@@ -1,0 +1,9 @@
+{
+  "gate_A_train_optimal": 0.7599999999999999,
+  "gate_B_beyond_training": 0.7493497729301453,
+  "train": {
+    "thr": 0.7599999999999999,
+    "mape": 1.6633877757959274,
+    "frac_hockey": 0.0
+  }
+}
