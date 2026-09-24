@@ -17,7 +17,7 @@ trained on synthetic substations and tested for transfer to unseen datasets.
 | `feature_cache/` | Cached windowed-HDD feature matrices (Swiss, German). |
 
 `scripts/hp_common.py`, `hp_pools.py`, `hp_capacity.py` and `src/heapo.py` are
-shared with **hp-sensitivity-paper**; the copies were identical at the split
+shared with [**hp-sensitivity-paper**](https://github.com/agouveia-kul/hp-sensitivity-paper); the copies were identical at the split
 (2026-09) and may diverge from here on.
 
 ## Data
@@ -25,13 +25,13 @@ shared with **hp-sensitivity-paper**; the copies were identical at the split
 Raw data is not in the repository. The notebook reads from `data/` (HEAPO,
 Swiss smart-meter pool, WPuQ, FeederBW and their cached pools/features). On the
 author's machine `data/` is a directory junction to a shared data folder.
-Dataset licensing notes are kept in the **hp-sensitivity-paper** repository
+Dataset licensing notes are kept in the [**hp-sensitivity-paper**](https://github.com/agouveia-kul/hp-sensitivity-paper) repository
 (`LICENSING.md`).
 
 ## Related repositories
 
-- **NILM** — the original PV installed-capacity work this repository was split from.
-- **hp-sensitivity-paper** — physics-based estimation (bathtub fit + simultaneity factor).
+- [**NILM**](https://github.com/agouveia-kul/NILM) — the original PV installed-capacity work this repository was split from.
+- [**hp-sensitivity-paper**](https://github.com/agouveia-kul/hp-sensitivity-paper) — physics-based estimation (bathtub fit + simultaneity factor).
 
 ## Setup
 
