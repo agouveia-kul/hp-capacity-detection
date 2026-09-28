@@ -1,0 +1,13 @@
+# Smoke run (< 5 min): checks the write guard and the cheap, deterministic scripts.
+exp_id: iter00_baseline_quick
+protocol: legacy
+out_dir: results/iter00_baseline_quick
+cache_dir: data/_paperb/iter00_quick
+seeds:
+  split: 42            # legacy SEED in regenerate_substations_pooled / household_pool_split
+  hyperopt: 42         # HYPEROPT_FMIN_SEED (legacy runs were unseeded)
+  numpy_global: 42
+  pythonhash: 0
+scripts:
+  - {name: regenerate_substations_pooled, args: [--dry-run]}
+  - {name: hockey_delta_calibrated}
