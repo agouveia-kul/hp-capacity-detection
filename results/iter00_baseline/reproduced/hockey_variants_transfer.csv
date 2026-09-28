@@ -1,0 +1,19 @@
+reduction,map,set,n,mape,r2,pred
+min/max,slope-only,Swiss test,1080,38.07677567255367,0.8253400786592386,
+min/max,slope-only,synthetic WPUQ,400,144.26892828238653,-0.16853812866149753,
+min/max,slope-only,real WPUQ feeder,1,1.9482680767790959,,233.86734354973729
+min/max,slope+base,Swiss test,1080,29.25323312641586,0.9324932739641438,
+min/max,slope+base,synthetic WPUQ,400,73.80462722940275,0.11510942989680528,
+min/max,slope+base,real WPUQ feeder,1,36.49562009314377,,151.46698932579056
+min/max,slope+base+Tbal,Swiss test,1080,29.548320899515534,0.9320453119294995,
+min/max,slope+base+Tbal,synthetic WPUQ,400,77.96712255438364,-0.048759020506527584,
+min/max,slope+base+Tbal,real WPUQ feeder,1,38.433974273164765,,146.84373857796075
+mean/mean,slope-only,Swiss test,1080,42.282146707483506,0.9101042314852293,
+mean/mean,slope-only,synthetic WPUQ,400,142.5660449917776,-0.19631523301592324,
+mean/mean,slope-only,real WPUQ feeder,1,1.3378752089526247,,235.32321746160315
+mean/mean,slope+base,Swiss test,1080,38.44219126579482,0.8413954816969821,
+mean/mean,slope+base,synthetic WPUQ,400,72.74897627318407,0.14867055052494516,
+mean/mean,slope+base,real WPUQ feeder,1,37.21866259715031,,149.74242998992926
+mean/mean,slope+base+Tbal,Swiss test,1080,39.004473847656385,0.83976134814769,
+mean/mean,slope+base+Tbal,synthetic WPUQ,400,72.88210542831601,0.09374006007686375,
+mean/mean,slope+base+Tbal,real WPUQ feeder,1,38.03655332557128,,147.79164413211748

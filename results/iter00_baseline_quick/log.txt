@@ -1,0 +1,4 @@
+
+# run_legacy 2026-09-28 19:34:37 config=configs/iter00_quick.yaml
+regenerate_substations_pooled    rc=0     0.1 min  log=results/iter00_baseline_quick/logs/regenerate_substations_pooled.log
+hockey_delta_calibrated          rc=0     0.4 min  log=results/iter00_baseline_quick/logs/hockey_delta_calibrated.log

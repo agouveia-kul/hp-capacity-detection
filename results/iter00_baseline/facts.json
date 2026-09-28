@@ -1,0 +1,263 @@
+{
+  "pools": {
+    "heapo_2023_legacy (data/_regen_prep.pkl)": {
+      "hp_households": 57,
+      "per_station": {
+        "8jB": 26,
+        "Hg": 21,
+        "MqO": 6,
+        "HbsbG": 3,
+        "z6I": 1
+      }
+    },
+    "heapo_design (data/_design_pool_cache.pkl)": {
+      "hp_households": 57,
+      "consumers": 58,
+      "per_station": {
+        "8jB": 26,
+        "Hg": 21,
+        "MqO": 6,
+        "HbsbG": 3,
+        "z6I": 1
+      },
+      "hp_set_equals_legacy": true
+    },
+    "swiss_kaiser_paired (data/_swiss_pool_cache.pkl)": {
+      "hp_households": 24,
+      "consumers": 1644,
+      "eheat_households": 329,
+      "per_station": {
+        "KLO": 24
+      }
+    },
+    "combined (data/_combined_pool_cache.pkl)": {
+      "hp_households": 81,
+      "consumers": 1702,
+      "eheat_households": 357,
+      "per_station": {
+        "KLO": 50,
+        "Hg": 21,
+        "MqO": 6,
+        "HbsbG": 3,
+        "z6I": 1
+      }
+    },
+    "wpuq (data/_wpuq_pool_cache.pkl)": {
+      "hp_households": 37,
+      "per_station": {
+        "WPUQ": 37
+      }
+    }
+  },
+  "split": {
+    "seed": 42,
+    "test_frac": 0.5,
+    "train_hh": 29,
+    "test_hh": 28,
+    "per_station": {
+      "train": {
+        "8jB": 12,
+        "Hg": 12,
+        "HbsbG": 3,
+        "MqO": 1,
+        "z6I": 1
+      },
+      "test": {
+        "8jB": 14,
+        "Hg": 9,
+        "MqO": 5
+      }
+    },
+    "hp_households_used_in_substations": {
+      "train": 27,
+      "test": 28
+    },
+    "fill_households_used": {
+      "train": 29,
+      "test": 28
+    },
+    "train_test_overlap_hp": 0,
+    "train_test_overlap_any": 0,
+    "legacy_members_consistent_with_seed_split": true
+  },
+  "design": {
+    "n_substations": {
+      "train": 1080,
+      "test": 1080
+    },
+    "sizes": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110,
+      120
+    ],
+    "penetrations": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "replicates_per_cell": 9,
+    "hp_draws": "with replacement, from the substation's weather-station pool of the split",
+    "fill_draws": "with replacement, from the whole split pool (all 57 are HP households; fill contributes their 'Other' channel)",
+    "stations_used": {
+      "train": [
+        "8jB",
+        "HbsbG",
+        "Hg"
+      ],
+      "test": [
+        "8jB",
+        "Hg",
+        "MqO"
+      ]
+    },
+    "substations_per_station": {
+      "train": {
+        "Hg": 481,
+        "8jB": 479,
+        "HbsbG": 120
+      },
+      "test": {
+        "8jB": 556,
+        "Hg": 315,
+        "MqO": 209
+      }
+    },
+    "train_120_pen100": {
+      "n": 9,
+      "mean_unique_hp": 10.0,
+      "mean_appearances_per_hp_profile": 16.666666666666668
+    },
+    "mean_appearances_by_size_split": {
+      "test": {
+        "10": 1.42,
+        "20": 1.85,
+        "30": 2.2,
+        "40": 2.67,
+        "50": 3.48,
+        "60": 3.66,
+        "70": 4.42,
+        "80": 4.42,
+        "90": 5.1,
+        "100": 6.11,
+        "110": 6.77,
+        "120": 6.76
+      },
+      "train": {
+        "10": 1.34,
+        "20": 1.65,
+        "30": 2.09,
+        "40": 2.96,
+        "50": 3.74,
+        "60": 3.7,
+        "70": 4.75,
+        "80": 4.47,
+        "90": 5.5,
+        "100": 6.69,
+        "110": 6.87,
+        "120": 8.29
+      }
+    },
+    "substations_with_hh_as_both_hp_and_fill": 1786,
+    "replay_matches_legacy_meta": true,
+    "replay_matches_legacy_members": true,
+    "HP_Peak_replay_max_abs_diff_kW": 2.2737367544323206e-13
+  },
+  "wpuq_synthetic": {
+    "n": 400,
+    "n_zero_hp": 24,
+    "size_range": [
+      10,
+      37
+    ],
+    "draws": "with replacement from 37 houses (HP and fill)",
+    "mean_appearances_per_hp_profile": 1.0731467372757266
+  },
+  "targets": {
+    "HP_Peak_quantiles_kW": {
+      "train": {
+        "0.0": 2.8,
+        "0.05": 20.1,
+        "0.25": 62.4,
+        "0.5": 145.5,
+        "0.75": 269.6,
+        "0.95": 503.9,
+        "1.0": 755.2
+      },
+      "test": {
+        "0.0": 3.6,
+        "0.05": 23.3,
+        "0.25": 79.1,
+        "0.5": 179.7,
+        "0.75": 343.7,
+        "0.95": 595.1,
+        "1.0": 962.1
+      }
+    },
+    "HP_Peak_mean_by_pen_test": {
+      "0.1": 41.9,
+      "0.2": 86.4,
+      "0.3": 127.7,
+      "0.4": 169.2,
+      "0.5": 212.8,
+      "0.6": 254.7,
+      "0.7": 295.9,
+      "0.8": 329.0,
+      "0.9": 382.0,
+      "1.0": 423.3
+    },
+    "coincidence_ratio_HP_CoincPeak_over_HP_Peak_median": 0.7909218745789747,
+    "per_hp_robust_peak_median_kW": {
+      "HEAPO (57)": 4.788456000000006,
+      "Swiss/Kaiser (24)": 5.369999885559082,
+      "WPUQ (37)": 5.980026236534129
+    },
+    "WPUQ_real_feeder_HP_Peak_kW": 238.5142403531091
+  },
+  "coverage": {
+    "HEAPO legacy": [
+      "2023-01-01 00:00 UTC",
+      "2023-12-31 23:45 UTC",
+      "15 min; household kept if >80% of 2023 rows"
+    ],
+    "Swiss/Kaiser pool": [
+      "2023-01-01 00:00:00+00:00",
+      "2023-12-31 23:45:00+00:00",
+      "not used by the 10 legacy capacity scripts"
+    ],
+    "WPUQ": [
+      "2019-01-01 00:00:00+00:00",
+      "2019-12-31 23:45:00+00:00",
+      "2019 only (2020 file unused)"
+    ],
+    "FeederBW": [
+      "-",
+      "-",
+      "not used by the 10 legacy scripts (only a housing-units printout)"
+    ]
+  },
+  "protocols": {
+    "protocol_rows": 410,
+    "rows_with_normpoint_el": 85,
+    "households_with_normpoint_el": 67,
+    "in_legacy_2023_pool": 2,
+    "in_train": 1,
+    "in_test": 1,
+    "households_with_heating_capacity_in_pool": 10
+  }
+}

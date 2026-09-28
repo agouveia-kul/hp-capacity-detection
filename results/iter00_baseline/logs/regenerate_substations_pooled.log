@@ -1,0 +1,12 @@
+Loading cached household prep from data/_regen_prep.pkl ...
+
+=== INSPECTION ===
+households kept: 57  | train 29  test 28
+weather stations: 5
+households per station per split:
+  train: {'8jB': 12, 'HbsbG': 3, 'Hg': 12, 'MqO': 1, 'z6I': 1}
+  test: {'8jB': 14, 'Hg': 9, 'MqO': 5}
+robust HP peak per household (kW): min 2.0  median 4.8  max 20.0
+FeederBW housing_units_count: min 0 median 32 max 161
+
+[dry-run] stopping before substation generation.

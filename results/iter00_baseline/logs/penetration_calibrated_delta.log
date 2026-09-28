@@ -1,0 +1,21 @@
+calibrated delta:  HP_Peak = 2.70*delta (mean/mean)
+fitted slope-only: HP_Peak = 27.4 + 41.8*slope (min/max)
+
+  pen  true kW     XGB  calDelta  slopeMap   best
+--------------------------------------------------------
+ 0.11     26.3    34.6      20.5     132.1   calDelta
+ 0.19     46.4    19.7      11.5      66.4   calDelta
+ 0.30     70.8    20.1      14.3      32.6   calDelta
+ 0.41     95.5    10.0      14.8      19.4   XGB
+ 0.51    123.5     8.1      14.6      13.0   XGB
+ 0.59    143.0     6.0      16.5       7.8   XGB
+ 0.70    167.8     7.0      18.0       4.9   slopeMap
+ 0.81    194.4    11.6      17.4       3.7   slopeMap
+ 0.89    213.6    15.0      17.8       2.0   slopeMap
+ 1.00    238.5    18.3      18.4       1.9   slopeMap
+--------------------------------------------------------
+  ALL    120.6    14.7      16.2      31.2
+[redirect] write data/penetration_calibrated_delta.csv -> results/iter00_baseline/reproduced/penetration_calibrated_delta.csv
+[redirect] figure paper/figures/fig_penetration_calibrated_delta.png -> results/iter00_baseline/figures/fig_penetration_calibrated_delta.png (+pdf)
+
+Saved -> data/penetration_calibrated_delta.csv, paper/figures/fig_penetration_calibrated_delta.png
