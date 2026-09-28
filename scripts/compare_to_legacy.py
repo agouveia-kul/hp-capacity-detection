@@ -69,9 +69,11 @@ def compare(name, legacy, repro, keys):
         rel = np.where(both_nan | (d == 0), 0.0, d / np.maximum(np.abs(a), 1e-12))
         mx_abs, mx_rel = float(np.nanmax(d)) if len(d) else np.nan, float(np.nanmax(rel)) if len(rel) else np.nan
         nan_mismatch = int((np.isnan(a) ^ np.isnan(b)).sum())
+        bad = ["/".join(map(str, r)) for r in m.loc[rel > REL_TOL, keys].itertuples(index=False)]
         flag = "OK" if (mx_rel <= REL_TOL and nan_mismatch == 0 and unmatched == 0) else "GT_1PCT"
         rows.append(dict(file=name, column=c, n_rows=len(m), max_abs=mx_abs, max_rel=mx_rel,
-                         flag=flag, unmatched_rows=unmatched, nan_mismatch=nan_mismatch))
+                         flag=flag, unmatched_rows=unmatched, nan_mismatch=nan_mismatch,
+                         rows_gt_tol=";".join(bad)))
     return rows
 
 
@@ -157,14 +159,15 @@ def main():
 
     # per-file summary
     lines = [f"# compare_to_legacy (commit {commit}, tolerance {REL_TOL:.0%} relative)", "",
-             "| file | columns | columns > 1 % | worst column | max rel diff | unmatched rows |",
-             "|---|---|---|---|---|---|"]
+             "| file | columns | columns > 1 % | worst column | max rel diff | unmatched rows | rows > 1 % |",
+             "|---|---|---|---|---|---|---|"]
     for f, g in D.groupby("file", sort=False):
         w = g.loc[g["max_rel"].fillna(np.inf).idxmax()]
         lines.append(f"| {f} | {len(g)} | {(g.flag != 'OK').sum()} | {w['column']} | "
-                     f"{w['max_rel']:.1e} | {int(g['unmatched_rows'].max())} |")
+                     f"{w['max_rel']:.1e} | {int(g['unmatched_rows'].max())} | "
+                     f"{', '.join(sorted({r for x in g['rows_gt_tol'].fillna('') for r in x.split(';') if r})) or '-'} |")
     for f in missing:
-        lines.append(f"| {f} | - | - | NOT REPRODUCED (no output) | - | - |")
+        lines.append(f"| {f} | - | - | NOT REPRODUCED (no output) | - | - | - |")
     (out_dir / "compare_to_legacy.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     print("\nflagged columns:")
