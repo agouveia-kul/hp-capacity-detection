@@ -1,0 +1,21 @@
+271 feeder variants across 10 penetration levels (size fixed at 37 real meters)
+
+============================================================================================
+  pen n_hp reps  true kW (mean)  XGB MAPE%  XGB cov  hockey MAPE%  hockey cov
+--------------------------------------------------------------------------------------------
+ 0.11    4   30            26.3       34.6     100%         132.1        100%
+ 0.19    7   30            46.4       19.7     100%          66.4        100%
+ 0.30   11   30            70.8       20.1     100%          32.6        100%
+ 0.41   15   30            95.5       10.0     100%          19.4        100%
+ 0.51   19   30           123.5        8.1     100%          13.0        100%
+ 0.59   22   30           143.0        6.0     100%           7.8        100%
+ 0.70   26   30           167.8        7.0     100%           4.9        100%
+ 0.81   30   30           194.4       11.6     100%           3.7        100%
+ 0.89   33   30           213.6       15.0     100%           2.0        100%
+ 1.00   37    1           238.5       18.3     100%           1.9        100%
+============================================================================================
+[redirect] write data/wpuq_penetration_sweep.csv -> results/iter00_baseline/reproduced/wpuq_penetration_sweep.csv
+[redirect] write data/wpuq_penetration_variants.csv -> results/iter00_baseline/reproduced/wpuq_penetration_variants.csv
+Saved -> data/wpuq_penetration_sweep.csv, data/wpuq_penetration_variants.csv
+[redirect] figure paper/figures/fig_wpuq_penetration_sweep.png -> results/iter00_baseline/figures/fig_wpuq_penetration_sweep.png (+pdf)
+Saved -> paper/figures/fig_wpuq_penetration_sweep.png

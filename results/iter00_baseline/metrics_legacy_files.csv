@@ -1,0 +1,332 @@
+exp_id,protocol,split_seed,dataset,target,method,anchor,metric,value,n_substations,n_hp_households,source_file
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,rmse,48.10240317030159,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,mae,28.51874009202328,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,mape,17.88587537897918,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,r2,0.9336705080908448,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,rmse,14.040005638383288,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,mae,11.026028667255805,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,mape,41.33858739778435,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,r2,0.7272371567429027,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,SVR,size+peak,rmse,65.49853717138228,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,SVR,size+peak,mae,39.217405434206185,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,SVR,size+peak,mape,23.507992199558306,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,SVR,size+peak,r2,0.8770194803408282,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,SVR,size+peak,rmse,47.67533077907929,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,SVR,size+peak,mae,38.67245761493744,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,SVR,size+peak,mape,208.57251678319165,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,SVR,size+peak,r2,-2.1451261844803198,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,ElasticNet,size+peak,rmse,67.9345578780996,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,ElasticNet,size+peak,mae,51.36378361517535,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,ElasticNet,size+peak,mape,37.617924617162245,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,ElasticNet,size+peak,r2,0.8677015886520296,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,ElasticNet,size+peak,rmse,73.95860526126154,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,ElasticNet,size+peak,mae,52.29025032600366,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,ElasticNet,size+peak,mape,190.2034829237703,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,ElasticNet,size+peak,r2,-6.568818123535652,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Lasso,size+peak,rmse,68.96437710821967,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Lasso,size+peak,mae,52.59512134823829,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Lasso,size+peak,mape,37.90952482432751,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Lasso,size+peak,r2,0.8636601667634216,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Lasso,size+peak,rmse,84.02048272781465,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Lasso,size+peak,mae,59.4557339736506,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Lasso,size+peak,mape,214.4616525862534,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Lasso,size+peak,r2,-8.768344989209938,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Ridge,size+peak,rmse,69.58523302684812,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Ridge,size+peak,mae,51.66513060198302,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Ridge,size+peak,mape,37.830875887695626,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,Ridge,size+peak,r2,0.8611943019916423,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Ridge,size+peak,rmse,75.57728642431164,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Ridge,size+peak,mae,53.20997649787157,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Ridge,size+peak,mape,197.2939130053288,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,Ridge,size+peak,r2,-6.903750709023819,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,LinearReg,size+peak,rmse,73.38368026806297,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,LinearReg,size+peak,mae,55.6956681528859,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,LinearReg,size+peak,mape,49.12431745904512,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,LinearReg,size+peak,r2,0.8456267316322696,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,LinearReg,size+peak,rmse,77.94709362952618,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,LinearReg,size+peak,mae,54.78090861816525,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,LinearReg,size+peak,mape,223.22441008891792,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,LinearReg,size+peak,r2,-7.407182934951303,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,FFNN,size+peak,rmse,152.65143442288408,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,FFNN,size+peak,mae,109.21893289003852,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,FFNN,size+peak,mape,61.97953762644517,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,FFNN,size+peak,r2,0.3174987417712778,1080,28,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,FFNN,size+peak,rmse,59.75946489715788,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,FFNN,size+peak,mae,41.67245534779685,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,FFNN,size+peak,mape,131.60874925546526,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,FFNN,size+peak,r2,-4.053014058621941,400,37,capacity_model_benchmark.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:median,none,pred_kW,145.45140800000047,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:median,none,err_kW,-93.0628323531086,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:median,none,abs_pct_err,39.017725824392485,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,SVR,size+peak,pred_kW,129.20315460514877,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,SVR,size+peak,err_kW,-109.3110857479603,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,SVR,size+peak,abs_pct_err,45.83000393860358,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pred_kW,128.94369506835938,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,err_kW,-109.5705452847497,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,abs_pct_err,45.93878550921559,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,FFNN,size+peak,pred_kW,349.9947509765625,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,FFNN,size+peak,err_kW,111.48051062345344,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,FFNN,size+peak,abs_pct_err,46.73956173787016,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:density,size,pred_kW,102.44249446666667,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:density,size,err_kW,-136.0717458864424,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,baseline:density,size,abs_pct_err,57.04973660482266,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Ridge,size+peak,pred_kW,645.1847509553756,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Ridge,size+peak,err_kW,406.6705106022666,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Ridge,size+peak,abs_pct_err,170.50156418342573,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,ElasticNet,size+peak,pred_kW,646.3343918013694,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,ElasticNet,size+peak,err_kW,407.82015144826033,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,ElasticNet,size+peak,abs_pct_err,170.98356510894354,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Lasso,size+peak,pred_kW,649.203304359638,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Lasso,size+peak,err_kW,410.6890640065289,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,Lasso,size+peak,abs_pct_err,172.18639163788424,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,LinearReg,size+peak,pred_kW,969.9233260095197,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,LinearReg,size+peak,err_kW,731.4090856564105,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,LinearReg,size+peak,abs_pct_err,306.652166584936,1,37,capacity_wpuq_real_feeder.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-5,size+peak,cv_rmse_mean,38.74363935226047,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-5,size+peak,cv_rmse_std,2.628101426688224,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-10,size+peak,cv_rmse_mean,32.42260592143568,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-10,size+peak,cv_rmse_std,2.4509731804770625,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-15,size+peak,cv_rmse_mean,25.596924919005687,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-15,size+peak,cv_rmse_std,1.2719907897158604,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-20,size+peak,cv_rmse_mean,23.88104115339697,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-20,size+peak,cv_rmse_std,1.753525778607987,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-30,size+peak,cv_rmse_mean,22.06163780116088,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-30,size+peak,cv_rmse_std,1.3090786683264173,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-40,size+peak,cv_rmse_mean,21.249589736987797,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-40,size+peak,cv_rmse_std,1.3097701113814435,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-60,size+peak,cv_rmse_mean,20.539332752614207,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-60,size+peak,cv_rmse_std,1.4671962006880868,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-80,size+peak,cv_rmse_mean,20.71588469796955,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-80,size+peak,cv_rmse_std,1.278733428025505,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-120,size+peak,cv_rmse_mean,20.39153387078615,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-120,size+peak,cv_rmse_std,2.007465885726783,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-160,size+peak,cv_rmse_mean,19.389665559456027,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-160,size+peak,cv_rmse_std,1.6827376290952134,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-220,size+peak,cv_rmse_mean,20.05808257415881,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-220,size+peak,cv_rmse_std,1.3450976754929207,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-274,size+peak,cv_rmse_mean,20.17912257453228,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO train (CV),HP_Peak,XGBoost top-274,size+peak,cv_rmse_std,1.755606710595517,1080,27,xgb_feature_selection_cv.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,mape,18.798446648718823,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,rmse,43.99644652036319,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,r2,0.9445108177507588,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,mape_lo,17.23685353611901,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,mape_hi,20.396460613917817,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,pi_cov,0.8740740740740741,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,XGBoost,size+peak,pi_width,281.6431902379901,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,mape,38.07677567255367,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,rmse,78.0566788249176,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,r2,0.8253400786592386,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,mape_lo,34.05651360366224,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,mape_hi,42.16235168377323,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,pi_cov,0.8907407407407407,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey-stick,none,pi_width,199.90692459633,1080,28,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,mape,40.33725184962885,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,rmse,14.136132315113525,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,r2,0.7053195566382073,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,mape_lo,35.39599615941228,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,mape_hi,45.53818752802774,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,pi_cov,0.9308510638297872,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,XGBoost,size+peak,pi_width,221.28139535409025,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,mape,144.26892828238653,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,rmse,28.621190541639773,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,r2,-0.2079960143643,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,mape_lo,127.02602543477636,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,mape_hi,161.75871174581218,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,pi_cov,1.0,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey-stick,none,pi_width,172.86901841404716,376,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,mape,18.32414379735652,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,rmse,43.70569237947626,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pi_cov,1.0,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pi_width,212.5700836181641,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pred,194.8085479736328,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pi_lo,53.67643737792969,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,pi_hi,266.2465209960937,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,XGBoost,size+peak,true,238.51424035310907,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,mape,1.948268076779096,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,rmse,4.646896803371789,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,pi_cov,1.0,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,pi_width,214.79286534864687,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,pred,233.86734354973729,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,pi_lo,126.47091087541386,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,pi_hi,341.26377622406073,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey-stick,none,true,238.51424035310907,1,37,xgb_hockey_ci_metrics.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope-only,none,mape,38.07677567255367,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope-only,none,r2,0.8253400786592386,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope-only,none,mape,144.26892828238653,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope-only,none,r2,-0.1685381286614975,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope-only,none,mape,1.948268076779096,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope-only,none,pred,233.86734354973729,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope+base,none,mape,29.25323312641586,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope+base,none,r2,0.9324932739641438,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope+base,none,mape,73.80462722940275,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope+base,none,r2,0.1151094298968052,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope+base,none,mape,36.49562009314377,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope+base,none,pred,151.46698932579056,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope+base+Tbal,none,mape,29.54832089951553,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey min/max slope+base+Tbal,none,r2,0.9320453119294996,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope+base+Tbal,none,mape,77.96712255438364,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey min/max slope+base+Tbal,none,r2,-0.0487590205065275,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope+base+Tbal,none,mape,38.433974273164765,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey min/max slope+base+Tbal,none,pred,146.84373857796075,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope-only,none,mape,42.28214670748351,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope-only,none,r2,0.9101042314852292,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope-only,none,mape,142.5660449917776,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope-only,none,r2,-0.1963152330159232,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope-only,none,mape,1.337875208952625,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope-only,none,pred,235.32321746160315,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope+base,none,mape,38.44219126579482,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope+base,none,r2,0.8413954816969821,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope+base,none,mape,72.74897627318407,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope+base,none,r2,0.1486705505249451,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope+base,none,mape,37.21866259715031,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope+base,none,pred,149.74242998992926,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope+base+Tbal,none,mape,39.00447384765639,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean slope+base+Tbal,none,r2,0.83976134814769,1080,28,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope+base+Tbal,none,mape,72.88210542831601,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean slope+base+Tbal,none,r2,0.0937400600768637,400,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope+base+Tbal,none,mape,38.03655332557128,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean slope+base+Tbal,none,pred,147.79164413211748,1,37,hockey_variants_transfer.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean raw delta,none,mape,60.16540242429152,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean raw delta,none,r2,-0.0128142506659794,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean delta calib (intercept),none,mape,48.08799829334471,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean delta calib (intercept),none,r2,0.8964832095882076,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean delta calib (origin),none,mape,22.3888292170711,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean delta calib (origin),none,r2,0.8955161415985002,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean fitted slope-only,none,mape,42.28214670748351,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,HEAPO test,HP_Peak,hockey mean/mean fitted slope-only,none,r2,0.9101042314852292,1080,28,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean raw delta,none,mape,63.97419302375327,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean raw delta,none,r2,-0.2672873703049725,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean delta calib (intercept),none,mape,158.60537641528393,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean delta calib (intercept),none,r2,-0.3023063692338634,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean delta calib (origin),none,mape,22.192950305976943,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean delta calib (origin),none,r2,0.9088890730888536,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean fitted slope-only,none,mape,142.5660449917776,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ synthetic,HP_Peak,hockey mean/mean fitted slope-only,none,r2,-0.1963152330159232,400,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean raw delta,none,mape,69.77935090443974,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean raw delta,none,pred,72.08055162005427,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean delta calib (intercept),none,mape,12.957930753395894,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean delta calib (intercept),none,pred,207.60773025116492,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.44699349698567,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean delta calib (origin),none,pred,194.51553394578627,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean fitted slope-only,none,mape,1.337875208952625,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder,HP_Peak,hockey mean/mean fitted slope-only,none,pred,235.32321746160315,1,37,hockey_delta_calibrated.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,XGBoost,size+peak,mape,34.61219340098562,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,XGBoost,size+peak,pred_mean,17.784705750147502,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,hockey min/max slope-only,none,mape,132.1000206552395,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,hockey min/max slope-only,none,pred_mean,59.81487888435088,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,XGBoost,size+peak,mape,19.703672482165533,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,XGBoost,size+peak,pred_mean,39.73788267771403,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,hockey min/max slope-only,none,mape,66.40834898416445,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,hockey min/max slope-only,none,pred_mean,76.53994408514033,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,XGBoost,size+peak,mape,20.084185801915048,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,XGBoost,size+peak,pred_mean,61.61629460652669,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,hockey min/max slope-only,none,mape,32.62757222567117,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,hockey min/max slope-only,none,pred_mean,93.68228266862138,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,XGBoost,size+peak,mape,10.00314550389892,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,XGBoost,size+peak,pred_mean,94.23738301595051,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,hockey min/max slope-only,none,mape,19.399349901473347,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,hockey min/max slope-only,none,pred_mean,113.69884867693602,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,XGBoost,size+peak,mape,8.072874825473564,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,XGBoost,size+peak,pred_mean,129.16148783365887,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,hockey min/max slope-only,none,mape,13.040884827158514,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,hockey min/max slope-only,none,pred_mean,139.21804945592967,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,XGBoost,size+peak,mape,6.010388323201365,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,XGBoost,size+peak,pred_mean,144.4203877766927,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,hockey min/max slope-only,none,mape,7.789421183666388,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,hockey min/max slope-only,none,pred_mean,153.54412660225017,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,XGBoost,size+peak,mape,6.995808189912295,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,XGBoost,size+peak,pred_mean,157.0760060628255,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,hockey min/max slope-only,none,mape,4.91295982929998,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,hockey min/max slope-only,none,pred_mean,173.73711983793663,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,XGBoost,size+peak,mape,11.613461753304074,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,XGBoost,size+peak,pred_mean,171.77722625732423,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,hockey min/max slope-only,none,mape,3.66473854607843,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,hockey min/max slope-only,none,pred_mean,197.8723485521678,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,XGBoost,size+peak,mape,14.998711909892704,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,XGBoost,size+peak,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,XGBoost,size+peak,pred_mean,181.5455057779948,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,hockey min/max slope-only,none,mape,1.9518143334082367,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,hockey min/max slope-only,none,cov,1.0,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,hockey min/max slope-only,none,pred_mean,214.424251541303,30,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,XGBoost,size+peak,mape,18.32414379735652,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,XGBoost,size+peak,cov,1.0,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,XGBoost,size+peak,pred_mean,194.8085479736328,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,hockey min/max slope-only,none,mape,1.9482695124865723,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,hockey min/max slope-only,none,cov,1.0,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,hockey min/max slope-only,none,pred_mean,233.8673401253705,1,37,wpuq_penetration_sweep.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,XGBoost,size+peak,mape,34.61219340098562,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,hockey mean/mean delta calib (origin),none,mape,20.52083261428817,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.11,HP_Peak,hockey min/max slope-only,none,mape,132.1000206552395,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,XGBoost,size+peak,mape,19.703672482165533,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,hockey mean/mean delta calib (origin),none,mape,11.468360727888832,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.19,HP_Peak,hockey min/max slope-only,none,mape,66.40834898416445,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,XGBoost,size+peak,mape,20.084185801915048,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,hockey mean/mean delta calib (origin),none,mape,14.278969002808015,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.30,HP_Peak,hockey min/max slope-only,none,mape,32.62757222567117,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,XGBoost,size+peak,mape,10.00314550389892,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,hockey mean/mean delta calib (origin),none,mape,14.794269670219458,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.41,HP_Peak,hockey min/max slope-only,none,mape,19.399349901473347,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,XGBoost,size+peak,mape,8.072874825473564,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,hockey mean/mean delta calib (origin),none,mape,14.640334584296538,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.51,HP_Peak,hockey min/max slope-only,none,mape,13.040884827158514,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,XGBoost,size+peak,mape,6.010388323201365,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,hockey mean/mean delta calib (origin),none,mape,16.513518165234835,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.59,HP_Peak,hockey min/max slope-only,none,mape,7.789421183666388,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,XGBoost,size+peak,mape,6.995808189912295,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.047594247565048,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.70,HP_Peak,hockey min/max slope-only,none,mape,4.91295982929998,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,XGBoost,size+peak,mape,11.613461753304074,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,hockey mean/mean delta calib (origin),none,mape,17.365162042707833,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.81,HP_Peak,hockey min/max slope-only,none,mape,3.66473854607843,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,XGBoost,size+peak,mape,14.998711909892704,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,hockey mean/mean delta calib (origin),none,mape,17.761428588628785,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=0.89,HP_Peak,hockey min/max slope-only,none,mape,1.9518143334082367,30,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,XGBoost,size+peak,mape,18.32414379735652,1,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.44699518341576,1,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,WPUQ real feeder pen=1.00,HP_Peak,hockey min/max slope-only,none,mape,1.9482695124865723,1,37,penetration_calibrated_delta.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.10,HP_Peak,XGBoost,size+peak,mape,63.07850196241361,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.10,HP_Peak,hockey mean/mean delta calib (origin),none,mape,50.83821306891706,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.10,HP_Peak,hockey min/max slope-only,none,mape,117.58099181878003,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.20,HP_Peak,XGBoost,size+peak,mape,25.28092130636825,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.20,HP_Peak,hockey mean/mean delta calib (origin),none,mape,23.242361802962304,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.20,HP_Peak,hockey min/max slope-only,none,mape,48.72464758025231,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.30,HP_Peak,XGBoost,size+peak,mape,16.343649468262473,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.30,HP_Peak,hockey mean/mean delta calib (origin),none,mape,20.30937712394096,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.30,HP_Peak,hockey min/max slope-only,none,mape,40.40757070232144,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.40,HP_Peak,XGBoost,size+peak,mape,15.567321005199805,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.40,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.65617025653824,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.40,HP_Peak,hockey min/max slope-only,none,mape,29.83679084170212,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.50,HP_Peak,XGBoost,size+peak,mape,10.881864161903517,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.50,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.9701713050156,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.50,HP_Peak,hockey min/max slope-only,none,mape,26.348623514524892,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.60,HP_Peak,XGBoost,size+peak,mape,9.606551789679113,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.60,HP_Peak,hockey mean/mean delta calib (origin),none,mape,19.20613070907117,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.60,HP_Peak,hockey min/max slope-only,none,mape,25.613475185578796,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.70,HP_Peak,XGBoost,size+peak,mape,9.984590867987414,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.70,HP_Peak,hockey mean/mean delta calib (origin),none,mape,17.84791367304131,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.70,HP_Peak,hockey min/max slope-only,none,mape,25.083103382219484,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.80,HP_Peak,XGBoost,size+peak,mape,11.297532039147509,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.80,HP_Peak,hockey mean/mean delta calib (origin),none,mape,18.976949243690296,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.80,HP_Peak,hockey min/max slope-only,none,mape,22.74632773013182,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.90,HP_Peak,XGBoost,size+peak,mape,12.328364517818962,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.90,HP_Peak,hockey mean/mean delta calib (origin),none,mape,17.995724470745937,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=0.90,HP_Peak,hockey min/max slope-only,none,mape,22.34160415959627,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=1.00,HP_Peak,XGBoost,size+peak,mape,13.615169368407615,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=1.00,HP_Peak,hockey mean/mean delta calib (origin),none,mape,17.84528051678814,108,28,swiss_penetration_sweep.csv
+iter00_baseline,legacy,42,HEAPO test pen=1.00,HP_Peak,hockey min/max slope-only,none,mape,22.084621810429525,108,28,swiss_penetration_sweep.csv

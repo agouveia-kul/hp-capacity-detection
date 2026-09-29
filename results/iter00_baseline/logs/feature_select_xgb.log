@@ -1,0 +1,40 @@
+Swiss train 1080 / test 1080 | 274 features | real feeder true 238.5 kW
+
+Tuning XGBoost on ALL features ...
+XGB CV tuning: 392.8s over 50 evals
+  ALL 274: test RMSE 55.22 R2 0.913 | WPUQ R2 0.594 | real 166.3 kW
+
+Ranking features by CV-averaged gain importance ...
+Scoring feature-count grid by 5-fold CV on train:
+  k=   5: CV RMSE  39.79 +/- 3.01
+  k=  10: CV RMSE  29.38 +/- 3.10
+  k=  15: CV RMSE  25.77 +/- 1.29
+  k=  20: CV RMSE  24.20 +/- 1.45
+  k=  30: CV RMSE  21.76 +/- 1.57
+  k=  40: CV RMSE  21.21 +/- 1.19
+  k=  60: CV RMSE  20.73 +/- 1.95
+  k=  80: CV RMSE  20.00 +/- 1.05
+  k= 120: CV RMSE  20.52 +/- 1.74
+  k= 160: CV RMSE  19.99 +/- 1.63
+  k= 220: CV RMSE  20.12 +/- 1.82
+  k= 274: CV RMSE  19.78 +/- 1.49
+
+best-CV k=274 (RMSE 19.78); 1-SE parsimonious k*=40 (40 features)
+
+Re-tuning XGBoost on 40 selected features ...
+XGB CV tuning: 90.2s over 50 evals
+
+==================================================================
+XGBoost feature selection -- honest comparison (test = unseen subs)
+==================================================================
+feature set               n  test RMSE  test R2  WPUQ R2  real kW
+all features            274      55.22    0.913    0.594    166.3
+selected (1-SE)          40      53.04    0.919    0.624    193.2
+
+test-RMSE reduction from selection: +2.18 kW (+3.9 %)  [positive = selected is better]
+[redirect] write models/xgb_selected_features.json -> results/iter00_baseline/models/xgb_selected_features.json
+[redirect] write data/xgb_feature_selection_cv.csv -> results/iter00_baseline/reproduced/xgb_feature_selection_cv.csv
+
+Saved -> models/xgb_selected_features.json, data/xgb_feature_selection_cv.csv
+[redirect] figure paper/figures/fig_xgb_feature_selection.png -> results/iter00_baseline/figures/fig_xgb_feature_selection.png (+pdf)
+Saved -> paper/figures/fig_xgb_feature_selection.png

@@ -1,0 +1,22 @@
+# Full legacy reproduction. Order respects dependencies. Downstream scripts read the
+# LEGACY models/xgb_selected_features.json (evaluation-only), not the re-selected one.
+exp_id: iter00_baseline
+protocol: legacy
+out_dir: results/iter00_baseline
+cache_dir: data/_paperb/iter00
+seeds:
+  split: 42
+  hyperopt: 42
+  numpy_global: 42
+  pythonhash: 0
+scripts:
+  - {name: regenerate_substations_pooled, args: [--dry-run]}   # full regen replaced by membership replay (legacy_facts.py)
+  - {name: hockey_variants_compare}
+  - {name: hockey_delta_calibrated}
+  - {name: evaluate_xgb_hockey_ci}
+  - {name: wpuq_penetration_sweep}
+  - {name: penetration_calibrated_delta}
+  - {name: swiss_penetration_sweep}
+  - {name: train_swiss_capacity}
+  - {name: feature_select_xgb}
+  - {name: benchmark_capacity_models}

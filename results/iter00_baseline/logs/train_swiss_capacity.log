@@ -1,0 +1,9 @@
+train 1080 / test 1080 substations | 274 features
+XGB CV tuning: 455.7s over 58 evals
+
+=== internal test (unseen households) ===
+  Ridge: RMSE 76.0 kW | MAE 55.5 | MAPE 41% | R2 0.834
+  XGB  : RMSE 42.9 kW | MAE 26.7 | MAPE 17% | R2 0.947
+[redirect] write models/capacity_swiss.pkl -> results/iter00_baseline/models/capacity_swiss.pkl
+
+Saved -> models/capacity_swiss.pkl

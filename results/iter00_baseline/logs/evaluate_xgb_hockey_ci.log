@@ -1,0 +1,20 @@
+hockey-stick slope->HP_Peak (train, n=1080): HP_Peak = 27.4 + 41.8 * slope
+
+============================================================================================
+set                          method           n  MAPE %      MAPE 95% CI    RMSE      R2  PI cov  PI wid
+--------------------------------------------------------------------------------------------------------
+Swiss test (unseen subs)     XGBoost       1080    18.8 [  17.2,  20.4]    44.0   0.945     87%   281.6
+                             hockey-stick  1080    38.1 [  34.1,  42.2]    78.1   0.825     89%   199.9
+synthetic WPUQ substations   XGBoost        376    40.3 [  35.4,  45.5]    14.1   0.705     93%   221.3
+                             hockey-stick   376   144.3 [ 127.0, 161.8]    28.6  -0.208    100%   172.9
+============================================================================================
+PI = 90% prediction interval (XGBoost q05-q95 / hockey-stick OLS); cov = fraction of true inside, wid = mean width (kW).
+
+============================================================================================
+REAL WPUQ feeder (n=1) -- TRUE installed HP capacity 238.5 kW
+--------------------------------------------------------------------------------------------
+  XGBoost      : point  194.8 kW  ( -18 %, |err|  18 %)   90% PI [   54,   266] kW  -> true 239 is INSIDE
+  hockey-stick : point  233.9 kW  (  -2 %, |err|   2 %)   90% PI [  126,   341] kW  -> true 239 is INSIDE
+[redirect] write data/xgb_hockey_ci_metrics.csv -> results/iter00_baseline/reproduced/xgb_hockey_ci_metrics.csv
+
+Saved -> data/xgb_hockey_ci_metrics.csv

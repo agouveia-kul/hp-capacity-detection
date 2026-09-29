@@ -1,0 +1,12 @@
+
+# run_legacy 2026-09-28 20:09:07 config=configs/iter00_full.yaml
+regenerate_substations_pooled    rc=0     0.1 min  log=results/iter00_baseline/logs/regenerate_substations_pooled.log
+hockey_variants_compare          rc=0     0.6 min  log=results/iter00_baseline/logs/hockey_variants_compare.log
+hockey_delta_calibrated          rc=0     0.4 min  log=results/iter00_baseline/logs/hockey_delta_calibrated.log
+evaluate_xgb_hockey_ci           rc=0     0.4 min  log=results/iter00_baseline/logs/evaluate_xgb_hockey_ci.log
+wpuq_penetration_sweep           rc=0     0.8 min  log=results/iter00_baseline/logs/wpuq_penetration_sweep.log
+penetration_calibrated_delta     rc=0     0.9 min  log=results/iter00_baseline/logs/penetration_calibrated_delta.log
+swiss_penetration_sweep          rc=0     0.6 min  log=results/iter00_baseline/logs/swiss_penetration_sweep.log
+train_swiss_capacity             rc=0     7.8 min  log=results/iter00_baseline/logs/train_swiss_capacity.log
+feature_select_xgb               rc=0     9.0 min  log=results/iter00_baseline/logs/feature_select_xgb.log
+benchmark_capacity_models        rc=0    13.7 min  log=results/iter00_baseline/logs/benchmark_capacity_models.log

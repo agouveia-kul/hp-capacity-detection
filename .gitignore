@@ -6,3 +6,11 @@ __pycache__/
 *.pyc
 /OLD/
 /.venv/
+# iteration outputs: keep metrics/config/REVIEW/figures, not models or big intermediates
+results/**/models/
+results/**/*.pkl
+results/**/*.parquet
+results/**/_pre_run_*
+!results/**/metrics.csv
+CLAUDE.md
+iterations/
