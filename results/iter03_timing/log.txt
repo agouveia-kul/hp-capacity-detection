@@ -1,0 +1,17 @@
+[    1.2s] pool bstar_2023: {'fill': 1291, 'hp': 86}; 1 workers x 7 threads; seeds [0]
+[s0     3.2s] HP train/test 64/22, fill 968/323; substations {'train': 460, 'inner': 420, 'test': 130}; dropped cells 504
+[s0   133.8s] evaluated 1010 substations in 130.5s (0.129 s each)
+[s0   134.0s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}
+[s0   134.1s]   HP_Peak Linear/size_peak/netfit/direct/log: cv_mse 83.47, best_iter None, 0 evals, 0.1s, params {}
+[s0   146.9s]   HP_Peak Lasso/size_peak/netfit/direct/log: cv_mse 76.48, best_iter None, 50 evals, 12.8s, params {'alpha': 0.0019414780476335858}
+[s0   171.2s]   HP_Peak XGBoost/size_peak/netfit/direct/log: cv_mse 37.7, best_iter 24, 50 evals, 24.3s, params {'colsample_bytree': 0.7712477754120627, 'eta': 0.134919460901729, 'gamma': 0.0476205400481966, 'max_depth': 6.0, 'min_child_weight': 20.0, 'n_estimators': 370.0, 'reg_alpha': 0.8609343460681542, 'reg_lambda': 0.9921239198380405, 'subsample': 0.7509342903513976}
+[s0   238.8s]   HP_Peak XGBoost_mono/size_peak/netfit/direct/log: cv_mse 36.15, best_iter 32, 50 evals, 67.6s, params {'colsample_bytree': 0.310892338855218, 'eta': 0.10497241320599845, 'gamma': 0.09151153495558637, 'max_depth': 8.0, 'min_child_weight': 16.0, 'n_estimators': 70.0, 'reg_alpha': 0.5965476052675032, 'reg_lambda': 0.7146295246714374, 'subsample': 0.6497558227542005}
+[s0   246.6s]   HP_Peak Lasso/size_peak/netfit/residual/log: cv_mse 0.1943, best_iter None, 50 evals, 7.8s, params {'alpha': 0.07593664777284519}
+[s0   264.0s]   HP_Peak XGBoost/size_peak/netfit/residual/log: cv_mse 0.1935, best_iter 11, 50 evals, 17.5s, params {'colsample_bytree': 0.3963303380096447, 'eta': 0.09980769320867605, 'gamma': 0.858579621881202, 'max_depth': 2.0, 'min_child_weight': 15.0, 'n_estimators': 150.0, 'reg_alpha': 1.4931008107392052, 'reg_lambda': 41.77211475088415, 'subsample': 0.8038405180245574}
+[s0   328.6s] evaluated 500 substations in 62.4s (0.125 s each)
+[s0   328.8s] learning curve n=32 draw=0: 32 train HP households, 414 dropped cells
+[s0   334.5s]   HP_Peak Lasso/size_peak/netfit/direct/log: cv_mse 49.07, best_iter None, 50 evals, 5.7s, params {'alpha': 0.2861157105873745}
+[s0   352.9s]   HP_Peak XGBoost/size_peak/netfit/residual/log: cv_mse 0.2841, best_iter 44, 50 evals, 18.4s, params {'colsample_bytree': 0.32660347701561787, 'eta': 0.047240691408061114, 'gamma': 0.0011086665401378593, 'max_depth': 2.0, 'min_child_weight': 15.0, 'n_estimators': 120.0, 'reg_alpha': 0.03162472471691932, 'reg_lambda': 1.0136857225928162, 'subsample': 0.5375894870824722}
+[s0   353.2s] done in 353.2s
+[  364.7s] seed 0 finished (1556 metric rows)
+[  366.3s] done in 366.3s (1 of 1 seeds)

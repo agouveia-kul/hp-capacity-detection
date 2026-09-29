@@ -1,0 +1,38 @@
+[    1.4s] pool bstar_2023: {'fill': 1291, 'hp': 86}; 1 workers x 28 threads; seeds [0]
+[s0     2.6s] HP train/test 64/22, fill 968/323; substations {'inner': 96, 'train': 90, 'test': 30}; dropped cells 75
+[s0     2.6s] features from cache bstar_s0_e9a684cd2617_tab.parquet
+[s0     3.0s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}
+[s0     3.2s]   HP_Peak Linear/size_peak/whdd/direct/none: cv_mse 102.5, best_iter None, 0 evals, 0.1s, params {}
+[s0     3.8s]   HP_Peak Ridge/size_peak/whdd/direct/none: cv_mse 46.7, best_iter None, 5 evals, 0.5s, params {'alpha': 616.3265772595347}
+[s0    13.9s]   HP_Peak XGBoost/size_peak/whdd/direct/none: cv_mse 54.74, best_iter 66, 5 evals, 10.1s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0    14.1s]   HP_Peak Linear/size_peak/whdd/direct/log: cv_mse 522, best_iter None, 0 evals, 0.1s, params {}
+[s0    14.6s]   HP_Peak Ridge/size_peak/whdd/direct/log: cv_mse 47.38, best_iter None, 5 evals, 0.5s, params {'alpha': 616.3265772595347}
+[s0    21.2s]   HP_Peak XGBoost/size_peak/whdd/direct/log: cv_mse 57.5, best_iter 24, 5 evals, 6.6s, params {'colsample_bytree': 0.9655021505022294, 'eta': 0.264841135562513, 'gamma': 1.0075398272595515, 'max_depth': 3.0, 'min_child_weight': 4.0, 'n_estimators': 380.0, 'reg_alpha': 0.3744678637601164, 'reg_lambda': 9.265366322180725, 'subsample': 0.7732001452367051}
+[s0    21.8s]   HP_Peak Ridge/size_peak/whdd/residual/log: cv_mse 0.1727, best_iter None, 5 evals, 0.5s, params {'alpha': 41392.98423343556}
+[s0    28.1s]   HP_Peak XGBoost/size_peak/whdd/residual/log: cv_mse 0.1706, best_iter 9, 5 evals, 6.4s, params {'colsample_bytree': 0.47229959755294254, 'eta': 0.04404153582738363, 'gamma': 0.6837542746895716, 'max_depth': 2.0, 'min_child_weight': 17.0, 'n_estimators': 120.0, 'reg_alpha': 0.16997429279634316, 'reg_lambda': 25.445105833433153, 'subsample': 0.6768617069884098}
+[s0    28.2s]   HP_Peak Linear/size_peak/netfit/direct/none: cv_mse 33.83, best_iter None, 0 evals, 0.1s, params {}
+[s0    28.5s]   HP_Peak Ridge/size_peak/netfit/direct/none: cv_mse 22.48, best_iter None, 5 evals, 0.3s, params {'alpha': 59.6822716716698}
+[s0    37.0s]   HP_Peak XGBoost/size_peak/netfit/direct/none: cv_mse 28.26, best_iter 66, 5 evals, 8.5s, params {'colsample_bytree': 0.4089226432638664, 'eta': 0.14490086940770683, 'gamma': 6.668763026825894, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 250.0, 'reg_alpha': 0.8964179680799482, 'reg_lambda': 3.149009514800194, 'subsample': 0.954663135591284}
+[s0    37.1s]   HP_Peak Linear/size_peak/netfit/direct/log: cv_mse 71.41, best_iter None, 0 evals, 0.1s, params {}
+[s0    37.4s]   HP_Peak Ridge/size_peak/netfit/direct/log: cv_mse 27.49, best_iter None, 5 evals, 0.3s, params {'alpha': 59.6822716716698}
+[s0    43.4s]   HP_Peak XGBoost/size_peak/netfit/direct/log: cv_mse 41.7, best_iter 15, 5 evals, 6.0s, params {'colsample_bytree': 0.9655021505022294, 'eta': 0.264841135562513, 'gamma': 1.0075398272595515, 'max_depth': 3.0, 'min_child_weight': 4.0, 'n_estimators': 380.0, 'reg_alpha': 0.3744678637601164, 'reg_lambda': 9.265366322180725, 'subsample': 0.7732001452367051}
+[s0    43.8s]   HP_Peak Ridge/size_peak/netfit/residual/log: cv_mse 0.1729, best_iter None, 5 evals, 0.3s, params {'alpha': 188195.90508002552}
+[s0    49.3s]   HP_Peak XGBoost/size_peak/netfit/residual/log: cv_mse 0.1703, best_iter 9, 5 evals, 5.5s, params {'colsample_bytree': 0.47229959755294254, 'eta': 0.04404153582738363, 'gamma': 0.6837542746895716, 'max_depth': 2.0, 'min_child_weight': 17.0, 'n_estimators': 120.0, 'reg_alpha': 0.16997429279634316, 'reg_lambda': 25.445105833433153, 'subsample': 0.6768617069884098}
+[s0    49.5s]   HP_Peak Linear/size_peak/both/direct/none: cv_mse 50.91, best_iter None, 0 evals, 0.2s, params {}
+[s0    50.1s]   HP_Peak Ridge/size_peak/both/direct/none: cv_mse 29.38, best_iter None, 5 evals, 0.6s, params {'alpha': 59.6822716716698}
+[s0    60.6s]   HP_Peak XGBoost/size_peak/both/direct/none: cv_mse 44.38, best_iter 101, 5 evals, 10.6s, params {'colsample_bytree': 0.6136705711060568, 'eta': 0.05417479322472048, 'gamma': 9.024534117254458, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 310.0, 'reg_alpha': 0.18777487575294727, 'reg_lambda': 2.7574444840384205, 'subsample': 0.9135579211284748}
+[s0    60.8s]   HP_Peak Linear/size_peak/both/direct/log: cv_mse 163.9, best_iter None, 0 evals, 0.2s, params {}
+[s0    61.4s]   HP_Peak Ridge/size_peak/both/direct/log: cv_mse 29.58, best_iter None, 5 evals, 0.6s, params {'alpha': 59.6822716716698}
+[s0    67.6s]   HP_Peak XGBoost/size_peak/both/direct/log: cv_mse 54.39, best_iter 33, 5 evals, 6.2s, params {'colsample_bytree': 0.9655021505022294, 'eta': 0.264841135562513, 'gamma': 1.0075398272595515, 'max_depth': 3.0, 'min_child_weight': 4.0, 'n_estimators': 380.0, 'reg_alpha': 0.3744678637601164, 'reg_lambda': 9.265366322180725, 'subsample': 0.7732001452367051}
+[s0    68.2s]   HP_Peak Ridge/size_peak/both/residual/log: cv_mse 0.1729, best_iter None, 5 evals, 0.6s, params {'alpha': 188195.90508002552}
+[s0    73.6s]   HP_Peak XGBoost/size_peak/both/residual/log: cv_mse 0.1708, best_iter 8, 5 evals, 5.4s, params {'colsample_bytree': 0.5240504079328978, 'eta': 0.02370941858698222, 'gamma': 0.9024534117254458, 'max_depth': 1.0, 'min_child_weight': 31.0, 'n_estimators': 180.0, 'reg_alpha': 0.036586816925752344, 'reg_lambda': 3.5603188759230173, 'subsample': 0.8308463369027799}
+[s0    73.7s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 93.44, best_iter None, 0 evals, 0.1s, params {}
+[s0    73.7s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 47.08, best_iter None, 0 evals, 0.1s, params {}
+[s0    73.8s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 47.08, best_iter None, 0 evals, 0.1s, params {}
+[s0    75.4s] features from cache bstar_s0_aa98b99f514e_tab.parquet
+[s0    75.6s] learning curve n=16 draw=0: 16 train HP households, 36 dropped cells
+[s0    76.0s]   HP_Peak Ridge/size_peak/netfit/direct/log: cv_mse 26.29, best_iter None, 5 evals, 0.3s, params {'alpha': 59.6822716716698}
+[s0    76.3s]   HP_Peak Ridge/size_peak/netfit/residual/log: cv_mse 0.2262, best_iter None, 5 evals, 0.3s, params {'alpha': 235.0727693985516}
+[s0    76.4s] done in 76.4s
+[   87.5s] seed 0 finished (1596 metric rows)
+[  110.4s] done in 110.4s (1 of 1 seeds)
