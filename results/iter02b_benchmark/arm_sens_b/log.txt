@@ -1,0 +1,252 @@
+[    0.5s] pool b_2023: {'fill': 1306, 'hp': 47}; 4 workers x 7 threads; seeds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[s2     1.0s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s2    75.2s] evaluated 575 substations in 74.1s (0.129 s each)
+[s2   116.3s]   HP_Peak XGBoost[none]: cv_mse 61.41, best_iter 52, 50 evals, 41.1s, params {'colsample_bytree': 0.33628125189909064, 'eta': 0.11818246055575557, 'gamma': 1.6073337308944302, 'max_depth': 5.0, 'min_child_weight': 18.0, 'n_estimators': 250.0, 'reg_alpha': 0.9135939817940693, 'reg_lambda': 8.980427421135982, 'subsample': 0.514850815949625}
+[s2   119.0s]   HP_Peak Ridge[none]: cv_mse 55.35, best_iter None, 50 evals, 2.7s, params {'alpha': 846.0454174779286}
+[s2   132.6s]   HP_Peak ElasticNet[none]: cv_mse 49.61, best_iter None, 50 evals, 13.6s, params {'alpha': 0.6143525573810746, 'l1_ratio': 0.897180844949778}
+[s2   135.8s]   HP_Peak SVR[none]: cv_mse 55.59, best_iter None, 50 evals, 3.2s, params {'C': 1.0538639390148026, 'epsilon': 0.2, 'gamma': 0.001015014572527815}
+[s2   138.2s]   HP_Peak PLS[none]: cv_mse 52.39, best_iter None, 50 evals, 2.5s, params {'n_components': 3.0}
+[s2   175.8s]   HP_Peak XGBoost[size]: cv_mse 62.08, best_iter 53, 50 evals, 37.5s, params {'colsample_bytree': 0.5455542593674696, 'eta': 0.11014150569232725, 'gamma': 4.036525373582186, 'max_depth': 5.0, 'min_child_weight': 18.0, 'n_estimators': 490.0, 'reg_alpha': 0.7127363845011884, 'reg_lambda': 8.55076094687966, 'subsample': 0.6960521050933881}
+[s2   178.5s]   HP_Peak Ridge[size]: cv_mse 54.83, best_iter None, 50 evals, 2.8s, params {'alpha': 846.0454174779286}
+[s2   197.3s]   HP_Peak ElasticNet[size]: cv_mse 46.2, best_iter None, 50 evals, 18.8s, params {'alpha': 0.5992898285966198, 'l1_ratio': 0.8944340269016804}
+[s2   200.5s]   HP_Peak SVR[size]: cv_mse 55.24, best_iter None, 50 evals, 3.1s, params {'C': 1.0538639390148026, 'epsilon': 0.2, 'gamma': 0.001015014572527815}
+[s2   203.0s]   HP_Peak PLS[size]: cv_mse 51.97, best_iter None, 50 evals, 2.5s, params {'n_components': 3.0}
+[s2   237.2s]   HP_Peak XGBoost[size_peak]: cv_mse 43.65, best_iter 14, 50 evals, 34.2s, params {'colsample_bytree': 0.9963601739610883, 'eta': 0.2530411956269402, 'gamma': 9.044849933165095, 'max_depth': 9.0, 'min_child_weight': 13.0, 'n_estimators': 470.0, 'reg_alpha': 0.47588422081210224, 'reg_lambda': 3.416594641887406, 'subsample': 0.8193970668316043}
+[s2   240.2s]   HP_Peak Ridge[size_peak]: cv_mse 52.46, best_iter None, 50 evals, 3.0s, params {'alpha': 643.6290627756918}
+[s2   256.0s]   HP_Peak ElasticNet[size_peak]: cv_mse 34.1, best_iter None, 50 evals, 15.8s, params {'alpha': 0.5992898285966198, 'l1_ratio': 0.8944340269016804}
+[s2   259.1s]   HP_Peak SVR[size_peak]: cv_mse 53.08, best_iter None, 50 evals, 3.1s, params {'C': 1.0538639390148026, 'epsilon': 0.2, 'gamma': 0.001015014572527815}
+[s2   261.4s]   HP_Peak PLS[size_peak]: cv_mse 50.34, best_iter None, 50 evals, 2.3s, params {'n_components': 3.0}
+[s2   261.4s]   HP_Peak anchor_only_Linear[size]: cv_mse 108.4, best_iter None, 0 evals, 0.0s, params {}
+[s2   261.4s]   HP_Peak anchor_only_Linear[peak]: cv_mse 71.73, best_iter None, 0 evals, 0.0s, params {}
+[s2   261.5s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 37.32, best_iter None, 0 evals, 0.0s, params {}
+[s2   267.2s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 104.8, best_iter 15, 50 evals, 5.8s, params {'colsample_bytree': 0.8837510648686948, 'eta': 0.2691892304582684, 'gamma': 6.377854563521936, 'max_depth': 8.0, 'min_child_weight': 7.0, 'n_estimators': 230.0, 'reg_alpha': 0.9801822171424169, 'reg_lambda': 1.2604781894377997, 'subsample': 0.663529686413683}
+[s2   273.5s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 60.91, best_iter 75, 50 evals, 6.3s, params {'colsample_bytree': 0.49616873403119344, 'eta': 0.04860025016612802, 'gamma': 5.552191563579592, 'max_depth': 4.0, 'min_child_weight': 13.0, 'n_estimators': 400.0, 'reg_alpha': 0.2770182709560657, 'reg_lambda': 9.799009695956247, 'subsample': 0.7504149257288002}
+[s2   282.0s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 45.77, best_iter 100, 50 evals, 8.5s, params {'colsample_bytree': 0.9399151545828833, 'eta': 0.1937754954611516, 'gamma': 9.978253336490344, 'max_depth': 5.0, 'min_child_weight': 8.0, 'n_estimators': 130.0, 'reg_alpha': 0.756159745016171, 'reg_lambda': 7.130359400599394, 'subsample': 0.7053899657277979}
+[s2   282.5s] done in 282.5s
+[  288.8s] seed 2 finished (2406 metric rows)
+[s1     1.0s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s1    77.9s] evaluated 575 substations in 76.8s (0.134 s each)
+[s1   115.1s]   HP_Peak XGBoost[none]: cv_mse 97.81, best_iter 12, 50 evals, 37.1s, params {'colsample_bytree': 0.707150535643974, 'eta': 0.259193586388694, 'gamma': 9.20804141453296, 'max_depth': 6.0, 'min_child_weight': 9.0, 'n_estimators': 470.0, 'reg_alpha': 0.4625926542490497, 'reg_lambda': 7.302525991457345, 'subsample': 0.6047679563949659}
+[s1   118.1s]   HP_Peak Ridge[none]: cv_mse 83.79, best_iter None, 50 evals, 3.0s, params {'alpha': 244.6045356283974}
+[s1   132.0s]   HP_Peak ElasticNet[none]: cv_mse 84.17, best_iter None, 50 evals, 14.0s, params {'alpha': 0.5007725655777463, 'l1_ratio': 0.11618947613018205}
+[s1   135.0s]   HP_Peak SVR[none]: cv_mse 76.59, best_iter None, 50 evals, 3.0s, params {'C': 2.416778866370988, 'epsilon': 0.2, 'gamma': 0.0008258399895264566}
+[s1   137.4s]   HP_Peak PLS[none]: cv_mse 82.2, best_iter None, 50 evals, 2.4s, params {'n_components': 5.0}
+[s1   173.3s]   HP_Peak XGBoost[size]: cv_mse 99.66, best_iter 36, 50 evals, 35.9s, params {'colsample_bytree': 0.7639401099900878, 'eta': 0.17075570814210622, 'gamma': 6.2278131717438985, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 440.0, 'reg_alpha': 0.8885358664924986, 'reg_lambda': 8.754252905574303, 'subsample': 0.9303499390422862}
+[s1   176.6s]   HP_Peak Ridge[size]: cv_mse 83.54, best_iter None, 50 evals, 3.3s, params {'alpha': 200.89033617860082}
+[s1   194.9s]   HP_Peak ElasticNet[size]: cv_mse 84.15, best_iter None, 50 evals, 18.3s, params {'alpha': 0.6563865346155409, 'l1_ratio': 0.14346279870980583}
+[s1   198.0s]   HP_Peak SVR[size]: cv_mse 76.58, best_iter None, 50 evals, 3.1s, params {'C': 2.416778866370988, 'epsilon': 0.2, 'gamma': 0.0008258399895264566}
+[s1   200.4s]   HP_Peak PLS[size]: cv_mse 81.94, best_iter None, 50 evals, 2.5s, params {'n_components': 5.0}
+[s1   240.5s]   HP_Peak XGBoost[size_peak]: cv_mse 82.42, best_iter 192, 50 evals, 40.1s, params {'colsample_bytree': 0.5627730345579693, 'eta': 0.02083147980737249, 'gamma': 7.64505818064875, 'max_depth': 5.0, 'min_child_weight': 5.0, 'n_estimators': 220.0, 'reg_alpha': 0.5848481201544887, 'reg_lambda': 0.33888176262481573, 'subsample': 0.8376521240423926}
+[s1   242.8s]   HP_Peak Ridge[size_peak]: cv_mse 71.82, best_iter None, 50 evals, 2.3s, params {'alpha': 3.72353305514178}
+[s1   268.5s]   HP_Peak ElasticNet[size_peak]: cv_mse 64.7, best_iter None, 50 evals, 25.7s, params {'alpha': 0.02537991028602354, 'l1_ratio': 0.8244230447136968}
+[s1   271.6s]   HP_Peak SVR[size_peak]: cv_mse 70.95, best_iter None, 50 evals, 3.1s, params {'C': 33.053722611431446, 'epsilon': 0.1, 'gamma': 0.00014594612958792434}
+[s1   274.5s]   HP_Peak PLS[size_peak]: cv_mse 75.42, best_iter None, 50 evals, 2.9s, params {'n_components': 19.0}
+[s1   274.5s]   HP_Peak anchor_only_Linear[size]: cv_mse 192.4, best_iter None, 0 evals, 0.0s, params {}
+[s1   274.5s]   HP_Peak anchor_only_Linear[peak]: cv_mse 130.4, best_iter None, 0 evals, 0.0s, params {}
+[s1   274.5s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 58.15, best_iter None, 0 evals, 0.0s, params {}
+[s1   280.8s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 198.2, best_iter 31, 50 evals, 6.3s, params {'colsample_bytree': 0.8970709958113822, 'eta': 0.29038384922605426, 'gamma': 7.484211761688584, 'max_depth': 8.0, 'min_child_weight': 4.0, 'n_estimators': 330.0, 'reg_alpha': 0.9738385321904501, 'reg_lambda': 0.7339752812870223, 'subsample': 0.5094034195601647}
+[s1   287.5s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 129.6, best_iter 12, 50 evals, 6.7s, params {'colsample_bytree': 0.6918645296623015, 'eta': 0.16393499193487793, 'gamma': 9.932716035760432, 'max_depth': 3.0, 'min_child_weight': 16.0, 'n_estimators': 350.0, 'reg_alpha': 0.20035281055440085, 'reg_lambda': 0.30840801573298826, 'subsample': 0.510848040488674}
+[s1   295.9s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 87.76, best_iter 79, 50 evals, 8.3s, params {'colsample_bytree': 0.9837616333997093, 'eta': 0.2918518523082788, 'gamma': 7.371996674631807, 'max_depth': 8.0, 'min_child_weight': 20.0, 'n_estimators': 310.0, 'reg_alpha': 0.10222867421574719, 'reg_lambda': 2.0411850371289053, 'subsample': 0.8848903218404998}
+[s1   296.3s] done in 296.3s
+[  302.7s] seed 1 finished (2406 metric rows)
+[s3     1.0s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s3    75.4s] evaluated 575 substations in 74.3s (0.129 s each)
+[s3   122.1s]   HP_Peak XGBoost[none]: cv_mse 104.5, best_iter 31, 50 evals, 46.6s, params {'colsample_bytree': 0.42161345379805326, 'eta': 0.1169809561800831, 'gamma': 6.97275950849828, 'max_depth': 9.0, 'min_child_weight': 2.0, 'n_estimators': 210.0, 'reg_alpha': 0.16906204052776125, 'reg_lambda': 7.0238009452250205, 'subsample': 0.6148316940660373}
+[s3   124.2s]   HP_Peak Ridge[none]: cv_mse 90.58, best_iter None, 50 evals, 2.2s, params {'alpha': 886.4828841932799}
+[s3   145.7s]   HP_Peak ElasticNet[none]: cv_mse 92.95, best_iter None, 50 evals, 21.4s, params {'alpha': 1.7759431582393779, 'l1_ratio': 0.11316693631174653}
+[s3   150.3s]   HP_Peak SVR[none]: cv_mse 88.93, best_iter None, 50 evals, 4.6s, params {'C': 8.20170422769028, 'epsilon': 0.1, 'gamma': 0.00011309295480255799}
+[s3   154.0s]   HP_Peak PLS[none]: cv_mse 92.61, best_iter None, 50 evals, 3.7s, params {'n_components': 2.0}
+[s3   187.5s]   HP_Peak XGBoost[size]: cv_mse 111.4, best_iter 43, 50 evals, 33.5s, params {'colsample_bytree': 0.3480947574775726, 'eta': 0.09248955692834888, 'gamma': 1.527391398391198, 'max_depth': 7.0, 'min_child_weight': 15.0, 'n_estimators': 280.0, 'reg_alpha': 0.9170850230686375, 'reg_lambda': 5.226622761463866, 'subsample': 0.7670541763135197}
+[s3   189.8s]   HP_Peak Ridge[size]: cv_mse 90.88, best_iter None, 50 evals, 2.3s, params {'alpha': 952.6659949920718}
+[s3   209.5s]   HP_Peak ElasticNet[size]: cv_mse 93.99, best_iter None, 50 evals, 19.8s, params {'alpha': 1.7759431582393779, 'l1_ratio': 0.11316693631174653}
+[s3   213.0s]   HP_Peak SVR[size]: cv_mse 90.21, best_iter None, 50 evals, 3.5s, params {'C': 4.06988386676479, 'epsilon': 0.1, 'gamma': 0.00019966062385513365}
+[s3   215.7s]   HP_Peak PLS[size]: cv_mse 91.82, best_iter None, 50 evals, 2.7s, params {'n_components': 2.0}
+[s3   247.4s]   HP_Peak XGBoost[size_peak]: cv_mse 77.57, best_iter 22, 50 evals, 31.6s, params {'colsample_bytree': 0.9255730549505576, 'eta': 0.1355904737862018, 'gamma': 5.7676665960015505, 'max_depth': 8.0, 'min_child_weight': 11.0, 'n_estimators': 120.0, 'reg_alpha': 0.08473556904782907, 'reg_lambda': 5.410198571984292, 'subsample': 0.5503393213341102}
+[s3   249.6s]   HP_Peak Ridge[size_peak]: cv_mse 89.67, best_iter None, 50 evals, 2.2s, params {'alpha': 952.6659949920718}
+[s3   268.6s]   HP_Peak ElasticNet[size_peak]: cv_mse 91.34, best_iter None, 50 evals, 19.0s, params {'alpha': 2.7799870380636955, 'l1_ratio': 0.10076915687647703}
+[s3   271.7s]   HP_Peak SVR[size_peak]: cv_mse 89.94, best_iter None, 50 evals, 3.1s, params {'C': 1.8115515639331392, 'epsilon': 0.1, 'gamma': 0.00022761032728154117}
+[s3   274.3s]   HP_Peak PLS[size_peak]: cv_mse 89.68, best_iter None, 50 evals, 2.6s, params {'n_components': 2.0}
+[s3   274.3s]   HP_Peak anchor_only_Linear[size]: cv_mse 136.3, best_iter None, 0 evals, 0.0s, params {}
+[s3   274.4s]   HP_Peak anchor_only_Linear[peak]: cv_mse 103.9, best_iter None, 0 evals, 0.0s, params {}
+[s3   274.4s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 80.54, best_iter None, 0 evals, 0.0s, params {}
+[s3   280.8s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 135.1, best_iter 11, 50 evals, 6.4s, params {'colsample_bytree': 0.5278187646324346, 'eta': 0.2839012384276069, 'gamma': 0.02488829140132154, 'max_depth': 9.0, 'min_child_weight': 1.0, 'n_estimators': 100.0, 'reg_alpha': 0.31128922109786117, 'reg_lambda': 0.6343394807971166, 'subsample': 0.5250975780432477}
+[s3   289.0s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 81, best_iter 45, 50 evals, 8.2s, params {'colsample_bytree': 0.5550055585606564, 'eta': 0.10928992554914019, 'gamma': 8.651725261913539, 'max_depth': 10.0, 'min_child_weight': 8.0, 'n_estimators': 370.0, 'reg_alpha': 0.7794793393223624, 'reg_lambda': 8.114326666869658, 'subsample': 0.7422322367132683}
+[s3   299.2s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 61.55, best_iter 136, 50 evals, 10.2s, params {'colsample_bytree': 0.43380291257355175, 'eta': 0.14227684781607203, 'gamma': 3.761258116609177, 'max_depth': 10.0, 'min_child_weight': 10.0, 'n_estimators': 420.0, 'reg_alpha': 0.3277418113544074, 'reg_lambda': 7.344521377928005, 'subsample': 0.9035125361704532}
+[s3   299.6s] done in 299.6s
+[  305.9s] seed 3 finished (2406 metric rows)
+[s0     1.0s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s0    75.1s] evaluated 575 substations in 74.0s (0.129 s each)
+[s0   119.4s]   HP_Peak XGBoost[none]: cv_mse 60.63, best_iter 18, 50 evals, 44.2s, params {'colsample_bytree': 0.4374805891397224, 'eta': 0.2730863234934532, 'gamma': 7.014923802611033, 'max_depth': 3.0, 'min_child_weight': 7.0, 'n_estimators': 390.0, 'reg_alpha': 0.7450061949938969, 'reg_lambda': 3.5904031992230054, 'subsample': 0.7539919189441443}
+[s0   121.7s]   HP_Peak Ridge[none]: cv_mse 60.72, best_iter None, 50 evals, 2.3s, params {'alpha': 855.5626312730157}
+[s0   140.7s]   HP_Peak ElasticNet[none]: cv_mse 60.65, best_iter None, 50 evals, 19.0s, params {'alpha': 1.098717144272064, 'l1_ratio': 0.44059385155451747}
+[s0   144.7s]   HP_Peak SVR[none]: cv_mse 62.91, best_iter None, 50 evals, 4.0s, params {'C': 1.3719387083809882, 'epsilon': 0.1, 'gamma': 0.00023247803139146337}
+[s0   148.1s]   HP_Peak PLS[none]: cv_mse 58.06, best_iter None, 50 evals, 3.5s, params {'n_components': 3.0}
+[s0   193.4s]   HP_Peak XGBoost[size]: cv_mse 58.97, best_iter 55, 50 evals, 45.3s, params {'colsample_bytree': 0.8980792594885998, 'eta': 0.12410604489440547, 'gamma': 6.820603518391868, 'max_depth': 3.0, 'min_child_weight': 2.0, 'n_estimators': 300.0, 'reg_alpha': 0.7468879635210457, 'reg_lambda': 7.640882441315659, 'subsample': 0.6953113734283993}
+[s0   195.7s]   HP_Peak Ridge[size]: cv_mse 60.32, best_iter None, 50 evals, 2.3s, params {'alpha': 855.5626312730157}
+[s0   213.0s]   HP_Peak ElasticNet[size]: cv_mse 60.75, best_iter None, 50 evals, 17.3s, params {'alpha': 0.6740861785905552, 'l1_ratio': 0.6155257767269807}
+[s0   216.7s]   HP_Peak SVR[size]: cv_mse 62.35, best_iter None, 50 evals, 3.7s, params {'C': 2.669658243703654, 'epsilon': 0.1, 'gamma': 0.0001489111778454439}
+[s0   220.0s]   HP_Peak PLS[size]: cv_mse 57.71, best_iter None, 50 evals, 3.3s, params {'n_components': 3.0}
+[s0   256.9s]   HP_Peak XGBoost[size_peak]: cv_mse 50.98, best_iter 21, 50 evals, 36.9s, params {'colsample_bytree': 0.8593616155378039, 'eta': 0.2666473722155201, 'gamma': 0.11870949157433053, 'max_depth': 3.0, 'min_child_weight': 5.0, 'n_estimators': 400.0, 'reg_alpha': 0.2805331641581506, 'reg_lambda': 3.9014127007208925, 'subsample': 0.6628531772773735}
+[s0   259.1s]   HP_Peak Ridge[size_peak]: cv_mse 58.39, best_iter None, 50 evals, 2.2s, params {'alpha': 796.7019839768496}
+[s0   275.7s]   HP_Peak ElasticNet[size_peak]: cv_mse 50.2, best_iter None, 50 evals, 16.7s, params {'alpha': 1.2997860259640404, 'l1_ratio': 0.8986811010652596}
+[s0   279.3s]   HP_Peak SVR[size_peak]: cv_mse 61.17, best_iter None, 50 evals, 3.5s, params {'C': 1.3719387083809882, 'epsilon': 0.1, 'gamma': 0.00023247803139146337}
+[s0   281.8s]   HP_Peak PLS[size_peak]: cv_mse 56.33, best_iter None, 50 evals, 2.6s, params {'n_components': 3.0}
+[s0   281.8s]   HP_Peak anchor_only_Linear[size]: cv_mse 112, best_iter None, 0 evals, 0.0s, params {}
+[s0   281.9s]   HP_Peak anchor_only_Linear[peak]: cv_mse 76.77, best_iter None, 0 evals, 0.0s, params {}
+[s0   281.9s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 65.66, best_iter None, 0 evals, 0.0s, params {}
+[s0   289.2s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 107.6, best_iter 21, 50 evals, 7.4s, params {'colsample_bytree': 0.5864603204489284, 'eta': 0.2603738982785494, 'gamma': 8.854782988021048, 'max_depth': 6.0, 'min_child_weight': 4.0, 'n_estimators': 460.0, 'reg_alpha': 0.12362956952051078, 'reg_lambda': 0.01508365838687209, 'subsample': 0.6771147946196734}
+[s0   295.8s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 71.59, best_iter 9, 50 evals, 6.5s, params {'colsample_bytree': 0.4633264317143734, 'eta': 0.2556614978416468, 'gamma': 8.759499615408235, 'max_depth': 5.0, 'min_child_weight': 9.0, 'n_estimators': 240.0, 'reg_alpha': 0.1526700260842514, 'reg_lambda': 4.0362608982423085, 'subsample': 0.5438838713402716}
+[s0   303.7s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 64.46, best_iter 70, 50 evals, 7.9s, params {'colsample_bytree': 0.8514952630740048, 'eta': 0.2965977952554375, 'gamma': 3.8989249148444682, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 440.0, 'reg_alpha': 0.6302868925852608, 'reg_lambda': 7.515269606673085, 'subsample': 0.648939237624541}
+[s0   304.1s] done in 304.1s
+[  310.4s] seed 0 finished (2406 metric rows)
+[s5     0.8s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s5    71.5s] evaluated 575 substations in 70.6s (0.123 s each)
+[s5   108.6s]   HP_Peak XGBoost[none]: cv_mse 80.54, best_iter 15, 50 evals, 37.0s, params {'colsample_bytree': 0.7197539421818426, 'eta': 0.16156856269418754, 'gamma': 9.052451571726984, 'max_depth': 7.0, 'min_child_weight': 15.0, 'n_estimators': 80.0, 'reg_alpha': 0.7920704520162642, 'reg_lambda': 2.601283851405143, 'subsample': 0.9897819658584751}
+[s5   111.1s]   HP_Peak Ridge[none]: cv_mse 87.12, best_iter None, 50 evals, 2.5s, params {'alpha': 1383.4987909171448}
+[s5   133.8s]   HP_Peak ElasticNet[none]: cv_mse 82.17, best_iter None, 50 evals, 22.7s, params {'alpha': 0.7194564225450669, 'l1_ratio': 0.7365050568165064}
+[s5   137.0s]   HP_Peak SVR[none]: cv_mse 84.57, best_iter None, 50 evals, 3.3s, params {'C': 1.6706263613694265, 'epsilon': 0.2, 'gamma': 0.00039855104381006286}
+[s5   139.5s]   HP_Peak PLS[none]: cv_mse 79.06, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s5   173.4s]   HP_Peak XGBoost[size]: cv_mse 79.48, best_iter 14, 50 evals, 33.9s, params {'colsample_bytree': 0.5765048681699652, 'eta': 0.26070746476745715, 'gamma': 1.8246793392147997, 'max_depth': 5.0, 'min_child_weight': 10.0, 'n_estimators': 190.0, 'reg_alpha': 0.9181543570261075, 'reg_lambda': 5.151489749049859, 'subsample': 0.5920986050118124}
+[s5   176.0s]   HP_Peak Ridge[size]: cv_mse 86.62, best_iter None, 50 evals, 2.6s, params {'alpha': 1383.4987909171448}
+[s5   197.4s]   HP_Peak ElasticNet[size]: cv_mse 75.59, best_iter None, 50 evals, 21.4s, params {'alpha': 0.6994866238951996, 'l1_ratio': 0.898417465194933}
+[s5   200.5s]   HP_Peak SVR[size]: cv_mse 83.93, best_iter None, 50 evals, 3.1s, params {'C': 1.8834498128747883, 'epsilon': 0.2, 'gamma': 0.0003434038058095805}
+[s5   202.9s]   HP_Peak PLS[size]: cv_mse 78.89, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s5   249.1s]   HP_Peak XGBoost[size_peak]: cv_mse 66.13, best_iter 15, 50 evals, 46.2s, params {'colsample_bytree': 0.7850165809407703, 'eta': 0.2271406809527512, 'gamma': 3.703721615911344, 'max_depth': 6.0, 'min_child_weight': 13.0, 'n_estimators': 470.0, 'reg_alpha': 0.8654809415818363, 'reg_lambda': 5.74891080189458, 'subsample': 0.8201809817946987}
+[s5   252.2s]   HP_Peak Ridge[size_peak]: cv_mse 84.42, best_iter None, 50 evals, 3.1s, params {'alpha': 1603.0743600326812}
+[s5   276.4s]   HP_Peak ElasticNet[size_peak]: cv_mse 57.24, best_iter None, 50 evals, 24.3s, params {'alpha': 0.5041617982220447, 'l1_ratio': 0.8623485417733036}
+[s5   279.9s]   HP_Peak SVR[size_peak]: cv_mse 80.47, best_iter None, 50 evals, 3.4s, params {'C': 5.969777025108519, 'epsilon': 0.01, 'gamma': 0.00015446692683224417}
+[s5   282.3s]   HP_Peak PLS[size_peak]: cv_mse 77.33, best_iter None, 50 evals, 2.4s, params {'n_components': 1.0}
+[s5   282.3s]   HP_Peak anchor_only_Linear[size]: cv_mse 147.9, best_iter None, 0 evals, 0.0s, params {}
+[s5   282.4s]   HP_Peak anchor_only_Linear[peak]: cv_mse 104.8, best_iter None, 0 evals, 0.0s, params {}
+[s5   282.4s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 89.34, best_iter None, 0 evals, 0.0s, params {}
+[s5   289.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 139.6, best_iter 32, 50 evals, 7.1s, params {'colsample_bytree': 0.445963247065899, 'eta': 0.26607141609245183, 'gamma': 4.426867066046743, 'max_depth': 8.0, 'min_child_weight': 5.0, 'n_estimators': 190.0, 'reg_alpha': 0.26945597188559783, 'reg_lambda': 3.274095049193532, 'subsample': 0.837999460958174}
+[s5   295.7s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 91.31, best_iter 16, 50 evals, 6.2s, params {'colsample_bytree': 0.9987196120981161, 'eta': 0.2061644677964182, 'gamma': 3.5334749820268687, 'max_depth': 3.0, 'min_child_weight': 20.0, 'n_estimators': 310.0, 'reg_alpha': 0.8620822106318665, 'reg_lambda': 9.98951658454328, 'subsample': 0.6783439319598983}
+[s5   303.5s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 86.14, best_iter 92, 50 evals, 7.8s, params {'colsample_bytree': 0.8016024766106695, 'eta': 0.14058593962215657, 'gamma': 4.444314234523032, 'max_depth': 7.0, 'min_child_weight': 16.0, 'n_estimators': 260.0, 'reg_alpha': 0.7431196411000195, 'reg_lambda': 1.8368499353851448, 'subsample': 0.5049742886340154}
+[s5   303.9s] done in 303.9s
+[  606.6s] seed 5 finished (2406 metric rows)
+[s4     0.9s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s4    72.2s] evaluated 575 substations in 71.2s (0.124 s each)
+[s4   117.1s]   HP_Peak XGBoost[none]: cv_mse 87.48, best_iter 144, 50 evals, 45.0s, params {'colsample_bytree': 0.5790575561514759, 'eta': 0.038995640418651785, 'gamma': 3.574485141252782, 'max_depth': 7.0, 'min_child_weight': 3.0, 'n_estimators': 440.0, 'reg_alpha': 0.5650044752241831, 'reg_lambda': 0.4359202736278678, 'subsample': 0.9151697940570374}
+[s4   120.2s]   HP_Peak Ridge[none]: cv_mse 90.02, best_iter None, 50 evals, 3.0s, params {'alpha': 790.1403048748201}
+[s4   137.0s]   HP_Peak ElasticNet[none]: cv_mse 85.81, best_iter None, 50 evals, 16.8s, params {'alpha': 1.6090038944313116, 'l1_ratio': 0.3443797460508942}
+[s4   140.0s]   HP_Peak SVR[none]: cv_mse 85.39, best_iter None, 50 evals, 3.0s, params {'C': 1.037837862915082, 'epsilon': 0.05, 'gamma': 0.0005415858732291799}
+[s4   142.4s]   HP_Peak PLS[none]: cv_mse 84.87, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s4   183.9s]   HP_Peak XGBoost[size]: cv_mse 88.9, best_iter 56, 50 evals, 41.5s, params {'colsample_bytree': 0.7552175871417809, 'eta': 0.11397267646383655, 'gamma': 4.459960316349877, 'max_depth': 4.0, 'min_child_weight': 10.0, 'n_estimators': 130.0, 'reg_alpha': 0.6634653371688641, 'reg_lambda': 9.955337941135625, 'subsample': 0.9945178314062241}
+[s4   186.9s]   HP_Peak Ridge[size]: cv_mse 89.85, best_iter None, 50 evals, 3.0s, params {'alpha': 790.1403048748201}
+[s4   204.1s]   HP_Peak ElasticNet[size]: cv_mse 85.49, best_iter None, 50 evals, 17.1s, params {'alpha': 1.6090038944313116, 'l1_ratio': 0.3443797460508942}
+[s4   207.2s]   HP_Peak SVR[size]: cv_mse 85.15, best_iter None, 50 evals, 3.1s, params {'C': 1.2557588830239064, 'epsilon': 0.1, 'gamma': 0.0005265699650389448}
+[s4   209.5s]   HP_Peak PLS[size]: cv_mse 84.73, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s4   270.7s]   HP_Peak XGBoost[size_peak]: cv_mse 79.26, best_iter 45, 50 evals, 61.1s, params {'colsample_bytree': 0.39066209506777083, 'eta': 0.13111492695994625, 'gamma': 5.772602422713202, 'max_depth': 4.0, 'min_child_weight': 6.0, 'n_estimators': 460.0, 'reg_alpha': 0.5317214728772459, 'reg_lambda': 5.639774762080681, 'subsample': 0.9695382783034929}
+[s4   273.4s]   HP_Peak Ridge[size_peak]: cv_mse 87.39, best_iter None, 50 evals, 2.7s, params {'alpha': 649.1979156671663}
+[s4   292.2s]   HP_Peak ElasticNet[size_peak]: cv_mse 66.39, best_iter None, 50 evals, 18.8s, params {'alpha': 0.6759604580991905, 'l1_ratio': 0.8975337395052729}
+[s4   295.2s]   HP_Peak SVR[size_peak]: cv_mse 82.78, best_iter None, 50 evals, 3.1s, params {'C': 1.1209147747372845, 'epsilon': 0.05, 'gamma': 0.0005519104280589689}
+[s4   297.8s]   HP_Peak PLS[size_peak]: cv_mse 83.23, best_iter None, 50 evals, 2.5s, params {'n_components': 2.0}
+[s4   297.8s]   HP_Peak anchor_only_Linear[size]: cv_mse 160.5, best_iter None, 0 evals, 0.0s, params {}
+[s4   297.8s]   HP_Peak anchor_only_Linear[peak]: cv_mse 106.4, best_iter None, 0 evals, 0.0s, params {}
+[s4   297.8s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 59.45, best_iter None, 0 evals, 0.0s, params {}
+[s4   304.8s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 164.1, best_iter 27, 50 evals, 7.0s, params {'colsample_bytree': 0.30123404624301886, 'eta': 0.22330727466401054, 'gamma': 5.659420120241506, 'max_depth': 3.0, 'min_child_weight': 5.0, 'n_estimators': 140.0, 'reg_alpha': 0.38530124767205964, 'reg_lambda': 8.603980438863086, 'subsample': 0.5327502992008515}
+[s4   311.4s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 101.8, best_iter 25, 50 evals, 6.6s, params {'colsample_bytree': 0.4123249472323627, 'eta': 0.22566766401964236, 'gamma': 9.901414405765951, 'max_depth': 3.0, 'min_child_weight': 5.0, 'n_estimators': 150.0, 'reg_alpha': 0.9873913413414156, 'reg_lambda': 8.064068457922426, 'subsample': 0.7203325786046837}
+[s4   319.1s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 89.75, best_iter 76, 50 evals, 7.7s, params {'colsample_bytree': 0.9065879992224151, 'eta': 0.22347634823512244, 'gamma': 8.484637629345004, 'max_depth': 7.0, 'min_child_weight': 5.0, 'n_estimators': 350.0, 'reg_alpha': 0.3722492601312886, 'reg_lambda': 9.98527184045525, 'subsample': 0.553645942153743}
+[s4   319.5s] done in 319.5s
+[  608.4s] seed 4 finished (2406 metric rows)
+[s6     0.7s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s6    71.9s] evaluated 575 substations in 71.1s (0.124 s each)
+[s6   114.1s]   HP_Peak XGBoost[none]: cv_mse 74.45, best_iter 9, 50 evals, 42.1s, params {'colsample_bytree': 0.6718475089839425, 'eta': 0.29708092876567843, 'gamma': 7.368451196593729, 'max_depth': 3.0, 'min_child_weight': 6.0, 'n_estimators': 360.0, 'reg_alpha': 0.8183781843042275, 'reg_lambda': 2.918333167549984, 'subsample': 0.5761959189902355}
+[s6   116.2s]   HP_Peak Ridge[none]: cv_mse 72.24, best_iter None, 50 evals, 2.2s, params {'alpha': 94.3965432222774}
+[s6   143.6s]   HP_Peak ElasticNet[none]: cv_mse 70.06, best_iter None, 50 evals, 27.4s, params {'alpha': 0.09271240041039275, 'l1_ratio': 0.7067307191239037}
+[s6   147.5s]   HP_Peak SVR[none]: cv_mse 64.16, best_iter None, 50 evals, 3.8s, params {'C': 2.6310315144877983, 'epsilon': 0.2, 'gamma': 0.000573034883383226}
+[s6   150.8s]   HP_Peak PLS[none]: cv_mse 71.58, best_iter None, 50 evals, 3.4s, params {'n_components': 6.0}
+[s6   190.6s]   HP_Peak XGBoost[size]: cv_mse 75.58, best_iter 61, 50 evals, 39.8s, params {'colsample_bytree': 0.5732601122023904, 'eta': 0.08367493073118869, 'gamma': 2.767467596820247, 'max_depth': 3.0, 'min_child_weight': 6.0, 'n_estimators': 260.0, 'reg_alpha': 0.6238962590965387, 'reg_lambda': 6.803099456463363, 'subsample': 0.6004295628931341}
+[s6   192.8s]   HP_Peak Ridge[size]: cv_mse 68.39, best_iter None, 50 evals, 2.1s, params {'alpha': 27.10283539382903}
+[s6   227.6s]   HP_Peak ElasticNet[size]: cv_mse 64.08, best_iter None, 50 evals, 34.8s, params {'alpha': 0.08369455592642291, 'l1_ratio': 0.7013354819818803}
+[s6   238.0s]   HP_Peak SVR[size]: cv_mse 62.18, best_iter None, 50 evals, 10.4s, params {'C': 1.698550722319179, 'epsilon': 0.2, 'gamma': 0.0009866331833900265}
+[s6   241.7s]   HP_Peak PLS[size]: cv_mse 70.35, best_iter None, 50 evals, 3.7s, params {'n_components': 6.0}
+[s6   275.3s]   HP_Peak XGBoost[size_peak]: cv_mse 64.52, best_iter 57, 50 evals, 33.6s, params {'colsample_bytree': 0.8027932461238539, 'eta': 0.0735275918915701, 'gamma': 8.665608568487647, 'max_depth': 4.0, 'min_child_weight': 14.0, 'n_estimators': 180.0, 'reg_alpha': 0.7556905510521219, 'reg_lambda': 5.605817856162897, 'subsample': 0.6234795156302386}
+[s6   277.6s]   HP_Peak Ridge[size_peak]: cv_mse 63.42, best_iter None, 50 evals, 2.3s, params {'alpha': 34.06500245381355}
+[s6   301.3s]   HP_Peak ElasticNet[size_peak]: cv_mse 58.72, best_iter None, 50 evals, 23.7s, params {'alpha': 0.08369455592642291, 'l1_ratio': 0.7013354819818803}
+[s6   304.5s]   HP_Peak SVR[size_peak]: cv_mse 61.03, best_iter None, 50 evals, 3.1s, params {'C': 3.9272446888926846, 'epsilon': 0.2, 'gamma': 0.0007313348415453902}
+[s6   306.9s]   HP_Peak PLS[size_peak]: cv_mse 66.5, best_iter None, 50 evals, 2.4s, params {'n_components': 7.0}
+[s6   306.9s]   HP_Peak anchor_only_Linear[size]: cv_mse 123.5, best_iter None, 0 evals, 0.0s, params {}
+[s6   306.9s]   HP_Peak anchor_only_Linear[peak]: cv_mse 96.68, best_iter None, 0 evals, 0.0s, params {}
+[s6   306.9s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 85.76, best_iter None, 0 evals, 0.0s, params {}
+[s6   312.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 120.8, best_iter 40, 50 evals, 5.6s, params {'colsample_bytree': 0.7571223167375448, 'eta': 0.2609225229546549, 'gamma': 0.9886971272686704, 'max_depth': 7.0, 'min_child_weight': 5.0, 'n_estimators': 150.0, 'reg_alpha': 0.3819896865309909, 'reg_lambda': 2.899739448341453, 'subsample': 0.6972676226250196}
+[s6   318.0s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 84.04, best_iter 8, 50 evals, 5.5s, params {'colsample_bytree': 0.606477213124851, 'eta': 0.2764341059137523, 'gamma': 5.569291444797827, 'max_depth': 8.0, 'min_child_weight': 12.0, 'n_estimators': 460.0, 'reg_alpha': 0.15504279303369892, 'reg_lambda': 3.3384199980336673, 'subsample': 0.5674099849658077}
+[s6   326.2s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 81.53, best_iter 93, 50 evals, 8.2s, params {'colsample_bytree': 0.9907754289526336, 'eta': 0.07490905720048555, 'gamma': 1.5710128648712165, 'max_depth': 7.0, 'min_child_weight': 6.0, 'n_estimators': 420.0, 'reg_alpha': 0.26672159139560225, 'reg_lambda': 8.870000848837094, 'subsample': 0.7226130802856687}
+[s6   326.7s] done in 326.7s
+[  632.6s] seed 6 finished (2406 metric rows)
+[s7     0.7s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s7    74.6s] evaluated 575 substations in 73.7s (0.128 s each)
+[s7   112.9s]   HP_Peak XGBoost[none]: cv_mse 79.03, best_iter 59, 50 evals, 38.3s, params {'colsample_bytree': 0.4621945606552573, 'eta': 0.16888755461617436, 'gamma': 2.5681756086615435, 'max_depth': 6.0, 'min_child_weight': 7.0, 'n_estimators': 460.0, 'reg_alpha': 0.11070141934200628, 'reg_lambda': 2.9640152416621266, 'subsample': 0.8155326469874453}
+[s7   115.1s]   HP_Peak Ridge[none]: cv_mse 87.37, best_iter None, 50 evals, 2.2s, params {'alpha': 20.536770618862725}
+[s7   135.6s]   HP_Peak ElasticNet[none]: cv_mse 80.56, best_iter None, 50 evals, 20.5s, params {'alpha': 1.109263825411218, 'l1_ratio': 0.8642035371827784}
+[s7   139.7s]   HP_Peak SVR[none]: cv_mse 68.66, best_iter None, 50 evals, 4.1s, params {'C': 220.5377938825257, 'epsilon': 0.01, 'gamma': 0.00011383554692398024}
+[s7   142.4s]   HP_Peak PLS[none]: cv_mse 85.7, best_iter None, 50 evals, 2.8s, params {'n_components': 13.0}
+[s7   179.9s]   HP_Peak XGBoost[size]: cv_mse 80.48, best_iter 84, 50 evals, 37.4s, params {'colsample_bytree': 0.49174364301126905, 'eta': 0.10520342631339864, 'gamma': 8.669893653764992, 'max_depth': 9.0, 'min_child_weight': 8.0, 'n_estimators': 220.0, 'reg_alpha': 0.7594874422715583, 'reg_lambda': 2.6541062908211455, 'subsample': 0.9522541383277249}
+[s7   182.1s]   HP_Peak Ridge[size]: cv_mse 83, best_iter None, 50 evals, 2.2s, params {'alpha': 10.9898698637114}
+[s7   208.4s]   HP_Peak ElasticNet[size]: cv_mse 79.94, best_iter None, 50 evals, 26.3s, params {'alpha': 1.109263825411218, 'l1_ratio': 0.8642035371827784}
+[s7   214.1s]   HP_Peak SVR[size]: cv_mse 65.19, best_iter None, 50 evals, 5.7s, params {'C': 24.135635081053856, 'epsilon': 0.01, 'gamma': 0.000376094648748586}
+[s7   222.9s]   HP_Peak PLS[size]: cv_mse 82.32, best_iter None, 50 evals, 8.8s, params {'n_components': 14.0}
+[s7   282.2s]   HP_Peak XGBoost[size_peak]: cv_mse 62.86, best_iter 153, 50 evals, 59.2s, params {'colsample_bytree': 0.7622152356730849, 'eta': 0.04365970467928122, 'gamma': 4.553355633266208, 'max_depth': 10.0, 'min_child_weight': 5.0, 'n_estimators': 340.0, 'reg_alpha': 0.33270646329000353, 'reg_lambda': 0.06828078546743471, 'subsample': 0.5083588992995092}
+[s7   284.4s]   HP_Peak Ridge[size_peak]: cv_mse 71.27, best_iter None, 50 evals, 2.2s, params {'alpha': 9.821939680980579}
+[s7   312.4s]   HP_Peak ElasticNet[size_peak]: cv_mse 66, best_iter None, 50 evals, 28.0s, params {'alpha': 0.1370638076798427, 'l1_ratio': 0.8237966479471805}
+[s7   316.1s]   HP_Peak SVR[size_peak]: cv_mse 60.71, best_iter None, 50 evals, 3.6s, params {'C': 109.02137478444864, 'epsilon': 0.01, 'gamma': 0.00010013448606778838}
+[s7   318.5s]   HP_Peak PLS[size_peak]: cv_mse 72.25, best_iter None, 50 evals, 2.5s, params {'n_components': 14.0}
+[s7   318.6s]   HP_Peak anchor_only_Linear[size]: cv_mse 153.5, best_iter None, 0 evals, 0.0s, params {}
+[s7   318.6s]   HP_Peak anchor_only_Linear[peak]: cv_mse 110.9, best_iter None, 0 evals, 0.0s, params {}
+[s7   318.6s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 83.18, best_iter None, 0 evals, 0.0s, params {}
+[s7   324.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 155.5, best_iter 38, 50 evals, 5.9s, params {'colsample_bytree': 0.595308976539205, 'eta': 0.16106777847357798, 'gamma': 4.209655848527733, 'max_depth': 6.0, 'min_child_weight': 8.0, 'n_estimators': 110.0, 'reg_alpha': 0.8166683910561086, 'reg_lambda': 7.622192897508604, 'subsample': 0.8506864882975308}
+[s7   329.9s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 106.4, best_iter 29, 50 evals, 5.4s, params {'colsample_bytree': 0.9392790686438163, 'eta': 0.2195826616435039, 'gamma': 6.361860915463898, 'max_depth': 6.0, 'min_child_weight': 10.0, 'n_estimators': 220.0, 'reg_alpha': 0.8694025396935268, 'reg_lambda': 8.96651531190158, 'subsample': 0.9322850423031699}
+[s7   336.7s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 88.56, best_iter 60, 50 evals, 6.8s, params {'colsample_bytree': 0.8936287816968301, 'eta': 0.265063859581107, 'gamma': 5.259505539220962, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 460.0, 'reg_alpha': 0.11000014729635278, 'reg_lambda': 1.5505311330563964, 'subsample': 0.5470099518811964}
+[s7   337.1s] done in 337.1s
+[  647.6s] seed 7 finished (2406 metric rows)
+[s8     0.7s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s8    67.6s] evaluated 575 substations in 66.8s (0.116 s each)
+[s8   106.4s]   HP_Peak XGBoost[none]: cv_mse 63.98, best_iter 53, 50 evals, 38.7s, params {'colsample_bytree': 0.5592772256058384, 'eta': 0.14292240480206758, 'gamma': 6.929667651150869, 'max_depth': 4.0, 'min_child_weight': 14.0, 'n_estimators': 110.0, 'reg_alpha': 0.4120988741239915, 'reg_lambda': 5.724289130899882, 'subsample': 0.6291622440209408}
+[s8   108.5s]   HP_Peak Ridge[none]: cv_mse 60.05, best_iter None, 50 evals, 2.1s, params {'alpha': 737.888617810503}
+[s8   124.4s]   HP_Peak ElasticNet[none]: cv_mse 59.29, best_iter None, 50 evals, 15.9s, params {'alpha': 2.044376077303122, 'l1_ratio': 0.12459893148849241}
+[s8   127.3s]   HP_Peak SVR[none]: cv_mse 53.94, best_iter None, 50 evals, 2.9s, params {'C': 2.476277755239081, 'epsilon': 0.05, 'gamma': 0.0013213151741669502}
+[s8   129.6s]   HP_Peak PLS[none]: cv_mse 57.81, best_iter None, 50 evals, 2.3s, params {'n_components': 3.0}
+[s8   170.7s]   HP_Peak XGBoost[size]: cv_mse 64.99, best_iter 208, 50 evals, 41.0s, params {'colsample_bytree': 0.34862240152181234, 'eta': 0.03194517725554089, 'gamma': 4.575248027331177, 'max_depth': 5.0, 'min_child_weight': 1.0, 'n_estimators': 370.0, 'reg_alpha': 0.08547028440171996, 'reg_lambda': 2.0105494213560324, 'subsample': 0.5071436986989115}
+[s8   172.9s]   HP_Peak Ridge[size]: cv_mse 59.25, best_iter None, 50 evals, 2.2s, params {'alpha': 737.888617810503}
+[s8   192.8s]   HP_Peak ElasticNet[size]: cv_mse 56.69, best_iter None, 50 evals, 19.9s, params {'alpha': 0.3409904654821139, 'l1_ratio': 0.8316647775356087}
+[s8   195.9s]   HP_Peak SVR[size]: cv_mse 53.21, best_iter None, 50 evals, 3.1s, params {'C': 3.131548666632461, 'epsilon': 0.2, 'gamma': 0.0007499817084185088}
+[s8   198.4s]   HP_Peak PLS[size]: cv_mse 57.21, best_iter None, 50 evals, 2.5s, params {'n_components': 3.0}
+[s8   243.5s]   HP_Peak XGBoost[size_peak]: cv_mse 52.14, best_iter 122, 50 evals, 45.1s, params {'colsample_bytree': 0.5724287345303338, 'eta': 0.03980644890678085, 'gamma': 7.521767587259881, 'max_depth': 7.0, 'min_child_weight': 8.0, 'n_estimators': 230.0, 'reg_alpha': 0.22579313721524297, 'reg_lambda': 0.3270730684766321, 'subsample': 0.77942192410162}
+[s8   245.6s]   HP_Peak Ridge[size_peak]: cv_mse 57.11, best_iter None, 50 evals, 2.1s, params {'alpha': 553.8021107390156}
+[s8   259.7s]   HP_Peak ElasticNet[size_peak]: cv_mse 45.04, best_iter None, 50 evals, 14.1s, params {'alpha': 0.7779061637132909, 'l1_ratio': 0.8108242870811406}
+[s8   270.0s]   HP_Peak SVR[size_peak]: cv_mse 50.02, best_iter None, 50 evals, 10.3s, params {'C': 3.131548666632461, 'epsilon': 0.2, 'gamma': 0.0007499817084185088}
+[s8   278.5s]   HP_Peak PLS[size_peak]: cv_mse 55.74, best_iter None, 50 evals, 8.4s, params {'n_components': 3.0}
+[s8   278.5s]   HP_Peak anchor_only_Linear[size]: cv_mse 119.2, best_iter None, 0 evals, 0.0s, params {}
+[s8   278.6s]   HP_Peak anchor_only_Linear[peak]: cv_mse 80.62, best_iter None, 0 evals, 0.0s, params {}
+[s8   278.6s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 59.82, best_iter None, 0 evals, 0.1s, params {}
+[s8   300.0s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 114.4, best_iter 44, 50 evals, 21.3s, params {'colsample_bytree': 0.5956991340583255, 'eta': 0.2220620477137879, 'gamma': 5.3807585580048, 'max_depth': 6.0, 'min_child_weight': 8.0, 'n_estimators': 420.0, 'reg_alpha': 0.60384477668764, 'reg_lambda': 6.871446053805538, 'subsample': 0.8634438586680353}
+[s8   307.9s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 74.05, best_iter 15, 50 evals, 7.9s, params {'colsample_bytree': 0.7970404462139679, 'eta': 0.2563975587169556, 'gamma': 5.488773490136886, 'max_depth': 4.0, 'min_child_weight': 8.0, 'n_estimators': 320.0, 'reg_alpha': 0.030296534605272485, 'reg_lambda': 3.268432426952095, 'subsample': 0.5031083452475233}
+[s8   315.2s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 56.78, best_iter 46, 50 evals, 7.3s, params {'colsample_bytree': 0.3786438940735408, 'eta': 0.26011954868106874, 'gamma': 4.335761943444849, 'max_depth': 3.0, 'min_child_weight': 5.0, 'n_estimators': 460.0, 'reg_alpha': 0.9941212632684382, 'reg_lambda': 9.93751652540229, 'subsample': 0.779698959226973}
+[s8   315.6s] done in 315.6s
+[  922.2s] seed 8 finished (2406 metric rows)
+[s9     0.7s] HP train/test 35/12, fill 980/326; substations {'inner': 260, 'train': 240, 'test': 75}; dropped cells 89
+[s9    67.3s] evaluated 575 substations in 66.5s (0.116 s each)
+[s9   101.9s]   HP_Peak XGBoost[none]: cv_mse 84.54, best_iter 136, 50 evals, 34.5s, params {'colsample_bytree': 0.8970230980859399, 'eta': 0.02398007532610477, 'gamma': 2.3866203623457354, 'max_depth': 7.0, 'min_child_weight': 12.0, 'n_estimators': 240.0, 'reg_alpha': 0.20973662399280618, 'reg_lambda': 7.702052829614806, 'subsample': 0.6766242484301437}
+[s9   104.0s]   HP_Peak Ridge[none]: cv_mse 95.52, best_iter None, 50 evals, 2.2s, params {'alpha': 722.3359759097999}
+[s9   131.0s]   HP_Peak ElasticNet[none]: cv_mse 92.81, best_iter None, 50 evals, 27.0s, params {'alpha': 1.0108529490729228, 'l1_ratio': 0.7027482856431118}
+[s9   134.1s]   HP_Peak SVR[none]: cv_mse 71.85, best_iter None, 50 evals, 3.1s, params {'C': 353.1323274999698, 'epsilon': 0.2, 'gamma': 0.0022948914373985656}
+[s9   136.5s]   HP_Peak PLS[none]: cv_mse 91.45, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s9   172.8s]   HP_Peak XGBoost[size]: cv_mse 84.4, best_iter 61, 50 evals, 36.2s, params {'colsample_bytree': 0.843970806635809, 'eta': 0.0469409596895414, 'gamma': 4.277775114132863, 'max_depth': 10.0, 'min_child_weight': 10.0, 'n_estimators': 360.0, 'reg_alpha': 0.8172203606694752, 'reg_lambda': 4.78846691290799, 'subsample': 0.5241553092976056}
+[s9   174.9s]   HP_Peak Ridge[size]: cv_mse 95.44, best_iter None, 50 evals, 2.1s, params {'alpha': 869.0979168979159}
+[s9   207.3s]   HP_Peak ElasticNet[size]: cv_mse 91.69, best_iter None, 50 evals, 32.3s, params {'alpha': 1.0108529490729228, 'l1_ratio': 0.7027482856431118}
+[s9   210.4s]   HP_Peak SVR[size]: cv_mse 70.23, best_iter None, 50 evals, 3.1s, params {'C': 60.557900582893964, 'epsilon': 0.2, 'gamma': 0.0022470906569071313}
+[s9   212.8s]   HP_Peak PLS[size]: cv_mse 91.42, best_iter None, 50 evals, 2.4s, params {'n_components': 2.0}
+[s9   242.2s]   HP_Peak XGBoost[size_peak]: cv_mse 75.09, best_iter 32, 50 evals, 29.4s, params {'colsample_bytree': 0.8358209245009693, 'eta': 0.13156842438757876, 'gamma': 0.009609577932919805, 'max_depth': 8.0, 'min_child_weight': 20.0, 'n_estimators': 50.0, 'reg_alpha': 0.9765095126696373, 'reg_lambda': 5.711936398998686, 'subsample': 0.8709546339204586}
+[s9   244.3s]   HP_Peak Ridge[size_peak]: cv_mse 76.53, best_iter None, 50 evals, 2.1s, params {'alpha': 4.17096972420824}
+[s9   309.9s]   HP_Peak ElasticNet[size_peak]: cv_mse 65.53, best_iter None, 50 evals, 65.6s, params {'alpha': 0.08464069172606298, 'l1_ratio': 0.8991853351551113}
+[s9   313.1s]   HP_Peak SVR[size_peak]: cv_mse 62.44, best_iter None, 50 evals, 3.1s, params {'C': 35.13818344548741, 'epsilon': 0.2, 'gamma': 0.0009381596813472195}
+[s9   315.7s]   HP_Peak PLS[size_peak]: cv_mse 81.71, best_iter None, 50 evals, 2.6s, params {'n_components': 19.0}
+[s9   315.7s]   HP_Peak anchor_only_Linear[size]: cv_mse 164.8, best_iter None, 0 evals, 0.0s, params {}
+[s9   315.7s]   HP_Peak anchor_only_Linear[peak]: cv_mse 120.7, best_iter None, 0 evals, 0.0s, params {}
+[s9   315.8s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 78.88, best_iter None, 0 evals, 0.0s, params {}
+[s9   320.8s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 155, best_iter 15, 50 evals, 5.1s, params {'colsample_bytree': 0.8638101504054847, 'eta': 0.24392682273145938, 'gamma': 8.658003411473544, 'max_depth': 10.0, 'min_child_weight': 4.0, 'n_estimators': 270.0, 'reg_alpha': 0.23833884297041183, 'reg_lambda': 5.452670143730847, 'subsample': 0.5785020706874797}
+[s9   326.0s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 116.7, best_iter 8, 50 evals, 5.2s, params {'colsample_bytree': 0.66819981501559, 'eta': 0.29983803774514706, 'gamma': 1.6344422402423642, 'max_depth': 6.0, 'min_child_weight': 8.0, 'n_estimators': 110.0, 'reg_alpha': 0.2877017399045386, 'reg_lambda': 0.35513567694749004, 'subsample': 0.793906166118533}
+[s9   332.8s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 101.4, best_iter 100, 50 evals, 6.8s, params {'colsample_bytree': 0.36145441635845216, 'eta': 0.17865063934480563, 'gamma': 0.007000711630670509, 'max_depth': 8.0, 'min_child_weight': 17.0, 'n_estimators': 400.0, 'reg_alpha': 0.5756429927823948, 'reg_lambda': 9.988261444575464, 'subsample': 0.7276616447624074}
+[s9   333.2s] done in 333.2s
+[  941.6s] seed 9 finished (2406 metric rows)
+[  942.3s] done in 942.3s (10 of 10 seeds)

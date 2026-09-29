@@ -113,12 +113,12 @@ def table1(A):
     ml = [c for c in W["r2"].columns if c[0] not in PHYS and not c[0].startswith("anchor_only")]
     cols = [(b, "none") for b in PHYS] + [c for c in ANCHOR_ONLY if c in W["r2"].columns] + sorted(ml, key=lambda c: (c[1], c[0]))
     entries = [("main", W, c) for c in cols] + ([("ffnn", Wf, c) for c in Wf["r2"].columns if c[0] == "FFNN"] if Wf else [])
-    n_hp = A.M[(A.M["exp_id"] == ARM["main"]) & (A.M["cell"] == "all") & (A.M["metric"] == "rmse")].groupby(["method", "anchor"])["n_hp_households"].median()
+    n_hp = A.M[(A.M["cell"] == "all") & (A.M["metric"] == "rmse")].groupby(["exp_id", "method", "anchor"])["n_hp_households"].median()
     for arm, w, c in entries:
         rows.append({"method [anchor]": label(*c), "arm": arm, "n_seeds": int(w["r2"][c].notna().sum()),
                      "R2 median [5%-90%]": A.fmt(w["r2"][c]), "MAPE % median [5%-90%]": A.fmt(w["mape"][c], 2),
                      "RMSE kW median [5%-90%]": A.fmt(w["rmse"][c], 2),
-                     "test HP households (median)": n_hp.get(c, np.nan),
+                     "test HP households (median)": n_hp.get((ARM[arm], *c), np.nan),
                      "T_h at bound, test share": f"{bound[(c[0], 'none')].median():.3f}" if c[0] in PHYS[:3] else ""})
         series["r2"].append((label(*c), w["r2"][c], color(c[0])))
         series["mape"].append((label(*c), w["mape"][c], color(c[0])))
@@ -128,8 +128,7 @@ def table1(A):
     for ax, k, t in zip(axs, ("r2", "mape"), ("R²", "MAPE (%)")):
         boxstrip(ax, series[k], A.band)
         ax.set_xlabel(t + ", test, per split seed")
-    axs[0].set_xlim(left=max(-0.2, axs[0].get_xlim()[0]))
-    fig.suptitle("Pool B*, HP_Peak: distribution over split seeds", fontsize=9)
+    axs[0].set_title("Pool B*, HP_Peak: distribution over split seeds (box = quartiles, whiskers = 5%-90%)", fontsize=9, loc="left")
     savefig(fig, "fig_table1_main")
 
 
@@ -139,7 +138,7 @@ def legacy_column():
     hv = pd.read_csv(ROOT / "data" / "hockey_variants_transfer.csv").query("set == 'Swiss test'")
     ph = hv.loc[hv["r2"].idxmax()]
     audit = (ROOT / "results" / "iter01_pool_audit" / "ml_audit_checks.md").read_text(encoding="utf-8")
-    r2_peak = float(re.search(r"R2 = \*\*([0-9.]+)\*\*", audit).group(1))
+    r2_peak = float(re.search(r"R2 = ([0-9.]+)\*\*", audit).group(1))
     return {"xgb": (xgb["test_r2"], xgb["test_mape"], xgb["test_rmse"]),
             "phys": (ph["r2"], ph["mape"], np.nan, f"legacy {ph['reduction']} {ph['map']}"),
             "peak": (r2_peak, np.nan, np.nan)}
@@ -158,10 +157,9 @@ def table2(A):
     leg = legacy_column()
     pools = [("A under v1 (57 HH, shared fill)", "legacy_a"), ("B* under v1", "main"), ("B under v1", "sens_b")]
     pick = {arm: {"xgb": ("XGBoost", "size_peak"),
-                  "phys": (A.best(arm, [(b, "none") for b in PHYS]), "none"),
+                  "phys": A.best(arm, [(b, "none") for b in PHYS]),
                   "peak": A.best(arm, [("anchor_only_Linear", "peak"), ("anchor_only_XGBoost", "peak")])}
             for _, arm in pools}
-    pick = {a: {k: (v if isinstance(v[0], str) else v) for k, v in d.items()} for a, d in pick.items()}
     rows, series = [], {}
     names = {"xgb": "XGBoost [size_peak]", "phys": "best physics baseline", "peak": "peak-only baseline"}
     for key in ("xgb", "phys", "peak"):
@@ -175,7 +173,8 @@ def table2(A):
                 c = pick[arm][key]
                 w = A.wide(arm, mk)[c]
                 row[pname] = A.fmt(w, nd) + (f" ({label(*c)})" if mk == "r2" and key != "xgb" else "")
-                series.setdefault((key, pname), w) if mk == "r2" else None
+                if mk == "r2":
+                    series[(key, pname)] = w
             main_c = pick["main"][key]                                    # B* restricted to A's test cells
             sub = subset_metrics(A.preds["main"], *main_c, lambda d: (d["size"] == 10) & (d["p"] <= 0.3))
             row["B* under v1, A's test cells only (size 10, p <= 0.3)"] = A.fmt(sub[mk], nd)
@@ -199,8 +198,8 @@ def table2(A):
     fig, axs = plt.subplots(1, 3, figsize=(11, 3.4), sharey=False)
     cats = [p for p, _ in pools] + ["B* on A cells"]
     for ax, key in zip(axs, ("xgb", "phys", "peak")):
-        boxstrip(ax, [(("A-v1", "B*-v1", "B-v1", "B*-v1 on A's cells")[i], series[(key, c)], color("XGBoost" if key == "xgb" else "x" if False else
-                       ("XGBoost" if key == "xgb" else "ElasticNet" if key == "phys" else "Ridge"))) for i, c in enumerate(cats)],
+        c = {"xgb": COLOR["XGBoost"], "phys": COLOR["phys"], "peak": COLOR["anchor"]}[key]
+        boxstrip(ax, [(n, series[(key, cat)], c) for n, cat in zip(("A-v1", "B*-v1", "B-v1", "B*-v1 on A's cells"), cats)],
                  A.band, horizontal=False)
         ax.axhline(leg[key][0], color=INK, ls="--", lw=1)
         ax.text(0.02, 0.02, "dashed: legacy CSV (one split)", transform=ax.transAxes, fontsize=6.5)
@@ -285,7 +284,7 @@ def table4(A):
     axs[0, 0].legend(fontsize=7, loc="upper right")
     savefig(fig, "fig_table4_error_vs_penetration_size")
     # per-cell heatmap of the median MAPE (cell rows of metrics.csv)
-    fig, axs = plt.subplots(1, 3, figsize=(12, 3.2))
+    fig, axs = plt.subplots(1, 3, figsize=(13, 3.4), constrained_layout=True)
     sizes, ps = sorted(pr["size"].unique()), sorted(pr["p"].unique())
     for ax, (m, a) in zip(axs, ms):
         w = A.M[(A.M["exp_id"] == ARM["main"]) & (A.M["method"] == m) & (A.M["anchor"] == a) & (A.M["metric"] == "mape") & (A.M["cell"] != "all")]
