@@ -1,0 +1,9 @@
+# Iteration 01 audit: full scans (~10 min, cached in data/_paperb/iter01).
+exp_id: iter01_pool_audit
+protocol: audit (read-only)
+out_dir: results/iter01_pool_audit
+cache_dir: data/_paperb/iter01
+scan_limit: null
+seeds:
+  split: 42
+  n_split_seeds: 20

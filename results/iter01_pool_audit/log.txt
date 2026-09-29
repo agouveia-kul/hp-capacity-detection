@@ -1,0 +1,13 @@
+iteration 01 - pool and protocol audit (read-only), code @ 0ea0301
+runtimes (Windows, OneDrive):
+  pool_inventory.py full   ~12 min first run (scan: HEAPO 15-min 1407 files 4.8 GB, HEAPO daily 1298, Kaiser 2447 files 7.4 GB, WPuQ 2019+2020); ~20 s from cache
+  ml_audit_checks.py full  ~35 s first run (one pass over data/substations_data_pooled.pkl, 2560 x 2 hockey-stick fits); ~5 s from cache
+  design_envelope.py full  ~5 s (20 split seeds)
+  quick config             ~10 s scans (25 files per folder) + ~40 s envelope/checks
+caches written: data/_paperb/iter01/*.parquet (1.2 MB), data/_paperb/iter01_quick/*.parquet
+warnings: pandas DeprecationWarning (groupby.apply) fixed; none remaining
+dropped / failed cases:
+  hockey fits: 0 failures (all 2560 substations have >= 20 heating days)
+  Kaiser: 1 HP meter without 0_object_id (excluded from pairing); NaN object ids no longer join (bug found and fixed before results)
+  quick config: options with < 2 HP households per split are reported as "too few", not dropped silently
+data/ and models/: no file outside data/_paperb/ newer than the start of the iteration (find -newer); models/ clean in git

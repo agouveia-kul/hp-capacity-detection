@@ -1,0 +1,264 @@
+source,requirement,station,window,n_households
+HEAPO 15-min,H15(a) HP submeter + other,8jB,2021/22,5
+HEAPO 15-min,H15(a) HP submeter + other,8jB,2022/23,23
+HEAPO 15-min,H15(a) HP submeter + other,8jB,cal2021,1
+HEAPO 15-min,H15(a) HP submeter + other,8jB,cal2022,4
+HEAPO 15-min,H15(a) HP submeter + other,8jB,cal2023,23
+HEAPO 15-min,H15(a) HP submeter + other,HbsbG,2022/23,1
+HEAPO 15-min,H15(a) HP submeter + other,HbsbG,cal2023,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2019/20,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2020/21,3
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2021/22,6
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2022/23,14
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2020,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2021,4
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2022,7
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2023,16
+HEAPO 15-min,H15(a) HP submeter + other,MqO,2021/22,2
+HEAPO 15-min,H15(a) HP submeter + other,MqO,2022/23,6
+HEAPO 15-min,H15(a) HP submeter + other,MqO,cal2021,1
+HEAPO 15-min,H15(a) HP submeter + other,MqO,cal2022,5
+HEAPO 15-min,H15(a) HP submeter + other,MqO,cal2023,6
+HEAPO 15-min,H15(a) HP submeter + other,z6I,2021/22,1
+HEAPO 15-min,H15(a) HP submeter + other,z6I,2022/23,2
+HEAPO 15-min,H15(a) HP submeter + other,z6I,cal2021,1
+HEAPO 15-min,H15(a) HP submeter + other,z6I,cal2022,1
+HEAPO 15-min,H15(a) HP submeter + other,z6I,cal2023,1
+HEAPO 15-min,H15(b) total,8jB,2019/20,1
+HEAPO 15-min,H15(b) total,8jB,2020/21,25
+HEAPO 15-min,H15(b) total,8jB,2021/22,100
+HEAPO 15-min,H15(b) total,8jB,2022/23,485
+HEAPO 15-min,H15(b) total,8jB,cal2020,6
+HEAPO 15-min,H15(b) total,8jB,cal2021,49
+HEAPO 15-min,H15(b) total,8jB,cal2022,121
+HEAPO 15-min,H15(b) total,8jB,cal2023,537
+HEAPO 15-min,H15(b) total,HbsbG,2020/21,7
+HEAPO 15-min,H15(b) total,HbsbG,2021/22,10
+HEAPO 15-min,H15(b) total,HbsbG,2022/23,25
+HEAPO 15-min,H15(b) total,HbsbG,cal2021,7
+HEAPO 15-min,H15(b) total,HbsbG,cal2022,11
+HEAPO 15-min,H15(b) total,HbsbG,cal2023,35
+HEAPO 15-min,H15(b) total,Hg,2019/20,7
+HEAPO 15-min,H15(b) total,Hg,2020/21,54
+HEAPO 15-min,H15(b) total,Hg,2021/22,98
+HEAPO 15-min,H15(b) total,Hg,2022/23,235
+HEAPO 15-min,H15(b) total,Hg,cal2020,26
+HEAPO 15-min,H15(b) total,Hg,cal2021,63
+HEAPO 15-min,H15(b) total,Hg,cal2022,113
+HEAPO 15-min,H15(b) total,Hg,cal2023,333
+HEAPO 15-min,H15(b) total,MqO,2020/21,1
+HEAPO 15-min,H15(b) total,MqO,2021/22,17
+HEAPO 15-min,H15(b) total,MqO,2022/23,25
+HEAPO 15-min,H15(b) total,MqO,cal2021,11
+HEAPO 15-min,H15(b) total,MqO,cal2022,16
+HEAPO 15-min,H15(b) total,MqO,cal2023,26
+HEAPO 15-min,H15(b) total,ceOxS,2020/21,3
+HEAPO 15-min,H15(b) total,ceOxS,2021/22,5
+HEAPO 15-min,H15(b) total,ceOxS,2022/23,23
+HEAPO 15-min,H15(b) total,ceOxS,cal2021,3
+HEAPO 15-min,H15(b) total,ceOxS,cal2022,6
+HEAPO 15-min,H15(b) total,ceOxS,cal2023,28
+HEAPO 15-min,H15(b) total,sV3mR,2020/21,8
+HEAPO 15-min,H15(b) total,sV3mR,2021/22,12
+HEAPO 15-min,H15(b) total,sV3mR,2022/23,25
+HEAPO 15-min,H15(b) total,sV3mR,cal2021,11
+HEAPO 15-min,H15(b) total,sV3mR,cal2022,14
+HEAPO 15-min,H15(b) total,sV3mR,cal2023,28
+HEAPO 15-min,H15(b) total,wDD,2020/21,12
+HEAPO 15-min,H15(b) total,wDD,2021/22,17
+HEAPO 15-min,H15(b) total,wDD,2022/23,35
+HEAPO 15-min,H15(b) total,wDD,cal2021,14
+HEAPO 15-min,H15(b) total,wDD,cal2022,20
+HEAPO 15-min,H15(b) total,wDD,cal2023,45
+HEAPO 15-min,H15(b) total,z6I,2020/21,9
+HEAPO 15-min,H15(b) total,z6I,2021/22,17
+HEAPO 15-min,H15(b) total,z6I,2022/23,31
+HEAPO 15-min,H15(b) total,z6I,cal2020,1
+HEAPO 15-min,H15(b) total,z6I,cal2021,15
+HEAPO 15-min,H15(b) total,z6I,cal2022,19
+HEAPO 15-min,H15(b) total,z6I,cal2023,42
+HEAPO daily,Hd(a) HP submeter daily,8jB,2019/20,3
+HEAPO daily,Hd(a) HP submeter daily,8jB,2020/21,4
+HEAPO daily,Hd(a) HP submeter daily,8jB,2021/22,7
+HEAPO daily,Hd(a) HP submeter daily,8jB,2022/23,15
+HEAPO daily,Hd(a) HP submeter daily,8jB,cal2020,3
+HEAPO daily,Hd(a) HP submeter daily,8jB,cal2021,5
+HEAPO daily,Hd(a) HP submeter daily,8jB,cal2022,8
+HEAPO daily,Hd(a) HP submeter daily,HbsbG,2022/23,1
+HEAPO daily,Hd(a) HP submeter daily,Hg,2019/20,2
+HEAPO daily,Hd(a) HP submeter daily,Hg,2020/21,1
+HEAPO daily,Hd(a) HP submeter daily,Hg,2021/22,3
+HEAPO daily,Hd(a) HP submeter daily,Hg,2022/23,6
+HEAPO daily,Hd(a) HP submeter daily,Hg,cal2019,5
+HEAPO daily,Hd(a) HP submeter daily,Hg,cal2020,2
+HEAPO daily,Hd(a) HP submeter daily,Hg,cal2021,1
+HEAPO daily,Hd(a) HP submeter daily,Hg,cal2022,3
+HEAPO daily,Hd(b) total daily,8jB,2019/20,105
+HEAPO daily,Hd(b) total daily,8jB,2020/21,97
+HEAPO daily,Hd(b) total daily,8jB,2021/22,216
+HEAPO daily,Hd(b) total daily,8jB,2022/23,387
+HEAPO daily,Hd(b) total daily,8jB,2023/24,381
+HEAPO daily,Hd(b) total daily,8jB,cal2019,56
+HEAPO daily,Hd(b) total daily,8jB,cal2020,95
+HEAPO daily,Hd(b) total daily,8jB,cal2021,125
+HEAPO daily,Hd(b) total daily,8jB,cal2022,256
+HEAPO daily,Hd(b) total daily,8jB,cal2023,374
+HEAPO daily,Hd(b) total daily,HbsbG,2019/20,5
+HEAPO daily,Hd(b) total daily,HbsbG,2020/21,2
+HEAPO daily,Hd(b) total daily,HbsbG,2021/22,7
+HEAPO daily,Hd(b) total daily,HbsbG,2022/23,28
+HEAPO daily,Hd(b) total daily,HbsbG,2023/24,31
+HEAPO daily,Hd(b) total daily,HbsbG,cal2019,3
+HEAPO daily,Hd(b) total daily,HbsbG,cal2020,4
+HEAPO daily,Hd(b) total daily,HbsbG,cal2021,3
+HEAPO daily,Hd(b) total daily,HbsbG,cal2022,11
+HEAPO daily,Hd(b) total daily,HbsbG,cal2023,27
+HEAPO daily,Hd(b) total daily,Hg,2019/20,44
+HEAPO daily,Hd(b) total daily,Hg,2020/21,24
+HEAPO daily,Hd(b) total daily,Hg,2021/22,106
+HEAPO daily,Hd(b) total daily,Hg,2022/23,250
+HEAPO daily,Hd(b) total daily,Hg,2023/24,306
+HEAPO daily,Hd(b) total daily,Hg,cal2019,28
+HEAPO daily,Hd(b) total daily,Hg,cal2020,39
+HEAPO daily,Hd(b) total daily,Hg,cal2021,27
+HEAPO daily,Hd(b) total daily,Hg,cal2022,123
+HEAPO daily,Hd(b) total daily,Hg,cal2023,289
+HEAPO daily,Hd(b) total daily,MqO,2019/20,7
+HEAPO daily,Hd(b) total daily,MqO,2020/21,9
+HEAPO daily,Hd(b) total daily,MqO,2021/22,8
+HEAPO daily,Hd(b) total daily,MqO,2022/23,8
+HEAPO daily,Hd(b) total daily,MqO,2023/24,7
+HEAPO daily,Hd(b) total daily,MqO,cal2019,3
+HEAPO daily,Hd(b) total daily,MqO,cal2020,6
+HEAPO daily,Hd(b) total daily,MqO,cal2021,8
+HEAPO daily,Hd(b) total daily,MqO,cal2022,8
+HEAPO daily,Hd(b) total daily,MqO,cal2023,7
+HEAPO daily,Hd(b) total daily,ceOxS,2019/20,6
+HEAPO daily,Hd(b) total daily,ceOxS,2020/21,4
+HEAPO daily,Hd(b) total daily,ceOxS,2021/22,2
+HEAPO daily,Hd(b) total daily,ceOxS,2022/23,23
+HEAPO daily,Hd(b) total daily,ceOxS,2023/24,27
+HEAPO daily,Hd(b) total daily,ceOxS,cal2019,6
+HEAPO daily,Hd(b) total daily,ceOxS,cal2020,7
+HEAPO daily,Hd(b) total daily,ceOxS,cal2021,2
+HEAPO daily,Hd(b) total daily,ceOxS,cal2022,3
+HEAPO daily,Hd(b) total daily,ceOxS,cal2023,24
+HEAPO daily,Hd(b) total daily,sV3mR,2019/20,14
+HEAPO daily,Hd(b) total daily,sV3mR,2020/21,2
+HEAPO daily,Hd(b) total daily,sV3mR,2021/22,8
+HEAPO daily,Hd(b) total daily,sV3mR,2022/23,14
+HEAPO daily,Hd(b) total daily,sV3mR,2023/24,17
+HEAPO daily,Hd(b) total daily,sV3mR,cal2019,5
+HEAPO daily,Hd(b) total daily,sV3mR,cal2020,11
+HEAPO daily,Hd(b) total daily,sV3mR,cal2021,2
+HEAPO daily,Hd(b) total daily,sV3mR,cal2022,10
+HEAPO daily,Hd(b) total daily,sV3mR,cal2023,15
+HEAPO daily,Hd(b) total daily,wDD,2019/20,26
+HEAPO daily,Hd(b) total daily,wDD,2020/21,5
+HEAPO daily,Hd(b) total daily,wDD,2021/22,5
+HEAPO daily,Hd(b) total daily,wDD,2022/23,12
+HEAPO daily,Hd(b) total daily,wDD,2023/24,17
+HEAPO daily,Hd(b) total daily,wDD,cal2019,17
+HEAPO daily,Hd(b) total daily,wDD,cal2020,18
+HEAPO daily,Hd(b) total daily,wDD,cal2021,3
+HEAPO daily,Hd(b) total daily,wDD,cal2022,5
+HEAPO daily,Hd(b) total daily,wDD,cal2023,13
+HEAPO daily,Hd(b) total daily,z6I,2019/20,25
+HEAPO daily,Hd(b) total daily,z6I,2020/21,7
+HEAPO daily,Hd(b) total daily,z6I,2021/22,8
+HEAPO daily,Hd(b) total daily,z6I,2022/23,24
+HEAPO daily,Hd(b) total daily,z6I,2023/24,34
+HEAPO daily,Hd(b) total daily,z6I,cal2019,12
+HEAPO daily,Hd(b) total daily,z6I,cal2020,23
+HEAPO daily,Hd(b) total daily,z6I,cal2021,6
+HEAPO daily,Hd(b) total daily,z6I,cal2022,11
+HEAPO daily,Hd(b) total daily,z6I,cal2023,25
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2019/20,1
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2020/21,25
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2021/22,95
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2022/23,462
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2020,6
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2021,48
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2022,117
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2023,514
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,2020/21,7
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,2021/22,10
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,2022/23,24
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,cal2021,7
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,cal2022,11
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,cal2023,34
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2019/20,6
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2020/21,51
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2021/22,92
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2022/23,221
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2020,25
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2021,59
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2022,106
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2023,317
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,2020/21,1
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,2021/22,15
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,2022/23,19
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,cal2021,10
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,cal2022,11
+HEAPO 15-min,"H15(b') total, no HP submeter",MqO,cal2023,20
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,2020/21,3
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,2021/22,5
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,2022/23,23
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,cal2021,3
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,cal2022,6
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,cal2023,28
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,2020/21,8
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,2021/22,12
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,2022/23,25
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,cal2021,11
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,cal2022,14
+HEAPO 15-min,"H15(b') total, no HP submeter",sV3mR,cal2023,28
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,2020/21,12
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,2021/22,17
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,2022/23,35
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,cal2021,14
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,cal2022,20
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,cal2023,45
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,2020/21,9
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,2021/22,16
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,2022/23,29
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2020,1
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2021,14
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2022,18
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2023,41
+Kaiser,K(a) dwelling + paired HP meter,KLO,2023/24,22
+Kaiser,K(a) dwelling + paired HP meter,KLO,cal2023,24
+Kaiser,K(a) dwelling + paired HP meter,KLO,cal2024,24
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,2023/24,84
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,cal2023,83
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,cal2024,81
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,2023/24,181
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,cal2023,199
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,cal2024,187
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,2023/24,1256
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,cal2023,1306
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,cal2024,1000
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,2023/24,56
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,cal2023,62
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,cal2024,57
+Kaiser,K(c) dwelling flag 1_hp-wh,KLO,2023/24,2
+Kaiser,K(c) dwelling flag 1_hp-wh,KLO,cal2023,3
+Kaiser,K(c) dwelling flag 1_hp-wh,KLO,cal2024,2
+Kaiser,K(c) dwelling flag 1_ewh,KLO,2023/24,451
+Kaiser,K(c) dwelling flag 1_ewh,KLO,cal2023,464
+Kaiser,K(c) dwelling flag 1_ewh,KLO,cal2024,444
+Kaiser,K(c) dwelling flag 1_storage_heating,KLO,2023/24,53
+Kaiser,K(c) dwelling flag 1_storage_heating,KLO,cal2023,53
+Kaiser,K(c) dwelling flag 1_storage_heating,KLO,cal2024,52
+Kaiser,K(c) dwelling flag 1_direct_heating,KLO,2023/24,23
+Kaiser,K(c) dwelling flag 1_direct_heating,KLO,cal2023,27
+Kaiser,K(c) dwelling flag 1_direct_heating,KLO,cal2024,18
+Kaiser,K(d) any meter 2_hp_control,KLO,2023/24,47
+Kaiser,K(d) any meter 2_hp_control,KLO,cal2023,50
+Kaiser,K(d) any meter 2_hp_control,KLO,cal2024,48
+Kaiser,K(d) any meter 2_wh_control,KLO,2023/24,55
+Kaiser,K(d) any meter 2_wh_control,KLO,cal2023,57
+Kaiser,K(d) any meter 2_wh_control,KLO,cal2024,56
+WPuQ,W HP + household,WPUQ,2019/20,30
+WPuQ,W HP + household,WPUQ,cal2019,32
+WPuQ,W HP + household,WPUQ,cal2020,27
