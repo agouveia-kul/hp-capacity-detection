@@ -43,12 +43,15 @@ modes: [direct]                        # 03a: direct | residual (z = log(y / P_h
 target_transforms: [none]              # 03a: none | log (direct models; exp back-transform, no smearing)
 residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
 paperA:                                # 03a: Paper A estimator s_h / m_h (physics.py)
-  estimators: []                       # paperA_sh_mh | paperA_sh_mh_station (paperA_sh_mh is added whenever modes has residual)
+  estimators: []                       # paperA_sh_mh | _sh_mh_station | _cal | _corr | _corr_all | _corr_cal (paperA_sh_mh is added whenever modes has residual)
   cap_def: hp_peak                     # pilot SF capacity: hp_peak (= HP_Peak's definition) | paperA (gap-filled 99.9th pct)
   min_station_pilot: 10                # station-matched pilot needs >= 10 train HP households at the station
   target: HP_Peak
   cap_def_check: false                 # also score against Paper A's capacity definition (target HP_Peak_A)
+  fill_station: KLO                    # 03b: station whose temperature the (Kaiser) fill dwellings respond to (s0 estimate)
+  crossfit: true                       # 03b: residual targets / calibration use pilots disjoint from the substation (Task 3)
 anchors: [none, size, size_peak]       # F1: every model runs in all three arms
+model_anchors: {}                      # 03b: {model: [anchors]} restricts a model to some anchors (default: all)
 anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}
 physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
 

@@ -33,10 +33,13 @@ def compose(p_hat, z_hat, valid, fallback=0.0):
 def residual_predict(tuned, name, X, y, p_hat, valid, fit_in, fit_tr, te):
     """Tune on inner, refit on train (valid P_hat only) and predict test.
 
-    `tuned(name, X, yv, mask_in, mask_tr, opts, space) -> test prediction of yv` is the runner's tuner (it logs
-    and times the fit). Returns (y_hat on test, counts)."""
+    `tuned(name, X, yv, mask_in, mask_tr, opts, space, eval_on=None) -> test prediction of yv` is the runner's tuner
+    (it logs and times the fit; `eval_on` = (y, p_hat) lets it report the inner-CV WAPE on the kW scale).
+    03b: `p_hat` / `valid` are the CROSS-FITTED P_hat_A on train and inner rows (pilot household-disjoint from the
+    row's substation, `physics.crossfit_pilot_m`) and the full-pilot P_hat_A on test rows. Returns (y_hat on test, counts)."""
     z = log_ratio(y, p_hat, valid)
     ok = np.isfinite(z)
-    z_hat = tuned(name, X, z, fit_in & ok, fit_tr & ok, {"clip": False}, RESIDUAL_SPACES[name])
+    z_hat = tuned(name, X, z, fit_in & ok, fit_tr & ok, {"clip": False}, RESIDUAL_SPACES[name],
+                  eval_on=(np.asarray(y, float), np.asarray(p_hat, float)))
     counts = {"n_resid_excluded_train": int((fit_tr & ~ok).sum()), "n_resid_excluded_inner": int((fit_in & ~ok).sum())}
     return compose(p_hat[te], z_hat, valid[te]), counts

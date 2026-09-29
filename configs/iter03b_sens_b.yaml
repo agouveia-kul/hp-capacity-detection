@@ -1,0 +1,17 @@
+# 03b sensitivity arm: pool B (KLO only, 47 HP households), 10 seeds; anchor size_peak, feature set both, direct-log + residual,
+# all models, all physics rows.
+base: configs/protocol_v1.yaml
+exp_id: iter03b_sens_b
+out_dir: results/iter03b_fair_test/arm_sens_b
+pred_figures: false
+pool: {option: b}
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+targets: [HP_Peak]
+models: [Linear, Ridge, Lasso, ElasticNet, SVR, PLS, XGBoost, XGBoost_mono]
+anchors: [size_peak]
+feature_sets: [both]
+modes: [direct, residual]
+target_transforms: [log]
+residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_all, paperA_corr_cal]}

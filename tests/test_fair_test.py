@@ -29,7 +29,7 @@ needs_pool = pytest.mark.skipif(not POOL_META.exists(), reason="B* pool cache no
 XGB = {"eta": 0.1, "max_depth": 3, "gamma": 0, "subsample": 1, "reg_alpha": 0, "reg_lambda": 1, "colsample_bytree": 1,
        "min_child_weight": 1, "n_estimators": 50}
 PARAMS = {"Linear": {}, "Ridge": {"alpha": 0.1}, "Lasso": {"alpha": 0.01}, "XGBoost": XGB}
-ZH_2023 = [date(2023, 1, 1), date(2023, 4, 7), date(2023, 4, 10), date(2023, 5, 1), date(2023, 5, 18),
+ZH_2023 = [date(2023, 1, 1), date(2023, 1, 2), date(2023, 4, 7), date(2023, 4, 10), date(2023, 5, 1), date(2023, 5, 18),
            date(2023, 5, 29), date(2023, 8, 1), date(2023, 12, 25), date(2023, 12, 26)]
 
 
@@ -40,7 +40,7 @@ def test_zh_holidays_and_disjoint_day_partition():
     assert set(ZH_2023) <= marked                                   # incl. weekday holidays (Good Friday, Ascension)
     assert all(d.dayofweek >= 5 or d.date() in ZH_2023 for d in days[we])
     assert (days[~we].dayofweek < 5).all() and not set(days[~we].date) & set(ZH_2023)
-    assert we.sum() + (~we).sum() == len(days) == 365 and we.sum() == 105 + 8   # 105 weekend days + 8 weekday holidays (1 Jan: Sunday)
+    assert we.sum() + (~we).sum() == len(days) == 365 and we.sum() == 105 + 9   # 105 weekend days + 9 weekday holidays (1 Jan: Sunday; Berchtoldstag added in 03b)
 
 
 def test_paperA_pilot_fixture():
@@ -90,7 +90,7 @@ def test_residual_excludes_invalid_and_uses_fallback():
     y = p * np.exp(0.2)
     seen = {}
 
-    def tuned(name, X, z, m_in, m_tr, opts, space):         # stands in for the grouped-CV tuner: predicts mean z
+    def tuned(name, X, z, m_in, m_tr, opts, space, eval_on=None):         # stands in for the grouped-CV tuner: predicts mean z
         seen.update(z_in=z[m_in], z_tr=z[m_tr], opts=opts)
         return np.full(int((split == "test").sum()), z[m_tr].mean())
 

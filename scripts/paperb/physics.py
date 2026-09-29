@@ -18,6 +18,10 @@ net-load slope (`s_h_net`); m_h is the SF slope of a submetered pilot (`pilot_fi
 the aggregate of the seed's TRAIN HP households (`paperA_sh_mh`), or of the train HP households of the
 substation's own station when it has >= `min_station_pilot` of them (`paperA_sh_mh_station`, else the full pilot,
 counted as a fallback). Invalid estimates (s_h <= 0 or NaN, m_h <= 0 or NaN) are predicted as 0 and counted.
+
+Iteration 03b: `household_sensitivity` (per-dwelling non-TCL slope s0 from TRAIN fill households, optionally plus the
+train HP households' own load), `paperA_corrected` (P_hat = max(s_h - N s0, 0) / m_h) and `crossfit_pilot_m` (m_h that
+is out of sample on the pilot side, for the residual targets and the bias calibration).
 """
 import numpy as np
 import pandas as pd
@@ -155,9 +159,55 @@ def paperA_estimate(s_h, m_h):
     return np.where(valid, s_h / np.where(valid, m_h, 1.0), 0.0), valid
 
 
-def paperA_predictions(tab, full, by_station):
-    """Both estimators for every substation of `tab` -> {name: (P_hat, valid, fallback-to-full-pilot mask)}."""
+def paperA_corrected(s_h, size, s0, m_h):
+    """03b Task 1: P_hat = max(s_h - N s0, 0) / m_h with N the dwelling count (`size`), s0 the per-dwelling non-TCL
+    heating slope. Valid iff the corrected slope and m_h are positive; invalid -> 0 (counted), as `paperA_estimate`."""
+    net = np.asarray(s_h, float) - np.asarray(size, float) * s0
+    return paperA_estimate(np.where(np.isfinite(net) & (net > 0), net, np.nan), m_h)
+
+
+def household_sensitivity(pool, fill_hh, own_hh=(), fill_station="KLO"):
+    """03b Task 1: per-dwelling non-TCL heating sensitivity s0 = s_h(aggregate of `fill_hh` and the own non-HP load
+    of `own_hh`) / N, by Paper A's net-load fit (`fit_daily`). Temperature = mean over the N dwellings of their
+    station's temperature (fill dwellings: `fill_station`). Callers pass TRAIN households only."""
+    own_hh, fill_hh = sorted(own_hh), sorted(fill_hh)
+    st = pd.Series([fill_station] * len(fill_hh) + list(pool.meta.loc[own_hh, "station"]))
+    N = len(st)
+    T = sum(pool.temp[s].astype(np.float64) * (n / N) for s, n in st.value_counts().items())
+    load = pool.fill[fill_hh].astype(np.float64).sum(axis=1) + (pool.own[own_hh].astype(np.float64).sum(axis=1) if own_hh else 0.0)
+    f = fit_daily(*daily_means(T, load))
+    return {"s0": f["s_h"] / N, "s_h": f["s_h"], "T_h": f["T_h"], "P_base": f["P_base"], "N": N}
+
+
+def crossfit_pilot_m(pool, train_hp, caps, folds, members, m_full):
+    """03b Task 3: pilot slope m_h that is out of sample on the pilot side, per substation of `members` (Series).
+    Inner substation of fold k: pilot of the train HP households NOT in fold k (`folds`: hh -> fold). Train substation
+    (no single fold): pilot of the train HP households not among its own HP members. Test: `m_full`.
+    Returns (m Series over `members`, {fold k: m_h})."""
+    train_hp = set(map(str, train_hp))
+    fold_m, out = {}, pd.Series(m_full, index=members.index, dtype=float)
+    for k in sorted(members.loc[members["split"] == "inner", "fold"].unique()):
+        keep = sorted(h for h in train_hp if folds[h] != k)
+        fold_m[int(k)] = pool_pilot(pool, keep, caps)["m"]
+        out[(members["split"] == "inner") & (members["fold"] == k)] = fold_m[int(k)]
+    for sid in members.index[members["split"] == "train"]:
+        out[sid] = pool_pilot(pool, sorted(train_hp - set(members.at[sid, "hp_members"])), caps)["m"]
+    return out, fold_m
+
+
+def paperA_predictions(tab, full, by_station, s0=None, m_cf=None):
+    """All estimators for every substation of `tab` -> {name: (P_hat, valid, fallback-to-full-pilot mask)}.
+    `s0` {name: per-dwelling slope} adds the non-TCL-corrected estimators; `m_cf` (array over tab, cross-fitted m_h,
+    equal to the full m_h on test rows) adds out-of-sample versions under key "cf" (name -> (P_hat, valid))."""
     m_st = tab["station"].map({s: p["m"] for s, p in by_station.items()})
     fallback = m_st.isna().to_numpy()
-    return {"paperA_sh_mh": (*paperA_estimate(tab["s_h_net"], full["m"]), np.zeros(len(tab), bool)),
-            "paperA_sh_mh_station": (*paperA_estimate(tab["s_h_net"], m_st.fillna(full["m"])), fallback)}
+    no_fb = np.zeros(len(tab), bool)
+    out = {"paperA_sh_mh": (*paperA_estimate(tab["s_h_net"], full["m"]), no_fb),
+           "paperA_sh_mh_station": (*paperA_estimate(tab["s_h_net"], m_st.fillna(full["m"])), fallback)}
+    for name, s in (s0 or {}).items():
+        out[name] = (*paperA_corrected(tab["s_h_net"], tab["size"], s, full["m"]), no_fb)
+    if m_cf is not None:
+        out["cf"] = {"paperA_sh_mh": paperA_estimate(tab["s_h_net"], m_cf)}
+        if s0:
+            out["cf"]["paperA_corr"] = paperA_corrected(tab["s_h_net"], tab["size"], s0["paperA_corr"], m_cf)
+    return out

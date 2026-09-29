@@ -167,27 +167,36 @@ class Model:
         return np.maximum(out, 0.0) if self.opts["clip"] else out
 
 
-def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None):
+def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None,
+                    eval_on=None):
     """Seeded hyperopt over household-grouped CV; returns (final model, meta dict, Trials).
 
     X, y, groups: inner substations and their fold ids. The final model is refit on (X_final, y_final)
     -- all train substations -- or on (X, y) when those are not given. `opts` go to Model; `space` replaces
-    SPACES[model_name] (e.g. RESIDUAL_SPACES).
+    SPACES[model_name] (e.g. RESIDUAL_SPACES). `eval_on = (y_kw, p_hat)` (arrays aligned with X; 03b) scores the
+    out-of-fold predictions as WAPE on the kW scale: y_hat = prediction (p_hat None, direct models) or
+    p_hat * exp(prediction) (residual models); meta['cv_wape'] (%, pooled over the folds) is the model-selection
+    statistic of the learning curve -- inner CV only, never test.
     """
     X, y, groups = pd.DataFrame(X), np.asarray(y, float), np.asarray(groups)
     folds = sorted(set(groups))
     iterative = model_name in ("XGBoost", "XGBoost_mono", "FFNN")
 
     def objective(params):
-        losses, iters = [], []
+        losses, iters, abserr = [], [], 0.0
         for i, f in enumerate(folds):
             va = groups == f
             es = groups == folds[(i + 1) % len(folds)] if iterative else np.zeros(len(y), bool)
             tr = ~va & ~es
             m = Model(model_name, params, seed, opts)
             iters.append(m.fit(X[tr], y[tr], X_es=X[es] if iterative else None, y_es=y[es] if iterative else None))
-            losses.append(float(np.mean((m.predict(X[va]) - y[va]) ** 2)))
-        return {"loss": float(np.mean(losses)), "status": STATUS_OK, "fold_losses": losses,
+            pred = m.predict(X[va])
+            losses.append(float(np.mean((pred - y[va]) ** 2)))
+            if eval_on is not None:
+                y_kw, p_hat = eval_on
+                abserr += float(np.abs((pred if p_hat is None else p_hat[va] * np.exp(pred)) - y_kw[va]).sum())
+        wape = 100 * abserr / float(np.sum(eval_on[0])) if eval_on is not None else None
+        return {"loss": float(np.mean(losses)), "status": STATUS_OK, "fold_losses": losses, "cv_wape": wape,
                 "best_iter": int(np.median(iters)) if iterative else None}
 
     trials = Trials()
@@ -200,4 +209,4 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
         params, res = {}, objective({})
     final = Model(model_name, params, seed, opts)
     final.fit(X if X_final is None else pd.DataFrame(X_final), y if y_final is None else y_final, n_iter=res["best_iter"])
-    return final, {"params": params, "cv_mse": res["loss"], "best_iter": res["best_iter"], "n_evals": len(trials.trials)}, trials
+    return final, {"params": params, "cv_mse": res["loss"], "cv_wape": res["cv_wape"], "best_iter": res["best_iter"], "n_evals": len(trials.trials)}, trials
