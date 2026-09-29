@@ -1,0 +1,7 @@
+# 02b smoke run (< 5 min): protocol_v1 quick overrides, 2 seeds on 2 workers, pool B*.
+base: configs/protocol_v1.yaml
+apply_quick: true
+exp_id: iter02b_quick
+out_dir: results/iter02b_quick
+split: {seeds: [0, 1]}
+parallel: {workers: 2}

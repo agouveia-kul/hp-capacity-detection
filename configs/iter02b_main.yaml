@@ -1,0 +1,8 @@
+# 02b main arm: pool B*, HP_Peak only, 20 split seeds, all non-FFNN models, all three anchor arms. Est. ~4 h with 4 workers.
+base: configs/protocol_v1.yaml
+exp_id: iter02b_main
+out_dir: results/iter02b_benchmark/arm_main
+pred_figures: false
+targets: [HP_Peak]
+models: [XGBoost, Ridge, ElasticNet, SVR, PLS]
+anchors: [none, size, size_peak]

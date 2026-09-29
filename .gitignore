@@ -16,3 +16,5 @@ results/**/_pre_run_*
 !results/**/physics_diagnostics.csv
 !results/**/timing.csv
 !results/**/hdh_hourly_ridge.csv
+!results/**/summary.csv
+!results/**/table*.csv

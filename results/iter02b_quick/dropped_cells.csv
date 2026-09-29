@@ -1,0 +1,151 @@
+split_seed,split,fold,station,size,p,n_hp,H,F,reason
+0,train,-1,HbsbG,10,0.05,1,1,968,station pool < min_station_pool
+0,train,-1,HbsbG,10,0.1,1,1,968,station pool < min_station_pool
+0,train,-1,HbsbG,10,0.2,2,1,968,station pool < min_station_pool
+0,train,-1,HbsbG,10,0.3,3,1,968,station pool < min_station_pool
+0,train,-1,HbsbG,10,0.5,5,1,968,station pool < min_station_pool
+0,train,-1,HbsbG,10,1.0,10,1,968,station pool < min_station_pool
+0,train,-1,Hg,10,1.0,10,12,968,n_hp > max_overlap * H
+0,train,-1,MqO,10,0.5,5,4,968,n_hp > max_overlap * H
+0,train,-1,MqO,10,1.0,10,4,968,n_hp > max_overlap * H
+0,train,-1,z6I,10,0.05,1,1,968,station pool < min_station_pool
+0,train,-1,z6I,10,0.1,1,1,968,station pool < min_station_pool
+0,train,-1,z6I,10,0.2,2,1,968,station pool < min_station_pool
+0,train,-1,z6I,10,0.3,3,1,968,station pool < min_station_pool
+0,train,-1,z6I,10,0.5,5,1,968,station pool < min_station_pool
+0,train,-1,z6I,10,1.0,10,1,968,station pool < min_station_pool
+0,test,-1,Hg,10,0.5,5,4,323,n_hp > max_overlap * H
+0,test,-1,Hg,10,1.0,10,4,323,n_hp > max_overlap * H
+0,test,-1,MqO,10,0.05,1,2,323,station pool < min_station_pool
+0,test,-1,MqO,10,0.1,1,2,323,station pool < min_station_pool
+0,test,-1,MqO,10,0.2,2,2,323,station pool < min_station_pool
+0,test,-1,MqO,10,0.3,3,2,323,station pool < min_station_pool
+0,test,-1,MqO,10,0.5,5,2,323,station pool < min_station_pool
+0,test,-1,MqO,10,1.0,10,2,323,station pool < min_station_pool
+0,inner,0,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+0,inner,0,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+0,inner,0,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+0,inner,0,KLO,10,1.0,10,11,242,n_hp > max_overlap * H
+0,inner,0,MqO,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,0,MqO,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,0,MqO,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,0,MqO,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,0,MqO,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,0,MqO,10,1.0,10,1,242,station pool < min_station_pool
+0,inner,1,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+0,inner,1,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+0,inner,1,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+0,inner,1,KLO,10,1.0,10,12,242,n_hp > max_overlap * H
+0,inner,1,MqO,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,1,MqO,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,1,MqO,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,1,MqO,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,1,MqO,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,1,MqO,10,1.0,10,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,1,z6I,10,1.0,10,1,242,station pool < min_station_pool
+0,inner,2,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+0,inner,2,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+0,inner,2,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+0,inner,2,KLO,10,1.0,10,12,242,n_hp > max_overlap * H
+0,inner,2,MqO,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,2,MqO,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,2,MqO,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,2,MqO,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,2,MqO,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,2,MqO,10,1.0,10,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,3,HbsbG,10,1.0,10,1,242,station pool < min_station_pool
+0,inner,3,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+0,inner,3,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+0,inner,3,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+0,inner,3,KLO,10,1.0,10,11,242,n_hp > max_overlap * H
+0,inner,3,MqO,10,0.05,1,1,242,station pool < min_station_pool
+0,inner,3,MqO,10,0.1,1,1,242,station pool < min_station_pool
+0,inner,3,MqO,10,0.2,2,1,242,station pool < min_station_pool
+0,inner,3,MqO,10,0.3,3,1,242,station pool < min_station_pool
+0,inner,3,MqO,10,0.5,5,1,242,station pool < min_station_pool
+0,inner,3,MqO,10,1.0,10,1,242,station pool < min_station_pool
+1,train,-1,HbsbG,10,0.05,1,1,968,station pool < min_station_pool
+1,train,-1,HbsbG,10,0.1,1,1,968,station pool < min_station_pool
+1,train,-1,HbsbG,10,0.2,2,1,968,station pool < min_station_pool
+1,train,-1,HbsbG,10,0.3,3,1,968,station pool < min_station_pool
+1,train,-1,HbsbG,10,0.5,5,1,968,station pool < min_station_pool
+1,train,-1,HbsbG,10,1.0,10,1,968,station pool < min_station_pool
+1,train,-1,Hg,10,1.0,10,12,968,n_hp > max_overlap * H
+1,train,-1,MqO,10,0.5,5,4,968,n_hp > max_overlap * H
+1,train,-1,MqO,10,1.0,10,4,968,n_hp > max_overlap * H
+1,train,-1,z6I,10,0.05,1,1,968,station pool < min_station_pool
+1,train,-1,z6I,10,0.1,1,1,968,station pool < min_station_pool
+1,train,-1,z6I,10,0.2,2,1,968,station pool < min_station_pool
+1,train,-1,z6I,10,0.3,3,1,968,station pool < min_station_pool
+1,train,-1,z6I,10,0.5,5,1,968,station pool < min_station_pool
+1,train,-1,z6I,10,1.0,10,1,968,station pool < min_station_pool
+1,test,-1,Hg,10,0.5,5,4,323,n_hp > max_overlap * H
+1,test,-1,Hg,10,1.0,10,4,323,n_hp > max_overlap * H
+1,test,-1,MqO,10,0.05,1,2,323,station pool < min_station_pool
+1,test,-1,MqO,10,0.1,1,2,323,station pool < min_station_pool
+1,test,-1,MqO,10,0.2,2,2,323,station pool < min_station_pool
+1,test,-1,MqO,10,0.3,3,2,323,station pool < min_station_pool
+1,test,-1,MqO,10,0.5,5,2,323,station pool < min_station_pool
+1,test,-1,MqO,10,1.0,10,2,323,station pool < min_station_pool
+1,inner,0,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+1,inner,0,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+1,inner,0,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+1,inner,0,KLO,10,1.0,10,11,242,n_hp > max_overlap * H
+1,inner,0,MqO,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,0,MqO,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,0,MqO,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,0,MqO,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,0,MqO,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,0,MqO,10,1.0,10,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,0,z6I,10,1.0,10,1,242,station pool < min_station_pool
+1,inner,1,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+1,inner,1,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+1,inner,1,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+1,inner,1,KLO,10,1.0,10,12,242,n_hp > max_overlap * H
+1,inner,1,MqO,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,1,MqO,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,1,MqO,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,1,MqO,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,1,MqO,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,1,MqO,10,1.0,10,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,2,HbsbG,10,1.0,10,1,242,station pool < min_station_pool
+1,inner,2,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+1,inner,2,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+1,inner,2,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+1,inner,2,KLO,10,1.0,10,12,242,n_hp > max_overlap * H
+1,inner,2,MqO,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,2,MqO,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,2,MqO,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,2,MqO,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,2,MqO,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,2,MqO,10,1.0,10,1,242,station pool < min_station_pool
+1,inner,3,Hg,10,0.3,3,3,242,n_hp > max_overlap * H
+1,inner,3,Hg,10,0.5,5,3,242,n_hp > max_overlap * H
+1,inner,3,Hg,10,1.0,10,3,242,n_hp > max_overlap * H
+1,inner,3,KLO,10,1.0,10,11,242,n_hp > max_overlap * H
+1,inner,3,MqO,10,0.05,1,1,242,station pool < min_station_pool
+1,inner,3,MqO,10,0.1,1,1,242,station pool < min_station_pool
+1,inner,3,MqO,10,0.2,2,1,242,station pool < min_station_pool
+1,inner,3,MqO,10,0.3,3,1,242,station pool < min_station_pool
+1,inner,3,MqO,10,0.5,5,1,242,station pool < min_station_pool
+1,inner,3,MqO,10,1.0,10,1,242,station pool < min_station_pool

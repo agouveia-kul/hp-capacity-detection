@@ -52,7 +52,9 @@ target_defs:
   robust_q: 0.999                      # HP_Peak: per-household 99.9th percentile of raw valid samples
   T_design_C: -8.0                     # P_design: one CH design temperature for every station (assumption, REVIEW)
 
-bootstrap: {unit: hp_household, B: 2000, seed: split_seed}
+bootstrap: {unit: hp_household, B: 2000, seed: split_seed}   # code kept; switched off by uncertainty.bootstrap (02b decision)
+uncertainty: {bootstrap: false, summary_band: [0.05, 0.90]}    # 02b: across-split summary only (median, mean, std, q05, q90)
+parallel: {workers: 4, blas_threads: 1}                         # split seeds in parallel; XGBoost n_jobs = floor(cores / workers); BLAS 1 thread (determinism)
 metrics: [rmse, mae, mape, r2]
 
 quick:                                 # overrides for configs/protocol_v1_quick.yaml (see that file)

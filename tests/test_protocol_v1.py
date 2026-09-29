@@ -189,3 +189,27 @@ def test_bootstrap_resamples_households_not_substations():
         assert (0 in k) == (1 in k) and len(set(k)) == len(k)
         assert (3 in k) == ((0 in k) and (2 in k))  # kept iff all its HP households were drawn
     assert any(len(k) < len(df) for k in kept)
+
+
+POOL_A_META = ROOT / "data" / "_paperb" / "pools" / "a_2023_meta.parquet"
+
+
+@pytest.mark.skipif(not POOL_A_META.exists(), reason="pool A cache not built")
+def test_pool_a_shared_fill_rules():
+    """02b pool A: the fill pool of a split is its own HP households; a household is never HP member and fill member."""
+    cfg, meta = load_config("configs/iter02b_legacy_a.yaml"), pd.read_parquet(POOL_A_META)
+    assert len(meta) == 57 and (meta["role"] == "hp").all()
+    for s in SEEDS[:3]:
+        sp = household_splits(meta, [s], cfg["split"]["test_frac"], shared_fill=True)[s]
+        assert not set(sp["train"]["hp"]) & set(sp["test"]["hp"]) and len(sp["train"]["hp"]) + len(sp["test"]["hp"]) == 57
+        assert all(sp[k]["fill"] == sp[k]["hp"] for k in ("train", "test"))
+        folds = grouped_inner_folds(sp["train"], meta, cfg["cv"]["k"], s)
+        assert set(folds.index) == set(sp["train"]["hp"])
+        members, _ = build_substations(meta, sp, s, cfg, folds)
+        for r in members.itertuples():
+            hp, fl = set(r.hp_members), set(r.fill_members)
+            assert not hp & fl and len(hp) + len(fl) == r.size                    # no household twice, no truncation
+            pool = sp["test" if r.split == "test" else "train"]["hp"]
+            assert hp | fl <= set(pool)                                           # same split
+            if r.split == "inner":
+                assert (folds[list(hp | fl)] == r.fold).all()

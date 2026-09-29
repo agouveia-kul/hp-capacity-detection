@@ -23,6 +23,12 @@ from hp_capacity import select_scale_free_columns
 
 ANCHOR_COLS = {"none": [], "size": ["size"], "size_peak": ["size", "peak"]}
 MAX_EPOCHS, PATIENCE, XGB_ES_ROUNDS = 500, 40, 25
+SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE}          # per-process; set by configure() (02b runner)
+
+
+def configure(xgb_n_jobs=-1, patience=PATIENCE):
+    """XGBoost thread cap per worker and FFNN early-stopping patience (protocol default 40)."""
+    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience))
 
 SPACES = {                                                  # legacy search ranges (benchmark_capacity_models.py)
     "XGBoost": {"eta": hp.uniform("eta", 0.01, 0.3), "max_depth": hp.quniform("max_depth", 3, 10, 1),
@@ -75,7 +81,7 @@ class Model:
             import xgboost as xgb
             kw = dict(learning_rate=p["eta"], max_depth=int(p["max_depth"]), gamma=p["gamma"], subsample=p["subsample"],
                       reg_alpha=p["reg_alpha"], reg_lambda=p["reg_lambda"], colsample_bytree=p["colsample_bytree"],
-                      min_child_weight=int(p["min_child_weight"]), tree_method="hist", random_state=self.seed, n_jobs=-1)
+                      min_child_weight=int(p["min_child_weight"]), tree_method="hist", random_state=self.seed, n_jobs=SETTINGS["xgb_n_jobs"])
             if n_iter is None and es is not None:
                 self.m = xgb.XGBRegressor(n_estimators=int(p["n_estimators"]), early_stopping_rounds=XGB_ES_ROUNDS, **kw)
                 self.m.fit(Xs, ys, eval_set=[es], verbose=False)
@@ -94,7 +100,7 @@ class Model:
                         loss = float(np.mean((self.m.predict(es[0]) - es[1]) ** 2))
                         if loss < best - 1e-9:
                             best, best_ep = loss, ep
-                        elif ep - best_ep >= PATIENCE:
+                        elif ep - best_ep >= SETTINGS["patience"]:
                             break
             if n_iter is None and es is not None:     # restore = refit to the best epoch (deterministic)
                 self.fit(X, y, n_iter=best_ep)

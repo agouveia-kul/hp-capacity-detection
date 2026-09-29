@@ -64,7 +64,7 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 - **No stacking within a substation.** Each dwelling in a substation is a distinct household (`build_substations_norepl`). Feeder size and penetration are bounded by the pool, and those bounds are reported.
 - **Grouped CV inside train.** Hyperparameter tuning and feature selection use folds built from household-disjoint sub-pools. Never use KFold over substations that share households.
 - **Repeated splits.** Headline metrics are the mean ± spread over at least 10 independent household splits (seeds).
-- **Cluster uncertainty.** Confidence intervals come from a household-cluster bootstrap, not a bootstrap over substations.
+- **Uncertainty = across-split summary (median, mean ± std, 5 %–90 %).** No bootstrap unless an iteration says so.
 - **Effective sample size.** Always report the number of distinct HP households behind each result.
 - **Physics baselines are always reported next to ML:**
   - hockey-stick slope-only map;
@@ -78,7 +78,7 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 | Name | Definition |
 |---|---|
 | `HP_Peak` | Sum over HP members of the per-household 99.9th percentile of 15-min HP submeter draw. Non-coincident observed peak; includes backup-rod draw. (Current legacy target.) |
-| `HP_CoincPeak` | Max of the aggregated HP submeter series of the substation. |
+| `HP_CoincPeak` | Max of the aggregated HP submeter series of the substation. Definition to be revisited in 03 (raw max vs 99.9th pct). |
 | `HP_Count` | Number of HP households in the substation. |
 | `HP_Nameplate_el` | HEAPO `HeatPump_Installation_Normpoint_ElectricPower`. **Household-level only** (nameplate vs observed-peak distribution); not a substation benchmark target (decision 2026-09-29). |
 | `s_h` | Hockey-stick slope (kW/K) fitted on the aggregated **HP submeter** series (ground truth). |
@@ -141,7 +141,7 @@ Then stop and wait for review. Do not start the next iteration.
 - **Bootstrap CIs too narrow.** They resample substations, not households.
 - **Single year and single split.** Swiss/HEAPO pools cover calendar 2023 only, with one household split seed.
 - **Unfiltered backup rods.** `hp-add` (backup rod) households are not filtered, so rod draw sits inside `HP_Peak`. EWH, storage and direct-heating households are excluded from pools, so they are not available as labelled classes.
-- **Fixed HDD base.** Windowed-HDD features use a fixed national T_base (12 °C CH, 15 °C DE).
+- **Fixed HDD base.** Windowed-HDD features use a fixed national T_base (12 °C CH, 15 °C DE). The HDH baseline uses the fixed 12 °C base too, while the fitted T_h has median 16.7 °C (revisit in 03).
 - **Missing scripts.** About ten scripts referenced by the notebook are missing from `scripts/` (iteration 0 recovers them).
 - **Small HP pool (pinned in iteration 00).** Every legacy capacity result uses the **57-household HEAPO 2023 pool**, split 29 train / 28 test. Only **27** households effectively seed train substations (stations with < 3 households in a split are skipped). 81 is the combined HEAPO + Kaiser pool, which no legacy script loads; "Swiss" in legacy names means HEAPO.
 - **Stacking factor.** In 120-dwelling, 100 %-penetration train substations each HP profile appears **16.7×** on average.

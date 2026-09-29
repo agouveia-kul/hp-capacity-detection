@@ -1,0 +1,11 @@
+# 02b FFNN arm (REDUCED BUDGET, label it so): pool B*, 5 seeds, 20 hyperopt evals, patience 10, anchors none + size_peak.
+base: configs/protocol_v1.yaml
+exp_id: iter02b_ffnn
+out_dir: results/iter02b_benchmark/arm_ffnn
+pred_figures: false
+targets: [HP_Peak]
+models: [FFNN]
+anchors: [none, size_peak]
+split: {seeds: [0, 1, 2, 3, 4]}
+cv: {hyperopt: {max_evals_by_model: {FFNN: 20}}}
+ffnn: {patience: 10}

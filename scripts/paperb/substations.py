@@ -24,8 +24,9 @@ class InfeasibleCellError(ValueError):
     pass
 
 
-def plan_cells(hp_by_station, n_fill, grid, tag):
-    """Feasible cells and dropped cells (with reason) of one household pool."""
+def plan_cells(hp_by_station, n_fill, grid, tag, shared=False):
+    """Feasible cells and dropped cells (with reason) of one household pool. `shared`: the fill pool contains
+    the HP households, so a substation's HP members are unavailable as its fill."""
     cells, dropped = [], []
     for st, hs in sorted(hp_by_station.items()):
         H = len(hs)
@@ -34,7 +35,7 @@ def plan_cells(hp_by_station, n_fill, grid, tag):
                 n_hp = max(1, int(round(p * size)))
                 why = ("station pool < min_station_pool" if H < grid["min_station_pool"] else
                        "n_hp > max_overlap * H" if n_hp > grid["max_overlap"] * H else
-                       "fill pool too small" if size - n_hp > n_fill else None)
+                       "fill pool too small" if size - n_hp > n_fill - (n_hp if shared else 0) else None)
                 rec = {**tag, "station": st, "size": size, "p": p, "n_hp": n_hp, "H": H, "F": n_fill}
                 if why is None:
                     cells.append(rec)
@@ -45,12 +46,14 @@ def plan_cells(hp_by_station, n_fill, grid, tag):
     return cells, dropped
 
 
-def draw_cells(cells, hp_by_station, fill, n_per_cell, rng):
+def draw_cells(cells, hp_by_station, fill, n_per_cell, rng, shared=False):
     rows = []
     for c in cells:
         for rep in range(n_per_cell):
             hp = rng.choice(hp_by_station[c["station"]], c["n_hp"], replace=False)
-            fl = rng.choice(fill, c["size"] - c["n_hp"], replace=False)
+            used = set(map(str, hp))
+            avail = [h for h in fill if h not in used] if shared else fill
+            fl = rng.choice(avail, c["size"] - c["n_hp"], replace=False)
             rows.append({**c, "rep": rep, "hp_members": sorted(map(str, hp)), "fill_members": sorted(map(str, fl))})
     return rows
 
@@ -61,7 +64,7 @@ def build_substations(meta, split, seed, cfg, folds=None):
     `split` is household_splits(...)[seed]; `folds` is grouped_inner_folds(...) over the train households.
     Returns (members, dropped) DataFrames; members.index is a readable sub_id.
     """
-    g = cfg["grid"]
+    g, shared = cfg["grid"], cfg["pool"].get("shared_fill", False)
     pools = [("train", -1, split["train"], g["substations_per_cell"]["train"]),
              ("test", -1, split["test"], g["substations_per_cell"]["test"])]
     if folds is not None:
@@ -73,8 +76,8 @@ def build_substations(meta, split, seed, cfg, folds=None):
         rng = np.random.default_rng([seed, SPLIT_CODE[name], fold + 1])
         by_st = meta.loc[hh["hp"], "station"].groupby(meta.loc[hh["hp"], "station"]).groups
         by_st = {st: sorted(ix) for st, ix in by_st.items()}
-        cells, d = plan_cells(by_st, len(hh["fill"]), g, {"split_seed": seed, "split": name, "fold": fold})
-        rows += draw_cells(cells, by_st, sorted(hh["fill"]), n, rng)
+        cells, d = plan_cells(by_st, len(hh["fill"]), g, {"split_seed": seed, "split": name, "fold": fold}, shared)
+        rows += draw_cells(cells, by_st, sorted(hh["fill"]), n, rng, shared)
         dropped += d
     members = pd.DataFrame(rows)
     members.index = [f"{r.split_seed}|{r.split}{'' if r.fold < 0 else r.fold}|{r.station}|{r.size}|{r.p}|{r.rep}"

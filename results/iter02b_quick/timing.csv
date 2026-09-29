@@ -1,0 +1,11 @@
+split_seed,method,seconds,n_substations,target,anchor,n_evals,n_inner,n_train
+0,evaluate_members,0.0,216.0,,,,,
+0,XGBoost,1.6786649227142334,,HP_Peak,size_peak,5.0,96.0,90.0
+0,anchor_only_Linear,0.0296268463134765,,HP_Peak,size,0.0,96.0,90.0
+0,anchor_only_Linear,0.0277066230773925,,HP_Peak,peak,0.0,96.0,90.0
+0,anchor_only_Linear,0.0322189331054687,,HP_Peak,size+peak,0.0,96.0,90.0
+1,evaluate_members,28.725402116775516,216.0,,,,,
+1,XGBoost,1.409317970275879,,HP_Peak,size_peak,5.0,96.0,90.0
+1,anchor_only_Linear,0.0183119773864746,,HP_Peak,size,0.0,96.0,90.0
+1,anchor_only_Linear,0.0218443870544433,,HP_Peak,peak,0.0,96.0,90.0
+1,anchor_only_Linear,0.0254831314086914,,HP_Peak,size+peak,0.0,96.0,90.0
