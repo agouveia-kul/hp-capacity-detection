@@ -1,0 +1,35 @@
+arm,method [anchor],vs anchor-only set,n_seeds,dR2 median [5%-90%],dMAPE pp median [5%-90%],share of seeds ML R2 > baseline
+main,ElasticNet [none],best of all,20,-0.121 [-0.303–0.019],18.78 [-4.34–38.47],0.15
+main,PLS [none],best of all,20,-0.173 [-0.387–-0.044],24.97 [-2.25–55.89],0.05
+main,Ridge [none],best of all,20,-0.119 [-0.319–-0.001],19.49 [-4.40–40.43],0.10
+main,SVR [none],best of all,20,-0.080 [-0.232–0.005],3.09 [-9.29–20.63],0.10
+main,XGBoost [none],best of all,20,-0.138 [-0.435–-0.013],3.65 [-17.11–18.01],0.10
+main,ElasticNet [size],size,20,0.602 [0.448–0.843],-109.63 [-130.80–-68.31],1.00
+main,PLS [size],size,20,0.574 [0.404–0.807],-93.06 [-125.62–-58.93],1.00
+main,Ridge [size],size,20,0.597 [0.452–0.848],-107.89 [-130.58–-69.07],1.00
+main,SVR [size],size,20,0.678 [0.411–0.891],-123.38 [-145.29–-73.49],1.00
+main,XGBoost [size],size,20,0.625 [0.365–0.818],-119.68 [-146.41–-80.83],1.00
+main,ElasticNet [size_peak],size+peak,20,0.001 [-0.169–0.115],-5.25 [-21.75–8.16],0.50
+main,PLS [size_peak],size+peak,20,-0.030 [-0.241–0.079],7.06 [-20.35–19.37],0.25
+main,Ridge [size_peak],size+peak,20,-0.006 [-0.180–0.090],-1.69 [-20.50–13.27],0.45
+main,SVR [size_peak],size+peak,20,-0.013 [-0.227–0.059],-2.98 [-13.65–8.49],0.40
+main,XGBoost [size_peak],size+peak,20,-0.018 [-0.147–0.098],-7.55 [-25.88–6.78],0.30
+ffnn,FFNN (reduced budget) [none],best of all,5,-0.261 [-0.434–-0.194],19.42 [13.21–43.32],0.00
+ffnn,FFNN (reduced budget) [size_peak],size+peak,5,-0.269 [-0.586–-0.186],31.97 [16.14–61.85],0.00
+sens_b,ElasticNet [none],best of all,10,-0.805 [-1.974–-0.451],20.86 [0.17–45.10],0.00
+sens_b,PLS [none],best of all,10,-0.898 [-2.472–-0.465],21.92 [4.62–51.61],0.00
+sens_b,Ridge [none],best of all,10,-0.722 [-2.161–-0.471],23.51 [4.85–50.56],0.00
+sens_b,SVR [none],best of all,10,-0.386 [-1.097–-0.130],14.28 [-5.33–36.62],0.10
+sens_b,XGBoost [none],best of all,10,-0.233 [-1.069–0.047],12.58 [-11.99–50.05],0.30
+sens_b,ElasticNet [size],size,10,2.684 [1.712–3.242],-164.28 [-220.00–-127.84],1.00
+sens_b,PLS [size],size,10,2.450 [1.484–3.022],-166.56 [-204.20–-115.05],1.00
+sens_b,Ridge [size],size,10,2.681 [1.464–3.141],-163.32 [-204.47–-110.73],1.00
+sens_b,SVR [size],size,10,3.291 [1.748–3.855],-175.59 [-215.01–-144.44],1.00
+sens_b,XGBoost [size],size,10,3.546 [2.032–3.846],-187.63 [-221.09–-125.62],1.00
+sens_b,ElasticNet [size_peak],size+peak,10,-0.183 [-0.802–0.036],0.48 [-6.06–9.49],0.20
+sens_b,PLS [size_peak],size+peak,10,-0.526 [-3.348–-0.326],18.07 [-2.23–52.09],0.10
+sens_b,Ridge [size_peak],size+peak,10,-0.443 [-1.948–-0.193],12.71 [-2.76–40.96],0.00
+sens_b,SVR [size_peak],size+peak,10,-0.305 [-0.928–-0.001],10.93 [-12.13–30.06],0.10
+sens_b,XGBoost [size_peak],size+peak,10,0.045 [-0.481–0.220],-5.38 [-12.34–7.38],0.60
+legacy_a,XGBoost [none],best of all,10,0.113 [-0.500–2.505],-12.01 [-80.34–5.35],0.70
+legacy_a,XGBoost [size_peak],size+peak,10,1.149 [-1.480–4.025],-45.29 [-167.87–38.19],0.70

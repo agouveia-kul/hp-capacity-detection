@@ -1,0 +1,11 @@
+# 02b legacy-pool arm: pool A (57-household HEAPO 2023, shared fill = the split's HP households' Other channel), protocol v1
+# (household-disjoint, no household twice per substation, grouped CV), XGBoost, 10 seeds.
+base: configs/protocol_v1.yaml
+exp_id: iter02b_legacy_a
+out_dir: results/iter02b_benchmark/arm_legacy_a
+pred_figures: false
+pool: {option: a, shared_fill: true}
+targets: [HP_Peak]
+models: [XGBoost]
+anchors: [none, size_peak]
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}

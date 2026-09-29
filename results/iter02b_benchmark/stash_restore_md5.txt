@@ -1,0 +1,5 @@
+﻿# Restored from stash@{0} (b412606) on 2026-09-29, byte-identical to the stash blobs. md5  bytes  path
+4b9785d407f6955d1bcdd92138e17bf8  518342  results/iter00_baseline/models/capacity_swiss.pkl
+cc91ca3750e26f5e64a38f38d6f8a72a  118  results/iter00_baseline/models/hockey_delta_calibration.json
+e929fa2ec25a4e40f9b9c1c7048d286a  15570  results/iter00_baseline/models/xgb_selected_features.json
+cc91ca3750e26f5e64a38f38d6f8a72a  118  results/iter00_baseline_quick/models/hockey_delta_calibration.json

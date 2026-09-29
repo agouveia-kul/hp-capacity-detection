@@ -1,0 +1,122 @@
+[    0.2s] pool a_2023: {'hp': 57}; 4 workers x 7 threads; seeds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[s1     0.3s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s1    74.3s] evaluated 570 substations in 73.8s (0.130 s each)
+[s1    88.9s]   HP_Peak XGBoost[none]: cv_mse 48.26, best_iter 8, 50 evals, 14.6s, params {'colsample_bytree': 0.9002219946304266, 'eta': 0.2219257460580083, 'gamma': 4.130527245547357, 'max_depth': 4.0, 'min_child_weight': 20.0, 'n_estimators': 340.0, 'reg_alpha': 0.8975717412017383, 'reg_lambda': 0.2617879695000891, 'subsample': 0.5395811157300591}
+[s1   104.9s]   HP_Peak XGBoost[size_peak]: cv_mse 43.53, best_iter 4, 50 evals, 16.0s, params {'colsample_bytree': 0.3019532157404036, 'eta': 0.17775566785992888, 'gamma': 0.7639703511977802, 'max_depth': 9.0, 'min_child_weight': 5.0, 'n_estimators': 490.0, 'reg_alpha': 0.3174752517097714, 'reg_lambda': 0.13125181419151222, 'subsample': 0.963300568101744}
+[s1   105.0s]   HP_Peak anchor_only_Linear[size]: cv_mse 56.1, best_iter None, 0 evals, 0.0s, params {}
+[s1   105.0s]   HP_Peak anchor_only_Linear[peak]: cv_mse 56.97, best_iter None, 0 evals, 0.0s, params {}
+[s1   105.0s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 56.97, best_iter None, 0 evals, 0.0s, params {}
+[s1   112.0s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 51.52, best_iter 1, 50 evals, 7.0s, params {'colsample_bytree': 0.30413405920820114, 'eta': 0.010417584837787616, 'gamma': 7.04735013686309, 'max_depth': 4.0, 'min_child_weight': 19.0, 'n_estimators': 330.0, 'reg_alpha': 0.8208577179890564, 'reg_lambda': 1.922416335573015, 'subsample': 0.9999518758585383}
+[s1   119.3s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 48.57, best_iter 2, 50 evals, 7.2s, params {'colsample_bytree': 0.5494346561475482, 'eta': 0.22420517892593964, 'gamma': 6.669079975874337, 'max_depth': 9.0, 'min_child_weight': 12.0, 'n_estimators': 240.0, 'reg_alpha': 0.6308175902466878, 'reg_lambda': 0.19194830221644432, 'subsample': 0.7078672747315423}
+[s1   125.8s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 46.46, best_iter 2, 50 evals, 6.5s, params {'colsample_bytree': 0.9546962398571746, 'eta': 0.2948276776106162, 'gamma': 7.094202927643291, 'max_depth': 6.0, 'min_child_weight': 1.0, 'n_estimators': 300.0, 'reg_alpha': 0.010838336609177796, 'reg_lambda': 0.026416110088938183, 'subsample': 0.5013271684873118}
+[s1   125.9s] done in 125.9s
+[  132.9s] seed 1 finished (366 metric rows)
+[s0     0.3s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s0    74.4s] evaluated 570 substations in 74.0s (0.130 s each)
+[s0    90.0s]   HP_Peak XGBoost[none]: cv_mse 26.74, best_iter 5, 50 evals, 15.5s, params {'colsample_bytree': 0.8963691581720814, 'eta': 0.21855286316576275, 'gamma': 9.301947876289173, 'max_depth': 5.0, 'min_child_weight': 9.0, 'n_estimators': 440.0, 'reg_alpha': 0.19083219966082232, 'reg_lambda': 0.05796753283622704, 'subsample': 0.5490934479037557}
+[s0   106.2s]   HP_Peak XGBoost[size_peak]: cv_mse 28.02, best_iter 7, 50 evals, 16.2s, params {'colsample_bytree': 0.9924534249403979, 'eta': 0.09590291646997565, 'gamma': 7.978203826480924, 'max_depth': 4.0, 'min_child_weight': 12.0, 'n_estimators': 490.0, 'reg_alpha': 0.7411423981409531, 'reg_lambda': 2.183761900905873, 'subsample': 0.5023765145945096}
+[s0   106.2s]   HP_Peak anchor_only_Linear[size]: cv_mse 32.31, best_iter None, 0 evals, 0.0s, params {}
+[s0   106.2s]   HP_Peak anchor_only_Linear[peak]: cv_mse 36.92, best_iter None, 0 evals, 0.0s, params {}
+[s0   106.3s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 36.92, best_iter None, 0 evals, 0.0s, params {}
+[s0   113.4s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 33.5, best_iter 23, 50 evals, 7.1s, params {'colsample_bytree': 0.680996444555708, 'eta': 0.28623366571222447, 'gamma': 4.201642570256198, 'max_depth': 4.0, 'min_child_weight': 5.0, 'n_estimators': 480.0, 'reg_alpha': 0.3139577449567679, 'reg_lambda': 3.94090674914212, 'subsample': 0.5158129853531704}
+[s0   121.1s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 32.8, best_iter 3, 50 evals, 7.7s, params {'colsample_bytree': 0.6286561666204971, 'eta': 0.16591037268776207, 'gamma': 5.328440152211294, 'max_depth': 7.0, 'min_child_weight': 2.0, 'n_estimators': 410.0, 'reg_alpha': 0.356151831273981, 'reg_lambda': 1.2725510577266452, 'subsample': 0.897741301494606}
+[s0   128.2s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 32.96, best_iter 7, 50 evals, 7.1s, params {'colsample_bytree': 0.7128597703412369, 'eta': 0.18015626441827093, 'gamma': 2.638193976380094, 'max_depth': 7.0, 'min_child_weight': 3.0, 'n_estimators': 420.0, 'reg_alpha': 0.7463773712927573, 'reg_lambda': 1.093054020834325, 'subsample': 0.859458905507311}
+[s0   128.2s] done in 128.2s
+[  135.2s] seed 0 finished (366 metric rows)
+[s3     0.3s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s3    74.6s] evaluated 570 substations in 74.1s (0.130 s each)
+[s3    91.9s]   HP_Peak XGBoost[none]: cv_mse 51.54, best_iter 9, 50 evals, 17.3s, params {'colsample_bytree': 0.6821329102017013, 'eta': 0.27353937757013663, 'gamma': 3.7466736636472895, 'max_depth': 8.0, 'min_child_weight': 16.0, 'n_estimators': 190.0, 'reg_alpha': 0.15270045174741054, 'reg_lambda': 5.919227888593623, 'subsample': 0.6822704229799111}
+[s3   112.7s]   HP_Peak XGBoost[size_peak]: cv_mse 45.92, best_iter 77, 50 evals, 20.8s, params {'colsample_bytree': 0.6232385248558259, 'eta': 0.16213902013684411, 'gamma': 0.006142220868387227, 'max_depth': 7.0, 'min_child_weight': 9.0, 'n_estimators': 360.0, 'reg_alpha': 0.5511617619143073, 'reg_lambda': 4.189268561213662, 'subsample': 0.7725230996096583}
+[s3   112.8s]   HP_Peak anchor_only_Linear[size]: cv_mse 59.3, best_iter None, 0 evals, 0.0s, params {}
+[s3   112.8s]   HP_Peak anchor_only_Linear[peak]: cv_mse 61.96, best_iter None, 0 evals, 0.0s, params {}
+[s3   112.8s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 61.96, best_iter None, 0 evals, 0.0s, params {}
+[s3   119.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 61.37, best_iter 16, 50 evals, 6.7s, params {'colsample_bytree': 0.8089445623325872, 'eta': 0.29902113252159096, 'gamma': 2.432007697300464, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 490.0, 'reg_alpha': 0.8559355237009063, 'reg_lambda': 4.672475101314628, 'subsample': 0.502136566552636}
+[s3   126.1s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 56.47, best_iter 2, 50 evals, 6.6s, params {'colsample_bytree': 0.4797414770945767, 'eta': 0.18708308106529153, 'gamma': 5.478316121566357, 'max_depth': 4.0, 'min_child_weight': 3.0, 'n_estimators': 220.0, 'reg_alpha': 0.4269303746465463, 'reg_lambda': 4.599065202731039, 'subsample': 0.9804947141550623}
+[s3   131.8s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 56.67, best_iter 9, 50 evals, 5.8s, params {'colsample_bytree': 0.995355456498404, 'eta': 0.1456976938007102, 'gamma': 5.939581897985383, 'max_depth': 9.0, 'min_child_weight': 2.0, 'n_estimators': 350.0, 'reg_alpha': 0.16655605357869463, 'reg_lambda': 6.536912918472014, 'subsample': 0.9413276516048689}
+[s3   131.9s] done in 131.9s
+[  138.9s] seed 3 finished (366 metric rows)
+[s2     0.3s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s2    74.2s] evaluated 570 substations in 73.8s (0.130 s each)
+[s2    94.7s]   HP_Peak XGBoost[none]: cv_mse 32.62, best_iter 33, 50 evals, 20.5s, params {'colsample_bytree': 0.44962029137691883, 'eta': 0.22003601207521584, 'gamma': 0.8597494621525825, 'max_depth': 5.0, 'min_child_weight': 3.0, 'n_estimators': 320.0, 'reg_alpha': 0.18466586223954995, 'reg_lambda': 1.2643512346646013, 'subsample': 0.8045465286070378}
+[s2   114.9s]   HP_Peak XGBoost[size_peak]: cv_mse 33.26, best_iter 14, 50 evals, 20.2s, params {'colsample_bytree': 0.3345790412660459, 'eta': 0.2835608851203023, 'gamma': 5.051027682228186, 'max_depth': 4.0, 'min_child_weight': 13.0, 'n_estimators': 100.0, 'reg_alpha': 0.6453014035167002, 'reg_lambda': 7.825631894223525, 'subsample': 0.7234463150521784}
+[s2   114.9s]   HP_Peak anchor_only_Linear[size]: cv_mse 51.61, best_iter None, 0 evals, 0.0s, params {}
+[s2   115.0s]   HP_Peak anchor_only_Linear[peak]: cv_mse 51.05, best_iter None, 0 evals, 0.0s, params {}
+[s2   115.0s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 51.05, best_iter None, 0 evals, 0.0s, params {}
+[s2   121.8s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 51.89, best_iter 12, 50 evals, 6.8s, params {'colsample_bytree': 0.5196342885219329, 'eta': 0.263161528113929, 'gamma': 9.692246196883739, 'max_depth': 6.0, 'min_child_weight': 12.0, 'n_estimators': 380.0, 'reg_alpha': 0.755422146323953, 'reg_lambda': 1.512232913840152, 'subsample': 0.7690712946741258}
+[s2   129.3s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 28.77, best_iter 57, 50 evals, 7.5s, params {'colsample_bytree': 0.5502146329199017, 'eta': 0.14118638696469177, 'gamma': 5.202634714245388, 'max_depth': 3.0, 'min_child_weight': 3.0, 'n_estimators': 450.0, 'reg_alpha': 0.32567300290675405, 'reg_lambda': 4.256685537527259, 'subsample': 0.8261271200334354}
+[s2   135.9s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 30.12, best_iter 50, 50 evals, 6.6s, params {'colsample_bytree': 0.913586634490334, 'eta': 0.14711931187850846, 'gamma': 6.962726569030957, 'max_depth': 3.0, 'min_child_weight': 1.0, 'n_estimators': 170.0, 'reg_alpha': 0.5629846431038285, 'reg_lambda': 5.1533182603228544, 'subsample': 0.9798102351257125}
+[s2   136.0s] done in 136.0s
+[  142.9s] seed 2 finished (366 metric rows)
+[s6     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s6    72.6s] evaluated 570 substations in 72.4s (0.127 s each)
+[s6    87.1s]   HP_Peak XGBoost[none]: cv_mse 30.25, best_iter 10, 50 evals, 14.4s, params {'colsample_bytree': 0.9576846550875383, 'eta': 0.2029299385987325, 'gamma': 1.9218365408556561, 'max_depth': 7.0, 'min_child_weight': 12.0, 'n_estimators': 280.0, 'reg_alpha': 0.26612656221918496, 'reg_lambda': 3.5499291744096926, 'subsample': 0.513673307701537}
+[s6   101.2s]   HP_Peak XGBoost[size_peak]: cv_mse 28.05, best_iter 7, 50 evals, 14.1s, params {'colsample_bytree': 0.5825481900329164, 'eta': 0.24543045052332066, 'gamma': 1.0359696913287118, 'max_depth': 9.0, 'min_child_weight': 14.0, 'n_estimators': 100.0, 'reg_alpha': 0.9979659757851997, 'reg_lambda': 8.603576030194892, 'subsample': 0.5350767678099357}
+[s6   101.2s]   HP_Peak anchor_only_Linear[size]: cv_mse 46.62, best_iter None, 0 evals, 0.0s, params {}
+[s6   101.2s]   HP_Peak anchor_only_Linear[peak]: cv_mse 145.7, best_iter None, 0 evals, 0.0s, params {}
+[s6   101.3s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 145.7, best_iter None, 0 evals, 0.0s, params {}
+[s6   107.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 47.95, best_iter 12, 50 evals, 6.3s, params {'colsample_bytree': 0.5530613217222934, 'eta': 0.293443893078148, 'gamma': 4.755795660506997, 'max_depth': 10.0, 'min_child_weight': 17.0, 'n_estimators': 400.0, 'reg_alpha': 0.29223984543965453, 'reg_lambda': 3.109373347651824, 'subsample': 0.5058905947591007}
+[s6   114.6s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 48.97, best_iter 25, 50 evals, 7.1s, params {'colsample_bytree': 0.7775671917062167, 'eta': 0.12640978760118504, 'gamma': 1.1274486108715518, 'max_depth': 5.0, 'min_child_weight': 9.0, 'n_estimators': 270.0, 'reg_alpha': 0.9954031557520587, 'reg_lambda': 9.192738801123891, 'subsample': 0.8987867542502519}
+[s6   121.5s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 48.26, best_iter 18, 50 evals, 6.9s, params {'colsample_bytree': 0.41732211167845557, 'eta': 0.16721634159191856, 'gamma': 9.176970669129643, 'max_depth': 9.0, 'min_child_weight': 3.0, 'n_estimators': 300.0, 'reg_alpha': 0.5069441395449389, 'reg_lambda': 8.813815776944413, 'subsample': 0.7745399951195189}
+[s6   121.6s] done in 121.6s
+[  260.5s] seed 6 finished (366 metric rows)
+[s5     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s5    71.1s] evaluated 570 substations in 70.9s (0.124 s each)
+[s5    87.5s]   HP_Peak XGBoost[none]: cv_mse 39.53, best_iter 22, 50 evals, 16.3s, params {'colsample_bytree': 0.5546376832528159, 'eta': 0.24709101978544956, 'gamma': 7.558816928672334, 'max_depth': 7.0, 'min_child_weight': 4.0, 'n_estimators': 360.0, 'reg_alpha': 0.5630028694025838, 'reg_lambda': 7.435611583047848, 'subsample': 0.7792963938200205}
+[s5   104.7s]   HP_Peak XGBoost[size_peak]: cv_mse 41.02, best_iter 76, 50 evals, 17.2s, params {'colsample_bytree': 0.39451984898762854, 'eta': 0.011120118635736378, 'gamma': 4.321248423102835, 'max_depth': 5.0, 'min_child_weight': 10.0, 'n_estimators': 120.0, 'reg_alpha': 0.3233037943205523, 'reg_lambda': 5.665850933028327, 'subsample': 0.6503594877361657}
+[s5   104.7s]   HP_Peak anchor_only_Linear[size]: cv_mse 39.9, best_iter None, 0 evals, 0.0s, params {}
+[s5   104.7s]   HP_Peak anchor_only_Linear[peak]: cv_mse 33.29, best_iter None, 0 evals, 0.0s, params {}
+[s5   104.8s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 33.29, best_iter None, 0 evals, 0.0s, params {}
+[s5   111.0s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 39, best_iter 7, 50 evals, 6.3s, params {'colsample_bytree': 0.8298347492916504, 'eta': 0.04504823010309297, 'gamma': 8.64861649752715, 'max_depth': 8.0, 'min_child_weight': 10.0, 'n_estimators': 340.0, 'reg_alpha': 0.2794813945604003, 'reg_lambda': 9.97637868577089, 'subsample': 0.999812615272786}
+[s5   117.8s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 32.51, best_iter 7, 50 evals, 6.8s, params {'colsample_bytree': 0.38411911194530246, 'eta': 0.2367137514277148, 'gamma': 6.770108189603557, 'max_depth': 8.0, 'min_child_weight': 4.0, 'n_estimators': 440.0, 'reg_alpha': 0.2761811060857396, 'reg_lambda': 7.252701939165181, 'subsample': 0.7660055453803577}
+[s5   125.4s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 31.89, best_iter 47, 50 evals, 7.6s, params {'colsample_bytree': 0.8526896913371445, 'eta': 0.09226244157126937, 'gamma': 1.580681482800289, 'max_depth': 4.0, 'min_child_weight': 2.0, 'n_estimators': 330.0, 'reg_alpha': 0.646439122482052, 'reg_lambda': 0.23657216970935924, 'subsample': 0.5680819914545039}
+[s5   125.5s] done in 125.5s
+[  260.7s] seed 5 finished (366 metric rows)
+[s4     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s4    71.6s] evaluated 570 substations in 71.3s (0.125 s each)
+[s4    89.1s]   HP_Peak XGBoost[none]: cv_mse 21.48, best_iter 10, 50 evals, 17.5s, params {'colsample_bytree': 0.5508343221921752, 'eta': 0.2862516758007009, 'gamma': 4.1076219452768985, 'max_depth': 7.0, 'min_child_weight': 7.0, 'n_estimators': 180.0, 'reg_alpha': 0.46726424662066557, 'reg_lambda': 2.1965785487879605, 'subsample': 0.5657018975904695}
+[s4   108.0s]   HP_Peak XGBoost[size_peak]: cv_mse 22.83, best_iter 47, 50 evals, 18.8s, params {'colsample_bytree': 0.589232002762248, 'eta': 0.23274208899897667, 'gamma': 7.319758007576925, 'max_depth': 5.0, 'min_child_weight': 5.0, 'n_estimators': 310.0, 'reg_alpha': 0.9668399941242913, 'reg_lambda': 8.939540894496428, 'subsample': 0.6727235124850656}
+[s4   108.0s]   HP_Peak anchor_only_Linear[size]: cv_mse 40.68, best_iter None, 0 evals, 0.0s, params {}
+[s4   108.0s]   HP_Peak anchor_only_Linear[peak]: cv_mse 38.02, best_iter None, 0 evals, 0.0s, params {}
+[s4   108.1s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 38.02, best_iter None, 0 evals, 0.0s, params {}
+[s4   114.4s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 40.82, best_iter 10, 50 evals, 6.3s, params {'colsample_bytree': 0.7320994622050453, 'eta': 0.2929748911163574, 'gamma': 1.7248802762280504, 'max_depth': 10.0, 'min_child_weight': 11.0, 'n_estimators': 140.0, 'reg_alpha': 0.38530124767205964, 'reg_lambda': 9.013938877202005, 'subsample': 0.5020296294734146}
+[s4   121.2s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 39.58, best_iter 9, 50 evals, 6.9s, params {'colsample_bytree': 0.4289850745111083, 'eta': 0.11292355346781688, 'gamma': 9.989421101564854, 'max_depth': 5.0, 'min_child_weight': 19.0, 'n_estimators': 200.0, 'reg_alpha': 0.2221561948150023, 'reg_lambda': 0.986120810587631, 'subsample': 0.6110144881965074}
+[s4   127.7s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 39.37, best_iter 10, 50 evals, 6.5s, params {'colsample_bytree': 0.6570494639334075, 'eta': 0.23075656523687965, 'gamma': 6.151933069930696, 'max_depth': 9.0, 'min_child_weight': 16.0, 'n_estimators': 180.0, 'reg_alpha': 0.7339279081824204, 'reg_lambda': 3.9652349275597683, 'subsample': 0.5370209246021932}
+[s4   127.8s] done in 127.8s
+[  260.7s] seed 4 finished (366 metric rows)
+[s7     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s7    74.2s] evaluated 570 substations in 73.9s (0.130 s each)
+[s7    91.4s]   HP_Peak XGBoost[none]: cv_mse 12.59, best_iter 61, 50 evals, 17.2s, params {'colsample_bytree': 0.4035381593618897, 'eta': 0.274063860524219, 'gamma': 4.515402654231554, 'max_depth': 5.0, 'min_child_weight': 3.0, 'n_estimators': 260.0, 'reg_alpha': 0.7811610086196269, 'reg_lambda': 8.93296095084565, 'subsample': 0.5093796497431905}
+[s7   112.0s]   HP_Peak XGBoost[size_peak]: cv_mse 13.16, best_iter 60, 50 evals, 20.5s, params {'colsample_bytree': 0.3216065961764587, 'eta': 0.17886133427395057, 'gamma': 3.1721795487864837, 'max_depth': 4.0, 'min_child_weight': 6.0, 'n_estimators': 430.0, 'reg_alpha': 0.9536575771826922, 'reg_lambda': 5.182308896153432, 'subsample': 0.5636752263131614}
+[s7   112.0s]   HP_Peak anchor_only_Linear[size]: cv_mse 30.53, best_iter None, 0 evals, 0.0s, params {}
+[s7   112.0s]   HP_Peak anchor_only_Linear[peak]: cv_mse 26.87, best_iter None, 0 evals, 0.0s, params {}
+[s7   112.1s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 26.87, best_iter None, 0 evals, 0.0s, params {}
+[s7   117.9s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 30.19, best_iter 17, 50 evals, 5.9s, params {'colsample_bytree': 0.3691001402190903, 'eta': 0.2953630919392067, 'gamma': 0.3959881558013889, 'max_depth': 6.0, 'min_child_weight': 13.0, 'n_estimators': 140.0, 'reg_alpha': 0.4092137981822924, 'reg_lambda': 3.715687803215968, 'subsample': 0.7002569459087092}
+[s7   122.9s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 28.63, best_iter 3, 50 evals, 4.9s, params {'colsample_bytree': 0.9871277489860029, 'eta': 0.08625099569619606, 'gamma': 8.637131439113862, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 140.0, 'reg_alpha': 0.4096342772075106, 'reg_lambda': 0.8405567783067655, 'subsample': 0.7376755354045746}
+[s7   127.8s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 29.96, best_iter 1, 50 evals, 4.9s, params {'colsample_bytree': 0.5537186609428478, 'eta': 0.07010399966850928, 'gamma': 6.047831753785963, 'max_depth': 9.0, 'min_child_weight': 7.0, 'n_estimators': 240.0, 'reg_alpha': 0.6291077411097068, 'reg_lambda': 1.5062200064509945, 'subsample': 0.9720192649670414}
+[s7   127.9s] done in 127.9s
+[  270.8s] seed 7 finished (366 metric rows)
+[s9     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s9    67.5s] evaluated 570 substations in 67.3s (0.118 s each)
+[s9    82.1s]   HP_Peak XGBoost[none]: cv_mse 17.18, best_iter 52, 50 evals, 14.4s, params {'colsample_bytree': 0.46218571033978323, 'eta': 0.22343113335844467, 'gamma': 3.2303078931557794, 'max_depth': 5.0, 'min_child_weight': 11.0, 'n_estimators': 90.0, 'reg_alpha': 0.9159377697771689, 'reg_lambda': 8.523525010554852, 'subsample': 0.9415549884200953}
+[s9    99.3s]   HP_Peak XGBoost[size_peak]: cv_mse 17.38, best_iter 56, 50 evals, 17.2s, params {'colsample_bytree': 0.31611867743050337, 'eta': 0.13467190313450203, 'gamma': 4.821409278007963, 'max_depth': 4.0, 'min_child_weight': 11.0, 'n_estimators': 330.0, 'reg_alpha': 0.982789952268226, 'reg_lambda': 4.818070814665035, 'subsample': 0.8872227919905431}
+[s9    99.3s]   HP_Peak anchor_only_Linear[size]: cv_mse 49.58, best_iter None, 0 evals, 0.0s, params {}
+[s9    99.4s]   HP_Peak anchor_only_Linear[peak]: cv_mse 68.11, best_iter None, 0 evals, 0.0s, params {}
+[s9    99.4s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 68.11, best_iter None, 0 evals, 0.0s, params {}
+[s9   106.3s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 49.43, best_iter 26, 50 evals, 6.9s, params {'colsample_bytree': 0.4276880705119588, 'eta': 0.25739413678244255, 'gamma': 8.058672799882753, 'max_depth': 5.0, 'min_child_weight': 18.0, 'n_estimators': 420.0, 'reg_alpha': 0.647398915073878, 'reg_lambda': 0.445717790006005, 'subsample': 0.8265242569420322}
+[s9   113.1s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 38.41, best_iter 16, 50 evals, 6.8s, params {'colsample_bytree': 0.8004521725450022, 'eta': 0.148859687266473, 'gamma': 0.15550953692846026, 'max_depth': 10.0, 'min_child_weight': 19.0, 'n_estimators': 350.0, 'reg_alpha': 0.8423333079350391, 'reg_lambda': 4.666632844347946, 'subsample': 0.5687079792887517}
+[s9   118.8s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 38.81, best_iter 26, 50 evals, 5.7s, params {'colsample_bytree': 0.3005692423603814, 'eta': 0.12952691609097547, 'gamma': 1.1945620138806574, 'max_depth': 9.0, 'min_child_weight': 20.0, 'n_estimators': 490.0, 'reg_alpha': 0.8430582899530705, 'reg_lambda': 6.419168735887005, 'subsample': 0.5650523527951928}
+[s9   118.9s] done in 118.9s
+[  379.6s] seed 9 finished (366 metric rows)
+[s8     0.1s] HP train/test 43/14, fill 43/14; substations {'train': 370, 'inner': 160, 'test': 40}; dropped cells 643
+[s8    67.7s] evaluated 570 substations in 67.4s (0.118 s each)
+[s8    86.5s]   HP_Peak XGBoost[none]: cv_mse 18.1, best_iter 198, 50 evals, 18.8s, params {'colsample_bytree': 0.6490520586134114, 'eta': 0.01971884165792703, 'gamma': 8.058595113327016, 'max_depth': 4.0, 'min_child_weight': 5.0, 'n_estimators': 470.0, 'reg_alpha': 0.44423502687590755, 'reg_lambda': 2.0285821696875583, 'subsample': 0.5852512948054773}
+[s8   104.7s]   HP_Peak XGBoost[size_peak]: cv_mse 16.98, best_iter 73, 50 evals, 18.2s, params {'colsample_bytree': 0.35394310036357934, 'eta': 0.06301762842309042, 'gamma': 0.9896092813611128, 'max_depth': 6.0, 'min_child_weight': 6.0, 'n_estimators': 460.0, 'reg_alpha': 0.27927485474468927, 'reg_lambda': 3.9196474335264035, 'subsample': 0.5727837764589014}
+[s8   104.8s]   HP_Peak anchor_only_Linear[size]: cv_mse 40.55, best_iter None, 0 evals, 0.0s, params {}
+[s8   104.8s]   HP_Peak anchor_only_Linear[peak]: cv_mse 44.51, best_iter None, 0 evals, 0.0s, params {}
+[s8   104.8s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 44.51, best_iter None, 0 evals, 0.0s, params {}
+[s8   111.5s]   HP_Peak anchor_only_XGBoost[size]: cv_mse 40.54, best_iter 22, 50 evals, 6.7s, params {'colsample_bytree': 0.7059204881644436, 'eta': 0.28260288079047613, 'gamma': 6.279170564030665, 'max_depth': 4.0, 'min_child_weight': 8.0, 'n_estimators': 380.0, 'reg_alpha': 0.5567750148174291, 'reg_lambda': 3.0887589187680007, 'subsample': 0.5221807843346518}
+[s8   117.9s]   HP_Peak anchor_only_XGBoost[peak]: cv_mse 39.95, best_iter 16, 50 evals, 6.4s, params {'colsample_bytree': 0.3033522964652092, 'eta': 0.015254655984140605, 'gamma': 4.194153659189292, 'max_depth': 6.0, 'min_child_weight': 20.0, 'n_estimators': 120.0, 'reg_alpha': 0.9644978905222615, 'reg_lambda': 0.2697559277257007, 'subsample': 0.731467841302657}
+[s8   127.9s]   HP_Peak anchor_only_XGBoost[size+peak]: cv_mse 39.49, best_iter 2, 50 evals, 10.0s, params {'colsample_bytree': 0.9567125384042936, 'eta': 0.1773320585477172, 'gamma': 4.095418975973869, 'max_depth': 7.0, 'min_child_weight': 20.0, 'n_estimators': 470.0, 'reg_alpha': 0.9087855191245515, 'reg_lambda': 4.469418479224045, 'subsample': 0.5240272168519172}
+[s8   128.0s] done in 128.0s
+[  388.5s] seed 8 finished (366 metric rows)
+[  389.0s] done in 389.0s (10 of 10 seeds)

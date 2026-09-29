@@ -1,0 +1,138 @@
+exp_id: iter02b_legacy_a
+protocol: v1
+out_dir: results/iter02b_benchmark/arm_legacy_a
+cache_dir: data/_paperb
+paper_a_repo: ../hp-sensitivity-paper
+pool:
+  option: a
+  year: 2023
+  coverage_min: 0.9
+  station_alias:
+    8jB: KLO
+  sfh_own_load_type: Single-family house
+  seed: 0
+  shared_fill: true
+split:
+  test_frac: 0.25
+  stratify: station
+  seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+grid:
+  size:
+  - 10
+  - 20
+  - 40
+  - 80
+  - 120
+  penetration:
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 1.0
+  n_hp: round
+  max_overlap: 0.75
+  min_station_pool: 3
+  substations_per_cell:
+    train: 10
+    test: 5
+  on_infeasible: drop
+cv:
+  scheme: household_grouped
+  k: 4
+  inner_substations_per_cell: 5
+  early_stopping: next_training_fold
+  hyperopt:
+    max_evals: 50
+    seed: split_seed
+  final_refit: median_best_iteration
+models:
+- XGBoost
+anchors:
+- none
+- size_peak
+anchor_only_baselines:
+  models:
+  - Linear
+  - XGBoost
+  features:
+  - - size
+  - - peak
+  - - size
+    - peak
+physics_baselines:
+- slope_only
+- slope_base
+- calibrated_delta
+- hdh
+features:
+  T_base: 12.0
+  kwargs:
+    resolution: 15
+    mild_thresh: 10.0
+    cold_thresh: 25.0
+    weekday_only: true
+    include_shape: false
+    include_minmax: true
+    include_quantiles: true
+    include_n_days: false
+    include_corr_features: false
+    include_climate_context: false
+    normalize_by_peak: true
+targets:
+- HP_Peak
+target_defs:
+  robust_q: 0.999
+  T_design_C: -8.0
+bootstrap:
+  unit: hp_household
+  B: 2000
+  seed: split_seed
+uncertainty:
+  bootstrap: false
+  summary_band:
+  - 0.05
+  - 0.9
+parallel:
+  workers: 4
+  blas_threads: 1
+  cores: 28
+  threads: 7
+metrics:
+- rmse
+- mae
+- mape
+- r2
+quick:
+  split.seeds:
+  - 0
+  grid.size:
+  - 10
+  grid.substations_per_cell:
+    train: 6
+    test: 3
+  cv.inner_substations_per_cell: 3
+  cv.hyperopt.max_evals: 5
+  models:
+  - XGBoost
+  anchors:
+  - size_peak
+  targets:
+  - HP_Peak
+  physics_baselines:
+  - slope_only
+  anchor_only_baselines.models:
+  - Linear
+  bootstrap.B: 200
+pred_figures: false
+git_commit: 9bfa9ab94ce3633e0d86c6e58b366b9f417571f1

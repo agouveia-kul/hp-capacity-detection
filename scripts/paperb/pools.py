@@ -1,4 +1,4 @@
-"""Protocol v1 household pools at 15 min, calendar year (UTC): B* (main arm) and B (sensitivity arm).
+"""Protocol v1 household pools at 15 min, calendar year (UTC): B* (main arm), B (sensitivity arm) and A (02b).
 
 B  = HEAPO households at KLO (8jB aliased) with HP submeter + Other + Total, and Kaiser dwellings with a
      paired HP meter.
@@ -6,6 +6,9 @@ B* = B + HEAPO households at the other stations + Kaiser HP meters in single-fam
      dwelling meter. Each of those is given ONE clean Kaiser dwelling (drawn once, with `pool.seed`, from the
      clean dwellings of type `sfh_own_load_type`) as its own non-HP load; that dwelling leaves the fill pool.
 Fill = Kaiser Apartment / SFH dwellings with no TCL flag and not paired (any station).
+A  = the 57-household HEAPO 2023 legacy pool (iter-00 `legacy_prep_datarange.parquet`, legacy 80 % coverage rule,
+     no coverage re-check). Fill is SHARED: the fill pool of a split is its HP households' non-HP (Other) channel,
+     and a household is never both an HP member and a fill member of one substation (`pool.shared_fill`).
 
 Every meter needs >= `coverage_min` valid raw samples in the year, checked BEFORE gaps are interpolated
 (F11 lesson). Gaps are then filled as in the legacy readers (time interpolation, then 0). Series are kW.
@@ -38,7 +41,7 @@ class Pool:
 
     def __init__(self, name, hp, own, fill, temp, meta):
         self.name, self.hp, self.own, self.fill, self.temp, self.meta = name, hp, own, fill, temp, meta
-        self.index = hp.index
+        self.index, self.shared_fill = hp.index, name == "a"
 
 
 def year_index(year):
@@ -86,7 +89,7 @@ def _heapo_flags():
 
 
 def build_pool(option, cfg, verbose=True):
-    """Read (or build and cache) pool `option` in {'bstar', 'b'}."""
+    """Read (or build and cache) pool `option` in {'bstar', 'b', 'a'}."""
     pc = cfg["pool"]
     year, cov_min = pc["year"], pc["coverage_min"]
     out = ROOT / cfg["cache_dir"] / "pools"
@@ -97,6 +100,8 @@ def build_pool(option, cfg, verbose=True):
                 for k in ("hp", "own", "fill", "T")}
         return Pool(option, part["hp"], part["own"], part["fill"], part["T"], meta)
 
+    if option == "a":
+        return _build_pool_a(cfg, f_ser, f_meta, verbose)
     index, win = year_index(year), f"cal{year}"
     alias = pc["station_alias"]
     scans = load_scans(SCAN_CACHE)
@@ -183,6 +188,37 @@ def build_pool(option, cfg, verbose=True):
         n = meta["role"].value_counts().to_dict()
         print(f"pool {option} {year}: {n}; dropped {len(dropped)} meters (coverage); stations {stations}")
     return Pool(option, frames["hp"], frames["own"], frames["fill"], temp, meta)
+
+
+def _build_pool_a(cfg, f_ser, f_meta, verbose):
+    year, index = cfg["pool"]["year"], year_index(cfg["pool"]["year"])
+    legacy = pd.read_parquet(ROOT / "data" / "_paperb" / "iter00" / "legacy_prep_datarange.parquet")
+    ewh_h, prot_h = _heapo_flags()
+    hp, own, rows = {}, {}, []
+    for hid, st in legacy["Weather_ID"].items():
+        r = _raw(HEAPO / "smart_meter_data" / "15min" / f"{hid}.csv", "Timestamp",
+                 ["kWh_received_Total", "kWh_received_HeatPump", "kWh_received_Other"], index)
+        cov, days = _coverage(r)
+        hp[f"H:{hid}"], own[f"H:{hid}"] = _fill_gaps(r["kWh_received_HeatPump"]), _fill_gaps(r["kWh_received_Other"])
+        rows.append(dict(hh=f"H:{hid}", role="hp", source="heapo_legacy", station=st, coverage=cov, n_valid_days=days,
+                         has_hp_add=pd.NA, has_ewh_in_own_load=ewh_h.get(hid, pd.NA), has_protocol=hid in prot_h,
+                         own_meter=f"H:{hid}", hp_peak=robust_series_peak(r["kWh_received_HeatPump"][r.notna().all(axis=1)],
+                                                                          cfg["target_defs"]["robust_q"])))
+    meta = pd.DataFrame(rows).set_index("hh")
+    meta["has_hp_add"], meta["has_ewh_in_own_load"] = (meta[c].astype("boolean") for c in ("has_hp_add", "has_ewh_in_own_load"))
+    stations = sorted(meta["station"].unique())
+    frames = {"hp": pd.DataFrame(hp, index=index), "own": pd.DataFrame(own, index=index),
+              "fill": pd.DataFrame(own, index=index),                  # shared fill: the same HP households' Other channel
+              "T": pd.DataFrame({st: _temperature(st, index) for st in stations}, index=index)}
+    f_ser.parent.mkdir(parents=True, exist_ok=True)
+    pd.concat([v.add_prefix(k + "|") for k, v in frames.items()], axis=1).rename_axis("ts").to_parquet(f_ser)
+    meta.attrs = {}
+    meta.to_parquet(f_meta)
+    if verbose:
+        leg = legacy["HP_robust_kW"].reindex([int(h.split(":")[1]) for h in meta.index]).to_numpy()
+        print(f"pool a {year}: {len(meta)} HP households, stations {stations}, min coverage {meta['coverage'].min():.3f}; "
+              f"max |hp_peak - legacy HP_robust_kW| = {np.abs(meta['hp_peak'].to_numpy() - leg).max():.3g} kW")
+    return Pool("a", frames["hp"], frames["own"], frames["fill"], frames["T"], meta)
 
 
 def build_pool_bstar(cfg, verbose=True):
