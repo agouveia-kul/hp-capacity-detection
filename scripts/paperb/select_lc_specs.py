@@ -5,7 +5,8 @@ household-disjoint inner substations, kW scale, see train.tune_grouped_cv). For 
 (model, anchor, feature set, transform) with the lowest MEDIAN cv_wape over the seeds is selected. Families:
 linear (Linear, Ridge, Lasso, ElasticNet, PLS), kernel (SVR), tree (XGBoost, XGBoost_mono); residual models exist for
 linear and tree only. Writes results/iter03b_fair_test/lc_selection.csv and configs/iter03b_lc.yaml (the learning-curve
-arm: all physics rows plus the selected specs, on the main arm's seeds `--seeds`).
+arm: all physics rows plus the selected specs, on the main arm's first `--seeds` seeds; its own main-part grid is one cheap
+physics row, `slope_only`, so the arm's metrics.csv is non-empty).
 
     python scripts/paperb/select_lc_specs.py --timing results/iter03b_fair_test/arm_main/timing.csv --seeds 10
 """
@@ -51,7 +52,7 @@ if __name__ == "__main__":
              for r in best.itertuples()]
     cfg = {"base": a.base, "exp_id": "iter03b_lc", "out_dir": "results/iter03b_fair_test/arm_lc", "pred_figures": False,
            "split": {"seeds": list(range(a.seeds))}, "models": [], "modes": ["direct"], "residual_models": [],
-           "physics_baselines": [], "anchor_only_baselines": {"models": [], "features": []}, "targets": ["HP_Peak"],
+           "physics_baselines": ["slope_only"], "anchor_only_baselines": {"models": [], "features": []}, "targets": ["HP_Peak"],
            "paperA": {"estimators": []},
            "learning_curve": {"n": [16, 32, 48, "all"], "draws": 3, "feature_sets": sorted(set(best["feature_set"])),
                               "specs": [f"{p}|none|-|-|-" for p in PHYSICS_SPECS] + ANCHOR_ONLY + specs}}

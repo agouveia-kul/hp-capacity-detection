@@ -245,7 +245,9 @@ def fig_lc(A):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/protocol_v1.yaml")
+    ap.add_argument("--out", default="results/iter03b_fair_test", help="directory holding arm_main / arm_lc / arm_sens_b")
     a = ap.parse_args()
+    OUT = ROOT / a.out
     A = Arms(load_config(a.config)["uncertainty"]["summary_band"])
     sp = table1(A)
     table2(A)
