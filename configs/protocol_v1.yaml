@@ -37,6 +37,17 @@ cv:
   final_refit: median_best_iteration
 
 models: [XGBoost, Ridge, ElasticNet, SVR, FFNN, PLS]
+ffnn: {enabled: false}                 # 02b review: FFNN leaves the main tables; runs only with ffnn.enabled: true
+feature_sets: [whdd]                   # 03a: whdd (legacy windowed HDD, unchanged) | netfit | both
+modes: [direct]                        # 03a: direct | residual (z = log(y / P_hat_A), residual.py)
+target_transforms: [none]              # 03a: none | log (direct models; exp back-transform, no smearing)
+residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
+paperA:                                # 03a: Paper A estimator s_h / m_h (physics.py)
+  estimators: []                       # paperA_sh_mh | paperA_sh_mh_station (paperA_sh_mh is added whenever modes has residual)
+  cap_def: hp_peak                     # pilot SF capacity: hp_peak (= HP_Peak's definition) | paperA (gap-filled 99.9th pct)
+  min_station_pilot: 10                # station-matched pilot needs >= 10 train HP households at the station
+  target: HP_Peak
+  cap_def_check: false                 # also score against Paper A's capacity definition (target HP_Peak_A)
 anchors: [none, size, size_peak]       # F1: every model runs in all three arms
 anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}
 physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
@@ -55,7 +66,7 @@ target_defs:
 bootstrap: {unit: hp_household, B: 2000, seed: split_seed}   # code kept; switched off by uncertainty.bootstrap (02b decision)
 uncertainty: {bootstrap: false, summary_band: [0.05, 0.90]}    # 02b: across-split summary only (median, mean, std, q05, q90)
 parallel: {workers: 4, blas_threads: 1}                         # split seeds in parallel; XGBoost n_jobs = floor(cores / workers); BLAS 1 thread (determinism)
-metrics: [rmse, mae, mape, r2]
+metrics: [wape, mape, r2, rmse, mae]  # 03a: WAPE is the primary metric (paperb/metrics.py)
 
 quick:                                 # overrides for configs/protocol_v1_quick.yaml (see that file)
   split.seeds: [0]

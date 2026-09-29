@@ -29,6 +29,13 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
 - **RQ3 — transfer.** Test CH → DE (FeederBW real feeders; WPuQ as a stress test) and a third domain (UKPN / RHPP / others). Compare raw-series vs physics-feature vs hybrid models, and fixed vs latent T_base.
 - **RQ4 — change detection.** Over a multi-year horizon with a given uptake probability, can capacity change be detected (minimum detectable change at a fixed false-alarm rate, detection delay) and quantified (relative, and registry-anchored absolute)?
 
+### Iteration plan (renumbered after the 02b review, 2026-09-29)
+- 03a / 03b — fair test of ML against the physics estimator (code / runs);
+- 04 — other targets and the daily arm (RQ1);
+- 05 — transfer (RQ3);
+- 06–07 — change detection (RQ4);
+- 08+ — freeze and draft.
+
 ## 2. Environment
 
 - Windows. Python 3.12 in `.venv`. Dependencies in `requirements.txt`. Record any new dependency there, with a version pin.
@@ -65,6 +72,7 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 - **Grouped CV inside train.** Hyperparameter tuning and feature selection use folds built from household-disjoint sub-pools. Never use KFold over substations that share households.
 - **Repeated splits.** Headline metrics are the mean ± spread over at least 10 independent household splits (seeds).
 - **Uncertainty = across-split summary (median, mean ± std, 5 %–90 %).** No bootstrap unless an iteration says so.
+- **Primary metric = WAPE** (Σ|ŷ − y| / Σy, as in Paper A); it comes first in `summary.csv` and in every table. MAPE and R² are secondary (decision 2026-09-29, 02b review).
 - **Effective sample size.** Always report the number of distinct HP households behind each result.
 - **Physics baselines are always reported next to ML:**
   - hockey-stick slope-only map;
@@ -141,7 +149,7 @@ Then stop and wait for review. Do not start the next iteration.
 - **Bootstrap CIs too narrow.** They resample substations, not households.
 - **Single year and single split.** Swiss/HEAPO pools cover calendar 2023 only, with one household split seed.
 - **Unfiltered backup rods.** `hp-add` (backup rod) households are not filtered, so rod draw sits inside `HP_Peak`. EWH, storage and direct-heating households are excluded from pools, so they are not available as labelled classes.
-- **Fixed HDD base.** Windowed-HDD features use a fixed national T_base (12 °C CH, 15 °C DE). The HDH baseline uses the fixed 12 °C base too, while the fitted T_h has median 16.7 °C (revisit in 03).
+- **Fixed HDD base.** Windowed-HDD features use a fixed national T_base (12 °C CH, 15 °C DE). The HDH baseline uses the fixed 12 °C base too, while the fitted T_h has median 16.7 °C (revisit in 03). *03a:* this bin misalignment is addressed by the new `netfit` feature set (latent T_h per substation, θ bins referenced to the fitted T_h); the legacy windowed-HDD set is kept unchanged as feature set `whdd`.
 - **Missing scripts.** About ten scripts referenced by the notebook are missing from `scripts/` (iteration 0 recovers them).
 - **Small HP pool (pinned in iteration 00).** Every legacy capacity result uses the **57-household HEAPO 2023 pool**, split 29 train / 28 test. Only **27** households effectively seed train substations (stations with < 3 households in a split are skipped). 81 is the combined HEAPO + Kaiser pool, which no legacy script loads; "Swiss" in legacy names means HEAPO.
 - **Stacking factor.** In 120-dwelling, 100 %-penetration train substations each HP profile appears **16.7×** on average.

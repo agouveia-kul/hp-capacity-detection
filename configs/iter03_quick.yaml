@@ -1,0 +1,20 @@
+# 03a smoke run (< 5 min once the pool cache exists): protocol_v1 quick overrides (1 seed, size 10, 5 evals) plus the
+# fair-test grid: three feature sets x {direct (none, log), residual}, Linear / Ridge / XGBoost (XGBoost_mono is tested in
+# tests/test_fair_test.py; it is 4-17x slower per fit),
+# Paper A's estimator (both pilots, plus the capacity-definition check) and one learning-curve point (n = 16, 1 draw).
+base: configs/protocol_v1.yaml
+apply_quick: true
+exp_id: iter03_quick
+out_dir: results/iter03_quick
+split: {seeds: [0]}
+parallel: {workers: 1}
+models: [Linear, Ridge, XGBoost]
+feature_sets: [whdd, netfit, both]
+modes: [direct, residual]
+target_transforms: [none, log]
+residual_models: [Ridge, XGBoost]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station], cap_def_check: true}
+learning_curve:
+  n: [16]
+  draws: 1
+  specs: ["paperA_sh_mh|none|-|-|-", "Ridge|size_peak|netfit|direct|log", "Ridge|size_peak|netfit|residual|log"]

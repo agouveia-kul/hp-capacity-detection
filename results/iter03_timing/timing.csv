@@ -1,0 +1,11 @@
+split_seed,method,seconds,n_substations,target,anchor,feature_set,mode,target_transform,n_evals,n_inner,n_train,n_train_hp,lc_draw
+0,evaluate_members,130.49999570846558,1010.0,,,,,,,,,,
+0,Linear,0.0841689109802246,,HP_Peak,size_peak,netfit,direct,log,0.0,420.0,460.0,,
+0,Lasso,12.790539503097534,,HP_Peak,size_peak,netfit,direct,log,50.0,420.0,460.0,,
+0,XGBoost,24.280317306518555,,HP_Peak,size_peak,netfit,direct,log,50.0,420.0,460.0,,
+0,XGBoost_mono,67.57822251319885,,HP_Peak,size_peak,netfit,direct,log,50.0,420.0,460.0,,
+0,Lasso,7.792378664016724,,HP_Peak,size_peak,netfit,residual,log,50.0,420.0,460.0,,
+0,XGBoost,17.470361948013306,,HP_Peak,size_peak,netfit,residual,log,50.0,420.0,460.0,,
+0,evaluate_members,62.3970308303833,500.0,,,,,,,,,32.0,0.0
+0,Lasso,5.701021671295166,,HP_Peak,size_peak,netfit,direct,log,50.0,200.0,300.0,32.0,0.0
+0,XGBoost,18.42992615699768,,HP_Peak,size_peak,netfit,residual,log,50.0,200.0,300.0,32.0,0.0

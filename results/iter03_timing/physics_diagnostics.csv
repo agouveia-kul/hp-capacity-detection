@@ -1,0 +1,2 @@
+split_seed,n_substations,hinge_inside_net,hinge_inside_hp,at_bound_net,coincpeak_gt_peak,failed_net_fit,failed_hp_fit
+0,1010,1.0,1.0,0.0198019801980198,382,0,0

@@ -11,6 +11,13 @@ the hinge above every retained temperature in 92 % of fits (F2); keeping warm da
 `daily_means`, `fit_daily` and `sf_arm` are the ports; tests/test_protocol_v1.py checks them against
 Paper A's own code (tests/fixtures/paperA_fixture.npz, scripts/paperb/make_paperA_fixture.py).
 The four baselines map substation-level fit results to a target with a fit(train) / predict(X) API.
+
+Paper A capacity estimator (iteration 03a): P_hat = s_h / m_h (draft eq. `capacity`). s_h is the substation's
+net-load slope (`s_h_net`); m_h is the SF slope of a submetered pilot (`pilot_fit`, a verbatim port of Paper A
+`outputs._pilot_fit`, checked against Paper A's committed Kloten pilots in tests/test_fair_test.py). The pilot is
+the aggregate of the seed's TRAIN HP households (`paperA_sh_mh`), or of the train HP households of the
+substation's own station when it has >= `min_station_pilot` of them (`paperA_sh_mh_station`, else the full pilot,
+counted as a fallback). Invalid estimates (s_h <= 0 or NaN, m_h <= 0 or NaN) are predicted as 0 and counted.
 """
 import numpy as np
 import pandas as pd
@@ -99,3 +106,58 @@ def make_baseline(name):
             "slope_base": lambda: LinearMap(["s_h_net", "P_base_net"]),
             "calibrated_delta": lambda: LinearMap(["delta_net"], intercept=False),  # legacy "delta calib (origin)"
             "hdh": lambda: LinearMap(["hdh_slope_net"])}[name]()
+
+
+# ---------------------------------------------------------------- Paper A estimator s_h / m_h (03a, Task 1)
+def household_caps(pool, cap_def="hp_peak"):
+    """Per-HP-household capacity P_n^max (kW). `hp_peak`: the HP_Peak definition (99.9th percentile of the RAW
+    valid 15-min samples); `paperA`: Paper A's `robust_series_peak` of the gap-filled 15-min series (eq. pk)."""
+    if cap_def == "hp_peak":
+        return pool.meta.loc[pool.hp.columns, "hp_peak"].astype(float)
+    return pool.hp.astype(np.float64).quantile(0.999)
+
+
+def pilot_fit(T, hp, own, cap):
+    """Verbatim port of Paper A `outputs._pilot_fit` on daily arrays of the pilot aggregate: T_h from the pilot's
+    own net-load fit (hp + own), then the SF arm of clip(hp / cap, 0, 1) anchored at T_h -> (b_h, m_h, T_h)."""
+    _, _, th, _ = fit_hockey_stick(T, hp + own, T_BALANCE_BOUNDS)
+    b, m, _, _ = sf_arm(T, np.clip(hp / cap, 0, 1), th, "h")
+    return b, m, th
+
+
+def pool_pilot(pool, hh, caps):
+    """Pilot of HP households `hh`: daily means of their summed HP and own load against the capacity-weighted mean
+    of their stations' temperatures (one station: that station's T) -> dict(b, m, T_h, cap, n_hh)."""
+    hh = sorted(hh)
+    w, st = caps[hh] / caps[hh].sum(), pool.meta.loc[hh, "station"]
+    T = sum(pool.temp[s].astype(np.float64) * w[st.index[st == s]].sum() for s in sorted(st.unique()))
+    d = pd.DataFrame({"T": T, "hp": pool.hp[hh].astype(np.float64).sum(axis=1),
+                      "own": pool.own[hh].astype(np.float64).sum(axis=1)}).resample("D").mean()
+    d = d[np.isfinite(d).all(axis=1)]
+    try:
+        b, m, th = pilot_fit(d["T"].to_numpy(), d["hp"].to_numpy(), d["own"].to_numpy(), float(caps[hh].sum()))
+    except (RuntimeError, ValueError):
+        b = m = th = np.nan
+    return {"b": b, "m": m, "T_h": th, "cap": float(caps[hh].sum()), "n_hh": len(hh)}
+
+
+def paperA_pilots(pool, train_hp, caps, min_station=10):
+    """(full pilot, {station: station pilot}) of one split seed; station pilots only with >= min_station HPs."""
+    st = pool.meta.loc[list(train_hp), "station"]
+    return pool_pilot(pool, train_hp, caps), {s: pool_pilot(pool, g.index, caps)
+                                              for s, g in st.groupby(st) if len(g) >= min_station}
+
+
+def paperA_estimate(s_h, m_h):
+    """P_hat = s_h / m_h and the validity mask; invalid (s_h <= 0 or NaN, m_h <= 0 or NaN) -> P_hat = 0."""
+    s_h, m_h = np.asarray(s_h, float), np.broadcast_to(np.asarray(m_h, float), np.shape(s_h))
+    valid = np.isfinite(s_h) & (s_h > 0) & np.isfinite(m_h) & (m_h > 0)
+    return np.where(valid, s_h / np.where(valid, m_h, 1.0), 0.0), valid
+
+
+def paperA_predictions(tab, full, by_station):
+    """Both estimators for every substation of `tab` -> {name: (P_hat, valid, fallback-to-full-pilot mask)}."""
+    m_st = tab["station"].map({s: p["m"] for s, p in by_station.items()})
+    fallback = m_st.isna().to_numpy()
+    return {"paperA_sh_mh": (*paperA_estimate(tab["s_h_net"], full["m"]), np.zeros(len(tab), bool)),
+            "paperA_sh_mh_station": (*paperA_estimate(tab["s_h_net"], m_st.fillna(full["m"])), fallback)}

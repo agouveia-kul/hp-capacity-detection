@@ -8,4 +8,4 @@ models: [FFNN]
 anchors: [none, size_peak]
 split: {seeds: [0, 1, 2, 3, 4]}
 cv: {hyperopt: {max_evals_by_model: {FFNN: 20}}}
-ffnn: {patience: 10}
+ffnn: {patience: 10, enabled: true}

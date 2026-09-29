@@ -5,6 +5,11 @@ figure (png + pdf). Every figure shows the distribution over split seeds (box = 
 summary band, points = seeds); the legacy column of the protocol-effect table is a single split (seed 42).
 
     python scripts/paperb/tables.py [--config configs/protocol_v1.yaml]
+
+03a: `--ablation <metrics.csv> --out <dir>` writes only the ablation table (feature set x {direct, residual} x model;
+WAPE / MAPE / R2 as median [5%-90%] over split seeds, test, cell `all`) to <dir>/table_ablation.{csv,md}.
+
+    python scripts/paperb/tables.py --ablation results/iter03_quick/metrics.csv --out results/iter03_quick
 """
 import argparse
 import re
@@ -307,9 +312,43 @@ def table4(A):
     savefig(fig, "fig_table4b_cell_heatmap_mape")
 
 
+# ---------------------------------------------------------------- 03a ablation table
+def ablation(metrics, band, target="HP_Peak"):
+    """Rows: reference estimators, then feature set x {direct, residual} x transform x anchor x model.
+    Columns: WAPE / MAPE / R2, median [5%-90%] over split seeds (cell `all`, test)."""
+    m = metrics[(metrics["cell"] == "all") & (metrics["target"] == target)].copy()
+    order = {"feature_set": ["-", "whdd", "netfit", "both"], "mode": ["-", "direct", "residual"]}
+    for c, o in order.items():
+        m[c] = pd.Categorical(m[c], o + sorted(set(m[c]) - set(o)), ordered=True)
+    def fmt(v, nd):
+        v = pd.Series(v).dropna()
+        return "n/a" if v.empty else f"{v.median():.{nd}f} [{v.quantile(band[0]):.{nd}f}–{v.quantile(band[1]):.{nd}f}]"
+
+    rows = []
+    for (fs, mode, tt, anchor, method), g in m.groupby(["feature_set", "mode", "target_transform", "anchor", "method"],
+                                                         observed=True, sort=True):
+        w = g.pivot_table(index="split_seed", columns="metric", values="value", aggfunc="first")
+        name = "zero residual = Paper A s_h/m_h" if method == "paperA_sh_mh" else method
+        rows.append({"feature set": fs, "mode": mode, "transform": tt, "anchor": anchor, "model": name, "n_seeds": len(w),
+                     **{f"{k} median [5%-90%]": fmt(w[c], nd) if c in w else "n/a"
+                        for k, c, nd in (("WAPE %", "wape", 1), ("MAPE %", "mape", 1), ("R2", "r2", 3))},
+                     "n_invalid (test, median)": w["n_invalid"].median() if "n_invalid" in w else ""})
+    return pd.DataFrame(rows)
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/protocol_v1.yaml")
-    A = Arms(load_config(ap.parse_args().config)["uncertainty"]["summary_band"])
-    for f in (table1, table2, table3, table4):
-        f(A)
+    ap.add_argument("--ablation", help="metrics.csv of a 03 run: write only the ablation table")
+    ap.add_argument("--out", help="output directory of --ablation")
+    a = ap.parse_args()
+    band = load_config(a.config)["uncertainty"]["summary_band"]
+    if a.ablation:
+        OUT = ROOT / a.out
+        save("table_ablation", ablation(pd.read_csv(ROOT / a.ablation), band),
+             "Ablation (HP_Peak, test): median [5%-90% band] across split seeds. Reference rows (feature set '-') are "
+             "the physics baselines and Paper A's s_h/m_h (= the zero-residual model).")
+    else:
+        A = Arms(band)
+        for f in (table1, table2, table3, table4):
+            f(A)
