@@ -1,0 +1,5 @@
+# Smoke run of protocol v1 (< 5 min once the pool cache exists): protocol_v1.yaml + its `quick:` overrides.
+base: configs/protocol_v1.yaml
+apply_quick: true
+exp_id: iter02a_smoke
+out_dir: results/iter02a_smoke

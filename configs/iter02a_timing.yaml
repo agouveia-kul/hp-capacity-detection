@@ -1,0 +1,10 @@
+# Runtime probe for the 02b budget (NOT a result; numbers are not interpreted): one split seed, the full
+# grid, every model and anchor arm, target HP_Peak, 3 hyperopt evals per search. Est. 15-25 min.
+base: configs/protocol_v1.yaml
+exp_id: iter02a_timing
+out_dir: results/iter02a_timing
+split: {test_frac: 0.25, stratify: station, seeds: [0]}
+cv: {scheme: household_grouped, k: 4, inner_substations_per_cell: 5, early_stopping: next_training_fold,
+     hyperopt: {max_evals: 3, seed: split_seed}, final_refit: median_best_iteration}
+targets: [HP_Peak]
+bootstrap: {unit: hp_household, B: 2000, seed: split_seed}

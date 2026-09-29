@@ -12,5 +12,7 @@ results/**/*.pkl
 results/**/*.parquet
 results/**/_pre_run_*
 !results/**/metrics.csv
-CLAUDE.md
-iterations/
+!results/**/dropped_cells.csv
+!results/**/physics_diagnostics.csv
+!results/**/timing.csv
+!results/**/hdh_hourly_ridge.csv

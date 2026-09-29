@@ -1,0 +1,7 @@
+# F14 smoke (< 5 min): first 60 train / 60 test substations of the notebook split. Numbers NOT meaningful.
+exp_id: iter02a_hdh_ridge_quick
+protocol: legacy (notebook substations_data.pkl)
+out_dir: results/iter02a_hdh_ridge_quick
+max_substations: 60
+seeds:
+  notebook_split: 42     # train_test_split(test_size=0.5, random_state=42), notebook cell 27
