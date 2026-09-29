@@ -137,12 +137,15 @@ def table2(A):
          "median; descriptive only, no model is selected from it). Residual models: Ridge, Lasso, ElasticNet, XGBoost.")
 
 
-def table3(A):
+def table3(A, exp="iter03b_main", name_="table3_comparison"):
     """Task 6: ML beats physics iff dWAPE < 0 in >= 80 % of the seeds AND median dWAPE <= -1 pp (per scope, vs that scope's best physics row)."""
     rows, summary = [], []
     for scope in BINS:
-        w = A.wide("wape", scope)
+        w = A.wide("wape", scope, exp)
         phys = [(m, "none", "-", "-", "-") for m in PHYS_CAND if (m, "none", "-", "-", "-") in w.columns]
+        if not phys:                                                    # e.g. pool B has no substation with p > 65 %
+            summary.append(f"- {scope}: no test substations")
+            continue
         best = min(phys, key=lambda c: w[c].median())
         hdh = (("hdh", "none", "-", "-", "-"))
         for c in w.columns:
@@ -157,9 +160,9 @@ def table3(A):
                        f"HDH median {w[hdh].median():.1f} %; ML configurations meeting the criterion: "
                        f"{sum(1 for r in rows if r['scope'] == scope and r['verdict'] == 'BEATS physics')} of {sum(1 for r in rows if r['scope'] == scope)}")
     df = pd.DataFrame(rows)
-    save("table3_comparison", df, "Task 6 (pre-registered): dWAPE = WAPE(ML) - WAPE(best physics row) per seed; ML beats physics iff dWAPE < 0 in >= 16 of 20 "
+    save(name_, df, f"[{exp}] Task 6 (pre-registered): dWAPE = WAPE(ML) - WAPE(best physics row) per seed; ML beats physics iff dWAPE < 0 in >= 16 of 20 "
          "seeds (>= 80 % of the seeds) and median dWAPE <= -1 pp. Best physics row chosen per scope by median WAPE among the Task 5 physics rows.")
-    (OUT / "comparison_summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
+    (OUT / f"{name_}_summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
     best_rows = df.assign(d=df["median dWAPE pp"].astype(float)).sort_values("d").groupby("scope").head(3)
     print("\n".join(summary), "\n", best_rows.to_string(index=False))
 
@@ -222,8 +225,8 @@ def fig_lc(A):
         return
     lc = A.LC[(A.LC["metric"] == "wape") & (A.LC["cell"] == "all") & (A.LC["target"] == "HP_Peak")]
     n_all = lc.groupby("n_train_hp").size().index.tolist()
-    fig, ax = plt.subplots(figsize=(7.5, 4.2))
-    cmap = plt.get_cmap("tab10")
+    fig, ax = plt.subplots(figsize=(10, 4.4))
+    cmap = plt.get_cmap("tab20")
     show = [m for m in ("paperA_sh_mh", "paperA_cal", "paperA_corr", "paperA_corr_cal", "slope_only", "slope_base")]
     ml = sorted({tuple(x) for x in lc.loc[lc["mode"].isin(["direct", "residual"]) & ~lc["method"].str.startswith("anchor_only"), SPEC].values})
     lines = [((m, "none", "-", "-", "-"), "--") for m in show] + [(s, "-") for s in ml]
@@ -232,11 +235,12 @@ def fig_lc(A):
         if g.ngroups == 0:
             continue
         x = sorted(g.groups)
-        ax.plot(x, g.median().loc[x], ls, marker="o", ms=3, color=cmap(i % 10), label=name(s))
-        ax.fill_between(x, g.quantile(A.band[0]).loc[x], g.quantile(A.band[1]).loc[x], color=cmap(i % 10), alpha=0.10)
-    ax.set(xlabel="train HP households (n_train_hp; last point = all)", ylabel="WAPE (%), test",
-           title="Learning curve, B*, HP_Peak: median and 5%-90% band over seeds x draws")
-    ax.legend(fontsize=6, ncol=2)
+        ax.plot(x, g.median().loc[x], ls, marker="o", ms=3, color=cmap(i), label=name(s))
+        if s[0] != "paperA_sh_mh":                                     # its band (up to ~ 95 %) would squash the axis
+            ax.fill_between(x, g.quantile(A.band[0]).loc[x], g.quantile(A.band[1]).loc[x], color=cmap(i), alpha=0.06)
+    ax.set(xlabel="train HP households (n_train_hp; last point = all)", ylabel="WAPE (%), test", ylim=(10, 55),
+           title="Learning curve, B*, HP_Peak: median and 5%-90% band over seeds x draws (no band for paperA_sh_mh)")
+    ax.legend(fontsize=7, loc="center left", bbox_to_anchor=(1.01, 0.5))
     ax.grid(lw=0.4, alpha=0.5)
     savefig(fig, "fig_learning_curve")
 
@@ -251,6 +255,8 @@ if __name__ == "__main__":
     sp = table1(A)
     table2(A)
     table3(A)
+    if "sens_b" in A.arm:
+        table3(A, "iter03b_sens_b", "table3_comparison_sens_b")     # 10 seeds: the criterion is applied as >= 80 % of the seeds (8 of 10)
     table4(A)
     table5_and_fig(A)
     fig_bins(A, sp)

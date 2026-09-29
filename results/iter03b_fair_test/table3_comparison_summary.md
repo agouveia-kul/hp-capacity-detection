@@ -1,0 +1,5 @@
+- all: best physics row = physics: slope_base (median WAPE 21.1 %); HDH median 22.9 %; ML configurations meeting the criterion: 4 of 166
+- pbin<=15: best physics row = physics: paperA_cal (median WAPE 26.8 %); HDH median 29.0 %; ML configurations meeting the criterion: 0 of 166
+- pbin15-35: best physics row = physics: calibrated_delta (median WAPE 15.0 %); HDH median 16.3 %; ML configurations meeting the criterion: 0 of 166
+- pbin35-65: best physics row = physics: calibrated_delta (median WAPE 14.8 %); HDH median 15.2 %; ML configurations meeting the criterion: 0 of 166
+- pbin>65: best physics row = physics: slope_base (median WAPE 14.3 %); HDH median 17.0 %; ML configurations meeting the criterion: 7 of 166

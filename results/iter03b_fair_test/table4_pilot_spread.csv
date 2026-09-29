@@ -1,0 +1,7 @@
+quantity,median [5%-90%]
+full pilot m_h (1/degC),0.01847 [0.01739–0.01935]
+cross-fit fold m_h / full m_h: min over folds,0.976 [0.946–0.988]
+cross-fit fold m_h / full m_h: max over folds,1.030 [1.017–1.050]
+"s0, fill households only (kW/K per dwelling)",0.00549 [0.00510–0.00573]
+"s0, fill + own non-HP load of train HP households",0.00627 [0.00592–0.00660]
+s0(all) / s0(fill) - 1,0.154 [0.092–0.175]
