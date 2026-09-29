@@ -1,0 +1,54 @@
+# Protocol v1 -- PROPOSAL (iteration 01). Not implemented; iteration 02 implements it after Alex approves.
+# Numbers in comments come from results/iter01_pool_audit/{pool_inventory,design_envelope,ml_audit_checks}.md.
+protocol: v1-proposal
+arms:
+  main_15min:
+    option: "B*"                       # HEAPO all stations + Kaiser paired + Kaiser SFH HP meters; 64 train / 22 test HP hh (seed 42)
+    window: cal2023                    # the only year where HEAPO 15-min HP and Kaiser fill are both >= 90 % covered
+    resolution: 15min
+    coverage_min: 0.90
+    hp_members:
+      - {source: heapo_15min, requirement: "HP submeter + Other + Total", stations: all}   # 47 households
+      - {source: kaiser, requirement: "dwelling + paired HP meter"}                          # 24
+      - {source: kaiser, requirement: "HP meter in a single-family object, no dwelling meter",
+         own_non_hp_load: "one Kaiser clean dwelling drawn from the same split, used once"}   # 15 -- decision for Alex
+    fill: {source: kaiser, requirement: "Apartment / SFH dwelling, no TCL flag, not paired", cross_station: true}  # 1306
+    station_alias: {8jB: KLO}          # bit-identical temperature (max |diff| 0.0 C over 36504 h)
+    targets_in: [HP_Peak, HP_CoincPeak, HP_Count, s_h, r, P_design]
+    targets_out: {HP_Nameplate_el: "1 nameplate household in the pool"}
+  daily:
+    option: D
+    windows: [cal2023, "2023/24"]
+    resolution: daily
+    hp_members_submetered: "HEAPO daily HP (daily file or 15-min aggregated) + Kaiser paired"       # 71
+    hp_members_count_only: "HEAPO total-only daily + Kaiser dwellings with 1_hp inside the meter"   # +1028 -> 1099
+    fill: {source: kaiser, requirement: clean dwelling, cross_station: true}
+    targets_in: {HP_Count: all 1099, s_h: submetered 71, r: submetered 71, P_design: submetered 71}
+    targets_out: {HP_Peak: needs 15-min, HP_CoincPeak: needs 15-min,
+                  HP_Nameplate_el: "37 nameplate households, max 14 in one station-window -> household-level descriptive check only"}
+split:
+  unit: household
+  test_frac: 0.25
+  stratify: station                    # HP households; fill split globally
+  n_split_seeds: 20                    # seeds 0..19; headline = mean +- sd over seeds (CLAUDE.md s.4 needs >= 10)
+grid:
+  size: [10, 20, 40, 80, 120]
+  penetration: [0.05, 0.1, 0.2, 0.3, 0.5, 1.0]
+  n_hp: "round(p * size), >= 1"
+  keep_cell_if: "n_hp <= max_overlap * H(station, split)"   # dropped cells are listed, never silently
+  max_overlap: 0.75
+  substations_per_cell: {train: 10, test: 5}
+  min_station_pool: 3
+cv:
+  scheme: household-grouped         # K household-disjoint sub-pools of the TRAIN pool, substations rebuilt inside each fold
+  k: 4
+  hyperopt: {max_evals: 50, seed_from: split_seed, early_stopping: "inner 80/20 household split of the training fold, not the scored fold"}
+bootstrap:
+  unit: HP household                 # multiway product weights: substation weight = prod of its HP members' bootstrap counts
+  n_boot: 2000
+  report: [within-split household-cluster CI, between-split sd over 20 seeds]
+baselines: [anchor-only (Scale_peak, Scale_size), hockey slope-only, slope+base, calibrated delta, HDH]
+runtime_estimate:
+  main_15min: "~9-10 min per split seed -> ~3-3.5 h for 20 seeds (~1.6 h for 10)"
+  daily: "~2 min per split seed -> ~40 min"
+  quick: "2 seeds, sizes [10, 40], p [0.1, 0.3], 10 hyperopt evals -> < 5 min"

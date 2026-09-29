@@ -1,0 +1,9 @@
+# Smoke run (< 5 min): scans only the first files of each dataset. Counts are NOT meaningful.
+exp_id: iter01_pool_audit_quick
+protocol: audit (read-only)
+out_dir: results/iter01_pool_audit_quick
+cache_dir: data/_paperb/iter01_quick
+scan_limit: 25            # files per HEAPO / Kaiser folder
+seeds:
+  split: 42               # household split for the design envelope
+  n_split_seeds: 3
