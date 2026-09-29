@@ -1,0 +1,99 @@
+source,requirement,station,window,n_households
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2021/22,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,2022/23,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2021,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2022,1
+HEAPO 15-min,H15(a) HP submeter + other,Hg,cal2023,1
+HEAPO 15-min,H15(b) total,8jB,2020/21,2
+HEAPO 15-min,H15(b) total,8jB,2021/22,3
+HEAPO 15-min,H15(b) total,8jB,2022/23,9
+HEAPO 15-min,H15(b) total,8jB,cal2020,1
+HEAPO 15-min,H15(b) total,8jB,cal2021,2
+HEAPO 15-min,H15(b) total,8jB,cal2022,4
+HEAPO 15-min,H15(b) total,8jB,cal2023,9
+HEAPO 15-min,H15(b) total,HbsbG,2022/23,1
+HEAPO 15-min,H15(b) total,HbsbG,cal2023,1
+HEAPO 15-min,H15(b) total,Hg,2021/22,2
+HEAPO 15-min,H15(b) total,Hg,2022/23,2
+HEAPO 15-min,H15(b) total,Hg,cal2021,1
+HEAPO 15-min,H15(b) total,Hg,cal2022,2
+HEAPO 15-min,H15(b) total,Hg,cal2023,2
+HEAPO 15-min,H15(b) total,ceOxS,2022/23,3
+HEAPO 15-min,H15(b) total,ceOxS,cal2023,3
+HEAPO 15-min,H15(b) total,wDD,cal2023,1
+HEAPO 15-min,H15(b) total,z6I,2020/21,1
+HEAPO 15-min,H15(b) total,z6I,2022/23,2
+HEAPO 15-min,H15(b) total,z6I,cal2021,1
+HEAPO 15-min,H15(b) total,z6I,cal2023,1
+HEAPO daily,Hd(b) total daily,8jB,2019/20,2
+HEAPO daily,Hd(b) total daily,8jB,2020/21,1
+HEAPO daily,Hd(b) total daily,8jB,2021/22,4
+HEAPO daily,Hd(b) total daily,8jB,2022/23,6
+HEAPO daily,Hd(b) total daily,8jB,2023/24,6
+HEAPO daily,Hd(b) total daily,8jB,cal2019,2
+HEAPO daily,Hd(b) total daily,8jB,cal2020,2
+HEAPO daily,Hd(b) total daily,8jB,cal2021,3
+HEAPO daily,Hd(b) total daily,8jB,cal2022,5
+HEAPO daily,Hd(b) total daily,8jB,cal2023,6
+HEAPO daily,Hd(b) total daily,HbsbG,2022/23,1
+HEAPO daily,Hd(b) total daily,HbsbG,2023/24,1
+HEAPO daily,Hd(b) total daily,HbsbG,cal2023,1
+HEAPO daily,Hd(b) total daily,Hg,2021/22,4
+HEAPO daily,Hd(b) total daily,Hg,2022/23,4
+HEAPO daily,Hd(b) total daily,Hg,2023/24,4
+HEAPO daily,Hd(b) total daily,Hg,cal2022,4
+HEAPO daily,Hd(b) total daily,Hg,cal2023,4
+HEAPO daily,Hd(b) total daily,ceOxS,2022/23,3
+HEAPO daily,Hd(b) total daily,ceOxS,2023/24,3
+HEAPO daily,Hd(b) total daily,ceOxS,cal2023,3
+HEAPO daily,Hd(b) total daily,wDD,2019/20,1
+HEAPO daily,Hd(b) total daily,wDD,cal2019,1
+HEAPO daily,Hd(b) total daily,wDD,cal2020,1
+HEAPO daily,Hd(b) total daily,z6I,2022/23,3
+HEAPO daily,Hd(b) total daily,z6I,2023/24,2
+HEAPO daily,Hd(b) total daily,z6I,cal2022,1
+HEAPO daily,Hd(b) total daily,z6I,cal2023,2
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2020/21,2
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2021/22,3
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,2022/23,9
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2020,1
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2021,2
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2022,4
+HEAPO 15-min,"H15(b') total, no HP submeter",8jB,cal2023,9
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,2022/23,1
+HEAPO 15-min,"H15(b') total, no HP submeter",HbsbG,cal2023,1
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2021/22,1
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,2022/23,1
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2022,1
+HEAPO 15-min,"H15(b') total, no HP submeter",Hg,cal2023,1
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,2022/23,3
+HEAPO 15-min,"H15(b') total, no HP submeter",ceOxS,cal2023,3
+HEAPO 15-min,"H15(b') total, no HP submeter",wDD,cal2023,1
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,2020/21,1
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,2022/23,2
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2021,1
+HEAPO 15-min,"H15(b') total, no HP submeter",z6I,cal2023,1
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,2023/24,1
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,cal2023,1
+Kaiser,"K(a') HP meter, no dwelling meter",KLO,cal2024,1
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,2023/24,5
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,cal2023,5
+Kaiser,K(a'') dwelling with 1_hp inside its meter,KLO,cal2024,5
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,2023/24,17
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,cal2023,17
+Kaiser,K(b) clean dwelling (no TCL flag),KLO,cal2024,14
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,2023/24,2
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,cal2023,2
+Kaiser,K(c) dwelling flag 1_hp-add,KLO,cal2024,2
+Kaiser,K(c) dwelling flag 1_ewh,KLO,2023/24,6
+Kaiser,K(c) dwelling flag 1_ewh,KLO,cal2023,6
+Kaiser,K(c) dwelling flag 1_ewh,KLO,cal2024,6
+Kaiser,K(d) any meter 2_hp_control,KLO,2023/24,1
+Kaiser,K(d) any meter 2_hp_control,KLO,cal2023,1
+Kaiser,K(d) any meter 2_hp_control,KLO,cal2024,1
+Kaiser,K(d) any meter 2_wh_control,KLO,2023/24,1
+Kaiser,K(d) any meter 2_wh_control,KLO,cal2023,1
+Kaiser,K(d) any meter 2_wh_control,KLO,cal2024,1
+WPuQ,W HP + household,WPUQ,2019/20,30
+WPuQ,W HP + household,WPUQ,cal2019,32
+WPuQ,W HP + household,WPUQ,cal2020,27
