@@ -12,3 +12,5 @@ results/**/*.pkl
 results/**/*.parquet
 results/**/_pre_run_*
 !results/**/metrics.csv
+CLAUDE.md
+iterations/
