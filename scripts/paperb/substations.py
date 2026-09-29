@@ -9,12 +9,14 @@ than min_station_pool HP households) raises InfeasibleCellError, or is listed in
 `grid.on_infeasible: drop`. Nothing is truncated: every stored `size` is the true membership size.
 
 Only memberships are stored; `evaluate_members` builds each aggregate on the fly and returns targets,
-anchors, physics features and (optionally) the legacy windowed-HDD features.
+anchors, physics features and (optionally) the feature columns of `cfg['feature_sets']`: the legacy
+windowed-HDD features (`whdd`) and/or the net-load fit features (`netfit`, 03a); `both` computes both.
 """
 import numpy as np
 import pandas as pd
 
 from hp_capacity import extract_windowed_hdd_features_from_series
+from paperb.features_netfit import netfit_features
 from paperb.physics import daily_means, fit_daily, net_features
 
 SPLIT_CODE = {"train": 1, "test": 2, "inner": 3}
@@ -99,6 +101,7 @@ def evaluate_members(pool, members, cfg, with_features=True):
     fill_pos = {h: i for i, h in enumerate(pool.fill.columns)}
     peak = pool.meta["hp_peak"]
     t_design = cfg["target_defs"]["T_design_C"]
+    sets = set(cfg.get("feature_sets", ["whdd"]))
     rows, feats = {}, {}
     for sid, m in members.iterrows():
         ih, jf = [hp_pos[h] for h in m["hp_members"]], [fill_pos[h] for h in m["fill_members"]]
@@ -115,7 +118,11 @@ def evaluate_members(pool, members, cfg, with_features=True):
                      "T_h_hp": f_hp["T_h"], "hinge_inside_hp": f_hp["hinge_inside"], "P_base_nonhp": f_non["P_base"],
                      **net_features(T, net)}
         if with_features:
-            feats[sid] = extract_windowed_hdd_features_from_series(net, T, T_base=cfg["features"]["T_base"],
-                                                                   **cfg["features"]["kwargs"])
+            feats[sid] = {}
+            if sets & {"whdd", "both"}:
+                feats[sid].update(extract_windowed_hdd_features_from_series(net, T, T_base=cfg["features"]["T_base"],
+                                                                            **cfg["features"]["kwargs"]))
+            if sets & {"netfit", "both"}:
+                feats[sid].update(netfit_features(T, net))
     tab = members.drop(columns=["hp_members", "fill_members"]).join(pd.DataFrame.from_dict(rows, orient="index"))
     return tab, (pd.DataFrame.from_dict(feats, orient="index").reindex(tab.index) if with_features else None)

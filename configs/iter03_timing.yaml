@@ -1,0 +1,24 @@
+# 03a timing probe for the 03b budget (not interpreted): 1 seed, full B* grid, 50 evals, one worker with a 4-worker
+# share of the CPU (7 of 28 cores). Times the fits that 02b did not: Lasso, Linear, XGBoost / XGBoost_mono on netfit
+# under log, the residual Lasso / shallow XGBoost, Paper A's estimator (with the capacity-definition check) and one
+# learning-curve draw (n = 32). Feature evaluation is netfit only (the whdd cost is known from 02b).
+base: configs/protocol_v1.yaml
+exp_id: iter03_timing
+out_dir: results/iter03_timing
+pred_figures: false
+split: {seeds: [0]}
+parallel: {workers: 1, cores: 7}
+targets: [HP_Peak]
+feature_sets: [netfit]
+anchors: [size_peak]
+models: [Linear, Lasso, XGBoost, XGBoost_mono]
+modes: [direct, residual]
+target_transforms: [log]
+residual_models: [Lasso, XGBoost]
+physics_baselines: [slope_only]
+anchor_only_baselines: {models: [], features: []}
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station], cap_def_check: true}
+learning_curve:
+  n: [32]
+  draws: 1
+  specs: ["paperA_sh_mh|none|-|-|-", "Lasso|size_peak|netfit|direct|log", "XGBoost|size_peak|netfit|residual|log"]
