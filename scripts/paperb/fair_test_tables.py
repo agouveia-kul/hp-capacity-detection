@@ -1,6 +1,6 @@
 """03b tables and figures (Task 7) from the arms in results/iter03b_fair_test/arm_{main,lc,sens_b}/.
 
-Writes to results/iter03b_fair_test/: metrics.csv + summary.csv (main + B sensitivity), summary_lc.csv, and
+Writes to results/iter03b_fair_test/: summary.csv (main + B sensitivity; the per-arm metrics.csv stay in arm_*/), summary_lc.csv, and
   table1_headline      physics rows, best anchor-only, best direct ML per feature set, best residual ML (WAPE overall and in
                        Paper A's penetration bins, MAPE, R2; median [5%-90%] over split seeds)
   table2_ablation      anchor x model rows, feature set x {direct, direct-log, residual} columns, WAPE; best cell per row marked *
@@ -55,7 +55,6 @@ class Arms:
                     or (OUT / f"arm_{a}" / "metrics_lc.csv").exists()}
         parts = [pd.read_csv(d / "metrics.csv") for a, d in self.arm.items() if (d / "metrics.csv").exists()]
         self.M = pd.concat(parts, ignore_index=True)
-        self.M.to_csv(OUT / "metrics.csv", index=False)
         summarise(self.M, band).to_csv(OUT / "summary.csv", index=False)
         if "lc" in self.arm and (self.arm["lc"] / "metrics_lc.csv").exists():
             self.LC = pd.read_csv(self.arm["lc"] / "metrics_lc.csv")

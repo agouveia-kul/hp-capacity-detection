@@ -290,9 +290,19 @@ def run_seed(cfg, seed):
             fold_l = grouped_inner_folds({"hp": sub, "fill": sp["train"]["fill"]}, pool.meta, cfg["cv"]["k"], seed)
             pa_l = pilot_estimates(t_l, sub, caps, mem, fold_l, cap_def=pac.get("cap_def", "hp_peak"), n=len(sub), lc_draw=draw)
             log(f"learning curve n={n} draw={draw}: {len(sub)} train HP households, {len(dr)} dropped cells")
+            spl_d, n_in = spl, mem.loc[mem["split"] == "inner", "fold"].nunique()
+            if n_in < cfg["cv"]["k"]:                                   # grouped inner CV needs substations in every fold
+                spl_d = [x for x in spl if x[0] in PHYSICS or x[0].startswith("paperA_")]
+                msg = f"inner CV infeasible: substations in {n_in} of {cfg['cv']['k']} folds; ML and anchor-only specs skipped"
+                lc_dropped.append({"split_seed": seed, "split": "inner", "n": n, "lc_draw": draw, "reason": msg})
+                log(f"learning curve n={n} draw={draw}: {msg}")
             for target in cfg["targets"]:
-                score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl), mem,
-                      n_train_hp=len(sub), lc_draw=draw)
+                try:
+                    score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl_d), mem,
+                          n_train_hp=len(sub), lc_draw=draw)
+                except Exception:                                       # listed, never silently dropped; the seed goes on
+                    lc_dropped.append({"split_seed": seed, "split": "all", "n": n, "lc_draw": draw, "reason": traceback.format_exc()[-400:]})
+                    log(f"learning curve n={n} draw={draw} {target} FAILED: {traceback.format_exc()}")
             for r in timing[k:]:
                 r.update(n_train_hp=len(sub), lc_draw=draw)
     log(f"done in {time.time() - t0:.1f}s")

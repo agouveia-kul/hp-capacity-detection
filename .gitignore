@@ -18,3 +18,7 @@ results/**/_pre_run_*
 !results/**/hdh_hourly_ridge.csv
 !results/**/summary.csv
 !results/**/table*.csv
+!results/**/metrics_lc.csv
+!results/**/summary_lc.csv
+!results/**/lc_selection.csv
+!results/**/pilots.csv
