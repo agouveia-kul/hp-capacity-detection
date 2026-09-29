@@ -35,3 +35,5 @@ Every gap sits only in rows produced by `hc.tune_xgb_cv` (unseeded `hyperopt.fmi
 1. **Official legacy baseline?** Recommended: use the **legacy CSVs in `data/`** (the 7 exact files are identical anyway), and quote the seed-42 rerun as a single-seed spread for the XGBoost rows. Alternative: switch to the seeded rerun, which is reproducible now.
 2. **Trust the recovered scripts?** None are reconstructed; all are byte-identical to git `309eaaf^` and `NILM/OLD/`, and 7/9 outputs match exactly. Recommended: **trust them**, and treat every XGBoost-tuned legacy number as single-seed.
 3. **Diff size (~660 lines):** accept it as infrastructure (recommended), or should I split it into 00a (runner + compare) and 00b (facts + tests)?
+
+**Resolved (Alex, 2026-09-29):** 1 — the official legacy baseline is the legacy CSVs in `data/`; the seed-42 rerun is quoted as a spread for the XGBoost rows. 2 — the recovered scripts are trusted, and XGBoost-tuned legacy numbers are treated as single-seed. 3 — the ~660-line diff is accepted as infrastructure.
