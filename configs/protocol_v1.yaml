@@ -1,0 +1,69 @@
+# Protocol v1 -- APPROVED (Alex, 2026-09-29; DECISIONS.md). Implemented in iteration 02a (scripts/paperb/).
+# Derived from configs/protocol_v1_proposal.yaml. The daily arm (D) is built in iteration 03, not here.
+exp_id: protocol_v1
+protocol: v1
+out_dir: results/protocol_v1
+cache_dir: data/_paperb                # pools/ and features/ live below this
+paper_a_repo: ../hp-sensitivity-paper  # read-only; only for the physics fixture (scripts/paperb/make_paperA_fixture.py)
+
+pool:
+  option: bstar                        # bstar (main arm, 86 HP households) | b (sensitivity arm, KLO only, 47)
+  year: 2023                           # calendar year, UTC
+  coverage_min: 0.90                   # share of valid raw 15-min samples BEFORE interpolation (F11 lesson)
+  station_alias: {8jB: KLO}            # bit-identical temperature (pool_inventory.md)
+  sfh_own_load_type: Single-family house  # B* SFH HP meters get one unused clean dwelling of this type as own non-HP load
+  seed: 0                              # draws the SFH own-load dwellings (fixed per pool, independent of split seeds)
+
+split:
+  test_frac: 0.25
+  stratify: station                    # HP households per station; fill split globally and independently
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+grid:
+  size: [10, 20, 40, 80, 120]
+  penetration: [0.05, 0.1, 0.2, 0.3, 0.5, 1.0]
+  n_hp: round                          # n_hp = max(1, round(p * size))
+  max_overlap: 0.75                    # design envelope: keep a (station, split) cell only if n_hp <= 0.75 * H
+  min_station_pool: 3                  # stations with fewer HP households in a split seed no substation
+  substations_per_cell: {train: 10, test: 5}
+  on_infeasible: drop                  # drop -> row in dropped_cells.csv; raise -> InfeasibleCellError
+
+cv:
+  scheme: household_grouped            # K household-disjoint sub-pools of TRAIN; inner substations built inside one fold
+  k: 4
+  inner_substations_per_cell: 5
+  early_stopping: next_training_fold   # early stopping on one household-disjoint TRAINING fold, never the scored fold
+  hyperopt: {max_evals: 50, seed: split_seed}
+  final_refit: median_best_iteration
+
+models: [XGBoost, Ridge, ElasticNet, SVR, FFNN, PLS]
+anchors: [none, size, size_peak]       # F1: every model runs in all three arms
+anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+
+features:                              # legacy windowed-HDD shape features (F3-F8 deferred to iteration 03)
+  T_base: 12.0
+  kwargs: {resolution: 15, mild_thresh: 10.0, cold_thresh: 25.0, weekday_only: true, include_shape: false,
+           include_minmax: true, include_quantiles: true, include_n_days: false, include_corr_features: false,
+           include_climate_context: false, normalize_by_peak: true}
+
+targets: [HP_Peak, HP_CoincPeak, HP_Count, s_h, r, P_design]
+target_defs:
+  robust_q: 0.999                      # HP_Peak: per-household 99.9th percentile of raw valid samples
+  T_design_C: -8.0                     # P_design: one CH design temperature for every station (assumption, REVIEW)
+
+bootstrap: {unit: hp_household, B: 2000, seed: split_seed}
+metrics: [rmse, mae, mape, r2]
+
+quick:                                 # overrides for configs/protocol_v1_quick.yaml (see that file)
+  split.seeds: [0]
+  grid.size: [10]                      # one small cell per penetration (all six p)
+  grid.substations_per_cell: {train: 6, test: 3}
+  cv.inner_substations_per_cell: 3
+  cv.hyperopt.max_evals: 5
+  models: [XGBoost]
+  anchors: [size_peak]
+  targets: [HP_Peak]
+  physics_baselines: [slope_only]
+  anchor_only_baselines.models: [Linear]
+  bootstrap.B: 200

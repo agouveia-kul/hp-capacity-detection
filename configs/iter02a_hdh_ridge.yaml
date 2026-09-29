@@ -1,0 +1,7 @@
+# F14: notebook cell 88 refitted on train (all 2000 notebook substations; ~15-25 min, loads a 3.9 GB pickle).
+exp_id: iter02a_hdh_ridge
+protocol: legacy (notebook substations_data.pkl)
+out_dir: results/iter02a_hdh_ridge
+max_substations: null
+seeds:
+  notebook_split: 42     # train_test_split(test_size=0.5, random_state=42), notebook cell 27

@@ -148,3 +148,9 @@ Then stop and wait for review. Do not start the next iteration.
 - **HP/fill overlap.** In **1786 of 2160** legacy substations a household is both an HP member and a fill member.
 - **Selection instability.** Feature selection is seed-dependent: k\* = 60 (legacy, unseeded) vs 40 (hyperopt seed 42), with the gain shrinking to +3.9 % RMSE.
 - **Leaky CV confirmed.** Within-train CV RMSE ≈ 20 kW vs 44–55 kW on test.
+- **Fixed in 02a** (tests in `tests/test_protocol_v1.py` pass; audit ids from `results/iter01_pool_audit/ml_audit.md`). These fixes live in the protocol v1 code (`scripts/paperb/`); legacy scripts and legacy numbers are unchanged.
+  - **F1** anchor-only baselines (linear, XGBoost on `[size]`, `[peak]`, `[size, peak]`) and the `none | size | size_peak` anchor arms.
+  - **F2** physics fit = Paper A's (daily means, all days, latent T_h in (8, 20) °C); the hinge lies inside the observed temperature range.
+  - **F12** substation generator v1: no truncation; infeasible cells raise or are listed in `dropped_cells.csv`.
+  - **F13** early stopping on a household-disjoint training fold, never on the scored fold (`tune_grouped_cv`).
+  - **F14** notebook cell 88 refitted on train (`scripts/legacy_fixes/hdh_hourly_ridge.py`); the cell is marked LEGACY.
