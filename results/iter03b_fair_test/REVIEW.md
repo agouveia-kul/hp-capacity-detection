@@ -1,7 +1,7 @@
 # Iteration 03b — Fair test of ML against the physics estimator: runs and results
 **Goal:** Run the fair test on `HP_Peak` (B\*, 20 seeds) with three added physics rows (non-TCL-corrected, bias-calibrated, cross-fitted) and apply the pre-registered Task 6 criterion.
 
-**Branch / commit:** iter/03b-fair-test-runs @ COMMIT (code 600fdf4; LC fix, tables and results on top). Branched from `main` after 03a.
+**Branch / commit:** iter/03b-fair-test-runs @ 698d422 (code 600fdf4; LC fix, tables and results on top). Branched from `main` after 03a.
 
 **Changed:** ≈ 180 logic lines (Tasks 1–4 + harness): `physics.py` +54, `run_benchmark.py` +73/−23, `train.py` +15 (`cv_wape`), `residual.py` +6, `features_netfit.py` +5. Listed separately: `fair_test_tables.py` 264, `select_lc_specs.py` 62, `tests/test_fair_test_03b.py` 154 (**56/56 tests pass**), 4 new configs (`iter03b_lc.yaml` generated) + `protocol_v1.yaml` +4, `.gitignore` +4, DECISIONS.md +4. *Generated:* `results/iter03b_fair_test/` (`arm_main/metrics.csv` 61 MB and `arm_lc/metrics_lc.csv` 33 MB are committed gzipped), `results/iter03b_quick/`, `data/_paperb/features/`. `data/` outside `_paperb/` and `models/` unmodified (mtime check).
 
