@@ -1,0 +1,4 @@
+                        variant      alpha  n_fit  n_test       rmse      mape       r2
+old: fit on test (cell 88, F14) 719.685673     60      60  91.332360 19.634764 0.852858
+              new: fit on train  51.794747     60      60 107.489181 24.070227 0.796195
+runtime 7s; notebook figure: RMSE 55.22 kW, MAPE 19.59 %, alpha 10.0

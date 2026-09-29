@@ -1,0 +1,9 @@
+[    0.7s] pool bstar_2023: {'fill': 1291, 'hp': 86} (load 0.7s)
+[    0.8s] seed 0: HP train/test 64/22, fill 968/323; substations {'inner': 96, 'train': 90, 'test': 30}; dropped cells 75
+[    0.8s] seed 0: features from cache bstar_s0_d9f6978bdbde_tab.parquet
+[    0.8s] seed 0: FLAG HP_CoincPeak > HP_Peak in 130 substations (robust 99.9 % peaks)
+[    3.1s]   HP_Peak XGBoost[size_peak]: cv_mse 54.74, best_iter 66, 5 evals, 2.2s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[    3.1s]   HP_Peak anchor_only_Linear[size]: cv_mse 93.44, best_iter None, 0 evals, 0.0s, params {}
+[    3.2s]   HP_Peak anchor_only_Linear[peak]: cv_mse 47.08, best_iter None, 0 evals, 0.0s, params {}
+[    3.2s]   HP_Peak anchor_only_Linear[size+peak]: cv_mse 47.08, best_iter None, 0 evals, 0.0s, params {}
+[    5.4s] done in 5.4s

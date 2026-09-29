@@ -1,0 +1,6 @@
+split_seed,method,seconds,n_substations,target,anchor,n_evals,n_inner,n_train
+0,evaluate_members,0.0,216.0,,,,,
+0,XGBoost,2.242985963821411,,HP_Peak,size_peak,5.0,96.0,90.0
+0,anchor_only_Linear,0.017769813537597656,,HP_Peak,size,0.0,96.0,90.0
+0,anchor_only_Linear,0.017509937286376953,,HP_Peak,peak,0.0,96.0,90.0
+0,anchor_only_Linear,0.01988983154296875,,HP_Peak,size+peak,0.0,96.0,90.0
