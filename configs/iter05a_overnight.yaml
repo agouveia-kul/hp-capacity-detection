@@ -1,0 +1,15 @@
+# 05a overnight queue (scripts/paperb/run_queue.py; schedule with scripts/schedule_overnight.ps1, run by Alex).
+# Arms in priority order: the timing probe (seed 0, 5 jobs) first, then D5 real and D5 swap (10 seeds x 5 families each).
+exp_id: iter05a_overnight
+out_dir: results/iter05a_pool/overnight
+workers: 6
+families:                                # 05a families (CLAUDE.md s.4, decision 7); 05b extends the lists
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Ridge, Lasso, ElasticNet]}
+  kernel: {models: [SVR], residual_models: []}
+  trees: {models: [XGBoost], residual_models: [XGBoost]}
+  neural: {models: [FFNN], residual_models: []}
+arms:
+  - {name: timing_probe, config: configs/iter05a_timing.yaml, seeds: [0], families: [physics, linear, kernel, trees, neural]}
+  - {name: d5_real, config: configs/iter05a_d5_real.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], families: [physics, linear, kernel, trees, neural]}
+  - {name: d5_swap, config: configs/iter05a_d5_swap.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], families: [physics, linear, kernel, trees, neural]}

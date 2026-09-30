@@ -179,7 +179,7 @@ def test_learning_curve_memberships():
     main, _ = build_substations(meta, sp, 0, cfg, grouped_inner_folds(sp["train"], meta, cfg["cv"]["k"], 0))
     test = main[main["split"] == "test"]
     seen = []
-    for n, draw, sub, mem, _ in lc_designs(cfg, meta, sp, 0, test):
+    for n, draw, _, sub, mem, _ in lc_designs(cfg, meta, sp, 0, test):
         assert set(sub) <= set(sp["train"]["hp"]) and len(sub) == (len(sp["train"]["hp"]) if n == "all" else n)
         tr = mem[mem["split"] != "test"]
         assert set().union(*tr["hp_members"]) <= set(sub)                       # train and inner use the subsample only

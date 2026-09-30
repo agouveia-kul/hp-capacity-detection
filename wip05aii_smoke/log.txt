@@ -1,0 +1,11 @@
+[    3.3s] pool gb_eoh_2122: {'fill': 3199, 'hp': 295}; 1 workers x 28 threads; seeds [0]
+[s0     5.8s] HP train/test 223/72, fill 2399/800; substations {'train': 270, 'inner': 165, 'test': 55}; dropped cells 357
+[s0    62.8s] evaluated 490 substations in 56.9s (0.116 s each)
+[s0   108.8s] Paper A pilot m_h 0.02483 (223 train HP households); station pilots {'G001': 0.0267, 'G002': 0.02142, 'G006': 0.02667, 'G009': 0.02077, 'G013': 0.02256}; s0 {'paperA_corr': 0.0133, 'paperA_corr_all': 0.0133}; cross-fit fold m_h [0.02527, 0.02458, 0.02451, 0.02493]
+[s0   110.7s]   HP_Peak Lasso/size/netfit/direct/none: cv_mse 10.01, cv_wape 25.2, best_iter None, 10 evals, 1.8s, params {'alpha': 0.0009061486859283034}
+[s0   124.3s]   HP_Peak XGBoost/size/netfit/direct/none: cv_mse 7.726, cv_wape 18.1, best_iter 66, 10 evals, 13.7s, params {'colsample_bytree': 0.9655021505022294, 'eta': 0.264841135562513, 'gamma': 1.0075398272595515, 'max_depth': 3.0, 'min_child_weight': 4.0, 'n_estimators': 380.0, 'reg_alpha': 0.3744678637601164, 'reg_lambda': 9.265366322180725, 'subsample': 0.7732001452367051}
+[s0   125.1s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.133, cv_wape 23.6, best_iter None, 10 evals, 0.8s, params {'alpha': 0.000627575846885798}
+[s0   125.2s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 41.23, cv_wape 54.2, best_iter None, 0 evals, 0.1s, params {}
+[s0   125.4s] done in 125.4s
+[  138.4s] seed 0 finished (348 metric rows)
+[  145.3s] done in 145.3s (1 of 1 seeds)
