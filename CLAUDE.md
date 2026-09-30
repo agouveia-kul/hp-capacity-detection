@@ -29,12 +29,13 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
 - **RQ3 — transfer.** Test CH → DE (FeederBW real feeders; WPuQ as a stress test) and a third domain (UKPN / RHPP / others). Compare raw-series vs physics-feature vs hybrid models, and fixed vs latent T_base.
 - **RQ4 — change detection.** Over a multi-year horizon with a given uptake probability, can capacity change be detected (minimum detectable change at a fixed false-alarm rate, detection delay) and quantified (relative, and registry-anchored absolute)?
 
-### Iteration plan (renumbered after the 02b review, 2026-09-29)
+### Iteration plan (renumbered in iteration 04, 2026-09-30)
 - 03a / 03b — fair test of ML against the physics estimator (code / runs);
-- 04 — other targets and the daily arm (RQ1);
-- 05 — transfer (RQ3);
-- 06–07 — change detection (RQ4);
-- 08+ — freeze and draft.
+- 04 — data inventory for larger pools and HP-profile simulation feasibility;
+- 05 — other targets and the daily arm (RQ1);
+- 06 — transfer (RQ3);
+- 07–08 — change detection (RQ4);
+- 09+ — freeze and draft.
 
 ## 2. Environment
 

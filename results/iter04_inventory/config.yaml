@@ -1,0 +1,14 @@
+# Iteration 04: data inventory, usability / envelopes and hplib check (read-only audit).
+exp_id: iter04_inventory
+protocol: audit (read-only)
+out_dir: results/iter04_inventory
+cache_dir: data/_paperb/iter04
+seeds:
+  split: 0                 # envelope split seeds 0..n-1 (protocol v1 uses 0..19)
+  n_split_seeds: 20
+hplib:
+  n_sites: 50              # conversion check: <= 50 EoH homes, one season
+  season: "2021/22"
+  seed: 0                  # draws the homes
+git_commit: fcb2740   # code commit (iter/04-data-inventory); first version c5a8a8a
+protocol_grid_from: configs/protocol_v1.yaml (grid block, unchanged)
