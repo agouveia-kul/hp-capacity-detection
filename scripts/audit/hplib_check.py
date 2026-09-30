@@ -1,6 +1,6 @@
 """Iteration 04, Task 4 -- hplib conversion-step check on EoH (feasibility, not a benchmark).
 
-For <= n_sites EoH air-source homes (hybrids and GSHP excluded) with a complete season of whole-system
+For <= n_sites EoH air-source homes (ASHP and HT-ASHP per HP_Installed; hybrids and GSHP excluded) with a complete season of whole-system
 electricity and heat output, predict the HP electricity from the MEASURED heat output with hplib's
 generic regulated air/water HP (group 1; group 4 on-off as sensitivity):
 
@@ -8,8 +8,9 @@ generic regulated air/water HP (group 1; group 4 on-off as sensitivity):
                                               else return + 5 K)
     if Q > P_th_max(T_ext, T_flow):  P_el_hat = P_el_max + (Q - P_th_max)   (resistance top-up, COP 1)
 
-Rated power is not on disk (HP_Size_kW is in the USmart table): the generic HP is sized so that its
-thermal output at A2/W35 equals the home's 99.5th percentile of 30-min heat output (assumption).
+Rated power: HP_Size_kW from the EoH property table, taken as the thermal output at A7/W35 (EN 14511 nominal
+point; assumption, the table does not state it). Sensitivity: the earlier proxy, 99.5th percentile of the home's
+30-min heat output at A2/W35. The COP map does not depend on the rated power; only the capacity limit does.
 Measured HP electricity = whole system - immersion - back-up heater - circulation pump (EoH definition).
 Scores: WAPE and bias (sum(P_hat - P) / sum P) at 30 min and daily, per outdoor-temperature bin and
 regime (DHW, back-up active, standby = Q ~ 0), and the seasonal-performance-factor bias per home.
@@ -54,10 +55,12 @@ def load(props, season):
     return x.dropna(subset=["T_out", "Q_hp"])
 
 
-def predict(g, group):
+def predict(g, group, sizing):
     q = g["Q_hp"].to_numpy() * 1000
-    p_rated = max(np.quantile(q, 0.995), 1000.0)
-    par = hpl.get_parameters("Generic", group_id=group, t_in=2, t_out=35, p_th=p_rated)
+    if sizing == "nameplate":
+        par = hpl.get_parameters("Generic", group_id=group, t_in=7, t_out=35, p_th=float(g["HP_Size_kW"].iloc[0]) * 1000)
+    else:
+        par = hpl.get_parameters("Generic", group_id=group, t_in=2, t_out=35, p_th=max(np.quantile(q, 0.995), 1000.0))
     r = hpl.HeatPump(par).simulate(t_in_primary=g["T_ext"].to_numpy(), t_in_secondary=g["T_out"].to_numpy() - 5,
                                    t_amb=g["T_ext"].to_numpy())
     cop, pth, pel = (np.asarray(r[k], float) for k in ("COP", "P_th", "P_el"))
@@ -82,16 +85,17 @@ def main():
     out = ROOT / cfg["out_dir"]
     (out / "figures").mkdir(parents=True, exist_ok=True)
     U = pd.read_parquet(CACHE / "eoh_units.parquet")
-    cand = U[U["seasons_ws_q_str"].str.contains(h["season"], regex=False) & (U["type"] == "ASHP/HT-ASHP (inferred)")]
+    cand = U[U["seasons_ws_q_str"].str.contains(h["season"], regex=False) & U["type"].isin(["ASHP", "HT-ASHP"])]
     props = sorted(np.random.default_rng(h["seed"]).choice(sorted(cand["property"]), h["n_sites"], replace=False))
     X = load(set(props), h["season"])
+    X = X.merge(U.set_index("property")[["type", "HP_Size_kW"]], left_on="property", right_index=True)
     res, spf = [], []
-    for group in (1, 4):
+    for group, sizing in ((1, "nameplate"), (4, "nameplate"), (1, "proxy")):
         parts = []
         for pid, g in X.groupby("property", observed=True):
-            p_hat, over = predict(g, group)
+            p_hat, over = predict(g, group, sizing)
             parts.append(g.assign(P_hat=p_hat, over=over))
-            spf.append({"group": group, "property": pid, "SPF_meas": g["Q_hp"].sum() / g["P"].sum(),
+            spf.append({"group": group, "sizing": sizing, "property": pid, "SPF_meas": g["Q_hp"].sum() / g["P"].sum(),
                         "SPF_pred": g["Q_hp"].sum() / p_hat.sum()})
         Y = pd.concat(parts)
         Y["T bin"] = pd.cut(Y["T_ext"], TBINS)
@@ -100,23 +104,25 @@ def main():
                                                                               T_ext=("T_ext", "mean"))
         dd = dd[dd["n"] >= 44]
         dd["T bin"] = pd.cut(dd["T_ext"], TBINS)
-        res.append((group, Y, dd))
+        res.append((group, sizing, Y, dd))
     S = pd.DataFrame(spf)
     S["bias %"] = 100 * (S["SPF_pred"] / S["SPF_meas"] - 1)
     txt = [f"Homes: {X['property'].nunique()} EoH ASHP homes (seed {h['seed']}), season {h['season']}; {len(X):,} valid 30-min bins. "
-           f"Source: `scripts/audit/hplib_check.py`. Rated power = 99.5th pct of 30-min heat output at A2/W35 (assumption)."]
-    for group, Y, dd in res:
-        name = {1: "group 1 (regulated air/water)", 4: "group 4 (on-off air/water)"}[group]
-        s = S[S["group"] == group]
+           f"Types {X.drop_duplicates('property')['type'].value_counts().to_dict()}. Source: `scripts/audit/hplib_check.py`. "
+           "Rated power = HP_Size_kW at A7/W35 (assumption); 'proxy' = 99.5th pct of 30-min heat output at A2/W35."]
+    for group, sizing, Y, dd in res:
+        name = {1: "group 1 (regulated air/water)", 4: "group 4 (on-off air/water)"}[group] + f", sizing: {sizing}"
+        s = S[(S["group"] == group) & (S["sizing"] == sizing)]
         txt += [f"### hplib generic {name}",
                 "Overall (30 min / daily):\n\n" + md_table(pd.concat([score(Y).assign(level="30 min"), score(dd).assign(level="daily")])),
                 "By outdoor temperature (daily):\n\n" + md_table(score(dd, "T bin").reset_index()),
                 "By outdoor temperature (30 min):\n\n" + md_table(score(Y, "T bin").reset_index()),
                 "By regime (30 min):\n\n" + md_table(score(Y, "regime").reset_index()),
+                "By HP type (daily):\n\n" + md_table(score(dd.join(Y.drop_duplicates("property").set_index("property")["type"]), "type").reset_index()),
                 f"Seasonal performance factor (SPF_H2-like, per home): measured median {s['SPF_meas'].median():.2f}, predicted median "
                 f"{s['SPF_pred'].median():.2f}; SPF bias median {s['bias %'].median():+.1f} % (10-90 %: {s['bias %'].quantile(.1):+.1f} to "
                 f"{s['bias %'].quantile(.9):+.1f} %). Bins where Q exceeded hplib's full-load output: {100 * Y['over'].mean():.1f} %."]
-    Y, dd = res[0][1], res[0][2]
+    Y, dd = res[0][2], res[0][3]
     fig, ax = plt.subplots(1, 2, figsize=(10, 4))
     ax[0].scatter(dd["P"] * 0.5, dd["P_hat"] * 0.5, s=3, alpha=.3)
     m = float(dd["P"].max() * 0.5)
@@ -131,9 +137,9 @@ def main():
         fig.savefig(out / "figures" / f"hplib_conversion.{ext}", dpi=150)
     S.to_csv(out / "hplib_spf.csv", index=False)
     rows = [{"exp_id": cfg["exp_id"], "split_seed": h["seed"], "dataset": f"EoH {h['season']}", "target": "P_el_hp",
-             "method": f"hplib_generic_g{g}", "anchor": lvl, "metric": k, "value": float(v), "n_substations": 0,
+             "method": f"hplib_generic_g{g}_{sz}", "anchor": lvl, "metric": k, "value": float(v), "n_substations": 0,
              "n_hp_households": X["property"].nunique()}
-            for g, Y, dd in res for lvl, d in (("30min", Y), ("daily", dd))
+            for g, sz, Y, dd in res for lvl, d in (("30min", Y), ("daily", dd))
             for k, v in score(d).iloc[0].items() if k in ("WAPE %", "bias %")]
     pd.DataFrame(rows).to_csv(out / "metrics.csv", index=False)
     (out / "hplib_check.md").write_text("\n\n".join(txt) + "\n", encoding="utf-8")

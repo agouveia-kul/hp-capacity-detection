@@ -121,9 +121,14 @@ def pools(cfg):
     for season in ("2020/21", "2021/22", "2022/23"):
         ok = E[E["seasons_ws_str"].str.contains(season, regex=False) & E["peak15_ws_kW"].notna() & (E["type"] != "hybrid")]
         st = eoh_stations(set(ok["property"]), season)
-        hp = pd.DataFrame({"role": "hp", "station": st.reindex(ok["property"]).fillna("G_none").to_numpy()}, index="E:" + ok["property"])
+        hp = pd.DataFrame({"role": "hp", "station": st.reindex(ok["property"]).fillna("G_none").to_numpy(),
+                           "area": ok["area"].to_numpy()}, index="E:" + ok["property"])
         fill = pd.DataFrame({"role": "fill", "station": "any"}, index=[f"L:{i}" for i in range(n_lcl["2012/13"])])
-        out[f"GB-EoH {season}"] = (pd.concat([hp, fill]), f"LCL {n_lcl['2012/13']} households >= 90 % in 2012/13 (8-10 years earlier, London)")
+        out[f"GB-EoH {season}"] = (pd.concat([hp, fill]), f"LCL {n_lcl['2012/13']} households >= 90 % in 2012/13 (8-10 years earlier, London). "
+                                   f"HP types (HP_Installed) {ok['type'].value_counts().to_dict()}; HP_Size_kW for {int(ok['HP_Size_kW'].notna().sum())}, "
+                                   f"median {ok['HP_Size_kW'].median():.1f} kW; oversizing HP_Size/MCS_SHLoad median {ok['oversize'].median():.2f} "
+                                   f"[IQR {ok['oversize'].quantile(.25):.2f}-{ok['oversize'].quantile(.75):.2f}]; robust 15-min peak / HP_Size median "
+                                   f"{(ok['peak15_ws_kW'] / ok['HP_Size_kW']).median():.2f}")
     R = pd.read_parquet(D / "rhpp_daily.parquet")
     R = R[(R["day"] >= "2013-11-01") & (R["day"] < "2014-03-01")].groupby("site").size()
     R = R[R >= 0.9 * 120]
@@ -168,6 +173,8 @@ def main():
                      **{f"{k} HP (used)": round(S[k][S[k] >= grid["min_station_pool"]].sum(), 1) if k in S else 0 for k in ("train", "test")},
                      "fill": int((meta["role"] == "fill").sum()),
                      **{f"test subs {k}": v for k, v in B.items()}, "test subs total": round(B.sum(), 1)})
+        if "area" in meta:                                                  # EoH: postcode areas behind each weather-station group
+            S = S.join(hpn.groupby("station")["area"].agg(lambda x: x.value_counts().head(3).to_dict()).rename("postcode areas (top 3)"))
         parts.append(f"### {name}\n\nFill: {fill_note}.\n\nHP households per station (mean over {len(seeds)} split seeds; stations with "
                      f"< {grid['min_station_pool']} HP in a split build no substation):\n\n{md_table(S.reset_index())}\n\n"
                      f"Test substations per Paper A penetration bin (mean per seed): {B.to_dict()}\n\n"

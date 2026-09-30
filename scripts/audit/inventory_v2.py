@@ -1,5 +1,6 @@
 """Iteration 04, Task 1 -- dataset inventory v2 (read-only; counts computed from the files).
 
+EoH is joined to the USmart Property/Design/Installation table (data/_paperb/raw/eoh/eoh_property_design_installation.csv).
 Writes results/iter04_inventory/inventory.{md,csv} and per-unit tables for Task 2 in
 data/_paperb/iter04/ (eoh_units, rhpp_units, neea_units, fluvius_units parquet).
 Heavy scans (Fluvius, Pecan Street, NEEA per-home fits) are cached there.
@@ -32,6 +33,8 @@ CACHE = D / "_paperb" / "iter04"
 SEASONS = {f"{y}/{(y + 1) % 100:02d}": (pd.Timestamp(f"{y}-11-01"), pd.Timestamp(f"{y + 1}-04-01")) for y in range(2009, 2025)}
 NEEA_HEAT = ("Ductless Heatpump", "Ducted Heatpump", "Electric Baseboard Heaters", "Electric Furnace", "Other Zonal Heat")
 NEEA_COOL = ("Central AC", "Room AC")
+PROP_COLS = ["HP_Installed", "HP_Installed_Detail", "HP_Size_kW", "HP_Brand", "MCS_SHLoad", "MCS_Flow_Temp", "Postcode_1",
+             "Delivery_Contractor", "House_Form", "House_Age", "Total_Floor_Area", "Tenure", "Elec_currentuse"]
 
 
 def seasons_ok(t, step, cov=0.9):
@@ -67,8 +70,13 @@ def eoh():
     U = S.merge(pd.DataFrame(units), on="property", how="left").merge(
         summ[["Property_ID", "Included_SPF_analysis"]].rename(columns={"Property_ID": "property"}), on="property", how="left")
     ch = U["channels"].fillna("")
-    U["type"] = np.select([ch == "EMPTY FILE", ch.str.contains("T_brine"), ch.str.contains("Q_boiler")], ["empty", "GSHP", "hybrid"],
-                          "ASHP/HT-ASHP (inferred)")
+    U["type_channels"] = np.select([ch == "EMPTY FILE", ch.str.contains("T_brine"), ch.str.contains("Q_boiler")],
+                                   ["empty", "GSHP", "hybrid"], "ASHP/HT-ASHP")
+    P = pd.read_csv(D / "_paperb/raw/eoh/eoh_property_design_installation.csv", low_memory=False)     # USmart table (user-supplied)
+    U = U.merge(P[["Property_ID"] + PROP_COLS].rename(columns={"Property_ID": "property"}), on="property", how="left")
+    U["type"] = U["HP_Installed"].map({"ASHP": "ASHP", "HT_ASHP": "HT-ASHP", "GSHP": "GSHP", "Hybrid": "hybrid"}).fillna(U["type_channels"])
+    U["area"] = U["Postcode_1"].str.extract(r"^([A-Z]+)", expand=False)
+    U["oversize"] = U["HP_Size_kW"] / U["MCS_SHLoad"].where(U["MCS_SHLoad"] > 0)
     for c in ("seasons_ws", "seasons_ws_q"):
         U["n_" + c] = U[c].apply(lambda x: len(x) if isinstance(x, (list, np.ndarray)) else 0)
         U[c + "_str"] = U[c].apply(lambda x: ";".join(x) if isinstance(x, (list, np.ndarray)) else "")
@@ -83,14 +91,23 @@ def eoh():
             "period": f"{U['start'].min():%Y-%m} .. {U['end'].max():%Y-%m}",
             "complete_seasons_per_unit": hist(U["n_seasons_ws"]), "units_per_season": per_season.to_dict(),
             "units_with_heat_meter_>=1_season": int((U["n_seasons_ws_q"] >= 1).sum()),
-            "weather": f"T_ext per home (local weather station), >=50% of 30-min bins in {int((U['T_ext_share'] >= .5).sum())} homes; no coordinates on disk",
-            "capacity_label": "robust peak (P_ws); HP_Size_kW and MCS_SHLoad exist only in the USmart Property/Design/Installation table (not on disk)",
-            "hp_type": " / ".join(f"{k}: {v}" for k, v in U["type"].value_counts().items()) + " (from channels; HP_Installed not on disk)",
+            "weather": f"T_ext per home (local weather station), >=50% of 30-min bins in {int((U['T_ext_share'] >= .5).sum())} homes; "
+                       "postcode district (Postcode_1) for station matching",
+            "capacity_label": f"HP_Size_kW (rated, property table) for {int(U['HP_Size_kW'].notna().sum())} homes, median "
+                              f"{U['HP_Size_kW'].median():.1f} kW; MCS_SHLoad (design heat load) for {int(U['MCS_SHLoad'].notna().sum())}; "
+                              f"oversizing HP_Size/MCS_SHLoad median {U['oversize'].median():.2f}; robust peak (P_ws)",
+            "hp_type": " / ".join(f"{k}: {v}" for k, v in U["type"].value_counts().items()) + " (HP_Installed); channel-inferred type agrees for "
+                       f"{int((U['type'].replace({'ASHP': 'ASHP/HT-ASHP', 'HT-ASHP': 'ASHP/HT-ASHP'}) == U['type_channels']).sum())} of {len(U)}",
             "backup_channels": f"immersion (P_ih) {ch.str.contains('P_ih').sum()}, back-up heater (P_buh) {ch.str.contains('P_buh').sum()}",
             "dhw_channels": f"DHW flow temperature {ch.str.contains('T_flow_dhw').sum()} (no separate DHW heat/electricity)",
-            "building_metadata": "none on disk (House_Form, House_Age, floor area, tenure are in the USmart table)",
-            "location": "none on disk (Postcode_1 in the USmart table)",
-            "licence": "Open Government Licence v2.0 (UKDA_Study_9050_Information.htm); cite DOI 10.5255/UKDA-SN-9050-2"}
+            "building_metadata": f"House_Form {int(U['House_Form'].notna().sum())}, House_Age {int(U['House_Age'].notna().sum())}, "
+                                 f"Total_Floor_Area {int(U['Total_Floor_Area'].notna().sum())}, Tenure {int(U['Tenure'].notna().sum())}; "
+                                 f"annual pre-install electricity (bills) {int(U['Elec_currentuse'].notna().sum())}",
+            "location": f"postcode district for {int(U['Postcode_1'].notna().sum())}; by delivery contractor "
+                        f"{U['Delivery_Contractor'].value_counts().to_dict()}; top areas {U['area'].value_counts().head(6).to_dict()}",
+            "licence": "performance data: Open Government Licence v2.0 (UKDA_Study_9050_Information.htm), DOI 10.5255/UKDA-SN-9050-2; "
+                       f"property table: USmart download supplied by Alex, licence not on disk ({len(P)} properties, "
+                       f"{int(P['HP_Installed'].notna().sum())} installed)"}
 
 
 def rhpp():
