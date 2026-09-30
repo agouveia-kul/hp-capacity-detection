@@ -18,3 +18,10 @@ results/**/_pre_run_*
 !results/**/hdh_hourly_ridge.csv
 !results/**/summary.csv
 !results/**/table*.csv
+!results/**/metrics_lc.csv
+!results/**/summary_lc.csv
+!results/**/lc_selection.csv
+!results/**/pilots.csv
+# 03b: the two big long-format files are committed gzipped (61 MB / 33 MB raw); gunzip them before running fair_test_tables.py
+/results/iter03b_fair_test/arm_main/metrics.csv
+/results/iter03b_fair_test/arm_lc/metrics_lc.csv

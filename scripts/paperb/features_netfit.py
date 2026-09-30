@@ -2,7 +2,8 @@
 
 Per substation, Paper A's net-load hockey stick (`physics.fit_daily`: daily means, latent T_h in (8, 20) degC)
 is fitted three times: `all` days, `wd` = weekdays that are not public holidays, and `we` = weekends plus
-public holidays. Holidays come from the `holidays` package (country CH, subdiv ZH) for every station.
+public holidays. Holidays come from the `holidays` package (country CH, subdiv ZH) for every station, plus Berchtoldstag (2 January),
+which the package does not carry for ZH (03b; `FEATURE_VERSION` keys the feature cache).
 Calendar days are UTC days, as in `physics.daily_means`. T_q05 is the 5th percentile of the daily mean
 temperature over all days. A `wd`/`we` fit with fewer than MIN_HEATING_DAYS heating days (days of the
 subset with T < T_h of the `all` fit) is NaN, and so is any failed fit; `n_heat_days` is always filled, so it
@@ -32,6 +33,7 @@ import pandas as pd
 from hp_common import MIN_HEATING_DAYS
 from paperb.physics import fit_daily
 
+FEATURE_VERSION = "03b-berchtoldstag"
 FITS = ("all", "wd", "we")
 PER_FIT = ("s_h", "T_h", "P_base", "R2_h", "n_heat_days", "at_bound", "cold_resp", "r_hat")
 COLUMNS = ([f"nf_{f}_{k}" for f in FITS for k in PER_FIT] + ["nf_ratio_sh_we_wd", "nf_ratio_Pbase_we_wd"]
@@ -42,7 +44,8 @@ def weekend_or_holiday(days, country="CH", subdiv="ZH"):
     """Boolean array over calendar days: True on Saturdays, Sundays and public holidays (the `we` days)."""
     idx = pd.DatetimeIndex(days)
     hol = holidays.country_holidays(country, subdiv=subdiv, years=sorted(set(idx.year)))
-    return np.asarray((idx.dayofweek >= 5) | np.array([d in hol for d in idx.date], bool))
+    berchtold = {pd.Timestamp(y, 1, 2).date() for y in idx.year.unique()}
+    return np.asarray((idx.dayofweek >= 5) | np.array([d in hol or d in berchtold for d in idx.date], bool))
 
 
 def _arm_r2(T, y, th, s, b):

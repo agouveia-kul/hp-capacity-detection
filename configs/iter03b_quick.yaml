@@ -1,0 +1,24 @@
+# 03b smoke run (< 5 min once the pool cache exists): protocol_v1 quick overrides (1 seed, size 10, 5 evals) plus every
+# 03b addition: all six Paper A rows (corrected, calibrated, cross-fitted), Berchtoldstag features, Paper A penetration bins,
+# XGBoost_mono restricted to size_peak, and one learning-curve point (n = 16, 1 draw).
+base: configs/protocol_v1.yaml
+apply_quick: true
+exp_id: iter03b_quick
+out_dir: results/iter03b_quick
+split: {seeds: [0]}
+parallel: {workers: 1}
+anchors: [none, size_peak]
+models: [Linear, Ridge, XGBoost, XGBoost_mono]
+model_anchors: {XGBoost_mono: [size_peak]}
+feature_sets: [whdd, netfit, both]
+modes: [direct, residual]
+target_transforms: [none, log]
+residual_models: [Ridge, XGBoost]
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_all, paperA_corr_cal]}
+learning_curve:
+  n: [16]
+  draws: 1
+  feature_sets: [netfit]
+  specs: ["paperA_sh_mh|none|-|-|-", "paperA_corr|none|-|-|-", "paperA_cal|none|-|-|-", "paperA_corr_cal|none|-|-|-",
+          "Ridge|size_peak|netfit|direct|log", "Ridge|size_peak|netfit|residual|log", "anchor_only_Linear|size+peak|-|direct|none"]

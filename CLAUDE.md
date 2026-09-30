@@ -162,3 +162,4 @@ Then stop and wait for review. Do not start the next iteration.
   - **F12** substation generator v1: no truncation; infeasible cells raise or are listed in `dropped_cells.csv`.
   - **F13** early stopping on a household-disjoint training fold, never on the scored fold (`tune_grouped_cv`).
   - **F14** notebook cell 88 refitted on train (`scripts/legacy_fixes/hdh_hourly_ridge.py`); the cell is marked LEGACY.
+  - **Fixed in 03b** (protocol v1 code, `scripts/paperb/`; `paperA_*` estimators report `HP_Peak` only): residual targets and the bias calibration use cross-fitted pilots (household-disjoint from the substation); Berchtoldstag is a `netfit` holiday; WAPE is also reported in Paper A's penetration bins (`pbin...` cells).

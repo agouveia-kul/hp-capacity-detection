@@ -18,6 +18,13 @@ Paper A's s_h / m_h (pilot = the seed's train HP households; pilots.csv, caps.cs
 z = log(y / P_hat_A) (residual.py); `paperA.cap_def_check` also scores the estimator against Paper A's capacity
 definition (target HP_Peak_A); a `learning_curve` block adds metrics_lc.csv (learning_curve.py). Metrics: WAPE first.
 
+03b: more physics rows: `paperA_corr` / `paperA_corr_all` (non-TCL-corrected s_h / m_h, s0 from TRAIN fill households
+[+ the train HP households' own load]), `paperA_cal` / `paperA_corr_cal` (times exp(b), b = mean cross-fitted train
+log-residual). With `paperA.crossfit` the residual targets z (and b) use pilots that are household-disjoint from the
+substation (inner substation of fold k: pilot without fold k; train substation: pilot without its own HP members;
+test: the full pilot). Extra cells per test substation set: Paper A's penetration bins (`pbin...`). `model_anchors`
+restricts a model to given anchors. The timing table carries the inner-CV WAPE (`cv_wape`) of every tuned model.
+
     python scripts/paperb/run_benchmark.py --config configs/protocol_v1_quick.yaml [--set parallel.workers=4] [--resume]
 """
 import argparse
@@ -43,9 +50,11 @@ import yaml  # noqa: E402
 from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
 from paperb.learning_curve import lc_designs  # noqa: E402
 from paperb.metrics import compute_metrics  # noqa: E402
-from paperb.physics import household_caps, make_baseline, paperA_pilots, paperA_predictions  # noqa: E402
+from paperb.features_netfit import FEATURE_VERSION  # noqa: E402
+from paperb.physics import (crossfit_pilot_m, household_caps, household_sensitivity, make_baseline,  # noqa: E402
+                            paperA_pilots, paperA_predictions)
 from paperb.pools import build_pool  # noqa: E402
-from paperb.residual import residual_predict  # noqa: E402
+from paperb.residual import log_ratio, residual_predict  # noqa: E402
 from paperb.splits import grouped_inner_folds, household_splits  # noqa: E402
 from paperb.substations import build_substations, evaluate_members  # noqa: E402
 from paperb.train import configure, feature_matrix, tune_grouped_cv  # noqa: E402
@@ -55,6 +64,8 @@ PHYSICS_FIT = ("slope_only", "slope_base", "calibrated_delta")     # HDH uses th
 PHYSICS = PHYSICS_FIT + ("hdh",)
 SPEC_COLS = ["method", "anchor", "feature_set", "mode", "target_transform"]
 NA = "-"
+PBINS = [("pbin<=15", 0.0, 0.15), ("pbin15-35", 0.15, 0.35), ("pbin35-65", 0.35, 0.65), ("pbin>65", 0.65, np.inf)]   # Paper A (actual p)
+CAL = {"paperA_cal": "paperA_sh_mh", "paperA_corr_cal": "paperA_corr"}     # calibrated estimator -> its base estimator
 
 
 def paperA_estimators(cfg):
@@ -71,14 +82,15 @@ def specs(cfg):
         for fs in cfg.get("feature_sets", ["whdd"]):
             for mode in cfg.get("modes", ["direct"]):
                 out += ([(m, anchor, fs, "direct", t) for t in cfg.get("target_transforms", ["none"]) for m in models
-                         if not (m == "XGBoost_mono" and fs == "whdd")]                  # no nf_* column: = XGBoost
+                         if not (m == "XGBoost_mono" and fs == "whdd")                   # no nf_* column: = XGBoost
+                         and anchor in cfg.get("model_anchors", {}).get(m, [anchor])]
                         if mode == "direct" else [(m, anchor, fs, "residual", "log") for m in cfg["residual_models"]])
     ao = cfg["anchor_only_baselines"]
     return out + [(f"anchor_only_{m}", "+".join(c), NA, "direct", "none") for m in ao["models"] for c in ao["features"]]
 
 
 def cached_eval(pool, members, cfg, seed, log):
-    key = hashlib.md5(json.dumps([pool.name, cfg["pool"], cfg["target_defs"], cfg["features"], sorted(cfg.get("feature_sets", ["whdd"])),
+    key = hashlib.md5(json.dumps([FEATURE_VERSION, pool.name, cfg["pool"], cfg["target_defs"], cfg["features"], sorted(cfg.get("feature_sets", ["whdd"])),
                                   list(members.index), members["hp_members"].tolist(), members["fill_members"].tolist()],
                                  sort_keys=True, default=str).encode()).hexdigest()[:12]     # 03a: memberships in the key
     d = ROOT / cfg.get("feature_cache_dir", Path(cfg["cache_dir"]) / "features")
@@ -106,12 +118,15 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
     pa_target = cfg.get("paperA", {}).get("target", "HP_Peak")
     yv, out, extra, Xc = y.to_numpy(float), {}, {}, {}
 
-    def tuned(spec, name, X, yt, m_in, m_tr, opts=None, space=None):
+    def tuned(spec, name, X, yt, m_in, m_tr, opts=None, space=None, eval_on=None):
         t0, ev = time.time(), ev_by.get(name, ev_all)
-        m, meta, _ = tune_grouped_cv(name, X[m_in], yt[m_in], tab.loc[m_in, "fold"], seed, ev, X[m_tr], yt[m_tr], opts, space)
+        y_kw, p_base = eval_on if eval_on is not None else (yv, None)              # direct models: yt is y itself
+        m, meta, _ = tune_grouped_cv(name, X[m_in], yt[m_in], tab.loc[m_in, "fold"], seed, ev, X[m_tr], yt[m_tr], opts, space,
+                                     (y_kw[m_in], None if p_base is None else p_base[m_in]))
         timing.append({"split_seed": seed, "target": y.name, **dict(zip(SPEC_COLS, spec)), "n_evals": meta["n_evals"],
-                       "seconds": time.time() - t0, "n_inner": int(m_in.sum()), "n_train": int(m_tr.sum())})
-        log(f"  {y.name} {'/'.join(spec)}: cv_mse {meta['cv_mse']:.4g}, best_iter {meta['best_iter']}, "
+                       "seconds": time.time() - t0, "n_inner": int(m_in.sum()), "n_train": int(m_tr.sum()),
+                       "cv_wape": meta["cv_wape"]})
+        log(f"  {y.name} {'/'.join(spec)}: cv_mse {meta['cv_mse']:.4g}, cv_wape {meta['cv_wape']:.1f}, best_iter {meta['best_iter']}, "
             f"{meta['n_evals']} evals, {time.time() - t0:.1f}s, params {meta['params']}")
         return m.predict(X[te])
 
@@ -121,6 +136,14 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
             continue                                                    # s_h / m_h estimates HP_Peak only
         if method in PHYSICS:
             out[spec] = make_baseline(method).fit(tab[fit_tr], y[fit_tr]).predict(tab[te])
+        elif method in CAL:                                              # P_hat * exp(b), b = mean cross-fitted train z
+            p, valid, _ = pa[CAL[method]]
+            p_cf, v_cf = pa.get("cf", {}).get(CAL[method], (p, valid))
+            z = log_ratio(yv, p_cf, v_cf)
+            use = fit_tr & np.isfinite(z)
+            b = float(z[use].mean())
+            out[spec] = np.where(valid[te], p[te] * np.exp(b), 0.0)
+            extra[spec] = {"n_invalid": int((~valid[te]).sum()), "cal_b": b, "n_cal_train": int(use.sum())}
         elif method.startswith("paperA_"):
             p, valid, fb = pa[method]
             out[spec], extra[spec] = p[te], {"n_invalid": int((~valid[te]).sum()), "n_station_fallback": int(fb[te].sum())}
@@ -133,8 +156,8 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
             if mode == "direct":
                 out[spec] = tuned(spec, method, X, yv, fit_in, fit_tr, {"target_transform": tt})
             else:
-                p, valid, _ = pa["paperA_sh_mh"]
-                out[spec], c = residual_predict(lambda *a: tuned(spec, *a), method, X, yv, p, valid, fit_in, fit_tr, te)
+                p, valid = pa.get("cf", {}).get("paperA_sh_mh", pa["paperA_sh_mh"][:2])      # cross-fitted (03b Task 3)
+                out[spec], c = residual_predict(lambda *a, **k: tuned(spec, *a, **k), method, X, yv, p, valid, fit_in, fit_tr, te)
                 extra[spec] = {"n_invalid": int((~valid[te]).sum()), **c}
     return out, extra
 
@@ -143,8 +166,9 @@ def metric_rows(cfg, seed, target, te, p, members, extra=None):
     """Long metric rows for one (method, anchor): overall (cell 'all') and per (penetration x size) cell."""
     y = te[target].to_numpy(float)
     ok = np.isfinite(y) & np.isfinite(p)
-    cells = [("all", np.ones(len(te), bool))] + [(f"p{pp}|n{ss}", ((te["p"] == pp) & (te["size"] == ss)).to_numpy())
-                                                for pp, ss in sorted(set(zip(te["p"], te["size"])))]
+    pen = (te["HP_Count"] / te["size"]).to_numpy(float)               # actual penetration (n_hp is rounded), Paper A's bins
+    cells = ([("all", np.ones(len(te), bool))] + [(c, (pen > lo) & (pen <= hi) if lo > 0 else pen <= hi) for c, lo, hi in PBINS]
+             + [(f"p{pp}|n{ss}", ((te["p"] == pp) & (te["size"] == ss)).to_numpy()) for pp, ss in sorted(set(zip(te["p"], te["size"])))])
     rows = []
     for cell, m in cells:
         mo = ok & m
@@ -204,16 +228,30 @@ def run_seed(cfg, seed):
     pac, pa = cfg.get("paperA", {}), None
     min_st = pac.get("min_station_pilot", 10)
 
-    def pilot_estimates(t, train_hp, caps, **tag):
+    def pilot_estimates(t, train_hp, caps, mem, fold_of, **tag):
+        """Paper A estimates for the substations of `t` (memberships `mem`, household folds `fold_of`): pilot of
+        `train_hp`, per-dwelling non-TCL slopes s0 (train fill [+ own load of train_hp]) and cross-fitted m_h."""
         full, by_st = paperA_pilots(pool, train_hp, caps, min_st)
         pilots.extend({"split_seed": seed, **tag, "pilot": k, **v} for k, v in [("all", full), *sorted(by_st.items())])
-        return paperA_predictions(t, full, by_st)
+        s0 = {k: household_sensitivity(pool, sp["train"]["fill"], own, pac.get("fill_station", "KLO"))
+              for k, own in (("paperA_corr", ()), ("paperA_corr_all", train_hp))}
+        pilots.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": v["s0"], "s_h": v["s_h"], "T_h": v["T_h"],
+                       "n_hh": v["N"]} for k, v in s0.items())
+        m_cf = None
+        if pac.get("crossfit", False):
+            m_ser, fold_m = crossfit_pilot_m(pool, train_hp, caps, fold_of, mem.loc[t.index], full["m"])
+            m_cf = m_ser.to_numpy()
+            pilots.extend({"split_seed": seed, **tag, "pilot": f"cf:fold{k}", "m": v, "n_hh": len([h for h in train_hp if fold_of[h] != k])}
+                           for k, v in fold_m.items())
+        return paperA_predictions(t, full, by_st, {k: v["s0"] for k, v in s0.items()}, m_cf)
 
     if paperA_estimators(cfg) or cfg.get("learning_curve"):
         caps = household_caps(pool, pac.get("cap_def", "hp_peak"))
-        pa = pilot_estimates(tab, sp["train"]["hp"], caps, cap_def=pac.get("cap_def", "hp_peak"), n="main", lc_draw=-1)
+        pa = pilot_estimates(tab, sp["train"]["hp"], caps, members, folds, cap_def=pac.get("cap_def", "hp_peak"), n="main", lc_draw=-1)
         log(f"Paper A pilot m_h {pilots[0]['m']:.5f} ({pilots[0]['n_hh']} train HP households); station pilots "
-            f"{ {r['pilot']: round(r['m'], 5) for r in pilots[1:]} }")
+            f"{ {r['pilot']: round(r['m'], 5) for r in pilots[1:] if r['pilot'] in pool.temp.columns} }; s0 "
+            f"{ {r['pilot'][3:]: round(r['s0'], 5) for r in pilots if r['pilot'].startswith('s0:')} }; cross-fit fold m_h "
+            f"{ [round(r['m'], 5) for r in pilots if r['pilot'].startswith('cf:')] }")
 
     def score(target, t, pr_all, mem, extra_rows=None, **tag):
         for spec, pr in pr_all[0].items():
@@ -233,8 +271,8 @@ def run_seed(cfg, seed):
     if pac.get("cap_def_check"):                                        # Paper A's own capacity definition (eq. pk)
         caps_a = household_caps(pool, "paperA")
         tab["HP_Peak_A"] = members.loc[tab.index, "hp_members"].map(lambda h: float(caps_a[list(h)].sum()))
-        pa_a = pilot_estimates(tab, sp["train"]["hp"], caps_a, cap_def="paperA", n="main", lc_draw=-1)
-        spl = [(e, "none", NA, NA, NA) for e in paperA_estimators(cfg)]
+        pa_a = pilot_estimates(tab, sp["train"]["hp"], caps_a, members, folds, cap_def="paperA", n="main", lc_draw=-1)
+        spl = [(e, "none", NA, NA, NA) for e in paperA_estimators(cfg) if e in ("paperA_sh_mh", "paperA_sh_mh_station")]
         score("HP_Peak_A", tab, predictions({**cfg, "paperA": {**pac, "target": "HP_Peak_A"}}, tab, F, tab["HP_Peak_A"],
                                             seed, timing, log, pa_a, spl), members)
     if cfg.get("learning_curve"):
@@ -245,14 +283,26 @@ def run_seed(cfg, seed):
                 log(f"learning curve n={n} draw={draw}: skipped ({dr[0]['reason']})")
                 continue
             k = len(timing)
-            t_l, F_l, dt_l = cached_eval(pool, mem[mem["split"] != "test"], cfg, seed, log)
+            cfg_l = {**cfg, "feature_sets": cfg["learning_curve"].get("feature_sets", cfg.get("feature_sets", ["whdd"]))}
+            t_l, F_l, dt_l = cached_eval(pool, mem[mem["split"] != "test"], cfg_l, seed, log)
             timing.append({"split_seed": seed, "method": "evaluate_members", "seconds": dt_l, "n_substations": len(t_l)})
-            t_l, F_l = pd.concat([t_l, tab.loc[te, t_l.columns]]), pd.concat([F_l, F.loc[te]])
-            pa_l = pilot_estimates(t_l, sub, caps, cap_def=pac.get("cap_def", "hp_peak"), n=len(sub), lc_draw=draw)
+            t_l, F_l = pd.concat([t_l, tab.loc[te, t_l.columns]]), pd.concat([F_l, F.loc[te, F_l.columns]])
+            fold_l = grouped_inner_folds({"hp": sub, "fill": sp["train"]["fill"]}, pool.meta, cfg["cv"]["k"], seed)
+            pa_l = pilot_estimates(t_l, sub, caps, mem, fold_l, cap_def=pac.get("cap_def", "hp_peak"), n=len(sub), lc_draw=draw)
             log(f"learning curve n={n} draw={draw}: {len(sub)} train HP households, {len(dr)} dropped cells")
+            spl_d, n_in = spl, mem.loc[mem["split"] == "inner", "fold"].nunique()
+            if n_in < cfg["cv"]["k"]:                                   # grouped inner CV needs substations in every fold
+                spl_d = [x for x in spl if x[0] in PHYSICS or x[0].startswith("paperA_")]
+                msg = f"inner CV infeasible: substations in {n_in} of {cfg['cv']['k']} folds; ML and anchor-only specs skipped"
+                lc_dropped.append({"split_seed": seed, "split": "inner", "n": n, "lc_draw": draw, "reason": msg})
+                log(f"learning curve n={n} draw={draw}: {msg}")
             for target in cfg["targets"]:
-                score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl), mem,
-                      n_train_hp=len(sub), lc_draw=draw)
+                try:
+                    score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl_d), mem,
+                          n_train_hp=len(sub), lc_draw=draw)
+                except Exception:                                       # listed, never silently dropped; the seed goes on
+                    lc_dropped.append({"split_seed": seed, "split": "all", "n": n, "lc_draw": draw, "reason": traceback.format_exc()[-400:]})
+                    log(f"learning curve n={n} draw={draw} {target} FAILED: {traceback.format_exc()}")
             for r in timing[k:]:
                 r.update(n_train_hp=len(sub), lc_draw=draw)
     log(f"done in {time.time() - t0:.1f}s")

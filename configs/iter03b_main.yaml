@@ -1,0 +1,17 @@
+# 03b main + physics arm: pool B*, HP_Peak, 20 split seeds. anchors {none, size, size_peak} x feature sets {whdd, netfit, both}
+# x {direct (none, log), residual} x 7 models; XGBoost_mono only with size_peak. The physics rows (all Paper A rows, slope-only,
+# slope + base, calibrated delta, HDH, anchor-only baselines) come out of the same run (they do not depend on the ML specs).
+base: configs/protocol_v1.yaml
+exp_id: iter03b_main
+out_dir: results/iter03b_fair_test/arm_main
+pred_figures: false
+targets: [HP_Peak]
+models: [Linear, Ridge, Lasso, ElasticNet, SVR, PLS, XGBoost, XGBoost_mono]
+model_anchors: {XGBoost_mono: [size_peak]}
+anchors: [none, size, size_peak]
+feature_sets: [whdd, netfit, both]
+modes: [direct, residual]
+target_transforms: [none, log]
+residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_all, paperA_corr_cal]}

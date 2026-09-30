@@ -1,0 +1,5 @@
+- all: best physics row = physics: paperA_cal (median WAPE 33.6 %); HDH median 39.6 %; ML configurations meeting the criterion: 1 of 12
+- pbin<=15: best physics row = physics: paperA_corr_all (median WAPE 42.4 %); HDH median 59.4 %; ML configurations meeting the criterion: 7 of 12
+- pbin15-35: best physics row = physics: paperA_cal (median WAPE 18.9 %); HDH median 20.1 %; ML configurations meeting the criterion: 0 of 12
+- pbin35-65: best physics row = physics: calibrated_delta (median WAPE 14.3 %); HDH median 15.7 %; ML configurations meeting the criterion: 0 of 12
+- pbin>65: no test substations

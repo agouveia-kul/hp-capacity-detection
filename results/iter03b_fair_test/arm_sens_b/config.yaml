@@ -1,0 +1,173 @@
+exp_id: iter03b_sens_b
+protocol: v1
+out_dir: results/iter03b_fair_test/arm_sens_b
+cache_dir: data/_paperb
+paper_a_repo: ../hp-sensitivity-paper
+pool:
+  option: b
+  year: 2023
+  coverage_min: 0.9
+  station_alias:
+    8jB: KLO
+  sfh_own_load_type: Single-family house
+  seed: 0
+split:
+  test_frac: 0.25
+  stratify: station
+  seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+grid:
+  size:
+  - 10
+  - 20
+  - 40
+  - 80
+  - 120
+  penetration:
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 1.0
+  n_hp: round
+  max_overlap: 0.75
+  min_station_pool: 3
+  substations_per_cell:
+    train: 10
+    test: 5
+  on_infeasible: drop
+cv:
+  scheme: household_grouped
+  k: 4
+  inner_substations_per_cell: 5
+  early_stopping: next_training_fold
+  hyperopt:
+    max_evals: 50
+    seed: split_seed
+  final_refit: median_best_iteration
+models:
+- Linear
+- Ridge
+- Lasso
+- ElasticNet
+- SVR
+- PLS
+- XGBoost
+- XGBoost_mono
+ffnn:
+  enabled: false
+feature_sets:
+- both
+modes:
+- direct
+- residual
+target_transforms:
+- log
+residual_models:
+- Ridge
+- Lasso
+- ElasticNet
+- XGBoost
+paperA:
+  estimators:
+  - paperA_sh_mh
+  - paperA_sh_mh_station
+  - paperA_cal
+  - paperA_corr
+  - paperA_corr_all
+  - paperA_corr_cal
+  cap_def: hp_peak
+  min_station_pilot: 10
+  target: HP_Peak
+  cap_def_check: false
+  fill_station: KLO
+  crossfit: true
+anchors:
+- size_peak
+model_anchors: {}
+anchor_only_baselines:
+  models:
+  - Linear
+  - XGBoost
+  features:
+  - - size
+  - - peak
+  - - size
+    - peak
+physics_baselines:
+- slope_only
+- slope_base
+- calibrated_delta
+- hdh
+features:
+  T_base: 12.0
+  kwargs:
+    resolution: 15
+    mild_thresh: 10.0
+    cold_thresh: 25.0
+    weekday_only: true
+    include_shape: false
+    include_minmax: true
+    include_quantiles: true
+    include_n_days: false
+    include_corr_features: false
+    include_climate_context: false
+    normalize_by_peak: true
+targets:
+- HP_Peak
+target_defs:
+  robust_q: 0.999
+  T_design_C: -8.0
+bootstrap:
+  unit: hp_household
+  B: 2000
+  seed: split_seed
+uncertainty:
+  bootstrap: false
+  summary_band:
+  - 0.05
+  - 0.9
+parallel:
+  workers: 10
+  blas_threads: 1
+  cores: 28
+  threads: 2
+metrics:
+- wape
+- mape
+- r2
+- rmse
+- mae
+quick:
+  split.seeds:
+  - 0
+  grid.size:
+  - 10
+  grid.substations_per_cell:
+    train: 6
+    test: 3
+  cv.inner_substations_per_cell: 3
+  cv.hyperopt.max_evals: 5
+  models:
+  - XGBoost
+  anchors:
+  - size_peak
+  targets:
+  - HP_Peak
+  physics_baselines:
+  - slope_only
+  anchor_only_baselines.models:
+  - Linear
+  bootstrap.B: 200
+pred_figures: false
+git_commit: 3e694b38808288ae635af3912df6961c907e2769
