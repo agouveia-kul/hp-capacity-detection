@@ -47,7 +47,7 @@
   - The zero-run rule removes 554 bins in 2021/22 but 2,130 in 2022/23.
   - 41 homes have heat-meter dropout days (kept for the simulator).
 - 123 of 295 homes have immersion or back-up heating active in some of their top 0.1 % bins, so `HP_Peak` includes that draw.
-- The line budget was exceeded (see Changed). Drafted 05a-ii code (queue, scheduler, learning-curve harness, smoke and timing configs) is kept only in a local backup. One end-to-end GB-EoH pipeline run (1 seed, sizes {10, 40} × p {0.1, 0.5}) finished in 2.6 min; its outputs are kept for 05a-ii and not interpreted.
+- The line budget was exceeded (see Changed). Drafted 05a-ii code (queue, scheduler, learning-curve harness, smoke and timing configs) is kept on the local, unpushed branch `wip/05a-ii` (a309f47). One end-to-end GB-EoH pipeline run (1 seed, sizes {10, 40} × p {0.1, 0.5}) finished in 2.6 min; its outputs are kept for 05a-ii and not interpreted.
 
 **Decisions for Alex:**
 1. **LCL and "gas-only".** *Recommended:* use the Std filler (3,199 households) as the main arm. Keep the "gas-only" subset, since it comes from the survey and is not circular, but only with the corrected columns (CH = Gas and 0 portable heaters; 777 households, s₀ 0.0082), as a sensitivity arm. Drop 04's definition. Also flag the Q304 error in Paper A.
