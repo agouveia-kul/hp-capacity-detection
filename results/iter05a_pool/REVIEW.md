@@ -1,56 +1,41 @@
-# Iteration 05a-i — GB-EoH pool with analog-day LCL filler (Tasks 0–3)
-**Goal:** Build GB-EoH as a second pool (EoH heat pumps + analog-matched flat-rate LCL fillers) and bound the fusion error, before any 05b run.
+# Iteration 05a-ii-a — R1–R8 rebuild, D4 diagnostics, queue, envelopes, smoke and timing probe (D5 pending)
+**Goal:** Apply the 05a-i review decisions, settle the D4 flag, and make the GB-EoH pools and the overnight queue ready; D5 waits for Alex to schedule it.
 
-**Branch / commit:** iter/05a-gb-eoh-pool @ 534aee4 (code; Task 0 = 8d3f03a); results and this REVIEW in the next commit. Branched from `iter-04` (fd3ebdb): `main` does not contain 04 yet.
+**Branch / commit:** iter/05a-gb-eoh-pool @ f4d85dc (code), results + this REVIEW in the next commit. **Not started: D5 and the final 05a-ii REVIEW** (they need the scheduled queue). The brief's ~450-line budget is exceeded, so this is the "05a-ii-a" stop.
 
-**Changed:** **Over budget → split per the brief:** Tasks 0–3 plus their tests are ~570 logic lines (`fill_analog.py` 160, `pools/gb_eoh.py` 120, `iter05a_report.py` 237 incl. report text and the D5 summary, 52 changed lines in `substations.py`, `run_benchmark.py`, `features_netfit.py`, `pools/__init__.py`). Adding Tasks 4/4b/6 would take the diff to ~800, so I stopped here and wrote this 05a-i REVIEW. Other changes: `pools.py` → `pools/__init__.py` (moved unchanged); tests `test_gb_eoh.py` 168; configs `protocol_v1_1`, `pool_{bstar,gb_eoh_2122,gb_eoh_2223}`, `iter05a_d5_{real,swap}`; CLAUDE.md fixes (EoH property table is on disk, HadCET path) + DECISIONS 1–10. *Generated:* `lcl_audit.md`, `eoh_selection.md`, `mapping.md` (D1–D4), `method_basis.md`, csvs; caches `data/_paperb/pools/{lcl_std_20120701_20140228*, gb_eoh_2122*, gb_eoh_2223*}` (≈ 400 MB). pytest: 66 passed, including the B\* seed-0 regression against 03b (metrics equal; fresh features equal the cache). Stash: `stash@{0}` no longer exists; the tags `iter-02b`, `iter-03b` and `iter-04` exist (local and origin).
+**Changed** (~840 logic lines, tests excluded): `d4_diagnostics.py` 168 (rule in its docstring, committed before any run), `run_queue.py` 242 and `schedule_overnight.ps1` 52 (drafted on `wip/05a-ii`, tested now), `pools/gb_eoh.py` ~105, `iter05a_report.py` ~145, `envelopes_v11.py` 70, `runtime_estimate.py` 70, `fill_analog.py` 40, `run_benchmark.py` 19, `learning_curve.py` 16. Tests: `test_queue.py` (kill/resume, `--retry-failed`), `test_05a_ii.py` (zero-run, station fill, windows, Heathrow, own-station matching, D4 rule). **pytest 74 passed** (21 min). Configs: `pool_gb_eoh_{2122,2223,2223sep}`, `iter05_quick`, `iter05a_{overnight,timing,d5_quick_queue}`; CLAUDE.md §4, §6, §7, §10; `method_basis.md`; DECISIONS (R1–R8, D4 rule). Results: `d4_diagnostics.md`, `zero_runs.md`, `envelopes.md`, `runtime_estimate.md`, `eoh_selection.md`, `lcl_audit.md`, `mapping.md`, smoke `metrics.csv`. Free disk 423 GB.
 
-**Results** (not interpreted; flags pre-registered in the brief)
+**Results** (D5 not run)
 
-| item | 04 / reference | 05a-i |
+| item | 05a-i | 05a-ii |
 |---|---|---|
-| LCL release on disk | public 5,567 hh | UKDS SN 7857 ed. 2: 4,173 Std + 1,025 ToU (tariff = file); a subset in households, a superset in fields (survey) |
-| Std filler kept | – | 3,199 (coverage < 90 %: −875, > 10 kWh: −1, zero run ≥ 24 h: −98) |
-| filler s₀ (kW/K per dwelling, HadCET) | B\* 0.0055; LCL 0.0133; "gas-only" 0.0070 (78 hh) | all kept 0.0131; 04 definition 0.0067 (47); **corrected gas CH & 0 heaters 0.0082 (777)** |
-| GB-EoH 2021/22: window, homes | 433 (Nov–Mar, ≥ 90 %) | Oct 2021–Sep 2022, **295** (≥ 95 %; 373 at ≥ 90 %); 15 stations ≥ 3 HP |
-| GB-EoH 2022/23 (same month + 1 y) | 371 | Oct 2022–Sep 2023, **244** (Jun 2022 start: 293) |
-| D1 s₀ own days vs mapped | flag > 15 % | +0.7 % (per station −6 … +13 %): not raised |
-| D2 share of days with abs(ΔT) > 1 K | flag > 5 % | 1.1 % (worst station 2.7 %): not raised |
-| D3 day-of-year distance | – | median 15 d; 91 widenings; 62 days (1.1 %) without a 1 K match; ≤ 8 uses per source day |
-| D4 LCL self-test, median abs(Δs_h) / abs(Δp99.9) | flag > 10 % | **58–99 % / 4–8 %: RAISED** (2012/13 −58…−64 %, 22.7 % of its days > 1 K; 2013/14 +60…+84 %, 0 % > 1 K) |
-| D5 B\* swap test | flag > 2 pp | code and tests done; **not run** (needs the Task 4b queue) |
-| B\* 30-min / 15-min HP_Peak | – | median 0.974 (IQR 0.916–0.993) |
+| EoH main window, homes | Oct 2021, 295 (≥ 95 %) | **Nov 2021, 385** (≥ 90 %; 388 before dropping 5 unfillable stations). Candidates Jun→Jan: 225, 275, 315, 355, 373, **388**, 379, 376 |
+| replication | Oct 2022, 244 | rule as written = **the main window again** (Nov 2021); latest admissible start Sep 2022: **338** (2-month overlap, 290 shared homes). Candidates from Nov 2020: 24 … 340 |
+| filler s₀, all Std / gas-CH & 0 heaters | 0.0131 / 0.0082 (HadCET) | 0.0120 / 0.0075 (Heathrow) |
+| D1 / D2 (flags) | +0.7 % / 1.1 % | +5.9 % (G005, G007 > 15 %) / 0.24 %: not raised |
+| D4 (Nov–Mar, `mapping.md`) | 58–99 % raised | median abs(Δs_h) 30–100 %, abs(Δp99.9) 3–7 %: raised |
+| **Task A**: real year-to-year Y vs D4 error E (def. a), n = 10/40/120 | – | Y 0.78/0.63/0.52 vs E 0.94/0.50/0.38; Y ≥ 0.5 E at all n (same for b, c) → **intrinsic filler variability** |
+| capacity-equivalent error, % of HP_Peak (N 10–120) | – | p 0.05: 48–74; 0.2: 12–19; 0.5: 4.8–7.4; 0.8: 3.0–4.7; 1.0: 2.4–3.7. **Fusion-limited: p ≤ 0.5** |
+| R4: nearest-T day changes vs HadCET | – | 94 % of (station, day); Heathrow is 1.2 K warmer, r = 0.984 |
+| envelopes (used HP train/test; test substations per bin ≤15/15–35/35–65/>65) | B\* 62/20; 75/40/10/10 | GB-EoH main 275/81; 265/125/30/35; Sep-2022: 239/66; 215/110/30/30 |
+| smoke run / timing probe | 2.6 min | 3.4 min wall / 3.5 job-h (seed, 5 families: 2.8 job-h; FFNN 1.2 h) |
 
 **Assumptions & deviations:**
-- The LCL coverage window is Jul 2012 – Feb 2014, not the full span. Over Nov 2011 – Feb 2014 only 450 Std households reach 90 %, because recruitment was staggered. The window covers every calendar day at least once.
-- **Typing and window.**
-  - Typing is 04's `type` (HP_Installed, with a channel fallback).
-  - A 30-min bin is valid with ≥ 12 of its 15 two-minute diffs and is rescaled by 15/n.
-  - "Other channels active" means heat output or circulation pump > 0 during the zero run.
-  - Stations are re-derived over the 05a span with 04's 0.2 °C rule (32 groups in 2021/22, 29 in 2022/23).
-  - The replication is fixed to the main window's month, as the brief says. Nov/Dec starts are reported for information only.
-- **Mapping details.**
-  - DST-change days are not candidates.
-  - The map seed is the split seed.
-  - `paperA_corr` uses s₀ per station, from the train fillers under that station's map.
-  - The Paper A pilot for EoH uses the HP series alone to find T_h, because EoH has no own load.
-- D1(b) is judged on the fit pooled over stations; per-station values are listed.
-- D4 has only 2 winters (2011/12 falls outside the window), and its fits use winter days only.
-- D5 swap: each substation keeps its fillers and gets n_hp extra fillers from the same split or fold, all on analog days. Candidates are matched on KLO temperature.
-- **Assumed values.** `P_design` uses T_design = −3 °C for GB (unverified). HadCET is a Central England series, not a London station.
+- **R8 rule is mine.** Runs are classified per run plus 12-h context. 2022/23: 122 of 124 runs (2,037 bins) belong to one home, EOH0836, whose electricity reads ≈ 0 while it delivers 8–10 kW of heat: a **meter dropout, not energy-crisis behaviour**. The exemption as worded would have un-flagged its gaps, so the rule is: missing if heat > 0.1 kW in the run or heat > 1 kW with electricity < 0.02 kW within 12 h. Real switch-offs exist (2021/22: 5 runs; 2022/23: 2) and stay valid.
+- Task A uses winters Nov–Feb (common span; the LCL window ends 27 Feb 2014). The rule's operationalisation (per n, definition a, medians) is in the docstring, committed before the run.
+- R4 Meteostat file 03772 (309 KB, CC BY-NC 4.0) fetched; the name of station 03772 is not verified on Meteostat. R7: −3.0 °C kept, now referenced (London 99.6 %, CIBSE Guide A via MCS): a London value; other sites run −1.5 to −5.9 (not verified at source).
+- Weather groups are derived per loaded span, so main and replication-as-written give 385 vs 388 homes in the same window. New caches `2122r2`, `2223r2`, `2223sep`.
+- Queue: `--arms` flag and atomic feature-cache writes added. Learning-curve jobs (n ≠ all) are 05b.
 
 **Problems found:**
-- **The LCL survey answers are shifted by one column against `survey_questions.csv`.** Iteration 04's "0 portable heaters" filter (answer Q304) actually selects **0 TVs**. Paper A's `_lcl_base` makes the same mistake for its clean and heater-rich splits. I reported this and did not change Paper A.
-- **Fewer eligible homes than 04 counted:** 295 / 244 against 433 / 371. The 12-month window at ≥ 95 % is stricter than 04's season rule. The 2021/22 count still rises at the last candidate month (Oct), and the 2022/23 window loses the end of September because the data stop on 29 Sep 2023.
-- **Station data.**
-  - Two weather groups with homes have more than 5 % missing temperature: G009 (27 homes) and G004 (2 homes).
-  - The zero-run rule removes 554 bins in 2021/22 but 2,130 in 2022/23.
-  - 41 homes have heat-meter dropout days (kept for the simulator).
-- 123 of 295 homes have immersion or back-up heating active in some of their top 0.1 % bins, so `HP_Peak` includes that draw.
-- The line budget was exceeded (see Changed). Drafted 05a-ii code (queue, scheduler, learning-curve harness, smoke and timing configs) is kept on the local, unpushed branch `wip/05a-ii` (a309f47). One end-to-end GB-EoH pipeline run (1 seed, sizes {10, 40} × p {0.1, 0.5}) finished in 2.6 min; its outputs are kept for 05a-ii and not interpreted.
+- **Silent-electricity homes** the exact-zero rule misses: EOH2291 (15 % of its heat bins, in the main pool) and EOH0836 (35 %, eligible in the Sep-2022 window). Kept and listed, not dropped.
+- The probe's neural job failed once (Windows `os.replace` race on the shared cache, fixed) and was rerun alone. Every family job repeats the pilot (441 s, 17 % of a seed).
+- B\* has 10 test substations in the 35–65 % and > 65 % bins even with p = 0.8 (target ≥ 20).
+- The mtimes of the four EoH originals changed at 22:47–22:50 today, one per minute, sizes unchanged; nothing here opens them, probably OneDrive (not verified).
+- The winter-only slope is a pessimistic proxy: the estimators fit a full year (D1 differs by 6 %).
 
 **Decisions for Alex:**
-1. **LCL and "gas-only".** *Recommended:* use the Std filler (3,199 households) as the main arm. Keep the "gas-only" subset, since it comes from the survey and is not circular, but only with the corrected columns (CH = Gas and 0 portable heaters; 777 households, s₀ 0.0082), as a sensitivity arm. Drop 04's definition. Also flag the Q304 error in Paper A.
-2. **Windows.** *Recommended:* accept Oct 2021 (295 homes) and Oct 2022 (244), as specified. The alternative is to allow ≥ 90 % coverage (373 / 315) or a Jun 2022 replication start (293). Either would be a rule change that needs your approval.
-3. **Mapping.** D1–D2 pass and D4 raises its flag: the winter-only slope is not preserved when a winter is rebuilt from another winter. *Recommended:* run D5 before deciding. If D5 also flags, add previous-day temperature conditioning, or restrict GB-EoH to the targets D5 shows are robust.
-4. **05a-ii.** *Recommended:* approve 05a-ii for Task 4 (envelopes, learning-curve harness), Task 4b (queue and scheduler), D5 on the queue, and Task 6 (smoke run and timing probe). All of it is drafted; the queue and scheduler still need their tests (kill/resume, `--retry-failed`) and a dry run.
+1. **D4 → intrinsic** (Y ≥ 0.5 E at every n). *Recommended:* accept the mapping; 05b adds the filler-uncertainty arm (fillers' temperature response ×0.5, ×1.5); mark p ≤ 0.5 (Paper A bins ≤ 15, 15–35, 35–65) fusion-limited in every GB-EoH table.
+2. **Replication window and silent homes.** *Recommended:* take Sep 2022 – Aug 2023 (338 homes, 2-month overlap) as the replication, and exclude homes with silent electricity > 5 % of their heat bins (2 homes; 4-min rebuild). The literal rule gives no replication.
+3. **Schedule D5, then 05b scope.** D5 ≈ 2.8 h wall at 6 workers. **05b ≈ 16.5 nights** (942 job-h, new models assumed to double tuning; 9.7 without); with cached pilots, 2 LC draws and arm 3 at spc {10, 40} ≈ 12. *Recommended:* approve those three reductions and drop B\* oracles from arm 4; you choose the rest. Pause OneDrive sync overnight. Run:
+`powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter05a_overnight.yaml -StartAt 22:00 -StopAt 07:30`

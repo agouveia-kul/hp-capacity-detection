@@ -53,15 +53,17 @@ Kept: **3199** of 4173 Std households. Donor-filled days per kept household (gap
 
 ## 5. Temperature and s0
 
-Temperature: HadCET daily mean (`data/hadcet/meantemp_daily_totals.txt`), the series used in 04. It is the Central England composite, not a London station. Per-dwelling s0 = Paper A fit of the households' mean daily load against HadCET (B* fill: 0.0055; 04: all LCL 0.0133, 04 'gas-only' 0.0070):
+Temperature (R4 of 05a-ii): London Heathrow daily mean, Meteostat bulk `daily/03772.csv.gz` (`data/_paperb/raw/meteostat/`), instead of HadCET (Central England composite, `data/hadcet/meantemp_daily_totals.txt`; the series of 04 and 05a-i), which stays as the comparison rows `T = hadcet`. Per-dwelling s0 = Paper A fit of the households' mean daily load against T (B* fill: 0.0055; 04 with HadCET: all LCL 0.0133, 04 'gas-only' 0.0070):
 
-| period | subset | N | s0 (kW/K) | T_h | P_base/N (kW) | r2 |
-|---|---|---|---|---|---|---|
-| Jul 2012 - Jun 2013 (as 04) | all kept Std | 3199 | 0.0131 | 14.2 | 0.345 | 0.843 |
-| Jul 2012 - Jun 2013 (as 04) | 04 def.: Q248 gas boiler for CH & Q304 = 0 (= 0 TVs) | 47 | 0.00673 | 14.2 | 0.276 | 0.614 |
-| Jul 2012 - Jun 2013 (as 04) | corrected: CH = Gas (col Q246) & 0 portable heaters (col Q303) | 777 | 0.00824 | 14.6 | 0.317 | 0.75 |
-| Jul 2012 - Jun 2013 (as 04) | CH = Gas (col Q246) | 1078 | 0.0101 | 14.3 | 0.324 | 0.786 |
-| LCL window | all kept Std | 3199 | 0.0126 | 15.4 | 0.338 | 0.847 |
-| LCL window | 04 def.: Q248 gas boiler for CH & Q304 = 0 (= 0 TVs) | 47 | 0.00634 | 16 | 0.272 | 0.611 |
-| LCL window | corrected: CH = Gas (col Q246) & 0 portable heaters (col Q303) | 777 | 0.00792 | 16.4 | 0.309 | 0.765 |
-| LCL window | CH = Gas (col Q246) | 1078 | 0.0097 | 15.7 | 0.316 | 0.796 |
+| period | subset | T | N | s0 (kW/K) | T_h | P_base/N (kW) | r2 |
+|---|---|---|---|---|---|---|---|
+| Jul 2012 - Jun 2013 (as 04) | all kept Std | heathrow | 3199 | 0.012 | 16.2 | 0.342 | 0.843 |
+| Jul 2012 - Jun 2013 (as 04) | all kept Std | hadcet | 3199 | 0.0131 | 14.2 | 0.345 | 0.843 |
+| Jul 2012 - Jun 2013 (as 04) | 04 def.: Q248 gas boiler for CH & Q304 = 0 (= 0 TVs) | heathrow | 47 | 0.00617 | 15.9 | 0.275 | 0.609 |
+| Jul 2012 - Jun 2013 (as 04) | corrected: CH = Gas (col Q246) & 0 portable heaters (col Q303) | heathrow | 777 | 0.00752 | 16.6 | 0.316 | 0.748 |
+| Jul 2012 - Jun 2013 (as 04) | CH = Gas (col Q246) | heathrow | 1078 | 0.00922 | 16.2 | 0.323 | 0.784 |
+| LCL window | all kept Std | heathrow | 3199 | 0.0114 | 17.6 | 0.334 | 0.844 |
+| LCL window | all kept Std | hadcet | 3199 | 0.0126 | 15.4 | 0.338 | 0.847 |
+| LCL window | 04 def.: Q248 gas boiler for CH & Q304 = 0 (= 0 TVs) | heathrow | 47 | 0.00583 | 18 | 0.271 | 0.605 |
+| LCL window | corrected: CH = Gas (col Q246) & 0 portable heaters (col Q303) | heathrow | 777 | 0.00726 | 18.5 | 0.307 | 0.761 |
+| LCL window | CH = Gas (col Q246) | heathrow | 1078 | 0.00881 | 17.9 | 0.313 | 0.794 |

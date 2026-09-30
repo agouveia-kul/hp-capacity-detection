@@ -1,0 +1,11 @@
+[21:50:20] queue iter05a_overnight: 1 of 5 jobs to run, 6 workers x 4 threads, stop at None
+[s0    10.3s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0    10.3s] features from cache gb_eoh_s0_52a2b8b21aa1_tab.parquet
+[s0   427.3s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0  1052.9s]   HP_Peak FFNN/size/netfit/direct/log: cv_mse 38.18, cv_wape 24.8, best_iter 65, 50 evals, 625.5s, params {'arch': (128,), 'l2': 0.0, 'lr': 0.0005}
+[s0  2501.6s]   HP_Peak FFNN/size/both/direct/log: cv_mse 50.01, cv_wape 28.5, best_iter 26, 50 evals, 1448.7s, params {'arch': (128,), 'l2': 0.0, 'lr': 0.001}
+[s0  3190.6s]   HP_Peak FFNN/size_peak/netfit/direct/log: cv_mse 36.15, cv_wape 24.3, best_iter 81, 50 evals, 688.9s, params {'arch': (128,), 'l2': 0.0, 'lr': 0.0005}
+[s0  4729.1s]   HP_Peak FFNN/size_peak/both/direct/log: cv_mse 42.84, cv_wape 26.4, best_iter 38, 50 evals, 1538.4s, params {'arch': (128, 64), 'l2': 0.0001, 'lr': 0.001}
+[s0  4729.7s] done in 4729.7s
+[23:09:25] done timing_probe__s0__d0__nall__neural (4743 s)
+[23:09:45] exit: {'done': 5, 'failed': 0, 'remaining': 0, 'median_job_s': 1891.7190890312195, 'eta_h': 0.0, 'updated': '2026-09-30T23:09:28'}

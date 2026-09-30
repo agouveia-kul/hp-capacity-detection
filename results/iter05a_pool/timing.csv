@@ -1,0 +1,6 @@
+split_seed,method,seconds,n_substations,target,anchor,feature_set,mode,target_transform,n_evals,n_inner,n_train,cv_wape
+0,evaluate_members,58.40795421600342,670.0,,,,,,,,,
+0,Lasso,1.7745275497436523,,HP_Peak,size,netfit,direct,none,10.0,225.0,370.0,26.38646617734784
+0,XGBoost,18.641235828399655,,HP_Peak,size,netfit,direct,none,10.0,225.0,370.0,19.36251936608119
+0,Lasso,0.8946993350982666,,HP_Peak,size,netfit,residual,log,10.0,225.0,370.0,26.45723389868161
+0,anchor_only_Linear,0.0573470592498779,,HP_Peak,size,-,direct,none,0.0,225.0,370.0,50.1131471343178
