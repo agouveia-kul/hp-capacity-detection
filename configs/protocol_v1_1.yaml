@@ -1,0 +1,8 @@
+# Protocol v1.1 (from iteration 05a; CLAUDE.md s.4) = protocol v1 + p = 0.8 in the grid, for every pool. Nothing else changes.
+# protocol_v1.yaml stays as it is for reproducing 02b-03b. Pools: configs/pool_*.yaml (base: this file).
+base: configs/protocol_v1.yaml
+protocol: v1.1
+exp_id: protocol_v1_1
+out_dir: results/protocol_v1_1
+grid:
+  penetration: [0.05, 0.1, 0.2, 0.3, 0.5, 0.8, 1.0]

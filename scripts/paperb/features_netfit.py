@@ -3,7 +3,8 @@
 Per substation, Paper A's net-load hockey stick (`physics.fit_daily`: daily means, latent T_h in (8, 20) degC)
 is fitted three times: `all` days, `wd` = weekdays that are not public holidays, and `we` = weekends plus
 public holidays. Holidays come from the `holidays` package (country CH, subdiv ZH) for every station, plus Berchtoldstag (2 January),
-which the package does not carry for ZH (03b; `FEATURE_VERSION` keys the feature cache).
+which the package does not carry for ZH (03b; `FEATURE_VERSION` keys the feature cache). 05a: the calendar is set per
+pool (`pool.holidays`, default CH-ZH; GB-EoH uses GB-ENG, without Berchtoldstag).
 Calendar days are UTC days, as in `physics.daily_means`. T_q05 is the 5th percentile of the daily mean
 temperature over all days. A `wd`/`we` fit with fewer than MIN_HEATING_DAYS heating days (days of the
 subset with T < T_h of the `all` fit) is NaN, and so is any failed fit; `n_heat_days` is always filled, so it
@@ -44,7 +45,7 @@ def weekend_or_holiday(days, country="CH", subdiv="ZH"):
     """Boolean array over calendar days: True on Saturdays, Sundays and public holidays (the `we` days)."""
     idx = pd.DatetimeIndex(days)
     hol = holidays.country_holidays(country, subdiv=subdiv, years=sorted(set(idx.year)))
-    berchtold = {pd.Timestamp(y, 1, 2).date() for y in idx.year.unique()}
+    berchtold = {pd.Timestamp(y, 1, 2).date() for y in idx.year.unique()} if (country, subdiv) == ("CH", "ZH") else set()
     return np.asarray((idx.dayofweek >= 5) | np.array([d in hol or d in berchtold for d in idx.date], bool))
 
 
@@ -75,12 +76,13 @@ def _one_fit(T, y, t_ref, t_q05, min_days):
     return out
 
 
-def netfit_features(T, net, min_days=MIN_HEATING_DAYS):
-    """The 29 `netfit` columns of one substation from its 15-min temperature and net load (Series, UTC index)."""
+def netfit_features(T, net, min_days=MIN_HEATING_DAYS, calendar=("CH", "ZH")):
+    """The 29 `netfit` columns of one substation from its 15-min temperature and net load (Series, UTC index).
+    05a: `calendar` = (country, subdivision) of the working-day / weekend split (GB-EoH: ("GB", "ENG"))."""
     d = pd.DataFrame({"T": T, "y": net}).resample("D").mean()
     d = d[np.isfinite(d["T"]) & np.isfinite(d["y"])]
     Td, yd = d["T"].to_numpy(float), d["y"].to_numpy(float)
-    we, t_q05 = weekend_or_holiday(d.index), float(np.quantile(Td, 0.05))
+    we, t_q05 = weekend_or_holiday(d.index, *calendar), float(np.quantile(Td, 0.05))
     fits = {"all": _one_fit(Td, yd, None, t_q05, min_days)}
     t_ref = fits["all"]["T_h"]
     fits["all"]["n_heat_days"] = int(np.sum(Td < t_ref)) if np.isfinite(t_ref) else 0

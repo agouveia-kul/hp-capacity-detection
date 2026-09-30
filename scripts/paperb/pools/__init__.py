@@ -42,6 +42,7 @@ class Pool:
     def __init__(self, name, hp, own, fill, temp, meta):
         self.name, self.hp, self.own, self.fill, self.temp, self.meta = name, hp, own, fill, temp, meta
         self.index, self.shared_fill = hp.index, name == "a"
+        self.analog, self.fill_per_dwelling = None, False           # 05a: analog-day fillers, one per dwelling
 
 
 def year_index(year):
@@ -89,8 +90,15 @@ def _heapo_flags():
 
 
 def build_pool(option, cfg, verbose=True):
-    """Read (or build and cache) pool `option` in {'bstar', 'b', 'a'}."""
+    """Read (or build and cache) pool `option` in {'bstar', 'b', 'a', 'gb_eoh'}. 05a: `pool.analog_swap` (D5) replaces
+    every non-HP load of the pool by analog days of its fill households (fill_analog.analog_swap)."""
     pc = cfg["pool"]
+    if option == "gb_eoh":
+        from paperb.pools.gb_eoh import build_pool_gb_eoh
+        return build_pool_gb_eoh(cfg, verbose)
+    if pc.get("analog_swap"):
+        from paperb.fill_analog import analog_swap
+        return analog_swap(build_pool(option, {**cfg, "pool": {k: v for k, v in pc.items() if k != "analog_swap"}}, verbose), cfg)
     year, cov_min = pc["year"], pc["coverage_min"]
     out = ROOT / cfg["cache_dir"] / "pools"
     f_ser, f_meta = out / f"{option}_{year}.parquet", out / f"{option}_{year}_meta.parquet"

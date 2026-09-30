@@ -1,0 +1,28 @@
+# GB-EoH 2022/23 (replication, iteration 05a) under protocol v1.1: EoH non-hybrid HP homes (whole heating-system
+# electricity, 30 min) + one analog-day LCL Std filler per dwelling (scripts/paperb/pools/gb_eoh.py, fill_analog.py).
+base: configs/protocol_v1_1.yaml
+pool:
+  option: gb_eoh
+  year: "2223"                         # cache / dataset tag (gb_eoh_2223)
+  window_year: 2022                    # 12-month window starting on the 1st of one of window_months (most eligible homes)
+  window_months: [6, 7, 8, 9, 10]
+  info_months: [11, 12]              # reported in eoh_selection.md only (outside the pre-specified Jun-Oct candidates)
+  window_fixed_month: 10             # replication = the main window's month (Oct, gb_eoh_2122) one year later
+  coverage_min: 0.95                   # valid 30-min bins after the zero-run rule, before gap filling
+  max_interp_slots: 4                  # gaps <= 2 h interpolated; longer: donor day (same day type, nearest station T)
+  holidays: GB-ENG                     # netfit working-day calendar and the analog day type (England & Wales)
+  fill:
+    calendar: GB-ENG
+    lcl_window: ["2012-07-01", "2014-02-28"]   # local days [start, end) of the LCL candidate / coverage window (05a Task 1)
+    lcl_coverage_min: 0.90
+    lcl_max_kwh: 10.0                  # a half-hour above 10 kWh drops the household
+    lcl_zero_run_slots: 48             # a run of exact zeros >= 24 h drops the household
+    max_interp_slots: 4
+    doy_windows: [30, 45, 60]          # day-of-year window, widened only when no candidate is within tol_K
+    tol_K: 1.0
+    k_nearest: 3                       # draw one of the 3 closest in temperature (seed = split seed)
+    subset: null                       # sensitivity arm: "gas_ch & no_heater" (survey, see lcl_audit.md)
+target_defs:
+  T_design_C: -3.0                     # GB design outdoor temperature for P_design (assumption, unverified; REVIEW)
+paperA:
+  fill_station: null                   # fillers respond to the station they are mapped to (per-station s0)
