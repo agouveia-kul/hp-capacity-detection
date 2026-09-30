@@ -1,7 +1,7 @@
 """Iteration 05a invariants (Tasks 1-3): analog mapping rules, one source day per substation-day, toy composition and
 labels, GB-ENG calendar, LCL Std-only filler and disjoint filler splits, EoH eligibility, D4 candidate exclusion, D5
 swap memberships and the +-3 d exclusion, and the B* regression against 03b. Tests that need the pool caches
-(data/_paperb/pools/{gb_eoh_2122,lcl_std_*,bstar_2023}*) are skipped without them."""
+(data/_paperb/pools/{gb_eoh_2122r2,lcl_std_*,bstar_2023}*) are skipped without them."""
 import copy
 import sys
 from datetime import date
@@ -24,7 +24,7 @@ from paperb.substations import build_substations, evaluate_members  # noqa: E402
 
 POOLS = ROOT / "data" / "_paperb" / "pools"
 EOH_CFG = load_config("configs/pool_gb_eoh_2122.yaml")
-needs_eoh = pytest.mark.skipif(not (POOLS / "gb_eoh_2122_meta.parquet").exists() or not list(POOLS.glob("lcl_std_*.npy")),
+needs_eoh = pytest.mark.skipif(not (POOLS / "gb_eoh_2122r2_meta.parquet").exists() or not list(POOLS.glob("lcl_std_*.npy")),
                                reason="GB-EoH / LCL caches not built")
 needs_bstar = pytest.mark.skipif(not (POOLS / "bstar_2023_meta.parquet").exists(), reason="B* pool cache not built")
 FC = {"doy_windows": [30, 45, 60], "tol_K": 1.0, "k_nearest": 3}

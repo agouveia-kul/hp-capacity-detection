@@ -1,10 +1,10 @@
-# GB-EoH 2021/22 (main GB pool, iteration 05a) under protocol v1.1: EoH non-hybrid HP homes (whole heating-system
+# GB-EoH replication, alternative (05a-ii): latest admissible window (iteration 05a) under protocol v1.1: EoH non-hybrid HP homes (whole heating-system
 # electricity, 30 min) + one analog-day LCL Std filler per dwelling (scripts/paperb/pools/gb_eoh.py, fill_analog.py).
 base: configs/protocol_v1_1.yaml
 pool:
   option: gb_eoh
-  year: "2122r2"                       # cache / dataset tag (05a-ii rebuild under R1, R2, R5, R8)
-  windows: {first: "2021-06-01", last_start: "2022-01-01"}     # R2: main = the start month with the most eligible homes
+  year: "2223sep"                       # cache / dataset tag (05a-ii rebuild under R1, R2, R5, R8)
+  windows: {first: "2022-09-01", last_end: "2023-09-29"}        # latest admissible start (ends 31 Aug 2023): the only month-aligned window that ends by 29 Sep 2023 and overlaps the main window by 2 months
   data_end: "2023-09-29"               # the EoH data stop here
   coverage_min: 0.90                   # R1: valid 30-min bins after the zero-run rule, before gap filling
   zero_run_heat_tol_kW: 0.1            # R8: a zero run is missing only if the heat meter exceeds this (else a real switch-off)

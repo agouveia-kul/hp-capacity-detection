@@ -59,13 +59,13 @@ def slopes(T, y, t_h):
     return out
 
 
-def rebuild_map(D, y, variant, rng, fc, col="T"):
+def rebuild_map(D, y, variant, rng, fc, col="T", k=None):
     """(target days, candidate days, analog map) of winter y. variant 'winter': donors outside the winter; 'band': donors outside +-30 d of
     each target day (both winters)."""
     tm = winter_days(D, y) & ~D["dst"].to_numpy()
     cm = ~winter_days(D, y) & ~D["dst"].to_numpy() if variant == "winter" else ~D["dst"].to_numpy()
     tgt, cand = D[tm].assign(T=D.loc[tm, col]), D[cm].assign(T=D.loc[cm, col], pos=np.flatnonzero(cm))
-    return tgt, cand, analog_map(tgt, cand, rng, tuple(fc["doy_windows"]), fc["tol_K"], fc["k_nearest"], exclude_days=30 if variant == "band" else 0)
+    return tgt, cand, analog_map(tgt, cand, rng, tuple(fc["doy_windows"]), fc["tol_K"], k or fc["k_nearest"], exclude_days=30 if variant == "band" else 0)
 
 
 def verdict(Y, E, E_b, E_c):
@@ -97,9 +97,10 @@ def main(cfg_path):
     rows, changes = [], []
     for w_i, y in enumerate(WINTERS):
         maps = {v: rebuild_map(D, y, v, np.random.default_rng([seed, 12, w_i]), fc) for v in ("winter", "band")}
-        alt = rebuild_map(D, y, "winter", np.random.default_rng([seed, 12, w_i]), fc, col="T_hadcet")
+        ch = [rebuild_map(D, y, "winter", np.random.default_rng([seed, 12, w_i]), fc, col=c, k=kk)[2]["src"].to_numpy() for kk in (None, 1) for c in ("T", "T_hadcet")]
         changes.append({"winter": f"{y}/{(y + 1) % 100:02d}", "days": len(maps["winter"][0]),
-                        "share of matches that change with HadCET": float((maps["winter"][2]["src"].to_numpy() != alt[2]["src"].to_numpy()).mean()),
+                        "share of matches that change with HadCET (rule, random among 3)": float((ch[0] != ch[1]).mean()),
+                        "share whose nearest-T day changes (k = 1)": float((ch[2] != ch[3]).mean()),
                         "share |dT| > 1 K (Heathrow)": float((maps["winter"][2]["dT"].abs() > 1).mean())})
         for n in SIZES:
             for d, h in enumerate(draws[n]):
@@ -144,7 +145,7 @@ def main(cfg_path):
     for ext in ("png", "pdf"):
         fig.savefig(OUT / "figures" / f"d4_capacity_equiv.{ext}", dpi=90, bbox_inches="tight")
     lim = {v: sorted(t.columns[(t > FLAG_PCT).any()].tolist()) for v, t in tabs.items()}
-    txt = ["# 05a-ii Task A - D4 diagnostics\n", f"Source: `scripts/paperb/d4_diagnostics.py` (definitions and the pre-registered rule are in its docstring), pool `{cfg['exp_id']}`, "
+    txt = ["# 05a-ii Task A - D4 diagnostics\n", f"Source: `scripts/paperb/d4_diagnostics.py` (definitions and the pre-registered rule are in its docstring), pool GB-EoH `{cfg['pool']['year']}`, "
            f"{len(idx)} train fillers (seed 0), {DRAWS} draws per size, London Heathrow temperature. Pooled LCL T_h (definition b) = {th_pool:.2f} degC.\n",
            "## Item 1-3: real year-to-year variation Y against the D4 error E (median |relative error| of s)\n", md(cmp.reset_index().rename(columns={"index": "def, n"}), 3), "",
            "Definitions: " + "; ".join(f"({k}) {v}" for k, v in DEFS.items()) + ".\n",

@@ -104,8 +104,15 @@ def cached_eval(pool, members, cfg, seed, log):
     tab, X = evaluate_members(pool, members, cfg)
     dt = time.time() - t0
     d.mkdir(parents=True, exist_ok=True)
-    tab.astype({c: float for c in tab.columns if c.startswith(("hinge_inside", "at_bound"))}).to_parquet(f_tab)
-    X.to_parquet(f_x)
+    for df, f in ((X, f_x), (tab.astype({c: float for c in tab.columns if c.startswith(("hinge_inside", "at_bound"))}), f_tab)):   # atomic: queue jobs share the cache
+        tmp = f.with_name(f"{f.name}.{os.getpid()}.tmp")
+        df.to_parquet(tmp)
+        try:
+            os.replace(tmp, f)
+        except PermissionError:                                          # Windows: another job replaced or is reading it (same content)
+            if not f.exists():
+                raise
+            os.remove(tmp)
     log(f"evaluated {len(tab)} substations in {dt:.1f}s ({dt / len(tab):.3f} s each)")
     return pd.read_parquet(f_tab), X, dt
 
@@ -291,7 +298,7 @@ def run_seed(cfg, seed):
         spl = [tuple(x.split("|")) for x in cfg["learning_curve"]["specs"]]
         if cfg["pool"].get("analog_swap"):
             raise ValueError("learning_curve with pool.analog_swap is not implemented (05a D5 runs n = all only)")
-        for n, draw, sub, mem, dr in lc_designs(cfg, pool.meta, sp, seed, members.loc[te]):
+        for n, draw, spc, sub, mem, dr in lc_designs(cfg, pool.meta, sp, seed, members.loc[te]):
             lc_dropped += dr
             if mem is None:
                 log(f"learning curve n={n} draw={draw}: skipped ({dr[0]['reason']})")
@@ -313,12 +320,12 @@ def run_seed(cfg, seed):
             for target in cfg["targets"]:
                 try:
                     score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl_d), mem,
-                          n_train_hp=len(sub), lc_draw=draw)
+                          n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
                 except Exception:                                       # listed, never silently dropped; the seed goes on
                     lc_dropped.append({"split_seed": seed, "split": "all", "n": n, "lc_draw": draw, "reason": traceback.format_exc()[-400:]})
                     log(f"learning curve n={n} draw={draw} {target} FAILED: {traceback.format_exc()}")
             for r in timing[k:]:
-                r.update(n_train_hp=len(sub), lc_draw=draw)
+                r.update(n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
     log(f"done in {time.time() - t0:.1f}s")
     return {"metrics": pd.DataFrame(rows).assign(exp_id=cfg["exp_id"], dataset=ds), "dropped": dropped,
             "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
@@ -384,7 +391,7 @@ def main():
         if len(m := merged(k)):
             m.to_csv(out / f"{name}.csv", index=False)
     if len(m := merged("lc")):
-        m[cols[:4] + ["n_train_hp", "lc_draw"] + cols[4:]].to_csv(out / "metrics_lc.csv", index=False)
+        m[cols[:4] + ["n_train_hp", "lc_draw", "spc_train"] + cols[4:]].to_csv(out / "metrics_lc.csv", index=False)
     if paperA_estimators(cfg):
         pool = build_pool(cfg["pool"]["option"], cfg, verbose=False)
         caps = pd.DataFrame({"station": pool.meta.loc[pool.hp.columns, "station"], "hp_peak": household_caps(pool, "hp_peak"),

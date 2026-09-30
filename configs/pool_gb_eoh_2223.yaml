@@ -3,12 +3,11 @@
 base: configs/protocol_v1_1.yaml
 pool:
   option: gb_eoh
-  year: "2223"                         # cache / dataset tag (gb_eoh_2223)
-  window_year: 2022                    # 12-month window starting on the 1st of one of window_months (most eligible homes)
-  window_months: [6, 7, 8, 9, 10]
-  info_months: [11, 12]              # reported in eoh_selection.md only (outside the pre-specified Jun-Oct candidates)
-  window_fixed_month: 10             # replication = the main window's month (Oct, gb_eoh_2122) one year later
-  coverage_min: 0.95                   # valid 30-min bins after the zero-run rule, before gap filling
+  year: "2223r2"                       # cache / dataset tag (05a-ii rebuild under R1, R2, R5, R8)
+  windows: {first: "2020-11-01", last_end: "2023-09-29"}        # R2: replication = the best 12 months ending on or before 29 Sep 2023, any month
+  data_end: "2023-09-29"               # the EoH data stop here
+  coverage_min: 0.90                   # R1: valid 30-min bins after the zero-run rule, before gap filling
+  zero_run_heat_tol_kW: 0.1            # R8: a zero run is missing only if the heat meter exceeds this (else a real switch-off)
   max_interp_slots: 4                  # gaps <= 2 h interpolated; longer: donor day (same day type, nearest station T)
   holidays: GB-ENG                     # netfit working-day calendar and the analog day type (England & Wales)
   fill:
@@ -21,8 +20,9 @@ pool:
     doy_windows: [30, 45, 60]          # day-of-year window, widened only when no candidate is within tol_K
     tol_K: 1.0
     k_nearest: 3                       # draw one of the 3 closest in temperature (seed = split seed)
+    temp_source: heathrow              # R4: London Heathrow daily mean (Meteostat 03772); HadCET kept as T_hadcet
     subset: null                       # sensitivity arm: "gas_ch & no_heater" (survey, see lcl_audit.md)
 target_defs:
-  T_design_C: -3.0                     # GB design outdoor temperature for P_design (assumption, unverified; REVIEW)
+  T_design_C: -3.0                     # R7: London 99.6 % external design T, CIBSE Guide A 2015 Table 2.5 via the MCS Heat Load Calculator (a London value used as the national central one; see method_basis.md)
 paperA:
   fill_station: null                   # fillers respond to the station they are mapped to (per-station s0)

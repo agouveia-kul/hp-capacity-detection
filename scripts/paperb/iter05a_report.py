@@ -69,8 +69,10 @@ def part_lcl(cfg):
     for per, (a, b) in {"Jul 2012 - Jun 2013 (as 04)": ("2012-07-01", "2013-07-01"), "LCL window": (fc["lcl_window"][0], fc["lcl_window"][1])}.items():
         dm = ((D["date"] >= a) & (D["date"] < b)).to_numpy()
         for name, m in sub.items():
-            if m.sum() >= 5:
-                rows.append({"period": per, "subset": name, **fit_s0(D.loc[dm, "T"], daily[m][:, dm].mean(axis=0), 1) | {"N": int(m.sum())}})
+            for tcol in ("T", "T_hadcet"):
+                if m.sum() >= 5 and (tcol == "T" or name == "all kept Std"):
+                    rows.append({"period": per, "subset": name, "T": {"T": fc.get("temp_source", "heathrow"), "T_hadcet": "hadcet"}[tcol],
+                                 **fit_s0(D.loc[dm, tcol], daily[m][:, dm].mean(axis=0), 1) | {"N": int(m.sum())}})
     s0 = pd.DataFrame(rows)
     txt = [f"# 05a Task 1 - LCL filler audit\n\nSource: `scripts/paperb/iter05a_report.py --part lcl`, cache `fill_analog.build_lcl` "
            f"(config `{cfg['exp_id']}`).\n",
@@ -104,9 +106,10 @@ def part_lcl(cfg):
            f"\nKept: **{audit['kept']}** of {audit['std_households']} Std households. Donor-filled days per kept household (gaps > 2 h): median "
            f"{meta['n_filled_days'].median():.0f}, 90th pct {meta['n_filled_days'].quantile(.9):.0f}. Surveyed: {int(meta['surveyed'].sum())}.\n",
            "## 5. Temperature and s0\n",
-           "Temperature: HadCET daily mean (`data/hadcet/meantemp_daily_totals.txt`), the series used in 04. It is the Central England "
-           "composite, not a London station. Per-dwelling s0 = Paper A fit of the households' mean daily load against HadCET (B* fill: 0.0055; "
-           "04: all LCL 0.0133, 04 'gas-only' 0.0070):\n", md(s0)]
+           "Temperature (R4 of 05a-ii): London Heathrow daily mean, Meteostat bulk `daily/03772.csv.gz` (`data/_paperb/raw/meteostat/`), "
+           "instead of HadCET (Central England composite, `data/hadcet/meantemp_daily_totals.txt`; the series of 04 and 05a-i), which stays as "
+           "the comparison rows `T = hadcet`. Per-dwelling s0 = Paper A fit of the households' mean daily load against T (B* fill: 0.0055; "
+           "04 with HadCET: all LCL 0.0133, 04 'gas-only' 0.0070):\n", md(s0)]
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "lcl_audit.md").write_text("\n".join(txt) + "\n", encoding="utf-8")
     s0.to_csv(OUT / "lcl_s0.csv", index=False)
@@ -114,33 +117,113 @@ def part_lcl(cfg):
 
 # ---------------------------------------------------------------- Task 2
 def part_eoh(_cfg):
-    txt = ["# 05a Task 2 - GB-EoH household selection\n", "Source: `scripts/paperb/pools/gb_eoh.py` (rules in its docstring), report "
-           "`scripts/paperb/iter05a_report.py --part eoh`. Iteration 04 counted homes with a complete Nov-Mar season at >= 90 % "
-           "(2021/22: 433, 2022/23: 371 / 370); 05a asks for a 12-month window at >= 95 % valid 30-min bins.\n"]
-    for tag in ("2122", "2223"):
-        pool = build_pool("gb_eoh", load_config(f"configs/pool_gb_eoh_{tag}.yaml"), verbose=False)
+    txt = ["# 05a Task 2 - GB-EoH household selection (rebuilt in 05a-ii under R1, R2, R5, R8)\n", "Source: `scripts/paperb/pools/gb_eoh.py` (rules in its docstring), "
+           "report `scripts/paperb/iter05a_report.py --part eoh`. Iteration 04 counted homes with a complete Nov-Mar season at >= 90 % (2021/22: 433, "
+           "2022/23: 371); 05a-i used a 12-month window at >= 95 % (295 / 244); 05a-ii uses >= 90 % (R1) and flexible month-aligned windows (R2). "
+           "Main: starts 1 Jun 2021 - 1 Jan 2022. Replication: any start whose 12 months end on or before 29 Sep 2023.\n"]
+    pools = {}
+    for tag, what, cfgname in (("2122r2", "main", "2122"), ("2223r2", "replication, rule as written", "2223"),
+                               ("2223sep", "replication, latest admissible start (alternative)", "2223sep")):
+        pool = build_pool("gb_eoh", load_config(f"configs/pool_gb_eoh_{cfgname}.yaml"), verbose=False)
         base = ROOT / "data" / "_paperb" / "pools" / f"gb_eoh_{tag}"
-        W, St = pd.read_csv(f"{base}_windows.csv"), pd.read_csv(f"{base}_stations.csv")
+        W, St, SF = pd.read_csv(f"{base}_windows.csv"), pd.read_csv(f"{base}_stations.csv"), pd.read_csv(f"{base}_stationfill.csv")
         m = pool.meta[pool.meta["role"] == "hp"]
+        pools[tag] = (W[W["chosen"]].iloc[0], set(m.index))
         q = lambda c: f"median {m[c].median():.3g}, IQR {m[c].quantile(.25):.3g}-{m[c].quantile(.75):.3g}, max {m[c].max():.3g}"   # noqa: E731
-        txt += [f"## GB-EoH {tag}\n", "Candidate windows (12 months from the 1st; `candidate` = the pre-specified Jun-Oct starts; Nov/Dec "
-                "reported only):\n", md(W), "",
-                f"Eligible homes: **{len(m)}** ({m['type'].value_counts().to_dict()}), {m['station'].nunique()} stations with homes "
-                f"({int((m['station'].value_counts() >= 3).sum())} with >= 3). Window {pool.index[0]} .. {pool.index[-1]} UTC.\n",
+        silent = m[m["silent_elec_share"] > 0.05]
+        txt += [f"## GB-EoH {tag} ({what})\n", "Candidate windows (12 months from the 1st; `n_homes_cov90` = homes at >= 90 % valid bins after the zero-run rule, "
+                "`n_homes_cov95` = at >= 95 % as in 05a-i; `chosen` = most homes at the pool's `coverage_min`):\n", md(W), "",
+                f"Eligible homes (after dropping stations that cannot be filled): **{len(m)}** ({m['type'].value_counts().to_dict()}), {m['station'].nunique()} stations with "
+                f"homes ({int((m['station'].value_counts() >= 3).sum())} with >= 3). Window {pool.index[0]} .. {pool.index[-1]} UTC.\n",
                 f"- donor-filled days (gaps > 2 h): {q('n_filled_days')}",
                 f"- HP_Peak per home (30-min 99.9th pct, kW): {q('hp_peak')}; rated `HP_Size_kW` {q('HP_Size_kW')}",
                 f"- share of the home's top 0.1 % bins with immersion or back-up > 0.1 kW: {q('peak_share_backup_active')}; "
                 f"homes with any: {int((m['peak_share_backup_active'] > 0).sum())}",
                 f"- mean share of the peak bins' power drawn by immersion + back-up: {q('peak_backup_kw_share')}",
                 f"- heat-meter dropout days (Q_hp = 0 all day while P_ws > 0.1 kW; kept for the simulator, labels unaffected): "
-                f"{q('heat_meter_dropout_days')}; homes with any: {int((m['heat_meter_dropout_days'] > 0).sum())}\n",
-                "Weather groups (flag: > 5 % missing bins in the window or values outside [-30, 40] degC):\n", md(St), ""]
-    b = build_pool("bstar", load_config("configs/protocol_v1.yaml"), verbose=False)
-    r = b.hp.resample("30min").mean().quantile(0.999) / b.hp.quantile(0.999)
+                f"{q('heat_meter_dropout_days')}; homes with any: {int((m['heat_meter_dropout_days'] > 0).sum())}",
+                f"- **electricity silent while heat is delivered** (share of bins with Q_hp > 1 kW that have P_ws < 0.02 kW; not caught by the exact-zero rule): "
+                f"homes above 1 %: {int((m['silent_elec_share'] > 0.01).sum())}, above 5 %: {len(silent)} ({', '.join(f'{h} {v:.0%}' for h, v in silent['silent_elec_share'].items()) or '-'}); "
+                f"kept in the pool and listed here (not dropped silently)\n",
+                "R5, stations with > 5 % missing T bins in the window (filled from the best-correlated unflagged group with a linear fit on the overlapping "
+                "days if corr >= 0.98, else dropped with its homes):\n", md(SF), "",
+                "Weather groups (flag: > 5 % missing bins in the window before filling, or values outside [-30, 40] degC):\n", md(St), ""]
+    (a, ha), (b, hb), (c, hc) = pools["2122r2"], pools["2223r2"], pools["2223sep"]
+    ov = lambda x: max(0, (pd.Timestamp(a["end"]) - pd.Timestamp(x["start"])).days) / 30.4              # noqa: E731
+    txt += ["## Overlap of the replication windows with the main window\n",
+            f"Main window starts {a['start']}. The rule as written (best window ending by 29 Sep 2023, any month) picks **{b['start']}**: "
+            f"{'the main window itself, so it is no replication' if b['start'] == a['start'] else 'a different window'} (overlap {ov(b):.0f} months; "
+            f"{len(ha & hb)} of {len(hb)} homes shared). The latest admissible start, **{c['start']}** ({int(c['n_homes_cov90'])} homes), overlaps the main window by "
+            f"about {ov(c):.0f} months and shares {len(ha & hc)} of its {len(hc)} homes. No fully disjoint 12-month window exists in the data "
+            f"(Oct 2020 - 29 Sep 2023).\n"]
+    bs = build_pool("bstar", load_config("configs/protocol_v1.yaml"), verbose=False)
+    r = bs.hp.resample("30min").mean().quantile(0.999) / bs.hp.quantile(0.999)
     txt += [f"## B*: 30-min vs 15-min HP_Peak\n\nPer HP household, 99.9th pct of the 30-min mean / 99.9th pct of the 15-min series "
             f"(gap-filled pool series): median **{r.median():.3f}** (IQR {r.quantile(.25):.3f}-{r.quantile(.75):.3f}, n = {len(r)}); "
             f"substation HP_Peak scales by about this factor.\n"]
     (OUT / "eoh_selection.md").write_text("\n".join(txt) + "\n", encoding="utf-8")
+
+
+# ---------------------------------------------------------------- R8: zero runs
+def part_zeroruns(_cfg):
+    """R8: the 05a-i zero-run rule (run >= 6 h starting below 12 degC while heat output or the circulation pump is active) on the
+    Oct 2021 and Oct 2022 windows; every run is classified, 5 random runs of 2022/23 (seed 0) plus the runs of the other homes are plotted."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    from paperb.pools import gb_eoh as G
+    U = pd.read_parquet(G.UNITS)
+    U = U[(U["type"] != "hybrid") & (U["n_rows"] > 0)].set_index("property")
+    runs, raw = [], {}
+    for lab, a, b in (("2021/22", "2021-10-01", "2022-10-01"), ("2022/23", "2022-10-01", "2023-09-29")):
+        W = G._wide(list(U.index), pd.Timestamp(a), pd.Timestamp(b))
+        grp = G._groups(W["T_ext"])
+        Tday = W["T_ext"].T.groupby(grp).median().T.drop(columns="G_none", errors="ignore").resample("D").mean().reindex(W["P_ws"].index, method="ffill")
+        n = W["n_P_ws"]
+        P = (W["P_ws"] * 15.0 / n).where(n >= 12)
+        homes = [p for p in P.columns if grp.get(p, "G_none") != "G_none"]
+        Pv, Q, CP, Td = P[homes].to_numpy(), W["Q_hp"][homes].to_numpy(), W["P_cp"][homes].to_numpy(), Tday[grp[homes]].to_numpy()
+        silent = (np.nan_to_num(Q) > 1.0) & (np.nan_to_num(Pv, nan=1.0) < 0.02)
+        for j, h in enumerate(homes):
+            d = np.diff(np.r_[0, (Pv[:, j] == 0).astype(np.int8), 0])
+            for s0, e0 in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)):
+                q, c = np.nan_to_num(Q[s0:e0, j]), np.nan_to_num(CP[s0:e0, j])
+                if e0 - s0 >= 12 and Td[s0, j] < 12 and ((q > 0).any() or (c > 0).any()):
+                    runs.append({"window": lab, "home": h, "start": P.index[s0], "bins": e0 - s0, "q_max_kW": q.max(), "cp_mean_kW": c.mean(),
+                                 "cls": "meter dropout" if q.max() > 0.1 or silent[max(s0 - 24, 0):e0 + 24, j].any() else "real switch-off"})
+        raw[lab] = W
+    R = pd.DataFrame(runs)
+    summ = R.groupby(["window", "cls"]).agg(runs=("bins", "size"), bins=("bins", "sum"), homes=("home", "nunique")).reset_index()
+    per_home = R.groupby(["window", "home", "cls"]).agg(runs=("bins", "size"), bins=("bins", "sum")).reset_index().sort_values("bins", ascending=False)
+    r23 = R[R["window"] == "2022/23"].reset_index(drop=True)
+    rng = np.random.default_rng(0)
+    pick = pd.concat([r23.iloc[rng.choice(len(r23), 5, replace=False)], r23[r23["home"] != r23["home"].mode()[0]]]).drop_duplicates(["home", "start"])
+    W = raw["2022/23"]
+    fig, ax = plt.subplots(len(pick), 1, figsize=(11, 2.6 * len(pick)))
+    for a_, r in zip(np.atleast_1d(ax), pick.itertuples()):
+        t0 = r.start.normalize()
+        sl = slice(t0 - pd.Timedelta("12h"), t0 + pd.Timedelta("36h"))
+        for c, lab in (("P_ws", "P_ws (electricity)"), ("Q_hp", "Q_hp (heat)"), ("P_cp", "P_cp (pump)")):
+            a_.plot(W[c][r.home].loc[sl], drawstyle="steps-post", label=lab)
+        a_.axvspan(r.start, r.start + pd.Timedelta(minutes=30 * r.bins), color="grey", alpha=.25)
+        a_.set_title(f"{r.home}, run from {r.start} ({r.bins / 2:.1f} h): {r.cls}", fontsize=8)
+        a_.set_ylabel("kW")
+    np.atleast_1d(ax)[0].legend(ncol=3, fontsize=7)
+    plt.tight_layout()
+    (OUT / "figures").mkdir(exist_ok=True)
+    for ext in ("png", "pdf"):
+        plt.savefig(OUT / "figures" / f"zero_runs_2223.{ext}", dpi=80)
+    R.to_csv(OUT / "zero_runs_05ai_rule.csv", index=False)
+    txt = ["# 05a-ii R8 - zero runs under the 05a-i rule\n", "Source: `scripts/paperb/iter05a_report.py --part zeroruns`. A run = exact zeros of the half-hourly heating-system "
+           "electricity for >= 6 h, starting on a day with mean T < 12 degC, while heat output or the circulation pump is active at any time in the run "
+           "(05a-i rule). Classification: **meter dropout** if the heat meter exceeds 0.1 kW during the run, or heat (> 1 kW) is delivered with electricity < 0.02 kW "
+           "within 12 h of it (heat cannot be delivered without electricity), else **real switch-off** (no heat output around it; the pump draws standby power only).\n", md(summ), "",
+           "Per home:\n", md(per_home.head(12)), "",
+           f"Figure `figures/zero_runs_2223.png`: {len(pick)} runs of 2022/23 (5 random, seed 0, plus the runs of the other homes). Rule adopted in `gb_eoh._zero_runs`: a zero run "
+           "is missing only if the heat meter exceeds 0.1 kW somewhere in it; runs without heat output are kept as real switch-offs.\n"]
+    (OUT / "zero_runs.md").write_text("\n".join(txt) + "\n", encoding="utf-8")
+    print(summ.to_string(), "\n", per_home.head(8).to_string())
 
 
 # ---------------------------------------------------------------- Task 3, D1-D4
@@ -161,7 +244,7 @@ def part_mapping(cfg):
     A = pool.analog.day_sum(fill)
     hp_st = pool.meta.loc[pool.meta["role"] == "hp", "station"].value_counts()
     stations = sorted(hp_st.index[hp_st >= cfg["grid"]["min_station_pool"]])
-    d1 = [{"fit": "(a) own LCL days vs HadCET", "station": "-", **fit_s0(D["T"], A.mean(axis=1), len(fill))}]
+    d1 = [{"fit": "(a) own LCL days vs T_London", "station": "-", **fit_s0(D["T"], A.mean(axis=1), len(fill))}]
     pts = []
     for st in stations:
         d = pd.DataFrame({"T": pool.temp[st].to_numpy(), "y": pool.analog.aggregate(None, st, A)}, index=pool.index).resample("D").mean()
@@ -172,13 +255,16 @@ def part_mapping(cfg):
     D1 = pd.DataFrame(d1)
     s0a, s0b = D1["s0 (kW/K)"].iloc[0], D1["s0 (kW/K)"].iloc[-1]
     M = pd.concat([pool.analog.maps[st].assign(station=st) for st in stations])
+    cand_h = pool.analog.cand.assign(T=pool.analog.cand["T_hadcet"])                       # R4: matches that change with HadCET (k = 1, deterministic)
+    chg = np.concatenate([(analog_map(pool.analog.targets[st], pool.analog.cand, np.random.default_rng(0), tuple(fc["doy_windows"]), fc["tol_K"], 1)["src"].to_numpy()
+                           != analog_map(pool.analog.targets[st], cand_h, np.random.default_rng(0), tuple(fc["doy_windows"]), fc["tol_K"], 1)["src"].to_numpy()) for st in stations])
     reuse = M.groupby(["station", "src"]).size()
     d2 = {"median |dT| (K)": M["dT"].abs().median(), "p95 |dT| (K)": M["dT"].abs().quantile(.95), "share |dT| > 1 K": (M["dT"].abs() > 1).mean(),
           "worst station share > 1 K": M.assign(o=M["dT"].abs() > 1).groupby("station")["o"].mean().max()}
     d3 = {"median ddoy": M["ddoy"].median(), "p95 ddoy": M["ddoy"].quantile(.95), "max ddoy": M["ddoy"].max(),
           **{f"days widened to {w}": int((M['widen'] == i).sum()) for i, w in enumerate(fc["doy_windows"]) if i}, "days without a candidate within tol": int((M["widen"] == 3).sum()),
           "source days used per station (median)": reuse.groupby(level=0).size().median(), "max uses of one source day": reuse.max(),
-          "mean uses per used source day": reuse.mean()}
+          "mean uses per used source day": reuse.mean(), "share of (station, day) nearest-T matches that change with HadCET": float(chg.mean())}
     # D4: LCL self-test
     rng, rows = np.random.default_rng([seed, 6]), []
     idx = np.array(sorted(pool.analog.pos[h] for h in fill))
@@ -209,7 +295,7 @@ def part_mapping(cfg):
     f2 = d2["share |dT| > 1 K"] > 0.05
     f4 = bool((D4["median |rel_d_s_h|"] > 0.10).any() or (D4["median |rel_d_p999|"] > 0.10).any())
     txt = ["# 05a Task 3 - analog mapping diagnostics (D1-D4; D5 below once the queue has run)\n",
-           f"Source: `scripts/paperb/iter05a_report.py --part mapping`, pool `{cfg['exp_id']}` (GB-EoH {cfg['pool']['year']}), split seed {seed}: "
+           f"Source: `scripts/paperb/iter05a_report.py --part mapping`, GB-EoH pool `{cfg['pool']['year']}`, split seed {seed}: "
            f"{len(fill)} train fillers, map seed {seed}; stations with >= {cfg['grid']['min_station_pool']} HP homes: {len(stations)}. Rule: "
            f"`fill_analog.py` docstring (doy windows {fc['doy_windows']}, tol {fc['tol_K']} K, k = {fc['k_nearest']}). "
            "Pre-registered flags: D1 s0 (a) vs (b) differ > 15 %, or > 5 % of days need |dT| > 1 K; D4 median |ds_h| > 10 % or median "
@@ -225,8 +311,8 @@ def part_mapping(cfg):
 
 
 # ---------------------------------------------------------------- Task 3, D5
-def part_d5(_cfg):
-    base = OUT / "overnight"
+def part_d5(_cfg, queue_dir="overnight"):
+    base = OUT / queue_dir
     M = {a: pd.read_csv(base / a / "metrics.csv") for a in ("d5_real", "d5_swap")}
     Tm = {a: pd.read_csv(base / a / "timing.csv") for a in ("d5_real", "d5_swap")}
     spec = ["method", "anchor", "feature_set", "mode", "target_transform"]
@@ -258,7 +344,7 @@ def part_d5(_cfg):
     fw.to_csv(OUT / "mapping_d5_family_winners.csv", index=False)
     per_spec.to_csv(OUT / "mapping_d5_per_spec.csv")
     txt = [f"## D5 - B* swap test (swapped - real, WAPE pp; median over {dW.index.get_level_values(0).nunique()} seeds)\n",
-           "Source: `scripts/paperb/iter05a_report.py --part d5` on `results/iter05a_pool/overnight/d5_{real,swap}/`. Pre-registered flag: "
+           f"Source: `scripts/paperb/iter05a_report.py --part d5` on `results/iter05a_pool/{queue_dir}/d5_{{real,swap}}/`. Pre-registered flag: "
            "|median dWAPE| > 2 pp for any physics row or family winner, overall or in any bin.\n",
            f"### Physics rows\n\n{md(phys.round(2))}\n", f"### Family winners (inner-CV WAPE per seed and arm)\n\n{md(fam_tab.round(2))}\n",
            f"-> **flag {'RAISED' if flag else 'not raised'}**.\n",
@@ -270,7 +356,11 @@ def part_d5(_cfg):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", required=True, choices=["lcl", "eoh", "mapping", "d5"])
+    ap.add_argument("--part", required=True, choices=["lcl", "eoh", "mapping", "d5", "zeroruns"])
     ap.add_argument("--config", default="configs/pool_gb_eoh_2122.yaml")
+    ap.add_argument("--queue-dir", default="overnight", help="d5: queue output directory under results/iter05a_pool/")
     a = ap.parse_args()
-    {"lcl": part_lcl, "eoh": part_eoh, "mapping": part_mapping, "d5": part_d5}[a.part](load_config(a.config))
+    if a.part == "d5":
+        part_d5(load_config(a.config), a.queue_dir)
+    else:
+        {"lcl": part_lcl, "eoh": part_eoh, "mapping": part_mapping, "zeroruns": part_zeroruns}[a.part](load_config(a.config))

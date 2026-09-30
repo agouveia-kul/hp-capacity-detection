@@ -1,0 +1,8 @@
+# Arm config of the queue tests (tests/test_queue.py): the keys the queue overrides per family.
+exp_id: toy
+physics_baselines: [slope_base]
+paperA: {estimators: [paperA_cal]}
+anchor_only_baselines: {models: [Linear]}
+models: []
+residual_models: []
+modes: [direct]

@@ -1,6 +1,6 @@
 # 05a D5, arm "swap": as iter05a_d5_real, but every non-HP load (fillers and the HP homes' own load) is replaced by
-# analog days of the B* fill households: same year, days within +-3 d of the target day excluded, candidates matched on
-# the fill station's (KLO) daily T against the substation station's daily T, CH-ZH day type; each substation gets
+# analog days of the B* fill households: same year, days within +-3 d of the target day excluded, each substation's station matched on its own
+# daily T at the source and the target day (R6 of 05a-ii), CH-ZH day type; each substation gets
 # n_hp extra fillers so that every dwelling carries one analog-day filler (fill_analog.analog_swap / add_own_fillers).
 # HP members, splits, seeds and test substations are those of the real arm.
 base: configs/iter05a_d5_real.yaml
@@ -9,7 +9,6 @@ out_dir: results/iter05a_pool/overnight/d5_swap
 pool:
   analog_swap:
     calendar: CH-ZH
-    fill_station: KLO
     exclude_days: 3
     doy_windows: [30, 45, 60]
     tol_K: 1.0

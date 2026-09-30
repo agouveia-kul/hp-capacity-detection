@@ -7,7 +7,8 @@ with d the local (Europe/London) calendar day of t, slot(t) its local clock half
 weather group g for day d (`analog_map`), chosen among the candidate days by
   1. same day type (working day vs weekend / bank holiday; England & Wales calendar on both sides);
   2. circular day-of-year distance <= 30 d, widened to 45, then 60 d when no candidate passes 3 (widenings counted);
-  3. |T_cand(d') - T_target(d)| <= 1 K (daily means; LCL: HadCET, the temperature used in iteration 04);
+  3. |T_cand(d') - T_target(d)| <= 1 K (daily means; LCL: London Heathrow, Meteostat WMO 03772 - R4 of 05a-ii; HadCET,
+     a Central England composite, is kept as the comparison column `T_hadcet` and as `fill.temp_source: hadcet`);
   4. one of the 3 candidates closest in temperature, drawn at random (seeded).
 If no candidate passes 3 even at 60 d, the closest in temperature within 60 d is taken (widen = 3, a > 1 K mismatch).
 The same d' applies to every filler of a substation-day (the filler aggregate is indexed once); the map is fixed per
@@ -16,8 +17,9 @@ local day (a 25-h day averages its repeated 01:00-02:00 hour; the missing hour o
 two DST-change days per year are not candidates; a 23-h target day skips local 01:00 and 01:30, a 25-h target day uses
 them twice.
 
-D5 (B* swap test, `analog_swap`): the same machinery on B*, with the B* fill households (same year, UTC days, KLO
-temperature) as candidates, excluding days within +-3 d of the target day; each substation gets n_hp extra fillers
+D5 (B* swap test, `analog_swap`): the same machinery on B*, with the B* fill households (same year, UTC days) as candidates,
+excluding days within +-3 d of the target day; each substation's station is matched on its own temperature on both sides
+(R6 of 05a-ii: T_g(d') against T_g(d), not KLO); each substation gets n_hp extra fillers
 (`add_own_fillers`) so that every dwelling, HP homes included, carries one analog-day filler, as in GB-EoH.
 """
 import json
@@ -34,6 +36,7 @@ from paperb.physics import fit_daily
 
 LCL_ZIP, LCL_DIR = ROOT / "data" / "LCL_2013.zip", "UKDA-7857-csv/csv/data_collection/data_tables/"
 HADCET = ROOT / "data" / "hadcet" / "meantemp_daily_totals.txt"
+HEATHROW = ROOT / "data" / "_paperb" / "raw" / "meteostat" / "03772_daily.csv.gz"     # Meteostat bulk daily, London Heathrow
 CACHE = ROOT / "data" / "_paperb" / "pools"
 MAP_STREAM, SWAP_STREAM = 4, 5
 TZ_GB = "Europe/London"
@@ -47,6 +50,16 @@ def day_type(days, calendar):
 def hadcet():
     T = pd.read_csv(HADCET, sep=r"\s+", skiprows=1, names=["date", "T"])
     return pd.Series(pd.to_numeric(T["T"], errors="coerce").to_numpy(), index=pd.to_datetime(T["date"], errors="coerce")).dropna()
+
+
+def heathrow():
+    """London Heathrow daily mean temperature (Meteostat bulk `daily/03772.csv.gz`: date, tavg, ...)."""
+    d = pd.read_csv(HEATHROW, header=None, usecols=[0, 1], names=["date", "T"])
+    return pd.Series(d["T"].to_numpy(float), index=pd.to_datetime(d["date"])).dropna()
+
+
+def lcl_temperature(source):
+    return {"heathrow": heathrow, "hadcet": hadcet}[source]()
 
 
 def zero_run_max(v):
@@ -90,9 +103,10 @@ def local_grid(index, tz, step_min):
 
 def build_lcl(fc, verbose=True):
     """Flat-rate (Std) LCL households on the local-clock grid of `fc['lcl_window']` -> (S [hh, day, 48] kW, memory-mapped;
-    days DataFrame date / T (HadCET) / we / dst; meta indexed by 'L:<id>'; audit dict). Cached in data/_paperb/pools/."""
+    days DataFrame date / T (`fill.temp_source`, default heathrow) / T_hadcet / we / dst; meta indexed by 'L:<id>'; audit dict). Cached in data/_paperb/pools/."""
     w0, w1 = (pd.Timestamp(x) for x in fc["lcl_window"])
-    base = CACHE / f"lcl_std_{w0:%Y%m%d}_{w1:%Y%m%d}"
+    src = fc.get("temp_source", "heathrow")
+    base = CACHE / f"lcl_std_{w0:%Y%m%d}_{w1:%Y%m%d}_{src}"
     if base.with_suffix(".npy").exists():
         return (np.load(base.with_suffix(".npy"), mmap_mode="r"), pd.read_parquet(f"{base}_days.parquet"),
                 pd.read_parquet(f"{base}_meta.parquet"), json.loads(Path(f"{base}_audit.json").read_text()))
@@ -121,8 +135,8 @@ def build_lcl(fc, verbose=True):
     days = pd.DatetimeIndex(sorted(set(dates)))
     pos = days.get_indexer(dates) * 48 + loc.hour * 2 + loc.minute // 30
     L = pd.DataFrame(v[:, keep] * 2.0, index=pos).groupby(level=0).mean().reindex(range(len(days) * 48)).to_numpy()   # kWh/30 min -> kW
-    T = hadcet().reindex(days).interpolate().to_numpy()
-    D = pd.DataFrame({"date": days, "T": T, "we": day_type(days, fc["calendar"]),
+    T = lcl_temperature(src).reindex(days).interpolate().to_numpy()
+    D = pd.DataFrame({"date": days, "T": T, "T_hadcet": hadcet().reindex(days).interpolate().to_numpy(), "we": day_type(days, fc["calendar"]),
                       "dst": pd.Series(dates).value_counts().reindex(days).to_numpy() != 48})
     S = np.empty((keep.sum(), len(days), 48), np.float32)
     n_filled = np.zeros(keep.sum(), int)
@@ -169,14 +183,15 @@ class AnalogFill:
     position in S); targets: {station: DataFrame(date, T, we)} over the target days; t_day / t_slot: target day position
     and clock slot of every stamp of the pool index."""
 
-    def __init__(self, S, hh, cand, targets, t_day, t_slot, fc, exclude_days=0):
+    def __init__(self, S, hh, cand, targets, t_day, t_slot, fc, exclude_days=0, cand_T=None):
         self.S, self.pos, self.cand, self.targets = S, {h: i for i, h in enumerate(hh)}, cand.reset_index(drop=True), targets
+        self.cand_T = cand_T or {}                                     # {station: candidate-day temperatures} where they differ by station
         self.t_day, self.t_slot, self.fc, self.exclude, self.maps, self.seed = t_day, t_slot, fc, exclude_days, {}, None
 
     def set_seed(self, seed):
         """Map of every station for split seed `seed` (stream [seed, MAP_STREAM, crc32(station)])."""
         self.seed, self._tot = seed, {}
-        self.maps = {st: analog_map(t, self.cand, np.random.default_rng([seed, MAP_STREAM, zlib.crc32(st.encode())]),
+        self.maps = {st: analog_map(t, self.cand if st not in self.cand_T else self.cand.assign(T=self.cand_T[st]), np.random.default_rng([seed, MAP_STREAM, zlib.crc32(st.encode())]),
                                     tuple(self.fc["doy_windows"]), self.fc["tol_K"], self.fc["k_nearest"], self.exclude)
                      for st, t in sorted(self.targets.items())}
 
@@ -210,14 +225,15 @@ def station_targets(index, temp, tz, calendar, step_min):
 
 def analog_swap(pool, cfg):
     """D5: B* with every non-HP load replaced by analog days of the B* fill households (same year, +-3 d excluded;
-    candidates respond to the fill station's temperature). Membership augmentation: `add_own_fillers`."""
+    a substation's candidate days are matched on its own station's temperature, R6). Membership augmentation: `add_own_fillers`."""
     fc, step = cfg["pool"]["analog_swap"], int((pool.index[1] - pool.index[0]).total_seconds() // 60)
     targets, t_day, t_slot = station_targets(pool.index, pool.temp, None, fc["calendar"], step)
     days = targets[next(iter(targets))]["date"]
-    cand = pd.DataFrame({"date": days, "T": pool.temp[fc["fill_station"]].groupby(t_day).mean().to_numpy(),
+    cand = pd.DataFrame({"date": days, "T": targets[next(iter(targets))]["T"].to_numpy(),
                          "we": day_type(days, fc["calendar"]), "pos": np.arange(len(days))})
     S = pool.fill.to_numpy().T.reshape(pool.fill.shape[1], len(days), -1)
-    pool.analog = AnalogFill(S, list(pool.fill.columns), cand, targets, t_day, t_slot, fc, fc["exclude_days"])
+    pool.analog = AnalogFill(S, list(pool.fill.columns), cand, targets, t_day, t_slot, fc, fc["exclude_days"],
+                              {st: t["T"].to_numpy() for st, t in targets.items()})
     pool.fill_per_dwelling = True
     return pool
 
