@@ -7,7 +7,7 @@ Source: `scripts/audit/envelope_v2.py` (config `iter04_inventory`); grid sizes [
 | B* (cal2023, reference) | 86 | 5 | 1 | 62.0 | 20.0 | 1291 | 75.0 | 40.0 | 10.0 | 5.0 | 130.0 |
 | GB-EoH 2020/21 | 18 | 4 | 0 | 11.0 | 0.0 | 5093 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
 | GB-EoH 2021/22 | 433 | 29 | 3 | 309.0 | 90.0 | 5093 | 265.0 | 145.0 | 30.0 | 15.0 | 455.0 |
-| GB-EoH 2022/23 | 371 | 26 | 3 | 264.0 | 72.0 | 5093 | 190.0 | 110.0 | 30.0 | 15.0 | 345.0 |
+| GB-EoH 2022/23 | 370 | 26 | 3 | 264.0 | 71.0 | 5093 | 190.0 | 110.0 | 30.0 | 15.0 | 345.0 |
 | GB-RHPP Nov13-Feb14 | 114 | 1 | 1 | 86.0 | 28.0 | 4796 | 50.0 | 35.0 | 15.0 | 10.0 | 110.0 |
 | US-NEEA cal2023 | 57 | 3 | 0 | 42.0 | 13.0 | 49 | 20.0 | 20.0 | 5.0 | 0.0 | 45.0 |
 
@@ -35,16 +35,16 @@ Max feeder size in the grid (<= 120) and uncapped (best test station; median ove
 
 ### GB-EoH 2020/21
 
-Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London).
+Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London). HP types (HP_Installed) {'ASHP': 10, 'HT-ASHP': 8}; HP_Size_kW for 18, median 7.0 kW; oversizing HP_Size/MCS_SHLoad median 1.18 [IQR 1.04-1.31]; robust 15-min peak / HP_Size median 0.51.
 
 HP households per station (mean over 20 split seeds; stations with < 3 HP in a split build no substation):
 
-| station | test | train |
-|---|---|---|
-| G000 | 2.0 | 7.0 |
-| G001 | 1.0 | 2.0 |
-| G002 | 1.0 | 4.0 |
-| G003 | 0.0 | 1.0 |
+| station | test | train | postcode areas (top 3) |
+|---|---|---|---|
+| G000 | 2.0 | 7.0 | {'EH': 8, 'KY': 1} |
+| G001 | 1.0 | 2.0 | {'TD': 3} |
+| G002 | 1.0 | 4.0 | {'NE': 5} |
+| G003 | 0.0 | 1.0 | {'G': 1} |
 
 Test substations per Paper A penetration bin (mean per seed): {'<=15%': 0.0, '15-35%': 0.0, '35-65%': 0.0, '>65%': 0.0}
 
@@ -56,41 +56,41 @@ Max feeder size in the grid (<= 120) and uncapped (best test station; median ove
 
 ### GB-EoH 2021/22
 
-Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London).
+Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London). HP types (HP_Installed) {'ASHP': 249, 'HT-ASHP': 158, 'GSHP': 26}; HP_Size_kW for 433, median 8.5 kW; oversizing HP_Size/MCS_SHLoad median 1.21 [IQR 1.06-1.38]; robust 15-min peak / HP_Size median 0.48.
 
 HP households per station (mean over 20 split seeds; stations with < 3 HP in a split build no substation):
 
-| station | test | train |
-|---|---|---|
-| G000 | 0.0 | 1.0 |
-| G001 | 26.0 | 78.0 |
-| G002 | 34.0 | 102.0 |
-| G003 | 1.0 | 3.0 |
-| G004 | 0.0 | 2.0 |
-| G005 | 1.0 | 4.0 |
-| G006 | 4.0 | 14.0 |
-| G007 | 2.0 | 7.0 |
-| G008 | 4.0 | 11.0 |
-| G009 | 10.0 | 29.0 |
-| G010 | 1.0 | 4.0 |
-| G011 | 3.0 | 9.0 |
-| G012 | 2.0 | 4.0 |
-| G013 | 4.0 | 10.0 |
-| G014 | 2.0 | 5.0 |
-| G015 | 0.0 | 2.0 |
-| G016 | 1.0 | 3.0 |
-| G017 | 5.0 | 15.0 |
-| G018 | 0.0 | 1.0 |
-| G019 | 1.0 | 4.0 |
-| G020 | 1.0 | 2.0 |
-| G021 | 0.0 | 2.0 |
-| G022 | 2.0 | 7.0 |
-| G023 | 0.0 | 2.0 |
-| G024 | 0.0 | 2.0 |
-| G025 | 1.0 | 2.0 |
-| G026 | 0.0 | 1.0 |
-| G027 | 0.0 | 1.0 |
-| G028 | 0.0 | 1.0 |
+| station | test | train | postcode areas (top 3) |
+|---|---|---|---|
+| G000 | 0.0 | 1.0 | {'SL': 1} |
+| G001 | 26.0 | 78.0 | {'NE': 93, 'DH': 10, 'SR': 1} |
+| G002 | 34.0 | 102.0 | {'EH': 114, 'KY': 18, 'FK': 4} |
+| G003 | 1.0 | 3.0 | {'ME': 3, 'TN': 1} |
+| G004 | 0.0 | 2.0 | {'NE': 2} |
+| G005 | 1.0 | 4.0 | {'ML': 5} |
+| G006 | 4.0 | 14.0 | {'KY': 11, 'EH': 6, 'DD': 1} |
+| G007 | 2.0 | 7.0 | {'TD': 5, 'EH': 4} |
+| G008 | 4.0 | 11.0 | {'TN': 8, 'BN': 7} |
+| G009 | 10.0 | 29.0 | {'TD': 27, 'EH': 12} |
+| G010 | 1.0 | 4.0 | {'PO': 4, 'GU': 1} |
+| G011 | 3.0 | 9.0 | {'BN': 10, 'RH': 2} |
+| G012 | 2.0 | 4.0 | {'TN': 4, 'CT': 2} |
+| G013 | 4.0 | 10.0 | {'GU': 13, 'RG': 1} |
+| G014 | 2.0 | 5.0 | {'G': 7} |
+| G015 | 0.0 | 2.0 | {'TD': 2} |
+| G016 | 1.0 | 3.0 | {'GU': 3, 'SO': 1} |
+| G017 | 5.0 | 15.0 | {'KT': 12, 'TN': 5, 'CR': 2} |
+| G018 | 0.0 | 1.0 | {'OX': 1} |
+| G019 | 1.0 | 4.0 | {'PH': 4, 'FK': 1} |
+| G020 | 1.0 | 2.0 | {'TD': 3} |
+| G021 | 0.0 | 2.0 | {'SO': 2} |
+| G022 | 2.0 | 7.0 | {'RH': 6, 'KT': 2, 'GU': 1} |
+| G023 | 0.0 | 2.0 | {'DL': 2} |
+| G024 | 0.0 | 2.0 | {'HP': 1, 'SL': 1} |
+| G025 | 1.0 | 2.0 | {'KT': 2, 'TW': 1} |
+| G026 | 0.0 | 1.0 | {'CT': 1} |
+| G027 | 0.0 | 1.0 | {'IV': 1} |
+| G028 | 0.0 | 1.0 | {'OX': 1} |
 
 Test substations per Paper A penetration bin (mean per seed): {'<=15%': 265.0, '15-35%': 145.0, '35-65%': 30.0, '>65%': 15.0}
 
@@ -102,38 +102,38 @@ Max feeder size in the grid (<= 120) and uncapped (best test station; median ove
 
 ### GB-EoH 2022/23
 
-Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London).
+Fill: LCL 5093 households >= 90 % in 2012/13 (8-10 years earlier, London). HP types (HP_Installed) {'ASHP': 197, 'HT-ASHP': 150, 'GSHP': 23}; HP_Size_kW for 370, median 8.2 kW; oversizing HP_Size/MCS_SHLoad median 1.22 [IQR 1.07-1.39]; robust 15-min peak / HP_Size median 0.48.
 
 HP households per station (mean over 20 split seeds; stations with < 3 HP in a split build no substation):
 
-| station | test | train |
-|---|---|---|
-| G000 | 26.0 | 76.0 |
-| G001 | 28.0 | 86.0 |
-| G002 | 10.0 | 30.0 |
-| G003 | 1.0 | 3.0 |
-| G004 | 4.0 | 11.0 |
-| G005 | 2.0 | 6.0 |
-| G006 | 2.0 | 8.0 |
-| G007 | 2.0 | 8.0 |
-| G008 | 1.0 | 3.0 |
-| G009 | 4.0 | 14.0 |
-| G010 | 2.0 | 6.0 |
-| G011 | 0.0 | 1.0 |
-| G012 | 1.0 | 3.0 |
-| G013 | 2.0 | 6.0 |
-| G014 | 1.0 | 2.0 |
-| G015 | 1.0 | 2.0 |
-| G016 | 1.0 | 2.0 |
-| G017 | 1.0 | 2.0 |
-| G018 | 1.0 | 4.0 |
-| G019 | 0.0 | 2.0 |
-| G020 | 0.0 | 1.0 |
-| G021 | 0.0 | 1.0 |
-| G022 | 0.0 | 1.0 |
-| G023 | 0.0 | 1.0 |
-| G024 | 0.0 | 1.0 |
-| G025 | 0.0 | 1.0 |
+| station | test | train | postcode areas (top 3) |
+|---|---|---|---|
+| G000 | 25.0 | 76.0 | {'NE': 90, 'DH': 10, 'SR': 1} |
+| G001 | 28.0 | 86.0 | {'EH': 96, 'KY': 15, 'FK': 3} |
+| G002 | 10.0 | 30.0 | {'TD': 27, 'EH': 10, 'NE': 3} |
+| G003 | 1.0 | 3.0 | {'ML': 4} |
+| G004 | 4.0 | 11.0 | {'KY': 10, 'EH': 4, 'DD': 1} |
+| G005 | 2.0 | 6.0 | {'EH': 4, 'TD': 4} |
+| G006 | 2.0 | 8.0 | {'BN': 7, 'TN': 3} |
+| G007 | 2.0 | 8.0 | {'BN': 8, 'RH': 2} |
+| G008 | 1.0 | 3.0 | {'TN': 3, 'CT': 1} |
+| G009 | 4.0 | 14.0 | {'GU': 16, 'RG': 2} |
+| G010 | 2.0 | 6.0 | {'G': 8} |
+| G011 | 0.0 | 1.0 | {'OX': 1} |
+| G012 | 1.0 | 3.0 | {'PH': 3, 'FK': 1} |
+| G013 | 2.0 | 6.0 | {'KT': 4, 'TN': 2, 'ME': 1} |
+| G014 | 1.0 | 2.0 | {'TD': 3} |
+| G015 | 1.0 | 2.0 | {'SO': 3} |
+| G016 | 1.0 | 2.0 | {'PO': 2, 'GU': 1} |
+| G017 | 1.0 | 2.0 | {'TW': 2, 'KT': 1} |
+| G018 | 1.0 | 4.0 | {'RH': 4, 'GU': 1} |
+| G019 | 0.0 | 2.0 | {'DL': 2} |
+| G020 | 0.0 | 1.0 | {'TD': 1} |
+| G021 | 0.0 | 1.0 | {'DA': 1} |
+| G022 | 0.0 | 1.0 | {'DL': 1} |
+| G023 | 0.0 | 1.0 | {'CT': 1} |
+| G024 | 0.0 | 1.0 | {'NE': 1} |
+| G025 | 0.0 | 1.0 | {'OX': 1} |
 
 Test substations per Paper A penetration bin (mean per seed): {'<=15%': 190.0, '15-35%': 110.0, '35-65%': 30.0, '>65%': 15.0}
 

@@ -15,22 +15,25 @@
 
 ## 2. Conversion-step validation on real data (EoH; `scripts/audit/hplib_check.py` → `hplib_check.md`, `hplib_spf.csv`, `metrics.csv`, `figures/hplib_conversion.png`)
 
-Setup: 50 EoH air-source homes (seed 0; hybrids and GSHP excluded; drawn among the homes with a complete 2021/22 season of whole-system electricity **and** heat output), 348 403 valid 30-min bins. Measured HP electricity = whole system − immersion − back-up − circulation pump (EoH definition). Prediction P̂ = Q_meas / COP(T_ext, T_flow), where T_flow is the DHW flow in DHW bins, else the SH flow, else return + 5 K. If Q exceeds hplib's full-load output, the excess is supplied at COP 1. **Rated power is not on disk**, so the generic HP is sized to the home's 99.5th-percentile 30-min heat output at A2/W35 (assumption).
+Setup: 50 EoH air-source homes (seed 0; 34 ASHP + 16 HT-ASHP per `HP_Installed`; hybrids and GSHP excluded; drawn among the homes with a complete 2021/22 season of whole-system electricity **and** heat output), 349 812 valid 30-min bins. Measured HP electricity = whole system − immersion − back-up − circulation pump (EoH definition). Prediction P̂ = Q_meas / COP(T_ext, T_flow), where T_flow is the DHW flow in DHW bins, else the SH flow, else return + 5 K. If Q exceeds hplib's full-load output, the excess is supplied at COP 1. **Rated power = `HP_Size_kW`** from the EoH property table, taken as the thermal output at A7/W35 (assumption: the table does not state the rating point). Sensitivity: the earlier proxy (99.5th-percentile 30-min heat output at A2/W35). The draw differs from the first version of this check, because homes are now selected by `HP_Installed` instead of channel-inferred type.
 
-| hplib generic | 30-min WAPE | 30-min bias | daily WAPE | daily bias | daily WAPE after one global rescale (in-sample) | SPF bias, median [10–90 %] |
+| hplib generic, sizing | 30-min WAPE | 30-min bias | daily WAPE | daily bias | daily WAPE after one global rescale (in-sample) | SPF bias, median [10–90 %] |
 |---|---|---|---|---|---|---|
-| group 1, regulated air/water | 29.0 % | −19.6 % | 21.7 % | −19.7 % | 13.8 % | **+27.5 %** [+10.9, +43.1] (measured median SPF 2.98, predicted 3.81) |
-| group 4, on-off air/water | 22.2 % | −17.4 % | 18.8 % | −17.5 % | 11.6 % | +22.2 % [+7.8, +36.6] |
+| **group 1 regulated, `HP_Size_kW`** | 29.7 % | −25.8 % | 26.8 % | −25.9 % | 13.3 % | **+37.2 %** [+15.1, +57.9] (measured median SPF 2.86, predicted 4.00) |
+| group 4 on-off, `HP_Size_kW` | 24.0 % | −12.8 % | 17.9 % | −12.9 % | 14.6 % | +16.9 % [−2.2, +34.1] |
+| group 1 regulated, proxy size | 29.5 % | −21.6 % | 23.1 % | −21.8 % | 13.8 % | +28.6 % [+10.5, +44.6] |
 
-By outdoor temperature (group 1, daily bias): −22.5 % at (−2, 2] °C, −20.8 % at (2, 6], −17.1 % at (6, 10], −20.3 % at (10, 14]. At 30 min: −15.7 % below −2 °C (1.3 % of energy), −32.8 % above 14 °C.
+By HP type (daily, group 1, `HP_Size_kW`): ASHP WAPE 29.3 % / bias −28.4 % (70 % of energy); HT-ASHP 20.9 % / −20.1 %. With group 4, HT-ASHP is nearly unbiased (−1.3 %, WAPE 12.3 %), ASHP −18.0 %.
+By outdoor temperature (group 1, `HP_Size_kW`, daily bias): −23.6 % at (−2, 2] °C, −25.4 % at (2, 6], −26.8 % at (6, 10], −30.7 % at (10, 14]. At 30 min: −17.4 % below −2 °C (1.4 % of energy), −41.2 % above 14 °C.
 
 **Where it fails**
-- **Systematic optimism:** the generic Keymark COP is about 20 % too high for these field installations at every temperature (group 1). Most of the daily error is this level bias: after one scalar rescale the daily WAPE falls from 21.7 % to 13.8 %. This agrees with the known gap between certificate and field SPF.
-- **Standby / idle (Q ≈ 0):** 34 % of the bins and 2.3 % of HP electricity. hplib predicts 0, so the error there is 100 %.
-- **DHW periods:** 21 % of energy; WAPE 33 % vs 26 % in space heating, bias −16 %. hplib has no tank or DHW mode; T_out is only the DHW flow temperature.
-- **Back-up active:** 1.2 % of energy (WAPE 33 %). The immersion/back-up draw is not part of P̂ here, because it is metered separately and excluded from P.
-- **Cold days / defrost:** not identifiable in 2021/22. Only 1.3 % of energy fell below −2 °C, and the bias there (−16 %) is *smaller*, not larger. The defrost band (≈ −5…+5 °C, humid) cannot be separated without humidity data. The cold 2022/23 winter (Dec 2022) would be the better test.
-- **Capacity limit:** group 1 sized at the 99.5th pct is exceeded in 6.0 % of bins (group 4: 0.5 %), so the rated-power proxy matters for peaks.
+- **Systematic optimism:** the generic Keymark COP is about 20–30 % too high for these field installations at every temperature (group 1), more for standard ASHP than for HT-ASHP. Most of the daily error is this level bias: after one scalar rescale the daily WAPE falls to 13–15 % in all three variants. This agrees with the known gap between certificate and field SPF.
+- **Rated size matters through the capacity limit, not the COP map.** With the real (larger) size, measured heat exceeds hplib's full-load output in only 1.7 % of bins (proxy: 5.5 %). Fewer bins get the COP-1 top-up, so the bias grows from −21.8 % to −25.9 %. The on-off map (group 4) happens to sit closest in level; neither map is right in shape (see rescaled WAPE).
+- **Standby / idle (Q ≈ 0):** 35 % of the bins and 2.3 % of HP electricity. hplib predicts 0, so the error there is 100 %.
+- **DHW periods:** 21.5 % of energy; WAPE 33 % vs 27 % in space heating (rescaled: 27 % vs 16 %). hplib has no tank or DHW mode; T_out is only the DHW flow temperature.
+- **Back-up active:** 1.2 % of energy (WAPE 36 %). The immersion/back-up draw is not part of P̂ here, because it is metered separately and excluded from P.
+- **Cold days / defrost:** not identifiable in 2021/22. Only 1.4 % of energy fell below −2 °C, and the bias there (−17 %) is *smaller*, not larger. The defrost band (≈ −5…+5 °C, humid) cannot be separated without humidity data. The cold 2022/23 winter (Dec 2022) would be the better test.
+- **Heat-meter dropouts:** one home reports zero heat output for 100 days while drawing 10–30 kWh/day (1.4 % of energy in the earlier draw), which inflates the standby error.
 - RHPP not run: it has no outdoor-air temperature (T_in is refrigerant/ground-loop), so only a daily check against HadCET would be possible. It is left for the simulator's calibration stage.
 
-**Implication for the simulator:** hplib's generic COP map cannot be used as-is. It needs (i) a per-population COP scale (≈ 0.80–0.85, to be calibrated and validated out-of-sample), (ii) a standby term and (iii) explicit DHW and cycling layers. The conversion error after rescaling (daily WAPE ≈ 12–14 %) is the floor for any simulator built on it.
+**Implication for the simulator:** hplib's generic COP map cannot be used as-is. It needs (i) a per-population COP scale (≈ 0.75–0.85, differing by ASHP vs HT-ASHP, to be calibrated and validated out-of-sample), (ii) a standby term and (iii) explicit DHW and cycling layers. The conversion error after rescaling (daily WAPE ≈ 13–15 %) is the floor for any simulator built on it.

@@ -8,7 +8,7 @@ Criteria (from the iteration file): **P** HP submeter ≤ 30 min, ≥ 1 complete
 
 | Dataset | P – capacity pool | T – transfer | C – change detection | S – simulation | R – real aggregate |
 |---|---|---|---|---|---|
-| **EoH (SN 9050)** | **partial.** 739 homes with 2-min HP-system data; 506 non-hybrid homes with ≥ 1 season (2021/22: 433, 2022/23: 371); robust peak computable; 30 shared weather-station groups, **3 with ≥ 30 HP**. **No whole-house load** → fill must come from another dataset; no nameplate on disk (HP_Size_kW is in the USmart table) | **yes (constructed).** GB population, 30-min, different climate/stock/control from B\* | **partial.** 300 non-hybrid homes with both 2021/22 and 2022/23; only 11 homes (incl. hybrids) have 3 seasons | **yes.** Heat meter in 608 homes with a complete season; SH and DHW flow temperature, return, T_ext per home, internal temperature; type from channels; rated power not on disk | no |
+| **EoH (SN 9050 + USmart property table)** | **partial (fill only).** 739 homes with 2-min HP-system data; 505 non-hybrid homes with ≥ 1 season (2021/22: 433, 2022/23: 370); robust peak computable; **rated size `HP_Size_kW` and MCS design heat load for every home**; postcode district for every home; 30 shared weather-station groups (Edinburgh/Fife, Tyneside, Borders, SE England), **3 with ≥ 30 HP**. **No whole-house load** → fill must come from another dataset (the only household electricity is annual pre-install bills, 220 of 742) | **yes (constructed).** GB population, 30-min, different climate/stock/control from B\* | **partial.** 300 non-hybrid homes with both 2021/22 and 2022/23; only 11 have 3 seasons | **yes.** Heat meter in 608 homes with a complete season; SH and DHW flow temperature, return, T_ext per home, internal temperature; type (`HP_Installed`: ASHP / HT-ASHP / GSHP / hybrid), brand/model, rated size, design heat load and design flow temperature | no |
 | **RHPP B2 (SN 8151)** | **partial.** 418 sites, 2-min; only 169 with a complete Nov–Mar season (B2 is one year per site, any start month); **114** cover Nov 2013–Feb 2014 at ≥ 90 %; **installer capacity for 405/418**; no outdoor temperature, no location (single GB region, HadCET) | **yes (constructed with LCL fill, concurrent)** | no (one year per site) | **partial.** Heat output, flow and condenser temperatures, DHW/boost split, type; **no outdoor-air temperature** (T_in is refrigerant/ground loop) | no |
 | **LCL smart meters (SN 7857)** | fill only: 5 198 households (30 min, 2011-11 → 2014-02); 5 093 cover 2012/13 at ≥ 90 %, 4 796 cover Nov 13–Feb 14 | fill for GB pools | no | no | no |
 | **LCL HP trial (`lcl_heatpump/`)** | no: 9 homes, 6 with 2 seasons, no capacity label, no whole-house load | no | too small (6) | no heat output | no |
@@ -34,7 +34,7 @@ Rules reused unchanged from `scripts/paperb/`: household-disjoint 75/25 split (H
 |---|---|---|---|---|---|---|
 | **B\*** (cal2023, reference) | 86 | 5 (1) | 62 / 20 | 1 291 Kaiser | 75 / 40 / 10 / 5 | 130 |
 | **GB-EoH 2021/22** (non-hybrid) | 433 | 29 (3) | **309 / 90** | 5 093 LCL | 265 / 145 / 30 / 15 | 455 |
-| GB-EoH 2022/23 (non-hybrid) | 371 | 26 (3) | 264 / 72 | 5 093 LCL | 190 / 110 / 30 / 15 | 345 |
+| GB-EoH 2022/23 (non-hybrid) | 370 | 26 (3) | 264 / 71 | 5 093 LCL | 190 / 110 / 30 / 15 | 345 |
 | GB-EoH 2020/21 | 18 | 4 (0) | 11 / 0 | – | 0 | 0 |
 | **GB-RHPP** Nov 13–Feb 14 | 114 | 1 "GB" (1) | 86 / 28 | 4 796 LCL (concurrent) | 50 / 35 / 15 / 10 | 110 |
 | B\*+ | 86 + 7 | – | extras fall in windows without concurrent fill or in cells < 3 HP → **envelope identical to B\*** | | | |
@@ -46,13 +46,15 @@ Max feeder size (best test station, median over seeds; grid ≤ 120 / uncapped):
 
 | pool | HP period / climate | fill period / climate | mismatch |
 |---|---|---|---|
-| GB-EoH | Nov 2021–Mar 2022 (or 2022/23); 29 weather-station groups across GB (locations not on disk; T_ext per home) | LCL, London, 2011-11 → 2014-02 | **8–10 years** (appliance stock, lighting, COVID-era occupancy vs 2012); London vs GB-wide weather sequence → the fill's weather-driven load is not aligned in time with the substation temperature unless days are re-matched |
+| GB-EoH | Nov 2021–Mar 2022 (or 2022/23); 29 weather-station groups: Edinburgh/Fife/Borders (Warmworks), Tyneside (E.ON), SE England (OVO) | LCL, London, 2011-11 → 2014-02 | **8–10 years** (appliance stock, lighting, COVID-era occupancy vs 2012); London vs Scotland / NE / SE England weather → the fill's weather-driven load is not aligned in time with the substation temperature unless days are re-matched |
 | GB-RHPP | Nov 2013–Feb 2014, GB-wide, no location | LCL, London, same window | concurrent; spatial mismatch unknown (RHPP has no location); 4-month window, not a full season |
 
 Fill temperature response, LCL (daily mean per dwelling vs HadCET, Jul 2012–Jun 2013, hockey-stick, T_h free in 8–20 °C): **all 4 329 households s₀ = 0.0133 kW/K** (T_h 14.2 °C, R² 0.84), **2.4× B\*'s 0.0055**; gas-heated with no portable electric heater (survey subset, 78 households) s₀ = 0.0070 kW/K (R² 0.60). Choosing the "clean" LCL subset brings s₀ close to B\* but shrinks the fill pool to the ~80 surveyed households, which caps feeder size (like NEEA).
 
 ## 4. Population notes
 
-- EoH 2021/22 non-hybrid: robust 15-min peak median **3.8 kW** (IQR 3.3–5.0) vs B\* HP_Peak median 5.4 kW (IQR 4.0–8.6); immersion + back-up heater = 1.7 % of HP-system energy (median; > 5 % in 76 of 433 homes). 406 ASHP (incl. HT-ASHP), 27 GSHP; 151 hybrids excluded (boiler counter unreliable: 724 k negative 2-min diffs).
+- EoH 2021/22 non-hybrid (433): 249 ASHP, 158 HT-ASHP, 26 GSHP (`HP_Installed`); 154 hybrids excluded (boiler counter unreliable: 724 k negative 2-min diffs). Channel-inferred types agreed with `HP_Installed` for all but 4 monitored homes (3 hybrids without a boiler meter, 1 HT-ASHP with brine channels).
+- Rated size `HP_Size_kW` median **8.5 kW** (IQR 7.0–11.2); MCS design heat load median 6.9 kW (IQR 5.0–8.5); **oversizing HP_Size / MCS_SHLoad median 1.21 (IQR 1.06–1.38)**. Robust 15-min electrical peak median **3.8 kW** (IQR 3.3–5.0), i.e. **0.48 × rated size** (IQR 0.41–0.55; RHPP 0.47), vs B\* HP_Peak median 5.4 kW (IQR 4.0–8.6). Immersion + back-up = 1.7 % of HP-system energy (median; > 5 % in 76 of 433 homes).
+- Stock: 197 detached, 122 semi, 87 terraced, 27 flats; floor area median 101 m² (IQR 83–130); all age bands, most 1945–1980.
 - RHPP window homes: robust peak median 3.9 kW vs installer capacity median 8.5 kW (peak/label median 0.47; label is thermal "net capacity"); 94 ASHP / 20 GSHP.
 - Timestamps: EoH has no gap or duplicate at the DST changes → UTC/GMT; RHPP and LCL as in Paper A.

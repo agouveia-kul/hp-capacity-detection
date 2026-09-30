@@ -1,9 +1,13 @@
 exp_id,split_seed,dataset,target,method,anchor,metric,value,n_substations,n_hp_households
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1,30min,WAPE %,29.0,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1,30min,bias %,-19.6,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1,daily,WAPE %,21.7,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1,daily,bias %,-19.7,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4,30min,WAPE %,22.2,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4,30min,bias %,-17.4,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4,daily,WAPE %,18.8,0,50
-iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4,daily,bias %,-17.5,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_nameplate,30min,WAPE %,29.7,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_nameplate,30min,bias %,-25.8,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_nameplate,daily,WAPE %,26.8,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_nameplate,daily,bias %,-25.9,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4_nameplate,30min,WAPE %,24.0,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4_nameplate,30min,bias %,-12.8,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4_nameplate,daily,WAPE %,17.9,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g4_nameplate,daily,bias %,-12.9,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_proxy,30min,WAPE %,29.5,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_proxy,30min,bias %,-21.6,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_proxy,daily,WAPE %,23.1,0,50
+iter04_inventory,0,EoH 2021/22,P_el_hp,hplib_generic_g1_proxy,daily,bias %,-21.8,0,50

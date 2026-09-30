@@ -10,5 +10,5 @@ hplib:
   n_sites: 50              # conversion check: <= 50 EoH homes, one season
   season: "2021/22"
   seed: 0                  # draws the homes
-git_commit: c5a8a8a   # code commit (iter/04-data-inventory)
+git_commit: fcb2740   # code commit (iter/04-data-inventory); first version c5a8a8a
 protocol_grid_from: configs/protocol_v1.yaml (grid block, unchanged)

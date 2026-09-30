@@ -29,3 +29,15 @@ Bugs fixed during the run (no effect on committed numbers): NEEA residual became
 
 Literature search: scite MCP monthly quota exhausted on the first call; Consensus search used instead (3 queries,
 one rate-limited). References marked "unverified" in simulation_design.md were not retrieved in this session.
+
+Update 2026-09-30 (property table, code commit fcb2740):
+- Alex supplied the EoH USmart Property/Design/Installation table as data/9bbf3b4f-5b33-4652-b385-d69ba68004d0.csv
+  (3,206 properties, 128 columns, 743 installed). Copied unchanged to
+  data/_paperb/raw/eoh/eoh_property_design_installation.csv (MD5 176b95c524187f0fa240eb00e5ee523c for both); the
+  original was only read. Licence terms of the USmart download are not on disk.
+- All 739 monitored homes join (by Property_ID); 4 installed properties have no performance data (3 empty files + 1
+  without a file). EoH type now = HP_Installed (ASHP 306 / HT_ASHP 244 / Hybrid 154 / GSHP 38 of 742 files); the
+  channel inference disagreed for 4 monitored homes (3 hybrids without a boiler channel, 1 HT_ASHP with brine channels).
+- GB-EoH 2022/23 changes from 371 to 370 HP households (one hybrid previously kept); 2021/22 unchanged (433).
+- hplib check redrawn from the corrected candidate set (same seed 0; 34 ASHP + 16 HT-ASHP) and rerun with
+  HP_Size_kW as rated power (A7/W35 assumed) plus the percentile proxy as sensitivity: runtime ~25 s.

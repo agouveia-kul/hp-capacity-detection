@@ -39,14 +39,14 @@ Source: `scripts/audit/inventory_v2.py` (config `iter04_inventory`); EoH via `sc
 - **complete_seasons_per_unit:** 0: 113, 1: 267, 2: 351, 3: 11
 - **units_per_season:** {'2020/21': 18, '2021/22': 524, '2022/23': 460}
 - **units_with_heat_meter_>=1_season:** 608
-- **weather:** T_ext per home (local weather station), >=50% of 30-min bins in 737 homes; no coordinates on disk
-- **capacity_label:** robust peak (P_ws); HP_Size_kW and MCS_SHLoad exist only in the USmart Property/Design/Installation table (not on disk)
-- **hp_type:** ASHP/HT-ASHP (inferred): 549 / hybrid: 151 / GSHP: 39 / empty: 3 (from channels; HP_Installed not on disk)
+- **weather:** T_ext per home (local weather station), >=50% of 30-min bins in 737 homes; postcode district (Postcode_1) for station matching
+- **capacity_label:** HP_Size_kW (rated, property table) for 742 homes, median 7.0 kW; MCS_SHLoad (design heat load) for 741; oversizing HP_Size/MCS_SHLoad median 1.14; robust peak (P_ws)
+- **hp_type:** ASHP: 306 / HT-ASHP: 244 / hybrid: 154 / GSHP: 38 (HP_Installed); channel-inferred type agrees for 735 of 742
 - **backup_channels:** immersion (P_ih) 379, back-up heater (P_buh) 24
 - **dhw_channels:** DHW flow temperature 583 (no separate DHW heat/electricity)
-- **building_metadata:** none on disk (House_Form, House_Age, floor area, tenure are in the USmart table)
-- **location:** none on disk (Postcode_1 in the USmart table)
-- **licence:** Open Government Licence v2.0 (UKDA_Study_9050_Information.htm); cite DOI 10.5255/UKDA-SN-9050-2
+- **building_metadata:** House_Form 742, House_Age 742, Total_Floor_Area 742, Tenure 742; annual pre-install electricity (bills) 220
+- **location:** postcode district for 742; by delivery contractor {'E.ON': 309, 'Warmworks': 305, 'OVO': 128}; top areas {'NE': 283, 'EH': 188, 'TD': 49, 'KY': 34, 'TN': 24, 'GU': 21}
+- **licence:** performance data: Open Government Licence v2.0 (UKDA_Study_9050_Information.htm), DOI 10.5255/UKDA-SN-9050-2; property table: USmart download supplied by Alex, licence not on disk (3206 properties, 743 installed)
 
 ### RHPP Sample B2 (UKDS SN 8151)
 
