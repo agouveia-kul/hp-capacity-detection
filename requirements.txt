@@ -96,6 +96,7 @@ notebook==7.1.1
 notebook_shim==0.2.4
 numba==0.60.0
 numpy==1.26.4
+openpyxl==3.1.5
 opt-einsum==3.3.0
 osqp==0.6.7.post3
 overrides==7.7.0
