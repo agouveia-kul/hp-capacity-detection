@@ -29,13 +29,16 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
 - **RQ3 — transfer.** Test CH → DE (FeederBW real feeders; WPuQ as a stress test) and a third domain (UKPN / RHPP / others). Compare raw-series vs physics-feature vs hybrid models, and fixed vs latent T_base.
 - **RQ4 — change detection.** Over a multi-year horizon with a given uptake probability, can capacity change be detected (minimum detectable change at a fixed false-alarm rate, detection delay) and quantified (relative, and registry-anchored absolute)?
 
-### Iteration plan (renumbered in iteration 04, 2026-09-30)
-- 03a / 03b — fair test of ML against the physics estimator (code / runs);
-- 04 — data inventory for larger pools and HP-profile simulation feasibility;
-- 05 — other targets and the daily arm (RQ1);
-- 06 — transfer (RQ3);
-- 07–08 — change detection (RQ4);
-- 09+ — freeze and draft.
+### Iteration plan (renumbered 2026-09-30, before iteration 05a)
+- 03a / 03b — fair test of ML against the physics estimator (code / runs); done;
+- 04 — data inventory for larger pools and HP-profile simulation feasibility; done;
+- 05a / 05b — GB-EoH pool with analog-matched LCL filler (code) / is training data what holds ML back? (runs);
+- 06 — other targets and the daily arm (RQ1), both pools;
+- 07 — transfer (RQ3), incl. CH↔GB and the RHPP nameplate arm;
+- 08–09 — change detection (RQ4), EoH multi-year panel;
+- 10+ — freeze and draft.
+
+**Current paper lead (03b):** identifiability-bounded learning. On B\*, no ML configuration beat the best physics row under the pre-registered criterion (§4).
 
 ## 2. Environment
 
@@ -59,14 +62,42 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
    - Keep the reviewed diff small, about 300 lines of new or changed logic. Files copied unchanged, and generated results, don't count, but list them.
    - If the work is bigger, stop and propose a split.
 6. **Do not merge.** Commit to the iteration branch and push it. Alex reviews and merges.
-7. **Smoke first.** Every experiment script takes `--config` and has a `quick` config that runs in under about 5 minutes on a small subset. Run `quick` before any long run. Long runs (> 30 min) need the estimated runtime stated before launching.
+7. **Smoke first; long runs overnight.** Every experiment script takes `--config` and has a `quick` config that runs in under about 5 minutes on a small subset. Run `quick` interactively before any long run.
+   - Long runs (> 30 min) state their estimated runtime.
+   - They go through the resumable job queue (`scripts/paperb/run_queue.py`, from 05a), which runs one job per (arm, seed, draw, n, family), skips finished jobs on relaunch and keeps the PC awake via `SetThreadExecutionState`.
+   - They are scheduled overnight with `scripts/schedule_overnight.ps1`. **Never register a scheduled task yourself**: print the command, and Alex runs it.
+   - Runtime is not a reason to cut arms. If a run needs more than ~3 nights, ask first.
 8. **Seeds everywhere.** Every random operation takes an explicit seed from the config.
 9. **Report honestly.** Report numbers that get worse. Never tune on test data. Never silently drop a failing case; list it.
 10. **Hyperopt and every stochastic search must be seeded** (`HYPEROPT_FMIN_SEED` or `rstate`).
+11. **Paper-facing methods need checked references.**
+    - Any methodological choice that will appear in the paper (a data-fusion step, a matching rule, a statistical test, a label definition) must be backed by references that you have **retrieved and checked**: title, authors, year, venue, DOI or link.
+    - Record them in the iteration's `method_basis.md` or in `references.bib`.
+    - Mark anything not retrieved as **unverified**. Never invent a citation or a DOI.
+    - If no precedent exists, say so explicitly.
+12. **Pre-registration.** When an iteration states a decision rule or pass/fail thresholds, they are fixed before any run. Never change them after seeing results; report every outcome.
 
 ## 4. Evaluation protocol (target state)
 
 Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02a, code in `scripts/paperb/`). Results produced before it are "legacy protocol" and must be labelled as such.
+
+**Protocol v1.1** (from 05a) = v1 + p = 0.8 in the grid, for all pools; everything else is unchanged. `protocol_v1.yaml` is kept for reproducing 02b–03b.
+
+**Pools:**
+
+| Pool | Role | HP households | Resolution | Non-HP load |
+|---|---|---|---|---|
+| **B\*** | headline, CH | 86 (≈ 62 train / 20 test per seed), cal2023 | 15-min | same-year Kaiser/HEAPO fill, plus each HP home's own non-HP load |
+| **GB-EoH** | second full-grid pool (from 05a) | ≈ 433 non-hybrid (2021/22), 371 (2022/23 replication) | 30-min | flat-rate LCL households, analog-day matched (see `fill_analog.py`); one LCL household per dwelling, HP dwellings included |
+| **B** | sensitivity | 47, KLO only | 15-min | as B\* |
+
+Cross-pool comparisons use gaps to the best physics row, not absolute WAPE (label resolution differs).
+
+**Pre-registered comparison criterion (03a).** ML "beats physics" only if both hold, overall and per Paper A penetration bin:
+- the paired per-seed ΔWAPE against the best physics row is < 0 in ≥ 16 of 20 seeds (≥ 80 % of seed × draws for learning curves);
+- the median ΔWAPE is ≤ −1 pp.
+
+Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always reported.
 
 - **Household-disjoint splits.** Split households into train/test pools **before** building substations. No household may appear in both. Stratify HP households by weather station.
 - **No stacking within a substation.** Each dwelling in a substation is a distinct household (`build_substations_norepl`). Feeder size and penetration are bounded by the pool, and those bounds are reported.
@@ -79,14 +110,31 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
   - hockey-stick slope-only map;
   - slope + base;
   - calibrated delta (mean/mean, through origin);
-  - HDH variant.
+  - HDH variant;
+  - Paper A's estimators:
+    - `paperA_sh_mh`: s_h / m_h with the all-train pilot;
+    - `paperA_corr`: the non-TCL-corrected version, with s₀ from the train fill;
+    - `paperA_cal`: bias-calibrated with the cross-fitted pilot.
+- **Reference set for tables (from 03b).** These rows are always named in tables for continuity; they are **not a model filter**:
+  - physics: `slope_base`, `paperA_corr`, `paperA_cal` (+ `paperA_sh_mh` as Paper A's row);
+  - ML: netfit + Lasso [size] direct, Lasso residual, XGBoost direct.
+- **Model families (from 05a/05b; all stay in the pipeline and in every arm):**
+  - linear: Linear, Ridge, Lasso, ElasticNet, PLS;
+  - kernel: SVR, Kernel Ridge, GP regression;
+  - trees: XGBoost, Random Forest, Extra Trees, CatBoost;
+  - neural: FFNN (full budget, 50 evals, patience 20), TabPFN (TabPFN-3.5, checkpoint `tabpfn-v3.5-20260909.safetensors` loaded via `model_path`, `tabpfn` ≥ 9.0.0; non-commercial licence, fine for this research). The weights are downloaded by Alex from Hugging Face into `TABPFN_MODEL_CACHE_DIR` and loaded locally. Never print or commit tokens.
+  - raw-series: 1D-CNN on the daily net-load and T series (feature-free check).
+
+  The models added in 05b are used from 05b on; 05a's D5 uses the families as they stand in 05a.
+
+  Compare families by **one inner-CV winner per family**, never by test. `XGBoost_mono` is retired.
 - **Transfer sets are never used for any fitting, selection or calibration** unless the experiment is explicitly a domain-adaptation experiment and says so.
 
 ## 5. Target definitions (use these names)
 
 | Name | Definition |
 |---|---|
-| `HP_Peak` | Sum over HP members of the per-household 99.9th percentile of 15-min HP submeter draw. Non-coincident observed peak; includes backup-rod draw. (Current legacy target.) |
+| `HP_Peak` | Sum over HP members of the per-household 99.9th percentile of HP draw. Non-coincident observed peak; includes backup-rod draw. Resolution and channel per pool: B\* uses the **15-min** HP submeter; GB-EoH uses the **30-min whole heating-system electricity** (compressor + backup + immersion + pumps). Primary target. |
 | `HP_CoincPeak` | Max of the aggregated HP submeter series of the substation. Definition to be revisited in 03 (raw max vs 99.9th pct). |
 | `HP_Count` | Number of HP households in the substation. |
 | `HP_Nameplate_el` | HEAPO `HeatPump_Installation_Normpoint_ElectricPower`. **Household-level only** (nameplate vs observed-peak distribution); not a substation benchmark target (decision 2026-09-29). |
@@ -103,6 +151,10 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 | `scripts/hp_pools.py` | Household pools: HEAPO, Swiss (Kaiser et al.), combined, WPuQ; `filter_pool_electric_heating`, `restrict_pool`. |
 | `scripts/hp_capacity.py` | Windowed-HDD features, `build_substations_norepl`, `household_pool_split`, WPuQ/FeederBW builders, `tune_xgb_cv`, metrics. |
 | `src/heapo.py` | HEAPO loader (smart meter, weather, protocols). |
+| `scripts/paperb/` | Protocol v1 pipeline: `substations.py` (cells, members, labels), `splits.py` (household splits, grouped inner folds), `physics.py` (hockey stick, Paper A estimators), `features_netfit.py`, `train.py` (model registry), `residual.py`, `learning_curve.py`, `metrics.py` (WAPE), `tables.py`, `summarise.py`, `run_benchmark.py` (entry point, `--config`). New in 05a: `pools/gb_eoh.py`, `fill_analog.py`. |
+| `scripts/audit/` | Read-only audit code (01 pool audit, 04 inventory: `eoh_convert.py`, `inventory_v2.py`, `envelope_v2.py`, `hplib_check.py`). |
+| `configs/` | `protocol_v1.yaml`, per-iteration configs (`iterNN_quick.yaml` for smoke runs), pool configs (`pool_*.yaml`, from 05a). |
+| `tests/` | pytest suite; `slow` tests are skipped by default (`pytest -m slow` runs them). Run as `.venv\Scripts\python -m pytest`. |
 | `models/` | Legacy trained models (read-only). |
 | `results/<exp_id>/` | All new outputs (see §7). |
 | `iterations/` | Instructions for each iteration (`NN-*.md`) — read the current one. |
@@ -115,7 +167,10 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 - **WPuQ:** `2019_data_15min.hdf5`, `2020_data_15min.hdf5`, `*_weather.hdf5`.
 - **FeederBW:** `FeederBW/` (200 feeders, 2023-04 → 2025-03, `feeder_metadata.csv`, `weather_data.parquet`).
 - **UKPN:** `ukpn-smart-meter-consumption-lv-feeder.csv`, `ukpn-smart-meter-consumption-substation.csv`, `ukpn-low-carbon-technologies-secondary.csv`.
+- **Electrification of Heat (EoH), UKDS SN 9050:** `9050csv_cleansed_data_set{1..4}_*.zip` (originals, never touch). The 30-min parquet conversion is in `_paperb/pools_raw/eoh/`, and the docs are in `_paperb/raw/eoh/`. The USmart Property/Design/Installation table (supplied by Alex, licence not on disk; original `9bbf3b4f-*.csv`) is copied to `_paperb/raw/eoh/eoh_property_design_installation.csv`: `HP_Installed`, `HP_Size_kW`, `MCS_SHLoad`, postcode district `Postcode_1`. There is no whole-house meter; the 30 weather groups (identical outdoor-T series) serve as stations.
+- **Low Carbon London (LCL):** `LCL_2013.zip`. The public release is 5,567 London households, Nov 2011 – Feb 2014, 30-min, with a tariff column `Std`/`ToU`. Filler uses `Std` only, and it has no heating label (05a Task 1 checks what is on disk). Temperature for LCL (04, reused in 05a): HadCET daily mean, `hadcet/meantemp_daily_totals.txt` (Central England composite, not a London station).
 - **Other HP data:** `rhpp_daily.parquet`, `rhpp_sites.parquet`, `RHPP_GB.zip`, `lcl_heatpump/`, `neea_*.parquet`, `bpa_hphc/`, `nrel_ccashp/`, `cofactor_ds1/`, `carleton/`, `15minuteFluvius.csv`.
+- **Paper B caches (writable):** `_paperb/`: features, pools_raw, raw docs, iteration caches.
 - **Legacy Paper-B caches (read-only):** `substations_data_pooled.pkl`, `_X_swiss_pooled.pkl`, `_combined_pool_cache.pkl`, `_swiss_pool_cache.pkl`, `_design_pool_cache.pkl`, `_wpuq_pool_cache.pkl`, `capacity_*.csv`, `xgb_*.csv`, `hockey_*.csv`, `*_penetration_*.csv`.
 
 ## 8. Results contract
@@ -164,3 +219,8 @@ Then stop and wait for review. Do not start the next iteration.
   - **F13** early stopping on a household-disjoint training fold, never on the scored fold (`tune_grouped_cv`).
   - **F14** notebook cell 88 refitted on train (`scripts/legacy_fixes/hdh_hourly_ridge.py`); the cell is marked LEGACY.
   - **Fixed in 03b** (protocol v1 code, `scripts/paperb/`; `paperA_*` estimators report `HP_Peak` only): residual targets and the bias calibration use cross-fitted pilots (household-disjoint from the substation); Berchtoldstag is a `netfit` holiday; WAPE is also reported in Paper A's penetration bins (`pbin...` cells).
+- **Data issues found in 04 (GB pools):**
+  - **EoH:** 3 empty property files; the hybrid boiler counter is unreliable (hybrids are excluded); heat-meter dropouts are recorded as 0, not missing; the UKDA summary dates differ from the file contents for 187 of 739 homes (use the files); `HP_Installed` / `HP_Size_kW` are only in the USmart property table (on disk since 04, see §7).
+  - **Fill s₀ (kW/K per dwelling):** B\* 0.0055; LCL 0.0133. The "gas-only" LCL subset (0.0070) has unverified provenance: use it only if 05a traces it to a documented label.
+  - **The > 65 % penetration bin** is grid-limited (p = 1.0 only) under v1; v1.1 adds p = 0.8.
+  - **hplib** under-predicts EoH HP electricity (daily WAPE 21.7 %, bias −19.7 %) and over-predicts SPF by +27.5 %. The simulator is deferred until the 05b verdict.
