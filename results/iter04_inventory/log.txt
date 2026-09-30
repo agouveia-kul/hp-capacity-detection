@@ -1,0 +1,31 @@
+Iteration 04 -- data inventory (read-only audit). Code commit c5a8a8a. Run 2026-09-30 on Windows, .venv Python 3.12.
+
+Disk (C:, df -h): before 425 GB free of 944 GB; after 425 GB free (+363 MB written: data/_paperb/raw/eoh 1 MB docs,
+data/_paperb/pools_raw/eoh 347 MB parquet, data/_paperb/iter04 16 MB caches). EoH zips (5.2 GB compressed, 31.1 GB
+uncompressed) were NOT extracted: property CSVs were streamed from the zips; only the dictionary, summary CSV and UKDA
+htm/pdf were extracted to data/_paperb/raw/eoh/. `find data -newermt "2026-09-30 11:30"` outside data/_paperb: nothing.
+
+Runtimes (wall): eoh_convert.py 897 s (742 properties); inventory_v2.py 54 s with caches (first builds: NEEA fits ~30 s,
+Pecan 3 s, Fluvius 33 s); envelope_v2.py 10 s with caches (LCL daily scan first build ~4 min); hplib_check.py 18 s.
+
+New dependency: openpyxl==3.1.5 (EoH / RHPP xlsx), pinned in requirements.txt.
+
+Dropped / excluded cases:
+- EoH: 3 empty property files (EOH0345, EOH1880, EOH2705; 3 bytes each) listed, not converted.
+- EoH: 151 hybrid homes (boiler heat meter present) excluded from GB-EoH pools and from the hplib check; their boiler
+  counter has 724,250 negative 2-min diffs in total. 39 GSHP kept in pools, excluded from the hplib check (air-source only).
+- EoH cumulative counters: 2-min diffs < 0 or above a plausibility cap (30 kW whole system, 60 kW heat) set missing;
+  negative diffs: P_ws 2,033, Q_hp 8,234, P_ih 2,489, P_cp 3,026, P_buh 145 (all properties).
+- EoH 2020/21: only 18 homes with a complete season -> no feasible test substations (listed in envelopes.md).
+- RHPP: 249 of 418 B2 sites have no complete Nov-Mar season (B2 = one year per site); 114 cover Nov 2013-Feb 2014.
+- NEEA: 195 HP+mains homes; 169 have circuit data in the 2023 parquets; 139 fitted (>= 120 full days, >= 30 below
+  10 C); residual fit failed (negative residual, solar) for 3; 57 pass the "fully submetered heating" criterion.
+- Pecan Street: heat pumps are not labelled; air1 circuits are not counted as HP submeters.
+- HEAPO/Kaiser beyond B*: 5 + 2 extra distinct HP households; 66 apartment-building + 3 garage Kaiser HP meters are not
+  households.
+
+Bugs fixed during the run (no effect on committed numbers): NEEA residual became NaN for homes without cooling circuits
+(unstack without fill_value) -> fixed before any number was reported; HadCET header parsing; duplicate LCL survey ids.
+
+Literature search: scite MCP monthly quota exhausted on the first call; Consensus search used instead (3 queries,
+one rate-limited). References marked "unverified" in simulation_design.md were not retrieved in this session.
