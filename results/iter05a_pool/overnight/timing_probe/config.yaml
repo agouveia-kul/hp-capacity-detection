@@ -5,7 +5,7 @@ cache_dir: data/_paperb
 paper_a_repo: ../hp-sensitivity-paper
 pool:
   option: gb_eoh
-  year: 2122r2
+  year: 2122r3
   coverage_min: 0.9
   station_alias:
     8jB: KLO
@@ -15,6 +15,7 @@ pool:
     first: '2021-06-01'
     last_start: '2022-01-01'
   data_end: '2023-09-29'
+  silent_elec_max: 0.05
   zero_run_heat_tol_kW: 0.1
   max_interp_slots: 4
   holidays: GB-ENG
@@ -226,4 +227,42 @@ queue:
     - kernel
     - trees
     - neural
-git_commit: 909621569b3a23f9f329c4fac1e98f7d156448fd
+  - name: d5_real
+    config: configs/iter05a_d5_real.yaml
+    seeds:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    families:
+    - physics
+    - linear
+    - kernel
+    - trees
+    - neural
+  - name: d5_swap
+    config: configs/iter05a_d5_swap.yaml
+    seeds:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    families:
+    - physics
+    - linear
+    - kernel
+    - trees
+    - neural
+git_commit: fba77a11ccfa2cd740ed1b99ff68a1d5426ddbac
