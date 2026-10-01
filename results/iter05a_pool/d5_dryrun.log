@@ -1,0 +1,74 @@
+[22:00:59] queue iter05a_d5_dryrun: 8 of 8 jobs to run, 4 workers x 7 threads, stop at None
+[s0     3.4s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s1     3.4s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s0     3.3s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s1     3.3s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s1    29.3s] evaluated 180 substations in 25.8s (0.143 s each)
+[s0    29.6s] evaluated 180 substations in 26.1s (0.145 s each)
+[s1    29.4s] evaluated 180 substations in 26.0s (0.145 s each)
+[s0    29.5s] evaluated 180 substations in 26.1s (0.145 s each)
+[s1    39.3s] Paper A pilot m_h 0.01811 (64 train HP households); station pilots {'Hg': 0.01833, 'KLO': 0.01866}; s0 {'paperA_corr': 0.00518, 'paperA_corr_all': 0.00605}; cross-fit fold m_h [0.01857, 0.01797, 0.01764, 0.01836]
+[s1    39.4s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 178.5, cv_wape 63.1, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.5s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 92.09, cv_wape 40.5, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.5s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 82.72, cv_wape 37.5, best_iter None, 0 evals, 0.1s, params {}
+[s0    39.7s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0    39.8s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 125, cv_wape 60.8, best_iter None, 0 evals, 0.1s, params {}
+[s0    39.9s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 67.27, cv_wape 41.0, best_iter None, 0 evals, 0.1s, params {}
+[s0    39.9s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 63.5, cv_wape 39.8, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.7s] Paper A pilot m_h 0.01811 (64 train HP households); station pilots {'Hg': 0.01833, 'KLO': 0.01866}; s0 {'paperA_corr': 0.00518, 'paperA_corr_all': 0.00605}; cross-fit fold m_h [0.01857, 0.01797, 0.01764, 0.01836]
+[s0    39.7s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s1    42.2s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 180.6, cv_wape 62.5, best_iter 20, 5 evals, 2.7s, params {'colsample_bytree': 0.6203638169403092, 'eta': 0.24393601248111466, 'gamma': 9.357932429633182, 'max_depth': 9.0, 'min_child_weight': 1.0, 'n_estimators': 150.0, 'reg_alpha': 0.555093840035503, 'reg_lambda': 3.4629379082598666, 'subsample': 0.7550682295417696}
+[s0    40.2s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 47.16, cv_wape 32.0, best_iter None, 5 evals, 0.4s, params {'alpha': 0.18984612752443417}
+[s1    40.2s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 74.99, cv_wape 33.3, best_iter None, 5 evals, 0.5s, params {'alpha': 0.11503202219561742}
+[s0    40.5s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1731, cv_wape 25.1, best_iter None, 5 evals, 0.3s, params {'alpha': 0.25782089028055166}
+[s0    40.6s] done in 40.6s
+[s1    40.7s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.166, cv_wape 24.7, best_iter None, 5 evals, 0.4s, params {'alpha': 0.03553712545170132}
+[s1    40.8s] done in 40.8s
+[22:02:00] done d5_real__s0__d0__nall__linear (59 s)
+[s0    42.9s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 125.5, cv_wape 61.5, best_iter 38, 5 evals, 3.0s, params {'colsample_bytree': 0.4089226432638664, 'eta': 0.14490086940770683, 'gamma': 6.668763026825894, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 250.0, 'reg_alpha': 0.8964179680799482, 'reg_lambda': 3.149009514800194, 'subsample': 0.954663135591284}
+[22:02:01] done d5_real__s1__d0__nall__linear (59 s)
+[s1    44.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 66.14, cv_wape 35.5, best_iter 36, 5 evals, 2.5s, params {'colsample_bytree': 0.36856378391754896, 'eta': 0.10681965209164666, 'gamma': 9.312443591517697, 'max_depth': 10.0, 'min_child_weight': 17.0, 'n_estimators': 60.0, 'reg_alpha': 0.7576166145786842, 'reg_lambda': 6.891004003307231, 'subsample': 0.9291229003766113}
+[s0    45.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 63.15, cv_wape 39.1, best_iter 16, 5 evals, 2.8s, params {'colsample_bytree': 0.4089226432638664, 'eta': 0.14490086940770683, 'gamma': 6.668763026825894, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 250.0, 'reg_alpha': 0.8964179680799482, 'reg_lambda': 3.149009514800194, 'subsample': 0.954663135591284}
+[s1    48.2s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 60.9, cv_wape 32.6, best_iter 60, 5 evals, 3.5s, params {'colsample_bytree': 0.812135146832524, 'eta': 0.24160738093162648, 'gamma': 8.874250204691776, 'max_depth': 7.0, 'min_child_weight': 5.0, 'n_estimators': 360.0, 'reg_alpha': 0.7832448946532112, 'reg_lambda': 5.9698325597388475, 'subsample': 0.5873018079263681}
+[s1    48.5s] done in 48.5s
+[22:02:06] done d5_real__s1__d0__nall__physics (65 s)
+[s0    49.4s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 66.43, cv_wape 38.8, best_iter 97, 5 evals, 3.7s, params {'colsample_bytree': 0.6136705711060568, 'eta': 0.05417479322472048, 'gamma': 9.024534117254458, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 310.0, 'reg_alpha': 0.18777487575294727, 'reg_lambda': 2.7574444840384205, 'subsample': 0.9135579211284748}
+[s0    49.8s] done in 49.8s
+[22:02:07] done d5_real__s0__d0__nall__physics (66 s)
+[s0     5.5s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s1     5.5s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s0     5.6s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s1     5.6s] HP train/test 64/22, fill 968/323; substations {'train': 80, 'inner': 80, 'test': 20}; dropped cells 60
+[s0    30.2s] evaluated 180 substations in 24.6s (0.137 s each)
+[s1    30.2s] evaluated 180 substations in 24.7s (0.137 s each)
+[s0    30.0s] evaluated 180 substations in 24.3s (0.135 s each)
+[s1    30.0s] evaluated 180 substations in 24.3s (0.135 s each)
+[s0    39.1s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00526, 'paperA_corr_all': 0.00526}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0    39.2s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 125, cv_wape 60.8, best_iter None, 0 evals, 0.1s, params {}
+[s0    39.3s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 74.97, cv_wape 44.4, best_iter None, 0 evals, 0.1s, params {}
+[s0    39.3s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 61.6, cv_wape 37.7, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.2s] Paper A pilot m_h 0.01811 (64 train HP households); station pilots {'Hg': 0.01833, 'KLO': 0.01866}; s0 {'paperA_corr': 0.00498, 'paperA_corr_all': 0.00498}; cross-fit fold m_h [0.01857, 0.01797, 0.01764, 0.01836]
+[s1    39.3s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 178.5, cv_wape 63.1, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.4s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 103.1, cv_wape 46.1, best_iter None, 0 evals, 0.1s, params {}
+[s1    39.4s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 69.91, cv_wape 37.6, best_iter None, 0 evals, 0.1s, params {}
+[s0    42.3s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 125.5, cv_wape 61.5, best_iter 38, 5 evals, 2.9s, params {'colsample_bytree': 0.4089226432638664, 'eta': 0.14490086940770683, 'gamma': 6.668763026825894, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 250.0, 'reg_alpha': 0.8964179680799482, 'reg_lambda': 3.149009514800194, 'subsample': 0.954663135591284}
+[s1    42.2s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 180.6, cv_wape 62.5, best_iter 20, 5 evals, 2.7s, params {'colsample_bytree': 0.6203638169403092, 'eta': 0.24393601248111466, 'gamma': 9.357932429633182, 'max_depth': 9.0, 'min_child_weight': 1.0, 'n_estimators': 150.0, 'reg_alpha': 0.555093840035503, 'reg_lambda': 3.4629379082598666, 'subsample': 0.7550682295417696}
+[s1    45.0s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 75.71, cv_wape 39.3, best_iter 25, 5 evals, 2.8s, params {'colsample_bytree': 0.812135146832524, 'eta': 0.24160738093162648, 'gamma': 8.874250204691776, 'max_depth': 7.0, 'min_child_weight': 5.0, 'n_estimators': 360.0, 'reg_alpha': 0.7832448946532112, 'reg_lambda': 5.9698325597388475, 'subsample': 0.5873018079263681}
+[s0    45.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 61.58, cv_wape 36.7, best_iter 36, 5 evals, 3.4s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0    40.0s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00526, 'paperA_corr_all': 0.00526}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0    40.4s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 23.02, cv_wape 21.3, best_iter None, 5 evals, 0.4s, params {'alpha': 0.044970281365499326}
+[s0    40.7s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1403, cv_wape 19.9, best_iter None, 5 evals, 0.4s, params {'alpha': 0.053951242674887864}
+[s0    40.8s] done in 40.8s
+[22:03:03] done d5_swap__s0__d0__nall__linear (55 s)
+[s1    40.2s] Paper A pilot m_h 0.01811 (64 train HP households); station pilots {'Hg': 0.01833, 'KLO': 0.01866}; s0 {'paperA_corr': 0.00498, 'paperA_corr_all': 0.00498}; cross-fit fold m_h [0.01857, 0.01797, 0.01764, 0.01836]
+[s1    40.6s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 56.4, cv_wape 30.2, best_iter None, 5 evals, 0.4s, params {'alpha': 0.11503202219561742}
+[s1    41.1s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1805, cv_wape 28.5, best_iter None, 5 evals, 0.5s, params {'alpha': 1.9553702520024403}
+[s1    41.2s] done in 41.2s
+[22:03:05] done d5_swap__s1__d0__nall__linear (55 s)
+[s1    48.7s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 74.67, cv_wape 38.4, best_iter 62, 5 evals, 3.7s, params {'colsample_bytree': 0.812135146832524, 'eta': 0.24160738093162648, 'gamma': 8.874250204691776, 'max_depth': 7.0, 'min_child_weight': 5.0, 'n_estimators': 360.0, 'reg_alpha': 0.7832448946532112, 'reg_lambda': 5.9698325597388475, 'subsample': 0.5873018079263681}
+[s0    49.5s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 61.79, cv_wape 37.4, best_iter 118, 5 evals, 3.8s, params {'colsample_bytree': 0.6136705711060568, 'eta': 0.05417479322472048, 'gamma': 9.024534117254458, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 310.0, 'reg_alpha': 0.18777487575294727, 'reg_lambda': 2.7574444840384205, 'subsample': 0.9135579211284748}
+[s1    49.0s] done in 49.0s
+[22:03:05] done d5_swap__s1__d0__nall__physics (63 s)
+[s0    49.8s] done in 49.8s
+[22:03:06] done d5_swap__s0__d0__nall__physics (63 s)
+[22:03:23] exit: {'done': 8, 'failed': 0, 'remaining': 0, 'median_job_s': 60.690497159957886, 'eta_h': 0.0, 'updated': '2026-09-30T22:03:08'}

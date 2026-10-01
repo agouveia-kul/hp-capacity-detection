@@ -1,12 +1,14 @@
-# GB-EoH 2022/23 (replication, iteration 05a) under protocol v1.1: EoH non-hybrid HP homes (whole heating-system
+# GB-EoH temporal replication (05a-ii review decision 2): Oct 2022 - 29 Sep 2023 (last full day 28 Sep), 1 month overlap with the main window.
 # electricity, 30 min) + one analog-day LCL Std filler per dwelling (scripts/paperb/pools/gb_eoh.py, fill_analog.py).
 base: configs/protocol_v1_1.yaml
 pool:
   option: gb_eoh
-  year: "2223r2"                       # cache / dataset tag (05a-ii rebuild under R1, R2, R5, R8)
-  windows: {first: "2020-11-01", last_end: "2023-09-29"}        # R2: replication = the best 12 months ending on or before 29 Sep 2023, any month
+  year: "2223r3"                       # cache / dataset tag (05a-ii rebuild: R1, R2, R5, R8, silent-electricity exclusion)
+  windows: {first: "2022-10-01", last_start: "2022-10-01"}   # temporal replication (05a-ii review): Oct 2022 - 28 Sep 2023, the data stop on 29 Sep 2023
+  last_day: "2023-09-28"                # last full day of data: the window is clipped to it (363 days)
   data_end: "2023-09-29"               # the EoH data stop here
   coverage_min: 0.90                   # R1: valid 30-min bins after the zero-run rule, before gap filling
+  silent_elec_max: 0.05                # exclude homes whose electricity is silent (< 0.02 kW) on > 5 % of their heat bins (> 1 kW)
   zero_run_heat_tol_kW: 0.1            # R8: a zero run is missing only if the heat meter exceeds this (else a real switch-off)
   max_interp_slots: 4                  # gaps <= 2 h interpolated; longer: donor day (same day type, nearest station T)
   holidays: GB-ENG                     # netfit working-day calendar and the analog day type (England & Wales)

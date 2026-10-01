@@ -19,63 +19,43 @@ seed,HP train (pool),HP test (pool),dropped cells,HP train used,train substation
 17,64,22,605,62,500,20,135,75,40,10,10,"B* (cal2023, 15 min)"
 18,64,22,605,62,500,20,135,75,40,10,10,"B* (cal2023, 15 min)"
 19,64,22,605,62,500,20,135,75,40,10,10,"B* (cal2023, 15 min)"
-0,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-1,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-2,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-3,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-4,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-5,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-6,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-7,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-8,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-9,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-10,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-11,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-12,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-13,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-14,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-15,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-16,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-17,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-18,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-19,293,92,3458,275,2080,81,455,265,125,30,35,GB-EoH 2021/22 main (Nov 2021 - Oct 2022)
-0,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-1,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-2,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-3,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-4,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-5,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-6,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-7,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-8,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-9,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-10,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-11,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-12,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-13,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-14,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-15,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-16,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-17,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-18,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-19,295,93,3454,277,2080,82,455,265,125,30,35,GB-EoH replication as written (= main window)
-0,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-1,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-2,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-3,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-4,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-5,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-6,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-7,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-8,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-9,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-10,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-11,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-12,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-13,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-14,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-15,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-16,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-17,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-18,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
-19,256,82,3473,239,1960,66,385,215,110,30,30,"GB-EoH replication, latest start (Sep 2022 - Aug 2023)"
+0,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+1,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+2,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+3,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+4,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+5,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+6,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+7,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+8,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+9,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+10,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+11,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+12,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+13,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+14,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+15,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+16,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+17,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+18,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+19,292,92,3458,274,2080,81,455,265,125,30,35,GB-EoH main (Nov 2021 - Oct 2022)
+0,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+1,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+2,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+3,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+4,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+5,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+6,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+7,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+8,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+9,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+10,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+11,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+12,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+13,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+14,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+15,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+16,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+17,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+18,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)
+19,241,78,3365,226,1870,61,355,190,105,30,30,GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)

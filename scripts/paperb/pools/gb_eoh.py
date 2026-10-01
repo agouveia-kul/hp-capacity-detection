@@ -21,7 +21,9 @@ group with > 5 % missing bins in the window is filled from the unflagged group w
 (>= 0.98) through a linear fit on the overlapping days, or dropped with its homes (`_stationfill.csv` lists every action);
 remaining gaps are time-interpolated; groups with values outside [-30, 40] degC are flagged.
 Labels (substations.py, unchanged) at 30 min: hp_peak = 99.9th percentile of the valid, uncleaned-by-filling bins.
-Cached in data/_paperb/pools/gb_eoh_<year>{.parquet,_meta.parquet,_windows.csv,_stations.csv,_stationfill.csv}.
+Homes whose electricity reads < 0.02 kW on more than `silent_elec_max` (5 %) of the bins with heat output > 1 kW are excluded
+(`_excluded.csv`; 05a-ii review decision 2). `last_day` clips a window to the last full day of data (replication: Oct 2022 - 28 Sep 2023).
+Cached in data/_paperb/pools/gb_eoh_<year>{.parquet,_meta.parquet,_windows.csv,_stations.csv,_stationfill.csv,_excluded.csv}.
 """
 import numpy as np
 import pandas as pd
@@ -103,7 +105,13 @@ def _starts(wc, data_end):
     """Candidate window starts (the 1st of each month) of a `windows` config that end on or before `last_end` / the data end."""
     st = pd.date_range(wc["first"], wc.get("last_start", data_end), freq="MS")
     end = pd.Timestamp(wc["last_end"]) if wc.get("last_end") else data_end
-    return [s for s in st if s + pd.DateOffset(months=12) - pd.Timedelta("30min") <= end]
+    return [s for s in st if "last_start" in wc or s + pd.DateOffset(months=12) - pd.Timedelta("30min") <= end]
+
+
+def _window_end(s, pc):
+    """Exclusive end of the window starting at s: 12 months, clipped to the day after `last_day` (the last full day of data)."""
+    e = s + pd.DateOffset(months=12)
+    return min(e, pd.Timestamp(pc["last_day"]) + pd.Timedelta("1D")) if pc.get("last_day") else e
 
 
 def build_pool_gb_eoh(cfg, verbose=True):
@@ -144,7 +152,7 @@ def _build(pc, robust_q, base, verbose):
     P, Z = P.mask(zr), pd.DataFrame(zr, index=P.index)
     win = []
     for s in starts:
-        e = s + pd.DateOffset(months=12) - pd.Timedelta("1ns")
+        e = _window_end(s, pc) - pd.Timedelta("1ns")
         cov = P.loc[s:e].notna().mean()
         win.append({"start": s.date(), "end": e.date(), "n_homes_cov": int((cov >= pc["coverage_min"]).sum()),
                     "n_homes_cov90": int((cov >= 0.9).sum()), "n_homes_cov95": int((cov >= 0.95).sum()),
@@ -152,7 +160,7 @@ def _build(pc, robust_q, base, verbose):
     Wn = pd.DataFrame(win)
     s = pd.Timestamp(Wn["start"].iloc[Wn["n_homes_cov"].argmax()])       # first maximum = the earliest on ties
     Wn["chosen"] = Wn["start"] == s.date()
-    idx = pd.date_range(s, s + pd.DateOffset(months=12), freq="30min", inclusive="left")
+    idx = pd.date_range(s, _window_end(s, pc), freq="30min", inclusive="left")
     Pw, cov = P.reindex(idx), P.reindex(idx).notna().mean()
     Tw = Tst.reindex(idx)
     flags = pd.DataFrame({"missing_share": Tw.isna().mean(), "implausible_bins": ((Tw < -30) | (Tw > 40)).sum()})
@@ -178,6 +186,11 @@ def _build(pc, robust_q, base, verbose):
                      "peak_backup_kw_share": float((bu[top] / raw[top]).clip(0, 1).mean()),
                      "heat_meter_dropout_days": int(((qd == 0) & (pd_ > 0.1)).sum()),
                      "silent_elec_share": float(((Pw[p] < 0.02) & (qh > 1.0)).sum() / max(int((qh > 1.0).sum()), 1))})
+    out = [r["hh"] for r in rows if r["silent_elec_share"] > pc["silent_elec_max"]]      # electricity silent while heat is delivered
+    pd.DataFrame([{"hh": r["hh"], "silent_elec_share": r["silent_elec_share"], "coverage": r["coverage"]} for r in rows if r["hh"] in out],
+                 columns=["hh", "silent_elec_share", "coverage"]).to_csv(f"{base}_excluded.csv", index=False)
+    rows, hp = [r for r in rows if r["hh"] not in out], {k: v for k, v in hp.items() if k not in out}
+    elig = [p for p in elig if f"E:{p}" not in out]
     st = flags.assign(n_homes_all=grp.value_counts().reindex(Tw.columns),
                       n_homes_eligible=pd.Series([grp[p] for p in elig]).value_counts().reindex(Tw.columns))
     st["flag"] = (st["missing_share"] > 0.05) | (st["implausible_bins"] > 0)
@@ -191,5 +204,5 @@ def _build(pc, robust_q, base, verbose):
     st.to_csv(f"{base}_stations.csv")
     sfill.merge(st[["n_homes_all"]], left_on="station", right_index=True, how="left").to_csv(f"{base}_stationfill.csv", index=False)
     if verbose:
-        print(f"GB-EoH {pc['year']}: window from {s.date()}, {len(elig)} eligible homes of {len(homes)} non-hybrid with T, "
+        print(f"GB-EoH {pc['year']}: window from {s.date()}, {len(elig)} eligible homes of {len(homes)} non-hybrid with T ({len(out)} excluded: silent electricity), "
               f"{len(stations)} stations, dropped stations {dropped}; windows {Wn[['start', 'n_homes_cov']].values.tolist()}", flush=True)

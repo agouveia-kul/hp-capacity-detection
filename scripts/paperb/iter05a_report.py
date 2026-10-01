@@ -120,13 +120,14 @@ def part_eoh(_cfg):
     txt = ["# 05a Task 2 - GB-EoH household selection (rebuilt in 05a-ii under R1, R2, R5, R8)\n", "Source: `scripts/paperb/pools/gb_eoh.py` (rules in its docstring), "
            "report `scripts/paperb/iter05a_report.py --part eoh`. Iteration 04 counted homes with a complete Nov-Mar season at >= 90 % (2021/22: 433, "
            "2022/23: 371); 05a-i used a 12-month window at >= 95 % (295 / 244); 05a-ii uses >= 90 % (R1) and flexible month-aligned windows (R2). "
-           "Main: starts 1 Jun 2021 - 1 Jan 2022. Replication: any start whose 12 months end on or before 29 Sep 2023.\n"]
+           "Main: starts 1 Jun 2021 - 1 Jan 2022. Temporal replication (review decision of 2026-10-01): Oct 2022 - 28 Sep 2023, the last full day of data (363 days); "
+           "fallback Sep 2022 - Aug 2023 only if it gave < 300 homes. Homes whose electricity is silent on > 5 % of their heat bins are excluded.\n"]
     pools = {}
-    for tag, what, cfgname in (("2122r2", "main", "2122"), ("2223r2", "replication, rule as written", "2223"),
-                               ("2223sep", "replication, latest admissible start (alternative)", "2223sep")):
+    for tag, what, cfgname in (("2122r3", "main", "2122"), ("2223r3", "temporal replication", "2223")):
         pool = build_pool("gb_eoh", load_config(f"configs/pool_gb_eoh_{cfgname}.yaml"), verbose=False)
         base = ROOT / "data" / "_paperb" / "pools" / f"gb_eoh_{tag}"
         W, St, SF = pd.read_csv(f"{base}_windows.csv"), pd.read_csv(f"{base}_stations.csv"), pd.read_csv(f"{base}_stationfill.csv")
+        EX = pd.read_csv(f"{base}_excluded.csv")
         m = pool.meta[pool.meta["role"] == "hp"]
         pools[tag] = (W[W["chosen"]].iloc[0], set(m.index))
         q = lambda c: f"median {m[c].median():.3g}, IQR {m[c].quantile(.25):.3g}-{m[c].quantile(.75):.3g}, max {m[c].max():.3g}"   # noqa: E731
@@ -144,18 +145,16 @@ def part_eoh(_cfg):
                 f"{q('heat_meter_dropout_days')}; homes with any: {int((m['heat_meter_dropout_days'] > 0).sum())}",
                 f"- **electricity silent while heat is delivered** (share of bins with Q_hp > 1 kW that have P_ws < 0.02 kW; not caught by the exact-zero rule): "
                 f"homes above 1 %: {int((m['silent_elec_share'] > 0.01).sum())}, above 5 %: {len(silent)} ({', '.join(f'{h} {v:.0%}' for h, v in silent['silent_elec_share'].items()) or '-'}); "
-                f"kept in the pool and listed here (not dropped silently)\n",
+                f"homes above 5 % are excluded from the pool; excluded here: "
+                f"{', '.join(f'{h} ({v:.0%})' for h, v in zip(EX['hh'], EX['silent_elec_share'])) or 'none'}\n",
                 "R5, stations with > 5 % missing T bins in the window (filled from the best-correlated unflagged group with a linear fit on the overlapping "
                 "days if corr >= 0.98, else dropped with its homes):\n", md(SF), "",
                 "Weather groups (flag: > 5 % missing bins in the window before filling, or values outside [-30, 40] degC):\n", md(St), ""]
-    (a, ha), (b, hb), (c, hc) = pools["2122r2"], pools["2223r2"], pools["2223sep"]
-    ov = lambda x: max(0, (pd.Timestamp(a["end"]) - pd.Timestamp(x["start"])).days) / 30.4              # noqa: E731
-    txt += ["## Overlap of the replication windows with the main window\n",
-            f"Main window starts {a['start']}. The rule as written (best window ending by 29 Sep 2023, any month) picks **{b['start']}**: "
-            f"{'the main window itself, so it is no replication' if b['start'] == a['start'] else 'a different window'} (overlap {ov(b):.0f} months; "
-            f"{len(ha & hb)} of {len(hb)} homes shared). The latest admissible start, **{c['start']}** ({int(c['n_homes_cov90'])} homes), overlaps the main window by "
-            f"about {ov(c):.0f} months and shares {len(ha & hc)} of its {len(hc)} homes. No fully disjoint 12-month window exists in the data "
-            f"(Oct 2020 - 29 Sep 2023).\n"]
+    (a, ha), (b, hb) = pools["2122r3"], pools["2223r3"]
+    txt += ["## Overlap of the temporal replication with the main window\n",
+            f"Main window {a['start']} - {a['end']}; replication {b['start']} - {b['end']} ({int(b['n_homes_cov'])} homes at >= 90 % before dropping unfillable stations). "
+            f"The windows overlap by 1 month; {len(ha & hb)} of the {len(hb)} replication homes are also in the main pool ({len(ha)} homes): "
+            f"another year, mostly the same homes, not an independent sample. No fully disjoint 12-month window exists in the data (Oct 2020 - 29 Sep 2023).\n"]
     bs = build_pool("bstar", load_config("configs/protocol_v1.yaml"), verbose=False)
     r = bs.hp.resample("30min").mean().quantile(0.999) / bs.hp.quantile(0.999)
     txt += [f"## B*: 30-min vs 15-min HP_Peak\n\nPer HP household, 99.9th pct of the 30-min mean / 99.9th pct of the 15-min series "

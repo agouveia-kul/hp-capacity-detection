@@ -20,9 +20,8 @@ from paperb.pools import build_pool  # noqa: E402
 from paperb.splits import grouped_inner_folds, household_splits  # noqa: E402
 from paperb.substations import build_substations  # noqa: E402
 
-POOLS = [("B* (cal2023, 15 min)", "configs/pool_bstar.yaml", "bstar"), ("GB-EoH 2021/22 main (Nov 2021 - Oct 2022)", "configs/pool_gb_eoh_2122.yaml", "gb_eoh"),
-         ("GB-EoH replication as written (= main window)", "configs/pool_gb_eoh_2223.yaml", "gb_eoh"),
-         ("GB-EoH replication, latest start (Sep 2022 - Aug 2023)", "configs/pool_gb_eoh_2223sep.yaml", "gb_eoh")]
+POOLS = [("B* (cal2023, 15 min)", "configs/pool_bstar.yaml", "bstar"), ("GB-EoH main (Nov 2021 - Oct 2022)", "configs/pool_gb_eoh_2122.yaml", "gb_eoh"),
+         ("GB-EoH temporal replication (Oct 2022 - 28 Sep 2023)", "configs/pool_gb_eoh_2223.yaml", "gb_eoh")]
 BINS = [("<=15 %", 0, .15), ("15-35 %", .15, .35), ("35-65 %", .35, .65), (">65 %", .65, 9)]
 SEEDS = range(20)
 

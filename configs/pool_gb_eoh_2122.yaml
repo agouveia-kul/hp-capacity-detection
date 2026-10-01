@@ -3,10 +3,11 @@
 base: configs/protocol_v1_1.yaml
 pool:
   option: gb_eoh
-  year: "2122r2"                       # cache / dataset tag (05a-ii rebuild under R1, R2, R5, R8)
+  year: "2122r3"                       # cache / dataset tag (05a-ii rebuild: R1, R2, R5, R8, silent-electricity exclusion)
   windows: {first: "2021-06-01", last_start: "2022-01-01"}     # R2: main = the start month with the most eligible homes
   data_end: "2023-09-29"               # the EoH data stop here
   coverage_min: 0.90                   # R1: valid 30-min bins after the zero-run rule, before gap filling
+  silent_elec_max: 0.05                # exclude homes whose electricity is silent (< 0.02 kW) on > 5 % of their heat bins (> 1 kW)
   zero_run_heat_tol_kW: 0.1            # R8: a zero run is missing only if the heat meter exceeds this (else a real switch-off)
   max_interp_slots: 4                  # gaps <= 2 h interpolated; longer: donor day (same day type, nearest station T)
   holidays: GB-ENG                     # netfit working-day calendar and the analog day type (England & Wales)

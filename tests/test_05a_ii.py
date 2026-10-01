@@ -90,3 +90,25 @@ def test_d4_diagnostics_rule_slopes_and_capacity_equivalent():
     assert verdict(mk(0.1), mk(0.9), mk(0.2), mk(0.3)) == "inconclusive"
     t = cap_equiv({10: 0.05, 40: 0.2}, m_h=0.025, hp_med=3.0, sizes=(10, 40), ps=(0.5, 1.0))
     assert t.loc[10, 0.5] == pytest.approx(100 * 0.05 / (0.025 * 0.5 * 10 * 3.0)) and t.loc[40, 1.0] < t.loc[40, 0.5]
+
+
+def test_replication_window_is_clipped_to_the_last_full_day():
+    pc = {"last_day": "2023-09-28", "windows": {"first": "2022-10-01", "last_start": "2022-10-01"}}
+    s = G._starts(pc["windows"], pd.Timestamp("2023-09-29"))
+    assert s == [pd.Timestamp("2022-10-01")]                                                          # a start whose 12 months run past the data is kept
+    assert G._window_end(s[0], pc) == pd.Timestamp("2023-09-29")                                      # ... and clipped: 1 Oct 2022 - 28 Sep 2023, 363 days
+    assert (G._window_end(s[0], pc) - s[0]).days == 363
+    assert G._window_end(pd.Timestamp("2021-11-01"), {}) == pd.Timestamp("2022-11-01")
+
+
+POOLS = ROOT / "data" / "_paperb" / "pools"
+
+
+@pytest.mark.skipif(not (POOLS / "gb_eoh_2223r3_meta.parquet").exists() or not (POOLS / "gb_eoh_2122r3_meta.parquet").exists(), reason="GB-EoH caches not built")
+def test_pools_exclude_silent_electricity_homes_and_replication_has_enough_homes():
+    main, rep = (pd.read_parquet(POOLS / f"gb_eoh_{t}_meta.parquet") for t in ("2122r3", "2223r3"))
+    for m in (main, rep):
+        assert (m["silent_elec_share"] <= 0.05).all() and (m["coverage"] >= 0.90).all()
+    assert "E:EOH2291" not in main.index and "E:EOH0836" not in rep.index                              # the two silent-electricity homes
+    assert len(rep) >= 300 and len(main) >= 300                                                       # no fallback to Sep 2022 needed
+    assert pd.read_csv(POOLS / "gb_eoh_2122r3_excluded.csv")["hh"].tolist() == ["E:EOH2291"]

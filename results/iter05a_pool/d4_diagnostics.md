@@ -29,7 +29,7 @@ Definitions: (a) hockey stick, latent T_h; (b) hockey stick, T_h fixed (pooled L
 
 (HadCET in place of Heathrow, same seed and candidate set; the share includes the random choice among the 3 closest.)
 
-## Item 4: capacity-equivalent error, % of HP_Peak (* = above 5 %, fusion-limited)
+## Item 4: capacity-equivalent error, % of HP_Peak (* = above 5 %, filler-variability-limited)
 
 m_h = 0.0251 (median over 10 split seeds, range 0.0246-0.0252); median household HP_Peak = 3.42 kW; |d s_h| = median absolute error of definition (a) at that aggregate size.
 
@@ -49,5 +49,5 @@ Donors from outside +-30 d of the target day:
 | 40 | 40.4 | 20.2 | 10.1 | 6.7 | 4 | 2.5 | 2 |
 | 120 | 25.5 | 12.8 | 6.4 | 4.3 | 2.6 | 1.6 | 1.3 |
 
-Fusion-limited penetrations (any N above 5 %): winter donors [0.05, 0.1, 0.2, 0.3, 0.5], band donors [0.05, 0.1, 0.2, 0.3, 0.5]. Figure: `figures/d4_capacity_equiv.png`.
+Filler-variability-limited penetrations (any N above 5 %): winter donors [0.05, 0.1, 0.2, 0.3, 0.5], band donors [0.05, 0.1, 0.2, 0.3, 0.5]. Figure: `figures/d4_capacity_equiv.png`.
 

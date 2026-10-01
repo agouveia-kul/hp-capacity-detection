@@ -1,0 +1,32 @@
+........................................................................ [ 97%]
+..                                                                       [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\hyperopt\atpe.py:19
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+    import pkg_resources
+
+tests/test_05a_ii.py::test_london_temperature_is_heathrow_and_complete_over_the_lcl_window
+tests/test_05a_ii.py::test_london_temperature_is_heathrow_and_complete_over_the_lcl_window
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\fill_analog.py:52: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+    return pd.Series(pd.to_numeric(T["T"], errors="coerce").to_numpy(), index=pd.to_datetime(T["date"], errors="coerce")).dropna()
+
+tests/test_fair_test.py: 6 warnings
+tests/test_fair_test_03b.py: 10 warnings
+tests/test_gb_eoh.py: 600 warnings
+tests/test_protocol_v1.py: 28 warnings
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\utils.py:203: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+tests/test_protocol_v1.py::test_targets_nonnegative_and_deterministic
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\tests\test_protocol_v1.py:125: UserWarning: HP_CoincPeak > HP_Peak in 2 of 6 substations
+    warnings.warn(f"HP_CoincPeak > HP_Peak in {int(viol.sum())} of {len(t1)} substations")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 6 durations =============================
+663.90s call     tests/test_parallel_runner.py::test_metrics_identical_for_1_and_4_workers
+419.78s call     tests/test_gb_eoh.py::test_bstar_seed0_reproduces_03b
+48.00s call     tests/test_queue.py::test_failed_job_is_skipped_and_retry_failed_reruns_only_it
+37.13s call     tests/test_queue.py::test_kill_and_resume_equals_uninterrupted
+17.71s call     tests/test_fair_test.py::test_learning_curve_pilot_is_the_subsample
+15.74s call     tests/test_fair_test_03b.py::test_run_seed_03b_train_only_s0_calibration_and_bins
+74 passed, 648 warnings in 1263.27s (0:21:03)

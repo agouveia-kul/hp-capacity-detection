@@ -16,7 +16,7 @@ of item 2, per slope definition and aggregate size n; E_b, E_c under (b), (c).
     temperature response x0.5 and x1.5);
   - mapping defect: Y_a < 0.5 E_a at every n and E_b, E_c > 25 % at every n -> add a 3-day mean-T criterion, rerun D1-D4, then stop;
   - otherwise: inconclusive (reported; 05b runs the sensitivity arm, the mapping is not changed).
-  - in every case a capacity-equivalent error > 5 % of HP_Peak marks the penetration bin as fusion-limited in every later table.
+  - in every case a capacity-equivalent error > 5 % of HP_Peak marks the penetration bin as filler-variability-limited in every later table.
 
     python scripts/paperb/d4_diagnostics.py [--config configs/pool_gb_eoh_2122.yaml]
 """
@@ -153,11 +153,11 @@ def main(cfg_path):
            f"E under (b) = {E.loc['winter', 'b'].round(3).to_dict()}, under (c) = {E.loc['winter', 'c'].round(3).to_dict()}.\n",
            "## Day matches that change with the temperature source\n", md(pd.DataFrame(changes), 3), "",
            "(HadCET in place of Heathrow, same seed and candidate set; the share includes the random choice among the 3 closest.)\n",
-           f"## Item 4: capacity-equivalent error, % of HP_Peak (* = above {FLAG_PCT:g} %, fusion-limited)\n",
+           f"## Item 4: capacity-equivalent error, % of HP_Peak (* = above {FLAG_PCT:g} %, filler-variability-limited)\n",
            f"m_h = {m_h.median():.4f} (median over 10 split seeds, range {m_h.min():.4f}-{m_h.max():.4f}); median household HP_Peak = {hp_med:.2f} kW; "
            "|d s_h| = median absolute error of definition (a) at that aggregate size.\n", "Winter donors (D4 as defined):\n", md(tabs["winter"].reset_index().round(1)), "",
            "Donors from outside +-30 d of the target day:\n", md(tabs["band"].reset_index().round(1)), "",
-           f"Fusion-limited penetrations (any N above {FLAG_PCT:g} %): winter donors {lim['winter']}, band donors {lim['band']}. Figure: `figures/d4_capacity_equiv.png`.\n"]
+           f"Filler-variability-limited penetrations (any N above {FLAG_PCT:g} %): winter donors {lim['winter']}, band donors {lim['band']}. Figure: `figures/d4_capacity_equiv.png`.\n"]
     (OUT / "d4_diagnostics.md").write_text("\n".join(txt) + "\n", encoding="utf-8")
     print("\n".join(txt))
 
