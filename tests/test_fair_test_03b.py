@@ -131,7 +131,7 @@ def test_run_seed_03b_train_only_s0_calibration_and_bins(monkeypatch):
     cfg = copy.deepcopy(CFG)
     cfg.update(models=["Linear"], model_anchors={}, feature_sets=["netfit"], modes=["direct", "residual"],
                target_transforms=["none"], residual_models=["Ridge"], anchors=["size_peak"], physics_baselines=[],
-               anchor_only_baselines={"models": [], "features": []})
+               anchor_only_baselines={"models": [], "features": []}, pilot_cache=False)       # 05b: the s0 calls are what is tested
     cfg["paperA"]["estimators"] = ["paperA_sh_mh", "paperA_cal", "paperA_corr", "paperA_corr_cal"]
     cfg["learning_curve"].update(specs=["paperA_corr|none|-|-|-"], feature_sets=["netfit"])
     cfg["parallel"]["threads"] = 4

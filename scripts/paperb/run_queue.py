@@ -9,11 +9,13 @@ restricted to the family and keeps only the family's rows (`physics`: every non-
 local staging directory, then moved one by one to <out_dir>/jobs/<job_id>.<frame>.parquet, and a <job_id>.done marker
 (json: seconds, start, end) is written last. A relaunch skips jobs with a marker, so a crash, reboot or morning stop
 loses at most the running jobs. A failing job writes <job_id>.failed (traceback) and is never retried in a loop;
-`--retry-failed` reruns only the failed jobs. `--stop-at HH:MM` starts no job after the next such time (running jobs
+`--retry-failed` reruns only the failed jobs. A family's `max_concurrent` caps how many of its jobs run at once (the next job
+of another family starts instead). `--stop-at HH:MM` starts no job after the next such time (running jobs
 finish). While the queue runs, SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED) keeps Windows awake (no
 admin rights, no power-setting change); it is reset at exit. progress.json is rewritten after every job and STATUS.md at
 exit; once no job remains, every arm's job frames are merged into <out_dir>/<arm>/<frame>.csv (metrics.csv as
-run_benchmark.py writes it).
+run_benchmark.py writes it). 05b: a job with n != all runs one learning-curve design (n, draw) of the arm (`lc_only`: only the test
+substations of the full design are evaluated, every spec of the family is scored into metrics_lc.csv); n = all has one draw.
 
     python scripts/paperb/run_queue.py --config configs/iter05a_overnight.yaml [--workers 4] [--stop-at 07:30] [--retry-failed] [--arms name,name]
 """
@@ -21,6 +23,10 @@ import os
 
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):    # BLAS 1 thread (determinism), before numpy
     os.environ.setdefault(_v, "1")
+try:                                                                  # 05b: torch before pandas / pyarrow (pyarrow 15 bundles an old
+    import torch  # noqa: F401                                        # msvcp140.dll that breaks torch's c10.dll if it is loaded first)
+except ImportError:
+    pass
 import argparse  # noqa: E402
 import concurrent.futures as cf  # noqa: E402
 import importlib  # noqa: E402
@@ -41,8 +47,8 @@ import yaml  # noqa: E402
 
 from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
 
-FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag")
-CSV = {"preds": "predictions", "dropped": "dropped_cells", "diag": "physics_diagnostics"}
+FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped")
+CSV = {"preds": "predictions", "dropped": "dropped_cells", "diag": "physics_diagnostics", "lc": "metrics_lc", "lc_dropped": "dropped_cells_lc"}
 ML_OFF = ["models=[]", "residual_models=[]", "modes=[direct]"]
 
 
@@ -53,7 +59,7 @@ def jobs(q):
         for fam in arm["families"]:
             for seed in arm["seeds"]:
                 for n in arm.get("n", ["all"]):
-                    for draw in arm.get("draws", [0]):
+                    for draw in ([0] if n == "all" else arm.get("draws", [0])):
                         out.append({"arm": arm["name"], "seed": seed, "draw": draw, "n": n, "family": fam,
                                     "id": f"{arm['name']}__s{seed}__d{draw}__n{n}__{fam}"})
     return out
@@ -62,12 +68,13 @@ def jobs(q):
 def job_config(q, arm, job, threads):
     """Arm config restricted to the job's family (and n, draw)."""
     fam = q["families"][job["family"]]
-    if job["n"] != "all":
-        raise NotImplementedError("learning-curve jobs (n != all) are added in 05b")
     over = ML_OFF if job["family"] == "physics" else [
         f"models={fam.get('models', [])}", f"residual_models={fam.get('residual_models', [])}", "physics_baselines=[]",
         "anchor_only_baselines.models=[]", "paperA.estimators=[]"]
     cfg = set_dotted(load_config(arm["config"]), over + list(fam.get("set", [])) + list(arm.get("set", [])))
+    if job["n"] != "all":                                             # 05b: one learning-curve design, test substations shared with n = all
+        cfg.update(lc_only=True, learning_curve={"n": [int(job["n"])], "draws": int(job["draw"]) + 1, "draw_ids": [int(job["draw"])],
+                                                 "specs": "all", "feature_sets": cfg.get("feature_sets", ["whdd"])})
     cfg.setdefault("parallel", {})["threads"] = threads
     return cfg, set(fam.get("models", [])) | set(fam.get("residual_models", []))
 
@@ -154,7 +161,8 @@ def merge(q, out, all_jobs):
             parts = [pd.read_parquet(f) for f in fs if f.exists()]
             if parts:
                 m = pd.concat(parts, ignore_index=True)
-                (m[cols + ["arm", "family"]] if k == "metrics" else m).to_csv(d / f"{CSV.get(k, k)}.csv", index=False)
+                lc = cols[:4] + ["n_train_hp", "lc_draw", "spc_train"] + cols[4:] + ["arm", "family"]
+                {"metrics": lambda: m[cols + ["arm", "family"]], "lc": lambda: m[lc]}.get(k, lambda: m)().to_csv(d / f"{CSV.get(k, k)}.csv", index=False)
 
 
 def main(argv=None):
@@ -175,7 +183,11 @@ def main(argv=None):
     stage.mkdir(parents=True, exist_ok=True)
     for arm in q["arms"]:                                             # full config of every arm, with the git commit
         (out / arm["name"]).mkdir(exist_ok=True)
-        (out / arm["name"] / "config.yaml").write_text(yaml.safe_dump({**load_config(arm["config"]), "queue": q, "git_commit": git_hash()},
+        tab = {}
+        if any("TabPFN" in q["families"][f].get("models", []) + q["families"][f].get("residual_models", []) for f in arm["families"]):
+            from paperb.train import tabpfn_info
+            tab = {"tabpfn": tabpfn_info()}                             # checkpoint file, SHA-256, package version (05b Task 1e)
+        (out / arm["name"] / "config.yaml").write_text(yaml.safe_dump({**load_config(arm["config"]), "queue": q, "git_commit": git_hash(), **tab},
                                                                       sort_keys=False), encoding="utf-8")
     all_jobs = jobs(q)
     if a.retry_failed:
@@ -211,12 +223,15 @@ def main(argv=None):
                     finish(job, [], None, traceback.format_exc())
         else:
             ex = cf.ProcessPoolExecutor(q["workers"], mp_context=mp.get_context("spawn"), max_tasks_per_child=1)
-            running, it = {}, iter(todo)
+            running, pending = {}, list(todo)
+            cap = {f: v["max_concurrent"] for f, v in q["families"].items() if v.get("max_concurrent")}   # 05b: e.g. TabPFN (RAM)
             while True:
                 while len(running) < q["workers"] and not (t_stop and datetime.now() >= t_stop):
-                    job = next(it, None)
+                    busy = [j["family"] for j in running.values()]
+                    job = next((j for j in pending if busy.count(j["family"]) < cap.get(j["family"], q["workers"])), None)
                     if job is None:
                         break
+                    pending.remove(job)
                     running[ex.submit(run_job, q, job, threads, stage)] = job
                 if not running:
                     break

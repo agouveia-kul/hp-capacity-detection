@@ -1,0 +1,635 @@
+[14:50:16] queue iter05b_quick: 22 of 22 jobs to run, 6 workers x 4 threads, stop at None
+[s0     9.6s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     9.2s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    15.4s] evaluated 30 substations in 5.2s (0.174 s each)
+[s0    12.2s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    12.2s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0    12.3s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    12.3s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0    12.3s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    12.3s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0    12.3s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    12.3s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0    14.3s] evaluated 30 substations in 4.6s (0.152 s each)
+[s0    23.4s] evaluated 46 substations in 7.2s (0.157 s each)
+[s0    20.1s] evaluated 46 substations in 7.0s (0.152 s each)
+[s0    20.2s] evaluated 46 substations in 7.0s (0.153 s each)
+[s0    20.2s] evaluated 46 substations in 7.0s (0.153 s each)
+[s0    20.3s] evaluated 46 substations in 7.0s (0.153 s each)
+[s0    22.3s] evaluated 46 substations in 7.1s (0.155 s each)
+[s0    29.5s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    29.7s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 0.7329, cv_wape 17.5, train_wape 46.3, best_iter None, 0 evals, 0.1s, params {}
+[s0    29.7s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 0.6929, cv_wape 18.0, train_wape 42.7, best_iter None, 0 evals, 0.1s, params {}
+[s0    29.8s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 0.6929, cv_wape 18.0, train_wape 35.4, best_iter None, 0 evals, 0.1s, params {}
+[s0    25.3s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    25.3s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    25.4s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 1.651, cv_wape 32.0, train_wape 9.0, best_iter None, 0 evals, 0.1s, params {}
+[s0    25.5s]   HP_Peak SVR/size/netfit/direct/log: cv_mse 0.6557, cv_wape 17.8, train_wape 13.0, best_iter None, 3 evals, 0.3s, params {'C': 3.728108863093485, 'epsilon': 0.2, 'gamma': 0.011137580658916056}
+[s0    25.7s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 0.711, cv_wape 16.6, train_wape 43.8, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0    25.8s]   HP_Peak KernelRidge/size/netfit/direct/log: cv_mse 0.7037, cv_wape 18.0, train_wape 3.4, best_iter None, 3 evals, 0.3s, params {'alpha': 0.11236698759256325, 'gamma': 0.06474534108746133, 'kernel': 'laplacian'}
+[s0    25.9s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 0.6597, cv_wape 17.1, train_wape 22.6, best_iter None, 3 evals, 0.2s, params {'alpha': 0.044970281365499326}
+[s0    32.3s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 52.8, best_iter 1, 3 evals, 2.5s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0    26.0s]   HP_Peak SVR/size/netfit/residual/log: cv_mse 0.07459, cv_wape 19.4, train_wape 11.1, best_iter None, 3 evals, 0.2s, params {'C': 16.99742927963431, 'epsilon': 0.05, 'gamma': 0.002120619752937791}
+[s0    25.9s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    25.9s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    26.2s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 0.6803, cv_wape 20.2, train_wape 20.1, best_iter None, 3 evals, 0.2s, params {'alpha': 0.008844374846554263, 'l1_ratio': 0.6458108965969798}
+[s0    26.3s]   HP_Peak KernelRidge/size/netfit/residual/log: cv_mse 0.05871, cv_wape 18.2, train_wape 14.8, best_iter None, 3 evals, 0.3s, params {'alpha': 0.008687091157164812, 'gamma': 0.0012675870498253744, 'kernel': 'rbf'}
+[s0    26.4s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 1.468, cv_wape 29.0, train_wape 17.9, best_iter None, 3 evals, 0.3s, params {'n_components': 9.0}
+[s0    26.5s] done in 26.5s
+[s0    26.5s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 0.07603, cv_wape 22.7, train_wape 5.3, best_iter None, 0 evals, 0.1s, params {}
+[14:51:22] FAILED q_arm1__s0__d0__n62__kernel:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    26.8s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.08509, cv_wape 24.7, train_wape 35.5, best_iter None, 3 evals, 0.3s, params {'alpha': 2871.500961053187}
+[s0    27.0s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.06526, cv_wape 20.3, train_wape 18.4, best_iter None, 3 evals, 0.2s, params {'alpha': 0.016246931049027892}
+[s0    27.3s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    27.3s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.04867, cv_wape 20.3, train_wape 15.4, best_iter None, 3 evals, 0.3s, params {'alpha': 0.002391785573438152, 'l1_ratio': 0.7616926738055597}
+[s0    33.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 50.1, best_iter 1, 3 evals, 1.4s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0    27.6s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 0.07603, cv_wape 22.7, train_wape 12.3, best_iter None, 3 evals, 0.3s, params {'n_components': 14.0}
+[s0    28.0s] done in 28.0s
+[14:51:23] FAILED q_arm1__s0__d0__n62__linear:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    29.0s]   HP_Peak FFNN/size/netfit/direct/log: cv_mse 0.9158, cv_wape 20.2, train_wape 29.2, best_iter 21, 3 evals, 3.0s, params {'arch': (128,), 'l2': 0.0, 'lr': 0.0005}
+[s0    29.5s]   HP_Peak XGBoost/size/netfit/direct/log: cv_mse 0.8104, cv_wape 19.0, train_wape 57.6, best_iter 1, 3 evals, 2.2s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0    35.6s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 52.8, best_iter 1, 3 evals, 1.9s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0    36.1s] done in 36.1s
+[14:51:25] FAILED q_arm1__s0__d0__n62__physics:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    31.9s]   HP_Peak FFNN/size/netfit/residual/log: cv_mse 0.09077, cv_wape 27.5, train_wape 13.1, best_iter 8, 3 evals, 2.9s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0    32.0s] done in 32.0s
+[14:51:27] FAILED q_arm1__s0__d0__n62__neural:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    35.2s]   HP_Peak CatBoost/size/netfit/direct/log: cv_mse 0.787, cv_wape 18.6, train_wape 32.5, best_iter 45, 3 evals, 9.3s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[s0    42.5s]   HP_Peak CatBoost/size/netfit/residual/log: cv_mse 0.1006, cv_wape 28.3, train_wape 11.3, best_iter 26, 3 evals, 7.2s, params {'depth': 7.0, 'iterations': 250.0, 'l2_leaf_reg': 1.9040065187978081, 'learning_rate': 0.10180898214539458}
+[s0    42.6s] done in 42.6s
+[14:51:38] FAILED q_arm1__s0__d0__n62__catboost:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    43.3s]   HP_Peak RandomForest/size/netfit/direct/log: cv_mse 0.7222, cv_wape 16.6, train_wape 9.5, best_iter None, 3 evals, 13.9s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    53.2s]   HP_Peak ExtraTrees/size/netfit/direct/log: cv_mse 0.6647, cv_wape 16.7, train_wape 13.8, best_iter None, 3 evals, 9.8s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    55.7s]   HP_Peak XGBoost/size/netfit/residual/log: cv_mse 0.09839, cv_wape 27.2, train_wape 37.8, best_iter 1, 3 evals, 2.5s, params {'colsample_bytree': 0.7656211530822303, 'eta': 0.02990115403857105, 'gamma': 0.632140639013041, 'max_depth': 2.0, 'min_child_weight': 37.0, 'n_estimators': 250.0, 'reg_alpha': 0.037281088630934864, 'reg_lambda': 2.3914805677347055, 'subsample': 0.7729054482984898}
+[s0    69.5s]   HP_Peak RandomForest/size/netfit/residual/log: cv_mse 0.0878, cv_wape 25.0, train_wape 16.1, best_iter None, 3 evals, 13.8s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0     8.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     8.9s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0     9.3s] features from cache gb_eoh_s0_986d195cf352_tab.parquet
+[s0     8.8s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     8.8s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0     9.5s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0     9.2s] features from cache gb_eoh_s0_986d195cf352_tab.parquet
+[s0     9.4s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0     8.8s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     8.8s] features from cache gb_eoh_s0_e879d4298569_tab.parquet
+[s0     9.1s] features from cache gb_eoh_s0_986d195cf352_tab.parquet
+[s0     9.4s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0    11.3s]   HP_Peak GP/size/netfit/direct/log: cv_mse 0.9126, cv_wape 20.7, train_wape 3.9, best_iter None, 0 evals, 1.9s, params {}
+[s0     9.1s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    13.9s]   HP_Peak GP/size/netfit/residual/log: cv_mse 0.1239, cv_wape 33.0, train_wape 1.1, best_iter None, 0 evals, 2.6s, params {}
+[s0    14.0s] done in 14.0s
+[14:52:13] FAILED q_arm1__s0__d0__n62__gp:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0    78.8s]   HP_Peak ExtraTrees/size/netfit/residual/log: cv_mse 0.06819, cv_wape 24.0, train_wape 16.8, best_iter None, 3 evals, 9.3s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    79.1s] done in 79.1s
+[14:52:15] FAILED q_arm1__s0__d0__n62__trees:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0     8.6s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    57.7s]   HP_Peak CNN/size/raw/direct/log: cv_mse 0.7486, cv_wape 17.8, train_wape 57.0, best_iter 40, 2 evals, 48.1s, params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}
+[s0     9.4s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     9.3s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    77.5s]   HP_Peak TabPFN/size/netfit/direct/log: cv_mse 0.8224, cv_wape 19.1, train_wape 3.8, best_iter None, 0 evals, 68.1s, params {}
+[s0   103.9s]   HP_Peak CNN/size/raw/residual/log: cv_mse 0.08889, cv_wape 26.5, train_wape 29.2, best_iter 72, 2 evals, 46.1s, params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}
+[s0   104.0s] done in 104.0s
+[14:53:41] FAILED q_arm1__s0__d0__n62__rawseries:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0   134.1s] evaluated 231 substations in 124.1s (0.537 s each)
+[s0   145.6s]   HP_Peak TabPFN/size/netfit/residual/log: cv_mse 0.05468, cv_wape 19.7, train_wape 1.2, best_iter None, 0 evals, 57.7s, params {}
+[s0     8.8s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     8.8s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0   133.9s] evaluated 231 substations in 124.4s (0.539 s each)
+[s0   155.3s] done in 155.3s
+[14:54:32] FAILED q_arm1__s0__d0__n62__tabpfn:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 102, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 410, in run_seed
+    "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+                                                                           ^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\pandas\core\reshape\concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 242, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+ValueError: No objects to concatenate
+
+[s0   165.8s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   165.9s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 37.65, cv_wape 51.0, train_wape 72.2, best_iter None, 0 evals, 0.1s, params {}
+[s0   166.0s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 29.67, cv_wape 44.6, train_wape 52.6, best_iter None, 0 evals, 0.1s, params {}
+[s0   166.0s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 23.21, cv_wape 37.3, train_wape 33.0, best_iter None, 0 evals, 0.1s, params {}
+[s0   170.7s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 37.72, cv_wape 51.0, train_wape 71.6, best_iter 57, 3 evals, 4.7s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0    41.6s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   166.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   166.3s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 37.15, cv_wape 34.0, train_wape 20.9, best_iter None, 0 evals, 0.1s, params {}
+[s0   166.5s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 17.07, cv_wape 29.3, train_wape 25.1, best_iter None, 3 evals, 0.2s, params {'alpha': 59.6822716716698}
+[s0   175.2s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 17.67, cv_wape 29.6, train_wape 44.2, best_iter 78, 3 evals, 4.4s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0   166.7s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 17.79, cv_wape 30.4, train_wape 24.7, best_iter None, 3 evals, 0.2s, params {'alpha': 0.044970281365499326}
+[s0   167.0s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 20.97, cv_wape 30.6, train_wape 23.7, best_iter None, 3 evals, 0.3s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0   167.3s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 28.39, cv_wape 33.1, train_wape 22.3, best_iter None, 3 evals, 0.3s, params {'n_components': 9.0}
+[s0   167.4s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 0.2305, cv_wape 31.3, train_wape 20.3, best_iter None, 0 evals, 0.1s, params {}
+[s0   167.6s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.1463, cv_wape 23.7, train_wape 22.7, best_iter None, 3 evals, 0.2s, params {'alpha': 34.453562907186836}
+[s0   167.8s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1532, cv_wape 24.6, train_wape 22.7, best_iter None, 3 evals, 0.2s, params {'alpha': 0.016246931049027892}
+[s0   168.3s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.1712, cv_wape 33.7, train_wape 31.7, best_iter None, 3 evals, 0.5s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0   134.0s] evaluated 231 substations in 123.6s (0.535 s each)
+[s0   134.1s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   168.6s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 0.1831, cv_wape 27.2, train_wape 21.3, best_iter None, 3 evals, 0.3s, params {'n_components': 14.0}
+[s0   168.9s]   HP_Peak Linear/size/both/direct/log: cv_mse 814.3, cv_wape 83.5, train_wape 0.0, best_iter None, 0 evals, 0.2s, params {}
+[s0   169.4s]   HP_Peak Ridge/size/both/direct/log: cv_mse 19.21, cv_wape 31.8, train_wape 25.1, best_iter None, 3 evals, 0.5s, params {'alpha': 616.3265772595347}
+[s0   170.0s]   HP_Peak Lasso/size/both/direct/log: cv_mse 15.93, cv_wape 28.2, train_wape 19.8, best_iter None, 3 evals, 0.6s, params {'alpha': 0.044970281365499326}
+[s0   134.2s] evaluated 231 substations in 124.0s (0.537 s each)
+[s0   134.3s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   134.6s]   HP_Peak SVR/size/netfit/direct/log: cv_mse 11.43, cv_wape 23.1, train_wape 16.3, best_iter None, 3 evals, 0.3s, params {'C': 3.728108863093485, 'epsilon': 0.2, 'gamma': 0.011137580658916056}
+[s0   134.8s]   HP_Peak KernelRidge/size/netfit/direct/log: cv_mse 12.03, cv_wape 23.1, train_wape 3.9, best_iter None, 3 evals, 0.3s, params {'alpha': 0.11236698759256325, 'gamma': 0.06474534108746133, 'kernel': 'laplacian'}
+[s0   170.7s]   HP_Peak ElasticNet/size/both/direct/log: cv_mse 25.96, cv_wape 32.3, train_wape 16.9, best_iter None, 3 evals, 0.7s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0   135.1s]   HP_Peak SVR/size/netfit/residual/log: cv_mse 0.1294, cv_wape 20.5, train_wape 9.8, best_iter None, 3 evals, 0.3s, params {'C': 3.658681692575232, 'epsilon': 0.2, 'gamma': 0.0302933656375985}
+[s0   135.4s]   HP_Peak KernelRidge/size/netfit/residual/log: cv_mse 0.1064, cv_wape 20.8, train_wape 3.0, best_iter None, 3 evals, 0.3s, params {'alpha': 0.11236698759256325, 'gamma': 0.06474534108746133, 'kernel': 'laplacian'}
+[s0   171.2s]   HP_Peak PLS/size/both/direct/log: cv_mse 318.5, cv_wape 56.7, train_wape 13.6, best_iter None, 3 evals, 0.6s, params {'n_components': 14.0}
+[s0   171.4s]   HP_Peak Linear/size/both/residual/log: cv_mse 0.3952, cv_wape 54.0, train_wape 0.0, best_iter None, 0 evals, 0.2s, params {}
+[s0   136.0s]   HP_Peak SVR/size/both/direct/log: cv_mse 21.38, cv_wape 30.2, train_wape 4.0, best_iter None, 3 evals, 0.5s, params {'C': 16.99742927963431, 'epsilon': 0.05, 'gamma': 0.002120619752937791}
+[s0   171.9s]   HP_Peak Ridge/size/both/residual/log: cv_mse 0.146, cv_wape 26.4, train_wape 22.9, best_iter None, 3 evals, 0.5s, params {'alpha': 2871.500961053187}
+[s0   136.5s]   HP_Peak KernelRidge/size/both/direct/log: cv_mse 18.42, cv_wape 27.9, train_wape 1.8, best_iter None, 3 evals, 0.5s, params {'alpha': 0.008687091157164812, 'gamma': 0.0012675870498253744, 'kernel': 'rbf'}
+[s0   172.4s]   HP_Peak Lasso/size/both/residual/log: cv_mse 0.1726, cv_wape 34.4, train_wape 31.7, best_iter None, 3 evals, 0.5s, params {'alpha': 0.25782089028055166}
+[s0   137.1s]   HP_Peak SVR/size/both/residual/log: cv_mse 0.1531, cv_wape 25.5, train_wape 1.9, best_iter None, 3 evals, 0.6s, params {'C': 16.99742927963431, 'epsilon': 0.05, 'gamma': 0.002120619752937791}
+[s0   137.7s]   HP_Peak KernelRidge/size/both/residual/log: cv_mse 0.1525, cv_wape 25.0, train_wape 1.7, best_iter None, 3 evals, 0.6s, params {'alpha': 0.008687091157164812, 'gamma': 0.0012675870498253744, 'kernel': 'rbf'}
+[s0   138.1s]   HP_Peak SVR/size_peak/netfit/direct/log: cv_mse 11.5, cv_wape 23.0, train_wape 16.3, best_iter None, 3 evals, 0.4s, params {'C': 3.728108863093485, 'epsilon': 0.2, 'gamma': 0.011137580658916056}
+[s0   138.5s]   HP_Peak KernelRidge/size_peak/netfit/direct/log: cv_mse 11.93, cv_wape 22.8, train_wape 3.8, best_iter None, 3 evals, 0.4s, params {'alpha': 0.11236698759256325, 'gamma': 0.06474534108746133, 'kernel': 'laplacian'}
+[s0   138.8s]   HP_Peak SVR/size_peak/netfit/residual/log: cv_mse 0.1291, cv_wape 20.6, train_wape 9.4, best_iter None, 3 evals, 0.3s, params {'C': 3.658681692575232, 'epsilon': 0.2, 'gamma': 0.0302933656375985}
+[s0   139.1s]   HP_Peak KernelRidge/size_peak/netfit/residual/log: cv_mse 0.1065, cv_wape 20.9, train_wape 2.9, best_iter None, 3 evals, 0.3s, params {'alpha': 0.11236698759256325, 'gamma': 0.06474534108746133, 'kernel': 'laplacian'}
+[s0   175.1s]   HP_Peak ElasticNet/size/both/residual/log: cv_mse 0.1636, cv_wape 31.6, train_wape 29.2, best_iter None, 3 evals, 2.6s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0   175.7s]   HP_Peak PLS/size/both/residual/log: cv_mse 0.244, cv_wape 35.9, train_wape 15.4, best_iter None, 3 evals, 0.6s, params {'n_components': 9.0}
+[s0   140.0s]   HP_Peak SVR/size_peak/both/direct/log: cv_mse 21.26, cv_wape 30.1, train_wape 4.0, best_iter None, 3 evals, 0.5s, params {'C': 16.99742927963431, 'epsilon': 0.05, 'gamma': 0.002120619752937791}
+[s0   175.9s]   HP_Peak Linear/size_peak/netfit/direct/log: cv_mse 55.79, cv_wape 38.4, train_wape 20.5, best_iter None, 0 evals, 0.1s, params {}
+[s0   176.1s]   HP_Peak Ridge/size_peak/netfit/direct/log: cv_mse 17.37, cv_wape 29.4, train_wape 25.0, best_iter None, 3 evals, 0.3s, params {'alpha': 59.6822716716698}
+[s0   140.5s]   HP_Peak KernelRidge/size_peak/both/direct/log: cv_mse 18.31, cv_wape 27.8, train_wape 1.7, best_iter None, 3 evals, 0.5s, params {'alpha': 0.008687091157164812, 'gamma': 0.0012675870498253744, 'kernel': 'rbf'}
+[s0   176.4s]   HP_Peak Lasso/size_peak/netfit/direct/log: cv_mse 20.05, cv_wape 31.5, train_wape 24.6, best_iter None, 3 evals, 0.2s, params {'alpha': 0.044970281365499326}
+[s0   176.6s]   HP_Peak ElasticNet/size_peak/netfit/direct/log: cv_mse 24.87, cv_wape 32.2, train_wape 23.5, best_iter None, 3 evals, 0.3s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0   142.3s]   HP_Peak XGBoost/size/netfit/direct/log: cv_mse 24.76, cv_wape 38.3, train_wape 37.8, best_iter 33, 3 evals, 8.2s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0   141.0s]   HP_Peak SVR/size_peak/both/residual/log: cv_mse 0.153, cv_wape 25.5, train_wape 1.9, best_iter None, 3 evals, 0.5s, params {'C': 16.99742927963431, 'epsilon': 0.05, 'gamma': 0.002120619752937791}
+[s0   185.6s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 17.75, cv_wape 29.9, train_wape 45.6, best_iter 108, 3 evals, 10.4s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0   177.0s]   HP_Peak PLS/size_peak/netfit/direct/log: cv_mse 36.77, cv_wape 35.8, train_wape 22.0, best_iter None, 3 evals, 0.3s, params {'n_components': 9.0}
+[s0   177.1s]   HP_Peak Linear/size_peak/netfit/residual/log: cv_mse 0.2639, cv_wape 36.8, train_wape 20.3, best_iter None, 0 evals, 0.1s, params {}
+[s0   177.3s]   HP_Peak Ridge/size_peak/netfit/residual/log: cv_mse 0.1467, cv_wape 23.8, train_wape 22.6, best_iter None, 3 evals, 0.2s, params {'alpha': 34.453562907186836}
+[s0   141.5s]   HP_Peak KernelRidge/size_peak/both/residual/log: cv_mse 0.1523, cv_wape 25.0, train_wape 1.7, best_iter None, 3 evals, 0.5s, params {'alpha': 0.008687091157164812, 'gamma': 0.0012675870498253744, 'kernel': 'rbf'}
+[s0   177.6s]   HP_Peak Lasso/size_peak/netfit/residual/log: cv_mse 0.1532, cv_wape 24.6, train_wape 22.7, best_iter None, 3 evals, 0.2s, params {'alpha': 0.016246931049027892}
+[s0   142.1s] done in 142.1s
+[s0   178.0s]   HP_Peak ElasticNet/size_peak/netfit/residual/log: cv_mse 0.1712, cv_wape 33.7, train_wape 31.7, best_iter None, 3 evals, 0.4s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[14:55:10] done q_arm2__s0__d0__nall__kernel (160 s)
+[s0   178.4s]   HP_Peak PLS/size_peak/netfit/residual/log: cv_mse 0.2009, cv_wape 29.4, train_wape 21.0, best_iter None, 3 evals, 0.4s, params {'n_components': 17.0}
+[s0   178.9s]   HP_Peak Linear/size_peak/both/direct/log: cv_mse 946, cv_wape 85.2, train_wape 0.0, best_iter None, 0 evals, 0.2s, params {}
+[s0   179.3s]   HP_Peak Ridge/size_peak/both/direct/log: cv_mse 19.1, cv_wape 31.7, train_wape 24.8, best_iter None, 3 evals, 0.5s, params {'alpha': 616.3265772595347}
+[s0   179.8s]   HP_Peak Lasso/size_peak/both/direct/log: cv_mse 17.14, cv_wape 29.6, train_wape 18.9, best_iter None, 3 evals, 0.5s, params {'alpha': 0.044970281365499326}
+[s0   180.5s]   HP_Peak ElasticNet/size_peak/both/direct/log: cv_mse 24.18, cv_wape 31.7, train_wape 16.4, best_iter None, 3 evals, 0.6s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0   181.1s]   HP_Peak PLS/size_peak/both/direct/log: cv_mse 312.2, cv_wape 56.8, train_wape 13.4, best_iter None, 3 evals, 0.6s, params {'n_components': 14.0}
+[s0   181.3s]   HP_Peak Linear/size_peak/both/residual/log: cv_mse 0.3994, cv_wape 54.7, train_wape 0.0, best_iter None, 0 evals, 0.2s, params {}
+[s0   181.8s]   HP_Peak Ridge/size_peak/both/residual/log: cv_mse 0.146, cv_wape 26.4, train_wape 22.9, best_iter None, 3 evals, 0.5s, params {'alpha': 2871.500961053187}
+[s0   182.3s]   HP_Peak Lasso/size_peak/both/residual/log: cv_mse 0.1726, cv_wape 34.4, train_wape 31.7, best_iter None, 3 evals, 0.5s, params {'alpha': 0.25782089028055166}
+[s0     9.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     9.9s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0    10.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   184.7s]   HP_Peak ElasticNet/size_peak/both/residual/log: cv_mse 0.1636, cv_wape 31.6, train_wape 29.2, best_iter None, 3 evals, 2.4s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0   185.3s]   HP_Peak PLS/size_peak/both/residual/log: cv_mse 0.2431, cv_wape 35.8, train_wape 15.3, best_iter None, 3 evals, 0.6s, params {'n_components': 9.0}
+[s0    63.1s]   HP_Peak CatBoost/size/netfit/direct/log: cv_mse 8.282, cv_wape 18.7, train_wape 8.8, best_iter 297, 3 evals, 21.5s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[s0   186.8s] done in 186.8s
+[14:55:19] done q_arm2__s0__d0__nall__linear (205 s)
+[s0   197.5s] done in 197.5s
+[14:55:21] done q_arm2__s0__d0__nall__physics (217 s)
+[s0   156.7s]   HP_Peak RandomForest/size/netfit/direct/log: cv_mse 7.939, cv_wape 17.8, train_wape 14.1, best_iter None, 3 evals, 14.3s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0    73.4s]   HP_Peak CatBoost/size/netfit/residual/log: cv_mse 0.1146, cv_wape 22.4, train_wape 4.9, best_iter 56, 3 evals, 10.4s, params {'depth': 6.0, 'iterations': 250.0, 'l2_leaf_reg': 2.554512226199128, 'learning_rate': 0.16662892431669848}
+[s0    23.6s]   HP_Peak FFNN/size/netfit/direct/log: cv_mse 20.84, cv_wape 27.4, train_wape 11.1, best_iter 21, 3 evals, 13.4s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   166.5s]   HP_Peak ExtraTrees/size/netfit/direct/log: cv_mse 9.122, cv_wape 20.3, train_wape 11.7, best_iter None, 3 evals, 9.8s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    35.5s]   HP_Peak FFNN/size/netfit/residual/log: cv_mse 0.1433, cv_wape 24.0, train_wape 19.6, best_iter 3, 3 evals, 11.9s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   175.0s]   HP_Peak XGBoost/size/netfit/residual/log: cv_mse 0.1717, cv_wape 34.1, train_wape 29.8, best_iter 5, 3 evals, 8.4s, params {'colsample_bytree': 0.47229959755294254, 'eta': 0.04404153582738363, 'gamma': 0.6837542746895716, 'max_depth': 2.0, 'min_child_weight': 17.0, 'n_estimators': 120.0, 'reg_alpha': 0.16997429279634316, 'reg_lambda': 25.445105833433153, 'subsample': 0.6768617069884098}
+[s0    51.1s]   HP_Peak FFNN/size/both/direct/log: cv_mse 63.04, cv_wape 45.2, train_wape 11.2, best_iter 8, 3 evals, 15.5s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   191.9s]   HP_Peak RandomForest/size/netfit/residual/log: cv_mse 0.118, cv_wape 21.8, train_wape 12.6, best_iter None, 3 evals, 16.8s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0    12.3s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    12.3s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0    12.5s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    59.4s]   HP_Peak FFNN/size/both/residual/log: cv_mse 0.1958, cv_wape 31.8, train_wape 4.7, best_iter 9, 3 evals, 8.3s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   198.9s]   HP_Peak ExtraTrees/size/netfit/residual/log: cv_mse 0.1074, cv_wape 20.3, train_wape 13.8, best_iter None, 3 evals, 7.0s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0     5.5s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     5.5s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     5.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     5.0s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     5.0s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     5.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   213.5s]   HP_Peak XGBoost/size/both/direct/log: cv_mse 24.53, cv_wape 38.2, train_wape 35.2, best_iter 33, 3 evals, 14.6s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0    75.3s]   HP_Peak FFNN/size_peak/netfit/direct/log: cv_mse 26.4, cv_wape 27.8, train_wape 9.8, best_iter 27, 3 evals, 15.9s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0    22.8s]   HP_Peak GP/size/netfit/direct/log: cv_mse 13.39, cv_wape 23.0, train_wape 3.7, best_iter None, 0 evals, 17.6s, params {}
+[s0    82.5s]   HP_Peak FFNN/size_peak/netfit/residual/log: cv_mse 0.1333, cv_wape 25.4, train_wape 16.0, best_iter 8, 3 evals, 7.1s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   224.1s]   HP_Peak RandomForest/size/both/direct/log: cv_mse 7.273, cv_wape 17.0, train_wape 13.1, best_iter None, 3 evals, 10.6s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0   231.5s]   HP_Peak ExtraTrees/size/both/direct/log: cv_mse 9.696, cv_wape 21.2, train_wape 8.2, best_iter None, 3 evals, 7.3s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    34.0s]   HP_Peak GP/size/netfit/residual/log: cv_mse 0.09454, cv_wape 22.8, train_wape 2.6, best_iter None, 0 evals, 11.2s, params {}
+[s0    94.7s]   HP_Peak FFNN/size_peak/both/direct/log: cv_mse 37.22, cv_wape 41.5, train_wape 0.8, best_iter 21, 3 evals, 12.2s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   239.4s]   HP_Peak XGBoost/size/both/residual/log: cv_mse 0.1721, cv_wape 34.2, train_wape 29.8, best_iter 5, 3 evals, 7.9s, params {'colsample_bytree': 0.5240504079328978, 'eta': 0.02370941858698222, 'gamma': 0.9024534117254458, 'max_depth': 1.0, 'min_child_weight': 31.0, 'n_estimators': 180.0, 'reg_alpha': 0.036586816925752344, 'reg_lambda': 3.5603188759230173, 'subsample': 0.8308463369027799}
+[s0   100.5s]   HP_Peak FFNN/size_peak/both/residual/log: cv_mse 0.207, cv_wape 34.2, train_wape 8.0, best_iter 5, 3 evals, 5.8s, params {'arch': (256, 128), 'l2': 0.0001, 'lr': 0.001}
+[s0   100.7s] done in 100.7s
+[14:56:46] done q_arm2__s0__d0__nall__neural (119 s)
+[s0    50.6s]   HP_Peak GP/size/both/direct/log: cv_mse 50, cv_wape 61.7, train_wape 9.6, best_iter None, 0 evals, 16.5s, params {}
+[s0   250.0s]   HP_Peak RandomForest/size/both/residual/log: cv_mse 0.1328, cv_wape 23.4, train_wape 10.6, best_iter None, 3 evals, 10.5s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0   256.1s]   HP_Peak ExtraTrees/size/both/residual/log: cv_mse 0.1227, cv_wape 22.4, train_wape 8.4, best_iter None, 3 evals, 6.1s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0    67.8s]   HP_Peak GP/size/both/residual/log: cv_mse 0.1726, cv_wape 34.4, train_wape 3.4, best_iter None, 0 evals, 17.2s, params {}
+[s0   268.1s]   HP_Peak XGBoost/size_peak/netfit/direct/log: cv_mse 24.74, cv_wape 38.3, train_wape 37.5, best_iter 33, 3 evals, 12.0s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0   180.0s]   HP_Peak CatBoost/size/both/direct/log: cv_mse 10.11, cv_wape 21.9, train_wape 5.8, best_iter 336, 3 evals, 106.4s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[s0   283.4s]   HP_Peak RandomForest/size_peak/netfit/direct/log: cv_mse 7.757, cv_wape 17.6, train_wape 13.9, best_iter None, 3 evals, 15.3s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0    11.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0   293.1s]   HP_Peak ExtraTrees/size_peak/netfit/direct/log: cv_mse 9.604, cv_wape 20.9, train_wape 11.6, best_iter None, 3 evals, 9.6s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0   298.0s]   HP_Peak XGBoost/size_peak/netfit/residual/log: cv_mse 0.1717, cv_wape 34.1, train_wape 29.7, best_iter 5, 3 evals, 4.8s, params {'colsample_bytree': 0.47229959755294254, 'eta': 0.04404153582738363, 'gamma': 0.6837542746895716, 'max_depth': 2.0, 'min_child_weight': 17.0, 'n_estimators': 120.0, 'reg_alpha': 0.16997429279634316, 'reg_lambda': 25.445105833433153, 'subsample': 0.6768617069884098}
+[s0   111.7s]   HP_Peak GP/size_peak/netfit/direct/log: cv_mse 15.79, cv_wape 25.9, train_wape 5.1, best_iter None, 0 evals, 43.9s, params {}
+[s0   312.2s]   HP_Peak RandomForest/size_peak/netfit/residual/log: cv_mse 0.1174, cv_wape 21.3, train_wape 11.5, best_iter None, 3 evals, 14.2s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0   323.4s]   HP_Peak ExtraTrees/size_peak/netfit/residual/log: cv_mse 0.1074, cv_wape 20.4, train_wape 13.9, best_iter None, 3 evals, 11.1s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0   132.9s]   HP_Peak GP/size_peak/netfit/residual/log: cv_mse 0.1039, cv_wape 23.9, train_wape 2.5, best_iter None, 0 evals, 21.2s, params {}
+[s0    55.8s] evaluated 231 substations in 43.8s (0.190 s each)
+[s0   332.6s]   HP_Peak XGBoost/size_peak/both/direct/log: cv_mse 24.61, cv_wape 38.4, train_wape 35.2, best_iter 33, 3 evals, 9.0s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0   244.8s]   HP_Peak CatBoost/size/both/residual/log: cv_mse 0.1457, cv_wape 26.0, train_wape 1.1, best_iter 75, 3 evals, 64.8s, params {'depth': 6.0, 'iterations': 250.0, 'l2_leaf_reg': 2.554512226199128, 'learning_rate': 0.16662892431669848}
+[s0   348.1s]   HP_Peak RandomForest/size_peak/both/direct/log: cv_mse 7.753, cv_wape 17.7, train_wape 13.2, best_iter None, 3 evals, 15.5s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0   265.2s]   HP_Peak CatBoost/size_peak/netfit/direct/log: cv_mse 8.901, cv_wape 19.5, train_wape 7.2, best_iter 383, 3 evals, 20.3s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[s0   158.2s]   HP_Peak GP/size_peak/both/direct/log: cv_mse 50, cv_wape 61.7, train_wape 9.6, best_iter None, 0 evals, 25.2s, params {}
+[s0   358.9s]   HP_Peak ExtraTrees/size_peak/both/direct/log: cv_mse 9.572, cv_wape 21.2, train_wape 8.2, best_iter None, 3 evals, 10.8s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0   363.7s]   HP_Peak XGBoost/size_peak/both/residual/log: cv_mse 0.1718, cv_wape 32.7, train_wape 19.6, best_iter 57, 3 evals, 4.7s, params {'colsample_bytree': 0.47229959755294254, 'eta': 0.04404153582738363, 'gamma': 0.6837542746895716, 'max_depth': 2.0, 'min_child_weight': 17.0, 'n_estimators': 120.0, 'reg_alpha': 0.16997429279634316, 'reg_lambda': 25.445105833433153, 'subsample': 0.6768617069884098}
+[s0   276.6s]   HP_Peak CatBoost/size_peak/netfit/residual/log: cv_mse 0.1194, cv_wape 21.8, train_wape 9.6, best_iter 42, 3 evals, 11.4s, params {'depth': 7.0, 'iterations': 250.0, 'l2_leaf_reg': 1.9040065187978081, 'learning_rate': 0.10180898214539458}
+[s0    99.3s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    99.5s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 37.65, cv_wape 51.0, train_wape 72.2, best_iter None, 0 evals, 0.1s, params {}
+[s0    99.6s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 2.221, cv_wape 10.3, train_wape 13.7, best_iter None, 0 evals, 0.1s, params {}
+[s0    99.7s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 2.229, cv_wape 10.5, train_wape 13.8, best_iter None, 0 evals, 0.1s, params {}
+[s0   380.9s]   HP_Peak RandomForest/size_peak/both/residual/log: cv_mse 0.133, cv_wape 23.5, train_wape 10.7, best_iter None, 3 evals, 17.2s, params {'max_depth': 12, 'max_features': 0.35021990060235786, 'min_samples_leaf': 6.0, 'n_estimators': 450.0}
+[s0   186.4s]   HP_Peak GP/size_peak/both/residual/log: cv_mse 0.1726, cv_wape 34.4, train_wape 3.4, best_iter None, 0 evals, 28.2s, params {}
+[s0   187.0s] done in 187.0s
+[14:59:11] done q_arm2__s0__d0__nall__gp (212 s)
+[s0   192.3s]   HP_Peak TabPFN/size/netfit/direct/log: cv_mse 6.423, cv_wape 15.8, train_wape 2.7, best_iter None, 0 evals, 186.6s, params {}
+[s0   112.5s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 37.72, cv_wape 51.0, train_wape 71.6, best_iter 57, 3 evals, 12.8s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0   392.1s]   HP_Peak ExtraTrees/size_peak/both/residual/log: cv_mse 0.1206, cv_wape 22.1, train_wape 8.4, best_iter None, 3 evals, 11.1s, params {'max_depth': 8, 'max_features': 0.35239695614283123, 'min_samples_leaf': 5.0, 'n_estimators': 350.0}
+[s0   393.3s] done in 393.3s
+[14:59:19] done q_arm2__s0__d0__nall__trees (412 s)
+[s0   127.5s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 3.647, cv_wape 12.0, train_wape 7.1, best_iter 65, 3 evals, 14.9s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0   150.2s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 3.846, cv_wape 12.3, train_wape 32.1, best_iter 128, 3 evals, 22.8s, params {'colsample_bytree': 0.6136705711060568, 'eta': 0.05417479322472048, 'gamma': 9.024534117254458, 'max_depth': 4.0, 'min_child_weight': 15.0, 'n_estimators': 310.0, 'reg_alpha': 0.18777487575294727, 'reg_lambda': 2.7574444840384205, 'subsample': 0.9135579211284748}
+[s0   151.0s] done in 151.0s
+[14:59:54] done q_oracle__s0__d0__nall__physics (175 s)
+[s0    10.6s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0    10.6s] features from cache gb_eoh_s0_b2ef679e7144_tab.parquet
+[s0     2.1s] HP train/test 64/22, fill 968/323; substations {'inner': 32, 'train': 24, 'test': 8}; dropped cells 60
+[s0   276.1s]   HP_Peak CNN/size/raw/direct/log: cv_mse 26.32, cv_wape 42.4, train_wape 26.6, best_iter 199, 2 evals, 263.5s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0    34.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    34.2s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 14.95, cv_wape 25.5, train_wape 23.6, best_iter None, 0 evals, 0.0s, params {}
+[s0    34.3s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 8.588, cv_wape 21.0, train_wape 31.5, best_iter None, 3 evals, 0.1s, params {'alpha': 59.6822716716698}
+[s0    34.4s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 8.148, cv_wape 19.5, train_wape 31.6, best_iter None, 3 evals, 0.1s, params {'alpha': 0.044970281365499326}
+[s0    34.5s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 8.785, cv_wape 19.6, train_wape 33.2, best_iter None, 3 evals, 0.1s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0    34.6s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 11.35, cv_wape 22.8, train_wape 31.7, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0    34.7s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 0.05843, cv_wape 16.4, train_wape 7.6, best_iter None, 0 evals, 0.0s, params {}
+[s0    34.8s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.06485, cv_wape 18.6, train_wape 13.2, best_iter None, 3 evals, 0.1s, params {'alpha': 2871.500961053187}
+[s0    34.9s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.07034, cv_wape 20.1, train_wape 14.1, best_iter None, 3 evals, 0.1s, params {'alpha': 0.25782089028055166}
+[s0    35.0s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.04096, cv_wape 13.5, train_wape 7.9, best_iter None, 3 evals, 0.2s, params {'alpha': 0.0008844374846554269, 'l1_ratio': 0.6458108965969798}
+[s0    35.2s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 0.05345, cv_wape 15.5, train_wape 7.9, best_iter None, 3 evals, 0.1s, params {'n_components': 17.0}
+[s0    35.4s] done in 35.4s
+[15:00:30] done q_oracle__s0__d0__nall__linear (60 s)
+[s0     7.2s] evaluated 64 substations in 5.0s (0.078 s each)
+[s0   378.5s]   HP_Peak CatBoost/size_peak/both/direct/log: cv_mse 10.89, cv_wape 22.4, train_wape 5.3, best_iter 347, 3 evals, 101.7s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[s0     9.6s] Paper A pilot m_h 0.01939 (64 train HP households); station pilots {'Hg': 0.01872, 'KLO': 0.01942}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00506}; cross-fit fold m_h [0.01991, 0.01934, 0.01912, 0.01922]
+[s0     9.6s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 121.2, cv_wape 61.2, train_wape 75.6, best_iter None, 0 evals, 0.0s, params {}
+[s0     9.7s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 84.71, cv_wape 44.6, train_wape 30.8, best_iter None, 0 evals, 0.0s, params {}
+[s0     9.7s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 86.24, cv_wape 43.5, train_wape 20.6, best_iter None, 0 evals, 0.0s, params {}
+[s0   289.2s]   HP_Peak CNN/size/raw/residual/log: cv_mse 0.1586, cv_wape 27.9, train_wape 22.3, best_iter 67, 2 evals, 13.1s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0    16.5s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 123.8, cv_wape 62.8, train_wape 75.8, best_iter 43, 50 evals, 6.8s, params {'colsample_bytree': 0.3708774401607349, 'eta': 0.18526824444604778, 'gamma': 6.328674787500216, 'max_depth': 8.0, 'min_child_weight': 1.0, 'n_estimators': 470.0, 'reg_alpha': 0.32072889264363313, 'reg_lambda': 5.439689314810119, 'subsample': 0.5437327956288853}
+[s0    45.0s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0   285.3s]   HP_Peak TabPFN/size/netfit/residual/log: cv_mse 0.05918, cv_wape 15.7, train_wape 1.7, best_iter None, 0 evals, 56.0s, params {}
+[s0    22.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 69.67, cv_wape 40.1, train_wape 53.9, best_iter 39, 50 evals, 6.3s, params {'colsample_bytree': 0.4840141512065652, 'eta': 0.21985968355893806, 'gamma': 8.831953163683295, 'max_depth': 4.0, 'min_child_weight': 5.0, 'n_estimators': 90.0, 'reg_alpha': 0.7110997087916452, 'reg_lambda': 6.5359610899450855, 'subsample': 0.553956112079613}
+[s0    29.7s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 58.7, cv_wape 37.3, train_wape 56.2, best_iter 24, 50 evals, 7.0s, params {'colsample_bytree': 0.302467941355517, 'eta': 0.29917209959075, 'gamma': 9.835548032466487, 'max_depth': 10.0, 'min_child_weight': 5.0, 'n_estimators': 70.0, 'reg_alpha': 0.5656102159269116, 'reg_lambda': 1.5499374015037541, 'subsample': 0.6340237124923689}
+[s0    30.7s] done in 30.7s
+[s0   400.9s]   HP_Peak CatBoost/size_peak/both/residual/log: cv_mse 0.1543, cv_wape 27.3, train_wape 12.6, best_iter 156, 3 evals, 22.4s, params {'depth': 5.0, 'iterations': 450.0, 'l2_leaf_reg': 10.91751922213659, 'learning_rate': 0.04498994542510085}
+[15:00:55] done q_bstar_o1b__s0__d0__nall__physics (44 s)
+[s0   401.0s] done in 401.0s
+[15:00:56] done q_arm2__s0__d0__nall__catboost (419 s)
+[s0   318.9s]   HP_Peak CNN/size_peak/raw/direct/log: cv_mse 21.93, cv_wape 33.6, train_wape 20.8, best_iter 200, 2 evals, 29.7s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0   334.6s]   HP_Peak CNN/size_peak/raw/residual/log: cv_mse 0.1588, cv_wape 28.7, train_wape 20.3, best_iter 118, 2 evals, 15.6s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0   334.6s] done in 334.6s
+[15:01:26] done q_arm2__s0__d0__nall__rawseries (359 s)
+[s0    86.9s] evaluated 231 substations in 41.6s (0.180 s each)
+[s0    98.3s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.00626, 'paperA_corr_all': 0.00626, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    98.3s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 37.65, cv_wape 51.0, train_wape 72.2, best_iter None, 0 evals, 0.0s, params {}
+[s0    98.3s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 27.23, cv_wape 42.4, train_wape 47.5, best_iter None, 0 evals, 0.0s, params {}
+[s0    98.4s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 16.63, cv_wape 31.5, train_wape 25.6, best_iter None, 0 evals, 0.0s, params {}
+[s0   104.4s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 37.42, cv_wape 50.6, train_wape 72.2, best_iter 28, 50 evals, 6.0s, params {'colsample_bytree': 0.9055850235958254, 'eta': 0.17823300784562743, 'gamma': 8.271505842447153, 'max_depth': 4.0, 'min_child_weight': 9.0, 'n_estimators': 220.0, 'reg_alpha': 0.3227395517992135, 'reg_lambda': 0.09177576585943648, 'subsample': 0.8820303149003405}
+[s0   110.4s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 13.19, cv_wape 23.6, train_wape 13.6, best_iter 43, 50 evals, 6.0s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0   116.6s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 13.29, cv_wape 25.1, train_wape 36.1, best_iter 14, 50 evals, 6.2s, params {'colsample_bytree': 0.6076344373638374, 'eta': 0.24919896686807613, 'gamma': 6.274544231607543, 'max_depth': 5.0, 'min_child_weight': 14.0, 'n_estimators': 250.0, 'reg_alpha': 0.41239543003340334, 'reg_lambda': 0.01478266729836264, 'subsample': 0.8366170487990108}
+[s0   116.7s] done in 116.7s
+[15:01:59] done q_scale__s0__d0__nall__physics (140 s)
+[s0   360.9s]   HP_Peak TabPFN/size/both/direct/log: cv_mse 5.886, cv_wape 16.4, train_wape 2.5, best_iter None, 0 evals, 70.5s, params {}
+[s0   604.3s]   HP_Peak TabPFN/size/both/residual/log: cv_mse 0.1104, cv_wape 18.8, train_wape 0.6, best_iter None, 0 evals, 217.5s, params {}
+[s0   723.2s]   HP_Peak TabPFN/size_peak/netfit/direct/log: cv_mse 6.695, cv_wape 16.4, train_wape 2.4, best_iter None, 0 evals, 76.1s, params {}
+[s0   771.7s]   HP_Peak TabPFN/size_peak/netfit/residual/log: cv_mse 0.06477, cv_wape 16.6, train_wape 1.7, best_iter None, 0 evals, 36.3s, params {}
+[s0   863.0s]   HP_Peak TabPFN/size_peak/both/direct/log: cv_mse 5.287, cv_wape 15.7, train_wape 2.7, best_iter None, 0 evals, 88.6s, params {}
+[s0   953.3s]   HP_Peak TabPFN/size_peak/both/residual/log: cv_mse 0.1097, cv_wape 18.9, train_wape 0.7, best_iter None, 0 evals, 75.0s, params {}
+[s0   963.8s] done in 963.8s
+[15:12:06] done q_arm2__s0__d0__nall__tabpfn (990 s)
+[15:12:13] exit: {'done': 13, 'failed': 9, 'remaining': 0, 'median_job_s': 204.9263002872467, 'eta_h': 0.0, 'updated': '2026-10-01T15:12:12'}
+
+real	22m23.939s
+user	0m0.030s
+sys	0m0.031s

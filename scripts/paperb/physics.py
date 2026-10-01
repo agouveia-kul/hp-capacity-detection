@@ -129,12 +129,16 @@ def pilot_fit(T, hp, own, cap):
     return b, m, th
 
 
+def _pilot_T(pool, hh, caps):
+    w, st = caps[hh] / caps[hh].sum(), pool.meta.loc[hh, "station"]
+    return sum(pool.temp[s].astype(np.float64) * w[st.index[st == s]].sum() for s in sorted(st.unique()))
+
+
 def pool_pilot(pool, hh, caps):
     """Pilot of HP households `hh`: daily means of their summed HP and own load against the capacity-weighted mean
     of their stations' temperatures (one station: that station's T) -> dict(b, m, T_h, cap, n_hh)."""
     hh = sorted(hh)
-    w, st = caps[hh] / caps[hh].sum(), pool.meta.loc[hh, "station"]
-    T = sum(pool.temp[s].astype(np.float64) * w[st.index[st == s]].sum() for s in sorted(st.unique()))
+    T = _pilot_T(pool, hh, caps)
     d = pd.DataFrame({"T": T, "hp": pool.hp[hh].astype(np.float64).sum(axis=1),
                       "own": pool.own[hh].astype(np.float64).sum(axis=1)}).resample("D").mean()
     d = d[np.isfinite(d).all(axis=1)]
@@ -143,6 +147,22 @@ def pool_pilot(pool, hh, caps):
     except (RuntimeError, ValueError):
         b = m = th = np.nan
     return {"b": b, "m": m, "T_h": th, "cap": float(caps[hh].sum()), "n_hh": len(hh)}
+
+
+def pilot_whole(pool, hh, caps, s0_by_home, fillers=None):
+    """05b (A7) pilot of `paperA_corr_own`: m_h' = [s_h(whole-house load of the pilot homes) - sum of their s0] / P_pilot, the
+    whole-house load being HP + own non-HP load (B*), or HP + one assigned filler per home on its station's analog map
+    (GB-EoH, `fillers` {home: filler}); s_h by Paper A's net-load fit against the pilot temperature of `pool_pilot`."""
+    hh = sorted(hh)
+    if fillers is None:
+        own = pool.own[hh].astype(np.float64).sum(axis=1).to_numpy()
+    else:
+        st = pool.meta.loc[hh, "station"]
+        own = sum(pool.analog.aggregate([fillers[h] for h in g.index], s) for s, g in st.groupby(st))
+    d = pd.DataFrame({"T": _pilot_T(pool, hh, caps), "y": pool.hp[hh].astype(np.float64).sum(axis=1).to_numpy() + own}).resample("D").mean().dropna()
+    s_whole = fit_daily(d["T"].to_numpy(), d["y"].to_numpy())["s_h"]
+    s0_sum = float(np.sum([s0_by_home[h] for h in hh]))
+    return {"m": (s_whole - s0_sum) / float(caps[hh].sum()), "s_whole": s_whole, "s0_sum": s0_sum, "n_hh": len(hh)}
 
 
 def paperA_pilots(pool, train_hp, caps, min_station=10):
@@ -195,10 +215,11 @@ def crossfit_pilot_m(pool, train_hp, caps, folds, members, m_full):
     return out, fold_m
 
 
-def paperA_predictions(tab, full, by_station, s0=None, m_cf=None):
+def paperA_predictions(tab, full, by_station, s0=None, m_cf=None, m_own=None):
     """All estimators for every substation of `tab` -> {name: (P_hat, valid, fallback-to-full-pilot mask)}.
     `s0` {name: per-dwelling slope} adds the non-TCL-corrected estimators; `m_cf` (array over tab, cross-fitted m_h,
-    equal to the full m_h on test rows) adds out-of-sample versions under key "cf" (name -> (P_hat, valid))."""
+    equal to the full m_h on test rows) adds out-of-sample versions under key "cf" (name -> (P_hat, valid)). 05b: `m_own`
+    (`pilot_whole`'s m_h') adds `paperA_corr_own` = max(s_h - N s0, 0) / m_h' with the s0 of `paperA_corr`."""
     m_st = tab["station"].map({s: p["m"] for s, p in by_station.items()})
     fallback = m_st.isna().to_numpy()
     no_fb = np.zeros(len(tab), bool)
@@ -206,6 +227,8 @@ def paperA_predictions(tab, full, by_station, s0=None, m_cf=None):
            "paperA_sh_mh_station": (*paperA_estimate(tab["s_h_net"], m_st.fillna(full["m"])), fallback)}
     for name, s in (s0 or {}).items():
         out[name] = (*paperA_corrected(tab["s_h_net"], tab["size"], s, full["m"]), no_fb)
+    if m_own is not None:
+        out["paperA_corr_own"] = (*paperA_corrected(tab["s_h_net"], tab["size"], s0["paperA_corr"], m_own), no_fb)
     if m_cf is not None:
         out["cf"] = {"paperA_sh_mh": paperA_estimate(tab["s_h_net"], m_cf)}
         if s0:

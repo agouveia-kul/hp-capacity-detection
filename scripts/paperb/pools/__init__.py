@@ -91,8 +91,12 @@ def _heapo_flags():
 
 def build_pool(option, cfg, verbose=True):
     """Read (or build and cache) pool `option` in {'bstar', 'b', 'a', 'gb_eoh'}. 05a: `pool.analog_swap` (D5) replaces
-    every non-HP load of the pool by analog days of its fill households (fill_analog.analog_swap)."""
+    every non-HP load of the pool by analog days of its fill households (fill_analog.analog_swap). 05b: `pool.response_scale`
+    {fill: f, own: f} scales the fillers' / HP homes' own temperature response (oracle.apply_response_scale)."""
     pc = cfg["pool"]
+    if pc.get("response_scale"):                                        # 05b: scaled temperature response (oracle.py; O1a / O1b, Arm 7)
+        from paperb.oracle import apply_response_scale
+        return apply_response_scale(build_pool(option, {**cfg, "pool": {k: v for k, v in pc.items() if k != "response_scale"}}, verbose), cfg)
     if option == "gb_eoh":
         from paperb.pools.gb_eoh import build_pool_gb_eoh
         return build_pool_gb_eoh(cfg, verbose)

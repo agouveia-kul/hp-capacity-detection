@@ -20,6 +20,18 @@ The hypotheses and the decision rule below are **pre-registered**: they are fixe
   - Arm 3 uses `substations_per_cell_train` ∈ {10, 40};
   - Arm 4 on B\* is physics-only.
 - **[A5] Staged runs.** Stage 1 = Arms 1 + 2, then a short interim REVIEW. Stage 2 = Arms 3–7, after Alex's go.
+- **[A7] Co-located non-HP response (from the 05a D5 diagnosis, `d5_paperA_diagnostic.md`).** On B\*, the HP homes' **own** non-HP load has a temperature slope ≈ 3.3 × a filler home's (0.018 vs 0.005 kW/K; partly electric water heaters, M9). It scales with n_hp, not N, and neither `paperA_sh_mh` nor `paperA_corr` removes it. Two additions follow, both physics-only:
+  - **Split the B\* error decomposition (Arm 4).** Fill contamination becomes two parts:
+    - (i) **fillers' response**: oracle O1a replaces only the fillers' load with zero-temperature-response load (each filler's daily-mean deviation from its own temperature fit removed, P_base kept);
+    - (ii) **HP homes' own non-HP response**: O1b does the same for the HP homes' own non-HP load only.
+
+    O1 (both removed) stays as before. Report (i) and (ii) per bin. On GB-EoH, (ii) is structurally absent: each HP dwelling's own load is a random LCL filler. State that.
+  - **A new label-free physics row, `paperA_corr_own`.** Pilot m_h′ = [s_h(pilot HP homes' **whole-house** load, i.e. HP + own non-HP) − n_pilot · s₀] / P_pilot, and P̂ = max(s_h − N·s₀, 0) / m_h′.
+    - The co-located response is thereby folded into the per-unit scale. It needs whole-house meters on the pilot homes (smart meters), and no substation labels.
+    - Cross-fitted pilots and the s₀ estimate are as for `paperA_corr`. Invalid estimates → 0, counted.
+    - On GB-EoH, `paperA_corr_own` uses the pilot homes' HP load + their assigned filler's load. Because that filler is random, it should approximately equal `paperA_corr`; report both, as a check.
+  - **Run it** in Arms 1, 2, 4, 5, 6 and 7 with the other physics rows. It joins the physics rows from which the best physics row is chosen for the criterion. Adding it before any run is pre-registration-safe.
+  - **Test:** on a toy pool where the own load has a known slope k per HP home, `paperA_corr_own` recovers capacity within 1 %, while `paperA_corr` is biased by k / m_h per HP home.
 - **[A6] Continuous running.** The schedule may also run in the daytime at below-normal priority. Add a `-Continuous` switch to `schedule_overnight.ps1` that omits `-StopAt`. Alex chooses per stage.
 
 ## Question
@@ -150,7 +162,7 @@ Runtime is not a constraint, but use the [A4] reductions, and re-estimate after 
 
 Then stop, and wait for Alex's go for Stage 2.
 
-**Stage 2 (Arms 3–7)** in this order: Arm 7 → Arm 4 → Arm 3 → Arm 5 → Arm 6. The final REVIEW.md comes after Stage 2.
+**Stage 2 (Arms 3–7)** in this order: Arm 7 → Arm 4 → Arm 3 → Arm 5 → Arm 6. Arm 4's B\* part includes the [A7] split. The final REVIEW.md comes after Stage 2. Its decisions must also cover: does `paperA_corr_own` close the gap to the label-calibrated rows on B\* (overall and per bin)?
 
 | Arm | Pool / seeds | What |
 |---|---|---|

@@ -1,0 +1,11 @@
+split_seed,cap_def,n,lc_draw,pilot,b,m,T_h,cap,n_hh,s0,s_h,s_whole,s0_sum,arm,family
+0,hp_peak,main,-1,all,0.033652249403046626,0.01938759900898614,15.819773117843244,394.41596800000093,64,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,Hg,0.036806878781362365,0.018722218146147197,15.61037481717853,61.553368000000006,12,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,KLO,0.03345983260201735,0.019419567602351657,16.17288899997706,286.4047760000008,46,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,s0:paperA_corr,,,18.442185204834125,,968,0.005415016226561297,5.241735707311336,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,s0:paperA_corr_all,,,18.281189004257623,,1032,0.005055806157629233,5.2175919546733684,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,cf:fold0,,0.019908559961038068,,,49,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,cf:fold1,,0.019337533262205102,,,47,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,cf:fold2,,0.01912217083134792,,,48,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,cf:fold3,,0.01922120073840505,,,48,,,,,q_bstar_o1b,physics
+0,hp_peak,main,-1,own,,0.0184777792071291,,,64,,,7.634492210970035,0.3465610384999231,q_bstar_o1b,physics

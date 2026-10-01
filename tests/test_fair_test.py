@@ -196,7 +196,8 @@ def test_learning_curve_pilot_is_the_subsample(monkeypatch):
     from paperb import run_benchmark as RB
     cfg = copy.deepcopy(CFG)
     cfg.update(models=["Linear"], modes=["direct"], target_transforms=["none"], physics_baselines=[],
-               anchor_only_baselines={"models": [], "features": []}, paperA={**cfg["paperA"], "cap_def_check": False})
+               anchor_only_baselines={"models": [], "features": []}, paperA={**cfg["paperA"], "cap_def_check": False},
+               pilot_cache=False)                                              # 05b: the pilot calls are what is tested
     cfg["learning_curve"]["specs"] = ["paperA_sh_mh|none|-|-|-"]
     cfg["parallel"]["threads"] = 4
     calls, real = [], RB.paperA_pilots

@@ -27,7 +27,11 @@ restricts a model to given anchors. The timing table carries the inner-CV WAPE (
 
     python scripts/paperb/run_benchmark.py --config configs/protocol_v1_quick.yaml [--set parallel.workers=4] [--resume]
 """
-import argparse
+try:                                                                  # 05b: torch before pandas / pyarrow (pyarrow 15 bundles an old
+    import torch  # noqa: F401                                        # msvcp140.dll that breaks torch's c10.dll if it is loaded first)
+except ImportError:
+    pass
+import argparse  # noqa: E402
 import concurrent.futures as cf
 import hashlib
 import json
@@ -52,8 +56,9 @@ from paperb.fill_analog import add_own_fillers  # noqa: E402
 from paperb.learning_curve import lc_designs  # noqa: E402
 from paperb.metrics import compute_metrics  # noqa: E402
 from paperb.features_netfit import FEATURE_VERSION  # noqa: E402
+from paperb.oracle import floor_rows, oracle_predictions, true_m  # noqa: E402
 from paperb.physics import (crossfit_pilot_m, household_caps, household_sensitivity, make_baseline,  # noqa: E402
-                            paperA_pilots, paperA_predictions)
+                            paperA_pilots, paperA_predictions, pilot_whole)
 from paperb.pools import build_pool  # noqa: E402
 from paperb.residual import log_ratio, residual_predict  # noqa: E402
 from paperb.splits import grouped_inner_folds, household_splits  # noqa: E402
@@ -67,6 +72,20 @@ SPEC_COLS = ["method", "anchor", "feature_set", "mode", "target_transform"]
 NA = "-"
 PBINS = [("pbin<=15", 0.0, 0.15), ("pbin15-35", 0.15, 0.35), ("pbin35-65", 0.35, 0.65), ("pbin>65", 0.65, np.inf)]   # Paper A (actual p)
 CAL = {"paperA_cal": "paperA_sh_mh", "paperA_corr_cal": "paperA_corr"}     # calibrated estimator -> its base estimator
+OWN_STREAM = 6                                                     # 05b: fillers assigned to the GB-EoH whole-house pilot homes
+
+
+def write_atomic(f, text):
+    """Write `text` to f via a per-process temporary file (queue jobs share the caches)."""
+    f.parent.mkdir(parents=True, exist_ok=True)
+    tmp = f.with_name(f"{f.name}.{os.getpid()}.tmp")
+    tmp.write_text(text)
+    try:
+        os.replace(tmp, f)
+    except PermissionError:                                          # Windows: another job replaced or is reading it (same content)
+        if not f.exists():
+            raise
+        os.remove(tmp)
 
 
 def paperA_estimators(cfg):
@@ -79,13 +98,14 @@ def specs(cfg):
     """Every prediction of one target as (method, anchor, feature_set, mode, target_transform)."""
     out = [(b, "none", NA, NA, NA) for b in cfg["physics_baselines"]] + [(e, "none", NA, NA, NA) for e in paperA_estimators(cfg)]
     models = [m for m in cfg["models"] if m != "FFNN" or cfg.get("ffnn", {}).get("enabled", False)]
+    fs_ok = lambda m, fs: fs in cfg.get("model_feature_sets", {}).get(m, [f for f in cfg.get("feature_sets", ["whdd"]) if f != "raw"])   # noqa: E731  05b: the CNN reads `raw` only
     for anchor in cfg["anchors"]:
         for fs in cfg.get("feature_sets", ["whdd"]):
             for mode in cfg.get("modes", ["direct"]):
                 out += ([(m, anchor, fs, "direct", t) for t in cfg.get("target_transforms", ["none"]) for m in models
                          if not (m == "XGBoost_mono" and fs == "whdd")                   # no nf_* column: = XGBoost
-                         and anchor in cfg.get("model_anchors", {}).get(m, [anchor])]
-                        if mode == "direct" else [(m, anchor, fs, "residual", "log") for m in cfg["residual_models"]])
+                         and anchor in cfg.get("model_anchors", {}).get(m, [anchor]) and fs_ok(m, fs)]
+                        if mode == "direct" else [(m, anchor, fs, "residual", "log") for m in cfg["residual_models"] if fs_ok(m, fs)])
     ao = cfg["anchor_only_baselines"]
     return out + [(f"anchor_only_{m}", "+".join(c), NA, "direct", "none") for m in ao["models"] for c in ao["features"]]
 
@@ -125,18 +145,30 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
         log(f"  {y.name}: {int((~y[tr | inn].notna()).sum())} train/inner substations without a target (failed fit), not used for fitting")
     ev_all, ev_by = cfg["cv"]["hyperopt"]["max_evals"], cfg["cv"]["hyperopt"].get("max_evals_by_model", {})
     pa_target = cfg.get("paperA", {}).get("target", "HP_Peak")
-    yv, out, extra, Xc = y.to_numpy(float), {}, {}, {}
+    yv, out, extra, Xc, bvs = y.to_numpy(float), {}, {}, {}, {}
 
     def tuned(spec, name, X, yt, m_in, m_tr, opts=None, space=None, eval_on=None):
         t0, ev = time.time(), ev_by.get(name, ev_all)
         y_kw, p_base = eval_on if eval_on is not None else (yv, None)              # direct models: yt is y itself
         m, meta, _ = tune_grouped_cv(name, X[m_in], yt[m_in], tab.loc[m_in, "fold"], seed, ev, X[m_tr], yt[m_tr], opts, space,
                                      (y_kw[m_in], None if p_base is None else p_base[m_in]))
+        to_kw = lambda pr, mask: pr if p_base is None else p_base[mask] * np.exp(pr)            # noqa: E731  residual: z -> kW
+        p_tr = to_kw(m.predict(X[m_tr]), m_tr)
+        bv = {"wape_train": 100 * float(np.abs(p_tr - y_kw[m_tr]).sum() / y_kw[m_tr].sum()), "wape_inner": meta["cv_wape"],
+              "n_train_sub": int(m_tr.sum()), "n_inner_sub": int(m_in.sum()), "n_test_sub": int(te.sum()),
+              "n_overlap_sub": int((m_tr & m_in).sum() + (m_tr & te).sum() + (m_in & te).sum())}   # 05b Task 1b: disjoint sets
+        if name == "CNN":
+            bv.update(cnn_params=m.m.n_params, cnn_params_flag=int(m.m.n_params > 10 * m_tr.sum()))
+        if name == "GP":                                                    # 5-95 % predictive interval coverage on test (not for selection)
+            lo, hi = (to_kw(v, te) for v in m.predict_interval(X[te]))
+            ok = np.isfinite(yv[te])
+            bv["gp_pi90_coverage"] = float(np.mean((lo[ok] <= yv[te][ok]) & (yv[te][ok] <= hi[ok])))
+        bvs[spec] = bv
         timing.append({"split_seed": seed, "target": y.name, **dict(zip(SPEC_COLS, spec)), "n_evals": meta["n_evals"],
                        "seconds": time.time() - t0, "n_inner": int(m_in.sum()), "n_train": int(m_tr.sum()),
-                       "cv_wape": meta["cv_wape"]})
-        log(f"  {y.name} {'/'.join(spec)}: cv_mse {meta['cv_mse']:.4g}, cv_wape {meta['cv_wape']:.1f}, best_iter {meta['best_iter']}, "
-            f"{meta['n_evals']} evals, {time.time() - t0:.1f}s, params {meta['params']}")
+                       "cv_wape": meta["cv_wape"], "train_wape": bv["wape_train"]})
+        log(f"  {y.name} {'/'.join(spec)}: cv_mse {meta['cv_mse']:.4g}, cv_wape {meta['cv_wape']:.1f}, train_wape {bv['wape_train']:.1f}, "
+            f"best_iter {meta['best_iter']}, {meta['n_evals']} evals, {time.time() - t0:.1f}s, params {meta['params']}")
         return m.predict(X[te])
 
     for spec in spec_list or specs(cfg):
@@ -168,6 +200,8 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
                 p, valid = pa.get("cf", {}).get("paperA_sh_mh", pa["paperA_sh_mh"][:2])      # cross-fitted (03b Task 3)
                 out[spec], c = residual_predict(lambda *a, **k: tuned(spec, *a, **k), method, X, yv, p, valid, fit_in, fit_tr, te)
                 extra[spec] = {"n_invalid": int((~valid[te]).sum()), **c}
+    for spec, bv in bvs.items():                                        # 05b Task 1b: train / inner-CV WAPE next to the test metrics
+        extra[spec] = {**extra.get(spec, {}), **bv}
     return out, extra
 
 
@@ -228,7 +262,8 @@ def run_seed(cfg, seed):
         members = add_own_fillers(members, sp, folds, seed)
     log(f"HP train/test {len(sp['train']['hp'])}/{len(sp['test']['hp'])}, fill {len(sp['train']['fill'])}/"
         f"{len(sp['test']['fill'])}; substations {members['split'].value_counts().to_dict()}; dropped cells {len(dropped)}")
-    tab, F, dt = cached_eval(pool, members, cfg, seed, log)
+    lc_only = bool(cfg.get("lc_only"))                                  # 05b queue job of one learning-curve design: test substations only
+    tab, F, dt = cached_eval(pool, members[members["split"] == "test"] if lc_only else members, cfg, seed, log)
     viol = tab["HP_CoincPeak"] > tab["HP_Peak"] + 1e-9
     diag = {"split_seed": seed, "n_substations": len(tab), "hinge_inside_net": tab["hinge_inside_net"].mean(),
             "hinge_inside_hp": tab["hinge_inside_hp"].mean(), "at_bound_net": tab["at_bound_net"].mean(),
@@ -243,29 +278,66 @@ def run_seed(cfg, seed):
 
     def pilot_estimates(t, train_hp, caps, mem, fold_of, **tag):
         """Paper A estimates for the substations of `t` (memberships `mem`, household folds `fold_of`): pilot of
-        `train_hp`, per-dwelling non-TCL slopes s0 (train fill [+ own load of train_hp]) and cross-fitted m_h."""
+        `train_hp`, per-dwelling non-TCL slopes s0 (train fill [+ own load of train_hp]) and cross-fitted m_h. 05b: the pilot
+        numbers are cached per (pool, seed, design) in <cache_dir>/pilots/ (A4) and reused by every family job; `paperA_corr_own`
+        adds the whole-house pilot (A7); a filler-scaled pool (Arm 7) adds `paperA_corr_s0unscaled` (s0 of the unscaled fillers)."""
+        key = hashlib.md5(json.dumps([pool.name, cfg["pool"], {k: pac.get(k) for k in ("cap_def", "crossfit", "fill_station", "min_station_pilot")},
+                                      seed, tag, sorted(train_hp), sorted(sp["train"]["fill"]), list(t.index), mem.loc[t.index, "hp_members"].tolist(),
+                                      sorted(map(str, fold_of.items())), "paperA_corr_own" in paperA_estimators(cfg)],
+                                     sort_keys=True, default=str).encode()).hexdigest()[:12]
+        f = Path(cfg.get("pilot_cache_dir") or ROOT / cfg["cache_dir"] / "pilots") / f"{pool.name}_s{seed}_{key}.json"
+        if cfg.get("pilot_cache", True) and f.exists():
+            c = json.loads(f.read_text())
+        else:
+            c = pilot_numbers(t, train_hp, caps, mem, fold_of, tag)
+            if cfg.get("pilot_cache", True):
+                write_atomic(f, json.dumps(c, default=float))
+        pilots.extend(c["rows"])
+        return paperA_predictions(t, c["full"], c["by_st"], {k: np.asarray(v, float) for k, v in c["s0"].items()},
+                                  None if c["m_cf"] is None else np.asarray(c["m_cf"], float), c["m_own"])
+
+    def pilot_numbers(t, train_hp, caps, mem, fold_of, tag):
         full, by_st = paperA_pilots(pool, train_hp, caps, min_st)
-        pilots.extend({"split_seed": seed, **tag, "pilot": k, **v} for k, v in [("all", full), *sorted(by_st.items())])
+        rows = [{"split_seed": seed, **tag, "pilot": k, **v} for k, v in [("all", full), *sorted(by_st.items())]]
+        stations = sorted(set(t["station"]) | set(pool.meta.loc[list(train_hp), "station"]))
         if pool.analog is None:
             s0 = {k: household_sensitivity(pool, sp["train"]["fill"], own, pac.get("fill_station", "KLO"))
                   for k, own in (("paperA_corr", ()), ("paperA_corr_all", train_hp))}
+            s0_home = {h: s0["paperA_corr"]["s0"] for h in train_hp}
         else:                                                           # 05a: train fillers under each station's map
-            by = pool.analog.s0(sp["train"]["fill"], pool.index, pool.temp, sorted(t["station"].unique()))
-            pilots.extend({"split_seed": seed, **tag, "pilot": f"s0map:{st}", **v} for st, v in by.items())
-            row = t["station"].map({st: v["s0"] for st, v in by.items()}).to_numpy()
-            s0 = {k: {"s0": row, "s_h": np.nan, "T_h": np.nan, "N": len(sp["train"]["fill"])} for k in ("paperA_corr", "paperA_corr_all")}
-        pilots.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": np.nanmedian(v["s0"]), "s_h": v["s_h"], "T_h": v["T_h"],
-                       "n_hh": v["N"]} for k, v in s0.items())
+            maps = {"": pool.analog.S} if getattr(pool, "analog_unscaled", None) is None else {"": pool.analog.S, "_s0unscaled": pool.analog_unscaled}
+            s0 = {}
+            for suffix, S in maps.items():
+                S_keep, pool.analog.S = pool.analog.S, S
+                by = pool.analog.s0(sp["train"]["fill"], pool.index, pool.temp, stations)
+                pool.analog.S = S_keep
+                rows.extend({"split_seed": seed, **tag, "pilot": f"s0map{suffix}:{st}", **v} for st, v in by.items())
+                row = t["station"].map({st: v["s0"] for st, v in by.items()}).to_numpy()
+                for k in (("paperA_corr", "paperA_corr_all") if not suffix else ("paperA_corr" + suffix,)):
+                    s0[k] = {"s0": row, "s_h": np.nan, "T_h": np.nan, "N": len(sp["train"]["fill"])}
+                if not suffix:
+                    s0_home = {h: by[pool.meta.at[h, "station"]]["s0"] for h in train_hp}
+        rows.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": np.nanmedian(v["s0"]), "s_h": v["s_h"], "T_h": v["T_h"],
+                     "n_hh": v["N"]} for k, v in s0.items())
         m_cf = None
         if pac.get("crossfit", False):
             m_ser, fold_m = crossfit_pilot_m(pool, train_hp, caps, fold_of, mem.loc[t.index], full["m"])
-            m_cf = m_ser.to_numpy()
-            pilots.extend({"split_seed": seed, **tag, "pilot": f"cf:fold{k}", "m": v, "n_hh": len([h for h in train_hp if fold_of[h] != k])}
-                           for k, v in fold_m.items())
-        return paperA_predictions(t, full, by_st, {k: v["s0"] for k, v in s0.items()}, m_cf)
+            m_cf = m_ser.to_numpy().tolist()
+            rows.extend({"split_seed": seed, **tag, "pilot": f"cf:fold{k}", "m": v, "n_hh": len([h for h in train_hp if fold_of[h] != k])}
+                        for k, v in fold_m.items())
+        m_own = None
+        if "paperA_corr_own" in paperA_estimators(cfg):                  # A7: whole-house pilot (GB-EoH: one random train filler per home)
+            fillers = None if pool.analog is None else dict(zip(sorted(train_hp), map(str, np.random.default_rng([seed, OWN_STREAM]).choice(
+                sorted(sp["train"]["fill"]), len(train_hp), replace=False))))
+            own = pilot_whole(pool, train_hp, caps, s0_home, fillers)
+            m_own = own["m"]
+            rows.append({"split_seed": seed, **tag, "pilot": "own", **own})
+        return {"rows": rows, "full": full, "by_st": by_st, "m_cf": m_cf, "m_own": m_own,
+                "s0": {k: np.broadcast_to(np.asarray(v["s0"], float), (len(t),)).tolist() for k, v in s0.items()}}
 
     if paperA_estimators(cfg) or cfg.get("learning_curve"):
         caps = household_caps(pool, pac.get("cap_def", "hp_peak"))
+    if (paperA_estimators(cfg) or cfg.get("learning_curve")) and not lc_only:
         pa = pilot_estimates(tab, sp["train"]["hp"], caps, members, folds, cap_def=pac.get("cap_def", "hp_peak"), n="main", lc_draw=-1)
         log(f"Paper A pilot m_h {pilots[0]['m']:.5f} ({pilots[0]['n_hh']} train HP households); station pilots "
             f"{ {r['pilot']: round(r['m'], 5) for r in pilots[1:] if r['pilot'] in pool.temp.columns} }; s0 "
@@ -279,7 +351,7 @@ def run_seed(cfg, seed):
             if extra_rows is not None:
                 extra_rows(spec, pr)
 
-    for target in cfg["targets"]:
+    for target in ([] if lc_only else cfg["targets"]):
         def keep(spec, pr, target=target):
             if spec[0] in PHYSICS_FIT:
                 rows.extend(at_bound_rows(seed, target, tab, spec, n_hp))
@@ -287,6 +359,12 @@ def run_seed(cfg, seed):
                                        "y": tab.loc[te, target].to_numpy(), "pred": pr, "split_seed": seed,
                                        "size": tab.loc[te, "size"].to_numpy(), "p": tab.loc[te, "p"].to_numpy()}))
         score(target, tab, predictions(cfg, tab, F, tab[target], seed, timing, log, pa), members, keep)
+        if cfg.get("oracle_rows") and target == "HP_Peak" and pa is not None and cfg["physics_baselines"]:   # 05b diagnostics (oracle.py)
+            t_te = tab.loc[te]
+            orc = oracle_predictions(t_te, pilots[0]["m"], true_m(pool, members.loc[te], caps))
+            score(target, tab, ({(k, "none", NA, NA, NA): v[0] for k, v in orc.items()},
+                                {(k, "none", NA, NA, NA): {"n_invalid": int((~v[1]).sum())} for k, v in orc.items()}), members, keep)
+            rows.extend(floor_rows(pool, t_te, seed))
     if pac.get("cap_def_check"):                                        # Paper A's own capacity definition (eq. pk)
         caps_a = household_caps(pool, "paperA")
         tab["HP_Peak_A"] = members.loc[tab.index, "hp_members"].map(lambda h: float(caps_a[list(h)].sum()))
@@ -295,7 +373,8 @@ def run_seed(cfg, seed):
         score("HP_Peak_A", tab, predictions({**cfg, "paperA": {**pac, "target": "HP_Peak_A"}}, tab, F, tab["HP_Peak_A"],
                                             seed, timing, log, pa_a, spl), members)
     if cfg.get("learning_curve"):
-        spl = [tuple(x.split("|")) for x in cfg["learning_curve"]["specs"]]
+        lsp = cfg["learning_curve"]["specs"]
+        spl = specs(cfg) if lsp == "all" else [tuple(x.split("|")) for x in lsp]
         if cfg["pool"].get("analog_swap"):
             raise ValueError("learning_curve with pool.analog_swap is not implemented (05a D5 runs n = all only)")
         for n, draw, spc, sub, mem, dr in lc_designs(cfg, pool.meta, sp, seed, members.loc[te]):
