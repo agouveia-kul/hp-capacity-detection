@@ -13,6 +13,7 @@ unknowns. Arm 1 runs netfit x size only (a quarter of the probe's feature-set x 
 22:00 - 07:30, a continuous day 24 h.
 
     python scripts/paperb/runtime_estimate.py [--workers 6]
+    python scripts/paperb/runtime_estimate.py --probe05b --workers 10     # 05b, after configs/iter05b_probe.yaml
 """
 import argparse
 import json
@@ -27,6 +28,7 @@ from paperb import ROOT  # noqa: E402
 OUT = ROOT / "results" / "iter05a_pool"
 JOBS = OUT / "overnight" / "jobs"
 EXTRA, NIGHT_H, SUBS_GB, HP_MAIN, HP_REP = 2.0, 9.5, 3875, 274, 226
+B_STAR = 0.11                                                           # B* / GB-EoH job-hours per seed, measured in 05a D5 (runtime_estimate.md)
 
 
 def measured():
@@ -83,7 +85,51 @@ def main(workers):
     print("\n".join(txt))
 
 
+def main05b(workers, out=ROOT / "results" / "iter05b_data_limit"):
+    """05b: re-estimate from the 05b probe (configs/iter05b_probe.yaml: arm 2, seed 0, full size, every queue family; pilots cached),
+    measured per queue family instead of the 05a probe x EXTRA. Same arm scaling as main(); arm 1's n = all point is arm 2 (not rerun),
+    its tabular families run netfit x size (1/4 of arm 2's specs), the CNN size only (1/2). Writes <out>/runtime_estimate_05b.md."""
+    J = out / "stage1" / "jobs"
+    fam = {f.name.split("__")[-1][:-len(".done")]: json.loads(f.read_text())["seconds"] / 3600 for f in J.glob("arm2__s0__d0__nall__*.done")}
+    failed = sorted(f.name.split("__")[-1][:-len(".failed")] for f in J.glob("arm2__s0__d0__nall__*.failed"))
+    if not fam:
+        raise SystemExit(f"no probe job in {J}: run the queue with configs/iter05b_probe.yaml first")
+    seed = sum(fam.values())                                            # job-hours of one full-size GB-EoH seed (arm 2)
+    frac = {k: 1.0 if k == "physics" else 0.5 if k == "rawseries" else 0.25 for k in fam}
+    lc_seeds = 10 * 2 * (16 + 32 + 62 + 100 + 200) / HP_MAIN           # arm 1 in full-size seeds at arm 2's specs
+    arm1 = lc_seeds * sum(frac[k] * v for k, v in fam.items()) / seed
+    arms = [("1 learning curve (10 seeds x 2 draws x n in {16, 32, 62, 100, 200}; netfit x size)", 1, arm1),
+            ("2 headline (20 seeds, n = all, full grid)", 1, 20),
+            ("7 filler uncertainty (10 seeds x factors 0.5, 1.5)", 2, 20),
+            ("4 oracles (GB-EoH 20 seeds, one extra family pass; B* physics only)", 2, 20 + 20 * B_STAR * fam.get("physics", 0) / seed),
+            ("3 households vs substations (10 seeds, n in {62, all} x spc {10, 40})", 2, 10 * (62 / HP_MAIN + 1) * (1 + 4)),
+            ("5 B* under v1.1 (20 seeds, full grid)", 2, 20 * B_STAR),
+            ("6 temporal replication (GB-EoH Oct 2022 - Sep 2023, 10 seeds)", 2, 10 * HP_REP / HP_MAIN)]
+    R = pd.DataFrame([{"stage": st, "arm": a, "full-size seeds": round(e, 1), "job hours": round(e * seed, 1), "wall h": round(e * seed / workers, 1),
+                       "nights": round(e * seed / workers / NIGHT_H, 2)} for a, st, e in arms])
+    S = R.groupby("stage")[["job hours", "wall h", "nights"]].sum().round(1)
+    S["continuous days"] = (S["wall h"] / 24).round(1)
+    F = pd.DataFrame([{"queue family": k, "probe job hours (seed 0)": round(v, 2), "share of a seed": f"{v / seed:.0%}",
+                       "stage 1 job hours": round(v * (20 + lc_seeds * frac[k]), 1)} for k, v in sorted(fam.items(), key=lambda kv: -kv[1])])
+    md = lambda d: "\n".join(["| " + " | ".join(map(str, d.columns)) + " |", "|" + "---|" * d.shape[1]] + ["| " + " | ".join(map(str, r)) + " |" for r in d.itertuples(index=False)])  # noqa: E731
+    txt = ["# 05b runtime estimate from the 05b timing probe\n",
+           f"Probe: arm 2 (GB-EoH main, full v1.1 grid, every model x anchors {{size, size_peak}} x feature sets {{netfit, both}} x {{direct-log, residual}}), seed 0, "
+           f"one queue job per family, pilots cached: {seed:.1f} job-hours for one full-size seed. Failed probe jobs (not in the estimate): {', '.join(failed) or 'none'}. "
+           f"B* = {B_STAR} x GB-EoH per seed (measured in 05a D5 on the 05a families; not re-measured for the new models).\n", md(F), "",
+           f"## Arms at {workers} workers\n", md(R), "", md(S.reset_index()), "",
+           f"Stage 1 (arms 1 + 2): {S.loc[1, 'wall h']:.0f} h wall = {S.loc[1, 'nights']:.1f} nights or {S.loc[1, 'continuous days']:.1f} continuous days; "
+           f"the probe already paid {seed:.1f} of its job-hours. Stage 2: {S.loc[2, 'wall h']:.0f} h wall = {S.loc[2, 'nights']:.1f} nights or {S.loc[2, 'continuous days']:.1f} continuous days.\n",
+           "Assumptions: cost proportional to the number of substations (the GP is cubic in the train substations and TabPFN's context grows with them, "
+           "so arm 1 is overestimated for those two and arm 3 at spc 40 underestimated); wall = job hours / workers, although TabPFN runs at most 3 jobs at once; "
+           "contention as in the probe (9 jobs at once).\n"]
+    (out / "runtime_estimate_05b.md").write_text("\n".join(txt), encoding="utf-8")
+    print("\n".join(txt))
+    return S
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--workers", type=int, default=6)
-    main(ap.parse_args().workers)
+    ap.add_argument("--probe05b", action="store_true", help="05b: estimate from the 05b probe (configs/iter05b_probe.yaml)")
+    a = ap.parse_args()
+    main05b(a.workers) if a.probe05b else main(a.workers)

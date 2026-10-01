@@ -407,7 +407,7 @@ def run_seed(cfg, seed):
                 r.update(n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
     log(f"done in {time.time() - t0:.1f}s")
     return {"metrics": pd.DataFrame(rows).assign(exp_id=cfg["exp_id"], dataset=ds), "dropped": dropped,
-            "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
+            "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds) if preds else pd.DataFrame(), "log": lines,
             "pilots": pd.DataFrame(pilots), "lc": pd.DataFrame(lc_rows).assign(exp_id=cfg["exp_id"], dataset=ds),
             "lc_dropped": pd.DataFrame(lc_dropped)}
 

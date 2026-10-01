@@ -12,6 +12,7 @@ from types import SimpleNamespace
 import numpy as np
 import pandas as pd
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -300,6 +301,20 @@ def test_cached_pilot_equals_fresh(tmp_path):
     assert "paperA_corr_own" in set(fresh["preds"]["method"]) and (fresh["pilots"]["pilot"] == "own").sum() == 1
 
 
+@needs_bstar
+def test_lc_only_job_returns_lc_rows_without_preds(tmp_path):
+    """A queue learning-curve job (lc_only) scores only the n-design; it has no full-split predictions and must not fail on them."""
+    cfg = copy.deepcopy(load_config("configs/iter03b_quick.yaml"))
+    cfg.update(models=[], residual_models=[], modes=["direct"], physics_baselines=[], anchor_only_baselines={"models": [], "features": []},
+               pilot_cache_dir=str(tmp_path), lc_only=True)
+    cfg["learning_curve"].update(n=[16], draws=1, draw_ids=[0], specs=["paperA_sh_mh|none|-|-|-"])
+    cfg["paperA"].update(estimators=["paperA_sh_mh"], cap_def_check=False)
+    cfg["parallel"]["threads"] = 4
+    res = RB.run_seed(cfg, 0)
+    assert res["preds"].empty and res["metrics"].empty
+    assert len(res["lc"]) and set(res["lc"]["n_train_hp"]) == {16} and set(res["lc"]["method"]) == {"paperA_sh_mh"}
+
+
 # ------------------------------------------------------------------ TabPFN (Task 1e) and secrets
 @needs_tabpfn
 def test_tabpfn_is_the_local_v35_checkpoint_with_recorded_hash():
@@ -311,8 +326,12 @@ def test_tabpfn_is_the_local_v35_checkpoint_with_recorded_hash():
     info = T.tabpfn_info()
     assert info["checkpoint"] == T.TABPFN_CHECKPOINT and re.fullmatch(r"[0-9a-f]{64}", info["sha256"]) and info["package"] >= "9.0.0"
     for f in (ROOT / "results" / "iter05b_data_limit").rglob("config.yaml"):                  # every recorded hash is this file's
-        if "tabpfn" in (txt := f.read_text(encoding="utf-8")):
-            assert info["sha256"] in txt
+        c = yaml.safe_load(f.read_text(encoding="utf-8"))
+        q, arm = c.get("queue") or {}, f.parent.name                  # an arm with TabPFN jobs must record it; physics-only arms need not
+        runs = any("TabPFN" in q["families"][fam].get("models", []) + q["families"][fam].get("residual_models", [])
+                   for a in q.get("arms", []) if a["name"] == arm for fam in a["families"])
+        if runs or "tabpfn" in c:
+            assert c["tabpfn"]["sha256"] == info["sha256"], f
 
 
 def test_no_token_in_outputs_or_tracked_files():
@@ -345,3 +364,29 @@ def test_cnn_reads_raw_only_and_others_never_read_raw():
     sp = RB.specs(cfg)
     assert {s[2] for s in sp if s[0] == "CNN"} == {"raw"} and "raw" not in {s[2] for s in sp if s[0] == "Lasso"}
     assert len([s for s in sp if s[0] == "CNN"]) == 2 * 2                         # anchors {size, size_peak} x {direct-log, residual}
+
+
+# ------------------------------------------------------------------ timing probe and runtime estimate (Task 2)
+def test_probe_jobs_are_stage1_jobs():
+    """The probe's work is reused: its job ids, output folder and arm configs are those of stage 1."""
+    import yaml as _y
+    p, s = (_y.safe_load((ROOT / f"configs/iter05b_{k}.yaml").read_text()) for k in ("probe", "stage1"))
+    assert (p["exp_id"], p["out_dir"], p["families"]) == (s["exp_id"], s["out_dir"], s["families"])
+    ids = {j["id"] for j in RQ.jobs(s)}
+    assert {j["id"] for j in RQ.jobs(p)} <= ids and len(RQ.jobs(p)) == len(p["families"])
+    for a in p["arms"]:
+        assert a["config"] == next(b for b in s["arms"] if b["name"] == a["name"])["config"]
+
+
+def test_runtime_estimate_05b_from_probe_markers(tmp_path):
+    import json
+    from paperb import runtime_estimate as RE
+    J = tmp_path / "stage1" / "jobs"
+    J.mkdir(parents=True)
+    for fam, h in {"physics": 1.0, "linear": 1.0, "rawseries": 2.0, "tabpfn": 4.0}.items():
+        (J / f"arm2__s0__d0__nall__{fam}.done").write_text(json.dumps({"seconds": 3600 * h}))
+    (J / "arm2__s0__d0__nall__gp.failed").write_text("boom")
+    S = RE.main05b(10, tmp_path)
+    lc = 10 * 2 * (16 + 32 + 62 + 100 + 200) / RE.HP_MAIN
+    assert S.loc[1, "job hours"] == pytest.approx(20 * 8 + lc * (1 + 0.25 + 1 + 1), abs=0.2)
+    assert "Failed probe jobs (not in the estimate): gp" in (tmp_path / "runtime_estimate_05b.md").read_text()
