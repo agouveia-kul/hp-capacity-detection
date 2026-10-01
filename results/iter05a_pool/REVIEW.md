@@ -1,7 +1,7 @@
 # Iteration 05a-ii — R1–R8 rebuild, D4 diagnostics, overnight queue, D5 swap test
 **Goal:** Apply the 05a-i review decisions, settle the D4 flag, run D5 through the queue, and decide whether 05b can start.
 
-**Branch / commit:** iter/05a-gb-eoh-pool @ CODEHASH (code fba77a1; results and this REVIEW in the last commit). Not pushed: the push was denied by the auto-mode classifier. Interim REVIEW: `REVIEW_05a-ii-a.md`. The ~450-line budget was exceeded (~850 logic lines in total).
+**Branch / commit:** iter/05a-gb-eoh-pool @ 873b326 (code fba77a1; results and this REVIEW in the last commit). Not pushed: the push was denied by the auto-mode classifier. Interim REVIEW: `REVIEW_05a-ii-a.md`. The ~450-line budget was exceeded (~850 logic lines in total).
 
 **Changed:** line counts in `REVIEW_05a-ii-a.md`. Since then: `gb_eoh.py` (replication window clipped to the last full day, silent-electricity exclusion), `d4_diagnostics.py` (flag renamed), `iter05a_report.py` (`--queue-dir`, replication report), `envelopes_v11.py`, `runtime_estimate.py` (amended 05b arms, measured B\* ratio), `test_05a_ii.py`, CLAUDE.md (restored and updated), DECISIONS.md. Results: `mapping.md` (D1–D5), `d4_diagnostics.md`, `zero_runs.md`, `envelopes.md`, `runtime_estimate.md`, `eoh_selection.md`, `overnight/STATUS.md`. pytest: 74 passed before the last edits (21 min); the 15 new or changed tests pass afterwards.
 
