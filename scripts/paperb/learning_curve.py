@@ -5,7 +5,9 @@ Within one split seed the TRAIN HP households are subsampled to n in `learning_c
 random sample without replacement (stream [seed, LC_STREAM, n, draw]); the train fill pool is unchanged. The train
 substations and the household-grouped inner folds are rebuilt from the subsample only, with the same generator rules
 (`build_substations`), so cells that become infeasible are listed (dropped_cells, with n and draw). The TEST
-substations are identical across n (checked here). The Paper A pilot is the subsample, so the estimator and the ML
+substations are identical across n (checked here). 05a: `learning_curve.substations_per_cell_train` (e.g. [10, 20, 40];
+default: the grid's value) rebuilds the train substations with that many per cell; test and inner substations are
+unchanged. Rows carry `spc_train` (None = the grid default). The Paper A pilot is the subsample, so the estimator and the ML
 models see the same labelled HP households. The runner scores each draw into metrics_lc.csv (usual columns plus
 n_train_hp and lc_draw).
 """
@@ -28,23 +30,25 @@ def lc_subsample(train_hp, n, seed, draw):
 
 
 def lc_designs(cfg, meta, split, seed, test_members):
-    """Yield (n, draw, subsample, members, dropped) per learning-curve draw of one split seed.
+    """Yield (n, draw, spc_train, subsample, members, dropped) per learning-curve draw of one split seed.
 
     `split` is household_splits(...)[seed]; `test_members` the main run's test memberships, which every draw must
     reproduce. An n larger than the train HP pool yields members = None and a one-row `dropped` frame."""
     lc = cfg["learning_curve"]
     key = ["hp_members", "fill_members"]
-    for n in lc["n"]:
+    designs = [(spc, n) for spc in lc.get("substations_per_cell_train", [None]) for n in lc["n"]]
+    for spc, n in designs:
+        c = cfg if spc is None else {**cfg, "grid": {**cfg["grid"], "substations_per_cell": {**cfg["grid"]["substations_per_cell"], "train": spc}}}
         for draw in range(1 if n == "all" else lc["draws"]):
             try:
                 sub = lc_subsample(split["train"]["hp"], n, seed, draw)
             except ValueError as e:
-                yield n, draw, None, None, [{"split_seed": seed, "split": "train", "n": n, "lc_draw": draw, "reason": str(e)}]
+                yield n, draw, spc, None, None, [{"split_seed": seed, "split": "train", "n": n, "lc_draw": draw, "reason": str(e)}]
                 continue
             sp = {"train": {"hp": sub, "fill": split["train"]["fill"]}, "test": split["test"]}
             folds = grouped_inner_folds(sp["train"], meta, cfg["cv"]["k"], seed)
-            members, dropped = build_substations(meta, sp, seed, cfg, folds)
+            members, dropped = build_substations(meta, sp, seed, c, folds)
             te = members[members["split"] == "test"]
             if not (te.index.equals(test_members.index) and te[key].astype(str).equals(test_members[key].astype(str))):
                 raise AssertionError(f"learning curve n={n} draw={draw}: test substations differ from the main run")
-            yield n, draw, sub, members, dropped.assign(n=n, lc_draw=draw).to_dict("records")
+            yield n, draw, spc, sub, members, dropped.assign(n=n, lc_draw=draw, spc_train=spc).to_dict("records")

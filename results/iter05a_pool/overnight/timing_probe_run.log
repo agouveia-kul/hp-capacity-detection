@@ -1,0 +1,104 @@
+[20:57:21] queue iter05a_overnight: 5 of 5 jobs to run, 5 workers x 5 threads, stop at None
+[s0    11.6s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0    14.7s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0    14.8s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0    14.8s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0    14.8s] HP train/test 293/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0  1078.6s] evaluated 3875 substations in 1066.6s (0.275 s each)
+[s0  1076.8s] evaluated 3875 substations in 1061.7s (0.274 s each)
+[21:15:42] FAILED timing_probe__s0__d0__nall__neural:
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 95, in run_job
+    res = getattr(importlib.import_module(mod), fn)(cfg, job["seed"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 226, in run_seed
+    tab, F, dt = cached_eval(pool, members, cfg, seed, log)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_benchmark.py", line 110, in cached_eval
+    os.replace(tmp, f)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\VENANCIA\\OneDrive - VITO\\Desktop\\hp-capacity-detection\\data\\_paperb\\features\\gb_eoh_s0_52a2b8b21aa1_tab.parquet.4876.tmp' -> 'C:\\Users\\VENANCIA\\OneDrive - VITO\\Desktop\\hp-capacity-detection\\data\\_paperb\\features\\gb_eoh_s0_52a2b8b21aa1_tab.parquet'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\run_queue.py", line 227, in main
+    finish(*fut.result())
+            ^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+PermissionError: [WinError None] Access is denied: 'C:\\Users\\VENANCIA\\OneDrive - VITO\\Desktop\\hp-capacity-detection\\data\\_paperb\\features\\gb_eoh_s0_52a2b8b21aa1_tab.parquet.4876.tmp' -> 'C:\\Users\\VENANCIA\\OneDrive - VITO\\Desktop\\hp-capacity-detection\\data\\_paperb\\features\\gb_eoh_s0_52a2b8b21aa1_tab.parquet'
+
+[s0  1077.1s] evaluated 3875 substations in 1062.1s (0.274 s each)
+[s0  1077.6s] evaluated 3875 substations in 1062.4s (0.274 s each)
+[s0  1251.8s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0  1250.4s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0  1250.5s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 170.3, cv_wape 61.5, best_iter None, 0 evals, 0.0s, params {}
+[s0  1250.5s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 137.2, cv_wape 53.5, best_iter None, 0 evals, 0.0s, params {}
+[s0  1250.5s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 72.56, cv_wape 37.9, best_iter None, 0 evals, 0.0s, params {}
+[s0  1250.8s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0  1250.8s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 146.8, cv_wape 28.6, best_iter None, 0 evals, 0.0s, params {}
+[s0  1250.9s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0  1252.2s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 66.07, cv_wape 30.9, best_iter None, 50 evals, 1.4s, params {'alpha': 674.6248110057228}
+[s0  1257.3s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 169.6, cv_wape 61.5, best_iter 24, 50 evals, 6.7s, params {'colsample_bytree': 0.6824040013068466, 'eta': 0.1787954930652189, 'gamma': 8.337477156610193, 'max_depth': 4.0, 'min_child_weight': 5.0, 'n_estimators': 500.0, 'reg_alpha': 0.05005574928598719, 'reg_lambda': 7.569725916183655, 'subsample': 0.871925604454391}
+[s0  1257.4s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 60.36, cv_wape 29.5, best_iter None, 50 evals, 5.2s, params {'alpha': 0.044970281365499326}
+[s0  1260.0s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 59.87, cv_wape 29.4, best_iter None, 50 evals, 2.6s, params {'alpha': 0.05594171746699743, 'l1_ratio': 0.6428763809736778}
+[s0  1261.8s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 72.57, cv_wape 32.1, best_iter None, 50 evals, 1.8s, params {'n_components': 2.0}
+[s0  1263.1s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.1619, cv_wape 25.6, best_iter None, 50 evals, 1.4s, params {'alpha': 0.05691276769194527}
+[s0  1263.0s]   HP_Peak XGBoost/size/netfit/direct/log: cv_mse 38.73, cv_wape 24.8, best_iter 36, 50 evals, 12.1s, params {'colsample_bytree': 0.7712477754120627, 'eta': 0.134919460901729, 'gamma': 0.0476205400481966, 'max_depth': 6.0, 'min_child_weight': 20.0, 'n_estimators': 370.0, 'reg_alpha': 0.8609343460681542, 'reg_lambda': 0.9921239198380405, 'subsample': 0.7509342903513976}
+[s0  1265.3s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 120.4, cv_wape 49.8, best_iter 111, 50 evals, 8.0s, params {'colsample_bytree': 0.6753232816070526, 'eta': 0.031538484424694174, 'gamma': 9.989732478675204, 'max_depth': 3.0, 'min_child_weight': 15.0, 'n_estimators': 440.0, 'reg_alpha': 0.26393475691285617, 'reg_lambda': 3.48213455216972, 'subsample': 0.5072967883552197}
+[s0  1274.4s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1619, cv_wape 25.7, best_iter None, 50 evals, 11.3s, params {'alpha': 0.0001095704047501783}
+[s0  1276.2s]   HP_Peak XGBoost/size/netfit/residual/log: cv_mse 0.1363, cv_wape 24.2, best_iter 35, 50 evals, 13.2s, params {'colsample_bytree': 0.42110120235258525, 'eta': 0.0989441433551358, 'gamma': 0.49661238909293437, 'max_depth': 3.0, 'min_child_weight': 10.0, 'n_estimators': 150.0, 'reg_alpha': 0.6117724492574509, 'reg_lambda': 6.522986142125255, 'subsample': 0.60192041104285}
+[s0  1279.9s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 91.88, cv_wape 40.6, best_iter 161, 50 evals, 14.6s, params {'colsample_bytree': 0.4573278764755399, 'eta': 0.2479085382922125, 'gamma': 2.034672000231227, 'max_depth': 3.0, 'min_child_weight': 16.0, 'n_estimators': 440.0, 'reg_alpha': 0.8070488255947914, 'reg_lambda': 4.305873378070964, 'subsample': 0.8382204378798654}
+[s0  1280.3s] done in 1280.3s
+[21:19:05] done timing_probe__s0__d0__nall__physics (1302 s)
+[s0  1290.5s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.1619, cv_wape 25.7, best_iter None, 50 evals, 16.0s, params {'alpha': 0.00010665046080308279, 'l1_ratio': 0.10466393137358618}
+[s0  1290.9s]   HP_Peak Linear/size/both/direct/log: cv_mse 181.2, cv_wape 27.3, best_iter None, 0 evals, 0.4s, params {}
+[s0  1300.0s]   HP_Peak SVR/size/netfit/direct/log: cv_mse 27.26, cv_wape 22.0, best_iter None, 50 evals, 48.2s, params {'C': 135.23307651581766, 'epsilon': 0.2, 'gamma': 0.004816001022603761}
+[s0  1300.7s]   HP_Peak Ridge/size/both/direct/log: cv_mse 38.79, cv_wape 24.8, best_iter None, 50 evals, 9.8s, params {'alpha': 339.44695191873086}
+[s0  1336.9s]   HP_Peak XGBoost/size/both/direct/log: cv_mse 31.61, cv_wape 22.8, best_iter 69, 50 evals, 60.7s, params {'colsample_bytree': 0.310892338855218, 'eta': 0.10497241320599845, 'gamma': 0.09151153495558637, 'max_depth': 8.0, 'min_child_weight': 16.0, 'n_estimators': 70.0, 'reg_alpha': 0.5965476052675032, 'reg_lambda': 0.7146295246714374, 'subsample': 0.6497558227542005}
+[s0  1343.5s]   HP_Peak SVR/size/both/direct/log: cv_mse 25.05, cv_wape 21.0, best_iter None, 50 evals, 43.4s, params {'C': 9.498407555601712, 'epsilon': 0.1, 'gamma': 0.0003636401403310393}
+[s0  1363.2s]   HP_Peak Lasso/size/both/direct/log: cv_mse 39.6, cv_wape 24.2, best_iter None, 50 evals, 62.5s, params {'alpha': 0.005705268532917794}
+[s0  1385.3s]   HP_Peak SVR/size_peak/netfit/direct/log: cv_mse 26.75, cv_wape 21.8, best_iter None, 50 evals, 41.7s, params {'C': 106.53020781606091, 'epsilon': 0.2, 'gamma': 0.005348978506101651}
+[s0  1396.4s]   HP_Peak ElasticNet/size/both/direct/log: cv_mse 39.24, cv_wape 24.2, best_iter None, 50 evals, 33.2s, params {'alpha': 0.01761235232374926, 'l1_ratio': 0.3022625660565035}
+[s0  1435.1s]   HP_Peak PLS/size/both/direct/log: cv_mse 41.25, cv_wape 24.8, best_iter None, 50 evals, 38.7s, params {'n_components': 15.0}
+[s0  1447.2s]   HP_Peak XGBoost/size/both/residual/log: cv_mse 0.1123, cv_wape 20.9, best_iter 251, 50 evals, 110.3s, params {'colsample_bytree': 0.3259634044792074, 'eta': 0.03229146979105883, 'gamma': 0.2567548745099346, 'max_depth': 3.0, 'min_child_weight': 30.0, 'n_estimators': 300.0, 'reg_alpha': 0.34425377974251004, 'reg_lambda': 14.204928095900701, 'subsample': 0.5890340352301777}
+[s0  1461.3s]   HP_Peak Ridge/size/both/residual/log: cv_mse 0.1142, cv_wape 21.4, best_iter None, 50 evals, 26.2s, params {'alpha': 75.7242578951663}
+[s0  1481.1s]   HP_Peak XGBoost/size_peak/netfit/direct/log: cv_mse 37.71, cv_wape 24.8, best_iter 33, 50 evals, 33.8s, params {'colsample_bytree': 0.8649766218097854, 'eta': 0.18506947498186405, 'gamma': 0.1169578759184178, 'max_depth': 10.0, 'min_child_weight': 13.0, 'n_estimators': 50.0, 'reg_alpha': 0.7771311375363376, 'reg_lambda': 1.2945581518464797, 'subsample': 0.6814981154813354}
+[s0  1514.2s]   HP_Peak XGBoost/size_peak/netfit/residual/log: cv_mse 0.1367, cv_wape 24.4, best_iter 39, 50 evals, 33.1s, params {'colsample_bytree': 0.5484858072856612, 'eta': 0.07436501914238113, 'gamma': 0.23771064966246197, 'max_depth': 3.0, 'min_child_weight': 16.0, 'n_estimators': 50.0, 'reg_alpha': 0.14130594054599235, 'reg_lambda': 1.0219365661600917, 'subsample': 0.6154210819130117}
+[s0  1527.5s]   HP_Peak SVR/size_peak/both/direct/log: cv_mse 24.85, cv_wape 21.0, best_iter None, 50 evals, 142.1s, params {'C': 9.498407555601712, 'epsilon': 0.1, 'gamma': 0.0003636401403310393}
+[s0  1528.4s] done in 1528.4s
+[21:23:10] done timing_probe__s0__d0__nall__kernel (1547 s)
+[s0  1683.7s]   HP_Peak XGBoost/size_peak/both/direct/log: cv_mse 29.72, cv_wape 22.5, best_iter 60, 50 evals, 169.5s, params {'colsample_bytree': 0.6801584012800875, 'eta': 0.20454695262915956, 'gamma': 0.0034181372943483807, 'max_depth': 8.0, 'min_child_weight': 17.0, 'n_estimators': 390.0, 'reg_alpha': 0.6172478663580773, 'reg_lambda': 3.3549994464963238, 'subsample': 0.6011181370107038}
+[s0  1739.3s]   HP_Peak Lasso/size/both/residual/log: cv_mse 0.1133, cv_wape 21.0, best_iter None, 50 evals, 278.0s, params {'alpha': 0.002429349985176051}
+[s0  1869.0s]   HP_Peak XGBoost/size_peak/both/residual/log: cv_mse 0.1136, cv_wape 20.5, best_iter 91, 50 evals, 185.3s, params {'colsample_bytree': 0.42236863697072696, 'eta': 0.0986178144666219, 'gamma': 0.2671360649165292, 'max_depth': 3.0, 'min_child_weight': 13.0, 'n_estimators': 150.0, 'reg_alpha': 0.022055877059265393, 'reg_lambda': 5.699079616357256, 'subsample': 0.6284206034782028}
+[s0  1870.0s] done in 1870.0s
+[21:28:55] done timing_probe__s0__d0__nall__trees (1892 s)
+[s0  2059.6s]   HP_Peak ElasticNet/size/both/residual/log: cv_mse 0.1133, cv_wape 21.1, best_iter None, 50 evals, 320.3s, params {'alpha': 0.0026211063984415426, 'l1_ratio': 0.8751778592477689}
+[s0  2059.8s]   HP_Peak Linear/size_peak/netfit/direct/log: cv_mse 155.5, cv_wape 28.4, best_iter None, 0 evals, 0.1s, params {}
+[s0  2064.2s]   HP_Peak Ridge/size_peak/netfit/direct/log: cv_mse 66.52, cv_wape 30.9, best_iter None, 50 evals, 4.5s, params {'alpha': 666.8982085684872}
+[s0  2081.9s]   HP_Peak Lasso/size_peak/netfit/direct/log: cv_mse 60.36, cv_wape 29.5, best_iter None, 50 evals, 17.6s, params {'alpha': 0.044970281365499326}
+[s0  2089.5s]   HP_Peak ElasticNet/size_peak/netfit/direct/log: cv_mse 59.87, cv_wape 29.4, best_iter None, 50 evals, 7.7s, params {'alpha': 0.05594171746699743, 'l1_ratio': 0.6428763809736778}
+[s0  2095.7s]   HP_Peak PLS/size_peak/netfit/direct/log: cv_mse 61.21, cv_wape 27.6, best_iter None, 50 evals, 6.2s, params {'n_components': 12.0}
+[s0  2100.0s]   HP_Peak Ridge/size_peak/netfit/residual/log: cv_mse 0.1619, cv_wape 25.7, best_iter None, 50 evals, 4.3s, params {'alpha': 0.06328036740751133}
+[s0  2137.7s]   HP_Peak Lasso/size_peak/netfit/residual/log: cv_mse 0.162, cv_wape 25.7, best_iter None, 50 evals, 37.6s, params {'alpha': 0.0001095704047501783}
+[s0  2194.7s]   HP_Peak ElasticNet/size_peak/netfit/residual/log: cv_mse 0.1619, cv_wape 25.7, best_iter None, 50 evals, 57.1s, params {'alpha': 0.00010687413580639973, 'l1_ratio': 0.13513400855408075}
+[s0  2195.8s]   HP_Peak Linear/size_peak/both/direct/log: cv_mse 179, cv_wape 27.3, best_iter None, 0 evals, 0.9s, params {}
+[s0  2219.8s]   HP_Peak Ridge/size_peak/both/direct/log: cv_mse 38.78, cv_wape 24.8, best_iter None, 50 evals, 24.0s, params {'alpha': 339.44695191873086}
+[s0  2407.4s]   HP_Peak Lasso/size_peak/both/direct/log: cv_mse 39.78, cv_wape 24.3, best_iter None, 50 evals, 187.6s, params {'alpha': 0.005985543608050883}
+[s0  2487.4s]   HP_Peak ElasticNet/size_peak/both/direct/log: cv_mse 39.41, cv_wape 24.2, best_iter None, 50 evals, 80.1s, params {'alpha': 0.01761235232374926, 'l1_ratio': 0.3022625660565035}
+[s0  2523.6s]   HP_Peak PLS/size_peak/both/direct/log: cv_mse 40.67, cv_wape 24.7, best_iter None, 50 evals, 36.1s, params {'n_components': 15.0}
+[s0  2549.2s]   HP_Peak Ridge/size_peak/both/residual/log: cv_mse 0.1142, cv_wape 21.4, best_iter None, 50 evals, 25.6s, params {'alpha': 75.7242578951663}
+[s0  2819.1s]   HP_Peak Lasso/size_peak/both/residual/log: cv_mse 0.1133, cv_wape 21.1, best_iter None, 50 evals, 269.9s, params {'alpha': 0.002429349985176051}
+[s0  3135.1s]   HP_Peak ElasticNet/size_peak/both/residual/log: cv_mse 0.1133, cv_wape 21.1, best_iter None, 50 evals, 315.9s, params {'alpha': 0.0026211063984415426, 'l1_ratio': 0.8751778592477689}
+[s0  3138.6s] done in 3138.6s
+[21:50:04] done timing_probe__s0__d0__nall__linear (3160 s)
+[21:50:22] exit: {'done': 4, 'failed': 1, 'remaining': 0, 'median_job_s': 1719.1763098239899, 'eta_h': 0.0, 'updated': '2026-09-30T21:50:07'}

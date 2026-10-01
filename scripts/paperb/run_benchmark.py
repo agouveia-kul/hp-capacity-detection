@@ -48,6 +48,7 @@ import pandas as pd  # noqa: E402
 import yaml  # noqa: E402
 
 from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
+from paperb.fill_analog import add_own_fillers  # noqa: E402
 from paperb.learning_curve import lc_designs  # noqa: E402
 from paperb.metrics import compute_metrics  # noqa: E402
 from paperb.features_netfit import FEATURE_VERSION  # noqa: E402
@@ -91,7 +92,8 @@ def specs(cfg):
 
 def cached_eval(pool, members, cfg, seed, log):
     key = hashlib.md5(json.dumps([FEATURE_VERSION, pool.name, cfg["pool"], cfg["target_defs"], cfg["features"], sorted(cfg.get("feature_sets", ["whdd"])),
-                                  list(members.index), members["hp_members"].tolist(), members["fill_members"].tolist()],
+                                  list(members.index), members["hp_members"].tolist(), members["fill_members"].tolist()]
+                                 + ([pool.analog.seed] if pool.analog is not None else []),           # 05a: analog map seed
                                  sort_keys=True, default=str).encode()).hexdigest()[:12]     # 03a: memberships in the key
     d = ROOT / cfg.get("feature_cache_dir", Path(cfg["cache_dir"]) / "features")
     f_tab, f_x = d / f"{pool.name}_s{seed}_{key}_tab.parquet", d / f"{pool.name}_s{seed}_{key}_X.parquet"
@@ -102,8 +104,15 @@ def cached_eval(pool, members, cfg, seed, log):
     tab, X = evaluate_members(pool, members, cfg)
     dt = time.time() - t0
     d.mkdir(parents=True, exist_ok=True)
-    tab.astype({c: float for c in tab.columns if c.startswith(("hinge_inside", "at_bound"))}).to_parquet(f_tab)
-    X.to_parquet(f_x)
+    for df, f in ((X, f_x), (tab.astype({c: float for c in tab.columns if c.startswith(("hinge_inside", "at_bound"))}), f_tab)):   # atomic: queue jobs share the cache
+        tmp = f.with_name(f"{f.name}.{os.getpid()}.tmp")
+        df.to_parquet(tmp)
+        try:
+            os.replace(tmp, f)
+        except PermissionError:                                          # Windows: another job replaced or is reading it (same content)
+            if not f.exists():
+                raise
+            os.remove(tmp)
     log(f"evaluated {len(tab)} substations in {dt:.1f}s ({dt / len(tab):.3f} s each)")
     return pd.read_parquet(f_tab), X, dt
 
@@ -208,11 +217,15 @@ def run_seed(cfg, seed):
         print(lines[-1], flush=True)
 
     pool = build_pool(cfg["pool"]["option"], cfg, verbose=False)
+    if pool.analog is not None:                                         # 05a: analog-day map of this split seed
+        pool.analog.set_seed(seed)
     ds = f"{pool.name}_{cfg['pool']['year']}"
     sp = household_splits(pool.meta, [seed], cfg["split"]["test_frac"], cfg["split"]["stratify"],
                           cfg["pool"].get("shared_fill", False))[seed]
     folds = grouped_inner_folds(sp["train"], pool.meta, cfg["cv"]["k"], seed)
     members, dropped = build_substations(pool.meta, sp, seed, cfg, folds)
+    if cfg["pool"].get("analog_swap"):                                  # D5: every dwelling gets an analog-day filler
+        members = add_own_fillers(members, sp, folds, seed)
     log(f"HP train/test {len(sp['train']['hp'])}/{len(sp['test']['hp'])}, fill {len(sp['train']['fill'])}/"
         f"{len(sp['test']['fill'])}; substations {members['split'].value_counts().to_dict()}; dropped cells {len(dropped)}")
     tab, F, dt = cached_eval(pool, members, cfg, seed, log)
@@ -233,9 +246,15 @@ def run_seed(cfg, seed):
         `train_hp`, per-dwelling non-TCL slopes s0 (train fill [+ own load of train_hp]) and cross-fitted m_h."""
         full, by_st = paperA_pilots(pool, train_hp, caps, min_st)
         pilots.extend({"split_seed": seed, **tag, "pilot": k, **v} for k, v in [("all", full), *sorted(by_st.items())])
-        s0 = {k: household_sensitivity(pool, sp["train"]["fill"], own, pac.get("fill_station", "KLO"))
-              for k, own in (("paperA_corr", ()), ("paperA_corr_all", train_hp))}
-        pilots.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": v["s0"], "s_h": v["s_h"], "T_h": v["T_h"],
+        if pool.analog is None:
+            s0 = {k: household_sensitivity(pool, sp["train"]["fill"], own, pac.get("fill_station", "KLO"))
+                  for k, own in (("paperA_corr", ()), ("paperA_corr_all", train_hp))}
+        else:                                                           # 05a: train fillers under each station's map
+            by = pool.analog.s0(sp["train"]["fill"], pool.index, pool.temp, sorted(t["station"].unique()))
+            pilots.extend({"split_seed": seed, **tag, "pilot": f"s0map:{st}", **v} for st, v in by.items())
+            row = t["station"].map({st: v["s0"] for st, v in by.items()}).to_numpy()
+            s0 = {k: {"s0": row, "s_h": np.nan, "T_h": np.nan, "N": len(sp["train"]["fill"])} for k in ("paperA_corr", "paperA_corr_all")}
+        pilots.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": np.nanmedian(v["s0"]), "s_h": v["s_h"], "T_h": v["T_h"],
                        "n_hh": v["N"]} for k, v in s0.items())
         m_cf = None
         if pac.get("crossfit", False):
@@ -277,7 +296,9 @@ def run_seed(cfg, seed):
                                             seed, timing, log, pa_a, spl), members)
     if cfg.get("learning_curve"):
         spl = [tuple(x.split("|")) for x in cfg["learning_curve"]["specs"]]
-        for n, draw, sub, mem, dr in lc_designs(cfg, pool.meta, sp, seed, members.loc[te]):
+        if cfg["pool"].get("analog_swap"):
+            raise ValueError("learning_curve with pool.analog_swap is not implemented (05a D5 runs n = all only)")
+        for n, draw, spc, sub, mem, dr in lc_designs(cfg, pool.meta, sp, seed, members.loc[te]):
             lc_dropped += dr
             if mem is None:
                 log(f"learning curve n={n} draw={draw}: skipped ({dr[0]['reason']})")
@@ -299,12 +320,12 @@ def run_seed(cfg, seed):
             for target in cfg["targets"]:
                 try:
                     score(target, t_l, predictions(cfg, t_l, F_l, t_l[target], seed, timing, log, pa_l, spl_d), mem,
-                          n_train_hp=len(sub), lc_draw=draw)
+                          n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
                 except Exception:                                       # listed, never silently dropped; the seed goes on
                     lc_dropped.append({"split_seed": seed, "split": "all", "n": n, "lc_draw": draw, "reason": traceback.format_exc()[-400:]})
                     log(f"learning curve n={n} draw={draw} {target} FAILED: {traceback.format_exc()}")
             for r in timing[k:]:
-                r.update(n_train_hp=len(sub), lc_draw=draw)
+                r.update(n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
     log(f"done in {time.time() - t0:.1f}s")
     return {"metrics": pd.DataFrame(rows).assign(exp_id=cfg["exp_id"], dataset=ds), "dropped": dropped,
             "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds), "log": lines,
@@ -370,7 +391,7 @@ def main():
         if len(m := merged(k)):
             m.to_csv(out / f"{name}.csv", index=False)
     if len(m := merged("lc")):
-        m[cols[:4] + ["n_train_hp", "lc_draw"] + cols[4:]].to_csv(out / "metrics_lc.csv", index=False)
+        m[cols[:4] + ["n_train_hp", "lc_draw", "spc_train"] + cols[4:]].to_csv(out / "metrics_lc.csv", index=False)
     if paperA_estimators(cfg):
         pool = build_pool(cfg["pool"]["option"], cfg, verbose=False)
         caps = pd.DataFrame({"station": pool.meta.loc[pool.hp.columns, "station"], "hp_peak": household_caps(pool, "hp_peak"),

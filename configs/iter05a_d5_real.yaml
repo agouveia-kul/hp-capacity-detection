@@ -1,0 +1,19 @@
+# 05a D5 (B* swap test), arm "real": B* under protocol v1.1 with its real same-year fill and the HP homes' own load.
+# Physics rows (decision 6 + slope-only, calibrated delta, HDH) and all four 05a families on the 05b candidate grid
+# (feature sets {netfit, both} x anchors {size, size_peak} x {direct-log, residual}); FFNN at the full budget
+# (50 evals, patience 20). Run through the queue (configs/iter05a_overnight.yaml), one job per (seed, family).
+base: configs/pool_bstar.yaml
+exp_id: iter05a_d5_real
+out_dir: results/iter05a_pool/overnight/d5_real
+pred_figures: false
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [netfit, both]
+modes: [direct, residual]
+target_transforms: [log]
+models: [Linear, Ridge, Lasso, ElasticNet, PLS, SVR, XGBoost, FFNN]
+residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
+ffnn: {enabled: true, patience: 20}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_cal, paperA_corr, paperA_corr_cal]}

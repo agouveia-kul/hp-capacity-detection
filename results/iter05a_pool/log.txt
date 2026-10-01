@@ -1,0 +1,20 @@
+[    4.6s] pool gb_eoh_2122r2: {'fill': 3199, 'hp': 385}; 1 workers x 28 threads; seeds [0]
+[s0     7.9s] HP train/test 293/92, fill 2399/800; substations {'train': 370, 'inner': 225, 'test': 75}; dropped cells 363
+[s0    66.3s] evaluated 670 substations in 58.4s (0.087 s each)
+[s0   138.1s] Paper A pilot m_h 0.02496 (293 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02227, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02507, 0.02492, 0.02495, 0.02491]
+[s0   139.9s]   HP_Peak Lasso/size/netfit/direct/none: cv_mse 11.94, cv_wape 26.4, best_iter None, 10 evals, 1.8s, params {'alpha': 0.01009804128424077}
+[s0   158.6s]   HP_Peak XGBoost/size/netfit/direct/none: cv_mse 8.395, cv_wape 19.4, best_iter 35, 10 evals, 18.6s, params {'colsample_bytree': 0.8442583246435658, 'eta': 0.09194600331281018, 'gamma': 7.389785293625444, 'max_depth': 6.0, 'min_child_weight': 14.0, 'n_estimators': 350.0, 'reg_alpha': 0.9381806490254235, 'reg_lambda': 0.3382640984905205, 'subsample': 0.5797666220819824}
+[s0   159.5s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1598, cv_wape 26.5, best_iter None, 10 evals, 0.9s, params {'alpha': 0.004679480245725534}
+[s0   159.5s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 36.65, cv_wape 50.1, best_iter None, 0 evals, 0.1s, params {}
+[s0   159.8s] done in 159.8s
+[  179.5s] seed 0 finished (404 metric rows)
+[  188.0s] done in 188.0s (1 of 1 seeds)
+
+iter05a-ii notes (2026-09-30; the lines above are the Task 6 smoke run, configs/iter05_quick.yaml, 3.4 min wall; the 05a-i log is log_05a_i.txt)
+- Pool rebuilds (gb_eoh._build, 4 min per 12-month load of 584 homes): tags 2122r2 (main), 2223r2 (replication as written), 2223sep (latest admissible start). Old 05a-i caches (2122, 2223) are unused and untouched.
+- Dropped / listed cases: weather groups dropped in the main window: G004 (2 homes; corr 0.963 < 0.98), G026, G027, G029, G030 (1 home or none each); G009 (27 homes) filled from G001 (corr 0.984), G024 from G017. Homes with silent electricity (Q_hp > 1 kW with P_ws < 0.02 kW on > 5 % of those bins) are kept and listed in eoh_selection.md: EOH2291 (main, 15 %), EOH0836 (Sep 2022 window, 35 %).
+- Warnings: numpy 'Mean of empty slice' in station grouping; dateutil fallback when parsing the HadCET header line.
+- Timing probe: GB-EoH 2021/22 seed 0, 5 queue jobs; the neural job failed once (PermissionError in os.replace on the shared feature cache, Windows; fixed in run_benchmark.cached_eval) and was rerun alone with --retry-failed (4 threads). See runtime_estimate.md.
+- D5 dry run (configs/iter05a_d5_quick_queue.yaml: 2 seeds, tiny grid, Lasso): the queue, the swap arm with own-station matching and `iter05a_report.py --part d5` ran end to end in 2.5 min; not a result and not kept.
+- pytest (incl. queue kill/resume, retry-failed, B* seed-0 regression against 03b): 74 passed in 21 min (pytest.log).
+- Disk: 423 GB free on C: after the run; data/_paperb/pools 0.9 GB, features 0.6 GB. Nothing written in data/ outside data/_paperb/ (new: _paperb/raw/meteostat/03772_daily.csv.gz, 309 KB); nothing in models/. Observation: the mtimes of the four EoH originals (data/9050csv_cleansed_data_set{1..4}_*.zip) changed at 22:47, 22:48, 22:49 and 22:50 on 2026-09-30, one per minute; no process of this session opens them (the pipelines read data/_paperb/pools_raw/eoh/*.parquet) and their sizes are unchanged: most likely OneDrive, not verified.

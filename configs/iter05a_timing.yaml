@@ -1,0 +1,17 @@
+# 05a Task 6 timing probe: GB-EoH 2021/22, seed 0, the full v1.1 grid, the 05b candidate grid (feature sets {netfit, both}
+# x anchors {size, size_peak} x {direct-log, residual}), one queue job per family (FFNN at the full budget).
+base: configs/pool_gb_eoh_2122.yaml
+exp_id: iter05a_timing
+out_dir: results/iter05a_pool/overnight/timing_probe
+pred_figures: false
+split: {seeds: [0]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [netfit, both]
+modes: [direct, residual]
+target_transforms: [log]
+models: [Linear, Ridge, Lasso, ElasticNet, PLS, SVR, XGBoost, FFNN]
+residual_models: [Ridge, Lasso, ElasticNet, XGBoost]
+ffnn: {enabled: true, patience: 20}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_cal, paperA_corr, paperA_corr_cal]}

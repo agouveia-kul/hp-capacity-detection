@@ -1,0 +1,29 @@
+# GB-EoH replication FALLBACK (05a-ii): Sep 2022 - Aug 2023; used only if the Oct 2022 window gives fewer than 300 homes.
+# electricity, 30 min) + one analog-day LCL Std filler per dwelling (scripts/paperb/pools/gb_eoh.py, fill_analog.py).
+base: configs/protocol_v1_1.yaml
+pool:
+  option: gb_eoh
+  year: "2223sepr3"                       # cache / dataset tag (05a-ii rebuild: R1, R2, R5, R8, silent-electricity exclusion)
+  windows: {first: "2022-09-01", last_end: "2023-09-29"}        # latest admissible start (ends 31 Aug 2023): the only month-aligned window that ends by 29 Sep 2023 and overlaps the main window by 2 months
+  data_end: "2023-09-29"               # the EoH data stop here
+  coverage_min: 0.90                   # R1: valid 30-min bins after the zero-run rule, before gap filling
+  silent_elec_max: 0.05                # exclude homes whose electricity is silent (< 0.02 kW) on > 5 % of their heat bins (> 1 kW)
+  zero_run_heat_tol_kW: 0.1            # R8: a zero run is missing only if the heat meter exceeds this (else a real switch-off)
+  max_interp_slots: 4                  # gaps <= 2 h interpolated; longer: donor day (same day type, nearest station T)
+  holidays: GB-ENG                     # netfit working-day calendar and the analog day type (England & Wales)
+  fill:
+    calendar: GB-ENG
+    lcl_window: ["2012-07-01", "2014-02-28"]   # local days [start, end) of the LCL candidate / coverage window (05a Task 1)
+    lcl_coverage_min: 0.90
+    lcl_max_kwh: 10.0                  # a half-hour above 10 kWh drops the household
+    lcl_zero_run_slots: 48             # a run of exact zeros >= 24 h drops the household
+    max_interp_slots: 4
+    doy_windows: [30, 45, 60]          # day-of-year window, widened only when no candidate is within tol_K
+    tol_K: 1.0
+    k_nearest: 3                       # draw one of the 3 closest in temperature (seed = split seed)
+    temp_source: heathrow              # R4: London Heathrow daily mean (Meteostat 03772); HadCET kept as T_hadcet
+    subset: null                       # sensitivity arm: "gas_ch & no_heater" (survey, see lcl_audit.md)
+target_defs:
+  T_design_C: -3.0                     # R7: London 99.6 % external design T, CIBSE Guide A 2015 Table 2.5 via the MCS Heat Load Calculator (a London value used as the national central one; see method_basis.md)
+paperA:
+  fill_station: null                   # fillers respond to the station they are mapped to (per-station s0)

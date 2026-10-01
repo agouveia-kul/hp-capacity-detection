@@ -1,0 +1,5 @@
+# B* (headline CH pool) under protocol v1.1. Same pool cache as protocol_v1.yaml (data/_paperb/pools/bstar_2023*).
+base: configs/protocol_v1_1.yaml
+pool:
+  option: bstar
+  holidays: CH-ZH                      # netfit working-day calendar (05a Task 4); CH-ZH is also the default

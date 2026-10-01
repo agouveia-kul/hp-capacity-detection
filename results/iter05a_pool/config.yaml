@@ -1,0 +1,161 @@
+exp_id: iter05_quick
+protocol: v1.1
+out_dir: results/iter05a_pool
+cache_dir: data/_paperb
+paper_a_repo: ../hp-sensitivity-paper
+pool:
+  option: gb_eoh
+  year: 2122r2
+  coverage_min: 0.9
+  station_alias:
+    8jB: KLO
+  sfh_own_load_type: Single-family house
+  seed: 0
+  windows:
+    first: '2021-06-01'
+    last_start: '2022-01-01'
+  data_end: '2023-09-29'
+  zero_run_heat_tol_kW: 0.1
+  max_interp_slots: 4
+  holidays: GB-ENG
+  fill:
+    calendar: GB-ENG
+    lcl_window:
+    - '2012-07-01'
+    - '2014-02-28'
+    lcl_coverage_min: 0.9
+    lcl_max_kwh: 10.0
+    lcl_zero_run_slots: 48
+    max_interp_slots: 4
+    doy_windows:
+    - 30
+    - 45
+    - 60
+    tol_K: 1.0
+    k_nearest: 3
+    temp_source: heathrow
+    subset: null
+split:
+  test_frac: 0.25
+  stratify: station
+  seeds:
+  - 0
+grid:
+  size:
+  - 10
+  - 40
+  penetration:
+  - 0.1
+  - 0.5
+  n_hp: round
+  max_overlap: 0.75
+  min_station_pool: 3
+  substations_per_cell:
+    train: 10
+    test: 5
+  on_infeasible: drop
+cv:
+  scheme: household_grouped
+  k: 4
+  inner_substations_per_cell: 5
+  early_stopping: next_training_fold
+  hyperopt:
+    max_evals: 10
+    seed: split_seed
+  final_refit: median_best_iteration
+models:
+- Lasso
+- XGBoost
+ffnn:
+  enabled: false
+feature_sets:
+- netfit
+modes:
+- direct
+- residual
+target_transforms:
+- none
+residual_models:
+- Lasso
+paperA:
+  estimators:
+  - paperA_sh_mh
+  - paperA_cal
+  - paperA_corr
+  cap_def: hp_peak
+  min_station_pilot: 10
+  target: HP_Peak
+  cap_def_check: false
+  fill_station: null
+  crossfit: true
+anchors:
+- size
+model_anchors: {}
+anchor_only_baselines:
+  models:
+  - Linear
+  features:
+  - - size
+physics_baselines:
+- slope_base
+features:
+  T_base: 12.0
+  kwargs:
+    resolution: 15
+    mild_thresh: 10.0
+    cold_thresh: 25.0
+    weekday_only: true
+    include_shape: false
+    include_minmax: true
+    include_quantiles: true
+    include_n_days: false
+    include_corr_features: false
+    include_climate_context: false
+    normalize_by_peak: true
+targets:
+- HP_Peak
+target_defs:
+  robust_q: 0.999
+  T_design_C: -3.0
+bootstrap:
+  unit: hp_household
+  B: 2000
+  seed: split_seed
+uncertainty:
+  bootstrap: false
+  summary_band:
+  - 0.05
+  - 0.9
+parallel:
+  workers: 1
+  blas_threads: 1
+  cores: 28
+  threads: 28
+metrics:
+- wape
+- mape
+- r2
+- rmse
+- mae
+quick:
+  split.seeds:
+  - 0
+  grid.size:
+  - 10
+  grid.substations_per_cell:
+    train: 6
+    test: 3
+  cv.inner_substations_per_cell: 3
+  cv.hyperopt.max_evals: 5
+  models:
+  - XGBoost
+  anchors:
+  - size_peak
+  targets:
+  - HP_Peak
+  physics_baselines:
+  - slope_only
+  anchor_only_baselines.models:
+  - Linear
+  bootstrap.B: 200
+git_commit: 909621569b3a23f9f329c4fac1e98f7d156448fd

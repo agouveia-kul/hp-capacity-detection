@@ -1,0 +1,19 @@
+# Dry run of the D5 pipeline through the queue (tiny grid, 1 seed, Lasso only): tests the queue, the swap arm and
+# `iter05a_report.py --part d5 --queue-dir overnight_dryrun`. Not a result.
+exp_id: iter05a_d5_dryrun
+out_dir: results/iter05a_pool/overnight_dryrun
+workers: 4
+families:
+  physics: {}
+  linear: {models: [Lasso], residual_models: [Lasso]}
+arms:
+  - name: d5_real
+    config: configs/iter05a_d5_real.yaml
+    seeds: [0, 1]
+    families: [physics, linear]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "cv.hyperopt.max_evals=5", "feature_sets=[netfit]", "anchors=[size]", "target_transforms=[log]"]
+  - name: d5_swap
+    config: configs/iter05a_d5_swap.yaml
+    seeds: [0, 1]
+    families: [physics, linear]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "cv.hyperopt.max_evals=5", "feature_sets=[netfit]", "anchors=[size]", "target_transforms=[log]"]

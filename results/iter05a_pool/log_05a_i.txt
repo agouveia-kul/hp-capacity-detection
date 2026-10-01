@@ -1,0 +1,11 @@
+iter05a-i log (2026-09-30), code 534aee4
+- LCL cache build (fill_analog.build_lcl, Std only, window 2012-07-01..2014-02-27 local days): ~40 s; 3199 of 4173 Std kept (drops: coverage 875, >10 kWh 1, zero run >= 24 h 98, in that order); 1025 ToU dropped by file.
+- GB-EoH 2021/22 pool build (gb_eoh._build): ~60 s; window 2021-10-01 (295 homes >= 95 %); 584 non-hybrid homes with an outdoor temperature (4 of 588 without).
+- GB-EoH 2022/23 pool build: ~60 s; window fixed to 2022-10-01 (244 homes); the Jun-Sep 2022 starts give 279-293.
+- Survey: 2785 rows in survey_answers.csv, duplicates dropped (first kept) before joining; answer columns shifted by one against survey_questions.csv (lcl_audit.md s.2).
+- iter05a_report --part lcl 6 s, --part eoh 9 s, --part mapping 24 s (D4: 2 winters x 3 sizes x 50 draws).
+- Warnings: numpy 'Mean of empty slice' in station grouping (homes without T in parts of the span; excluded as G_none when < 30 days); dateutil fallback when parsing the HadCET header line (dropped).
+- Dropped cases: none silently. Homes without temperature (G_none): 4 (2021/22). Weather groups flagged (> 5 % missing or implausible T) are listed in eoh_selection.md; flagged groups with homes: G004 (2 homes), G009 (27 homes) in 2021/22.
+- Not run in 05a-i: D5 (needs the Task 4b queue), envelopes, smoke run and timing probe (05a-ii).
+- pytest: 66 passed (6 min), incl. tests/test_gb_eoh.py (10) and the B* seed-0 regression against 03b.
+- Disk: 427 GB free on C: after the run. Nothing in data/ outside data/_paperb/ and nothing in models/ modified (mtime check).

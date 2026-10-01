@@ -1,0 +1,22 @@
+# 05a Task 6 smoke run (< 5 min once the pool caches exist): GB-EoH 2021/22, 1 seed, sizes {10, 40} x p {0.1, 0.5},
+# the physics reference rows (decision 6) and the 03b ML reference set on netfit with the size anchor (decision 7):
+# Lasso direct, Lasso residual, XGBoost direct. Results are not interpreted (05b).
+base: configs/pool_gb_eoh_2122.yaml
+exp_id: iter05_quick
+out_dir: results/iter05a_pool
+split: {seeds: [0]}
+parallel: {workers: 1}
+grid:
+  size: [10, 40]
+  penetration: [0.1, 0.5]
+cv: {hyperopt: {max_evals: 10}}
+targets: [HP_Peak]
+anchors: [size]
+feature_sets: [netfit]
+modes: [direct, residual]
+target_transforms: [none]
+models: [Lasso, XGBoost]
+residual_models: [Lasso]
+physics_baselines: [slope_base]
+paperA: {estimators: [paperA_sh_mh, paperA_cal, paperA_corr]}
+anchor_only_baselines: {models: [Linear], features: [[size]]}
