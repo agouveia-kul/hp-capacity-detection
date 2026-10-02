@@ -48,7 +48,8 @@ Thermostatically controlled loads, heat pumps, low-voltage networks, installed c
 \section*{Nomenclature}
 \todo{Align symbols with Paper A.}
 % DSO, HP, LV, SF, TCL, WAPE, ...
-% P_net, P_TCL, P_non-TCL, P_base, s_h, T_h, m_h, SF, P^max, N, N_hp, r = s_h/P_base, T_design, P_design
+% Paper A's symbols (hp-sensitivity-paper, paper/hp_sensitivity_overleaf.tex): P_net, P_TCL, P_non-TCL, P_base, s_h, T_h, m_h, SF,
+% P_TCL^max (target, = HP_Peak), N, N_hp, aggregate index ^{\,i}; new: r = s_h/P_base, T_design, P_design (same scheme).
 
 % =====================================================================
 \section{Introduction}
@@ -101,7 +102,7 @@ Thermostatically controlled loads, heat pumps, low-voltage networks, installed c
 % - Temperature-driven energy
 
 % Draft text moved here from Data draft 1 (2026-10-02); to be extended when Section II is drafted.
-The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\mathrm{HP}}$. For each HP household, the 99.9th percentile of its HP electricity is computed over the study period. $P^{\mathrm{HP}}$ is the sum of these percentiles over the HP households of the aggregate. The percentile is used instead of the maximum to reduce the influence of single spurious readings.
+The main target is the installed capacity of the HPs of an aggregate, denoted as $P_{\mathrm{TCL}}^{\max}$ as in Paper A~\cite{paperA}. For each HP household, the 99.9th percentile of its HP electricity is computed over the study period. $P_{\mathrm{TCL}}^{\max}$ is the sum of these percentiles over the HP households of the aggregate. The percentile is used instead of the maximum to reduce the influence of single spurious readings.
 
 \subsection{What the Net Load Determines}
 % Keep short and cite Paper A: Paper B must not repeat its identifiability argument (structure item 7, 2026-10-02).
@@ -259,6 +260,32 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 
 \appendices
 \section{Household Datasets and Design Envelope}
+\label{app:envelope}
+% Moved here from III-C draft 1 (2026-10-02, Alex: III-C too detailed).
+The design envelope of the semi-synthetic aggregates is given in Table~\ref{tab:envelope}. Its counts are the same in every split, since the split is stratified by weather station. Weather stations with fewer than three HP households in a set are not used.
+
+\begin{table}[t]
+  \centering
+  \caption{Design envelope of the semi-synthetic aggregates in one split. The counts are identical in every split. Penetration bins as in Paper A~\cite{paperA}.}
+  \label{tab:envelope}
+  \footnotesize
+  \begin{tabular}{lrrr}
+    \toprule
+    & \dataCH & \dataGB & GB repl.\textsuperscript{a} \\
+    \midrule
+    HP households, train / test & 64 / 22 & 292 / 92 & 241 / 78 \\
+    \quad used in aggregates & 62 / 20 & 274 / 81 & 226 / 61 \\
+    Aggregates, train / test & 500 / 135 & \num{2080} / 455 & \num{1870} / 355 \\
+    Test aggregates per bin & & & \\
+    \quad $\le 15\%$ & 75 & 265 & 190 \\
+    \quad $15$--$35\%$ & 40 & 125 & 105 \\
+    \quad $35$--$65\%$ & 10 & 30 & 30 \\
+    \quad $> 65\%$ & 10 & 35 & 30 \\
+    \bottomrule
+    \multicolumn{4}{l}{\textsuperscript{a}Temporal replication, October 2022 to 28 September 2023.}\\
+  \end{tabular}
+\end{table}
+
 \section{Model Hyperparameters}
 
 \bibliographystyle{IEEEtran}

@@ -91,105 +91,36 @@ The LCL data were recorded about nine years before the EoH data, so they are not
 The HP label of a household is computed from its HP channel, which differs between the two datasets. In the \dataCH{} the channel is the HP submeter only, whereas in the \dataGB{} it is the whole heating system, including the immersion heater. Labels are also computed at different resolutions, 15 minutes and 30 minutes respectively. For these reasons, results are compared between the two datasets through their gap to a physics-based estimator, and not through absolute errors.
 
 % ---------------------------------------------------------------------
-% III-C: draft 1 (2026-10-02). Sources of every number: paper/README.md.
+% III-C: draft 2 (2026-10-02, after Alex's review of draft 1: shorter, no diagnostic results, Paper A's notation).
+% Sources of every number: paper/README.md. The detailed design envelope is in Appendix A.
 % ---------------------------------------------------------------------
 \subsection{Semi-Synthetic Aggregates}
 \label{sec:aggregates}
 
-Feeders with submetered HPs and a known HP capacity are rarely available in numbers large enough for supervised learning. For this reason, semi-synthetic aggregates are built by summing the measured loads of distinct households, as summarised in Fig.~\ref{fig:design}. Each aggregate stands for the net load of the dwellings behind one LV feeder. Network losses are not modelled, since the aim is a realistic aggregate rather than an exact copy of a real feeder.
+Semi-synthetic aggregates, i.e.\ sums of measured households, are used as feeders with a known HP capacity. Their construction is shown in Fig.~\ref{fig:design}. Network losses are not modelled, since the aim is a realistic aggregate rather than an exact copy of a real feeder.
 
 \begin{figure}[t]
 \centering
-\figplaceholder{Fig.~1 (to be drawn by Alex). Households of one dataset are split into training and test sets, stratified by weather station. Within each set, an aggregate draws $n$ HP households of one station and its fillers, all distinct. CH dataset adds $N-n$ fillers and keeps each HP household's own load. GB dataset adds $N$ fillers on analog days.}
-\caption{Construction of the semi-synthetic aggregates. Households are split into training and test sets before any aggregate is built. Each aggregate combines HP households of one weather station with fillers. In the \dataGB, every dwelling receives one filler placed on analog days.}
+\figplaceholder{Fig.~1 (to be drawn by Alex). Split of the households into training and test sets, then aggregates of $N$ consumers with $N_{hp}$ HPs of one weather station, built within each set.}
+\caption{Construction of the semi-synthetic aggregates. Households are split into training and test sets before any aggregate is built.}
 \label{fig:design}
 \end{figure}
 
-\subsubsection{Splits before construction}
-Households are split into a training set and a test set before any aggregate is built. In each weather station, one quarter of the HP households is drawn for the test set. The fillers are split in the same proportion over the whole dataset, independently of the HP households. Training aggregates are then built from training households only and test aggregates from test households only, so that no household appears in both sets. Earlier versions of this benchmark did not follow this rule, as discussed in Section~\ref{sec:pitfalls}. The number of splits and the folds used for tuning are described in Section~\ref{sec:protocol}.
+Households are split into a training set and a test set before any aggregate is built. One quarter of the HP households of each weather station is drawn for the test set, and the fillers are split in the same proportion. Each aggregate is then built from the households of one set only, so that no household appears in both.
 
-\subsubsection{Composition of an aggregate}
-An aggregate is defined by its weather station, its size $N$ in dwellings and its HP penetration $p$, which give it $n=\max\bigl(1,\operatorname{round}(pN)\bigr)$ HP households. All HP households of an aggregate are drawn from one weather station, so that one temperature series drives its whole heating load. The same can be expected on a feeder that serves a small area. Every dwelling of an aggregate is a distinct household, and HP households are never used as fillers. All draws are made without replacement and with a fixed seed per split.
+Each aggregate has $N$ consumers, of which $N_{hp}$ have an HP. All its HPs come from one weather station, so that one temperature series drives its heating load. In the \dataCH, each HP household keeps its own non-HP load, and $N-N_{hp}$ fillers are added. In the \dataGB, the EoH homes have no record of their non-HP load, so each of the $N$ consumers receives one filler. All draws are made without replacement, so no household recurs within an aggregate.
 
-In the \dataCH, an aggregate contains $N-n$ fillers and $n$ HP households, each with its HP load and its own non-HP load as measured. In the \dataGB, the EoH homes have no record of their non-HP load, so each of the $N$ dwellings receives one filler, HP dwellings included. The net load of aggregate $a$ is thus
-\begin{equation}
-P^{\mathrm{net}}_a(t) = \sum_{i\in\mathcal{H}_a} \bigl(h_i(t) + o_i(t)\bigr) + \sum_{j\in\mathcal{F}_a} f_j(t),
-\label{eq:aggregate}
-\end{equation}
-where $\mathcal{H}_a$ and $\mathcal{F}_a$ are the HP households and the fillers of the aggregate. The HP load is denoted by $h_i$, the own non-HP load by $o_i$ and the filler load by $f_j$. In the \dataGB, $o_i$ is zero and $f_j$ is taken on analog days, as described in Section~\ref{sec:analog}.
-
-\subsubsection{Grid and design envelope}
-The grid has sizes $N$ of 10, 20, 40, 80 and 120 dwellings and penetrations $p$ of 0.05, 0.1, 0.2, 0.3, 0.5, 0.8 and 1.0. A grid cell is one combination of station, size and penetration within one set. A cell is kept only if $n \le 0.75H$, where $H$ is the number of HP households of that station in the set. This bound keeps the aggregates of one cell from sharing most of their HP households. Stations with fewer than three HP households in a set are not used. Cells outside these bounds are dropped and listed, and no aggregate is truncated to fit. Each kept cell gives ten training aggregates or five test aggregates.
-
-The resulting design envelope is given in Table~\ref{tab:envelope}, and its counts are the same in every split since the split is stratified by station. Since the aggregates of one set reuse the same households many times, the number of distinct HP households is the effective sample size of each result. The \dataCH{} gives ten test aggregates in each of the two upper penetration bins. The \dataGB{} gives at least 30 test aggregates in every bin.
-
-\begin{table}[t]
-  \centering
-  \caption{Design envelope of the semi-synthetic aggregates in one split. The counts are identical in every split. Penetration bins as in Paper A~\cite{paperA}.}
-  \label{tab:envelope}
-  \footnotesize
-  \begin{tabular}{lrrr}
-    \toprule
-    & \dataCH & \dataGB & GB repl.\textsuperscript{a} \\
-    \midrule
-    HP households, train / test & 64 / 22 & 292 / 92 & 241 / 78 \\
-    \quad used in aggregates & 62 / 20 & 274 / 81 & 226 / 61 \\
-    Aggregates, train / test & 500 / 135 & \num{2080} / 455 & \num{1870} / 355 \\
-    Test aggregates per bin & & & \\
-    \quad $p \le 15\%$ & 75 & 265 & 190 \\
-    \quad $15$--$35\%$ & 40 & 125 & 105 \\
-    \quad $35$--$65\%$ & 10 & 30 & 30 \\
-    \quad $> 65\%$ & 10 & 35 & 30 \\
-    \bottomrule
-    \multicolumn{4}{l}{\textsuperscript{a}Temporal replication, October 2022 to 28 September 2023.}\\
-  \end{tabular}
-\end{table}
+The consumer count $N$ takes the values 10, 20, 40, 80 and 120. The HP penetration takes the values 5, 10, 20, 30, 50, 80 and 100\%. A combination of station, $N$ and penetration is kept only if its $N_{hp}$ HPs are at most three quarters of the HP households of that station in the set. Each kept combination holds ten training aggregates or five test aggregates. Per split, this gives 500 training and 135 test aggregates in the \dataCH. The \dataGB{} gives \num{2080} training and 455 test aggregates. The full design envelope is given in Appendix~\ref{app:envelope}.
 
 \subsubsection{Fillers for the \dataGB{} from analog days}
 \label{sec:analog}
-The LCL fillers were recorded in 2012--2014 and the EoH homes in 2021--2023, so their calendar days cannot be aligned directly. Instead, every EoH day is paired with an LCL day of similar weather, called its analog day.
+The LCL fillers were recorded in 2012--2014 and the EoH homes in 2021--2023, so their calendar days cannot be aligned directly. Instead, every EoH day is paired with an LCL day of similar weather, called its analog day. The analog day has the same day type, and its day of the year lies within 30 days of that of the EoH day. Among these days, those within 1~K of the daily mean temperature of the EoH weather station are kept, and the window is widened up to 60 days if none is found. One of the three closest days in temperature is drawn at random, and all fillers of an aggregate take the same analog day.
 
-For each weather group $g$ and EoH day $d$, the analog day $d'$ is chosen from the LCL days in four steps.
-\begin{enumerate}
-\item The candidate has the same day type as $d$ in the England and Wales calendar, i.e.\ a working day or a weekend or bank holiday.
-\item Its day of the year lies within 30 days of $d$. This window is widened to 45 and then 60 days only when no candidate passes the next step.
-\item Its daily mean temperature at Heathrow lies within 1~K of that of group $g$ on day $d$.
-\item One of the three candidates closest in temperature is drawn at random with a fixed seed.
-\end{enumerate}
-If no candidate passes the third step even at 60 days, the candidate closest in temperature is taken. The map from $d$ to $d'$ is fixed per weather group and split. All fillers of an aggregate take the same analog day, which possibly preserves their common response to the weather and the calendar of that day. The half-hours of $d'$ are then placed on the local clock time of $d$.\footnote{Days on which daylight saving time changes are not candidates. A target day of 23 hours skips the missing half-hours, and a target day of 25 hours uses the repeated ones twice.}
+This construction assumes that the load of a filler is independent of the HP load, given temperature, day type and time of year. This is the conditional independence assumption of statistical matching~\cite{dorazio2006statistical}. Choosing whole days by their nearest neighbours in temperature follows the resampling used in weather generators~\cite{lall1996nearest,rajagopalan1999knn} and the analog method of statistical downscaling~\cite{zorita1999analog}. Measured HP profiles have been added to national electricity demand~\cite{love2017addition}, and to household smart meter data~\cite{agrawal2026electricity}. To the best of the authors' knowledge, no previous work pairs HP and household loads from different years on temperature-analog days.
 
-This construction assumes that the load of a filler is independent of the HP load, given temperature, day type and time of year. This is the conditional independence assumption of statistical matching, which cannot be tested with the two datasets alone~\cite{dorazio2006statistical}. Its consequences are therefore checked by the diagnostics below. The choice of whole days by nearest neighbours within a seasonal window follows the nearest-neighbour resampling used in weather generators~\cite{lall1996nearest,rajagopalan1999knn}. It is also close to the analog method of statistical downscaling~\cite{zorita1999analog} and to similar-day methods in load forecasting~\cite{dudek2015pattern}.
+The temperature response of real households changes from one winter to the next. Rebuilding a held-out LCL winter from the other LCL days showed an error of the same size as this natural change. This variability limits any estimator at low HP penetration, where the fillers carry most of the temperature response. Penetrations up to 50\% are therefore marked as filler-variability-limited in every GB table. The same construction is also applied to the \dataCH, where the real aggregates are known, and its effect is reported next to the GB results.
 
-Measured HP profiles have been added to national electricity demand before~\cite{love2017addition}. Household smart meter data have also been combined with EoH HP data into synthetic household profiles~\cite{agrawal2026electricity}. To the best of the authors' knowledge, no previous work pairs separately measured HP and household loads from different years on temperature-analog days.
-
-\begin{table}[t]
-  \centering
-  \caption{Diagnostics of the analog-day fillers. Each flag threshold was fixed before the diagnostic was run. D1 to D4 use the training fillers of one split.}
-  \label{tab:diag}
-  \footnotesize
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{>{\raggedright\arraybackslash}p{0.05\columnwidth}>{\raggedright\arraybackslash}p{0.37\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.28\columnwidth}}
-    \toprule
-    & Comparison & Flag if & Outcome \\
-    \midrule
-    D1 & Heating slope of the filler aggregate, own LCL days vs.\ EoH days & change $> 15\%$ & $+5.9\%$, not raised \\
-    D2 & EoH days matched with a temperature difference above 1~K & $> 5\%$ of days & $0.24\%$, not raised \\
-    D3 & Day-of-year distance between $d$ and $d'$ & descriptive & median 16 days, 95th percentile 29 days \\
-    D4 & Rebuilt vs.\ real LCL winter, heating slope and peak & change $> 10\%$ & raised for the slope, intrinsic filler variability \\
-    D5 & Analog-day vs.\ real aggregates of the \dataCH, error of each estimator & change $> 2$~pp & raised, reported with the GB results \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Five diagnostics, D1 to D5, test the analog-day fillers. They are listed in Table~\ref{tab:diag}, and each flag threshold was fixed before the run. D1 raised no flag, since the heating slope of the filler aggregate changes by 5.9\% when it is moved onto the EoH days. At two of the 16 stations, however, this change exceeds 15\%. D2 raised no flag either, since only 0.24\% of the EoH days are matched with a temperature difference above 1~K.
-
-D4 rebuilds one LCL winter from the other LCL days with the same rule, and compares it with the real winter. The median peak of the rebuilt filler aggregates differs from the real one by 3\% to 7\%. Their heating slope differs by far more than the threshold, so D4 raised its flag. A second rule, also fixed before any run, then tested whether this error comes from the mapping or from the fillers themselves. It compares the error with the real change in slope of the same filler aggregates between the winters 2012/13 and 2013/14. This real change is 52\% to 78\% in median, depending on the aggregate size. It is of the same size as the rebuild error, which ranges from 38\% to 94\%. The rule therefore classifies the error as intrinsic filler variability, and the mapping is kept.
-
-This variability of real households limits any estimator that reads the HP capacity from the heating slope of the net load. Its effect is expressed as a capacity-equivalent error, i.e.\ the slope error divided by the slope per kW of HP peak of the training HP households. This error exceeds 5\% of $P^{\mathrm{HP}}$ at every penetration up to 0.5, for at least one aggregate size. These penetrations cover the three lower penetration bins of Paper A~\cite{paperA} and are marked as filler-variability-limited in every GB table. The mark is a floor for any estimator, not a defect of the \dataGB. The test uses winter slopes, whereas the estimators fit a full year, so this floor is possibly pessimistic. A sensitivity analysis also scales the temperature response of the fillers by 0.5 and 1.5.
-
-D5 applies the same rule to the \dataCH, in which the HP load and the own non-HP load of each household were measured together. Each dwelling receives an analog-day filler from the same year.\footnote{Candidate days within three days of the target day are excluded, and each aggregate is matched on the temperature of its own station.} The estimators are then scored on these aggregates and on the real ones. D5 thus measures the cost of the analog-day construction, including the loss of each household's own non-HP load. It raised its flag for some estimators and penetration bins, so its differences are reported next to every headline GB result in Section~\ref{sec:rq2}.
-
-The analog-day fillers cannot reproduce every property of a real feeder. First, the own non-HP load of an HP home is replaced by that of an unrelated household, so any link between the two is lost. Second, the LCL loads reflect the appliances and occupancy of 2012--2014. Third, only the daily mean temperature is matched, so solar gain, wind and humidity are not. Fourth, consecutive EoH days take unrelated LCL days, so multi-day cold spells are not preserved in the fillers. Finally, all flat-rate households are kept, so electrically heated LCL homes add to the temperature response of the fillers.
+The analog-day fillers cannot reproduce every property of a real feeder. The own non-HP load of an HP home is replaced by that of an unrelated household. The LCL loads also reflect the appliances and occupancy of 2012--2014. Finally, all flat-rate households are kept, so electrically heated LCL homes add to the temperature response of the fillers.
 
 \subsection{Evaluation Protocol}
 \label{sec:protocol}

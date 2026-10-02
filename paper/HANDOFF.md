@@ -49,7 +49,8 @@ A zip of the updated skill is in the previous session's scratchpad. Alex may re-
 | source datasets (HEAPO, Kaiser et al., EoH, LCL) | | |
 | fillers (households without HP that fill an aggregate) | fill | `fill` |
 | aggregates / semi-synthetic aggregates (Alex's skeleton wording) | | substations |
-| $P^{\mathrm{HP}}$, the non-coincident HP peak | | `HP_Peak` |
+| $P_{\mathrm{TCL}}^{\max}$, the installed capacity (non-coincident 99.9th-percentile peak), as in Paper A | $P^{\mathrm{HP}}$ | `HP_Peak` |
+| $N$ consumers, $N_{hp}$ HPs per aggregate (Paper A) | size, $n$, $p$ as a symbol | `size`, `n_hp`, `p` |
 
 Never write "pool" anywhere in the paper.
 
@@ -71,6 +72,14 @@ Structure (applied to the outline in `main.tex` / `03_data_protocol.tex`, as com
 7. II-C stays short and cites Paper A (CLAUDE.md: Paper B must not repeat Paper A).
 8. **Open:** target journal and whether RQ3/RQ4 move to a third paper. Do not restructure for it.
 9. `a4paper` and `hidelinks` applied.
+
+III-C review (2026-10-02):
+1. Use Paper A's notation throughout (`hp-sensitivity-paper/paper/hp_sensitivity_overleaf.tex`, Nomenclature); a new symbol follows the same scheme.
+2. The split mechanics (one quarter per station to test) are described in III-C; III-D adds only seeds and inner CV.
+3. No D5 numbers in Section III.
+4. No filler-uncertainty sentence (×0.5, ×1.5) in III-C until RQ2 is drafted.
+5. No gas-heated LCL sensitivity set in III-C.
+6. Short sections: describe the method, not diagnostic outcomes; detail goes to tables or appendices.
 
 ## 6. What can be drafted now, and what cannot
 

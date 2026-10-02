@@ -26,7 +26,7 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | II | Problem Statement | `main.tex` | outline; II-B holds the label definition moved from Data draft 1 |
 | III-A | Source Datasets | `sections/03_data_protocol.tex` | draft 3, reviewed 2026-10-02 |
 | III-B | CH and GB Datasets | `sections/03_data_protocol.tex` | draft 3, reviewed 2026-10-02 |
-| III-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/03_data_protocol.tex` | draft 1 (2026-10-02), **waiting for Alex's review** |
+| III-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/03_data_protocol.tex` | draft 2 (2026-10-02, shorter after Alex's review), **waiting for Alex's review** |
 | III-D, III-E | Evaluation Protocol, Pitfalls | `sections/03_data_protocol.tex` | outline |
 | IV | Estimators | `main.tex` | outline |
 | V–X | RQ1–RQ4, Discussion, Conclusion | `main.tex` | after 05b stages 1–2 and later iterations |
@@ -44,7 +44,9 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | LCL 4,173 flat-rate → 3,199 kept, rules, Heathrow (Meteostat) | `results/iter05a_pool/lcl_audit.md`, CLAUDE.md §7 |
 | HP_Peak definition per dataset | CLAUDE.md §5 |
 
-## Sources of the numbers in Section III-C
+## Sources of the numbers in Section III-C and Appendix A
+Draft 2 keeps only the design numbers in III-C (split, grid, envelope rule, aggregates per split, analog-day rule, 50 % limit) and moves Table III to Appendix A. The D1–D5 numbers below are no longer in the text; they stay listed for a later appendix or the RQ2 section.
+Notation follows Paper A (`hp-sensitivity-paper/paper/hp_sensitivity_overleaf.tex`, Nomenclature): $N$, $N_{hp}$, $P_{\mathrm{TCL}}^{\max}$ (= `HP_Peak`, same definition as Paper A's 99.9th-percentile installed capacity).
 | Number | Source in the repo |
 |---|---|
 | Split before construction: test fraction 0.25, HP households stratified by station, fillers split globally and independently | `configs/protocol_v1.yaml` (`split`), `scripts/paperb/splits.py` (`household_splits`) |
