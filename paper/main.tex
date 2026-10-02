@@ -1,4 +1,4 @@
-\documentclass[9pt,journal,a4]{IEEEtran}
+\documentclass[9pt,journal,a4paper]{IEEEtran}
 
 \usepackage{cite}
 \usepackage{amsmath}
@@ -8,16 +8,16 @@
 \usepackage{siunitx}
 \sisetup{group-separator={,},group-minimum-digits=4}
 \usepackage{xcolor}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \graphicspath{{figures/}}
 
 % ---------------------------------------------------------------------
 % Skeleton helpers -- remove before submission
 % ---------------------------------------------------------------------
 \newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-% Pool names in one place, so they can be renamed after review.
-\newcommand{\poolCH}{Swiss pool}
-\newcommand{\poolGB}{GB pool}
+% Names of the two household datasets (Alex, 2026-10-02: no "pool"; CH and GB).
+\newcommand{\dataCH}{CH dataset}
+\newcommand{\dataGB}{GB dataset}
 \newcommand{\figplaceholder}[1]{\fbox{\parbox[c][3cm][c]{0.9\columnwidth}{\centering\footnotesize #1}}}
 
 \begin{document}
@@ -104,6 +104,7 @@ Thermostatically controlled loads, heat pumps, low-voltage networks, installed c
 The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\mathrm{HP}}$. For each HP household, the 99.9th percentile of its HP electricity is computed over the study period. $P^{\mathrm{HP}}$ is the sum of these percentiles over the HP households of the aggregate. The percentile is used instead of the maximum to reduce the influence of single spurious readings.
 
 \subsection{What the Net Load Determines}
+% Keep short and cite Paper A: Paper B must not repeat its identifiability argument (structure item 7, 2026-10-02).
 % - s_h and T_h follow from net load and temperature alone.
 % - Capacity = s_h / m_h: m_h (or per-unit power) is not observable at the feeder.
 % - Example: two populations with equal s_h and different capacity.
@@ -123,6 +124,9 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 
 \subsection{Physics-Based Estimators}
 % Paper A estimator s_h / m_h (pilot m_h); hockey-stick slope maps; calibrated coincident peak; HDH variant.
+% Updated 2026-10-02: slope-only, slope + base, calibrated delta, HDH; Paper A rows paperA_sh_mh (all-train pilot),
+% paperA_corr (non-TCL correction, s0 from the train fillers), paperA_cal (bias-calibrated, cross-fitted pilot),
+% paperA_corr_own (pilot from the pilot homes' whole-house load, 05b A7). Best physics row = per scope, by median WAPE.
 
 \subsection{Anchor-Only Baselines}
 % Linear / XGBoost on dwelling count, observed peak, both.
@@ -130,9 +134,20 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 \subsection{Features}
 % Windowed degree-day bins; time-of-day profiles; raw series (PLS);
 % feeder-referenced temperature features (relative to own T_h and T_design).
+% Updated 2026-10-02: netfit (net-load hockey-stick fit with latent T_h per aggregate, temperature bins referenced to the
+% fitted T_h), whdd (legacy windowed degree-day bins, fixed base), both (netfit + whdd), raw (daily net load / size and daily T,
+% read only by the CNN). Scale anchors: size, size_peak.
+
+\subsection{Residual Learning on the Physics Estimate}
+% Added 2026-10-02 (structure item 5): ML predicts z = log(y / P_hat_A), the correction to the Paper A estimate, with a
+% cross-fitted pilot (household-disjoint from the aggregate); direct-log vs residual variants of every model.
 
 \subsection{Learning Models}
 % XGBoost, Ridge / Elastic Net, SVR, PLS, neural network; tuning.
+% Updated 2026-10-02: families linear (Linear, Ridge, Lasso, ElasticNet, PLS), kernel (SVR, Kernel Ridge), trees (XGBoost,
+% Random Forest, Extra Trees), neural (FFNN, TabPFN-3.5), raw-series (1D-CNN). GP and CatBoost implemented but not run (05b A8).
+% Grouped inner CV on household-disjoint folds, seeded TPE search (50 evals), early stopping on a training fold;
+% one inner-CV winner per family, never chosen on test.
 
 \subsection{Learning the Transfer Parameter}
 % Physics numerator s_h + learned m_h (or design-day SF) from covariates;
@@ -172,6 +187,14 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 \label{fig:rq2}
 \end{figure}
 
+\subsection{Does More Training Data Help?}
+% Added 2026-10-02 (structure item 3; iteration 05b): learning curve over distinct train HP households, households vs
+% substations per cell, fitted asymptote and n*; pre-registered verdict D (data) / S (synthetic sample) / I (identifiability) / F (features).
+
+\subsection{Error Decomposition}
+% Added 2026-10-02 (structure item 4; 05b oracles): O1 perfect disaggregation, O2 perfect scale; filler contamination,
+% scale (m_h) dispersion and fit noise per penetration bin; per-unit dispersion floor for any estimator built on s_h.
+
 \subsection{Other Electric Heating and Utility Control}
 % Backup rods, storage / direct heating, water heaters; blocking periods.
 
@@ -181,6 +204,8 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 
 \subsection{Transfer Settings}
 % CH -> DE (FeederBW real feeders, WPuQ); third domain (UK).
+% Updated 2026-10-02: CH <-> GB between the two datasets. The HP label differs (CH: HP submeter; GB: whole heating
+% system incl. immersion), so transfer runs under harmonised labels (iterations/07-transfer-notes.md).
 
 \subsection{End-to-End Models}
 
@@ -225,7 +250,7 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 \subsection{Guidance for DSOs}
 
 \subsection{Limitations}
-% Pool size; single year; synthetic aggregates; registry labels; control regimes; cooling untested.
+% Dataset size; single year; synthetic aggregates; registry labels; control regimes; cooling untested.
 
 % =====================================================================
 \section{Conclusion}
@@ -233,7 +258,7 @@ The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\m
 \todo{Summary of RQ1--RQ4 findings; future work.}
 
 \appendices
-\section{Household Pools and Design Envelope}
+\section{Household Datasets and Design Envelope}
 \section{Model Hyperparameters}
 
 \bibliographystyle{IEEEtran}
