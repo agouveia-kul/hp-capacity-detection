@@ -42,4 +42,4 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | GB dataset: EoH selection rules, Nov 2021 – Oct 2022, 384 homes, 26 groups, 217/153/14 by HP type, one silent-meter home (15 %) | `results/iter05a_pool/eoh_selection.md`, CLAUDE.md §7 |
 | Replication Oct 2022 – 28 Sep 2023, 319 homes, 272 shared | CLAUDE.md §4, DECISIONS 2026-10-01 |
 | LCL 4,173 flat-rate → 3,199 kept, rules, Heathrow (Meteostat) | `results/iter05a_pool/lcl_audit.md`, CLAUDE.md §7 |
-| HP_Peak definition per pool | CLAUDE.md §5 |
+| HP_Peak definition per dataset | CLAUDE.md §5 |
