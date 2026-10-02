@@ -1,0 +1,63 @@
+% Section 2 -- Data. Draft 1 (2026-10-02). Sources for every number are listed in paper/README.md.
+\section{Data}\label{sec:data}
+
+In this section, the datasets used to build the synthetic LV substations are described. Two pools of Heat Pump (HP) households are used, one from Switzerland and one from Great Britain (GB). Each pool combines HP electricity measurements with the load of households without HPs. The main properties of both pools are summarised in Table~\ref{tab:pools}.
+
+\begin{table}[t]
+  \centering
+  \caption{Overview of the two household pools. The HP channel is the measurement from which the HP labels are computed. Counts refer to households that pass the coverage rules of Section~\ref{sec:data}.}
+  \label{tab:pools}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.34\linewidth}}
+    \toprule
+    & \poolCH & \poolGB \\
+    \midrule
+    HP data source & HEAPO~\cite{brudermueller2025heapo}, Kaiser et al.~\cite{kaiser2026swiss} & EoH~\cite{esc2024eoh} \\
+    HP households & 86 & 384 (319 in the replication year) \\
+    Weather stations & 5 & 26 \\
+    Period & Jan--Dec 2023 & Nov 2021--Oct 2022 \\
+    Resolution & 15 min & 30 min \\
+    HP channel & HP submeter & whole heating system \\
+    Non-HP households & \num{1291} (Kaiser et al.) & \num{3199} (LCL~\cite{schofield2015lcl}) \\
+    Non-HP data period & same year & 2012--2014, matched by analog days \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Swiss pool}\label{sec:data-ch}
+
+The \poolCH{} draws on two open datasets from the canton of Zurich. The HEAPO dataset contains smart meter data of \num{1408} households with HPs, recorded at 15-minute and daily resolution between 2018 and 2024~\cite{brudermueller2025heapo}. A subset of these households has a separate submeter for the HP. The dataset of Kaiser et al.\ contains 15-minute smart meter data of \num{2447} residential installations for 2023 and 2024~\cite{kaiser2026swiss}. Its metadata flag the major loads of each installation, such as HPs, backup heating rods, electric water heaters and storage heaters.
+
+Calendar year 2023 is used as the study period, since it is the only year covered by both datasets. A meter is kept only if at least 90\% of its raw 15-minute samples in that year are valid. This rule is checked before any gap is filled, so that interpolated values cannot inflate the coverage. Remaining gaps are then interpolated linearly in time.
+
+Three types of HP household pass this rule. HEAPO contributes 47 households with an HP submeter and a channel for the remaining household load. The Kaiser et al.\ dataset contributes 24 dwellings whose meter is paired with a separate HP meter. It also contributes 15 HP meters in single-family houses that have no dwelling meter. Each of these 15 HP meters is given the load of one unused single-family dwelling without HP, drawn at random with a fixed seed. In total, the \poolCH{} has 86 HP households spread over five weather stations.
+
+The non-HP load comes from \num{1291} dwellings of the Kaiser et al.\ dataset whose metadata flag no Thermostatically Controlled Load (TCL). These dwellings have no HP, electric water heater, storage heater or direct electric heating, and are referred to as fillers in the rest of this paper. It should be noted that the own non-HP load of an HP household is kept as measured, and can include an electric water heater.
+
+Outdoor temperature is taken from the weather station assigned to each household. HEAPO provides data from eight stations in its dataset~\cite{brudermueller2025heapo}. The Kaiser et al.\ dataset has no weather data, so the MeteoSwiss station of Zurich-Kloten, the closest station to these installations, is used~\cite{kaiser2026swiss}.
+
+\subsection{GB pool}\label{sec:data-gb}
+
+The \poolGB{} is based on the Electrification of Heat (EoH) Demonstration Project. In this trial, HPs were installed and monitored in 742 homes in South East England, North East England and South East Scotland. The cleansed 30-minute dataset covers November 2020 to September 2023~\cite{esc2024eoh}. Unlike the \poolCH, the EoH data measure the electricity of the whole heating system. This includes the compressor, the backup heater, the immersion heater for hot water and the circulation pumps. Hybrid systems are excluded, since their boiler data are unreliable.
+
+A home is eligible if at least 90\% of its 30-minute bins are valid within a 12-month window. Gaps of up to two hours are interpolated, while longer gaps are filled with a donor day from the same home and day type. Runs of zero electricity of six hours or more are treated as missing only when the heat meter still records heat output, which indicates a meter dropout. Runs without heat output are kept as real switch-offs.
+
+The 12-month window starts in the month that gives the most eligible homes. Among the start months from June 2021 to January 2022, this is November 2021, so the main window runs from November 2021 to October 2022. One home is excluded because its electricity reads close to zero on 15\% of the bins in which heat is delivered. This pattern points to a silent electricity meter rather than to real behaviour.
+
+The EoH homes are grouped into weather groups that share one outdoor temperature series, and these groups are used as weather stations. Groups with more than 5\% missing temperature are filled from the best-correlated group if that correlation is at least 0.98, and are dropped with their homes otherwise. The resulting pool has 384 homes in 26 groups. Of these, 217 have an air-source HP, 153 a high-temperature air-source HP and 14 a ground-source HP.
+
+A second window, from October 2022 to 28 September 2023, serves as a temporal replication. The end date is the last full day of EoH data. It contains 319 homes, of which 272 are also in the main window. It is therefore a second year of mostly the same homes, not an independent sample.
+
+\subsection{Non-HP load for the GB pool}\label{sec:data-lcl}
+
+The EoH data contain no whole-house meter. The non-HP load of the \poolGB{} therefore comes from the Low Carbon London (LCL) trial, which recorded 30-minute smart meter data of London households~\cite{schofield2015lcl}. Only households on a flat-rate tariff are used. Households on the dynamic time-of-use tariff are excluded, since the price signals shift their load in time.
+
+A flat-rate household is kept if at least 90\% of its data are valid between July 2012 and February 2014. Households with any half-hour above 10~kWh, or with a run of zeros of 24 hours or more, are also removed. Of \num{4173} flat-rate households, \num{3199} remain. Outdoor temperature for these households is the daily mean at London Heathrow, obtained from Meteostat~\cite{meteostat}.
+
+The LCL data were recorded about nine years before the EoH data, so they are not used on their own calendar days. Instead, each LCL household is mapped to the EoH days by matching days with similar temperature and the same day type. This mapping is described in Section~\ref{sec:scenarios}.
+
+\subsection{Labels}\label{sec:data-labels}
+
+The main target is the non-coincident HP peak of a substation, denoted as $P^{\mathrm{HP}}$. For each HP household, the 99.9th percentile of its HP electricity is computed over the study period. $P^{\mathrm{HP}}$ is the sum of these percentiles over the HP households of the substation. The percentile is used instead of the maximum to reduce the influence of single spurious readings.
+
+The label differs between pools, because the HP channel differs. In the \poolCH{} it covers the HP submeter only, whereas in the \poolGB{} it covers the whole heating system, including the immersion heater. Labels are also computed at different resolutions, 15 minutes and 30 minutes respectively. For these reasons, results are compared between pools through their gap to a physics-based estimator, and not through absolute errors.

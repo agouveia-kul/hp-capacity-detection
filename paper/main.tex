@@ -1,0 +1,47 @@
+% Paper B -- working draft. Sections are drafted one at a time and reviewed by Alex (paper/README.md).
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\sisetup{group-separator={,},group-minimum-digits=4}
+
+% Pool names in one place, so they can be renamed after review.
+\newcommand{\poolCH}{Swiss pool}
+\newcommand{\poolGB}{GB pool}
+% Open items left for later iterations or for review.
+\newcommand{\placeholder}[1]{\textcolor{orange}{[#1]}}
+
+\title{What data-driven methods can and cannot recover about heat pump capacity from aggregated LV net load\\\large Working draft}
+\author{Alexandre M. V. Gouveia}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+\placeholder{To be drafted after the 05b verdict.}
+
+\input{sections/02_data}
+
+\section{Scenario generation}\label{sec:scenarios}
+\placeholder{Next section to be drafted.}
+
+\section{Estimators}\label{sec:estimators}
+\placeholder{To be drafted.}
+
+\section{Evaluation design}\label{sec:evaluation}
+\placeholder{To be drafted.}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\end{document}
