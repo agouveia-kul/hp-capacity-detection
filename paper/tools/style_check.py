@@ -20,11 +20,13 @@ def prose(tex):
     t = re.sub(r"\\begin\{(table\*?|figure\*?|equation\*?|align\*?)\}.*?\\end\{\1\}", "", t, flags=re.S)
     t = re.sub(r"\$[^$]*\$", "X", t)
     t = re.sub(r"\\(label|cite|ref|input|todo|figplaceholder)\{[^}]*\}", "", t)
-    t = re.sub(r"\\(section|subsection|subsubsection)\*?\{[^}]*\}", "", t)
+    t = re.sub(r"\\(section|subsection|subsubsection)\*?\{(?:[^{}]|\{[^{}]*\})*\}", "", t)
+    t = re.sub(r"\\(begin|end)\{(enumerate|itemize)\}|\\item\b|\\footnote\{", " ", t)   # footnotes and list items count as prose
     t = re.sub(r"\\num\{([^}]*)\}", r"\1", t)
     for k, v in MACROS.items():
         t = t.replace(k, v)
-    return " ".join(t.replace(r"et al.\ ", "et al. ").replace("~", " ").split())
+    t = t.replace(r"et al.\ ", "et al. ").replace(r"i.e.\ ", "i.e. ").replace(r"vs.\ ", "vs. ")
+    return " ".join(t.replace("~", " ").replace("{", "").replace("}", "").split())
 
 
 def main(path):
