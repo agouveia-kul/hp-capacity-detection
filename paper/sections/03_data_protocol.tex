@@ -1,0 +1,115 @@
+% =====================================================================
+% Section III -- Data and Evaluation Protocol.
+% III-A Datasets and III-B Household Pools: draft 2 (2026-10-02), moved into Alex's skeleton from draft 1.
+% III-C to III-E: Alex's outline, not drafted yet. Sources of every number: paper/README.md.
+% =====================================================================
+\section{Data and Evaluation Protocol}
+\label{sec:data}
+
+In this section, the datasets and the household pools built from them are described first. The construction of the semi-synthetic aggregates and the evaluation protocol follow.
+
+\subsection{Datasets}
+\label{sec:datasets}
+
+The datasets used in this paper are listed in Table~\ref{tab:datasets}. Two of them provide submetered HP electricity, and two provide the load of households without HPs.
+
+\begin{table*}[t]
+  \centering
+  \caption{Datasets used in this paper. Counts are those reported by each dataset, before any selection.}
+  \label{tab:datasets}
+  \footnotesize
+  \begin{tabular}{llllllp{3.3cm}}
+    \toprule
+    Dataset & Country & Households & HP measurement & Resolution & Period & Role \\
+    \midrule
+    HEAPO~\cite{brudermueller2025heapo} & Switzerland & \num{1408} & HP submeter (subset) & 15 min, daily & 2018--2024 & HP households, \poolCH \\
+    Kaiser et al.~\cite{kaiser2026swiss} & Switzerland & \num{2447} & separate HP meter (subset) & 15 min & 2023--2024 & HP households and fillers, \poolCH \\
+    EoH~\cite{esc2024eoh} & Great Britain & 742 & whole heating system & 30 min & 2020--2023 & HP households, \poolGB \\
+    LCL~\cite{schofield2015lcl} & Great Britain & \num{4173}\textsuperscript{a} & none & 30 min & 2012--2014\textsuperscript{b} & fillers, \poolGB \\
+    \bottomrule
+    \multicolumn{7}{l}{\textsuperscript{a}Households on the flat-rate tariff in the files used here. \textsuperscript{b}Window used here.}\\
+  \end{tabular}
+  % TODO (07): add the transfer datasets (WPuQ, FeederBW, UKPN) once the transfer iteration fixes their use.
+\end{table*}
+
+The HEAPO dataset contains smart meter data of \num{1408} households with HPs in the canton of Zurich~\cite{brudermueller2025heapo}. It was recorded at 15-minute and daily resolution between 2018 and 2024, and a subset of the households has a separate submeter for the HP. Weather data from eight stations are included.
+
+The dataset of Kaiser et al.\ contains 15-minute smart meter data of \num{2447} residential installations in Switzerland for 2023 and 2024~\cite{kaiser2026swiss}. Its metadata flag the major loads of each installation, such as HPs, backup heating rods, electric water heaters and storage heaters. Some HPs are measured by their own meter, next to the meter of the dwelling. The dataset has no weather data, so the MeteoSwiss station of Zurich-Kloten, the closest station to these installations, is used~\cite{kaiser2026swiss}.
+
+The Electrification of Heat (EoH) Demonstration Project installed and monitored HPs in 742 homes in South East England, North East England and South East Scotland~\cite{esc2024eoh}. Its cleansed 30-minute dataset covers November 2020 to September 2023. The EoH data measure the electricity of the whole heating system, which includes the compressor, the backup heater, the immersion heater for hot water and the circulation pumps. The homes are grouped into weather groups, which share one outdoor temperature series. These groups are used as weather stations in this paper.
+
+The Low Carbon London (LCL) trial recorded 30-minute smart meter data of London households~\cite{schofield2015lcl}. Part of these households were placed on a dynamic time-of-use tariff in 2013, while the others stayed on a flat-rate tariff. The LCL data contain no information on HPs. Outdoor temperature for these households is the daily mean at London Heathrow, obtained from Meteostat~\cite{meteostat}.
+
+\subsection{Household Pools}
+\label{sec:pools}
+
+Two pools of HP households are built from these datasets, the \poolCH{} and the \poolGB. Their main properties are summarised in Table~\ref{tab:pools}. In both pools, the households without HPs are referred to as fillers, since they fill each aggregate up to its size.
+
+\begin{table}[t]
+  \centering
+  \caption{Household pools after selection. The HP channel is the measurement from which the HP labels are computed.}
+  \label{tab:pools}
+  \footnotesize
+  \begin{tabular}{>{\raggedright\arraybackslash}p{0.26\columnwidth}>{\raggedright\arraybackslash}p{0.27\columnwidth}>{\raggedright\arraybackslash}p{0.31\columnwidth}}
+    \toprule
+    & \poolCH & \poolGB \\
+    \midrule
+    HP households & 86 & 384 (319 in the replication year) \\
+    Weather stations & 5 & 26 \\
+    Period & Jan--Dec 2023 & Nov 2021--Oct 2022 \\
+    Resolution & 15 min & 30 min \\
+    HP channel & HP submeter & whole heating system \\
+    Fillers & \num{1291} (Kaiser et al.) & \num{3199} (LCL) \\
+    Filler period & same year & 2012--2014, matched by analog days \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{\poolCH}
+Calendar year 2023 is used as the study period, since it is the only year covered by both Swiss datasets. A meter is kept only if at least 90\% of its raw 15-minute samples in that year are valid. This rule is checked before any gap is filled, so that interpolated values cannot inflate the coverage. Remaining gaps are then interpolated linearly in time.
+
+Three types of HP household pass this rule. HEAPO contributes 47 households with an HP submeter and a channel for the remaining household load. The Kaiser et al.\ dataset contributes 24 dwellings whose meter is paired with a separate HP meter. It also contributes 15 HP meters in single-family houses that have no dwelling meter. Each of these 15 HP meters is given the load of one unused single-family dwelling without HP, drawn at random with a fixed seed. In total, the \poolCH{} has 86 HP households spread over five weather stations.
+
+The fillers are the \num{1291} dwellings of the Kaiser et al.\ dataset whose metadata flag no Thermostatically Controlled Load (TCL). These dwellings have no HP, electric water heater, storage heater or direct electric heating. It should be noted that the own non-HP load of an HP household is kept as measured, and can include an electric water heater.
+
+A smaller sensitivity pool keeps only the 47 HP households at the Zurich-Kloten station. % TODO: confirm whether pool B is reported in the paper (DECISIONS 2026-09-29: sensitivity arm).
+
+\subsubsection{\poolGB}
+A home of the EoH project is eligible if at least 90\% of its 30-minute bins are valid within a 12-month window. Gaps of up to two hours are interpolated, while longer gaps are filled with a donor day from the same home and day type. Runs of zero electricity of six hours or more are treated as missing only when the heat meter still records heat output, which indicates a meter dropout. Runs without heat output are kept as real switch-offs. Hybrid systems are excluded, since their boiler data are unreliable.
+
+The 12-month window starts in the month that gives the most eligible homes. Among the start months from June 2021 to January 2022, this is November 2021, so the main window runs from November 2021 to October 2022. One home is excluded because its electricity reads close to zero on 15\% of the bins in which heat is delivered. This pattern points to a silent electricity meter rather than to real behaviour.
+
+Weather groups with more than 5\% missing temperature are filled from the best-correlated group if that correlation is at least 0.98, and are dropped with their homes otherwise. The resulting pool has 384 homes in 26 groups. Of these, 217 have an air-source HP, 153 a high-temperature air-source HP and 14 a ground-source HP.
+
+A second window, from October 2022 to 28 September 2023, serves as a temporal replication. The end date is the last full day of EoH data. It contains 319 homes, of which 272 are also in the main window. It is therefore a second year of mostly the same homes, not an independent sample.
+
+The EoH data contain no whole-house meter, so the fillers of the \poolGB{} come from the LCL trial. Only households on the flat-rate tariff are used, since the price signals of the dynamic tariff shift load in time. A household is kept if at least 90\% of its data are valid between July 2012 and February 2014. Households with any half-hour above 10~kWh, or with a run of zeros of 24 hours or more, are also removed. Of \num{4173} flat-rate households, \num{3199} remain.
+
+The LCL data were recorded about nine years before the EoH data, so they are not used on their own calendar days. Instead, each filler is mapped to the EoH days by matching days with similar temperature and the same day type, as described in Section~\ref{sec:aggregates}.
+
+\subsubsection{Labels per pool}
+The HP label of a household is computed from its HP channel, which differs between pools. In the \poolCH{} the channel is the HP submeter only, whereas in the \poolGB{} it is the whole heating system, including the immersion heater. Labels are also computed at different resolutions, 15 minutes and 30 minutes respectively. For these reasons, results are compared between pools through their gap to a physics-based estimator, and not through absolute errors.
+
+% ---------------------------------------------------------------------
+% Not drafted yet: Alex's outline, unchanged.
+% ---------------------------------------------------------------------
+\subsection{Semi-Synthetic Aggregates}
+\label{sec:aggregates}
+% No household twice in an aggregate; no HP/fill overlap; HP members share a weather station;
+% size x penetration grid bounded by the pool.
+\begin{figure}[t]
+\centering
+\figplaceholder{Fig.: construction of semi-synthetic aggregates and household-disjoint splits}
+\caption{\todo{caption}}
+\label{fig:design}
+\end{figure}
+
+\subsection{Evaluation Protocol}
+\label{sec:protocol}
+% Household-disjoint train/test splits (20 seeds); grouped inner CV for tuning;
+% metrics (WAPE, MAPE, R^2); summary across splits (median, 5--90% band).
+
+\subsection{Pitfalls of Semi-Synthetic Benchmarks}
+\label{sec:pitfalls}
+% Stacked profiles and leaked households inflate accuracy: legacy vs leak-free protocol.
+\todo{Table: legacy protocol vs leak-free protocol (legacy pool) vs leak-free (B*)}

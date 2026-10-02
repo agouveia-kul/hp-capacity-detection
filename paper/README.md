@@ -14,16 +14,20 @@ Alex's voice (skill `gouveia-academic-voice`), plus the instructions of 2026-10-
 References follow hard rule 11: every entry in `references.bib` was retrieved and checked, or is marked UNVERIFIED there.
 
 ## Sections
+Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted parts live in `sections/`; the rest keeps Alex's outline comments.
+
 | # | Section | File | Status |
 |---|---|---|---|
-| 1 | Introduction | (placeholder) | after the 05b verdict |
-| 2 | Data | `sections/02_data.tex` | **draft 1, for review** |
-| 3 | Scenario generation (substations, analog-day fusion) | (placeholder) | next |
-| 4 | Estimators (physics, ML) | (placeholder) | |
-| 5 | Evaluation design | (placeholder) | |
-| 6–8 | Results, discussion, conclusion | | after 05b stages 1 and 2 |
+| – | Abstract, Nomenclature, I Introduction | `main.tex` | outline (after the 05b verdict) |
+| II | Problem Statement | `main.tex` | outline; II-B holds the label definition moved from Data draft 1 |
+| III-A | Datasets | `sections/03_data_protocol.tex` | **draft 2, for review** |
+| III-B | Household Pools | `sections/03_data_protocol.tex` | **draft 2, for review** |
+| III-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/03_data_protocol.tex` | outline, **next** |
+| III-D, III-E | Evaluation Protocol, Pitfalls | `sections/03_data_protocol.tex` | outline |
+| IV | Estimators | `main.tex` | outline |
+| V–X | RQ1–RQ4, Discussion, Conclusion | `main.tex` | after 05b stages 1–2 and later iterations |
 
-## Sources of the numbers in Section 2
+## Sources of the numbers in Section III-A/B
 | Number | Source in the repo |
 |---|---|
 | HEAPO 1,408 households, 15-min/daily, 2018-11 to 2024-03, 8 stations | HEAPO paper (full text, checked 2026-10-02) |

@@ -1,47 +1,242 @@
-% Paper B -- working draft. Sections are drafted one at a time and reviewed by Alex (paper/README.md).
-\documentclass[a4paper,11pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[utf8]{inputenc}
-\usepackage[british]{babel}
-\usepackage{amsmath,amssymb}
+\documentclass[9pt,journal,a4]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{siunitx}
-\usepackage{graphicx}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage[hidelinks]{hyperref}
-\usepackage{xcolor}
-
 \sisetup{group-separator={,},group-minimum-digits=4}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\graphicspath{{figures/}}
 
+% ---------------------------------------------------------------------
+% Skeleton helpers -- remove before submission
+% ---------------------------------------------------------------------
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
 % Pool names in one place, so they can be renamed after review.
 \newcommand{\poolCH}{Swiss pool}
 \newcommand{\poolGB}{GB pool}
-% Open items left for later iterations or for review.
-\newcommand{\placeholder}[1]{\textcolor{orange}{[#1]}}
-
-\title{What data-driven methods can and cannot recover about heat pump capacity from aggregated LV net load\\\large Working draft}
-\author{Alexandre M. V. Gouveia}
-\date{\today}
+\newcommand{\figplaceholder}[1]{\fbox{\parbox[c][3cm][c]{0.9\columnwidth}{\centering\footnotesize #1}}}
 
 \begin{document}
+
+% Working title -- alternatives:
+%  - "What Can Be Learned? Data-Driven Estimation of Aggregated TCL Capacity from LV Net Load"
+%  - "Data-Driven versus Physics-Based Quantification of Aggregated Thermostatically Controlled Loads"
+\title{Data-Driven Quantification of Aggregated Thermostatically Controlled Loads from Low-Voltage Net Load: What Can Be Learned?}
+
+\author{Alexandre~M.~V.~Gouveia, Md. Umar Hashmi, Reinhilde D'hulst, Dirk Van Hertem}
+
 \maketitle
 
-\section{Introduction}\label{sec:intro}
-\placeholder{To be drafted after the 05b verdict.}
+\begin{abstract}
+\todo{Write last.}
+% 1. Context: TCL/HP uptake behind LV feeders; DSOs lack installed-capacity data.
+% 2. Gap: a physics estimator exists (Paper A, SF transfer); unclear what supervised ML adds and what any model can recover.
+% 3. Approach: leak-free benchmark of ML vs physics on semi-synthetic and real aggregates; targets ordered by what the net load determines.
+% 4. Headline results: RQ1 (targets), RQ2 (gain over physics / anchor-only), RQ3 (transfer), RQ4 (change detection).
+% 5. Implication for DSOs.
+\end{abstract}
 
-\input{sections/02_data}
+\begin{IEEEkeywords}
+Thermostatically controlled loads, heat pumps, low-voltage networks, installed capacity, machine learning, transferability, smart meter data, distribution system observability.
+\end{IEEEkeywords}
 
-\section{Scenario generation}\label{sec:scenarios}
-\placeholder{Next section to be drafted.}
+% =====================================================================
+\section*{Nomenclature}
+\todo{Align symbols with Paper A.}
+% DSO, HP, LV, SF, TCL, WAPE, ...
+% P_net, P_TCL, P_non-TCL, P_base, s_h, T_h, m_h, SF, P^max, N, N_hp, r = s_h/P_base, T_design, P_design
 
-\section{Estimators}\label{sec:estimators}
-\placeholder{To be drafted.}
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
 
-\section{Evaluation design}\label{sec:evaluation}
-\placeholder{To be drafted.}
+% --- Motivation
+% - Electrification of heating: HP uptake behind LV feeders (cf. FeederBW +20% HP kW 2023-2025).
+% - DSOs meter aggregated net load but rarely hold appliance registers or nameplate data.
 
-\bibliographystyle{unsrtnat}
+% --- State of the art (literature table as in Paper A)
+% - NILM / HP detection at household level (labelled data, no installed capacity).
+% - Change-point / degree-day models (sensitivity, not capacity).
+% - PV installed-capacity estimation from aggregates (data-driven vs model-based; own prior work).
+% - Physics estimator for TCL capacity via SF transfer (Paper A).
+% - Transfer of ML load models across countries (e.g. SAVE -> WPuQ).
+\todo{Literature table: method family | input | output | labels needed | capacity? | transfer tested?}
+
+% --- Gap
+% - Net load reveals the heating sensitivity s_h, not the installed capacity:
+%   the step s_h -> P^max needs external information (m_h from a pilot in Paper A).
+% - Unknown: which TCL quantities supervised ML can recover, whether it adds value over the
+%   physics estimator, and whether it transfers.
+% - Semi-synthetic benchmarks can overstate ML accuracy (profile reuse, household leakage).
+
+% --- Contributions
+\begin{enumerate}
+\item \todo{Targets ordered by what the net load determines; ML performance tracks this ordering (RQ1).}
+\item \todo{Leak-free benchmark of ML against the Paper A estimator and anchor-only baselines (RQ2); protocol pitfalls quantified.}
+\item \todo{Transfer across populations; learning the transfer parameter from DSO-available covariates (RQ3).}
+\item \todo{Detection and quantification of TCL uptake over a multi-year horizon (RQ4).}
+\end{enumerate}
+
+% --- Paper structure paragraph
+
+% =====================================================================
+\section{Problem Statement}
+\label{sec:problem}
+
+\subsection{Aggregate Model}
+% P_net(t) = P_TCL(t) + P_non-TCL(t); daily means vs temperature; net-load fit (Paper A).
+
+\subsection{Quantities of Interest}
+% Targets and their use for DSOs.
+\todo{Table: target | definition | unit | DSO use | determined by net load? (yes / with anchor / no)}
+% - HP_Count
+% - Installed capacity (non-coincident observed peak, 99.9th percentile); nameplate as household-level check only
+% - Coincident peak
+% - Heating sensitivity s_h and ratio r = s_h / P_base
+% - Peak at design temperature P_design
+% - Temperature-driven energy
+
+% Draft text moved here from Data draft 1 (2026-10-02); to be extended when Section II is drafted.
+The main target is the non-coincident HP peak of an aggregate, denoted as $P^{\mathrm{HP}}$. For each HP household, the 99.9th percentile of its HP electricity is computed over the study period. $P^{\mathrm{HP}}$ is the sum of these percentiles over the HP households of the aggregate. The percentile is used instead of the maximum to reduce the influence of single spurious readings.
+
+\subsection{What the Net Load Determines}
+% - s_h and T_h follow from net load and temperature alone.
+% - Capacity = s_h / m_h: m_h (or per-unit power) is not observable at the feeder.
+% - Example: two populations with equal s_h and different capacity.
+% - Consequence: an ML model learns an implicit m_h from its training population.
+
+\subsection{Information Available to a DSO}
+% Scale anchors: dwelling count, observed feeder peak; climate (design temperature);
+% building-stock registers; tariff/control regime.
+
+% =====================================================================
+% Drafted in sections/03_data_protocol.tex (III-A, III-B); III-C to III-E keep the outline there.
+\input{sections/03_data_protocol}
+
+% =====================================================================
+\section{Estimators}
+\label{sec:estimators}
+
+\subsection{Physics-Based Estimators}
+% Paper A estimator s_h / m_h (pilot m_h); hockey-stick slope maps; calibrated coincident peak; HDH variant.
+
+\subsection{Anchor-Only Baselines}
+% Linear / XGBoost on dwelling count, observed peak, both.
+
+\subsection{Features}
+% Windowed degree-day bins; time-of-day profiles; raw series (PLS);
+% feeder-referenced temperature features (relative to own T_h and T_design).
+
+\subsection{Learning Models}
+% XGBoost, Ridge / Elastic Net, SVR, PLS, neural network; tuning.
+
+\subsection{Learning the Transfer Parameter}
+% Physics numerator s_h + learned m_h (or design-day SF) from covariates;
+% hierarchical model across submetered populations.
+
+% =====================================================================
+\section{Targets and Identifiability (RQ1)}
+\label{sec:rq1}
+
+\subsection{Accuracy per Target}
+\begin{figure}[t]
+\centering
+\figplaceholder{Fig.: error per target, with and without scale anchor}
+\caption{\todo{caption}}
+\label{fig:rq1}
+\end{figure}
+
+\subsection{Role of the Scale Anchor}
+
+\subsection{Large-Sample Check at Daily Resolution}
+% HP_Count on the daily-resolution arm.
+
+% =====================================================================
+\section{Value over the Physics Estimator (RQ2)}
+\label{sec:rq2}
+
+\subsection{Benchmark on Semi-Synthetic Aggregates}
+\todo{Table: method x anchor, median [5--90\%] across splits}
+
+\subsection{Gain over Anchor-Only Baselines}
+
+\subsection{Dependence on Penetration and Aggregate Size}
+\begin{figure}[t]
+\centering
+\figplaceholder{Fig.: error vs HP penetration and aggregate size (ML, physics, anchor-only)}
+\caption{\todo{caption}}
+\label{fig:rq2}
+\end{figure}
+
+\subsection{Other Electric Heating and Utility Control}
+% Backup rods, storage / direct heating, water heaters; blocking periods.
+
+% =====================================================================
+\section{Transfer across Populations (RQ3)}
+\label{sec:rq3}
+
+\subsection{Transfer Settings}
+% CH -> DE (FeederBW real feeders, WPuQ); third domain (UK).
+
+\subsection{End-to-End Models}
+
+\subsection{Learned Transfer Parameter}
+% Design-span normalisation; covariates; leave-one-population-out.
+\todo{Table: transfer error per target population, SF transfer vs learned parameter}
+
+\subsection{Recalibration with a Small Local Pilot}
+
+% =====================================================================
+\section{Detecting Change in TCL Capacity (RQ4)}
+\label{sec:rq4}
+
+\subsection{Uptake Scenarios}
+% Annual adoption probability; multi-year horizon.
+
+\subsection{Multi-Year Aggregates}
+% Temperature-matched resampling across weather years.
+
+\subsection{Detection and Quantification}
+% Minimum detectable change at a fixed false-alarm rate; detection delay; relative and register-anchored change.
+\begin{figure}[t]
+\centering
+\figplaceholder{Fig.: minimum detectable change vs aggregate size and horizon}
+\caption{\todo{caption}}
+\label{fig:rq4}
+\end{figure}
+
+\subsection{Real Change on FeederBW}
+% Two winters; feeders with and without registered HP increase.
+
+% =====================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What the Models Learn}
+% Implicit m_h / per-unit power of the training population.
+
+\subsection{Accuracy versus Data Cost}
+% When ML earns its data cost; when the physics estimator suffices.
+
+\subsection{Guidance for DSOs}
+
+\subsection{Limitations}
+% Pool size; single year; synthetic aggregates; registry labels; control regimes; cooling untested.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+\todo{Summary of RQ1--RQ4 findings; future work.}
+
+\appendices
+\section{Household Pools and Design Envelope}
+\section{Model Hyperparameters}
+
+\bibliographystyle{IEEEtran}
 \bibliography{references}
+
 \end{document}
