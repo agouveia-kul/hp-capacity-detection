@@ -120,8 +120,8 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
   - ML: netfit + Lasso [size] direct, Lasso residual, XGBoost direct.
 - **Model families (from 05a/05b; all stay in the pipeline and in every arm):**
   - linear: Linear, Ridge, Lasso, ElasticNet, PLS;
-  - kernel: SVR, Kernel Ridge, GP regression;
-  - trees: XGBoost, Random Forest, Extra Trees, CatBoost;
+  - kernel: SVR, Kernel Ridge (GP regression implemented but not run from 05b, A8);
+  - trees: XGBoost, Random Forest, Extra Trees (CatBoost implemented but not run from 05b, A8);
   - neural: FFNN (full budget, 50 evals, patience 20), TabPFN (TabPFN-3.5, checkpoint `tabpfn-v3.5-20260909.safetensors` loaded via `model_path`, `tabpfn` ≥ 9.0.0; non-commercial licence, fine for this research). The weights are downloaded by Alex from Hugging Face into `TABPFN_MODEL_CACHE_DIR` and loaded locally. Never print or commit tokens.
   - raw-series: 1D-CNN on the daily net-load and T series (feature-free check).
 

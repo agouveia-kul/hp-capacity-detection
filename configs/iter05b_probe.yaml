@@ -3,6 +3,8 @@
 # (linear). Same exp_id, out_dir, arm name and arm config as configs/iter05b_stage1.yaml, so the job ids are identical
 # (arm2__s0__d0__nall__<family>) and stage 1 skips these jobs when it is launched: the probe is part of stage 1, not extra work.
 # Then: python scripts/paperb/runtime_estimate.py --probe05b --workers 10
+# Kept as run (2026-10-01/02). A8 then removed CatBoost and GP from stage 1: their probe jobs stay on disk, outside the stage-1
+# job list, so the queue's merge and the tables never read them.
 exp_id: iter05b_stage1
 out_dir: results/iter05b_data_limit/stage1
 workers: 9                                   # one job per family at once, as in the 05a probe

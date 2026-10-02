@@ -33,6 +33,7 @@ The hypotheses and the decision rule below are **pre-registered**: they are fixe
   - **Run it** in Arms 1, 2, 4, 5, 6 and 7 with the other physics rows. It joins the physics rows from which the best physics row is chosen for the criterion. Adding it before any run is pre-registration-safe.
   - **Test:** on a toy pool where the own load has a known slope k per HP home, `paperA_corr_own` recovers capacity within 1 %, while `paperA_corr` is biased by k / m_h per HP home.
 - **[A6] Continuous running.** The schedule may also run in the daytime at below-normal priority. Add a `-Continuous` switch to `schedule_overnight.ps1` that omits `-StopAt`. Alex chooses per stage.
+- **[A8] Models (Alex, 2026-10-02, after the timing probe, before any stage-1 result).** CatBoost and GP regression are not run in any arm; the code and its tests stay. Kernel family = SVR, Kernel Ridge; trees family = XGBoost, Random Forest, Extra Trees. Seeds and the decision rule are unchanged. Reason: the probe put stage 1 at 81 h wall (8.5 nights); CatBoost and GP were 46 % of it and are near-duplicates within their families (no categorical features; KRR = GP posterior mean). The GP predictive-interval column is dropped with GP.
 
 ## Question
 On B\*, no ML configuration beat physics (03b). Is that because ML saw too few distinct HP households (≈ 62), or because net load does not identify capacity beyond what physics already extracts?

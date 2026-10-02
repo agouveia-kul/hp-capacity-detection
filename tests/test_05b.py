@@ -371,9 +371,12 @@ def test_probe_jobs_are_stage1_jobs():
     """The probe's work is reused: its job ids, output folder and arm configs are those of stage 1."""
     import yaml as _y
     p, s = (_y.safe_load((ROOT / f"configs/iter05b_{k}.yaml").read_text()) for k in ("probe", "stage1"))
-    assert (p["exp_id"], p["out_dir"], p["families"]) == (s["exp_id"], s["out_dir"], s["families"])
+    assert (p["exp_id"], p["out_dir"]) == (s["exp_id"], s["out_dir"])
+    assert all(p["families"][f] == v for f, v in s["families"].items())          # stage 1 runs a subset of the probed families (A8)
+    assert not {"catboost", "gp"} & set(s["families"]) and not any({"catboost", "gp"} & set(a["families"]) for a in s["arms"])
     ids = {j["id"] for j in RQ.jobs(s)}
-    assert {j["id"] for j in RQ.jobs(p)} <= ids and len(RQ.jobs(p)) == len(p["families"])
+    kept = [j for j in RQ.jobs(p) if j["family"] in s["families"]]
+    assert {j["id"] for j in kept} <= ids and len(kept) == len(s["families"])
     for a in p["arms"]:
         assert a["config"] == next(b for b in s["arms"] if b["name"] == a["name"])["config"]
 
@@ -383,10 +386,11 @@ def test_runtime_estimate_05b_from_probe_markers(tmp_path):
     from paperb import runtime_estimate as RE
     J = tmp_path / "stage1" / "jobs"
     J.mkdir(parents=True)
-    for fam, h in {"physics": 1.0, "linear": 1.0, "rawseries": 2.0, "tabpfn": 4.0}.items():
+    for fam, h in {"physics": 1.0, "linear": 1.0, "rawseries": 2.0, "tabpfn": 4.0, "catboost": 5.0}.items():
         (J / f"arm2__s0__d0__nall__{fam}.done").write_text(json.dumps({"seconds": 3600 * h}))
-    (J / "arm2__s0__d0__nall__gp.failed").write_text("boom")
+    (J / "arm2__s0__d0__nall__kernel.failed").write_text("boom")
     S = RE.main05b(10, tmp_path)
     lc = 10 * 2 * (16 + 32 + 62 + 100 + 200) / RE.HP_MAIN
     assert S.loc[1, "job hours"] == pytest.approx(20 * 8 + lc * (1 + 0.25 + 1 + 1), abs=0.2)
-    assert "Failed probe jobs (not in the estimate): gp" in (tmp_path / "runtime_estimate_05b.md").read_text()
+    txt = (tmp_path / "runtime_estimate_05b.md").read_text()                   # catboost probed but not run (A8): not counted
+    assert "Failed probe jobs (not in the estimate): kernel" in txt and "{'catboost': 5.0}" in txt

@@ -5,6 +5,7 @@ checkpoint names from the Hugging Face model card `Prior-Labs/tabpfn_3_5` on 202
 the one-line descriptions below are from the retrieved records and the standard description of these works.
 
 ## Model families (Task 1e)
+**A8 (2026-10-02):** GP regression and CatBoost are implemented and tested but not run in any 05b arm (DECISIONS.md); their entries below document the code only.
 - **Kernel ridge regression** (sklearn `KernelRidge`, RBF / Laplacian kernel, alpha and gamma tuned) and **Gaussian-process
   regression** (sklearn `GaussianProcessRegressor`: constant x ARD RBF + white-noise kernel on the standardised target, type-II
   maximum likelihood, 3 seeded restarts; 5–95 % predictive interval from the predictive sd, white noise included) [1, 2].

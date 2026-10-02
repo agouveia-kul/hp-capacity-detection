@@ -22,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd  # noqa: E402
+import yaml  # noqa: E402
 
 from paperb import ROOT  # noqa: E402
 
@@ -94,6 +95,11 @@ def main05b(workers, out=ROOT / "results" / "iter05b_data_limit"):
     failed = sorted(f.name.split("__")[-1][:-len(".failed")] for f in J.glob("arm2__s0__d0__nall__*.failed"))
     if not fam:
         raise SystemExit(f"no probe job in {J}: run the queue with configs/iter05b_probe.yaml first")
+    q = yaml.safe_load((ROOT / "configs" / "iter05b_stage1.yaml").read_text())
+    run = set(next(a for a in q["arms"] if a["name"] == "arm2")["families"])
+    dropped = {k: round(v, 2) for k, v in fam.items() if k not in run}  # A8: probed, not run in stage 1
+    fam = {k: v for k, v in fam.items() if k in run}
+    failed = [f for f in failed if f in run]
     seed = sum(fam.values())                                            # job-hours of one full-size GB-EoH seed (arm 2)
     frac = {k: 1.0 if k == "physics" else 0.5 if k == "rawseries" else 0.25 for k in fam}
     lc_seeds = 10 * 2 * (16 + 32 + 62 + 100 + 200) / HP_MAIN           # arm 1 in full-size seeds at arm 2's specs
@@ -114,7 +120,8 @@ def main05b(workers, out=ROOT / "results" / "iter05b_data_limit"):
     md = lambda d: "\n".join(["| " + " | ".join(map(str, d.columns)) + " |", "|" + "---|" * d.shape[1]] + ["| " + " | ".join(map(str, r)) + " |" for r in d.itertuples(index=False)])  # noqa: E731
     txt = ["# 05b runtime estimate from the 05b timing probe\n",
            f"Probe: arm 2 (GB-EoH main, full v1.1 grid, every model x anchors {{size, size_peak}} x feature sets {{netfit, both}} x {{direct-log, residual}}), seed 0, "
-           f"one queue job per family, pilots cached: {seed:.1f} job-hours for one full-size seed. Failed probe jobs (not in the estimate): {', '.join(failed) or 'none'}. "
+           f"one queue job per family, pilots cached: {seed:.1f} job-hours for one full-size seed of the families stage 1 runs. Failed probe jobs (not in the estimate): {', '.join(failed) or 'none'}. "
+           f"Probed but not run in stage 1 (A8), job-hours per seed: {dropped or 'none'}. "
            f"B* = {B_STAR} x GB-EoH per seed (measured in 05a D5 on the 05a families; not re-measured for the new models).\n", md(F), "",
            f"## Arms at {workers} workers\n", md(R), "", md(S.reset_index()), "",
            f"Stage 1 (arms 1 + 2): {S.loc[1, 'wall h']:.0f} h wall = {S.loc[1, 'nights']:.1f} nights or {S.loc[1, 'continuous days']:.1f} continuous days; "

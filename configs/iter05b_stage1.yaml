@@ -1,7 +1,9 @@
 # 05b stage 1 queue (scripts/paperb/run_queue.py; schedule with scripts/schedule_overnight.ps1, run by Alex): Arm 1 -> Arm 2.
 # A job is one (arm, seed, n, draw, queue family); queue families split the five model families into jobs of similar size, and the
-# tables map every model back to its family (lc_fit.FAMILY_OF): linear; kernel = kernel + gp; trees = trees + catboost;
+# tables map every model back to its family (lc_fit.FAMILY_OF): linear; kernel = SVR + Kernel Ridge; trees = XGBoost + RF + ET;
 # neural = neural + tabpfn; raw-series = rawseries. Every model runs direct-log and residual.
+# A8 (DECISIONS.md 2026-10-02): CatBoost and GP are not run in 05b (code and tests kept): CatBoost ~ XGBoost without categorical
+# features, GP's point prediction ~ Kernel Ridge (RBF); they were 46 % of the probe's stage-1 cost.
 exp_id: iter05b_stage1
 out_dir: results/iter05b_data_limit/stage1
 workers: 10
@@ -10,13 +12,11 @@ families:
   linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
   trees: {models: [XGBoost, RandomForest, ExtraTrees], residual_models: [XGBoost, RandomForest, ExtraTrees]}
   kernel: {models: [SVR, KernelRidge], residual_models: [SVR, KernelRidge]}
-  catboost: {models: [CatBoost], residual_models: [CatBoost]}
   neural: {models: [FFNN], residual_models: [FFNN]}
   rawseries: {models: [CNN], residual_models: [CNN]}
   tabpfn: {models: [TabPFN], residual_models: [TabPFN], max_concurrent: 3}     # ~1 GB of weights per process
-  gp: {models: [GP], residual_models: [GP]}
 arms:
   - {name: arm1, config: configs/iter05b_arm1.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], n: [16, 32, 62, 100, 200], draws: [0, 1],
-     families: [physics, linear, trees, kernel, catboost, neural, rawseries, tabpfn, gp]}
+     families: [physics, linear, trees, kernel, neural, rawseries, tabpfn]}
   - {name: arm2, config: configs/iter05b_arm2.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-     families: [physics, linear, trees, kernel, catboost, neural, rawseries, tabpfn, gp]}
+     families: [physics, linear, trees, kernel, neural, rawseries, tabpfn]}
