@@ -42,12 +42,13 @@ from paperb.models_rawseries import CNN_SPACE, RAW_PREFIX
 
 ANCHOR_COLS = {"none": [], "size": ["size"], "size_peak": ["size", "peak"]}
 MAX_EPOCHS, PATIENCE, XGB_ES_ROUNDS = 500, 40, 25
-SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE}          # per-process; set by configure() (02b runner)
+SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE, "device": "cpu"}   # per-process; set by configure() (02b runner)
 
 
-def configure(xgb_n_jobs=-1, patience=PATIENCE):
-    """XGBoost thread cap per worker and FFNN early-stopping patience (protocol default 40)."""
-    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience))
+def configure(xgb_n_jobs=-1, patience=PATIENCE, device="cpu"):
+    """XGBoost thread cap per worker, FFNN early-stopping patience (protocol default 40) and the torch device of the CNN and
+    TabPFN ("cpu" or "cuda"; 05b: one device per family for a whole stage, recorded in each job's .done marker)."""
+    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience), device=str(device))
 
 SPACES = {                                                  # legacy search ranges (benchmark_capacity_models.py)
     "XGBoost": {"eta": hp.uniform("eta", 0.01, 0.3), "max_depth": hp.quniform("max_depth", 3, 10, 1),
@@ -129,11 +130,11 @@ def tabpfn_info():
 
 
 def tabpfn_regressor(seed, n_estimators=None):
-    """TabPFN-3.5 regressor from the local checkpoint, CPU, offline (no download, no hub call), seeded. The CPU guard of tabpfn
-    (> 1000 rows) is a speed warning, not a pre-training limit, and is lifted by TABPFN_ALLOW_CPU_LARGE_DATASET."""
+    """TabPFN-3.5 regressor from the local checkpoint, offline (no download, no hub call), seeded, on SETTINGS["device"]. The CPU
+    guard of tabpfn (> 1000 rows) is a speed warning, not a pre-training limit, and is lifted by TABPFN_ALLOW_CPU_LARGE_DATASET."""
     os.environ.update(HF_HUB_OFFLINE="1", TABPFN_ALLOW_CPU_LARGE_DATASET="1")
     from tabpfn import TabPFNRegressor
-    return TabPFNRegressor(model_path=str(tabpfn_checkpoint()), device="cpu", random_state=int(seed),
+    return TabPFNRegressor(model_path=str(tabpfn_checkpoint()), device=SETTINGS["device"], random_state=int(seed),
                            n_estimators="auto" if n_estimators is None else int(n_estimators), n_preprocessing_jobs=1)
 
 
@@ -215,7 +216,7 @@ class Model:
             return None
         if n == "CNN":
             from paperb.models_rawseries import RawSeriesCNN
-            self.m = RawSeriesCNN(p, self.seed, SETTINGS["xgb_n_jobs"])
+            self.m = RawSeriesCNN(p, self.seed, SETTINGS["xgb_n_jobs"], SETTINGS["device"])
             return self.m.fit(Xs, ys, n_iter, es)
         if n == "TabPFN":
             import torch

@@ -26,8 +26,20 @@ def raw_columns(n_days=RAW_DAYS):
 
 
 class RawSeriesCNN:
-    def __init__(self, params, seed, threads=1):
-        self.p, self.seed, self.threads = dict(params), int(seed), max(1, int(threads))
+    def __init__(self, params, seed, threads=1, device="cpu"):
+        self.p, self.seed, self.threads, self.device = dict(params), int(seed), max(1, int(threads)), str(device)
+
+    def _torch(self):
+        """torch, seeded and deterministic on self.device (CUDA needs CUBLAS_WORKSPACE_CONFIG for deterministic matmuls)."""
+        import os
+        if self.device.startswith("cuda"):
+            os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        import torch
+        torch.manual_seed(self.seed)
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.benchmark = False
+        torch.set_num_threads(self.threads)
+        return torch
 
     def _arrays(self, X, fit=False):
         """DataFrame -> (series [n, 2, days], anchors [n, k]) with the training-row statistics."""
@@ -68,23 +80,22 @@ class RawSeriesCNN:
     def fit(self, X, y, n_iter=None, es=None):
         """Train; with `es` = (X_es, y_es) and no n_iter: early-stop and return the best epoch count (the model is then
         refit for that many epochs, deterministically); otherwise train `n_iter` (or MAX_EPOCHS) epochs and return None."""
-        import torch
-        torch.manual_seed(self.seed)
-        torch.use_deterministic_algorithms(True)
-        torch.set_num_threads(self.threads)
+        torch = self._torch()
+        dev = torch.device(self.device)
         S, A = self._arrays(X, fit=True)
-        t = [torch.from_numpy(S), torch.from_numpy(A), torch.from_numpy(np.asarray(y, np.float32))]
-        self.net = self._net(A.shape[1])
+        t = [torch.from_numpy(S).to(dev), torch.from_numpy(A).to(dev), torch.from_numpy(np.asarray(y, np.float32)).to(dev)]
+        self.net = self._net(A.shape[1]).to(dev)
         self.n_params = int(sum(q.numel() for q in self.net.parameters()))
         opt = torch.optim.Adam(self.net.parameters(), lr=float(self.p["lr"]), weight_decay=float(self.p["weight_decay"]))
         gen = torch.Generator().manual_seed(self.seed)
         if es is not None and n_iter is None:
             Se, Ae = self._arrays(es[0])
-            te = (torch.from_numpy(Se), torch.from_numpy(Ae), torch.from_numpy(np.asarray(es[1], np.float32)))
+            te = (torch.from_numpy(Se).to(dev), torch.from_numpy(Ae).to(dev), torch.from_numpy(np.asarray(es[1], np.float32)).to(dev))
         best, best_ep = np.inf, 1
         for ep in range(1, (n_iter or MAX_EPOCHS) + 1):
             self.net.train()
-            for b in torch.randperm(len(t[2]), generator=gen).split(BATCH):
+            for b in torch.randperm(len(t[2]), generator=gen).split(BATCH):     # batch order drawn on the CPU (seeded)
+                b = b.to(dev)
                 opt.zero_grad()
                 torch.mean((self.net(t[0][b], t[1][b]) - t[2][b]) ** 2).backward()
                 opt.step()
@@ -103,7 +114,8 @@ class RawSeriesCNN:
 
     def predict(self, X):
         import torch
+        dev = torch.device(self.device)
         S, A = self._arrays(X)
         self.net.eval()
         with torch.no_grad():
-            return self.net(torch.from_numpy(S), torch.from_numpy(A)).numpy().astype(float)
+            return self.net(torch.from_numpy(S).to(dev), torch.from_numpy(A).to(dev)).cpu().numpy().astype(float)

@@ -23,6 +23,10 @@ substations of the full design are evaluated, every spec of the family is scored
 disjoint jobs (same commit, environment and data/_paperb caches on each). Status and the merge still cover every job: after
 copying the other machines' jobs/ files into this out_dir, a relaunch finds nothing to do and merges. Each .done marker
 records the host that ran the job.
+`--families a,b` runs only those queue families (e.g. the GPU families on a machine with a GPU); a family's `set: [device=cuda]`
+moves its CNN / TabPFN to the GPU, and each .done marker records the device. If a worker dies (e.g. out of memory), the jobs
+running at that moment are marked failed with that reason, a new worker pool is started and the queue goes on
+(`--retry-failed` reruns them later).
 """
 import os
 import platform
@@ -35,6 +39,7 @@ except ImportError:
     pass
 import argparse  # noqa: E402
 import concurrent.futures as cf  # noqa: E402
+from concurrent.futures.process import BrokenProcessPool  # noqa: E402
 import importlib  # noqa: E402
 import json  # noqa: E402
 import multiprocessing as mp  # noqa: E402
@@ -113,7 +118,8 @@ def run_job(q, job, threads, stage):
             f = stage / f"{job['id']}.{k}.parquet"
             d.assign(arm=job["arm"], family=job["family"]).astype({c: str for c in d.columns if d[c].dtype == object}).to_parquet(f)
             files.append(f)
-    return job, files, {"seconds": time.time() - t0, "start": start, "end": datetime.now().isoformat(timespec="seconds"), "host": platform.node()}
+    return job, files, {"seconds": time.time() - t0, "start": start, "end": datetime.now().isoformat(timespec="seconds"), "host": platform.node(),
+                        "device": cfg.get("device", "cpu")}
 
 
 def shard(all_jobs, spec):
@@ -189,6 +195,7 @@ def main(argv=None):
     ap.add_argument("--retry-failed", action="store_true")
     ap.add_argument("--arms", default=None, help="comma-separated arm names: run only these arms (e.g. the timing probe)")
     ap.add_argument("--shard", default=None, help="I/N: run only jobs at positions I mod N (several machines, disjoint jobs)")
+    ap.add_argument("--families", default=None, help="comma-separated queue families: run only these (e.g. rawseries,tabpfn on a GPU)")
     a = ap.parse_args(argv)
     q = yaml.safe_load(open(ROOT / a.config))
     q["workers"] = a.workers or q.get("workers", 1)
@@ -210,11 +217,14 @@ def main(argv=None):
     if a.retry_failed:
         for f in (out / "jobs").glob("*.failed"):
             f.unlink()
-    todo = [j for j in shard(all_jobs, a.shard) if not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
+    fams = set(a.families.split(",")) if a.families else None
+    if fams and fams - set(q["families"]):
+        raise ValueError(f"--families: unknown {sorted(fams - set(q['families']))}")
+    todo = [j for j in shard(all_jobs, a.shard) if (fams is None or j["family"] in fams) and not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
     threads = max(1, (os.cpu_count() or 1) // q["workers"])
     t_start, t_stop = time.time(), stop_time(a.stop_at)
     print(f"[{datetime.now():%H:%M:%S}] queue {q['exp_id']}: {len(todo)} of {len(all_jobs)} jobs to run, {q['workers']} workers x "
-          f"{threads} threads, stop at {t_stop}, shard {a.shard or 'all'}", flush=True)
+          f"{threads} threads, stop at {t_stop}, shard {a.shard or 'all'}, families {a.families or 'all'}", flush=True)
 
     def finish(job, files, info, err=None):
         J = out / "jobs"
@@ -253,12 +263,29 @@ def main(argv=None):
                 if not running:
                     break
                 fin, _ = cf.wait(running, return_when=cf.FIRST_COMPLETED)
+                broken = False
                 for fut in fin:
                     job = running.pop(fut)
                     try:
                         finish(*fut.result())
+                    except BrokenProcessPool:                           # a worker died (e.g. out of memory): the pool is unusable
+                        broken = True
+                        finish(job, [], None, "worker process died (BrokenProcessPool), likely out of memory\n" + traceback.format_exc())
                     except Exception:
                         finish(job, [], None, traceback.format_exc())
+                if broken:                                              # jobs still in the dead pool: keep finished ones, fail the rest
+                    cf.wait(running, timeout=60)
+                    for fut, job in list(running.items()):
+                        try:
+                            if not fut.done():
+                                raise BrokenProcessPool("still running when the pool died")
+                            finish(*fut.result())
+                        except Exception:
+                            finish(job, [], None, "worker pool died while this job ran (BrokenProcessPool), likely out of memory\n" + traceback.format_exc())
+                    running.clear()
+                    ex.shutdown(wait=False, cancel_futures=True)
+                    ex = cf.ProcessPoolExecutor(q["workers"], mp_context=mp.get_context("spawn"), max_tasks_per_child=1)
+                    print(f"[{datetime.now():%H:%M:%S}] worker pool restarted", flush=True)
             ex.shutdown()
     finally:
         keep_awake(False)

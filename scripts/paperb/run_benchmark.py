@@ -243,7 +243,7 @@ def at_bound_rows(seed, target, tab, spec, n_hp):
 
 def run_seed(cfg, seed):
     """One split seed end to end -> dict of frames (runs in a worker process)."""
-    configure(cfg["parallel"]["threads"], cfg.get("ffnn", {}).get("patience", 40))
+    configure(cfg["parallel"]["threads"], cfg.get("ffnn", {}).get("patience", 40), cfg.get("device", "cpu"))
     lines, t0 = [], time.time()
 
     def log(msg):

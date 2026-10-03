@@ -12,6 +12,7 @@
   Pausing OneDrive sync overnight is advised. -DryRun prints what would be registered and changes nothing.
   -Continuous (05b, A6) omits the morning stop: the queue also runs in the daytime, at below-normal priority, until no job remains.
   -Shard I/N (05b) runs only the jobs at positions I mod N, so several machines can share one queue (see run_queue.py).
+  -Families a,b (05b) runs only those queue families, e.g. rawseries,tabpfn on the GPU machine.
 
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter05a_overnight.yaml -StopAt 07:30
@@ -24,6 +25,7 @@ param(
     [string]$StopAt = "",
     [int]$Workers = 0,
     [string]$Shard = "",
+    [string]$Families = "",
     [switch]$Continuous,
     [switch]$DryRun
 )
@@ -39,6 +41,7 @@ $QueueArgs = "--config $Config"
 if ($StopAt -and -not $Continuous) { $QueueArgs += " --stop-at $StopAt" }
 if ($Workers -gt 0) { $QueueArgs += " --workers $Workers" }
 if ($Shard) { $QueueArgs += " --shard $Shard" }
+if ($Families) { $QueueArgs += " --families $Families" }
 $Launch = Join-Path $OutDir "launch.cmd"
 $Body = "@echo off`r`ncd /d `"$Repo`"`r`nstart `"paperb-$ExpId`" /belownormal /wait /b `"$Repo\.venv\Scripts\python.exe`" scripts\paperb\run_queue.py $QueueArgs >> `"$OutDir\log.txt`" 2>&1`r`n"
 

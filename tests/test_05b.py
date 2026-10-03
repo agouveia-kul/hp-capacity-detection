@@ -465,3 +465,49 @@ def test_stage1_report_applies_the_preregistered_rule(tmp_path):
     assert set(D["phys"]) == {"slope_base"}                                     # oracle / HDH sentinels never chosen
     assert not D["winner"].str.startswith("Ridge").any()                        # selection by inner CV only
     assert (tmp_path / "report" / "fig_learning_curve.png").exists() and "† = filler-variability-limited" in (tmp_path / "report" / "stage1_report.md").read_text()
+
+
+def test_gpu_queue_has_the_same_jobs_and_moves_only_cnn_and_tabpfn():
+    import yaml as _y
+    q, g = (_y.safe_load((ROOT / f"configs/{f}.yaml").read_text()) for f in ("iter05b_stage1", "iter05b_stage1_gpu"))
+    assert [j["id"] for j in RQ.jobs(q)] == [j["id"] for j in RQ.jobs(g)] and (q["exp_id"], q["out_dir"]) == (g["exp_id"], g["out_dir"])
+    js = RQ.jobs(g)
+    for fam in g["families"]:
+        cfg, _ = RQ.job_config(g, g["arms"][1], next(j for j in js if j["family"] == fam and j["arm"] == "arm2"), 2)
+        assert cfg.get("device", "cpu") == ("cuda" if fam in ("rawseries", "tabpfn") else "cpu")
+
+
+def test_cnn_cpu_device_path_is_deterministic():
+    from paperb.models_rawseries import RawSeriesCNN
+    X, y = toy_xy(120, seed=4, cnn=True)
+    p = NEW["CNN"]
+    a = RawSeriesCNN(p, 7, 1, "cpu"); a.fit(X, np.log(y), n_iter=3)
+    b = RawSeriesCNN(p, 7, 1, "cpu"); b.fit(X, np.log(y), n_iter=3)
+    assert np.array_equal(a.predict(X), b.predict(X))
+
+
+def _cuda():
+    try:
+        import torch
+        return torch.cuda.is_available()
+    except ImportError:
+        return False
+
+
+@pytest.mark.skipif(not _cuda(), reason="no CUDA device")
+def test_cnn_and_tabpfn_run_on_cuda():
+    """GPU smoke test (05b GPU machine): the CNN is deterministic on CUDA and close to its CPU result; TabPFN fits on CUDA."""
+    from paperb.models_rawseries import RawSeriesCNN
+    X, y = toy_xy(120, seed=4, cnn=True)
+    runs = []
+    for dev in ("cuda", "cuda", "cpu"):
+        m = RawSeriesCNN(NEW["CNN"], 7, 1, dev)
+        m.fit(X, np.log(y), n_iter=3)
+        runs.append(m.predict(X))
+    assert np.array_equal(runs[0], runs[1]) and np.allclose(runs[0], runs[2], atol=1e-2)
+    if (Path(os.environ.get("TABPFN_MODEL_CACHE_DIR", "-")) / T.TABPFN_CHECKPOINT).is_file():
+        T.configure(1, device="cuda")
+        Xt, yt = toy_xy(200, seed=5)
+        p = T.tabpfn_regressor(0).fit(Xt.fillna(0), np.log(yt)).predict(Xt.fillna(0))
+        T.configure(1, device="cpu")
+        assert np.isfinite(p).all()
