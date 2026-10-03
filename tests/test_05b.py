@@ -420,3 +420,48 @@ def test_queue_shards_are_disjoint_and_cover_every_job():
     assert max(len(p) for p in parts) - min(len(p) for p in parts) <= 1
     with pytest.raises(ValueError):
         RQ.shard(js, "3/3")
+
+
+# ------------------------------------------------------------------ Stage 1 report: the pre-registered rule on synthetic results
+def _fake_stage1(root, rng):
+    scopes = ["all", "pbin<=15", "pbin15-35", "pbin35-65", "pbin>65"]
+    curves = {("slope_base", "none", "-", "-", "-"): lambda n: 25.0, ("paperA_corr", "none", "-", "-", "-"): lambda n: 26.0,
+              ("hdh", "none", "-", "-", "-"): lambda n: 5.0, ("oracle_O2", "none", "-", "-", "-"): lambda n: 0.1,  # sentinels: never "best physics"
+              ("Lasso", "size", "netfit", "direct", "log"): lambda n: 15.0 + 60.0 * n ** -0.5,             # data-limited, beats physics
+              ("Ridge", "size", "netfit", "direct", "log"): lambda n: 3.0,                                 # test-best, inner-CV worst: never chosen
+              ("XGBoost", "size", "netfit", "direct", "log"): lambda n: 27.0,                              # flat, above physics
+              ("CNN", "size", "raw", "direct", "log"): lambda n: 30.0}
+    inner = {"Ridge": 99.0}
+
+    def rows(seed, draw, n, extra):
+        out = []
+        for cfg, f in curves.items():
+            w = f(n) + rng.normal(0, 0.05)
+            spec = dict(zip(["method", "anchor", "feature_set", "mode", "target_transform"], cfg))
+            for s in scopes:
+                out.append({"split_seed": seed, "target": "HP_Peak", **spec, "cell": s, "metric": "wape", "value": w, **extra})
+            if cfg[0] in ("Lasso", "Ridge", "XGBoost", "CNN"):
+                out += [{"split_seed": seed, "target": "HP_Peak", **spec, "cell": "all", "metric": m, "value": v, **extra}
+                        for m, v in (("wape_inner", inner.get(cfg[0], w + 1)), ("wape_train", w - 2))]
+        return out
+    a1 = [r for s in range(10) for d in (0, 1) for n in (16, 32, 62, 100, 200) for r in rows(s, d, n, {"n_train_hp": n, "lc_draw": d})]
+    a2 = [r for s in range(20) for r in rows(s, 0, 292, {})]
+    for arm, data in (("arm1", a1), ("arm2", a2)):
+        (root / arm).mkdir(parents=True)
+    pd.DataFrame(a1).to_csv(root / "arm1" / "metrics_lc.csv", index=False)
+    pd.DataFrame(a2).to_csv(root / "arm2" / "metrics.csv", index=False)
+    pd.DataFrame([{"split_seed": s, "n": "main", "pilot": "all", "n_hh": 292} for s in range(20)]).to_csv(root / "arm2" / "pilots.csv", index=False)
+
+
+def test_stage1_report_applies_the_preregistered_rule(tmp_path):
+    from paperb import iter05b_report as R
+    _fake_stage1(tmp_path, np.random.default_rng(3))
+    V, F = R.main(tmp_path)
+    v = V.set_index(["family", "scope"])["verdict"]
+    assert (v.xs("linear", level="family") == "D").all()
+    assert (v.xs("trees", level="family") == "I or features").all() and (v.xs("rawseries", level="family") == "I or features").all()
+    assert not any(F.values())
+    D = pd.read_csv(tmp_path / "report" / "lc_paired.csv")
+    assert set(D["phys"]) == {"slope_base"}                                     # oracle / HDH sentinels never chosen
+    assert not D["winner"].str.startswith("Ridge").any()                        # selection by inner CV only
+    assert (tmp_path / "report" / "fig_learning_curve.png").exists() and "† = filler-variability-limited" in (tmp_path / "report" / "stage1_report.md").read_text()
