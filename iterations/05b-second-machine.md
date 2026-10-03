@@ -40,7 +40,13 @@ After the first jobs finish, check `results\iter05b_data_limit\stage1\progress.j
 `progress.json` on this machine counts machine A's jobs as remaining. Count only the `rawseries` and `tabpfn` jobs (`jobs\*__rawseries.done`, `jobs\*__tabpfn.done`).
 
 ## 5. Hand-back
-When this shard has no job left, Alex copies this machine's `results\iter05b_data_limit\stage1\jobs\` files (`*.parquet`, `*.done`, `*.failed`) into machine A's `jobs` folder, for example:
+**Decision A9 (2026-10-03):** the CNN and TabPFN families run entirely on this GPU, so this machine runs **all** their jobs, including the ones machine A already ran on CPU. Before merging, Alex moves machine A's CPU outputs of these two families out of its `jobs` folder:
+```powershell
+New-Item -ItemType Directory -Force results\iter05b_data_limit\stage1\jobs_cpu_archive | Out-Null
+Move-Item results\iter05b_data_limit\stage1\jobs\*__rawseries.* results\iter05b_data_limit\stage1\jobs_cpu_archive\
+Move-Item results\iter05b_data_limit\stage1\jobs\*__tabpfn.* results\iter05b_data_limit\stage1\jobs_cpu_archive\
+```
+When this machine has no job left, Alex copies this machine's `results\iter05b_data_limit\stage1\jobs\` files (`*.parquet`, `*.done`, `*.failed`) into machine A's `jobs` folder, for example:
 `robocopy <this repo>\results\iter05b_data_limit\stage1\jobs <machine A repo>\results\iter05b_data_limit\stage1\jobs *.parquet *.done *.failed /XO`
 Machine A then runs the queue once more, finds nothing left and writes the merged CSVs. Each `.done` file records the host that ran the job.
 
