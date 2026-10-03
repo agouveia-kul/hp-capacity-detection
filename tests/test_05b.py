@@ -394,3 +394,29 @@ def test_runtime_estimate_05b_from_probe_markers(tmp_path):
     assert S.loc[1, "job hours"] == pytest.approx(20 * 8 + lc * (1 + 0.25 + 1 + 1), abs=0.2)
     txt = (tmp_path / "runtime_estimate_05b.md").read_text()                   # catboost probed but not run (A8): not counted
     assert "Failed probe jobs (not in the estimate): kernel" in txt and "{'catboost': 5.0}" in txt
+
+
+# ------------------------------------------------------------------ memory and sharding (Stage 1 runtime)
+def test_day_sum_streaming_is_bitwise_identical():
+    from paperb.fill_analog import AnalogFill
+    rng = np.random.default_rng(1)
+    S = rng.gamma(1.0, 0.3, (300, 40, 48)).astype(np.float32)
+    hh = [f"L{i}" for i in range(300)]
+    af = AnalogFill(S, hh, pd.DataFrame({"pos": [0]}), {}, None, None, {})
+    for members in (["L7"], ["L3", "L250", "L1"], list(rng.choice(hh, 200, replace=False))):
+        old = np.asarray(S[sorted(af.pos[h] for h in members)], np.float64).sum(axis=0)
+        assert np.array_equal(af.day_sum(members), old)
+    assert np.array_equal(af.day_sum([]), np.zeros((40, 48)))
+
+
+def test_queue_shards_are_disjoint_and_cover_every_job():
+    import yaml as _y
+    q = _y.safe_load((ROOT / "configs/iter05b_stage1.yaml").read_text())
+    js = RQ.jobs(q)
+    parts = [RQ.shard(js, f"{i}/3") for i in range(3)]
+    ids = [{j["id"] for j in p} for p in parts]
+    assert not (ids[0] & ids[1]) and not (ids[0] & ids[2]) and not (ids[1] & ids[2])
+    assert set().union(*ids) == {j["id"] for j in js} and RQ.shard(js, None) == js
+    assert max(len(p) for p in parts) - min(len(p) for p in parts) <= 1
+    with pytest.raises(ValueError):
+        RQ.shard(js, "3/3")

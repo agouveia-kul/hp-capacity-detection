@@ -17,9 +17,15 @@ exit; once no job remains, every arm's job frames are merged into <out_dir>/<arm
 run_benchmark.py writes it). 05b: a job with n != all runs one learning-curve design (n, draw) of the arm (`lc_only`: only the test
 substations of the full design are evaluated, every spec of the family is scored into metrics_lc.csv); n = all has one draw.
 
-    python scripts/paperb/run_queue.py --config configs/iter05a_overnight.yaml [--workers 4] [--stop-at 07:30] [--retry-failed] [--arms name,name]
+    python scripts/paperb/run_queue.py --config configs/iter05a_overnight.yaml [--workers 4] [--stop-at 07:30] [--retry-failed] [--arms name,name] [--shard I/N]
+
+05b: `--shard I/N` runs only the jobs whose position in the job list is I modulo N, so N machines can share one queue with
+disjoint jobs (same commit, environment and data/_paperb caches on each). Status and the merge still cover every job: after
+copying the other machines' jobs/ files into this out_dir, a relaunch finds nothing to do and merges. Each .done marker
+records the host that ran the job.
 """
 import os
+import platform
 
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):    # BLAS 1 thread (determinism), before numpy
     os.environ.setdefault(_v, "1")
@@ -107,7 +113,17 @@ def run_job(q, job, threads, stage):
             f = stage / f"{job['id']}.{k}.parquet"
             d.assign(arm=job["arm"], family=job["family"]).astype({c: str for c in d.columns if d[c].dtype == object}).to_parquet(f)
             files.append(f)
-    return job, files, {"seconds": time.time() - t0, "start": start, "end": datetime.now().isoformat(timespec="seconds")}
+    return job, files, {"seconds": time.time() - t0, "start": start, "end": datetime.now().isoformat(timespec="seconds"), "host": platform.node()}
+
+
+def shard(all_jobs, spec):
+    """Jobs of shard `spec` = "I/N" (positions I mod N of the fixed job list); every job if spec is None."""
+    if not spec:
+        return list(all_jobs)
+    i, n = (int(x) for x in spec.split("/"))
+    if not 0 <= i < n:
+        raise ValueError(f"--shard {spec}: need 0 <= I < N")
+    return [j for k, j in enumerate(all_jobs) if k % n == i]
 
 
 def keep_awake(on):
@@ -172,6 +188,7 @@ def main(argv=None):
     ap.add_argument("--stop-at", default=None, help="HH:MM: start no job after this time")
     ap.add_argument("--retry-failed", action="store_true")
     ap.add_argument("--arms", default=None, help="comma-separated arm names: run only these arms (e.g. the timing probe)")
+    ap.add_argument("--shard", default=None, help="I/N: run only jobs at positions I mod N (several machines, disjoint jobs)")
     a = ap.parse_args(argv)
     q = yaml.safe_load(open(ROOT / a.config))
     q["workers"] = a.workers or q.get("workers", 1)
@@ -193,11 +210,11 @@ def main(argv=None):
     if a.retry_failed:
         for f in (out / "jobs").glob("*.failed"):
             f.unlink()
-    todo = [j for j in all_jobs if not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
+    todo = [j for j in shard(all_jobs, a.shard) if not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
     threads = max(1, (os.cpu_count() or 1) // q["workers"])
     t_start, t_stop = time.time(), stop_time(a.stop_at)
     print(f"[{datetime.now():%H:%M:%S}] queue {q['exp_id']}: {len(todo)} of {len(all_jobs)} jobs to run, {q['workers']} workers x "
-          f"{threads} threads, stop at {t_stop}", flush=True)
+          f"{threads} threads, stop at {t_stop}, shard {a.shard or 'all'}", flush=True)
 
     def finish(job, files, info, err=None):
         J = out / "jobs"
