@@ -511,3 +511,21 @@ def test_cnn_and_tabpfn_run_on_cuda():
         p = T.tabpfn_regressor(0).fit(Xt.fillna(0), np.log(yt)).predict(Xt.fillna(0))
         T.configure(1, device="cpu")
         assert np.isfinite(p).all()
+
+
+def test_check_jobs_reports_missing_failed_and_wrong_device(tmp_path):
+    import json
+    import yaml as _y
+    from paperb import check_jobs as CJ
+    q = _y.safe_load((ROOT / "configs/iter05b_stage1_gpu.yaml").read_text())
+    js = [j for j in RQ.jobs(q) if j["family"] == "tabpfn"]
+    J = tmp_path / "jobs"
+    J.mkdir()
+    for k, j in enumerate(js[:-2]):
+        (J / f"{j['id']}.done").write_text(json.dumps({"seconds": 1, "device": "cpu" if k == 0 else "cuda", "host": "B"}))
+        (J / f"{j['id']}.lc.parquet").write_text("x")
+    (J / f"{js[-2]['id']}.failed").write_text("boom")
+    rows, problems = CJ.check(q, tmp_path, {"tabpfn"}, {"tabpfn": "cuda"})
+    assert sum(r["done"] for r in rows) == len(js) - 2 and sum(r["failed"] for r in rows) == 1 and sum(r["missing"] for r in rows) == 1
+    text = "\n".join(problems)
+    assert "1 failed" in text and "1 missing" in text and "1 device != cuda" in text
