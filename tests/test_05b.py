@@ -525,7 +525,12 @@ def test_check_jobs_reports_missing_failed_and_wrong_device(tmp_path):
         (J / f"{j['id']}.done").write_text(json.dumps({"seconds": 1, "device": "cpu" if k == 0 else "cuda", "host": "B"}))
         (J / f"{j['id']}.lc.parquet").write_text("x")
     (J / f"{js[-2]['id']}.failed").write_text("boom")
+    skip, lost = js[1]["id"], js[2]["id"]                      # done without frames: inner CV infeasible (recorded) vs unexplained
+    for i in (skip, lost):
+        (J / f"{i}.lc.parquet").unlink()
+    pd.DataFrame({"reason": ["inner CV infeasible: substations in 2 of 4 folds"]}).to_parquet(J / f"{skip[:-len('tabpfn')]}physics.lc_dropped.parquet")
     rows, problems = CJ.check(q, tmp_path, {"tabpfn"}, {"tabpfn": "cuda"})
+    assert sum(r["skipped_inner_cv"] for r in rows) == 1 and sum(r["done_without_frames"] for r in rows) == 1
     assert sum(r["done"] for r in rows) == len(js) - 2 and sum(r["failed"] for r in rows) == 1 and sum(r["missing"] for r in rows) == 1
     text = "\n".join(problems)
     assert "1 failed" in text and "1 missing" in text and "1 device != cuda" in text
