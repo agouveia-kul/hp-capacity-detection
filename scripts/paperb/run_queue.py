@@ -35,7 +35,7 @@ for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):    # B
     os.environ.setdefault(_v, "1")
 try:                                                                  # 05b: torch before pandas / pyarrow (pyarrow 15 bundles an old
     import torch  # noqa: F401                                        # msvcp140.dll that breaks torch's c10.dll if it is loaded first)
-except ImportError:
+except (ImportError, OSError):                                       # no torch, or its DLLs failed: only CNN / TabPFN jobs need it
     pass
 import argparse  # noqa: E402
 import concurrent.futures as cf  # noqa: E402

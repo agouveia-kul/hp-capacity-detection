@@ -13,11 +13,10 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from paperb.run_queue import FRAMES, jobs  # noqa: E402  (first: it loads torch before pandas / pyarrow, see run_queue.py)
+from paperb import ROOT  # noqa: E402
 import pandas as pd  # noqa: E402
 import yaml  # noqa: E402
-
-from paperb import ROOT  # noqa: E402
-from paperb.run_queue import FRAMES, jobs  # noqa: E402
 
 
 def inner_cv_infeasible(J, job_id, fam):
