@@ -534,3 +534,12 @@ def test_check_jobs_reports_missing_failed_and_wrong_device(tmp_path):
     assert sum(r["done"] for r in rows) == len(js) - 2 and sum(r["failed"] for r in rows) == 1 and sum(r["missing"] for r in rows) == 1
     text = "\n".join(problems)
     assert "1 failed" in text and "1 missing" in text and "1 device != cuda" in text
+
+
+def test_wall_times_busy_hours_is_the_union_of_job_intervals():
+    from paperb.wall_times import busy_hours
+    t = pd.Timestamp
+    iv = [(t("2026-10-01 22:00"), t("2026-10-02 01:00")), (t("2026-10-02 00:00"), t("2026-10-02 02:00")),   # overlap -> 4 h
+          (t("2026-10-02 10:00"), t("2026-10-02 10:30"))]                                                   # gap not counted
+    assert busy_hours(iv) == pytest.approx(4.5)
+    assert busy_hours([]) == 0
