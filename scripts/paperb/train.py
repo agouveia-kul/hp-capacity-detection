@@ -263,7 +263,7 @@ class Model:
 
 
 def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None,
-                    eval_on=None):
+                    eval_on=None, fixed=None):
     """Seeded hyperopt over household-grouped CV; returns (final model, meta dict, Trials).
 
     X, y, groups: inner substations and their fold ids. The final model is refit on (X_final, y_final)
@@ -271,8 +271,14 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
     SPACES[model_name] (e.g. RESIDUAL_SPACES). `eval_on = (y_kw, p_hat)` (arrays aligned with X; 03b) scores the
     out-of-fold predictions as WAPE on the kW scale: y_hat = prediction (p_hat None, direct models) or
     p_hat * exp(prediction) (residual models); meta['cv_wape'] (%, pooled over the folds) is the model-selection
-    statistic of the learning curve -- inner CV only, never test.
+    statistic of the learning curve -- inner CV only, never test. 05b A10: `fixed = (params, best_iter)` skips the search and the
+    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0).
     """
+    if fixed is not None:
+        params, best_iter = dict(fixed[0]), fixed[1]
+        final = Model(model_name, params, seed, opts)
+        final.fit(pd.DataFrame(X if X_final is None else X_final), y if y_final is None else y_final, n_iter=best_iter)
+        return final, {"params": params, "cv_mse": None, "cv_wape": None, "best_iter": best_iter, "n_evals": 0}, None
     X, y, groups = pd.DataFrame(X), np.asarray(y, float), np.asarray(groups)
     folds = sorted(set(groups))
     iterative = model_name in ITERATIVE

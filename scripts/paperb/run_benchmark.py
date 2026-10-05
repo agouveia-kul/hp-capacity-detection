@@ -146,12 +146,20 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
     ev_all, ev_by = cfg["cv"]["hyperopt"]["max_evals"], cfg["cv"]["hyperopt"].get("max_evals_by_model", {})
     pa_target = cfg.get("paperA", {}).get("target", "HP_Peak")
     yv, out, extra, Xc, bvs = y.to_numpy(float), {}, {}, {}, {}
+    refit, fitted = cfg.get("refit") or {}, {}                             # 05b A10: frozen (params, best_iter) per spec, persisted models
 
     def tuned(spec, name, X, yt, m_in, m_tr, opts=None, space=None, eval_on=None):
         t0, ev = time.time(), ev_by.get(name, ev_all)
         y_kw, p_base = eval_on if eval_on is not None else (yv, None)              # direct models: yt is y itself
+        fx = refit.get("fixed", {}).get("|".join(spec))
         m, meta, _ = tune_grouped_cv(name, X[m_in], yt[m_in], tab.loc[m_in, "fold"], seed, ev, X[m_tr], yt[m_tr], opts, space,
-                                     (y_kw[m_in], None if p_base is None else p_base[m_in]))
+                                     (y_kw[m_in], None if p_base is None else p_base[m_in]),
+                                     None if fx is None else (fx["params"], fx["best_iter"]))
+        if refit.get("dir"):
+            fitted[spec] = {"model": m, "meta": meta, "X_te": X[te], "X_tr": X[m_tr], "y_tr": yt[m_tr]}
+        if fx is not None:
+            log(f"  {y.name} {'/'.join(spec)}: refit with fixed params {meta['params']}, best_iter {meta['best_iter']}, {time.time() - t0:.1f}s")
+            return m.predict(X[te])
         to_kw = lambda pr, mask: pr if p_base is None else p_base[mask] * np.exp(pr)            # noqa: E731  residual: z -> kW
         p_tr = to_kw(m.predict(X[m_tr]), m_tr)
         bv = {"wape_train": 100 * float(np.abs(p_tr - y_kw[m_tr]).sum() / y_kw[m_tr].sum()), "wape_inner": meta["cv_wape"],
@@ -200,6 +208,12 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
                 p, valid = pa.get("cf", {}).get("paperA_sh_mh", pa["paperA_sh_mh"][:2])      # cross-fitted (03b Task 3)
                 out[spec], c = residual_predict(lambda *a, **k: tuned(spec, *a, **k), method, X, yv, p, valid, fit_in, fit_tr, te)
                 extra[spec] = {"n_invalid": int((~valid[te]).sum()), **c}
+                if spec in fitted:
+                    fitted[spec].update(p_te=np.asarray(p, float)[te], valid_te=np.asarray(valid, bool)[te])
+    if refit.get("dir"):                                                # 05b A10: persist each refit model with its test design
+        from paperb.persist import save_model
+        for spec, f in fitted.items():
+            save_model(Path(refit["dir"]), seed, spec, f, tab.index[te], out[spec], refit.get("device", cfg.get("device", "cpu")))
     for spec, bv in bvs.items():                                        # 05b Task 1b: train / inner-CV WAPE next to the test metrics
         extra[spec] = {**extra.get(spec, {}), **bv}
     return out, extra
@@ -358,7 +372,8 @@ def run_seed(cfg, seed):
             preds.append(pd.DataFrame({"sub_id": te, "target": target, **dict(zip(SPEC_COLS, spec)),
                                        "y": tab.loc[te, target].to_numpy(), "pred": pr, "split_seed": seed,
                                        "size": tab.loc[te, "size"].to_numpy(), "p": tab.loc[te, "p"].to_numpy()}))
-        score(target, tab, predictions(cfg, tab, F, tab[target], seed, timing, log, pa), members, keep)
+        spl_refit = [tuple(s.split("|")) for s in cfg["refit"]["fixed"]] if cfg.get("refit") else None    # 05b A10: the winners only
+        score(target, tab, predictions(cfg, tab, F, tab[target], seed, timing, log, pa, spl_refit), members, keep)
         if cfg.get("oracle_rows") and target == "HP_Peak" and pa is not None and cfg["physics_baselines"]:   # 05b diagnostics (oracle.py)
             t_te = tab.loc[te]
             orc = oracle_predictions(t_te, pilots[0]["m"], true_m(pool, members.loc[te], caps))

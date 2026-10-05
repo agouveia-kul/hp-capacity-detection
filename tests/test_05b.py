@@ -543,3 +543,68 @@ def test_wall_times_busy_hours_is_the_union_of_job_intervals():
           (t("2026-10-02 10:00"), t("2026-10-02 10:30"))]                                                   # gap not counted
     assert busy_hours(iv) == pytest.approx(4.5)
     assert busy_hours([]) == 0
+
+
+@pytest.mark.parametrize("spec", [("Lasso", "size", "netfit", "direct", "log"), ("Lasso", "size", "netfit", "residual", "log"),
+                                  ("RandomForest", "size", "netfit", "direct", "log"), ("XGBoost", "size", "netfit", "direct", "log")])
+def test_a10_logged_params_refit_persist_and_reload_reproduce_the_tuned_predictions(spec, tmp_path):
+    from paperb import refit_persist as RP
+    from paperb.persist import load_predict
+    T.configure(xgb_n_jobs=2)
+    tab, F = toy_tab()
+    cfg = {**toy_cfg(), "models": [spec[0]], "residual_models": ["Lasso"]}
+    lines = []
+    out, _ = RB.predictions(cfg, tab, F, tab["HP_Peak"], 0, [], lambda m: lines.append(f"[s0    1.0s] {m}"), toy_pa(tab), [spec])
+    (tmp_path / "log.txt").write_text("\n".join(lines))
+    logged = RP.log_params([tmp_path / "log.txt"])[(0, "/".join(spec))]
+    assert len(logged) == 1
+    fixed = {"|".join(spec): {"params": logged[0]["params"], "best_iter": logged[0]["best_iter"]}}
+    out2, _ = RB.predictions({**cfg, "refit": {"dir": str(tmp_path / "models"), "fixed": fixed}}, tab, F, tab["HP_Peak"], 0, [],
+                             lambda m: None, toy_pa(tab), [spec])
+    np.testing.assert_allclose(out2[spec], out[spec], rtol=1e-12)            # fixed params, no search: the tuned model again
+    rel = load_predict(tmp_path / "models" / "s0" / LC.FAMILY_OF[spec[0]])
+    assert list(rel.index) == list(tab.index[tab["split"] == "test"])
+    np.testing.assert_allclose(rel.to_numpy(), out[spec], rtol=1e-12)        # reload in place of the fitted object
+
+
+def test_a10_log_parser_reads_tuples_none_and_best_iter(tmp_path):
+    from paperb import refit_persist as RP
+    (tmp_path / "l.txt").write_text(
+        "[s3  12.0s]   HP_Peak FFNN/size/both/residual/log: cv_mse 0.1, cv_wape 20.4, train_wape 9.9, best_iter 57, 50 evals, 3.0s, "
+        "params {'arch': (64, 32), 'l2': 0.001, 'lr': 0.01}\n"
+        "[s3  13.0s]   HP_Peak RandomForest/size/netfit/direct/log: cv_mse 26.1, cv_wape 22.1, train_wape 5.5, best_iter None, 50 evals, "
+        "60.1s, params {'max_depth': None, 'max_features': 0.8058840619754752, 'min_samples_leaf': 1.0, 'n_estimators': 250.0}\n"
+        "[s3  14.0s] learning curve n=62 draw=0: 62 train HP households\n")
+    L = RP.log_params([tmp_path / "l.txt"])
+    assert L[(3, "FFNN/size/both/residual/log")][0] == {"cv_wape": 20.4, "train_wape": 9.9, "best_iter": 57,
+                                                         "params": {"arch": (64, 32), "l2": 0.001, "lr": 0.01}}
+    rf = L[(3, "RandomForest/size/netfit/direct/log")][0]
+    assert rf["best_iter"] is None and rf["params"]["max_depth"] is None and rf["params"]["max_features"] == 0.8058840619754752
+
+
+def test_a10_carry_rule_top2_near_best_linear_always_and_reload_gate():
+    from paperb import refit_persist as RP
+    med = {"trees": 20.0, "kernel": 20.6, "neural": 20.8, "rawseries": 25.0, "linear": 23.0}
+    P = pd.DataFrame([{"split_seed": s, "family": f, "wape_inner": v + 0.1 * s, "wape_all": -v} for s in range(4) for f, v in med.items()])
+    F, M = RP.carry_rule(P, pd.DataFrame([{"split_seed": s, "family": f, "reload_pass": not (s == 0 and f == "trees")}
+                                          for s in range(4) for f in med]))
+    got = dict(zip(F["family"], F["carried"]))
+    assert got == {"trees": True, "kernel": True, "neural": True, "linear": True, "rawseries": False}   # top 2, 0.8 pp < 1, linear
+    assert F.set_index("family").loc["neural", "reason"] == "within 1 pp"
+    assert not M.query("split_seed == 0 and family == 'trees'")["carried_model"].iloc[0]                # failed reload: not carried
+    F2, _ = RP.carry_rule(P.assign(wape_all=0.0))                                                     # test columns are never read
+    pd.testing.assert_frame_equal(F, F2)
+
+
+def test_a10_cnn_persists_as_state_dict_and_reloads_identically(tmp_path):
+    from paperb.persist import load_predict, save_model
+    T.configure(xgb_n_jobs=1, device="cpu")
+    X, y = toy_xy(120, seed=4, cnn=True)
+    m = T.Model("CNN", NEW["CNN"], 7, {"target_transform": "log"})
+    m.fit(X.iloc[:90], y[:90], n_iter=3)
+    pred = m.predict(X.iloc[90:])
+    spec = ("CNN", "size", "raw", "direct", "log")
+    d = save_model(tmp_path, 0, spec, {"model": m, "meta": {"params": NEW["CNN"], "best_iter": 3}, "X_te": X.iloc[90:], "X_tr": X.iloc[:90],
+                                       "y_tr": y[:90]}, X.index[90:], pred, "cpu")
+    assert (d / "cnn_state.pt").exists() and d.name == "rawseries"
+    np.testing.assert_array_equal(load_predict(d).to_numpy(), pred)
