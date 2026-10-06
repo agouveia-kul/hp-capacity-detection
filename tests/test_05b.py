@@ -608,3 +608,38 @@ def test_a10_cnn_persists_as_state_dict_and_reloads_identically(tmp_path):
                                        "y_tr": y[:90]}, X.index[90:], pred, "cpu")
     assert (d / "cnn_state.pt").exists() and d.name == "rawseries"
     np.testing.assert_array_equal(load_predict(d).to_numpy(), pred)
+
+
+def test_a11_check_writes_each_row_and_resumes_after_an_interruption(tmp_path, monkeypatch):
+    from paperb import persist
+    from paperb import refit_persist as RP
+    (tmp_path / "refit").mkdir()
+    (tmp_path / "jobs").mkdir()
+    plan = [{"split_seed": s, "family": "rawseries", "queue_family": "rawseries", "spec": "CNN|size|raw|direct|log", "device": "cuda"}
+            for s in range(3)]
+    pd.DataFrame(plan).to_csv(tmp_path / "refit" / "refit_plan.csv", index=False)
+    for s in range(3):
+        (tmp_path / "models" / f"s{s}" / "rawseries").mkdir(parents=True)
+        (tmp_path / "models" / f"s{s}" / "rawseries" / "model.joblib").write_bytes(b"x")
+        pd.DataFrame({"sub_id": ["a", "b"], "target": "HP_Peak", "method": "CNN", "anchor": "size", "feature_set": "raw", "mode": "direct",
+                      "target_transform": "log", "y": [10.0, 20.0], "pred": [11.0, 19.0]}).to_parquet(
+            tmp_path / "jobs" / f"arm2__s{s}__d0__nall__rawseries.preds.parquet")
+    calls = []
+
+    class Interrupt(BaseException):                                          # like Ctrl+C: not caught by check()'s per-model except
+        pass
+
+    def fake(d, device=None):
+        calls.append(d.parent.name)
+        if calls == ["s0", "s1"]:
+            raise Interrupt                                                  # interrupted while checking the 2nd model
+        return pd.Series([11.0, 19.0], index=pd.Index(["a", "b"], name="sub_id"))
+    monkeypatch.setattr(persist, "load_predict", fake)
+    with pytest.raises(Interrupt):
+        RP.check(["rawseries"], tmp_path, device="cpu", out="cpu.csv")
+    C = pd.read_csv(tmp_path / "refit" / "cpu.csv")
+    assert list(C["split_seed"]) == [0] and bool(C["reload_pass"].iloc[0])     # the finished model survived the interruption
+    calls.clear()
+    C = RP.check(["rawseries"], tmp_path, device="cpu", out="cpu.csv", resume=True)
+    assert calls == ["s1", "s2"] and sorted(C["split_seed"]) == [0, 1, 2] and C["reload_pass"].all()
+    assert set(C["reload_device"]) == {"cpu"}

@@ -134,15 +134,23 @@ def refit(families, workers, overrides, stage1=STAGE1):
     return failed
 
 
-def check(families, stage1=STAGE1, device=None, out="reload_check.csv", threads=-1):
+def check(families, stage1=STAGE1, device=None, out="reload_check.csv", threads=-1, resume=False):
     """`device` reloads the CNN / TabPFN on another device than they were fitted on (A11: the GPU winners on machine A's CPU,
-    written to its own `out` file so the A10 rows stay as they are); the pass rule is unchanged."""
+    written to its own `out` file so the A10 rows stay as they are); the pass rule is unchanged. Each model's row is written to
+    `out` as soon as it is checked (atomic replace; the other rows are kept, read with round-trip float precision), so an
+    interrupted check loses at most the model in progress; `resume` skips the models that already have an error-free row for
+    the same reload device."""
     from paperb.persist import load_predict
     from paperb.train import configure
     configure(xgb_n_jobs=threads, device=device or "cpu")
     P = pd.read_csv(stage1 / "refit" / "refit_plan.csv")
     P = P[P["queue_family"].isin(families)]
-    rows = []
+    f, key = stage1 / "refit" / out, ["split_seed", "family"]
+    C = pd.read_csv(f, float_precision="round_trip") if f.exists() else pd.DataFrame(columns=key)
+    if resume and len(C) and {"reload_device", "error"} <= set(C.columns):
+        done = C[C["error"].fillna("").eq("") & (C["reload_device"].eq(device) if device else C["reload_device"].eq(C["device"]))]
+        P = P[~P.set_index(key).index.isin(done.set_index(key).index)]
+        print(f"resume: {len(done)} models already checked, {len(P)} to go", flush=True)
     for r in P.to_dict("records"):
         d = stage1 / "models" / f"s{r['split_seed']}" / r["family"]
         row = {**{k: r[k] for k in ("split_seed", "family", "spec", "device")}, "reload_device": device or r["device"]}
@@ -162,13 +170,11 @@ def check(families, stage1=STAGE1, device=None, out="reload_check.csv", threads=
                        model_mb=round(sum(f.stat().st_size for f in d.iterdir()) / 2**20, 2), error="")
         except Exception as e:                                          # listed, never silently dropped
             row.update(reload_pass=False, error=f"{type(e).__name__}: {e}"[:300])
-        rows.append(row)
-    C = pd.DataFrame(rows)
-    f = stage1 / "refit" / out
-    if f.exists():                                                      # keep the other machine's rows
-        old = pd.read_csv(f)
-        C = pd.concat([old[~old.set_index(["split_seed", "family"]).index.isin(C.set_index(["split_seed", "family"]).index)], C])
-    C.sort_values(["split_seed", "family"]).to_csv(f, index=False)
+        C = pd.concat([C[~C.set_index(key).index.isin([(r["split_seed"], r["family"])])], pd.DataFrame([row])], ignore_index=True)
+        tmp = f.with_name(f"{f.name}.{os.getpid()}.tmp")
+        C.sort_values(key).to_csv(tmp, index=False)
+        os.replace(tmp, f)                                              # keep the rows of other machines and earlier runs
+        print(f"s{r['split_seed']} {r['family']}: pass {row['reload_pass']}, dWAPE {row.get('dwape_pp', float('nan')):.4g} pp {row['error']}", flush=True)
     print(C.groupby("family")["reload_pass"].agg(["sum", "size"]).to_string())
     return C
 
@@ -221,6 +227,7 @@ if __name__ == "__main__":
     ap.add_argument("--device", default=None, help="check: reload the models on this device (A11: cpu)")
     ap.add_argument("--out", default="reload_check.csv", help="check: output file in stage1/refit/")
     ap.add_argument("--threads", type=int, default=-1, help="check: torch / XGBoost threads")
+    ap.add_argument("--resume", action="store_true", help="check: skip models that already have an error-free row in --out")
     a = ap.parse_args()
     fams = a.families.split(",")
     if a.step == "plan":
@@ -228,6 +235,6 @@ if __name__ == "__main__":
     elif a.step == "refit":
         sys.exit(1 if refit(fams, a.workers, a.set) else 0)
     elif a.step == "check":
-        check(fams, device=a.device, out=a.out, threads=a.threads)
+        check(fams, device=a.device, out=a.out, threads=a.threads, resume=a.resume)
     else:
         carry()

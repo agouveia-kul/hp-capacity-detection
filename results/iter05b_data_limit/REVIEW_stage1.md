@@ -39,7 +39,7 @@ F holds via the raw-series family being D; its second route fails: the CNN beats
 - 2026-10-05 19:08: the queue's console closed during a desktop hang (exit 0xC000013A); ≈ 16 h of tree jobs (s18, s19) plus partial kernel / neural jobs were lost and rerun.
 - 2026-10-06: Windows TLS stalled; 385 machine-B frames stayed cloud-only until a restart.
 - Mechanics fixes: `importlib.metadata` fails on OneDrive dist-info (OSError 22) and `persist` now uses `__version__`; a stale `.failed` marker (progress.json locked) was cleared by `--retry-failed`; `test_stage1_report_applies_the_preregistered_rule` read the report without `encoding="utf-8"` (fails on the Windows locale; test fixed, report unchanged). pytest: 124 passed, 1 skipped (CUDA).
-- `refit_persist.check` rewrites `reload_check.csv` through pandas `read_csv` / `to_csv`: machine B's run changed 8 floats of machine A's rows in the last digit (max 3.6e-15; no pass / fail change). Possible fix, not applied: `float_precision="round_trip"` in the `read_csv` call at `refit_persist.py:165`.
+- `refit_persist.check` rewrites `reload_check.csv` through pandas `read_csv` / `to_csv`: machine B's run changed 8 floats of machine A's rows in the last digit (max 3.6e-15; no pass / fail change). Fixed afterwards (2026-10-06, with the resumable A11 check): `check` reads with `float_precision="round_trip"` and writes each model's row as soon as it is checked (`--resume`).
 - The probe FFNN / tree jobs took 1.1 / 3.9 h; at 6 workers they took 3.0 / 11.4 h.
 - Stray file `jobs_cpu_archive/Get-Date` (a probe `.done` record, left untouched).
 - The working copy of the brief has an uncommitted deletion of the [A8] bullet (not committed).
