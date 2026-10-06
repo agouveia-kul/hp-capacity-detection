@@ -134,16 +134,20 @@ def refit(families, workers, overrides, stage1=STAGE1):
     return failed
 
 
-def check(families, stage1=STAGE1):
+def check(families, stage1=STAGE1, device=None, out="reload_check.csv", threads=-1):
+    """`device` reloads the CNN / TabPFN on another device than they were fitted on (A11: the GPU winners on machine A's CPU,
+    written to its own `out` file so the A10 rows stay as they are); the pass rule is unchanged."""
     from paperb.persist import load_predict
+    from paperb.train import configure
+    configure(xgb_n_jobs=threads, device=device or "cpu")
     P = pd.read_csv(stage1 / "refit" / "refit_plan.csv")
     P = P[P["queue_family"].isin(families)]
     rows = []
     for r in P.to_dict("records"):
         d = stage1 / "models" / f"s{r['split_seed']}" / r["family"]
-        row = {k: r[k] for k in ("split_seed", "family", "spec", "device")}
+        row = {**{k: r[k] for k in ("split_seed", "family", "spec", "device")}, "reload_device": device or r["device"]}
         try:
-            pr = load_predict(d)
+            pr = load_predict(d, device)
             lg = pd.read_parquet(stage1 / "jobs" / f"arm2__s{r['split_seed']}__d0__nall__{r['queue_family']}.preds.parquet")
             lg = lg[(lg["target"] == "HP_Peak") & (lg[CONFIG_COLS].astype(str).agg("|".join, axis=1) == r["spec"])]
             lg = lg.assign(sub_id=lg["sub_id"].astype(str)).set_index("sub_id")
@@ -160,7 +164,7 @@ def check(families, stage1=STAGE1):
             row.update(reload_pass=False, error=f"{type(e).__name__}: {e}"[:300])
         rows.append(row)
     C = pd.DataFrame(rows)
-    f = stage1 / "refit" / "reload_check.csv"
+    f = stage1 / "refit" / out
     if f.exists():                                                      # keep the other machine's rows
         old = pd.read_csv(f)
         C = pd.concat([old[~old.set_index(["split_seed", "family"]).index.isin(C.set_index(["split_seed", "family"]).index)], C])
@@ -214,6 +218,9 @@ if __name__ == "__main__":
     ap.add_argument("--families", default="linear,trees,kernel,neural", help="queue families (GPU: rawseries,tabpfn)")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--set", nargs="*", default=[], help="dotted overrides, e.g. device=cuda")
+    ap.add_argument("--device", default=None, help="check: reload the models on this device (A11: cpu)")
+    ap.add_argument("--out", default="reload_check.csv", help="check: output file in stage1/refit/")
+    ap.add_argument("--threads", type=int, default=-1, help="check: torch / XGBoost threads")
     a = ap.parse_args()
     fams = a.families.split(",")
     if a.step == "plan":
@@ -221,6 +228,6 @@ if __name__ == "__main__":
     elif a.step == "refit":
         sys.exit(1 if refit(fams, a.workers, a.set) else 0)
     elif a.step == "check":
-        check(fams)
+        check(fams, device=a.device, out=a.out, threads=a.threads)
     else:
         carry()
