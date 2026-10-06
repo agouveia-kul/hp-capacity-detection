@@ -138,3 +138,123 @@
 [s0     6.8s]   HP_Peak ElasticNet/size_peak/both/residual/log: refit with fixed params {'alpha': 0.0016637198364966093, 'l1_ratio': 0.2953191106343754}, best_iter None, 1.2s
 [s0   108.8s]   HP_Peak RandomForest/size/both/residual/log: refit with fixed params {'max_depth': 16, 'max_features': 0.9936666929171255, 'min_samples_leaf': 1.0, 'n_estimators': 500.0}, best_iter None, 101.9s
 [s0   111.9s] done in 111.9s
+[s1     4.9s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s1     4.9s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1   191.9s] Paper A pilot m_h 0.02522 (292 train HP households); station pilots {'G001': 0.02718, 'G002': 0.02363, 'G006': 0.02632, 'G009': 0.02168, 'G013': 0.0229}; s0 {'paperA_corr': 0.01299, 'paperA_corr_all': 0.01299}; cross-fit fold m_h [0.02488, 0.02543, 0.02529, 0.02532]
+[s1   205.0s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 13.0s
+[s1   258.1s]   HP_Peak CNN/size_peak/raw/residual/log: refit with fixed params {'dropout': 0.05186748294003746, 'kernel': 7, 'lr': 0.0029578834023515793, 'n_blocks': 3, 'weight_decay': 2.244344053638389e-06, 'width': 32}, best_iter 111, 29.7s
+[s1   261.4s] done in 261.4s
+[s0     4.8s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s0     4.8s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0   191.6s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0   205.0s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 13.3s
+[s0   264.3s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.06923494298809725, 'kernel': 7, 'lr': 0.0010430799553716628, 'n_blocks': 3, 'weight_decay': 3.200811615404507e-05, 'width': 32}, best_iter 149, 35.9s
+[s0   265.4s] done in 265.4s
+[s2     2.3s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s2     2.3s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2   217.8s] Paper A pilot m_h 0.02468 (292 train HP households); station pilots {'G001': 0.02733, 'G002': 0.02215, 'G006': 0.02647, 'G009': 0.02012, 'G013': 0.02322}; s0 {'paperA_corr': 0.01276, 'paperA_corr_all': 0.01276}; cross-fit fold m_h [0.02462, 0.02504, 0.02423, 0.02482]
+[s2   220.4s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.6s
+[s2   267.4s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.049622375406536336, 'kernel': 9, 'lr': 0.000715613331454641, 'n_blocks': 3, 'weight_decay': 0.00010601164471931416, 'width': 32}, best_iter 149, 21.4s
+[s2   268.5s] done in 268.5s
+[s3     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s3     2.0s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3   217.8s] Paper A pilot m_h 0.02500 (292 train HP households); station pilots {'G001': 0.02669, 'G002': 0.0227, 'G006': 0.02649, 'G009': 0.02153, 'G013': 0.02213}; s0 {'paperA_corr': 0.01266, 'paperA_corr_all': 0.01266}; cross-fit fold m_h [0.02499, 0.02511, 0.02497, 0.02492]
+[s3   220.4s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.6s
+[s3   267.6s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.0946997286011711, 'kernel': 7, 'lr': 0.001845224838811464, 'n_blocks': 3, 'weight_decay': 9.466864371975534e-06, 'width': 32}, best_iter 176, 25.6s
+[s3   268.9s] done in 268.9s
+[s4     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s4     2.0s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4   195.5s] Paper A pilot m_h 0.02522 (292 train HP households); station pilots {'G001': 0.02686, 'G002': 0.02288, 'G006': 0.0269, 'G009': 0.02179, 'G013': 0.0255}; s0 {'paperA_corr': 0.01244, 'paperA_corr_all': 0.01244}; cross-fit fold m_h [0.02513, 0.02513, 0.0253, 0.02535]
+[s4   197.8s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.2s
+[s4   234.1s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.015472215251117437, 'kernel': 9, 'lr': 0.0014954871625557046, 'n_blocks': 3, 'weight_decay': 4.828874873169432e-06, 'width': 32}, best_iter 116, 18.5s
+[s4   235.3s] done in 235.3s
+[s5     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s5     2.0s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5   195.4s] Paper A pilot m_h 0.02514 (292 train HP households); station pilots {'G001': 0.02757, 'G002': 0.02299, 'G006': 0.02649, 'G009': 0.0204, 'G013': 0.02258}; s0 {'paperA_corr': 0.01285, 'paperA_corr_all': 0.01285}; cross-fit fold m_h [0.02469, 0.02527, 0.02496, 0.02563]
+[s5   197.6s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.2s
+[s5   243.3s]   HP_Peak CNN/size_peak/raw/residual/log: refit with fixed params {'dropout': 0.1995005076013763, 'kernel': 7, 'lr': 0.0009551781005652862, 'n_blocks': 3, 'weight_decay': 8.506743790680527e-06, 'width': 32}, best_iter 184, 27.3s
+[s5   244.5s] done in 244.5s
+[s6     2.1s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s6     2.1s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6   189.2s] Paper A pilot m_h 0.02513 (292 train HP households); station pilots {'G001': 0.02788, 'G002': 0.02287, 'G006': 0.02518, 'G009': 0.02056, 'G013': 0.02229}; s0 {'paperA_corr': 0.01258, 'paperA_corr_all': 0.01258}; cross-fit fold m_h [0.02523, 0.02498, 0.02454, 0.02577]
+[s6   191.9s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.6s
+[s6   232.9s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.01891223690633195, 'kernel': 7, 'lr': 0.001212560018847726, 'n_blocks': 3, 'weight_decay': 1.9175505468938412e-05, 'width': 32}, best_iter 152, 25.8s
+[s6   234.0s] done in 234.0s
+[s7     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s7     2.0s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7   189.6s] Paper A pilot m_h 0.02507 (292 train HP households); station pilots {'G001': 0.02768, 'G002': 0.02255, 'G006': 0.02467, 'G009': 0.02112, 'G013': 0.02254}; s0 {'paperA_corr': 0.01198, 'paperA_corr_all': 0.01198}; cross-fit fold m_h [0.02436, 0.02578, 0.02532, 0.02487]
+[s7   192.0s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.4s
+[s7   222.7s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.29460994530240614, 'kernel': 7, 'lr': 0.0029164232557844162, 'n_blocks': 3, 'weight_decay': 1.6309264796855003e-06, 'width': 32}, best_iter 102, 15.4s
+[s7   223.9s] done in 223.9s
+[s8     2.3s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s8     2.4s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8   190.6s] Paper A pilot m_h 0.02499 (292 train HP households); station pilots {'G001': 0.02776, 'G002': 0.02245, 'G006': 0.024, 'G009': 0.02072, 'G013': 0.02328}; s0 {'paperA_corr': 0.01216, 'paperA_corr_all': 0.01216}; cross-fit fold m_h [0.0249, 0.02505, 0.02519, 0.02484]
+[s8   192.9s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.3s
+[s8   227.4s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.20140861841942378, 'kernel': 9, 'lr': 0.0018200259918838323, 'n_blocks': 3, 'weight_decay': 2.058083250840173e-06, 'width': 32}, best_iter 104, 17.1s
+[s8   228.5s] done in 228.5s
+[s9     2.1s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s9     2.1s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9   190.8s] Paper A pilot m_h 0.02497 (292 train HP households); station pilots {'G001': 0.02708, 'G002': 0.02244, 'G006': 0.02681, 'G009': 0.02023, 'G013': 0.02316}; s0 {'paperA_corr': 0.01293, 'paperA_corr_all': 0.01293}; cross-fit fold m_h [0.02493, 0.02462, 0.0255, 0.02483]
+[s9   193.2s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.4s
+[s9   233.2s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.07963725045922827, 'kernel': 9, 'lr': 0.002946393430086896, 'n_blocks': 3, 'weight_decay': 0.0005821272091691708, 'width': 32}, best_iter 144, 21.7s
+[s9   234.3s] done in 234.3s
+[s10     2.1s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s10     2.1s] features from cache gb_eoh_s10_e5f121179ca0_tab.parquet
+[s10   188.7s] Paper A pilot m_h 0.02503 (292 train HP households); station pilots {'G001': 0.02645, 'G002': 0.02287, 'G006': 0.02675, 'G009': 0.02098, 'G013': 0.02215}; s0 {'paperA_corr': 0.01245, 'paperA_corr_all': 0.01245}; cross-fit fold m_h [0.02525, 0.02472, 0.02473, 0.02538]
+[s10   191.2s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.5s
+[s10   226.3s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.23006713748420474, 'kernel': 9, 'lr': 0.001676991228942765, 'n_blocks': 3, 'weight_decay': 2.1483177507720265e-05, 'width': 32}, best_iter 116, 19.0s
+[s10   227.5s] done in 227.5s
+[s11     1.9s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s11     1.9s] features from cache gb_eoh_s11_2c03f71ee49c_tab.parquet
+[s11   189.0s] Paper A pilot m_h 0.02518 (292 train HP households); station pilots {'G001': 0.02748, 'G002': 0.02344, 'G006': 0.02509, 'G009': 0.02199, 'G013': 0.02372}; s0 {'paperA_corr': 0.0127, 'paperA_corr_all': 0.0127}; cross-fit fold m_h [0.02487, 0.02539, 0.02542, 0.02513]
+[s11   191.4s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.4s
+[s11   230.8s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.01634157426139507, 'kernel': 5, 'lr': 0.002322939814914627, 'n_blocks': 3, 'weight_decay': 1.0757517525817304e-06, 'width': 32}, best_iter 151, 22.8s
+[s11   231.9s] done in 231.9s
+[s12     2.2s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s12     2.2s] features from cache gb_eoh_s12_7f6e7194fdd4_tab.parquet
+[s12   190.0s] Paper A pilot m_h 0.02478 (292 train HP households); station pilots {'G001': 0.02708, 'G002': 0.02232, 'G006': 0.02677, 'G009': 0.02062, 'G013': 0.02359}; s0 {'paperA_corr': 0.01218, 'paperA_corr_all': 0.01218}; cross-fit fold m_h [0.02486, 0.02492, 0.02507, 0.02425]
+[s12   192.2s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.2s
+[s12   237.7s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.08722439652324529, 'kernel': 7, 'lr': 0.001762643583763293, 'n_blocks': 3, 'weight_decay': 0.00011754610495492674, 'width': 32}, best_iter 162, 30.3s
+[s12   238.8s] done in 238.8s
+[s13     1.9s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s13     1.9s] features from cache gb_eoh_s13_47e41de6a1cc_tab.parquet
+[s13   190.0s] Paper A pilot m_h 0.02525 (292 train HP households); station pilots {'G001': 0.02737, 'G002': 0.02326, 'G006': 0.02642, 'G009': 0.02223, 'G013': 0.02222}; s0 {'paperA_corr': 0.01283, 'paperA_corr_all': 0.01283}; cross-fit fold m_h [0.02475, 0.02535, 0.02519, 0.02567]
+[s13   192.2s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.2s
+[s13   227.0s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.13493604431638992, 'kernel': 5, 'lr': 0.0023596844953709655, 'n_blocks': 3, 'weight_decay': 0.0002263800303488709, 'width': 32}, best_iter 114, 18.7s
+[s13   228.1s] done in 228.1s
+[s14     2.4s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s14     2.4s] features from cache gb_eoh_s14_33235065c10e_tab.parquet
+[s14   209.6s] Paper A pilot m_h 0.02512 (292 train HP households); station pilots {'G001': 0.02774, 'G002': 0.02289, 'G006': 0.02606, 'G009': 0.02088, 'G013': 0.02204}; s0 {'paperA_corr': 0.01204, 'paperA_corr_all': 0.01204}; cross-fit fold m_h [0.025, 0.02541, 0.02512, 0.02496]
+[s14   212.3s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.6s
+[s14   254.8s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.11949757508023788, 'kernel': 7, 'lr': 0.0018313823029789565, 'n_blocks': 3, 'weight_decay': 7.30614727944255e-05, 'width': 32}, best_iter 134, 24.0s
+[s14   256.0s] done in 256.0s
+[s15     2.6s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s15     2.7s] features from cache gb_eoh_s15_1f87d009be82_tab.parquet
+[s15   210.4s] Paper A pilot m_h 0.02490 (292 train HP households); station pilots {'G001': 0.02763, 'G002': 0.02207, 'G006': 0.02631, 'G009': 0.02137, 'G013': 0.02331}; s0 {'paperA_corr': 0.01269, 'paperA_corr_all': 0.01269}; cross-fit fold m_h [0.02513, 0.02479, 0.02486, 0.02489]
+[s15   213.3s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.8s
+[s15   257.3s]   HP_Peak CNN/size_peak/raw/residual/log: refit with fixed params {'dropout': 0.13136349909449774, 'kernel': 9, 'lr': 0.001359910759114054, 'n_blocks': 3, 'weight_decay': 3.511700884677721e-05, 'width': 32}, best_iter 150, 24.9s
+[s15   258.5s] done in 258.5s
+[s17     2.4s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s17     2.4s] features from cache gb_eoh_s17_ecd258e7f91b_tab.parquet
+[s17   210.0s] Paper A pilot m_h 0.02516 (292 train HP households); station pilots {'G001': 0.0276, 'G002': 0.02271, 'G006': 0.02793, 'G009': 0.02126, 'G013': 0.02222}; s0 {'paperA_corr': 0.0126, 'paperA_corr_all': 0.0126}; cross-fit fold m_h [0.02504, 0.025, 0.02537, 0.02523]
+[s17   212.4s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.3s
+[s17   248.2s]   HP_Peak CNN/size/raw/residual/log: refit with fixed params {'dropout': 0.08207953522260472, 'kernel': 5, 'lr': 0.0021504051101950347, 'n_blocks': 3, 'weight_decay': 3.1426831106365905e-05, 'width': 32}, best_iter 110, 17.4s
+[s17   249.4s] done in 249.4s
+[s16     2.3s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s16     2.3s] features from cache gb_eoh_s16_c4cdfacc428b_tab.parquet
+[s16   209.4s] Paper A pilot m_h 0.02497 (292 train HP households); station pilots {'G001': 0.02747, 'G002': 0.0218, 'G006': 0.0269, 'G009': 0.02147, 'G013': 0.02345}; s0 {'paperA_corr': 0.01225, 'paperA_corr_all': 0.01225}; cross-fit fold m_h [0.02475, 0.02475, 0.02527, 0.02512]
+[s16   211.8s]   HP_Peak TabPFN/size_peak/both/direct/log: refit with fixed params {}, best_iter None, 2.4s
+[s16   263.3s]   HP_Peak CNN/size/raw/direct/log: refit with fixed params {'dropout': 0.11446145804950728, 'kernel': 9, 'lr': 0.0015046444910512555, 'n_blocks': 3, 'weight_decay': 9.671358144297086e-05, 'width': 32}, best_iter 187, 33.5s
+[s16   264.4s] done in 264.4s
+[s18     2.5s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s18     2.5s] features from cache gb_eoh_s18_ac9f871a11f3_tab.parquet
+[s18   195.0s] Paper A pilot m_h 0.02523 (292 train HP households); station pilots {'G001': 0.02728, 'G002': 0.02266, 'G006': 0.02775, 'G009': 0.0214, 'G013': 0.02167}; s0 {'paperA_corr': 0.01249, 'paperA_corr_all': 0.01249}; cross-fit fold m_h [0.02505, 0.02494, 0.02566, 0.02528]
+[s18   197.8s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.7s
+[s18   248.3s]   HP_Peak CNN/size/raw/direct/log: refit with fixed params {'dropout': 0.0671019209306394, 'kernel': 9, 'lr': 0.00108261168358813, 'n_blocks': 3, 'weight_decay': 1.8914113953016758e-06, 'width': 32}, best_iter 190, 33.3s
+[s18   249.6s] done in 249.6s
+[s19     1.9s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s19     1.9s] features from cache gb_eoh_s19_1276bfc40d75_tab.parquet
+[s19   194.7s] Paper A pilot m_h 0.02505 (292 train HP households); station pilots {'G001': 0.02728, 'G002': 0.02275, 'G006': 0.02671, 'G009': 0.02021, 'G013': 0.02326}; s0 {'paperA_corr': 0.01237, 'paperA_corr_all': 0.01237}; cross-fit fold m_h [0.02531, 0.02544, 0.02423, 0.02522]
+[s19   197.4s]   HP_Peak TabPFN/size/both/direct/log: refit with fixed params {}, best_iter None, 2.7s
+[s19   242.4s]   HP_Peak CNN/size_peak/raw/direct/log: refit with fixed params {'dropout': 0.09221135116215085, 'kernel': 9, 'lr': 0.0010516820924562796, 'n_blocks': 3, 'weight_decay': 2.0094399320568156e-05, 'width': 32}, best_iter 171, 27.5s
+[s19   243.7s] done in 243.7s
