@@ -464,7 +464,7 @@ def test_stage1_report_applies_the_preregistered_rule(tmp_path):
     D = pd.read_csv(tmp_path / "report" / "lc_paired.csv")
     assert set(D["phys"]) == {"slope_base"}                                     # oracle / HDH sentinels never chosen
     assert not D["winner"].str.startswith("Ridge").any()                        # selection by inner CV only
-    assert (tmp_path / "report" / "fig_learning_curve.png").exists() and "† = filler-variability-limited" in (tmp_path / "report" / "stage1_report.md").read_text()
+    assert (tmp_path / "report" / "fig_learning_curve.png").exists() and "† = filler-variability-limited" in (tmp_path / "report" / "stage1_report.md").read_text(encoding="utf-8")
 
 
 def test_gpu_queue_has_the_same_jobs_and_moves_only_cnn_and_tabpfn():

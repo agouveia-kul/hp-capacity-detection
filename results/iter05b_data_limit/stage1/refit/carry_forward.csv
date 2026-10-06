@@ -1,0 +1,6 @@
+family,median_inner_wape,rank,gap_to_best_pp,carried,reason
+neural,16.910014695832366,1,0.0,True,top 2
+rawseries,17.901962106411982,2,0.9919474105796162,True,top 2
+kernel,19.96621570366603,3,3.056201007833664,False,not carried
+trees,20.447204985025216,4,3.53719028919285,False,not carried
+linear,21.668039975035697,5,4.758025279203331,True,linear always

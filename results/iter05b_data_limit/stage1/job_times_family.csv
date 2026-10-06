@@ -1,0 +1,15 @@
+arm,family,jobs,job_hours,median_job_h,max_job_h
+arm1,kernel,100,2.9,0.02,0.09
+arm1,linear,100,5.4,0.04,0.14
+arm1,neural,100,10.7,0.08,0.4
+arm1,physics,100,23.7,0.1,1.44
+arm1,rawseries,100,33.5,0.24,1.18
+arm1,tabpfn,100,0.9,0.01,0.02
+arm1,trees,100,28.6,0.31,0.69
+arm2,kernel,20,12.4,0.64,0.75
+arm2,linear,20,19.7,0.98,1.16
+arm2,neural,20,58.3,3.0,3.84
+arm2,physics,20,13.4,0.69,0.71
+arm2,rawseries,20,55.7,2.72,4.09
+arm2,tabpfn,20,4.8,0.25,0.37
+arm2,trees,20,214.5,11.36,13.73
