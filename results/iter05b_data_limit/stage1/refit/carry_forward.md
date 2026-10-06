@@ -16,6 +16,6 @@ Carried models per family (reload check passed):
 |---|---|---|---|
 | kernel | 20 | 20 | 0 |
 | linear | 20 | 20 | 20 |
-| neural | 20 | 0 | 0 |
-| rawseries | 20 | 0 | 0 |
+| neural | 20 | 20 | 20 |
+| rawseries | 20 | 20 | 20 |
 | trees | 20 | 20 | 0 |
