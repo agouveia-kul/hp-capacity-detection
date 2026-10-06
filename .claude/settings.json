@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git push https://github.com/agouveia-kul/hp-capacity-detection.git *)",
+      "Bash(git push https://github.com/agouveia-kul/hp-capacity-detection.git *)"
+    ]
+  }
+}
