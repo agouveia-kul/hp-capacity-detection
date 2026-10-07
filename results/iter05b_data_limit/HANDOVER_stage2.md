@@ -15,7 +15,7 @@ Read first, in this order: `CLAUDE.md` (contract; hard rules apply, rule 6 amend
 - **Stage 1 is done.** Arms 1 + 2 merged in `stage1/arm{1,2}/` (big long files gzipped: gunzip before `iter05b_report.py`);
   report in `stage1/report/`; verdict **D (linear, CNN) + F** overall. ML family winners beat the best physics row
   (`paperA_corr`, 25.8 %) by 5.8-9.8 pp at n = all; at n = 62 they are within ~2 pp of physics.
-- **Open REVIEW_stage1 decision 1** (accept D + F; hold the paper-lead change until Arms 7 and 6). Stage 2 does not depend on it.
+- **REVIEW_stage1 decision 1 resolved (2026-10-07):** D + F accepted; the paper-lead change is deferred until Arms 7 and 6, so the final REVIEW must say whether they support it.
 - **A10 (refit, persist, carry-forward)** - done:
   - 100 Arm 2 winners (20 seeds x 5 families) refit with their logged hyperparameters and saved in
     `stage1/models/s<seed>/<family>/` (git-ignored, 767 MB; manifest + SHA-256 each); reload check 100/100
