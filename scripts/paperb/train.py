@@ -17,29 +17,38 @@ are fitted on the rows passed to `fit` only (inside each CV fold). Options (`opt
 The CV loss is the MSE of the model's output: kW for direct models (also under `log`), z for residual models.
 `RESIDUAL_SPACES` (Task 4) let the regularisation reach an all-zero model and keep XGBoost shallow.
 """
+import os
 import re
 import warnings
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from hyperopt import STATUS_OK, Trials, fmin, hp, space_eval, tpe
 from sklearn.cross_decomposition import PLSRegression
+from sklearn.dummy import DummyRegressor
+from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import RBF, ConstantKernel, WhiteKernel
 from sklearn.impute import SimpleImputer
+from sklearn.kernel_ridge import KernelRidge
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
 
 from hp_capacity import select_scale_free_columns
+from paperb.models_rawseries import CNN_SPACE, RAW_PREFIX
 
 ANCHOR_COLS = {"none": [], "size": ["size"], "size_peak": ["size", "peak"]}
 MAX_EPOCHS, PATIENCE, XGB_ES_ROUNDS = 500, 40, 25
-SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE}          # per-process; set by configure() (02b runner)
+SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE, "device": "cpu"}   # per-process; set by configure() (02b runner)
 
 
-def configure(xgb_n_jobs=-1, patience=PATIENCE):
-    """XGBoost thread cap per worker and FFNN early-stopping patience (protocol default 40)."""
-    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience))
+def configure(xgb_n_jobs=-1, patience=PATIENCE, device="cpu"):
+    """XGBoost thread cap per worker, FFNN early-stopping patience (protocol default 40) and the torch device of the CNN and
+    TabPFN ("cpu" or "cuda"; 05b: one device per family for a whole stage, recorded in each job's .done marker)."""
+    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience), device=str(device))
 
 SPACES = {                                                  # legacy search ranges (benchmark_capacity_models.py)
     "XGBoost": {"eta": hp.uniform("eta", 0.01, 0.3), "max_depth": hp.quniform("max_depth", 3, 10, 1),
@@ -57,8 +66,22 @@ SPACES = {                                                  # legacy search rang
     "FFNN": {"arch": hp.choice("arch", [(64,), (128,), (128, 64), (256, 128)]), "lr": hp.choice("lr", [1e-3, 5e-4]),
              "l2": hp.choice("l2", [0.0, 1e-4])},
     "Linear": {},
+    # 05b (Task 1e)
+    "KernelRidge": {"alpha": hp.loguniform("alpha", np.log(1e-3), np.log(1e2)), "gamma": hp.loguniform("gamma", np.log(1e-4), np.log(1.0)),
+                    "kernel": hp.choice("kernel", ["rbf", "laplacian"])},
+    "GP": {},                                                # marginal-likelihood fit (ARD RBF + white noise), no hyperopt
+    "RandomForest": {"n_estimators": hp.quniform("n_estimators", 100, 500, 50), "max_features": hp.uniform("max_features", 0.2, 1.0),
+                     "min_samples_leaf": hp.quniform("min_samples_leaf", 1, 20, 1), "max_depth": hp.choice("max_depth", [None, 4, 6, 8, 12, 16])},
+    "CatBoost": {"depth": hp.quniform("depth", 3, 8, 1), "learning_rate": hp.loguniform("learning_rate", np.log(0.01), np.log(0.3)),
+                 "l2_leaf_reg": hp.loguniform("l2_leaf_reg", np.log(1.0), np.log(30.0)), "iterations": hp.quniform("iterations", 100, 1000, 50)},
+    "TabPFN": {},                                            # in-context learning, no hyperopt
+    "CNN": CNN_SPACE,
 }
+SPACES["ExtraTrees"] = SPACES["RandomForest"]
 SPACES["XGBoost_mono"] = SPACES["XGBoost"]
+ITERATIVE = ("XGBoost", "XGBoost_mono", "FFNN", "CatBoost", "CNN")       # early stopping on the next training fold
+STD_Y = ("SVR", "FFNN", "KernelRidge", "GP", "CNN")                       # fitted on standardised y
+TABPFN_CHECKPOINT = "tabpfn-v3.5-20260909.safetensors"
 RESIDUAL_SPACES = {                                          # z = log(y / P_hat_A) has sd ~ 0.3: all-zero reachable
     "Ridge": {"alpha": hp.loguniform("alpha", np.log(1e-2), np.log(1e6))},
     "Lasso": {"alpha": hp.loguniform("alpha", np.log(1e-4), np.log(10.0))},
@@ -76,13 +99,43 @@ MONOTONE = re.compile(r"nf_(all|wd|we)_(s_h|cold_resp)")
 
 def feature_matrix(features, tab, anchor, feature_set="whdd"):
     """Columns of `feature_set` plus the anchor columns of `anchor` in {none, size, size_peak}. whdd: scale-free
-    windowed-HDD features (unchanged); netfit: the nf_* columns (features_netfit); both: the union."""
-    whdd = select_scale_free_columns(features[[c for c in features.columns if not c.startswith("nf_")]])
+    windowed-HDD features (unchanged); netfit: the nf_* columns (features_netfit); both: the union; raw (05b): the daily
+    series rs_* of the raw-series CNN (substations.raw_daily)."""
+    whdd = select_scale_free_columns(features[[c for c in features.columns if not c.startswith(("nf_", RAW_PREFIX))]])
     nf = [c for c in features.columns if c.startswith("nf_")]
-    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf}[feature_set]].copy()
+    raw = [c for c in features.columns if c.startswith(RAW_PREFIX)]
+    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf, "raw": raw}[feature_set]].copy()
     for c in ANCHOR_COLS[anchor]:
         X[f"Feature Scale_{c}"] = tab.loc[X.index, c].astype(float)
     return X.apply(pd.to_numeric, errors="coerce").replace([np.inf, -np.inf], np.nan)
+
+
+def tabpfn_checkpoint():
+    """Path of the local TabPFN-3.5 regressor checkpoint; raises (the queue then lists the job as failed) when it is missing."""
+    d = os.environ.get("TABPFN_MODEL_CACHE_DIR")
+    if not d or not (Path(d) / TABPFN_CHECKPOINT).is_file():
+        raise RuntimeError(f"TabPFN checkpoint {TABPFN_CHECKPOINT} not found: TABPFN_MODEL_CACHE_DIR={d!r}. Ask Alex; no download is attempted.")
+    return Path(d) / TABPFN_CHECKPOINT
+
+
+def tabpfn_info():
+    """Checkpoint file name, SHA-256 and package version, for config.yaml."""
+    import hashlib
+    from importlib.metadata import version
+    h, f = hashlib.sha256(), tabpfn_checkpoint()
+    with open(f, "rb") as fh:
+        for b in iter(lambda: fh.read(1 << 24), b""):
+            h.update(b)
+    return {"checkpoint": f.name, "sha256": h.hexdigest(), "package": version("tabpfn")}
+
+
+def tabpfn_regressor(seed, n_estimators=None):
+    """TabPFN-3.5 regressor from the local checkpoint, offline (no download, no hub call), seeded, on SETTINGS["device"]. The CPU
+    guard of tabpfn (> 1000 rows) is a speed warning, not a pre-training limit, and is lifted by TABPFN_ALLOW_CPU_LARGE_DATASET."""
+    os.environ.update(HF_HUB_OFFLINE="1", TABPFN_ALLOW_CPU_LARGE_DATASET="1")
+    from tabpfn import TabPFNRegressor
+    return TabPFNRegressor(model_path=str(tabpfn_checkpoint()), device=SETTINGS["device"], random_state=int(seed),
+                           n_estimators="auto" if n_estimators is None else int(n_estimators), n_preprocessing_jobs=1)
 
 
 class Model:
@@ -99,15 +152,17 @@ class Model:
                 raise ValueError("log target transform needs y > 0")
             y = np.log(y)
         self.cols = list(pd.DataFrame(X).columns)
+        self.ym, self.ysd = 0.0, 1.0
+        if self.name in STD_Y:                                   # standardised y (SVR, FFNN as before; 05b kernel models, CNN)
+            self.ym, self.ysd = float(np.mean(y)), float(np.std(y)) or 1.0
+        if self.name == "CNN":                                   # imputes and scales its own channels on the rows it is fitted on
+            return pd.DataFrame(X), (np.asarray(y, float) - self.ym) / self.ysd
         self.imp = SimpleImputer(strategy="median", keep_empty_features=True).fit(X)
         self.xs = StandardScaler().fit(self.imp.transform(X))
-        self.ym, self.ysd = 0.0, 1.0
-        if self.name in ("SVR", "FFNN"):                         # legacy standardised y for these two only
-            self.ym, self.ysd = float(np.mean(y)), float(np.std(y)) or 1.0
         return self._x(X), (np.asarray(y, float) - self.ym) / self.ysd
 
     def _x(self, X):
-        return self.xs.transform(self.imp.transform(X))
+        return pd.DataFrame(X) if self.name == "CNN" else self.xs.transform(self.imp.transform(X))
 
     def fit(self, X, y, n_iter=None, X_es=None, y_es=None):
         Xs, ys = self._prep(X, y)
@@ -115,6 +170,9 @@ class Model:
             y_es = np.log(np.asarray(y_es, float))
         es = None if X_es is None else (self._x(X_es), (np.asarray(y_es, float) - self.ym) / self.ysd)
         p, n = self.params, self.name
+        if np.ptp(ys) == 0 and n in ("CatBoost", "TabPFN", "GP", "CNN"):   # constant target (e.g. z = 0): these refuse it or need not learn it
+            self.m = DummyRegressor(strategy="constant", constant=float(ys[0])).fit(np.zeros((len(ys), 1)), ys)
+            return None
         if n == "XGBoost":
             import xgboost as xgb
             kw = dict(learning_rate=p["eta"], max_depth=int(p["max_depth"]), gamma=p["gamma"], subsample=p["subsample"],
@@ -146,16 +204,53 @@ class Model:
                 self.fit(X, y, n_iter=best_ep)
                 return best_ep
             return None
+        if n == "CatBoost":
+            from catboost import CatBoostRegressor
+            self.m = CatBoostRegressor(iterations=int(n_iter or p["iterations"]), depth=int(p["depth"]), learning_rate=p["learning_rate"],
+                                       l2_leaf_reg=p["l2_leaf_reg"], random_seed=self.seed, thread_count=SETTINGS["xgb_n_jobs"],
+                                       verbose=False, allow_writing_files=False)
+            if n_iter is None and es is not None:
+                self.m.fit(Xs, ys, eval_set=es, early_stopping_rounds=XGB_ES_ROUNDS, use_best_model=True)
+                return int(self.m.get_best_iteration()) + 1
+            self.m.fit(Xs, ys)
+            return None
+        if n == "CNN":
+            from paperb.models_rawseries import RawSeriesCNN
+            self.m = RawSeriesCNN(p, self.seed, SETTINGS["xgb_n_jobs"], SETTINGS["device"])
+            return self.m.fit(Xs, ys, n_iter, es)
+        if n == "TabPFN":
+            import torch
+            torch.set_num_threads(max(1, SETTINGS["xgb_n_jobs"]))     # the queue sets OMP_NUM_THREADS = 1 (BLAS determinism)
+            self.m = tabpfn_regressor(self.seed, p.get("n_estimators")).fit(Xs, ys)
+            return None
         est = {"Ridge": lambda: Ridge(alpha=p["alpha"]),
                "ElasticNet": lambda: ElasticNet(alpha=p["alpha"], l1_ratio=p["l1_ratio"], max_iter=20000),
                "Lasso": lambda: Lasso(alpha=p["alpha"], max_iter=20000),
                "SVR": lambda: SVR(kernel="rbf", C=p["C"], gamma=p["gamma"], epsilon=p["epsilon"]),
                "PLS": lambda: PLSRegression(n_components=int(min(p["n_components"], Xs.shape[1], len(ys) - 1))),
-               "Linear": LinearRegression}[n]()
+               "Linear": LinearRegression,
+               "KernelRidge": lambda: KernelRidge(alpha=p["alpha"], kernel=p["kernel"], gamma=p["gamma"]),
+               "GP": lambda: GaussianProcessRegressor(
+                   ConstantKernel(1.0, (1e-3, 1e3)) * RBF(np.ones(Xs.shape[1]), (1e-2, 1e3)) + WhiteKernel(0.1, (1e-5, 1e1)),
+                   n_restarts_optimizer=3, random_state=self.seed),
+               "RandomForest": lambda: RandomForestRegressor(**self._forest(p)),
+               "ExtraTrees": lambda: ExtraTreesRegressor(**self._forest(p))}[n]()
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             self.m = est.fit(Xs, ys)
+        if n in ("RandomForest", "ExtraTrees"):
+            self.m.n_jobs = 1                                      # threaded tree averaging is order-dependent (1e-14): predict serially
         return None
+
+    def _forest(self, p):
+        return dict(n_estimators=int(p["n_estimators"]), max_features=float(p["max_features"]), min_samples_leaf=int(p["min_samples_leaf"]),
+                    max_depth=None if p["max_depth"] is None else int(p["max_depth"]), random_state=self.seed, n_jobs=SETTINGS["xgb_n_jobs"])
+
+    def predict_interval(self, X, z=1.645):
+        """GP only: (lo, hi) of the central 90 % predictive interval (mean +- z sd, white noise included) on the output scale."""
+        mu, sd = self.m.predict(self._x(X), return_std=True)
+        lo, hi = ((mu + s * z * sd) * self.ysd + self.ym for s in (-1, 1))
+        return (np.exp(lo), np.exp(hi)) if self.opts["target_transform"] == "log" else (lo, hi)
 
     def monotone_constraints(self):
         """+1 on the nf_{all,wd,we}_s_h / _cold_resp columns, 0 elsewhere (the scaler keeps each column's order)."""
@@ -168,7 +263,7 @@ class Model:
 
 
 def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None,
-                    eval_on=None):
+                    eval_on=None, fixed=None):
     """Seeded hyperopt over household-grouped CV; returns (final model, meta dict, Trials).
 
     X, y, groups: inner substations and their fold ids. The final model is refit on (X_final, y_final)
@@ -176,11 +271,17 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
     SPACES[model_name] (e.g. RESIDUAL_SPACES). `eval_on = (y_kw, p_hat)` (arrays aligned with X; 03b) scores the
     out-of-fold predictions as WAPE on the kW scale: y_hat = prediction (p_hat None, direct models) or
     p_hat * exp(prediction) (residual models); meta['cv_wape'] (%, pooled over the folds) is the model-selection
-    statistic of the learning curve -- inner CV only, never test.
+    statistic of the learning curve -- inner CV only, never test. 05b A10: `fixed = (params, best_iter)` skips the search and the
+    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0).
     """
+    if fixed is not None:
+        params, best_iter = dict(fixed[0]), fixed[1]
+        final = Model(model_name, params, seed, opts)
+        final.fit(pd.DataFrame(X if X_final is None else X_final), y if y_final is None else y_final, n_iter=best_iter)
+        return final, {"params": params, "cv_mse": None, "cv_wape": None, "best_iter": best_iter, "n_evals": 0}, None
     X, y, groups = pd.DataFrame(X), np.asarray(y, float), np.asarray(groups)
     folds = sorted(set(groups))
-    iterative = model_name in ("XGBoost", "XGBoost_mono", "FFNN")
+    iterative = model_name in ITERATIVE
 
     def objective(params):
         losses, iters, abserr = [], [], 0.0

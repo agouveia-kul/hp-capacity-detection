@@ -133,6 +133,7 @@ def build_pool_gb_eoh(cfg, verbose=True):
     targets, t_day, t_slot = station_targets(hp.index, temp, TZ_GB, fc["calendar"], 30)
     cand = D[~D["dst"]].assign(pos=np.flatnonzero(~D["dst"].to_numpy()))
     pool.analog, pool.fill_per_dwelling = AnalogFill(S, list(lmeta_all.index), cand, targets, t_day, t_slot, fc), True
+    pool.analog.S_T = D["T"].to_numpy()                                  # 05b: LCL day temperature of every S day (filler response scaling)
     return pool
 
 

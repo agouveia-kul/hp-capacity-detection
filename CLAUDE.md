@@ -61,7 +61,7 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
    - Branch name: `iter/NN-short-slug`.
    - Keep the reviewed diff small, about 300 lines of new or changed logic. Files copied unchanged, and generated results, don't count, but list them.
    - If the work is bigger, stop and propose a split.
-6. **Do not merge.** Commit to the iteration branch and push it. Alex reviews and merges.
+6. **Merge and push only on Alex's request.** Commit to the iteration branch. Push it, or merge it into `main`, only when Alex asks for that (in the conversation, or in instructions he gives for the task, e.g. a handover); never on your own initiative. Alex reviews before any merge. (Amended 2026-10-06; was "Do not merge".)
 7. **Smoke first; long runs overnight.** Every experiment script takes `--config` and has a `quick` config that runs in under about 5 minutes on a small subset. Run `quick` interactively before any long run.
    - Long runs (> 30 min) state their estimated runtime.
    - They go through the resumable job queue (`scripts/paperb/run_queue.py`, from 05a), which runs one job per (arm, seed, draw, n, family), skips finished jobs on relaunch and keeps the PC awake via `SetThreadExecutionState`.
@@ -120,8 +120,8 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
   - ML: netfit + Lasso [size] direct, Lasso residual, XGBoost direct.
 - **Model families (from 05a/05b; all stay in the pipeline and in every arm):**
   - linear: Linear, Ridge, Lasso, ElasticNet, PLS;
-  - kernel: SVR, Kernel Ridge, GP regression;
-  - trees: XGBoost, Random Forest, Extra Trees, CatBoost;
+  - kernel: SVR, Kernel Ridge (GP regression implemented but not run from 05b, A8);
+  - trees: XGBoost, Random Forest, Extra Trees (CatBoost implemented but not run from 05b, A8);
   - neural: FFNN (full budget, 50 evals, patience 20), TabPFN (TabPFN-3.5, checkpoint `tabpfn-v3.5-20260909.safetensors` loaded via `model_path`, `tabpfn` ≥ 9.0.0; non-commercial licence, fine for this research). The weights are downloaded by Alex from Hugging Face into `TABPFN_MODEL_CACHE_DIR` and loaded locally. Never print or commit tokens.
   - raw-series: 1D-CNN on the daily net-load and T series (feature-free check).
 

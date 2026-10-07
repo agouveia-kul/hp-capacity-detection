@@ -1,0 +1,23 @@
+...................................F.................................... [ 67%]
+...................................                                      [100%]
+================================== FAILURES ===================================
+_________ test_tabpfn_is_the_local_v35_checkpoint_with_recorded_hash __________
+
+    @needs_tabpfn
+    def test_tabpfn_is_the_local_v35_checkpoint_with_recorded_hash():
+        from tabpfn.constants import ModelVersion
+        from tabpfn.model_loading import resolve_model_version
+        m = T.tabpfn_regressor(0)
+        assert Path(m.model_path).name == T.TABPFN_CHECKPOINT and Path(m.model_path) == T.tabpfn_checkpoint()
+        assert resolve_model_version(m.model_path) == ModelVersion.V3_5
+        info = T.tabpfn_info()
+        assert info["checkpoint"] == T.TABPFN_CHECKPOINT and re.fullmatch(r"[0-9a-f]{64}", info["sha256"]) and info["package"] >= "9.0.0"
+        for f in (ROOT / "results" / "iter05b_data_limit").rglob("config.yaml"):                  # every recorded hash is this file's
+            if "tabpfn" in (txt := f.read_text(encoding="utf-8")):
+>               assert info["sha256"] in txt
+E               AssertionError: assert 'ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3' in 'exp_id: protocol_v1_1\nprotocol: v1.1\nout_dir: results/protocol_v1_1\ncache_dir: data/_paperb\npaper_a_repo: ../hp-s...A_sh_mh, paperA_corr, paperA_corr_own]\n    - oracle_rows=true\ngit_commit: 2e6f229e17ec63dd3e53689584ea89523383fbe2\n'
+
+tests\test_05b.py:315: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_05b.py::test_tabpfn_is_the_local_v35_checkpoint_with_recorded_hash
+1 failed, 106 passed in 1471.04s (0:24:31)

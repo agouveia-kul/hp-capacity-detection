@@ -196,8 +196,16 @@ class AnalogFill:
                      for st, t in sorted(self.targets.items())}
 
     def day_sum(self, members):
+        """Sum of the members' source days [source day, slot] in float64. Rows are added one at a time (the order numpy uses
+        for an axis-0 sum, so the result is bitwise identical) to avoid a float64 copy of all members (~0.8 GB for 2,399
+        train fillers per worker)."""
         idx = sorted(self.pos[h] for h in members)
-        return np.asarray(self.S[idx], np.float64).sum(axis=0)           # [source day, slot]
+        if not idx:
+            return np.zeros(self.S.shape[1:], np.float64)
+        acc = np.array(self.S[idx[0]], np.float64)
+        for i in idx[1:]:
+            acc += self.S[i]
+        return acc
 
     def aggregate(self, members, station, A=None):
         """Filler aggregate of `members` on the target index (float64 array)."""

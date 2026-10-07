@@ -1,0 +1,10 @@
+# 05b Arm 1 (learning curve, stage 1): GB-EoH main window, 10 seeds x 2 draws, n in {16, 32, 62, 100, 200} distinct train HP
+# households (learning_curve.py: train substations and inner folds rebuilt from the subsample, test substations fixed). A4: netfit x
+# size only (raw-series: size). The n = all point is Arm 2 restricted to netfit x size, seeds 0-9 (same split, test substations,
+# models and seeds, so the same predictions; it is not run twice). Run through the queue only (one job per seed, n, draw, family).
+base: configs/iter05b_arm2.yaml
+exp_id: iter05b_arm1
+out_dir: results/iter05b_data_limit/stage1/arm1
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+anchors: [size]
+feature_sets: [netfit, raw]

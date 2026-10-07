@@ -25,3 +25,9 @@ results/**/_pre_run_*
 # 03b: the two big long-format files are committed gzipped (61 MB / 33 MB raw); gunzip them before running fair_test_tables.py
 /results/iter03b_fair_test/arm_main/metrics.csv
 /results/iter03b_fair_test/arm_lc/metrics_lc.csv
+# 05b: local secrets (HF_TOKEN, TABPFN_TOKEN) are never committed
+.env
+# 05b stage 1: the big merged long-format files are committed gzipped (82 / 26 / 58 MB raw); gunzip before iter05b_report.py
+/results/iter05b_data_limit/stage1/arm1/metrics_lc.csv
+/results/iter05b_data_limit/stage1/arm1/dropped_cells.csv
+/results/iter05b_data_limit/stage1/arm2/metrics.csv

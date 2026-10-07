@@ -9,7 +9,7 @@ substations are identical across n (checked here). 05a: `learning_curve.substati
 default: the grid's value) rebuilds the train substations with that many per cell; test and inner substations are
 unchanged. Rows carry `spc_train` (None = the grid default). The Paper A pilot is the subsample, so the estimator and the ML
 models see the same labelled HP households. The runner scores each draw into metrics_lc.csv (usual columns plus
-n_train_hp and lc_draw).
+n_train_hp and lc_draw). 05b: `learning_curve.draw_ids` runs only the listed draws (one queue job per (n, draw)).
 """
 import numpy as np
 
@@ -39,7 +39,7 @@ def lc_designs(cfg, meta, split, seed, test_members):
     designs = [(spc, n) for spc in lc.get("substations_per_cell_train", [None]) for n in lc["n"]]
     for spc, n in designs:
         c = cfg if spc is None else {**cfg, "grid": {**cfg["grid"], "substations_per_cell": {**cfg["grid"]["substations_per_cell"], "train": spc}}}
-        for draw in range(1 if n == "all" else lc["draws"]):
+        for draw in ([0] if n == "all" else lc.get("draw_ids") or range(lc["draws"])):
             try:
                 sub = lc_subsample(split["train"]["hp"], n, seed, draw)
             except ValueError as e:

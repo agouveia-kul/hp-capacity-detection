@@ -10,17 +10,26 @@
   registered through the ScheduledTasks cmdlets so the start date does not depend on the locale's date format.
   The queue keeps the PC awake while it runs (SetThreadExecutionState); the PC must be awake at -StartAt.
   Pausing OneDrive sync overnight is advised. -DryRun prints what would be registered and changes nothing.
+  -Continuous (05b, A6) omits the morning stop: the queue also runs in the daytime, at below-normal priority, until no job remains.
+  -Shard I/N (05b) runs only the jobs at positions I mod N, so several machines can share one queue (see run_queue.py).
+  -Families a,b (05b) runs only those queue families, e.g. rawseries,tabpfn on the GPU machine.
 
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter05a_overnight.yaml -StopAt 07:30
+.EXAMPLE
+  powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter05b_stage1.yaml -StartAt 22:00 -Continuous
 #>
 param(
     [Parameter(Mandatory = $true)][string]$Config,
     [string]$StartAt = "22:00",
     [string]$StopAt = "",
     [int]$Workers = 0,
+    [string]$Shard = "",
+    [string]$Families = "",
+    [switch]$Continuous,
     [switch]$DryRun
 )
+if ($Continuous -and $StopAt) { throw "-Continuous runs until the queue is empty: do not combine it with -StopAt" }
 $ErrorActionPreference = "Stop"
 $Repo = Split-Path -Parent $PSScriptRoot
 $yaml = Get-Content (Join-Path $Repo $Config) -Raw
@@ -29,15 +38,18 @@ $OutDir = Join-Path $Repo ([regex]::Match($yaml, '(?m)^out_dir:\s*(\S+)')).Group
 if (-not $ExpId -or -not $OutDir) { throw "exp_id / out_dir not found in $Config" }
 
 $QueueArgs = "--config $Config"
-if ($StopAt) { $QueueArgs += " --stop-at $StopAt" }
+if ($StopAt -and -not $Continuous) { $QueueArgs += " --stop-at $StopAt" }
 if ($Workers -gt 0) { $QueueArgs += " --workers $Workers" }
+if ($Shard) { $QueueArgs += " --shard $Shard" }
+if ($Families) { $QueueArgs += " --families $Families" }
 $Launch = Join-Path $OutDir "launch.cmd"
 $Body = "@echo off`r`ncd /d `"$Repo`"`r`nstart `"paperb-$ExpId`" /belownormal /wait /b `"$Repo\.venv\Scripts\python.exe`" scripts\paperb\run_queue.py $QueueArgs >> `"$OutDir\log.txt`" 2>&1`r`n"
 
 $At = [datetime]::ParseExact($StartAt, "HH:mm", $null)
 if ($At -le (Get-Date)) { $At = $At.AddDays(1) }
 $TaskName = "paperb-$ExpId"
-Write-Output "Task      : $TaskName (current user, once at $($At.ToString('yyyy-MM-dd HH:mm')), below-normal priority)"
+$Mode = if ($Continuous) { "continuous until the queue is empty (day and night)" } elseif ($StopAt) { "no new job after $StopAt" } else { "until the queue is empty" }
+Write-Output "Task      : $TaskName (current user, once at $($At.ToString('yyyy-MM-dd HH:mm')), below-normal priority, $Mode)"
 Write-Output "Launcher  : $Launch"
 Write-Output "Command   : .venv\Scripts\python.exe scripts\paperb\run_queue.py $QueueArgs >> $OutDir\log.txt"
 if ($DryRun) { Write-Output "DryRun: nothing written or registered."; exit 0 }

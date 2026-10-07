@@ -1,0 +1,23 @@
+# 05b timing probe (Task 2 step 1): Arm 2, seed 0, full size, one job per queue family, run before stage 1 is scheduled. The quick run
+# (tiny grid, 3 evals) cannot be scaled to the new models: on the 05a families its full / quick ratio ranges from 9x (XGBoost) to 100x
+# (linear). Same exp_id, out_dir, arm name and arm config as configs/iter05b_stage1.yaml, so the job ids are identical
+# (arm2__s0__d0__nall__<family>) and stage 1 skips these jobs when it is launched: the probe is part of stage 1, not extra work.
+# Then: python scripts/paperb/runtime_estimate.py --probe05b --workers 10
+# Kept as run (2026-10-01/02). A8 then removed CatBoost and GP from stage 1: their probe jobs stay on disk, outside the stage-1
+# job list, so the queue's merge and the tables never read them.
+exp_id: iter05b_stage1
+out_dir: results/iter05b_data_limit/stage1
+workers: 9                                   # one job per family at once, as in the 05a probe
+families:
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
+  trees: {models: [XGBoost, RandomForest, ExtraTrees], residual_models: [XGBoost, RandomForest, ExtraTrees]}
+  kernel: {models: [SVR, KernelRidge], residual_models: [SVR, KernelRidge]}
+  catboost: {models: [CatBoost], residual_models: [CatBoost]}
+  neural: {models: [FFNN], residual_models: [FFNN]}
+  rawseries: {models: [CNN], residual_models: [CNN]}
+  tabpfn: {models: [TabPFN], residual_models: [TabPFN], max_concurrent: 3}
+  gp: {models: [GP], residual_models: [GP]}
+arms:
+  - {name: arm2, config: configs/iter05b_arm2.yaml, seeds: [0],
+     families: [physics, linear, trees, kernel, catboost, neural, rawseries, tabpfn, gp]}

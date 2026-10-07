@@ -1,0 +1,50 @@
+# 05b quick run (Task 2, run interactively before anything is scheduled): the stage-1 arm configs on a tiny grid (sizes {10, 40},
+# p {0.1, 0.5}, 3 train / 2 test / 2 inner substations per cell, 3 hyperopt evals; CNN 2 evals of at most 3 epochs is not
+# configurable, so CNN runs its normal epochs on the tiny set), 1 seed, every queue family, plus one learning-curve design (n = 62,
+# draw 0) and the stage-2 code paths: oracle rows + O1 pool (arm q_oracle), filler response x0.5 (q_scale), B* own-load response
+# removed (q_bstar_o1b, physics only). Not a result. CatBoost and GP removed (A8, 2026-10-02).
+exp_id: iter05b_quick
+out_dir: results/iter05b_data_limit/quick
+workers: 6
+families:
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
+  trees: {models: [XGBoost, RandomForest, ExtraTrees], residual_models: [XGBoost, RandomForest, ExtraTrees]}
+  kernel: {models: [SVR, KernelRidge], residual_models: [SVR, KernelRidge]}
+  neural: {models: [FFNN], residual_models: [FFNN]}
+  rawseries: {models: [CNN], residual_models: [CNN]}
+  tabpfn: {models: [TabPFN], residual_models: [TabPFN], max_concurrent: 3}
+arms:
+  - name: q_arm1
+    config: configs/iter05b_arm1.yaml
+    seeds: [0]
+    n: [62]
+    draws: [0]
+    families: [physics, linear, trees, kernel, neural, rawseries, tabpfn]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+          "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}"]
+  - name: q_arm2
+    config: configs/iter05b_arm2.yaml
+    seeds: [0]
+    families: [physics, linear, trees, kernel, neural, rawseries, tabpfn]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+          "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}", "oracle_rows=true"]
+  - name: q_oracle
+    config: configs/iter05b_arm2.yaml
+    seeds: [0]
+    families: [physics, linear]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+          "cv.hyperopt.max_evals=3", "anchors=[size]", "feature_sets=[netfit]", "pool.oracle=O1"]
+  - name: q_scale
+    config: configs/iter05b_arm2.yaml
+    seeds: [0]
+    families: [physics]
+    set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+          "pool.response_scale={fill: 0.5}", "paperA.estimators=[paperA_sh_mh, paperA_corr, paperA_corr_s0unscaled, paperA_corr_own]"]
+  - name: q_bstar_o1b
+    config: configs/pool_bstar.yaml
+    seeds: [0]
+    families: [physics]
+    set: ["exp_id=iter05b_quick_bstar", "pred_figures=false", "targets=[HP_Peak]", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]",
+          "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2", "feature_sets=[netfit]", "pool.response_scale={own: 0}",
+          "physics_baselines=[slope_base]", "paperA.estimators=[paperA_sh_mh, paperA_corr, paperA_corr_own]", "oracle_rows=true"]

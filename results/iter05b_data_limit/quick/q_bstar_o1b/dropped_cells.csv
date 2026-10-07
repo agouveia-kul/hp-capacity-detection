@@ -1,0 +1,61 @@
+split_seed,split,fold,station,size,p,n_hp,H,F,reason,arm,family
+0,train,-1,HbsbG,10,0.1,1,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,HbsbG,10,0.5,5,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,HbsbG,40,0.1,4,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,HbsbG,40,0.5,20,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,Hg,40,0.5,20,12,968,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,train,-1,MqO,10,0.5,5,4,968,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,train,-1,MqO,40,0.1,4,4,968,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,train,-1,MqO,40,0.5,20,4,968,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,train,-1,z6I,10,0.1,1,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,z6I,10,0.5,5,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,z6I,40,0.1,4,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,train,-1,z6I,40,0.5,20,1,968,station pool < min_station_pool,q_bstar_o1b,physics
+0,test,-1,Hg,10,0.5,5,4,323,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,test,-1,Hg,40,0.1,4,4,323,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,test,-1,Hg,40,0.5,20,4,323,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,test,-1,KLO,40,0.5,20,16,323,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,test,-1,MqO,10,0.1,1,2,323,station pool < min_station_pool,q_bstar_o1b,physics
+0,test,-1,MqO,10,0.5,5,2,323,station pool < min_station_pool,q_bstar_o1b,physics
+0,test,-1,MqO,40,0.1,4,2,323,station pool < min_station_pool,q_bstar_o1b,physics
+0,test,-1,MqO,40,0.5,20,2,323,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,0,Hg,10,0.5,5,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,0,Hg,40,0.1,4,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,0,Hg,40,0.5,20,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,0,KLO,40,0.5,20,11,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,0,MqO,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,0,MqO,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,0,MqO,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,0,MqO,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,Hg,10,0.5,5,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,1,Hg,40,0.1,4,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,1,Hg,40,0.5,20,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,1,KLO,40,0.5,20,12,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,1,MqO,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,MqO,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,MqO,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,MqO,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,z6I,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,z6I,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,z6I,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,1,z6I,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,2,Hg,10,0.5,5,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,2,Hg,40,0.1,4,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,2,Hg,40,0.5,20,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,2,KLO,40,0.5,20,12,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,2,MqO,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,2,MqO,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,2,MqO,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,2,MqO,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,HbsbG,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,HbsbG,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,HbsbG,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,HbsbG,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,Hg,10,0.5,5,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,3,Hg,40,0.1,4,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,3,Hg,40,0.5,20,3,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,3,KLO,40,0.5,20,11,242,n_hp > max_overlap * H,q_bstar_o1b,physics
+0,inner,3,MqO,10,0.1,1,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,MqO,10,0.5,5,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,MqO,40,0.1,4,1,242,station pool < min_station_pool,q_bstar_o1b,physics
+0,inner,3,MqO,40,0.5,20,1,242,station pool < min_station_pool,q_bstar_o1b,physics

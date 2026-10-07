@@ -20,7 +20,27 @@ The hypotheses and the decision rule below are **pre-registered**: they are fixe
   - Arm 3 uses `substations_per_cell_train` ∈ {10, 40};
   - Arm 4 on B\* is physics-only.
 - **[A5] Staged runs.** Stage 1 = Arms 1 + 2, then a short interim REVIEW. Stage 2 = Arms 3–7, after Alex's go.
+- **[A7] Co-located non-HP response (from the 05a D5 diagnosis, `d5_paperA_diagnostic.md`).** On B\*, the HP homes' **own** non-HP load has a temperature slope ≈ 3.3 × a filler home's (0.018 vs 0.005 kW/K; partly electric water heaters, M9). It scales with n_hp, not N, and neither `paperA_sh_mh` nor `paperA_corr` removes it. Two additions follow, both physics-only:
+  - **Split the B\* error decomposition (Arm 4).** Fill contamination becomes two parts:
+    - (i) **fillers' response**: oracle O1a replaces only the fillers' load with zero-temperature-response load (each filler's daily-mean deviation from its own temperature fit removed, P_base kept);
+    - (ii) **HP homes' own non-HP response**: O1b does the same for the HP homes' own non-HP load only.
+
+    O1 (both removed) stays as before. Report (i) and (ii) per bin. On GB-EoH, (ii) is structurally absent: each HP dwelling's own load is a random LCL filler. State that.
+  - **A new label-free physics row, `paperA_corr_own`.** Pilot m_h′ = [s_h(pilot HP homes' **whole-house** load, i.e. HP + own non-HP) − n_pilot · s₀] / P_pilot, and P̂ = max(s_h − N·s₀, 0) / m_h′.
+    - The co-located response is thereby folded into the per-unit scale. It needs whole-house meters on the pilot homes (smart meters), and no substation labels.
+    - Cross-fitted pilots and the s₀ estimate are as for `paperA_corr`. Invalid estimates → 0, counted.
+    - On GB-EoH, `paperA_corr_own` uses the pilot homes' HP load + their assigned filler's load. Because that filler is random, it should approximately equal `paperA_corr`; report both, as a check.
+  - **Run it** in Arms 1, 2, 4, 5, 6 and 7 with the other physics rows. It joins the physics rows from which the best physics row is chosen for the criterion. Adding it before any run is pre-registration-safe.
+  - **Test:** on a toy pool where the own load has a known slope k per HP home, `paperA_corr_own` recovers capacity within 1 %, while `paperA_corr` is biased by k / m_h per HP home.
 - **[A6] Continuous running.** The schedule may also run in the daytime at below-normal priority. Add a `-Continuous` switch to `schedule_overnight.ps1` that omits `-StopAt`. Alex chooses per stage.
+- **[A8] Models (Alex, 2026-10-02, after the timing probe, before any stage-1 result).** CatBoost and GP regression are not run in any arm; the code and its tests stay. Kernel family = SVR, Kernel Ridge; trees family = XGBoost, Random Forest, Extra Trees. Seeds and the decision rule are unchanged. Reason: the probe put stage 1 at 81 h wall (8.5 nights); CatBoost and GP were 46 % of it and are near-duplicates within their families (no categorical features; KRR = GP posterior mean). The GP predictive-interval column is dropped with GP.
+- **[A10] Refit, persist and carry forward (Alex, 2026-10-05, before any Stage 1 result was read).** Goal: save compute after Stage 1 by keeping the trained models and running only the best families later. Fixed before the Stage 1 merge (hard rule 12); A9 is the GPU decision in `DECISIONS.md`.
+  - **Refit and persist.** For each of the 20 Arm 2 seeds and each of the 5 families, refit the family's inner-CV winner with its logged hyperparameters (and logged best iteration), on the same train substations and with the same seed; nothing is re-tuned. Models go to `results/iter05b_data_limit/stage1/models/s<seed>/<family>/` (git-ignored, never `models/`), each with a manifest: configuration, hyperparameters, feature list, the fitted preprocessing, package versions, SHA-256. CNN and TabPFN are refit on machine B's GPU (A9); TabPFN's "model" is its train context plus the checkpoint hash.
+  - **Reload check.** Load each saved model in a fresh process, predict the seed's test substations, and compare with the test predictions the queue logged. Pass: max relative difference ≤ 1e-6 (CPU models); |ΔWAPE| ≤ 0.1 pp (GPU models: CNN, TabPFN). A failure is listed in the REVIEW and that model is not carried forward. The Arm 2 numbers stay the results of record either way.
+  - **Carry-forward rule.** Rank the families by the median over the 20 seeds of their Arm 2 winner's **inner-CV** WAPE (never test). Carry forward the top 2 families plus any family within 1 pp of the best; linear is always kept (cheap; reference-set Lasso rows); the physics rows are always kept.
+  - **Use in Stage 2.** The carried families run with each seed's frozen Arm 2 configuration and hyperparameters, refit on the arm's own data (no hyperopt), in Arms 3, 4, 6 and 7; Arm 7 also reports a frozen-model row (the step-1 model, trained at ×1.0, applied to the scaled test data). Arm 5 (B\*, another pool) keeps per-arm tuning for the carried families. This replaces inner-CV selection on each arm's data (methodological change, stated in the REVIEW). Caution: in Arm 3, settings tuned at n = all with 10 substations per cell and reused at n = 62 or 40 per cell slightly favour the n = all case.
+  - Saved models are reused without training from iteration 07 (transfer) and 08–09 (change detection).
+- **[A11] Stage 2 on CPU for TabPFN and CNN (Alex, 2026-10-06, REVIEW_stage1 decision 2 option b).** Machine B, the only GPU, is unavailable for about 4 months: the carried TabPFN and CNN families run on machine A's CPU (deviation from A9). Gate, fixed before running: the 40 GPU-fitted A10 winners reloaded on the CPU must match the logged GPU test predictions within |ΔWAPE| ≤ 0.1 pp each (`refit_persist.py check --families rawseries,tabpfn --device cpu --out reload_check_cpu.csv`); otherwise another GPU (option a).
 
 ## Question
 On B\*, no ML configuration beat physics (03b). Is that because ML saw too few distinct HP households (≈ 62), or because net load does not identify capacity beyond what physics already extracts?
@@ -150,7 +170,7 @@ Runtime is not a constraint, but use the [A4] reductions, and re-estimate after 
 
 Then stop, and wait for Alex's go for Stage 2.
 
-**Stage 2 (Arms 3–7)** in this order: Arm 7 → Arm 4 → Arm 3 → Arm 5 → Arm 6. The final REVIEW.md comes after Stage 2.
+**Stage 2 (Arms 3–7)** in this order: Arm 7 → Arm 4 → Arm 3 → Arm 5 → Arm 6. Arm 4's B\* part includes the [A7] split. The final REVIEW.md comes after Stage 2. Its decisions must also cover: does `paperA_corr_own` close the gap to the label-calibrated rows on B\* (overall and per bin)?
 
 | Arm | Pool / seeds | What |
 |---|---|---|

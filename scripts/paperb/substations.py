@@ -11,12 +11,15 @@ than min_station_pool HP households) raises InfeasibleCellError, or is listed in
 Only memberships are stored; `evaluate_members` builds each aggregate on the fly and returns targets,
 anchors, physics features and (optionally) the feature columns of `cfg['feature_sets']`: the legacy
 windowed-HDD features (`whdd`) and/or the net-load fit features (`netfit`, 03a); `both` computes both.
+05b: feature set `raw` adds the daily series of the raw-series CNN (`raw_daily`); `pool.oracle: O1` (oracle O1, a diagnostic)
+replaces the net load by the substation's HP aggregate for every feature and physics fit (targets unchanged).
 """
 import numpy as np
 import pandas as pd
 
 from hp_capacity import extract_windowed_hdd_features_from_series
 from paperb.features_netfit import netfit_features
+from paperb.models_rawseries import RAW_DAYS, raw_columns
 from paperb.physics import daily_means, fit_daily, net_features
 
 SPLIT_CODE = {"train": 1, "test": 2, "inner": 3}
@@ -88,6 +91,13 @@ def build_substations(meta, split, seed, cfg, folds=None):
     return members.rename_axis("sub_id"), pd.DataFrame(dropped)
 
 
+def raw_daily(T, net, n_days=RAW_DAYS):
+    """05b raw-series input: the first `n_days` UTC-day means of the net load and the temperature (NaN-padded)."""
+    d = pd.DataFrame({"y": net, "T": T}).resample("D").mean().iloc[:n_days]
+    pad = lambda v: np.r_[v, np.full(n_days - len(v), np.nan)]          # noqa: E731
+    return dict(zip(raw_columns(n_days), np.r_[pad(d["y"].to_numpy(float)), pad(d["T"].to_numpy(float))]))
+
+
 def _fit_or_nan(T, y):
     try:
         return fit_daily(*daily_means(T, y))
@@ -104,6 +114,7 @@ def evaluate_members(pool, members, cfg, with_features=True):
     t_design = cfg["target_defs"]["T_design_C"]
     sets = set(cfg.get("feature_sets", ["whdd"]))
     cal = tuple(cfg["pool"].get("holidays", "CH-ZH").split("-"))            # 05a: netfit working-day calendar per pool
+    oracle = cfg["pool"].get("oracle")
     rows, feats = {}, {}
     for sid, m in members.iterrows():
         ih, jf = [hp_pos[h] for h in m["hp_members"]], [fill_pos[h] for h in m["fill_members"] if h in fill_pos]
@@ -113,7 +124,7 @@ def evaluate_members(pool, members, cfg, with_features=True):
         else:
             nonhp = pd.Series(own_arr[ih].sum(axis=0, dtype=np.float64) + fill_arr[jf].sum(axis=0, dtype=np.float64),
                               index=pool.index)
-        net, T = hp + nonhp, pool.temp[m["station"]]
+        net, T = (hp if oracle == "O1" else hp + nonhp), pool.temp[m["station"]]     # 05b O1: the HP aggregate replaces the net load
         f_hp, f_non = _fit_or_nan(T, hp), _fit_or_nan(T, nonhp)
         rows[sid] = {"HP_Peak": float(peak[m["hp_members"]].sum()), "HP_CoincPeak": float(hp.max()),
                      "HP_Count": len(m["hp_members"]), "s_h": f_hp["s_h"],
@@ -129,5 +140,7 @@ def evaluate_members(pool, members, cfg, with_features=True):
                                                                             **cfg["features"]["kwargs"]))
             if sets & {"netfit", "both"}:
                 feats[sid].update(netfit_features(T, net, calendar=cal))
+            if "raw" in sets:
+                feats[sid].update(raw_daily(T, net))
     tab = members.drop(columns=["hp_members", "fill_members"]).join(pd.DataFrame.from_dict(rows, orient="index"))
     return tab, (pd.DataFrame.from_dict(feats, orient="index").reindex(tab.index) if with_features else None)
