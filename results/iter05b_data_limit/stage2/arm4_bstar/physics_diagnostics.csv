@@ -1,0 +1,2 @@
+split_seed,n_substations,hinge_inside_net,hinge_inside_hp,at_bound_net,coincpeak_gt_peak,failed_net_fit,failed_hp_fit,arm,family
+0,1075,1.0,1.0,0.017674418604651163,385,0,0,arm4_bstar,physics

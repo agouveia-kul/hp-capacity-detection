@@ -1,0 +1,379 @@
+exp_id: iter05b_arm4
+protocol: v1.1
+out_dir: results/iter05b_data_limit/stage2/arm4
+cache_dir: data/_paperb
+paper_a_repo: ../hp-sensitivity-paper
+pool:
+  option: gb_eoh
+  year: 2122r3
+  coverage_min: 0.9
+  station_alias:
+    8jB: KLO
+  sfh_own_load_type: Single-family house
+  seed: 0
+  windows:
+    first: '2021-06-01'
+    last_start: '2022-01-01'
+  data_end: '2023-09-29'
+  silent_elec_max: 0.05
+  zero_run_heat_tol_kW: 0.1
+  max_interp_slots: 4
+  holidays: GB-ENG
+  fill:
+    calendar: GB-ENG
+    lcl_window:
+    - '2012-07-01'
+    - '2014-02-28'
+    lcl_coverage_min: 0.9
+    lcl_max_kwh: 10.0
+    lcl_zero_run_slots: 48
+    max_interp_slots: 4
+    doy_windows:
+    - 30
+    - 45
+    - 60
+    tol_K: 1.0
+    k_nearest: 3
+    temp_source: heathrow
+    subset: null
+split:
+  test_frac: 0.25
+  stratify: station
+  seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+grid:
+  size:
+  - 10
+  - 20
+  - 40
+  - 80
+  - 120
+  penetration:
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 0.8
+  - 1.0
+  n_hp: round
+  max_overlap: 0.75
+  min_station_pool: 3
+  substations_per_cell:
+    train: 10
+    test: 5
+  on_infeasible: drop
+cv:
+  scheme: household_grouped
+  k: 4
+  inner_substations_per_cell: 5
+  early_stopping: next_training_fold
+  hyperopt:
+    max_evals: 50
+    seed: split_seed
+    max_evals_by_model:
+      CNN: 30
+  final_refit: median_best_iteration
+models: []
+ffnn:
+  enabled: true
+  patience: 20
+feature_sets:
+- netfit
+- both
+- raw
+modes:
+- direct
+- residual
+target_transforms:
+- log
+residual_models: []
+paperA:
+  estimators:
+  - paperA_sh_mh
+  - paperA_sh_mh_station
+  - paperA_cal
+  - paperA_corr
+  - paperA_corr_cal
+  - paperA_corr_own
+  cap_def: hp_peak
+  min_station_pilot: 10
+  target: HP_Peak
+  cap_def_check: false
+  fill_station: null
+  crossfit: true
+anchors:
+- size
+- size_peak
+model_anchors: {}
+anchor_only_baselines:
+  models:
+  - Linear
+  - XGBoost
+  features:
+  - - size
+  - - peak
+  - - size
+    - peak
+physics_baselines:
+- slope_only
+- slope_base
+- calibrated_delta
+- hdh
+features:
+  T_base: 12.0
+  kwargs:
+    resolution: 15
+    mild_thresh: 10.0
+    cold_thresh: 25.0
+    weekday_only: true
+    include_shape: false
+    include_minmax: true
+    include_quantiles: true
+    include_n_days: false
+    include_corr_features: false
+    include_climate_context: false
+    normalize_by_peak: true
+targets:
+- HP_Peak
+target_defs:
+  robust_q: 0.999
+  T_design_C: -3.0
+bootstrap:
+  unit: hp_household
+  B: 2000
+  seed: split_seed
+uncertainty:
+  bootstrap: false
+  summary_band:
+  - 0.05
+  - 0.9
+parallel:
+  workers: 4
+  blas_threads: 1
+metrics:
+- wape
+- mape
+- r2
+- rmse
+- mae
+quick:
+  split.seeds:
+  - 0
+  grid.size:
+  - 10
+  grid.substations_per_cell:
+    train: 6
+    test: 3
+  cv.inner_substations_per_cell: 3
+  cv.hyperopt.max_evals: 5
+  models:
+  - XGBoost
+  anchors:
+  - size_peak
+  targets:
+  - HP_Peak
+  physics_baselines:
+  - slope_only
+  anchor_only_baselines.models:
+  - Linear
+  bootstrap.B: 200
+pred_figures: false
+model_feature_sets:
+  CNN:
+  - raw
+oracle_rows: true
+queue:
+  exp_id: iter05b_stage2
+  out_dir: results/iter05b_data_limit/stage2
+  workers: 6
+  frozen:
+    models_csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv
+    models_dir: results/iter05b_data_limit/stage1/models
+  families:
+    physics: {}
+    linear:
+      models:
+      - Linear
+      - Ridge
+      - Lasso
+      - ElasticNet
+      - PLS
+      residual_models:
+      - Linear
+      - Ridge
+      - Lasso
+      - ElasticNet
+      - PLS
+    tabpfn:
+      models:
+      - TabPFN
+      residual_models:
+      - TabPFN
+      max_concurrent: 3
+    rawseries:
+      models:
+      - CNN
+      residual_models:
+      - CNN
+    neural:
+      models:
+      - FFNN
+      residual_models:
+      - FFNN
+  arms:
+  - name: arm2_cpu
+    config: configs/iter05b_arm2.yaml
+    seeds:
+    - 0
+    frozen: true
+    families:
+    - linear
+    - tabpfn
+    - rawseries
+  - name: arm7_x05
+    config: configs/iter05b_arm7.yaml
+    seeds:
+    - 0
+    frozen: true
+    frozen_model: true
+    families:
+    - physics
+    - linear
+    - tabpfn
+    - rawseries
+    set:
+    - 'pool.response_scale={fill: 0.5}'
+  - name: arm7_x15
+    config: configs/iter05b_arm7.yaml
+    seeds:
+    - 0
+    frozen: true
+    frozen_model: true
+    families:
+    - physics
+    - linear
+    - tabpfn
+    - rawseries
+    set:
+    - 'pool.response_scale={fill: 1.5}'
+  - name: arm4
+    config: configs/iter05b_arm4.yaml
+    seeds:
+    - 0
+    families:
+    - physics
+  - name: arm4_o1
+    config: configs/iter05b_arm4.yaml
+    seeds:
+    - 0
+    frozen: true
+    families:
+    - linear
+    - tabpfn
+    - rawseries
+    set:
+    - pool.oracle=O1
+  - name: arm4_bstar
+    config: configs/iter05b_arm5.yaml
+    seeds:
+    - 0
+    families:
+    - physics
+    set:
+    - exp_id=iter05b_arm4_bstar
+    - oracle_rows=true
+  - name: arm4_bstar_o1a
+    config: configs/iter05b_arm5.yaml
+    seeds:
+    - 0
+    families:
+    - physics
+    set:
+    - exp_id=iter05b_arm4_bstar_o1a
+    - 'pool.response_scale={fill: 0}'
+  - name: arm4_bstar_o1b
+    config: configs/iter05b_arm5.yaml
+    seeds:
+    - 0
+    families:
+    - physics
+    set:
+    - exp_id=iter05b_arm4_bstar_o1b
+    - 'pool.response_scale={own: 0}'
+  - name: arm3_spc10
+    config: configs/iter05b_arm3.yaml
+    seeds:
+    - 0
+    n:
+    - 62
+    - all
+    draws:
+    - 0
+    spc_train: 10
+    frozen: true
+    families:
+    - physics
+    - linear
+    - tabpfn
+    - rawseries
+  - name: arm3_spc40
+    config: configs/iter05b_arm3.yaml
+    seeds:
+    - 0
+    n:
+    - 62
+    - all
+    draws:
+    - 0
+    spc_train: 40
+    frozen: true
+    families:
+    - physics
+    - linear
+    - tabpfn
+    - rawseries
+  - name: arm5
+    config: configs/iter05b_arm5.yaml
+    seeds:
+    - 0
+    families:
+    - physics
+    - linear
+    - neural
+    - tabpfn
+    - rawseries
+  - name: arm6
+    config: configs/iter05b_arm6.yaml
+    seeds:
+    - 0
+    frozen: true
+    families:
+    - physics
+    - linear
+    - tabpfn
+    - rawseries
+git_commit: 255f1d8163dea056e0f127daca786bc62738a735
+tabpfn:
+  checkpoint: tabpfn-v3.5-20260909.safetensors
+  sha256: ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3
+  package: 9.0.0

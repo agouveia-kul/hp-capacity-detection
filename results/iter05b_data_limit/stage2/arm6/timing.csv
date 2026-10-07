@@ -1,0 +1,8 @@
+split_seed,method,seconds,n_substations,target,anchor,feature_set,mode,target_transform,n_evals,n_inner,n_train,cv_wape,train_wape,arm,family
+0,evaluate_members,1219.1725285053253,3360.0,nan,nan,nan,nan,nan,,,,,,arm6,physics
+0,anchor_only_Linear,0.08964133262634277,,HP_Peak,size,-,direct,none,0.0,1135.0,1870.0,56.85324626748522,73.57241405550788,arm6,physics
+0,anchor_only_Linear,0.08424878120422363,,HP_Peak,peak,-,direct,none,0.0,1135.0,1870.0,51.03714680469898,57.08343029544748,arm6,physics
+0,anchor_only_Linear,0.08664178848266602,,HP_Peak,size+peak,-,direct,none,0.0,1135.0,1870.0,37.78540205609866,32.75314030933732,arm6,physics
+0,anchor_only_XGBoost,217.86791896820068,,HP_Peak,size,-,direct,none,50.0,1135.0,1870.0,56.851970769839724,73.85258844865612,arm6,physics
+0,anchor_only_XGBoost,288.26577734947205,,HP_Peak,peak,-,direct,none,50.0,1135.0,1870.0,45.954860058430896,49.13931863750596,arm6,physics
+0,anchor_only_XGBoost,695.403805732727,,HP_Peak,size+peak,-,direct,none,50.0,1135.0,1870.0,40.89435335318888,40.57188380375592,arm6,physics
