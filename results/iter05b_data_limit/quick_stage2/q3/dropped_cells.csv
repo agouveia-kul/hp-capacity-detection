@@ -1,0 +1,727 @@
+split_seed,split,fold,station,size,p,n_hp,H,F,reason,arm,family
+0,train,-1,G003,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G006,40,0.5,20,13,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G007,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G008,40,0.5,20,9,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G011,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G012,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G013,40,0.5,20,13,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G015,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G016,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G017,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G018,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G018,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G018,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G019,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G021,40,0.5,20,7,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,10,0.5,5,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,40,0.1,4,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,40,0.5,20,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G023,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,test,-1,G001,40,0.5,20,25,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G005,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G006,10,0.5,5,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G006,40,0.1,4,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G006,40,0.5,20,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G007,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G008,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G008,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G008,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G009,40,0.5,20,9,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G010,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G011,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G011,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G011,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G012,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G013,10,0.5,5,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G013,40,0.1,4,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G013,40,0.5,20,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G014,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G016,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G016,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G016,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G018,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,inner,0,G001,40,0.5,20,19,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G003,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G006,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G006,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G006,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G013,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G013,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G013,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G001,40,0.5,20,18,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G005,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G006,10,0.5,5,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G006,40,0.1,4,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G006,40,0.5,20,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G008,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G008,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G008,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G013,10,0.5,5,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G013,40,0.1,4,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G013,40,0.5,20,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G001,40,0.5,20,18,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G013,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G013,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G013,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,3,G001,40,0.5,20,19,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G002,40,0.5,20,22,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G003,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G006,10,0.5,5,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G006,40,0.1,4,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G006,40,0.5,20,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G007,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G009,40,0.5,20,7,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G010,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G013,10,0.5,5,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G013,40,0.1,4,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G013,40,0.5,20,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G014,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,train,-1,G003,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G003,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G005,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G006,40,0.5,20,13,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G007,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G008,40,0.5,20,9,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G010,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G011,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G012,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G012,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G013,40,0.5,20,13,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G014,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G015,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G015,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G016,40,0.5,20,8,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G017,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G017,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G018,10,0.5,5,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G018,40,0.1,4,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G018,40,0.5,20,4,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G019,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G019,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G020,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G021,40,0.5,20,7,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,10,0.5,5,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,40,0.1,4,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G022,40,0.5,20,3,2399,n_hp > max_overlap * H,q3,physics
+0,train,-1,G023,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G023,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,10,0.1,1,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,10,0.5,5,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,40,0.1,4,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G024,40,0.5,20,2,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G025,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G028,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,10,0.1,1,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,10,0.5,5,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,40,0.1,4,1,2399,station pool < min_station_pool,q3,physics
+0,train,-1,G031,40,0.5,20,1,2399,station pool < min_station_pool,q3,physics
+0,test,-1,G001,40,0.5,20,25,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G005,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G005,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G006,10,0.5,5,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G006,40,0.1,4,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G006,40,0.5,20,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G007,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G007,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G008,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G008,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G008,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G009,40,0.5,20,9,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G010,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G010,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G011,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G011,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G011,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G012,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G012,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G013,10,0.5,5,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G013,40,0.1,4,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G013,40,0.5,20,4,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G014,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G014,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G016,10,0.5,5,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G016,40,0.1,4,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G016,40,0.5,20,3,800,n_hp > max_overlap * H,q3,physics
+0,test,-1,G018,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G018,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,10,0.1,1,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,10,0.5,5,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,40,0.1,4,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G021,40,0.5,20,2,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,10,0.1,1,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,10,0.5,5,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,40,0.1,4,1,800,station pool < min_station_pool,q3,physics
+0,test,-1,G022,40,0.5,20,1,800,station pool < min_station_pool,q3,physics
+0,inner,0,G001,40,0.5,20,19,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G003,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G003,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G005,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G006,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G006,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G006,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G008,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G012,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G013,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G013,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G013,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,0,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G020,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G021,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G022,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G024,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,0,G025,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G001,40,0.5,20,18,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G005,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G005,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G006,10,0.5,5,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G006,40,0.1,4,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G006,40,0.5,20,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G008,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G008,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G008,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G013,10,0.5,5,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G013,40,0.1,4,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G013,40,0.5,20,4,600,n_hp > max_overlap * H,q3,physics
+0,inner,1,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G021,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,1,G028,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G001,40,0.5,20,18,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G002,40,0.5,20,23,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G006,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G007,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G007,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G008,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G009,40,0.5,20,7,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G010,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G010,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G011,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G013,10,0.5,5,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G013,40,0.1,4,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G013,40,0.5,20,3,600,n_hp > max_overlap * H,q3,physics
+0,inner,2,G014,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G014,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G015,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G016,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G017,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G018,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G019,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,10,0.1,1,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,10,0.5,5,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,40,0.1,4,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G021,40,0.5,20,2,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G022,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G023,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,10,0.1,1,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,10,0.5,5,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,40,0.1,4,1,600,station pool < min_station_pool,q3,physics
+0,inner,2,G031,40,0.5,20,1,600,station pool < min_station_pool,q3,physics
+0,inner,3,G001,40,0.5,20,19,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G002,40,0.5,20,22,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G003,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G003,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G006,10,0.5,5,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G006,40,0.1,4,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G006,40,0.5,20,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G007,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G007,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G008,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G009,40,0.5,20,7,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G010,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G010,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G011,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G012,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G013,10,0.5,5,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G013,40,0.1,4,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G013,40,0.5,20,3,599,n_hp > max_overlap * H,q3,physics
+0,inner,3,G014,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G014,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G016,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G018,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G019,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G020,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,10,0.1,1,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,10,0.5,5,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,40,0.1,4,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G021,40,0.5,20,2,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G022,40,0.5,20,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,10,0.1,1,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,10,0.5,5,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,40,0.1,4,1,599,station pool < min_station_pool,q3,physics
+0,inner,3,G024,40,0.5,20,1,599,station pool < min_station_pool,q3,physics

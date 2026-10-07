@@ -1,0 +1,17 @@
+split_seed,method,seconds,n_substations,n_train_hp,lc_draw,spc_train,target,anchor,feature_set,mode,target_transform,n_evals,n_inner,n_train,cv_wape,train_wape,arm,family
+0,evaluate_members,24.687966346740723,30.0,,,,nan,nan,nan,nan,nan,,,,,,q3,physics
+0,evaluate_members,55.361353158950806,76.0,62.0,0.0,6.0,nan,nan,nan,nan,nan,,,,,,q3,physics
+0,anchor_only_Linear,0.07048320770263672,,62.0,0.0,6.0,HP_Peak,size,-,direct,none,0.0,16.0,60.0,17.456107319294507,45.60715197586898,q3,physics
+0,anchor_only_Linear,0.07094001770019531,,62.0,0.0,6.0,HP_Peak,peak,-,direct,none,0.0,16.0,60.0,17.979446396518057,42.61181453377801,q3,physics
+0,anchor_only_Linear,0.07722115516662598,,62.0,0.0,6.0,HP_Peak,size+peak,-,direct,none,0.0,16.0,60.0,17.979446396518057,38.42309985076724,q3,physics
+0,anchor_only_XGBoost,1.6885201930999756,,62.0,0.0,6.0,HP_Peak,size,-,direct,none,3.0,16.0,60.0,19.24244747011422,52.93601677185244,q3,physics
+0,anchor_only_XGBoost,1.2844476699829102,,62.0,0.0,6.0,HP_Peak,peak,-,direct,none,3.0,16.0,60.0,19.24244747011422,49.58174692536985,q3,physics
+0,anchor_only_XGBoost,1.3750271797180176,,62.0,0.0,6.0,HP_Peak,size+peak,-,direct,none,3.0,16.0,60.0,19.24244747011422,52.93601677185244,q3,physics
+0,evaluate_members,0.0,30.0,,,,nan,nan,nan,nan,nan,,,,,,q3,physics
+0,evaluate_members,169.68093013763428,312.0,292.0,0.0,6.0,nan,nan,nan,nan,nan,,,,,,q3,physics
+0,anchor_only_Linear,0.08826255798339844,,292.0,0.0,6.0,HP_Peak,size,-,direct,none,0.0,90.0,222.0,51.033649593969365,70.79724238951344,q3,physics
+0,anchor_only_Linear,0.0835409164428711,,292.0,0.0,6.0,HP_Peak,peak,-,direct,none,0.0,90.0,222.0,44.58074856857696,52.03583279308032,q3,physics
+0,anchor_only_Linear,0.09895849227905273,,292.0,0.0,6.0,HP_Peak,size+peak,-,direct,none,0.0,90.0,222.0,37.30641127700115,34.129984888545415,q3,physics
+0,anchor_only_XGBoost,5.976926565170288,,292.0,0.0,6.0,HP_Peak,size,-,direct,none,3.0,90.0,222.0,51.026653035873444,70.21335342943983,q3,physics
+0,anchor_only_XGBoost,11.303248405456543,,292.0,0.0,6.0,HP_Peak,peak,-,direct,none,3.0,90.0,222.0,29.643920796658293,19.94425474863724,q3,physics
+0,anchor_only_XGBoost,10.875365972518921,,292.0,0.0,6.0,HP_Peak,size+peak,-,direct,none,3.0,90.0,222.0,29.884131824955784,20.99230576470548,q3,physics

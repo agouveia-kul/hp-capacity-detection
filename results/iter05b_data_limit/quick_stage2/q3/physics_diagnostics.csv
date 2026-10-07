@@ -1,0 +1,3 @@
+split_seed,n_substations,hinge_inside_net,hinge_inside_hp,at_bound_net,coincpeak_gt_peak,failed_net_fit,failed_hp_fit,arm,family
+0,30,1.0,1.0,0.0,17,0,0,q3,physics
+0,30,1.0,1.0,0.0,17,0,0,q3,physics

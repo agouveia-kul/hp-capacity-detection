@@ -1,0 +1,38 @@
+# 05b quick run for Stage 2 (run interactively before anything is scheduled): every Stage 2 arm of configs/iter05b_stage2.yaml on the
+# quick grid of configs/iter05b_quick.yaml (sizes {10, 40}, p {0.1, 0.5}, 3 train / 2 test / 2 inner substations per cell, 3 hyperopt
+# evals, CNN 2), seed 0. Frozen arms refit seed 0's carried Arm 2 winners (A10). The Arm 7 frozen-model row needs Arm 2's own test
+# substations (the saved models' test design), so it is off here; tests/test_05b.py covers it on a toy set and the full-size probe
+# (configs/iter05b_stage2.yaml, one seed per arm) runs it for real. Arm 3 uses 6 train substations per cell here. Not a result.
+exp_id: iter05b_quick_stage2
+out_dir: results/iter05b_data_limit/quick_stage2
+workers: 6
+frozen: {models_csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv, models_dir: results/iter05b_data_limit/stage1/models}
+families:
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
+  tabpfn: {models: [TabPFN], residual_models: [TabPFN], max_concurrent: 3}
+  rawseries: {models: [CNN], residual_models: [CNN]}
+  neural: {models: [FFNN], residual_models: [FFNN]}
+arms:
+  - {name: q7_x15, config: configs/iter05b_arm7.yaml, seeds: [0], frozen: true, families: [physics, linear, tabpfn, rawseries],
+     set: ["pool.response_scale={fill: 1.5}", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}",
+           "cv.inner_substations_per_cell=2"]}
+  - {name: q4, config: configs/iter05b_arm4.yaml, seeds: [0], families: [physics],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3"]}
+  - {name: q4_o1, config: configs/iter05b_arm4.yaml, seeds: [0], frozen: true, families: [linear, tabpfn, rawseries],
+     set: ["pool.oracle=O1", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}",
+           "cv.inner_substations_per_cell=2"]}
+  - {name: q4_bstar_o1a, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics],
+     set: ["exp_id=iter05b_quick_arm4_bstar_o1a", "pool.response_scale={fill: 0}", "oracle_rows=true", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]",
+           "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2", "cv.hyperopt.max_evals=3"]}
+  - {name: q3, config: configs/iter05b_arm3.yaml, seeds: [0], n: [62, all], draws: [0], spc_train: 6, frozen: true,
+     families: [physics, linear, tabpfn, rawseries],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3"]}
+  - {name: q5, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics, linear, neural, tabpfn, rawseries],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}"]}
+  - {name: q6, config: configs/iter05b_arm6.yaml, seeds: [0], frozen: true, families: [physics, linear, tabpfn, rawseries],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3"]}

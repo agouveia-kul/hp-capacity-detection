@@ -1,0 +1,11 @@
+# 05b Arm 7 (filler uncertainty, stage 2): GB-EoH main window, seeds 0-9, n = all, the Arm 2 grid. The fillers' temperature response
+# is scaled x0.5 / x1.5 per queue arm (`pool.response_scale={fill: f}`, oracle.apply_response_scale: s0 scales, P_base and the profile
+# shape are kept). Physics rows incl. paperA_corr (s0 from the scaled train fillers) and paperA_corr_s0unscaled (s0 of the unscaled
+# fillers: a mis-specified correction). Carried families (A10): each seed's frozen Arm 2 winner refit on the scaled data, plus the
+# frozen-model row `<model>@frozen` (the saved Stage 1 model, trained at x1.0, applied unchanged to the scaled test substations).
+# The x1.0 reference is Arm 2, seeds 0-9. Run through the queue only (configs/iter05b_stage2.yaml).
+base: configs/iter05b_arm2.yaml
+exp_id: iter05b_arm7
+out_dir: results/iter05b_data_limit/stage2/arm7
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_corr_s0unscaled]}
