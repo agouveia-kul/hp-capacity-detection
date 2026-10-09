@@ -1,8 +1,8 @@
 % =====================================================================
 % Paper B: structure only (headings, planned figures and tables).
-% Generated 2026-10-09 from main.tex and sections/04_data.tex; restructured 2026-10-09 (Alex: data after Estimators,
-% evaluation protocol in its own section without pitfalls, anchor-only baselines removed, scale features under Features).
-% One-line content notes from Alex's outline comments in main.tex and the drafted IV-A to IV-C.
+% Restructured 2026-10-09 after the storyline change (paper/STRUCTURE-2026-10-09.md): capacity only, methods then results
+% (III--V methods, VII results), the data section is VI, evaluation is subsection VII-A, transfer validation and the use case
+% are their own sections. Old numbering is recorded in paper/README.md.
 % Keep in sync by hand when a heading changes. Build: pdflatex structure
 % =====================================================================
 \documentclass[9pt,journal,a4paper]{IEEEtran}
@@ -30,31 +30,44 @@
 \cnote{Acronyms and symbols, aligned with Paper A ($P_{\mathrm{net}}$, $P_{\mathrm{TCL}}$, $P_{\mathrm{TCL}}^{\max}$, $s_h$, $T_h$, $m_h$, SF, $N$, $N_{hp}$).}
 
 \section{Introduction}
-\cnote{HP uptake behind LV feeders, the data DSOs lack, prior work by family, the gap, contributions and roadmap.}
+\cnote{Unobservable LV network and DER, Paper A, the gap. Contributions: the hybrid estimator, the validation methodology (household-disjoint semi-synthetic aggregates, statistical-matching fusion), transfer evidence and the use case.}
 \planned{Table}{Literature: method family, input, output, labels needed, capacity, transfer tested}
 
 \section{Problem Statement}
 \subsection{Aggregate Model}
 \cnote{$P_{\mathrm{net}} = P_{\mathrm{TCL}} + P_{\text{non-TCL}}$ and the net-load fit on daily means vs temperature, as in Paper A.}
-\subsection{Quantities of Interest}
-\cnote{Targets: installed capacity $P_{\mathrm{TCL}}^{\max}$, HP count, coincident peak, $s_h$, $r = s_h/P_{\mathrm{base}}$, $P_{\mathrm{design}}$, energy.}
-\planned{Table}{Targets: definition, unit, DSO use, determined by the net load}
+\subsection{Target: Installed Capacity}
+\cnote{Capacity only, $P_{\mathrm{TCL}}^{\max}$ (non-coincident 99.9th-percentile peak). The other targets are dropped for now.}
 \subsection{What the Net Load Determines}
 \cnote{Short, citing Paper A: $s_h$ is observable, capacity needs $m_h$, so a model learns an implicit $m_h$.}
 \subsection{Information Available to a DSO}
 \cnote{Scale features (consumer count, observed feeder peak), climate, building-stock registers, tariff and control regime.}
 
-\section{Estimators}
-\subsection{Physics-Based Estimators}
+\section{Physics-Based Estimation and Its Limits}
+\subsection{The Paper A Estimator}
 \cnote{Hockey-stick slope maps, calibrated delta, HDH, Paper A's $s_h/m_h$ and its corrected and calibrated variants.}
+\subsection{Non-TCL Correction}
+\cnote{Correction of the slope for the non-TCL load, including the own-load term.}
+\subsection{Limits of Physics-Based Estimation}
+\cnote{Filler contamination, dispersion of $m_h$, transfer of $m_h$.}
+
+\section{Data-Driven Estimation}
 \subsection{Features}
-\cnote{Scale features (consumer count $N$, observed net-load peak), net-load fit features with a latent $T_h$, legacy degree-day bins, raw daily series for the CNN.}
+\cnote{Generic, physics-derived (net-load fit with a latent $T_h$) and raw-series features. Scale features: consumer count $N$ and observed net-load peak.}
+\subsection{Learning Models}
+\cnote{Linear, kernel, tree, neural (incl.\ TabPFN) and raw-series (CNN) families, tuned by grouped inner CV, one winner per family.}
+\subsection{Limits of Data-Driven Estimation}
+\cnote{Data hunger ($n^*$) and sensitivity to the fillers.}
+
+\section{Hybrid Identifiability-Guided Estimation}
+\subsection{Identified Slope}
+\cnote{The physics numerator $s_h$, identified from net load and temperature alone.}
+\subsection{Learning the Transfer Parameter}
+\cnote{Central part of the hybrid. Transferable scale from a pilot, design-temperature normalisation or learned from covariates.}
 \subsection{Residual Learning on the Physics Estimate}
 \cnote{ML predicts the log correction to Paper A's estimate, with a pilot disjoint from the aggregate.}
-\subsection{Learning Models}
-\cnote{Linear, kernel, tree, neural and raw-series families, tuned by grouped inner CV, one winner per family.}
-\subsection{Learning the Transfer Parameter}
-\cnote{Physics numerator $s_h$ with $m_h$ predicted from covariates instead of copied from a pilot.}
+\subsection{Ensemble of Experts}
+\cnote{Only if it passes its pre-registered rule.}
 
 \section{Data and Semi-Synthetic Aggregates}
 \subsection{Source Datasets}
@@ -72,35 +85,30 @@
 \subsubsection{Fillers for the GB dataset from analog days}
 \cnote{LCL days matched to EoH days by day type, season and temperature, with the assumption, precedent and limits.}
 
-\section{Evaluation Protocol}
-\cnote{Repeated household splits, grouped inner CV, WAPE and penetration bins, pre-registered comparison rule (deferred by Alex). Direction of 2026-10-09, not drafted: this becomes a subsection on how the methods are evaluated (error metrics, seeds and splits, inner-CV selection, comparison criterion, penetration bins), with one sentence on the 5\,\% capacity-equivalent criterion of the filler-variability limit. Aggregate-construction rules stay in IV-C. Placement and wording pending Alex.}
-
-\section{Targets and Identifiability (RQ1)}
-\subsection{Accuracy per Target}
-\cnote{Error of each target against what the net load determines, with and without the scale features.}
-\planned{Fig.}{Error per target, with and without scale features}
-\subsection{Role of the Scale Features}
-\cnote{How much each target gains from the consumer count and the observed peak.}
-\subsection{Large-Sample Check at Daily Resolution}
-\cnote{HP count on the daily-resolution arm with many more households.}
-
-\section{Value over the Physics Estimator (RQ2)}
-\subsection{Benchmark on Semi-Synthetic Aggregates}
-\cnote{ML vs the best physics estimator under the pre-registered criterion, CH and GB datasets.}
-\planned{Table}{Method $\times$ scale features, median and 5--90\% band across splits}
-\subsection{Dependence on Penetration and Aggregate Size}
-\cnote{Error across Paper A's penetration bins and aggregate sizes, filler-variability limit marked.}
-\planned{Fig.}{Error vs HP penetration and aggregate size (ML, physics)}
-\subsection{Does More Training Data Help?}
-\cnote{Learning curve over distinct training HP households and the pre-registered verdict.}
-\subsection{Error Decomposition}
+\section{Results}
+\subsection{Evaluation}
+\cnote{Error metrics, seeds and splits, inner-CV selection, comparison criterion, penetration bins and the four axes (accuracy, sample efficiency, robustness, transfer). One sentence on the 5\,\% filler-variability criterion, derived in Appendix~C. Placement and wording pending.}
+\subsection{Physics-Based Estimation}
+\cnote{Mirrors Section III.}
+\subsubsection{Accuracy by Penetration and Aggregate Size}
+\planned{Fig.}{Error vs HP penetration and aggregate size (physics-based estimators)}
+\subsubsection{Error Decomposition}
 \cnote{Oracle tests: filler contamination, dispersion of $m_h$ and fit noise per penetration bin.}
-\subsection{Other Electric Heating and Utility Control}
-\cnote{Backup rods, storage and direct heating, water heaters and blocking periods.}
+\subsection{Data-Driven Estimation}
+\cnote{Mirrors Section IV.}
+\subsubsection{Accuracy}
+\planned{Table}{Method $\times$ scale features, median and 5--90\% band across splits}
+\subsubsection{Does More Training Data Help?}
+\cnote{Learning curve over distinct training HP households and the pre-registered verdict.}
+\subsubsection{Robustness to the Fillers}
+\cnote{Filler temperature response scaled by 0.5 and 1.5.}
+\subsection{The Hybrid Estimator}
+\cnote{Mirrors Section V: the ladder from the physics estimator to the learned transfer parameter, the residual and the ensemble.}
+\planned{Table}{The hybrid ladder, median and 5--90\% band of WAPE per rung}
 
-\section{Transfer across Populations (RQ3)}
+\section{Transfer Validation}
 \subsection{Transfer Settings}
-\cnote{CH $\leftrightarrow$ GB under harmonised labels, plus real German feeders and a UK domain.}
+\cnote{CH $\leftrightarrow$ GB under harmonised labels, plus real German feeders and a UK domain. All rungs of the ladder.}
 \subsection{End-to-End Models}
 \cnote{Models trained in one domain and applied unchanged in another.}
 \subsection{Learned Transfer Parameter}
@@ -109,7 +117,8 @@
 \subsection{Recalibration with a Small Local Pilot}
 \cnote{How few submetered target households restore accuracy.}
 
-\section{Detecting Change in TCL Capacity (RQ4)}
+\section{Use Case: Detecting a Change in Capacity}
+\cnote{Compact demonstration, revisited once iteration 08 shows its size.}
 \subsection{Uptake Scenarios}
 \cnote{Annual HP adoption probability over a multi-year horizon.}
 \subsection{Multi-Year Aggregates}
@@ -128,10 +137,10 @@
 \subsection{Guidance for DSOs}
 \cnote{Which estimator to use given the data a DSO holds.}
 \subsection{Limitations}
-\cnote{Dataset size, single years, semi-synthetic aggregates, registry labels, control regimes, no cooling.}
+\cnote{Dataset size, single years, semi-synthetic aggregates, registry labels, control regimes, other electric heating and utility control, no cooling.}
 
 \section{Conclusion}
-\cnote{Summary of RQ1 to RQ4 and future work.}
+\cnote{Summary of the ladder, the transfer validation and the use case, and future work.}
 
 \appendices
 \section{Household Datasets and Design Envelope}
@@ -139,7 +148,7 @@
 \planned{Table}{Design envelope of the semi-synthetic aggregates}
 \section{Model Hyperparameters}
 \cnote{Search spaces and tuning budget per model family.}
-\section{Derivation of the Filler-Variability Criterion (pending)}
-\cnote{Derivation of the 5\,\% capacity-equivalent criterion behind the filler-variability-limited mark (Alex, 2026-10-09). Placement and wording pending.}
+\section{Derivation of the Filler-Variability Criterion}
+\cnote{Derivation of the 5\,\% capacity-equivalent criterion behind the filler-variability-limited mark.}
 
 \end{document}

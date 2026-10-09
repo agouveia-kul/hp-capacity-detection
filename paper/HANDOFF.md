@@ -8,7 +8,7 @@ Read first, in this order: `CLAUDE.md` (the repo contract), this file, `paper/RE
 
 - **Branch:** `paper/draft` (from `main`). Commit and push here only. Never commit to `iter/*` or `claude/*` branches, never merge (CLAUDE.md hard rule 6).
 - **`paper/main.tex`:** Alex's IEEEtran skeleton (title, authors, section outline in comments). Drafted text lives in `paper/sections/` and is pulled in with `\input`. Keep Alex's outline comments until a subsection is drafted.
-- **`paper/sections/04_data.tex`** (was `03_data_protocol.tex` before 2026-10-09; section letters below are the old III-*, now IV-*): Section IV. III-A Source Datasets and III-B CH and GB Datasets are drafted (draft 3, reviewed by Alex on 2026-10-02). III-C to III-E hold the outline.
+- **`paper/sections/04_data.tex`** (was `03_data_protocol.tex` before 2026-10-09; section letters below are the old III-*, now VI-* after the restructure of 2026-10-09, see §5 and `README.md`): Section VI. III-A Source Datasets and III-B CH and GB Datasets are drafted (draft 3, reviewed by Alex on 2026-10-02). III-C to III-E hold the outline.
 - **`paper/references.bib`:** every entry records when and how it was checked, or is marked `UNVERIFIED`.
 - **`paper/README.md`:** section status and the repo source of every number in III-A/B. Keep both tables up to date.
 - **`paper/tools/style_check.py`:** mechanical check of the prose rules (run it on every section before delivering).
@@ -95,7 +95,16 @@ Answers to the open questions (Alex, 2026-10-09):
 3. The 5 % capacity-equivalent criterion behind "filler-variability-limited" goes into the evaluation text as one sentence, with its derivation in an appendix (not drafted yet).
 4. The Paper A bib entry (`paperA`) stays a placeholder until Alex provides the details.
 
-Structure direction, not to be drafted yet (Alex, 2026-10-09): Section V becomes a subsection on how the methods are evaluated (error metrics, seeds and splits, inner-CV selection, the comparison criterion, penetration bins). The aggregate-construction rules stay in IV-C. Placement and wording are pending Alex. Do not draft or restructure Section V until he says so. `main.tex`, `structure.tex` and `README.md` carry the note only.
+Structure direction (Alex, 2026-10-09, first version): Section V becomes a subsection on how the methods are evaluated. **Superseded the same day by the storyline change below (Evaluation is VII-A).**
+
+Storyline change and new structure (Alex, 2026-10-09; full text in `paper/STRUCTURE-2026-10-09.md`, old → new numbering in `paper/README.md`). **This supersedes the section order of "Structure review (2026-10-09)" above.**
+1. **Storyline.** (1) The LV network and its DER are unobservable. (2) Physics-based estimation (Paper A) has limits. (3) Data-driven estimation (feature types × models) has other limits. (4) A hybrid, identifiability-guided estimator is the methodological contribution. (5) Validation by transfer. (6) Use case, detecting a change in capacity.
+2. **Capacity only.** The target is $P_{\mathrm{TCL}}^{\max}$. The other targets and the RQ1 material (target table, role of the scale features, daily large-sample check) are dropped for now. The anchor-only baselines stay removed and the scale features stay under Features.
+3. **Methods then results.** III Physics-Based Estimation and Its Limits, IV Data-Driven Estimation and V Hybrid Identifiability-Guided Estimation are the methods. VII Results holds the results, mirrored subsection by subsection (B physics-based, C data-driven, D hybrid). VI is the data section (old IV, text unchanged). VIII Transfer Validation and IX Use Case are their own sections.
+4. **Evaluation is subsection VII-A of Results** and describes the error metrics and how the methods are evaluated (seeds and splits, inner-CV selection, comparison criterion, penetration bins, the four axes accuracy, sample efficiency, robustness and transfer, one sentence on the 5 % filler-variability criterion). The aggregate-construction rules stay in VI-C. The stand-alone Evaluation Protocol section is gone. VII-A is **not drafted**, placement and wording pending Alex.
+5. **"Learning the Transfer Parameter" moves into Section V** (V-B), as the central part of the hybrid. Residual learning is V-C. The ensemble of experts (V-D) is kept only if it passes its pre-registered rule.
+6. **The use case stays in this paper for now** (IX), to be revisited once iteration 08 shows its size.
+7. Not in the new structure and kept as a comment under X-D Limitations: "Other Electric Heating and Utility Control" (old RQ2 subsection). "Information Available to a DSO" (II-D) was not named in the proposal and is kept for now. Both are open for Alex to confirm.
 
 ## 6. What can be drafted now, and what cannot
 

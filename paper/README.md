@@ -20,21 +20,44 @@ Alex's voice (skill `gouveia-academic-voice`), plus the instructions of 2026-10-
 References follow hard rule 11: every entry in `references.bib` was retrieved and checked, or is marked UNVERIFIED there.
 
 ## Sections
-Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted parts live in `sections/`; the rest keeps Alex's outline comments.
+Structure of 2026-10-09 (Alex, storyline change), copied to `STRUCTURE-2026-10-09.md`. Target: capacity only. Methods (III–V) then results (VII). Drafted parts live in `sections/`; the rest keeps outline comments only.
 
 | # | Section | File | Status |
 |---|---|---|---|
 | – | Abstract, Nomenclature, I Introduction | `main.tex` | outline (after the 05b verdict) |
-| II | Problem Statement | `main.tex` | outline; II-B holds the label definition moved from Data draft 1 |
-| III | Estimators | `main.tex` | outline (moved before the data, 2026-10-09; anchor-only baselines removed, scale features under III-B Features) |
-| IV-A | Source Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
-| IV-B | CH and GB Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
-| IV-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/04_data.tex` | draft 2 (2026-10-02, shorter after Alex's review), **waiting for Alex's review** |
-| V | Evaluation Protocol (splits, tuning, metrics) | `main.tex` | outline, no subsections (split out of the old Section III; pitfalls removed, 2026-10-09). **Direction (Alex, 2026-10-09), not drafted:** to become a subsection on how the methods are evaluated (metrics, seeds and splits, inner-CV selection, comparison criterion, penetration bins); the 5 % capacity-equivalent criterion gets one sentence there, its derivation goes to an appendix; placement and wording pending Alex |
-| App. A, B | Design envelope table; model hyperparameters | `main.tex` | A drafted (table); B outline. A further appendix for the derivation of the 5 % criterion is pending Alex |
-| VI–XI | RQ1–RQ4, Discussion, Conclusion | `main.tex` | after 05b stages 1–2 and later iterations |
+| II | Problem Statement (Aggregate Model, Target: Installed Capacity, What the Net Load Determines, Information Available to a DSO) | `main.tex` | outline; II-B holds the label definition moved from Data draft 1 |
+| III | Physics-Based Estimation and Its Limits | `main.tex` | outline (evidence 03b, 05b Arm 4) |
+| IV | Data-Driven Estimation (Features, Learning Models, Limits) | `main.tex` | outline (evidence 05b Stages 1–2); scale features under IV-A Features |
+| V | Hybrid Identifiability-Guided Estimation (Identified Slope, Learning the Transfer Parameter, Residual Learning, Ensemble of Experts) | `main.tex` | outline (evidence 06) |
+| VI-A | Source Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
+| VI-B | CH and GB Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
+| VI-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/04_data.tex` | draft 2 (2026-10-02, shorter after Alex's review), **waiting for Alex's review** |
+| VII | Results: A Evaluation, B Physics-Based Estimation, C Data-Driven Estimation, D The Hybrid Estimator | `main.tex` | outline. VII-A (metrics, seeds and splits, inner-CV selection, comparison criterion, penetration bins, the 5 % filler-variability criterion in one sentence) is **not drafted, placement and wording pending Alex** |
+| VIII | Transfer Validation | `main.tex` | outline (evidence 07) |
+| IX | Use Case: Detecting a Change in Capacity | `main.tex` | outline (kept for now, revisit after 08) |
+| X, XI | Discussion, Conclusion | `main.tex` | after the results |
+| App. A, B, C | Design envelope table; model hyperparameters; derivation of the filler-variability criterion | `main.tex` | A drafted (table); B outline; C heading only, not drafted |
 
-## Sources of the numbers in Section IV-A/B (III-A/B before 2026-10-09)
+### Numbering, old → new (2026-10-09)
+| Before (structure of the morning of 2026-10-09) | Now |
+|---|---|
+| I Introduction, II Problem Statement | I, II (II-B Quantities of Interest becomes II-B Target: Installed Capacity, other targets and the target table dropped) |
+| III-A Physics-Based Estimators | III-A The Paper A Estimator (plus new III-B Non-TCL Correction, III-C Limits) |
+| III-B Features, III-D Learning Models | IV-A Features, IV-B Learning Models (plus new IV-C Limits) |
+| III-E Learning the Transfer Parameter | V-B (moved into the hybrid) |
+| III-C Residual Learning on the Physics Estimate | V-C |
+| IV Data and Semi-Synthetic Aggregates, IV-A/B/C | VI, VI-A/B/C (text unchanged; file `sections/04_data.tex` keeps its name) |
+| V Evaluation Protocol | VII-A Evaluation (not a separate section any more) |
+| VI RQ1 Targets and Identifiability | dropped (other targets, role of the scale features, daily large-sample check) |
+| VII-A Benchmark, VII-B Dependence on Penetration and Aggregate Size | VII-C Accuracy, VII-B Accuracy by Penetration and Aggregate Size |
+| VII-C Does More Training Data Help?, VII-D Error Decomposition | VII-C, VII-B |
+| VII-E Other Electric Heating and Utility Control | not in the new structure, kept as a comment under X-D Limitations |
+| VIII RQ3 Transfer across Populations | VIII Transfer Validation |
+| IX RQ4 Detecting Change in TCL Capacity | IX Use Case: Detecting a Change in Capacity |
+| X Discussion, XI Conclusion, Appendices A, B | X, XI, A, B (new Appendix C, filler-variability derivation) |
+Section letters in older notes (`HANDOFF.md` §5, the review of 2026-10-02) use the numbering of their date.
+
+## Sources of the numbers in Section VI-A/B (IV-A/B and III-A/B before 2026-10-09)
 | Number | Source in the repo |
 |---|---|
 | HEAPO 1,408 households, 15-min/daily, 2018-11 to 2024-03, 8 stations | HEAPO paper (full text, checked 2026-10-02) |
@@ -47,7 +70,7 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | LCL 4,173 flat-rate → 3,199 kept, rules, Heathrow (Meteostat) | `results/iter05a_pool/lcl_audit.md`, CLAUDE.md §7 |
 | HP_Peak definition per dataset | CLAUDE.md §5 |
 
-## Sources of the numbers in Section IV-C (III-C before 2026-10-09) and Appendix A
+## Sources of the numbers in Section VI-C (IV-C and III-C before 2026-10-09) and Appendix A
 Draft 2 keeps only the design numbers in III-C (split, grid, envelope rule, aggregates per split, analog-day rule, 50 % limit) and moves Table III to Appendix A. The D1–D5 numbers below are no longer in the text; they stay listed for a later appendix or the RQ2 section.
 Notation follows Paper A (`hp-sensitivity-paper/paper/hp_sensitivity_overleaf.tex`, Nomenclature): $N$, $N_{hp}$, $P_{\mathrm{TCL}}^{\max}$ (= `HP_Peak`, same definition as Paper A's 99.9th-percentile installed capacity).
 | Number | Source in the repo |
