@@ -41,6 +41,15 @@ The hypotheses and the decision rule below are **pre-registered**: they are fixe
   - **Use in Stage 2.** The carried families run with each seed's frozen Arm 2 configuration and hyperparameters, refit on the arm's own data (no hyperopt), in Arms 3, 4, 6 and 7; Arm 7 also reports a frozen-model row (the step-1 model, trained at ×1.0, applied to the scaled test data). Arm 5 (B\*, another pool) keeps per-arm tuning for the carried families. This replaces inner-CV selection on each arm's data (methodological change, stated in the REVIEW). Caution: in Arm 3, settings tuned at n = all with 10 substations per cell and reused at n = 62 or 40 per cell slightly favour the n = all case.
   - Saved models are reused without training from iteration 07 (transfer) and 08–09 (change detection).
 - **[A11] Stage 2 on CPU for TabPFN and CNN (Alex, 2026-10-06, REVIEW_stage1 decision 2 option b).** Machine B, the only GPU, is unavailable for about 4 months: the carried TabPFN and CNN families run on machine A's CPU (deviation from A9). Gate, fixed before running: the 40 GPU-fitted A10 winners reloaded on the CPU must match the logged GPU test predictions within |ΔWAPE| ≤ 0.1 pp each (`refit_persist.py check --families rawseries,tabpfn --device cpu --out reload_check_cpu.csv`); otherwise another GPU (option a).
+- **[A12] Criterion for the paper-lead change (Alex, 2026-10-09, before any Arm 6 or Arm 7 result was read).** REVIEW_stage1 decision 1 deferred the paper-lead change until Arms 7 and 6. It is decided by this rule, fixed before the results it judges:
+  - **(a) Replication.** A carried family that met the 03b criterion overall in Arm 2 also meets it overall in Arm 6: ΔWAPE < 0 vs the best physics row in ≥ 8/10 seeds and median ΔWAPE ≤ −1 pp.
+  - **(b) Filler robustness.** For the same family, the Arm 7 frozen-model row (the Stage 1 model trained at ×1.0, applied to test aggregates with fillers at ×0.5 and at ×1.5) beats the best physics row on the same scaled aggregates in ≥ 8/10 seeds at both factors. The best physics row is chosen by median WAPE among the physics rows, `paperA_corr` with s₀ from the scaled train fillers included. (b) is evaluated overall and per Paper A bin.
+  - **Outcome:**
+    - (a) and (b) hold overall → the lead becomes "physics-bounded below n\* (about 40–75 HP households), ML ahead beyond";
+    - (a) holds and (b) fails overall but holds in every bin above 15 % → the same lead, restricted to penetrations above 15 %;
+    - (a) fails → the lead stays identifiability-bounded;
+    - any other combination → reported, and Alex decides.
+  - The final REVIEW applies A12 as written and reports its inputs in a table.
 
 ## Question
 On B\*, no ML configuration beat physics (03b). Is that because ML saw too few distinct HP households (≈ 62), or because net load does not identify capacity beyond what physics already extracts?
