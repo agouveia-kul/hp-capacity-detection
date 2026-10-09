@@ -30,7 +30,7 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | IV-A | Source Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
 | IV-B | CH and GB Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
 | IV-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/04_data.tex` | draft 2 (2026-10-02, shorter after Alex's review), **waiting for Alex's review** |
-| V | Evaluation Protocol (splits, tuning, metrics; pitfalls) | `main.tex` | outline (split out of the old Section III, 2026-10-09) |
+| V | Evaluation Protocol (splits, tuning, metrics) | `main.tex` | outline, no subsections (split out of the old Section III; pitfalls removed, 2026-10-09) |
 | VI–XI | RQ1–RQ4, Discussion, Conclusion | `main.tex` | after 05b stages 1–2 and later iterations |
 
 ## Sources of the numbers in Section IV-A/B (III-A/B before 2026-10-09)

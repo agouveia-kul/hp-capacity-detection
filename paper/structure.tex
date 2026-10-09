@@ -1,8 +1,8 @@
 % =====================================================================
 % Paper B: structure only (headings, planned figures and tables).
 % Generated 2026-10-09 from main.tex and sections/04_data.tex; restructured 2026-10-09 (Alex: data after Estimators,
-% evaluation protocol in its own section, anchor-only baselines removed, scale features under Features).
-% One-line content notes from Alex's outline comments in main.tex and the drafted III-A to III-C.
+% evaluation protocol in its own section without pitfalls, anchor-only baselines removed, scale features under Features).
+% One-line content notes from Alex's outline comments in main.tex and the drafted IV-A to IV-C.
 % Keep in sync by hand when a heading changes. Build: pdflatex structure
 % =====================================================================
 \documentclass[9pt,journal,a4paper]{IEEEtran}
@@ -42,7 +42,7 @@
 \subsection{What the Net Load Determines}
 \cnote{Short, citing Paper A: $s_h$ is observable, capacity needs $m_h$, so a model learns an implicit $m_h$.}
 \subsection{Information Available to a DSO}
-\cnote{Scale anchors (consumer count, observed feeder peak), climate, building-stock registers, tariff and control regime.}
+\cnote{Scale features (consumer count, observed feeder peak), climate, building-stock registers, tariff and control regime.}
 
 \section{Estimators}
 \subsection{Physics-Based Estimators}
@@ -73,17 +73,13 @@
 \cnote{LCL days matched to EoH days by day type, season and temperature, with the assumption, precedent and limits.}
 
 \section{Evaluation Protocol}
-\subsection{Splits, Tuning and Metrics}
 \cnote{Repeated household splits, grouped inner CV, WAPE and penetration bins, pre-registered comparison rule (deferred by Alex).}
-\subsection{Pitfalls of Semi-Synthetic Benchmarks}
-\cnote{Stacked profiles and leaked households inflate accuracy, legacy vs leak-free protocol.}
-\planned{Table}{Legacy protocol vs leak-free protocol}
 
 \section{Targets and Identifiability (RQ1)}
 \subsection{Accuracy per Target}
-\cnote{Error of each target against what the net load determines, with and without the scale anchor.}
-\planned{Fig.}{Error per target, with and without scale anchor}
-\subsection{Role of the Scale Anchor}
+\cnote{Error of each target against what the net load determines, with and without the scale features.}
+\planned{Fig.}{Error per target, with and without scale features}
+\subsection{Role of the Scale Features}
 \cnote{How much each target gains from the consumer count and the observed peak.}
 \subsection{Large-Sample Check at Daily Resolution}
 \cnote{HP count on the daily-resolution arm with many more households.}
@@ -91,7 +87,7 @@
 \section{Value over the Physics Estimator (RQ2)}
 \subsection{Benchmark on Semi-Synthetic Aggregates}
 \cnote{ML vs the best physics estimator under the pre-registered criterion, CH and GB datasets.}
-\planned{Table}{Method $\times$ anchor, median and 5--90\% band across splits}
+\planned{Table}{Method $\times$ scale features, median and 5--90\% band across splits}
 \subsection{Dependence on Penetration and Aggregate Size}
 \cnote{Error across Paper A's penetration bins and aggregate sizes, filler-variability limit marked.}
 \planned{Fig.}{Error vs HP penetration and aggregate size (ML, physics)}

@@ -86,6 +86,8 @@ Structure review (2026-10-09):
 2. The data section holds only the data and the aggregate construction; the evaluation protocol and the pitfalls are their own section (V).
 3. Anchor-only baselines leave the paper (subsection and RQ2 "Gain over Anchor-Only Baselines" removed); the consumer count and the observed peak are scale features under III-B Features.
 4. `paper/structure.tex` is the one-page structure with content notes; keep it in sync with `main.tex`.
+5. Section V Evaluation Protocol stays, as one section without subsections; the pitfalls subsection (legacy vs leak-free table) is removed.
+6. "Scale anchor" becomes "scale features" everywhere (RQ1 subsection "Role of the Scale Features").
 
 ## 6. What can be drafted now, and what cannot
 
@@ -94,7 +96,7 @@ Structure review (2026-10-09):
 - counts: `results/iter05a_pool/envelopes.md` (per seed, CH 500 train / 135 test aggregates from 62 / 20 HP households; GB 2,080 / 455 from 274 / 81; test aggregates per Paper A bin);
 - analog-day fillers: `scripts/paperb/fill_analog.py` docstring, `results/iter05a_pool/mapping.md` (D1–D5), `d4_diagnostics.md`, `method_basis.md` (checked references for statistical matching, analog methods, k-NN resampling; and the explicit "no precedent" statement), DECISIONS lines R3–R6 and the D4/D5 lines.
 
-**Can be drafted after III-C, if Alex agrees:** II Problem Statement (short, cite Paper A), IV Estimators (sources: `scripts/paperb/physics.py`, `features_netfit.py`, `residual.py`, `train.py`, `results/iter03b_fair_test/REVIEW.md`, `results/iter05b_data_limit/method_basis.md` on branch `iter/05b-data-limit`, DECISIONS A7, A8), III-E Pitfalls (`results/iter01_pool_audit/`, `results/iter02b_benchmark/REVIEW.md`, CLAUDE.md §10 legacy figures).
+**Can be drafted after III-C, if Alex agrees:** II Problem Statement (short, cite Paper A), IV Estimators (sources: `scripts/paperb/physics.py`, `features_netfit.py`, `residual.py`, `train.py`, `results/iter03b_fair_test/REVIEW.md`, `results/iter05b_data_limit/method_basis.md` on branch `iter/05b-data-limit`, DECISIONS A7, A8), III-E Pitfalls (removed 2026-10-09).
 
 **Do not draft yet:** III-D (item 6 deferred), the Abstract, contributions and the "we show" part of the Introduction, and every Results / Discussion section. The GB results of iteration 05b are not reviewed yet and the paper's lead depends on them (CLAUDE.md §1). Never use unreviewed numbers, and never open the 05b probe or Stage 1 test metrics. When results are reviewed, Alex will say so.
 

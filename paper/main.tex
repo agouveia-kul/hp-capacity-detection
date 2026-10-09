@@ -77,7 +77,7 @@ Thermostatically controlled loads, heat pumps, low-voltage networks, installed c
 % --- Contributions
 \begin{enumerate}
 \item \todo{Targets ordered by what the net load determines; ML performance tracks this ordering (RQ1).}
-\item \todo{Leak-free benchmark of ML against the Paper A estimator (RQ2); protocol pitfalls quantified.}
+\item \todo{Leak-free benchmark of ML against the Paper A estimator (RQ2).}
 \item \todo{Transfer across populations; learning the transfer parameter from DSO-available covariates (RQ3).}
 \item \todo{Detection and quantification of TCL uptake over a multi-year horizon (RQ4).}
 \end{enumerate}
@@ -93,7 +93,7 @@ Thermostatically controlled loads, heat pumps, low-voltage networks, installed c
 
 \subsection{Quantities of Interest}
 % Targets and their use for DSOs.
-\todo{Table: target | definition | unit | DSO use | determined by net load? (yes / with anchor / no)}
+\todo{Table: target | definition | unit | DSO use | determined by net load? (yes / with scale features / no)}
 % - HP_Count
 % - Installed capacity (non-coincident observed peak, 99.9th percentile); nameplate as household-level check only
 % - Coincident peak
@@ -112,7 +112,7 @@ The main target is the installed capacity of the HPs of an aggregate, denoted as
 % - Consequence: an ML model learns an implicit m_h from its training population.
 
 \subsection{Information Available to a DSO}
-% Scale anchors: dwelling count, observed feeder peak; climate (design temperature);
+% Scale features: consumer count, observed feeder peak; climate (design temperature);
 % building-stock registers; tariff/control regime.
 
 % =====================================================================
@@ -158,16 +158,11 @@ The main target is the installed capacity of the HPs of an aggregate, denoted as
 \section{Evaluation Protocol}
 \label{sec:protocol}
 
-\subsection{Splits, Tuning and Metrics}
+% 2026-10-09 (Alex): one section without subsections; the pitfalls subsection (legacy vs leak-free protocol) is removed.
 % Household-disjoint train/test splits (20 seeds); grouped inner CV for tuning;
 % metrics (WAPE, MAPE, R^2); summary across splits (median, 5--90% band).
 % Deferred by Alex (2026-10-02): how the pre-registered rules (16/20 criterion, WAPE primary, penetration bins, multiplicity,
 % filler-variability flag) are written here.
-
-\subsection{Pitfalls of Semi-Synthetic Benchmarks}
-\label{sec:pitfalls}
-% Stacked profiles and leaked households inflate accuracy: legacy vs leak-free protocol.
-\todo{Table: legacy protocol vs leak-free protocol (legacy data) vs leak-free (CH)}
 
 % =====================================================================
 \section{Targets and Identifiability (RQ1)}
@@ -176,12 +171,12 @@ The main target is the installed capacity of the HPs of an aggregate, denoted as
 \subsection{Accuracy per Target}
 \begin{figure}[t]
 \centering
-\figplaceholder{Fig.: error per target, with and without scale anchor}
+\figplaceholder{Fig.: error per target, with and without scale features}
 \caption{\todo{caption}}
 \label{fig:rq1}
 \end{figure}
 
-\subsection{Role of the Scale Anchor}
+\subsection{Role of the Scale Features}
 
 \subsection{Large-Sample Check at Daily Resolution}
 % HP_Count on the daily-resolution arm.
@@ -191,7 +186,7 @@ The main target is the installed capacity of the HPs of an aggregate, denoted as
 \label{sec:rq2}
 
 \subsection{Benchmark on Semi-Synthetic Aggregates}
-\todo{Table: method x anchor, median [5--90\%] across splits}
+\todo{Table: method x scale features, median [5--90\%] across splits}
 
 \subsection{Dependence on Penetration and Aggregate Size}
 \begin{figure}[t]
