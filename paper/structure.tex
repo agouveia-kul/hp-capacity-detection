@@ -1,0 +1,102 @@
+% =====================================================================
+% Paper B: structure only (headings, planned figures and tables).
+% Generated 2026-10-09 from main.tex and sections/03_data_protocol.tex (commit 0fc16c7).
+% Keep in sync by hand when a heading changes. Build: pdflatex structure
+% =====================================================================
+\documentclass[9pt,journal,a4paper]{IEEEtran}
+
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% Planned figure or table, shown in place.
+\newcommand{\planned}[2]{\noindent\textcolor{gray}{\footnotesize\textit{[#1] #2}}\par}
+
+\begin{document}
+
+\title{Data-Driven Quantification of Aggregated Thermostatically Controlled Loads from Low-Voltage Net Load: What Can Be Learned?}
+\author{Alexandre~M.~V.~Gouveia, Md. Umar Hashmi, Reinhilde D'hulst, Dirk Van Hertem}
+\maketitle
+
+\begin{abstract}
+\textcolor{gray}{\footnotesize\textit{Written last.}}
+\end{abstract}
+
+\section*{Nomenclature}
+
+\section{Introduction}
+\planned{Table}{Literature: method family, input, output, labels needed, capacity, transfer tested}
+
+\section{Problem Statement}
+\subsection{Aggregate Model}
+\subsection{Quantities of Interest}
+\planned{Table}{Targets: definition, unit, DSO use, determined by the net load}
+\subsection{What the Net Load Determines}
+\subsection{Information Available to a DSO}
+
+\section{Data and Evaluation Protocol}
+\subsection{Source Datasets}
+\planned{Table}{Source datasets (HEAPO, Kaiser et al., EoH, LCL)}
+\subsection{CH and GB Datasets}
+\planned{Table}{The CH and GB datasets after selection}
+\subsubsection{CH dataset}
+\subsubsection{GB dataset}
+\subsubsection{Labels per dataset}
+\subsection{Semi-Synthetic Aggregates}
+\planned{Fig.}{Construction of the semi-synthetic aggregates and household-disjoint splits}
+\subsubsection{Fillers for the GB dataset from analog days}
+\subsection{Evaluation Protocol}
+\subsection{Pitfalls of Semi-Synthetic Benchmarks}
+\planned{Table}{Legacy protocol vs leak-free protocol}
+
+\section{Estimators}
+\subsection{Physics-Based Estimators}
+\subsection{Anchor-Only Baselines}
+\subsection{Features}
+\subsection{Residual Learning on the Physics Estimate}
+\subsection{Learning Models}
+\subsection{Learning the Transfer Parameter}
+
+\section{Targets and Identifiability (RQ1)}
+\subsection{Accuracy per Target}
+\planned{Fig.}{Error per target, with and without scale anchor}
+\subsection{Role of the Scale Anchor}
+\subsection{Large-Sample Check at Daily Resolution}
+
+\section{Value over the Physics Estimator (RQ2)}
+\subsection{Benchmark on Semi-Synthetic Aggregates}
+\planned{Table}{Method $\times$ anchor, median and 5--90\% band across splits}
+\subsection{Gain over Anchor-Only Baselines}
+\subsection{Dependence on Penetration and Aggregate Size}
+\planned{Fig.}{Error vs HP penetration and aggregate size (ML, physics, anchor-only)}
+\subsection{Does More Training Data Help?}
+\subsection{Error Decomposition}
+\subsection{Other Electric Heating and Utility Control}
+
+\section{Transfer across Populations (RQ3)}
+\subsection{Transfer Settings}
+\subsection{End-to-End Models}
+\subsection{Learned Transfer Parameter}
+\planned{Table}{Transfer error per target population, SF transfer vs learned parameter}
+\subsection{Recalibration with a Small Local Pilot}
+
+\section{Detecting Change in TCL Capacity (RQ4)}
+\subsection{Uptake Scenarios}
+\subsection{Multi-Year Aggregates}
+\subsection{Detection and Quantification}
+\planned{Fig.}{Minimum detectable change vs aggregate size and horizon}
+\subsection{Real Change on FeederBW}
+
+\section{Discussion}
+\subsection{What the Models Learn}
+\subsection{Accuracy versus Data Cost}
+\subsection{Guidance for DSOs}
+\subsection{Limitations}
+
+\section{Conclusion}
+
+\appendices
+\section{Household Datasets and Design Envelope}
+\planned{Table}{Design envelope of the semi-synthetic aggregates}
+\section{Model Hyperparameters}
+
+\end{document}

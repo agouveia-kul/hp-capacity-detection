@@ -7,6 +7,8 @@ Branch `paper/draft`, kept separate from the iteration branches (CLAUDE.md hard 
 
 Build (TeX Live): `pdflatex main && bibtex main && pdflatex main && pdflatex main`.
 
+`structure.tex`: the paper's structure only (headings and planned figures and tables), one page, `pdflatex structure`. Kept in sync with `main.tex` by hand.
+
 ## Style rules for the prose
 Alex's voice (skill `gouveia-academic-voice`), plus the instructions of 2026-10-02:
 - no em dashes, no dashes used as punctuation, no semicolons and no colons in prose (en dash only in numeric ranges);
