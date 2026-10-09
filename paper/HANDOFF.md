@@ -8,7 +8,7 @@ Read first, in this order: `CLAUDE.md` (the repo contract), this file, `paper/RE
 
 - **Branch:** `paper/draft` (from `main`). Commit and push here only. Never commit to `iter/*` or `claude/*` branches, never merge (CLAUDE.md hard rule 6).
 - **`paper/main.tex`:** Alex's IEEEtran skeleton (title, authors, section outline in comments). Drafted text lives in `paper/sections/` and is pulled in with `\input`. Keep Alex's outline comments until a subsection is drafted.
-- **`paper/sections/03_data_protocol.tex`:** Section III. III-A Source Datasets and III-B CH and GB Datasets are drafted (draft 3, reviewed by Alex on 2026-10-02). III-C to III-E hold the outline.
+- **`paper/sections/04_data.tex`** (was `03_data_protocol.tex` before 2026-10-09; section letters below are the old III-*, now IV-*): Section IV. III-A Source Datasets and III-B CH and GB Datasets are drafted (draft 3, reviewed by Alex on 2026-10-02). III-C to III-E hold the outline.
 - **`paper/references.bib`:** every entry records when and how it was checked, or is marked `UNVERIFIED`.
 - **`paper/README.md`:** section status and the repo source of every number in III-A/B. Keep both tables up to date.
 - **`paper/tools/style_check.py`:** mechanical check of the prose rules (run it on every section before delivering).
@@ -80,6 +80,12 @@ III-C review (2026-10-02):
 4. No filler-uncertainty sentence (×0.5, ×1.5) in III-C until RQ2 is drafted.
 5. No gas-heated LCL sensitivity set in III-C.
 6. Short sections: describe the method, not diagnostic outcomes; detail goes to tables or appendices.
+
+Structure review (2026-10-09):
+1. Order: I Introduction, II Problem Statement, III Estimators, IV Data and Semi-Synthetic Aggregates, V Evaluation Protocol, VI–IX RQ1–RQ4, X Discussion, XI Conclusion.
+2. The data section holds only the data and the aggregate construction; the evaluation protocol and the pitfalls are their own section (V).
+3. Anchor-only baselines leave the paper (subsection and RQ2 "Gain over Anchor-Only Baselines" removed); the consumer count and the observed peak are scale features under III-B Features.
+4. `paper/structure.tex` is the one-page structure with content notes; keep it in sync with `main.tex`.
 
 ## 6. What can be drafted now, and what cannot
 

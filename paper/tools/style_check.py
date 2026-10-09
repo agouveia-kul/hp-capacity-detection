@@ -4,7 +4,7 @@ Checks the prose only (comments, tables, figures, math and LaTeX commands remove
 banned punctuation (em dash, dash as punctuation, semicolon, colon), sentence length (cap 35 words),
 median length (target 20-24, below 18 = choppy) and expletive openers.
 
-    python paper/tools/style_check.py paper/sections/03_data_protocol.tex
+    python paper/tools/style_check.py paper/sections/04_data.tex
 """
 import re
 import statistics

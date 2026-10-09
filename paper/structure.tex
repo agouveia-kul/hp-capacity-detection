@@ -1,6 +1,7 @@
 % =====================================================================
 % Paper B: structure only (headings, planned figures and tables).
-% Generated 2026-10-09 from main.tex and sections/03_data_protocol.tex (commit 0fc16c7).
+% Generated 2026-10-09 from main.tex and sections/04_data.tex; restructured 2026-10-09 (Alex: data after Estimators,
+% evaluation protocol in its own section, anchor-only baselines removed, scale features under Features).
 % One-line content notes from Alex's outline comments in main.tex and the drafted III-A to III-C.
 % Keep in sync by hand when a heading changes. Build: pdflatex structure
 % =====================================================================
@@ -43,7 +44,19 @@
 \subsection{Information Available to a DSO}
 \cnote{Scale anchors (consumer count, observed feeder peak), climate, building-stock registers, tariff and control regime.}
 
-\section{Data and Evaluation Protocol}
+\section{Estimators}
+\subsection{Physics-Based Estimators}
+\cnote{Hockey-stick slope maps, calibrated delta, HDH, Paper A's $s_h/m_h$ and its corrected and calibrated variants.}
+\subsection{Features}
+\cnote{Scale features (consumer count $N$, observed net-load peak), net-load fit features with a latent $T_h$, legacy degree-day bins, raw daily series for the CNN.}
+\subsection{Residual Learning on the Physics Estimate}
+\cnote{ML predicts the log correction to Paper A's estimate, with a pilot disjoint from the aggregate.}
+\subsection{Learning Models}
+\cnote{Linear, kernel, tree, neural and raw-series families, tuned by grouped inner CV, one winner per family.}
+\subsection{Learning the Transfer Parameter}
+\cnote{Physics numerator $s_h$ with $m_h$ predicted from covariates instead of copied from a pilot.}
+
+\section{Data and Semi-Synthetic Aggregates}
 \subsection{Source Datasets}
 \cnote{HEAPO and Kaiser et al.\ (CH), EoH and LCL (GB): what each measures and its role.}
 \planned{Table}{Source datasets (HEAPO, Kaiser et al., EoH, LCL)}
@@ -58,25 +71,13 @@
 \planned{Fig.}{Construction of the semi-synthetic aggregates and household-disjoint splits}
 \subsubsection{Fillers for the GB dataset from analog days}
 \cnote{LCL days matched to EoH days by day type, season and temperature, with the assumption, precedent and limits.}
-\subsection{Evaluation Protocol}
+
+\section{Evaluation Protocol}
+\subsection{Splits, Tuning and Metrics}
 \cnote{Repeated household splits, grouped inner CV, WAPE and penetration bins, pre-registered comparison rule (deferred by Alex).}
 \subsection{Pitfalls of Semi-Synthetic Benchmarks}
 \cnote{Stacked profiles and leaked households inflate accuracy, legacy vs leak-free protocol.}
 \planned{Table}{Legacy protocol vs leak-free protocol}
-
-\section{Estimators}
-\subsection{Physics-Based Estimators}
-\cnote{Hockey-stick slope maps, calibrated delta, HDH, Paper A's $s_h/m_h$ and its corrected and calibrated variants.}
-\subsection{Anchor-Only Baselines}
-\cnote{Linear and XGBoost on the scale anchors only (consumer count, observed peak, both), with no temperature information.}
-\subsection{Features}
-\cnote{Net-load fit features with a latent $T_h$, legacy windowed degree-day bins, and raw daily series for the CNN.}
-\subsection{Residual Learning on the Physics Estimate}
-\cnote{ML predicts the log correction to Paper A's estimate, with a pilot disjoint from the aggregate.}
-\subsection{Learning Models}
-\cnote{Linear, kernel, tree, neural and raw-series families, tuned by grouped inner CV, one winner per family.}
-\subsection{Learning the Transfer Parameter}
-\cnote{Physics numerator $s_h$ with $m_h$ predicted from covariates instead of copied from a pilot.}
 
 \section{Targets and Identifiability (RQ1)}
 \subsection{Accuracy per Target}
@@ -91,11 +92,9 @@
 \subsection{Benchmark on Semi-Synthetic Aggregates}
 \cnote{ML vs the best physics estimator under the pre-registered criterion, CH and GB datasets.}
 \planned{Table}{Method $\times$ anchor, median and 5--90\% band across splits}
-\subsection{Gain over Anchor-Only Baselines}
-\cnote{What temperature-dependent features add beyond the scale anchors.}
 \subsection{Dependence on Penetration and Aggregate Size}
 \cnote{Error across Paper A's penetration bins and aggregate sizes, filler-variability limit marked.}
-\planned{Fig.}{Error vs HP penetration and aggregate size (ML, physics, anchor-only)}
+\planned{Fig.}{Error vs HP penetration and aggregate size (ML, physics)}
 \subsection{Does More Training Data Help?}
 \cnote{Learning curve over distinct training HP households and the pre-registered verdict.}
 \subsection{Error Decomposition}
