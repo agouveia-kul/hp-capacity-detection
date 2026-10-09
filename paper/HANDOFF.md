@@ -89,6 +89,14 @@ Structure review (2026-10-09):
 5. Section V Evaluation Protocol stays, as one section without subsections; the pitfalls subsection (legacy vs leak-free table) is removed.
 6. "Scale anchor" becomes "scale features" everywhere (RQ1 subsection "Role of the Scale Features").
 
+Answers to the open questions (Alex, 2026-10-09):
+1. The target symbol is $P_{\mathrm{TCL}}^{\max}$, as in Paper A (not $P_{\mathrm{HP}}^{\max}$).
+2. "Consumers" is the word for the units counted by $N$ everywhere, including IV-B. "Dwellings" is no longer used (applied in `sections/04_data.tex`).
+3. The 5 % capacity-equivalent criterion behind "filler-variability-limited" goes into the evaluation text as one sentence, with its derivation in an appendix (not drafted yet).
+4. The Paper A bib entry (`paperA`) stays a placeholder until Alex provides the details.
+
+Structure direction, not to be drafted yet (Alex, 2026-10-09): Section V becomes a subsection on how the methods are evaluated (error metrics, seeds and splits, inner-CV selection, the comparison criterion, penetration bins). The aggregate-construction rules stay in IV-C. Placement and wording are pending Alex. Do not draft or restructure Section V until he says so. `main.tex`, `structure.tex` and `README.md` carry the note only.
+
 ## 6. What can be drafted now, and what cannot
 
 **Next: III-C Semi-Synthetic Aggregates** (generator + analog-day fillers + Alex's Fig. 1 as a construction diagram placeholder). Sources:

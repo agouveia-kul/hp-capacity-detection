@@ -30,7 +30,8 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | IV-A | Source Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
 | IV-B | CH and GB Datasets | `sections/04_data.tex` | draft 3, reviewed 2026-10-02 |
 | IV-C | Semi-Synthetic Aggregates (incl. analog-day fillers) | `sections/04_data.tex` | draft 2 (2026-10-02, shorter after Alex's review), **waiting for Alex's review** |
-| V | Evaluation Protocol (splits, tuning, metrics) | `main.tex` | outline, no subsections (split out of the old Section III; pitfalls removed, 2026-10-09) |
+| V | Evaluation Protocol (splits, tuning, metrics) | `main.tex` | outline, no subsections (split out of the old Section III; pitfalls removed, 2026-10-09). **Direction (Alex, 2026-10-09), not drafted:** to become a subsection on how the methods are evaluated (metrics, seeds and splits, inner-CV selection, comparison criterion, penetration bins); the 5 % capacity-equivalent criterion gets one sentence there, its derivation goes to an appendix; placement and wording pending Alex |
+| App. A, B | Design envelope table; model hyperparameters | `main.tex` | A drafted (table); B outline. A further appendix for the derivation of the 5 % criterion is pending Alex |
 | VI–XI | RQ1–RQ4, Discussion, Conclusion | `main.tex` | after 05b stages 1–2 and later iterations |
 
 ## Sources of the numbers in Section IV-A/B (III-A/B before 2026-10-09)
@@ -39,7 +40,7 @@ Structure = Alex's IEEEtran skeleton (uploaded 2026-10-02, `main.tex`). Drafted 
 | HEAPO 1,408 households, 15-min/daily, 2018-11 to 2024-03, 8 stations | HEAPO paper (full text, checked 2026-10-02) |
 | Kaiser et al. 2,447 installations, 15-min, 2023–2024, load flags, Zurich-Kloten | Kaiser et al. (full text, checked 2026-10-02) |
 | CH dataset 86 HP households = 47 HEAPO + 24 Kaiser paired + 15 Kaiser SFH; 5 stations; cal2023; coverage ≥ 90 % before interpolation | `scripts/paperb/pools/__init__.py`, `results/iter01_pool_audit/REVIEW.md`, DECISIONS 2026-09-29 |
-| 1,291 fillers (Kaiser dwellings with no TCL flag) | `results/iter03b_fair_test/arm_main/log.txt` (`pool bstar_2023: {'fill': 1291, 'hp': 86}`) |
+| 1,291 fillers (Kaiser consumers with no TCL flag) | `results/iter03b_fair_test/arm_main/log.txt` (`pool bstar_2023: {'fill': 1291, 'hp': 86}`) |
 | EoH 742 homes, three regions, Nov 2020 – Sep 2023, SN 9050 | Energy Systems Catapult project page (web search, 2026-10-02) |
 | GB dataset: EoH selection rules, Nov 2021 – Oct 2022, 384 homes, 26 groups, 217/153/14 by HP type, one silent-meter home (15 %) | `results/iter05a_pool/eoh_selection.md`, CLAUDE.md §7 |
 | Replication Oct 2022 – 28 Sep 2023, 319 homes, 272 shared | CLAUDE.md §4, DECISIONS 2026-10-01 |
@@ -54,7 +55,7 @@ Notation follows Paper A (`hp-sensitivity-paper/paper/hp_sensitivity_overleaf.te
 | Split before construction: test fraction 0.25, HP households stratified by station, fillers split globally and independently | `configs/protocol_v1.yaml` (`split`), `scripts/paperb/splits.py` (`household_splits`) |
 | $n = \max(1, \mathrm{round}(pN))$; sizes 10, 20, 40, 80, 120; penetrations 0.05 ... 1.0 incl. 0.8 | `configs/protocol_v1.yaml` (`grid`), `configs/protocol_v1_1.yaml` (p = 0.8), CLAUDE.md §4 |
 | Envelope rule $n \le 0.75H$, stations with < 3 HP households unused, 10 train / 5 test aggregates per cell, dropped not truncated | `configs/protocol_v1.yaml` (`max_overlap`, `min_station_pool`, `substations_per_cell`, `on_infeasible: drop`), `scripts/paperb/substations.py` (`plan_cells`, `draw_cells`) |
-| CH aggregate = n HP households (HP + own load) + N − n fillers; GB = N fillers, one per dwelling incl. HP dwellings; HP households never fillers; draws without replacement | `scripts/paperb/substations.py` (`draw_cells`, `fill_all`, `evaluate_members`), `scripts/paperb/fill_analog.py` docstring |
+| CH aggregate = n HP households (HP + own load) + N − n fillers; GB = N fillers, one per consumer incl. HP consumers; HP households never fillers; draws without replacement | `scripts/paperb/substations.py` (`draw_cells`, `fill_all`, `evaluate_members`), `scripts/paperb/fill_analog.py` docstring |
 | Table III: HP households 64/22, 292/92, 241/78; used 62/20, 274/81, 226/61; aggregates 500/135, 2,080/455, 1,870/355; test per bin 75/40/10/10, 265/125/30/35, 190/105/30/30; identical in all 20 seeds | `results/iter05a_pool/envelopes.md`, `envelopes.csv` (seed 0; min = max over seeds) |
 | Analog-day rule: same day type (England & Wales calendar), day-of-year window 30 → 45 → 60 days, ΔT ≤ 1 K (Heathrow), random among 3 closest (seeded), fallback = closest T within 60 d, map fixed per (group, split), same d′ for all fillers of an aggregate, local clock, DST days excluded | `scripts/paperb/fill_analog.py` docstring |
 | D1 +5.9 % (flag 15 %), 2 of 16 stations beyond 15 % (G005, G007) | `results/iter05a_pool/mapping.md` D1 (seed 0, 2,399 train fillers, build `2122r2`) |
