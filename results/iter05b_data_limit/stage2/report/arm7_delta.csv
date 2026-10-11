@@ -1,0 +1,25 @@
+factor,row,seeds,all,pbin<=15 †,pbin15-35 †,pbin35-65 †,pbin>65
+x0.5,slope_base,10,-7.53,-16.85,-5.31,-3.33,-1.34
+x0.5,paperA_corr,10,-7.59,-16.31,-4.95,-2.88,-1.48
+x0.5,paperA_corr_own,10,-7.51,-16.02,-4.96,-3.10,-1.51
+x0.5,paperA_cal,10,-11.76,-17.06,-5.26,-10.23,-13.17
+x0.5,paperA_sh_mh,10,-43.09,-96.61,-27.56,-11.20,-4.34
+x0.5,paperA_corr_s0unscaled,10,18.65,39.83,13.58,6.19,1.95
+x0.5,linear refit (vs arm2_cpu),10,-5.30,-6.04,-5.33,-4.64,-4.16
+x0.5,neural refit (vs arm2_cpu),10,-4.11,-6.33,-4.02,-2.92,-1.28
+x0.5,rawseries refit (vs arm2_cpu),10,-3.03,-4.97,-3.32,-0.79,-2.00
+x0.5,linear frozen model (vs Arm 2),10,2.45,1.57,4.17,1.18,-0.55
+x0.5,neural frozen model (vs Arm 2),10,1.92,1.38,2.59,0.40,0.83
+x0.5,rawseries frozen model (vs Arm 2),10,-0.35,-1.02,-0.52,-1.72,-0.49
+x1.5,slope_base,10,8.33,16.68,5.87,3.67,2.16
+x1.5,paperA_corr,10,8.09,16.37,6.31,3.60,1.75
+x1.5,paperA_corr_own,10,7.90,15.81,6.42,3.37,2.05
+x1.5,paperA_cal,10,7.58,12.24,2.80,5.65,7.66
+x1.5,paperA_sh_mh,10,45.01,97.80,29.54,13.65,6.52
+x1.5,paperA_corr_s0unscaled,10,24.47,58.17,14.07,1.96,1.26
+x1.5,linear refit (vs arm2_cpu),10,3.68,4.46,2.71,3.16,3.35
+x1.5,neural refit (vs arm2_cpu),10,3.11,4.59,3.21,2.73,1.33
+x1.5,rawseries refit (vs arm2_cpu),10,3.13,3.95,2.04,1.73,2.02
+x1.5,linear frozen model (vs Arm 2),10,7.04,21.95,-1.55,-0.67,0.69
+x1.5,neural frozen model (vs Arm 2),10,8.46,18.38,5.80,3.46,0.80
+x1.5,rawseries frozen model (vs Arm 2),10,3.98,5.53,4.73,1.82,1.66

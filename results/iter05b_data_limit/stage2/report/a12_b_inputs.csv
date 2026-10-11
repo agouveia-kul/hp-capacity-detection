@@ -1,0 +1,61 @@
+candidates,factor,family,scope,best physics,wins,n,median_d,holds
+rule,x0.5,rawseries,all,paperA_corr,10,10,-2.570680135306789,True
+rule,x0.5,rawseries,pbin<=15,paperA_corr_own,9,10,-5.5461831874236776,True
+rule,x0.5,rawseries,pbin15-35,paperA_corr,8,10,-1.5482790803303734,True
+rule,x0.5,rawseries,pbin35-65,slope_base,8,10,-1.1093117066571163,True
+rule,x0.5,rawseries,pbin>65,paperA_corr,8,10,-1.9243511369474482,True
+rule,x0.5,linear,all,paperA_corr,0,10,5.070050410152993,False
+rule,x0.5,linear,pbin<=15,paperA_corr_own,4,10,0.9279372008166273,False
+rule,x0.5,linear,pbin15-35,paperA_corr,0,10,9.339931676825444,False
+rule,x0.5,linear,pbin35-65,slope_base,1,10,4.606867357490746,False
+rule,x0.5,linear,pbin>65,paperA_corr,3,10,2.3889199988536163,False
+rule,x0.5,neural,all,paperA_corr,5,10,-0.5358941033814375,False
+rule,x0.5,neural,pbin<=15,paperA_corr_own,9,10,-3.0458809482957303,True
+rule,x0.5,neural,pbin15-35,paperA_corr,0,10,5.024650274938578,False
+rule,x0.5,neural,pbin35-65,slope_base,7,10,-0.10551888431665901,False
+rule,x0.5,neural,pbin>65,paperA_corr,9,10,-3.0762243475068924,True
+without paperA_corr_s0unscaled,x0.5,rawseries,all,paperA_corr,10,10,-2.570680135306789,True
+without paperA_corr_s0unscaled,x0.5,rawseries,pbin<=15,paperA_corr_own,9,10,-5.5461831874236776,True
+without paperA_corr_s0unscaled,x0.5,rawseries,pbin15-35,paperA_corr,8,10,-1.5482790803303734,True
+without paperA_corr_s0unscaled,x0.5,rawseries,pbin35-65,slope_base,8,10,-1.1093117066571163,True
+without paperA_corr_s0unscaled,x0.5,rawseries,pbin>65,paperA_corr,8,10,-1.9243511369474482,True
+without paperA_corr_s0unscaled,x0.5,linear,all,paperA_corr,0,10,5.070050410152993,False
+without paperA_corr_s0unscaled,x0.5,linear,pbin<=15,paperA_corr_own,4,10,0.9279372008166273,False
+without paperA_corr_s0unscaled,x0.5,linear,pbin15-35,paperA_corr,0,10,9.339931676825444,False
+without paperA_corr_s0unscaled,x0.5,linear,pbin35-65,slope_base,1,10,4.606867357490746,False
+without paperA_corr_s0unscaled,x0.5,linear,pbin>65,paperA_corr,3,10,2.3889199988536163,False
+without paperA_corr_s0unscaled,x0.5,neural,all,paperA_corr,5,10,-0.5358941033814375,False
+without paperA_corr_s0unscaled,x0.5,neural,pbin<=15,paperA_corr_own,9,10,-3.0458809482957303,True
+without paperA_corr_s0unscaled,x0.5,neural,pbin15-35,paperA_corr,0,10,5.024650274938578,False
+without paperA_corr_s0unscaled,x0.5,neural,pbin35-65,slope_base,7,10,-0.10551888431665901,False
+without paperA_corr_s0unscaled,x0.5,neural,pbin>65,paperA_corr,9,10,-3.0762243475068924,True
+rule,x1.5,rawseries,all,slope_base,10,10,-13.869641498321592,True
+rule,x1.5,rawseries,pbin<=15,paperA_corr_own,10,10,-30.5275132138483,True
+rule,x1.5,rawseries,pbin15-35,calibrated_delta,7,10,-1.5034877757192007,False
+rule,x1.5,rawseries,pbin35-65,paperA_corr_s0unscaled,9,10,-5.709634856922843,True
+rule,x1.5,rawseries,pbin>65,paperA_corr_s0unscaled,9,10,-3.3348404033686325,True
+rule,x1.5,linear,all,slope_base,10,10,-7.361612931859119,True
+rule,x1.5,linear,pbin<=15,paperA_corr_own,9,10,-10.833704556163603,True
+rule,x1.5,linear,pbin15-35,calibrated_delta,7,10,-0.42566090987384975,False
+rule,x1.5,linear,pbin35-65,paperA_corr_s0unscaled,6,10,-2.35975741190381,False
+rule,x1.5,linear,pbin>65,paperA_corr_s0unscaled,4,10,0.7615975518753961,False
+rule,x1.5,neural,all,slope_base,10,10,-9.317013503951959,True
+rule,x1.5,neural,pbin<=15,paperA_corr_own,10,10,-15.728839789518407,True
+rule,x1.5,neural,pbin15-35,calibrated_delta,2,10,1.3391657007527087,False
+rule,x1.5,neural,pbin35-65,paperA_corr_s0unscaled,7,10,-2.8392895441725523,False
+rule,x1.5,neural,pbin>65,paperA_corr_s0unscaled,10,10,-5.63711123040987,True
+without paperA_corr_s0unscaled,x1.5,rawseries,all,slope_base,10,10,-13.869641498321592,True
+without paperA_corr_s0unscaled,x1.5,rawseries,pbin<=15,paperA_corr_own,10,10,-30.5275132138483,True
+without paperA_corr_s0unscaled,x1.5,rawseries,pbin15-35,calibrated_delta,7,10,-1.5034877757192007,False
+without paperA_corr_s0unscaled,x1.5,rawseries,pbin35-65,slope_base,9,10,-6.897409162846314,True
+without paperA_corr_s0unscaled,x1.5,rawseries,pbin>65,paperA_corr,9,10,-3.183334113432336,True
+without paperA_corr_s0unscaled,x1.5,linear,all,slope_base,10,10,-7.361612931859119,True
+without paperA_corr_s0unscaled,x1.5,linear,pbin<=15,paperA_corr_own,9,10,-10.833704556163603,True
+without paperA_corr_s0unscaled,x1.5,linear,pbin15-35,calibrated_delta,7,10,-0.42566090987384975,False
+without paperA_corr_s0unscaled,x1.5,linear,pbin35-65,slope_base,8,10,-5.030393694854875,True
+without paperA_corr_s0unscaled,x1.5,linear,pbin>65,paperA_corr,4,10,0.3754540241141511,False
+without paperA_corr_s0unscaled,x1.5,neural,all,slope_base,10,10,-9.317013503951959,True
+without paperA_corr_s0unscaled,x1.5,neural,pbin<=15,paperA_corr_own,10,10,-15.728839789518407,True
+without paperA_corr_s0unscaled,x1.5,neural,pbin15-35,calibrated_delta,2,10,1.3391657007527087,False
+without paperA_corr_s0unscaled,x1.5,neural,pbin35-65,slope_base,8,10,-6.684627971031478,True
+without paperA_corr_s0unscaled,x1.5,neural,pbin>65,paperA_corr,10,10,-5.947039953903597,True
