@@ -245,10 +245,20 @@ def test_rung_winners_are_persisted_by_inner_cv_and_the_frozen_l4_keeps_its_scal
     want = compose(p, m.predict(T.feature_matrix(F2, tab2, l4[1], l4[2])[te]), valid)
     np.testing.assert_allclose(out2[(f"{l4[0]}@frozen", *l4[1:])], want, rtol=1e-12)
     assert not np.allclose(want, out2[l4]) and not np.allclose(p, pa2[SM.BASE[l4[3]]][0][te])    # not the refit, not the new base
-    assert sorted((s[0].endswith("@frozen"), SM.rung(s)) for s in out2) == [(f, r) for f in (False, True) for r in ("L1", "L2", "L3", "L4")]   # the fixed specs only
+    kinds = sorted((s[0].split("@")[1] if "@" in s[0] else "refit", SM.rung(s)) for s in out2)
+    assert kinds == sorted([(k, r) for k in ("refit", "frozen") for r in ("L1", "L2", "L3", "L4")] + [("update", "L4")])   # the fixed specs; update: L4 only
+    # R(i) update row (C7): the frozen residual and the frozen scale model, only s0 replaced by the new arm's (label-free) s0
+    z = m.predict(T.feature_matrix(F2, tab2, l4[1], l4[2])[te])
+    C_new = SM.covariates(tab2[te], 0.007, scale.clim, -8.0)
+    p_new, v_new = SM.estimate(C_new, scale.m_hat(C_new))
+    upd = out2[(f"{l4[0]}@update", *l4[1:])]
+    np.testing.assert_allclose(upd, compose(p_new, z, v_new), rtol=1e-12)
+    assert not np.allclose(upd, want) and not np.allclose(upd, out2[l4])           # neither the fully frozen row nor the refit
+    np.testing.assert_array_equal(joblib.load(d / "scale.joblib").s0, scale.s0)      # the saved scale model is not modified
     out3, _ = ladder_run(tmp_path, tab, F, pa, fixed=fixed, frozen_dir=str(tmp_path), by_rung=True)
     for s in map(lambda x: tuple(x.split("|")), fixed):                          # same data: every frozen row is the persisted model's prediction
         np.testing.assert_allclose(out3[(f"{s[0]}@frozen", *s[1:])], out[s], rtol=1e-12)
+    np.testing.assert_array_equal(out3[(f"{l4[0]}@update", *l4[1:])], out3[(f"{l4[0]}@frozen", *l4[1:])])   # same s0: update = frozen
 
 
 def test_oof_predictions_are_out_of_fold():
@@ -333,7 +343,7 @@ def test_queue_arms_seeds_and_core_budget():
         job = next(j for j in js if j["arm"] == arm["name"] and j["family"] == "physics")
         cfg, _ = RQ.job_config(QUEUE, arm, job, 3)
         assert cfg["l4"] and {"paperA_l4a", "paperA_l4b", "paperA_corr_own"} <= set(cfg["paperA"]["estimators"]) and cfg["parallel"]["threads"] == 3
-        assert cfg["no_train_wape"] == ["TabPFN"]
+        assert cfg["no_train_wape"] == ["TabPFN"] and cfg["cnn_inits"] == 3
         if arm["name"] == "s_gb":                                               # decision 2026-10-12: anchor size, one feature set per rung
             assert RB.computed_sets(cfg) == ["netfit", "raw", "whdd"] and cfg["anchors"] == ["size"]
         else:
@@ -361,7 +371,7 @@ def test_frozen_specs_come_from_the_rung_winners_manifests(tmp_path):
     for fam, rungs in (("tabpfn_d", ["L1", "L2"]), ("tabpfn_r", ["L3"]), ("tabpfn_h", ["L4"])):
         cfg, keep = RQ.job_config(q, arm, job(fam), 3)
         assert cfg["refit"] == {"fixed": {specs[r]: {"params": {"k": 3}, "best_iter": None} for r in rungs}, "by_rung": True, "frozen_dir": str(tmp_path)}
-        assert keep == {"TabPFN", "TabPFN@frozen"} and cfg["pool"]["response_scale"] == {"fill": 0.5}
+        assert keep == {"TabPFN", "TabPFN@frozen", "TabPFN@update"} and cfg["pool"]["response_scale"] == {"fill": 0.5}
         assert "paperA_corr_s0unscaled" not in cfg["paperA"]["estimators"]          # a family job has no physics row
     cfg, _ = RQ.job_config(q, arm, job("linear"), 3)
     assert set(cfg["refit"]["fixed"]) == {s.replace("TabPFN", "Ridge") for s in specs.values()}
@@ -459,3 +469,188 @@ def test_no_train_wape_skips_the_train_prediction_only(monkeypatch):
         np.testing.assert_array_equal(out[s], ref[s])
         if s[0] in ("Lasso", "Ridge"):
             assert extra[s]["wape_inner"] == e_ref[s]["wape_inner"] and np.isnan(extra[s]["wape_train"]) == (s[0] == "Lasso")
+
+
+# ------------------------------------------------------------------ review decisions of 2026-10-12: B1, B2
+def cnn_tab(seed=0):
+    """A toy substation table with raw series whose target depends on the series (so that a CNN can learn it)."""
+    tab, F = ladder_tab()
+    s = (tab["HP_Peak"] / tab["size"]).to_numpy()
+    T_ = 8 + 8 * np.sin(np.linspace(0, 2 * np.pi, 10))
+    Y = tab["size"].to_numpy()[:, None] * (0.4 + 0.02 * s[:, None] * np.maximum(0, 15 - T_)[None]) + np.random.default_rng(seed).normal(0, 0.05, (len(tab), 10))
+    F[raw_columns(10)] = np.c_[Y, np.tile(T_, (len(tab), 1))]
+    return tab, F
+
+
+def test_b1_cnn_keeps_the_best_of_three_initialisations_by_validation_loss(monkeypatch):
+    spec = ("CNN", "size", "raw", "direct", "log")
+    cfg = {**toy_cfg(), "models": ["CNN"], "residual_models": [], "feature_sets": ["raw"], "model_feature_sets": {"CNN": ["raw"]}, "modes": ["direct"],
+           "physics_baselines": [], "anchor_only_baselines": {"models": [], "features": []}, "cv": {"hyperopt": {"max_evals": 2}, "fixed_params": {"CNN": NEW["CNN"]}}}
+    tab, F = cnn_tab()
+    te, inn = (tab["split"] == "test").to_numpy(), (tab["split"] == "inner").to_numpy()
+    seen, real = [], T.Model.predict
+    monkeypatch.setattr(T.Model, "predict", lambda self, X: seen.append(set(X.index)) or real(self, X))
+
+    def run(F_):
+        seen.clear()
+        lines = []
+        T.configure(xgb_n_jobs=2, cnn_inits=3)
+        try:
+            out, extra = RB.predictions(cfg, tab, F_, tab["HP_Peak"], 0, [], lines.append, toy_pa(tab), [spec])
+        finally:
+            T.configure(xgb_n_jobs=2, cnn_inits=1)
+        return out[spec], extra[spec], lines, list(seen)
+
+    p, e, lines, calls = run(F)
+    losses = [e[f"init{k}_val_loss"] for k in range(3)]
+    assert all(np.isfinite(losses)) and len(set(losses)) == 3 and e["init_chosen"] == int(np.argmin(losses))     # three seeds, the lowest loss kept
+    assert all(np.isfinite(e[f"init{k}_test_wape"]) for k in range(3))                                         # diagnostics, written and logged
+    assert any("initialisations val_loss" in ln and all(f"{v:.5f}"[:6] in ln for v in losses) for ln in lines)
+    first_test = next(i for i, rows in enumerate(calls) if rows & set(tab.index[te]))
+    n_val = sum(rows == set(tab.index[inn]) for rows in calls[:first_test])
+    assert n_val == 3 and not any(rows & set(tab.index[te]) for rows in calls[:first_test])                    # chosen on the inner rows, before any test row is read
+    F2 = F.copy()                                                                                               # sentinel: other test rows, same choice
+    F2.loc[te, raw_columns(10)] = 987.0
+    p2, e2, _, _ = run(F2)
+    assert [e2[f"init{k}_val_loss"] for k in range(3)] == losses and e2["init_chosen"] == e["init_chosen"] and not np.allclose(p2, p)
+    p3, e3, _, _ = run(F)                                                                                       # identical seeds, identical choice
+    np.testing.assert_array_equal(p3, p)
+    assert e3 == e
+
+
+def test_b1_search_evaluations_train_one_initialisation(monkeypatch):
+    X, y = toy_xy(n=120, cnn=True)
+    g, made = np.arange(120) % 4, []
+    real = T.Model.__init__
+    monkeypatch.setattr(T.Model, "__init__", lambda self, name, params, seed, opts=None: made.append(seed) or real(self, name, params, seed, opts))
+    T.configure(xgb_n_jobs=2, cnn_inits=3)
+    try:
+        space = {"width": T.hp.choice("width", [8]), "kernel": T.hp.choice("kernel", [3]), "n_blocks": T.hp.choice("n_blocks", [2]),
+                 "dropout": T.hp.uniform("dropout", 0.0, 0.1), "weight_decay": T.hp.uniform("weight_decay", 1e-5, 1e-4), "lr": T.hp.uniform("lr", 2e-3, 3e-3)}
+        _, meta, _ = T.tune_grouped_cv("CNN", X, y, g, 5, 2, opts={"target_transform": "log"}, space=space)       # a search (B*): 2 evaluations
+        assert made == [5] * 8 + [5, 5 + T.INIT_STEP, 5 + 2 * T.INIT_STEP] and len(meta["inits"]) == 3              # 8 fold fits x 1, final fit x 3
+        made.clear()
+        T.tune_grouped_cv("CNN", X, y, g, 5, 2, opts={"target_transform": "log"}, params=NEW["CNN"])               # a fixed-params pass: 3 per fold
+        assert made == [5, 5 + T.INIT_STEP, 5 + 2 * T.INIT_STEP] * 5
+        made.clear()
+        T.tune_grouped_cv("Ridge", X.iloc[:, -1:], y, g, 5, 2)                                                     # other models: one model per fit
+        assert set(made) == {5}
+    finally:
+        T.configure(xgb_n_jobs=2, cnn_inits=1)
+
+
+def toy_queue(tmp_path, name, **fam):
+    arm = {"name": "a", "config": "tests/fixtures/toy_queue_arm.yaml", "runner": "toy_queue_runner:run_seed", "seeds": [0, 1], "families": ["physics", "linear"]}
+    cfg = {"exp_id": name, "out_dir": str(tmp_path / name), "workers": 1, "threads": 1, "sys_path": [str(ROOT / "tests")],
+           "families": {"physics": {}, "linear": {"models": ["Lasso", "Ridge"], **fam}}, "arms": [arm]}
+    (tmp_path / f"{name}.yaml").write_text(yaml.safe_dump(cfg))
+    return tmp_path / f"{name}.yaml", tmp_path / name / "jobs"
+
+
+def test_b2_timed_out_job_is_failed_with_reason_and_rerun(tmp_path, monkeypatch):
+    for k, v in {"TOY_LOG": tmp_path / "calls.log", "TOY_SLEEP": "3", "TOY_FAIL": tmp_path / "none.txt"}.items():
+        monkeypatch.setenv(k, str(v))
+    cfg, J = toy_queue(tmp_path, "toy06_timeout", timeout_s=1)
+    prog = RQ.main(["--config", str(cfg)])
+    assert prog == {**prog, "done": 2, "failed": 2, "remaining": 0}                 # physics has no timeout; both linear jobs ran too long
+    txt = (J / "a__s0__d0__nall__linear.failed").read_text()
+    assert txt.startswith("reason: timeout") and "TimeoutError: timeout: a__s0__d0__nall__linear ran longer than the 1 s" in txt
+    assert RQ.main(["--config", str(cfg)])["failed"] == 2                           # never retried in a loop
+    monkeypatch.setenv("TOY_SLEEP", "0")
+    prog = RQ.main(["--config", str(cfg), "--retry-failed"])
+    assert prog["done"] == 4 and prog["failed"] == 0 and (J / "a__s1__d0__nall__linear.done").exists()
+
+
+def test_b2_queue_refuses_more_threads_than_physical_cores(tmp_path, monkeypatch):
+    import psutil
+    monkeypatch.setenv("TOY_LOG", str(tmp_path / "calls.log"))
+    cfg, J = toy_queue(tmp_path, "toy06_cores")
+    with pytest.raises(SystemExit, match="exceed the .* physical cores"):
+        RQ.main(["--config", str(cfg), "--workers", "2", "--threads", str(psutil.cpu_count(logical=False))])
+    assert not list(J.glob("*.done"))
+    assert QUEUE["workers"] * QUEUE["threads"] <= psutil.cpu_count(logical=False)
+
+
+# ------------------------------------------------------------------ the report script (rules 1-3 on a fabricated result tree)
+def fake_results(root, seeds=range(10)):
+    """A result tree with known gaps. GB: L1 30, L2 25, L3 24.6, L4 22 (linear; TabPFN -3; CNN -1), physics paperA_corr 27.
+    S (n = 62): L1 40, L2 34, L3 33, L4 28. R degradation: L1 +6, L2 +5.5, L3 +5.5, L4 +1 at both factors, +2 / +2 / +2 / 0 on the
+    replication year. Inner-CV WAPE = the level + 1, so the hybrid is TabPFN L4 and the best pure data-driven model TabPFN L2."""
+    rng = np.random.default_rng(0)
+    lvl, off = {"L1": 30.0, "L2": 25.0, "L3": 24.6, "L4": 22.0}, {"Lasso": 0.0, "TabPFN": -3.0, "CNN": -1.0}
+    cfgs = {"L1": ("whdd", "direct"), "L2": ("netfit", "direct"), "L3": ("netfit", "residual"), "L4": ("netfit", "l4b")}
+    raw = {"whdd": "raw", "netfit": "rawphys"}
+
+    def rows(seed, method, fs, mode, w, inner=None, **extra):
+        base = {"exp_id": "fake", "split_seed": seed, "dataset": "fake", "target": "HP_Peak", "method": method, "anchor": "none" if fs == "-" else "size",
+                "feature_set": fs, "mode": mode, "target_transform": "-" if fs == "-" else "log", "n_substations": 100, "n_hp_households": 81, **extra}
+        r = [{**base, "cell": c, "metric": "wape", "value": w + k} for k, c in enumerate(["all", "pbin<=15", "pbin15-35", "pbin35-65", "pbin>65"])]
+        return r + ([{**base, "cell": "all", "metric": "wape_inner", "value": inner}] if inner is not None else [])
+
+    def arm(shift, phys, kind="", d_rung=None, extra_phys=(), **extra):
+        out = []
+        for s in seeds:
+            e = rng.normal(0, 0.1)
+            out += rows(s, "paperA_corr", "-", "-", phys + e, **extra) + rows(s, "slope_base", "-", "-", phys + 2 + e, **extra)
+            for m, ph in extra_phys:
+                out += rows(s, m, "-", "-", ph + e, **extra)
+            for meth, o in off.items():
+                for r, (fs, mode) in cfgs.items():
+                    w = lvl[r] + o + shift.get(r, 0.0) + e + rng.normal(0, 0.05)
+                    f = raw[fs] if meth == "CNN" else fs
+                    if kind:                                                # R(i): the refit row and the frozen row (+ L4 update)
+                        out += rows(s, meth, f, mode, w - 1, **extra) + rows(s, f"{meth}@frozen", f, mode, w + (d_rung or {}).get(r, 0.0), **extra)
+                        out += rows(s, f"{meth}@update", f, mode, w, **extra) if r == "L4" else []
+                    else:
+                        out += rows(s, meth, f, mode, w + (d_rung or {}).get(r, 0.0), None if d_rung else w + 1, **extra)
+        return pd.DataFrame(out)
+
+    for name, M in {"a_gb": arm({}, 27.0), "a_ch": arm({r: 4.0 for r in lvl}, 24.0),
+                    "r_x05": arm({}, 30.0, "x", {"L1": 6, "L2": 5.5, "L3": 5.5, "L4": 1}, [("paperA_corr_s0unscaled", 33.0)]),
+                    "r_x15": arm({}, 30.0, "x", {"L1": 6, "L2": 5.5, "L3": 5.5, "L4": 1}, [("paperA_corr_s0unscaled", 33.0)]),
+                    "r_rep": arm({}, 28.0, "", {"L1": 2, "L2": 2, "L3": 2, "L4": 0})}.items():
+        (root / name).mkdir(parents=True)
+        M.to_csv(root / name / "metrics.csv", index=False)
+    lc = pd.concat([arm({"L1": 10 * k, "L2": 9 * k, "L3": 8.4 * k, "L4": 6 * k}, 27.0 + 3 * k, n_train_hp=n, lc_draw=d, spc_train=-1)
+                    for n, k in ((32, 1.6), (62, 1.0), (100, 0.6)) for d in (0, 1)])
+    (root / "s_gb").mkdir()
+    lc.to_csv(root / "s_gb" / "metrics_lc.csv", index=False)
+    pd.DataFrame([{"split_seed": s, "n": "main", "pilot": p, "n_hh": 293, "l4b_alpha": 1e4, "l4b_cv_mse": 0.05, "n_cf_fallback": 0, "l4a_kappa": 0.4}
+                  for s in seeds for p in ("all", "l4")]).to_csv(root / "a_gb" / "pilots.csv", index=False)
+
+
+def test_report_applies_the_preregistered_rules(tmp_path):
+    from paperb import iter06_report as RP
+    fake_results(tmp_path)
+    R = RP.main(tmp_path)
+    st = R["steps"].set_index(["reading", "family", "step"])["verdict"]
+    for fam in ("linear", "tabpfn", "cnn"):
+        assert st["A-GB all", fam, "L2 vs L1"] == "better" and st["A-GB all", fam, "L3 vs L2"] == "no difference" and st["A-GB all", fam, "L4 vs L3"] == "better"
+        assert st["S-GB n=62", fam, "L4 vs L3"] == "better" and st["R x0.5", fam, "L4 vs L3"] == "better" and st["R x0.5", fam, "L3 vs L2"] == "no difference"
+        assert st["R (combined)", fam, "L4 vs L3"] == "better" and st["R (combined)", fam, "L2 vs L1"] == "no difference"     # -0.5 pp at the factors, 0 on the replication year
+    n = R["steps"].set_index(["reading", "family", "step"])["n"]
+    assert n["A-GB all", "linear", "L2 vs L1"] == 10 and n["S-GB n=62", "linear", "L2 vs L1"] == 20                          # units: seeds; seed x draws on S
+    c = R["claim"].iloc[0]
+    assert c["hybrid"] == "tabpfn L4" and c["best_pure_dd"] == "tabpfn L2" and bool(c["a_holds"]) and c["A_gap_pp"] == pytest.approx(-3, abs=0.3)
+    assert c["S_n62"] == "better" and c["R"] == "better" and c["outcome"] == "holds regardless of T" and c["T"] == "pending 07"
+    assert R["claim"].iloc[1]["hybrid"] == "tabpfn L4" and R["claim"].iloc[1]["families"] == "linear+tabpfn" and not R["claim"]["cnn_dependent"].any()
+    assert not R["summary"]["cnn_dependent"].any()
+    assert R["T"]["R x0.5"]["linear", "L4"].median() == pytest.approx(1.0, abs=0.2) and R["T"]["R x0.5 update"]["linear", "L4"].median() == pytest.approx(0.0, abs=0.2)
+    assert R["Z"]["R x0.5"].name == "paperA_corr_s0unscaled" and R["Z"]["R x0.5"].median() == pytest.approx(6.0, abs=0.3)
+    assert R["Z"]["A-GB all"].name == "paperA_corr" and R["T"]["S-GB n=all"]["tabpfn", "L1"].median() == pytest.approx(27.0, abs=0.3)
+    assert set(R["n_star"]["rung"]) == {"L1", "L2", "L3", "L4"} and len(R["l5"]) == 0                                       # no persisted model: L5 is missing, not invented
+    txt = (tmp_path / "report" / "report.md").read_text(encoding="utf-8")
+    assert "inherited hyperparameters" in txt and "differs from axis A" in txt and "outside the rules" in txt and "_missing_" in txt
+    assert (tmp_path / "report" / "figures" / "wape_vs_rung.png").exists() and (tmp_path / "report" / "figures" / "learning_curves.pdf").exists()
+    assert RP.verdict([-2] * 8 + [1] * 2)["verdict"] == "better" and RP.verdict([-2] * 7 + [1] * 3)["verdict"] == "no difference"
+    assert RP.verdict([-0.5] * 10)["verdict"] == "no difference" and RP.verdict([2] * 9 + [-1])["verdict"] == "worse"
+    assert RP.combine_r(["better", "better", "no difference"]) == "better" and RP.combine_r(["better", "better", "worse"]) == "no difference"
+
+
+def test_report_winner_is_chosen_by_inner_cv_never_by_test(tmp_path):
+    from paperb import iter06_report as RP
+    base = {"exp_id": "f", "dataset": "f", "target": "HP_Peak", "anchor": "size", "mode": "direct", "target_transform": "log", "n_substations": 9, "n_hp_households": 9, "cell": "all"}
+    M = pd.DataFrame([{**base, "split_seed": 0, "method": "Lasso", "feature_set": fs, "metric": k, "value": v}
+                      for fs, test, inner in (("netfit", 10.0, 30.0), ("both", 50.0, 20.0)) for k, v in (("wape", test), ("wape_inner", inner))])
+    w = RP.winners(RP.wide(M, ["split_seed"]), ["split_seed"])
+    assert len(w) == 1 and w["feature_set"].iloc[0] == "both" and w["all"].iloc[0] == 50.0 and w["rung"].iloc[0] == "L2"

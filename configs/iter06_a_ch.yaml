@@ -16,6 +16,7 @@ target_transforms: [log]
 models: []
 residual_models: []
 l4: true
+cnn_inits: 3                           # B1 (DECISIONS.md 2026-10-12): best of 3 initialisations in every final CNN fit and fixed-params fold fit
 no_train_wape: [TabPFN]              # decision 2026-10-12: TabPFN does not predict its train substations (wape_train is NaN; no 06 table uses it)
 cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
 physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]

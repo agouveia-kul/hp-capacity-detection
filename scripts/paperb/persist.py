@@ -148,18 +148,24 @@ def reload_check(root, device=None):
     return pd.DataFrame(rows)
 
 
-def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None, tab_te=None):
+def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None, tab_te=None, s0_update=None):
     """05b Arm 7 frozen-model row: the seed's saved Stage 1 model of `spec` (trained at x1.0), unchanged, applied to another
     version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model).
-    06: an L4 model's base s_hat / m_hat_h is rebuilt from its saved scale model on `tab_te` (the substation table of X_te)."""
+    06: an L4 model's base s_hat / m_hat_h is rebuilt from its saved scale model on `tab_te` (the substation table of X_te). With
+    `s0_update` (per-dwelling s0 of the test substations, re-estimated without labels) it returns (frozen prediction, update
+    prediction): the same residual and scale model, s0 replaced (06 R(i), DECISIONS.md 2026-10-12)."""
     d = model_dir(root, seed, spec)
     m, man = load_model(d, device)
+    upd = None
     if (d / "scale.joblib").exists():
-        p_valid = joblib.load(d / "scale.joblib").base(tab_te)
+        scale = joblib.load(d / "scale.joblib")
+        p_valid = scale.base(tab_te)
+        upd = None if s0_update is None else scale.base(tab_te, np.asarray(s0_update, float))
     if man["spec"] != "|".join(spec):
         raise ValueError(f"{d}: saved model is {man['spec']}, not {'|'.join(spec)}")
     saved = pd.read_parquet(d / "X_test.parquet", columns=[]).index.astype(str)
     if not saved.equals(pd.Index(X_te.index).astype(str)):
         raise ValueError(f"{d}: test substations differ from the saved model's test design")
     pred = m.predict(X_te[man["feature_columns"]])
-    return compose(p_valid[0], pred, p_valid[1]) if man["residual"] else np.asarray(pred, float)
+    out = compose(p_valid[0], pred, p_valid[1]) if man["residual"] else np.asarray(pred, float)
+    return out if s0_update is None else (out, compose(upd[0], pred, upd[1]))

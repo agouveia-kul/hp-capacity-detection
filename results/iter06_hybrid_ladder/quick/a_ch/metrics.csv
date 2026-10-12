@@ -2414,6 +2414,13 @@ iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,n_test_sub,8.
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,n_overlap_sub,0.0,8,17,a_ch,cnn_r
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,cnn_params,4209.0,8,17,a_ch,cnn_r
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,cnn_params_flag,1.0,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init0_val_loss,0.18646944716781863,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init1_val_loss,0.1867031745051484,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init2_val_loss,0.24353443892860882,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init0_test_wape,24.81916895026549,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init1_test_wape,24.45066606119432,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init2_test_wape,17.722585978987826,8,17,a_ch,cnn_r
+iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,all,init_chosen,0.0,8,17,a_ch,cnn_r
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,pbin<=15,wape,22.14360729165522,6,12,a_ch,cnn_r
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,pbin<=15,rmse,4.376385333686145,6,12,a_ch,cnn_r
 iter06_a_ch,0,bstar_2023,HP_Peak,CNN,size,rawphys,residual,log,pbin<=15,mae,3.3057008857082866,6,12,a_ch,cnn_r

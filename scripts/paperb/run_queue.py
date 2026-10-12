@@ -38,6 +38,10 @@ arm with `after: <arm>` starts a family job only when that arm's job of the same
 lesson); a family's `group` shares its `max_concurrent` cap with the other families of the group. `fixed_params: {csv, models:
 {model: queue_family of the csv}, arms: [..]}` gives, in the listed arms, each model the hyperparameters of the seed's row of the
 05b carry-forward table (`cv.fixed_params`: no search, one inner-CV pass per configuration; train.tune_grouped_cv).
+B2 (DECISIONS.md 2026-10-12): a family's `timeout_s` (3 x the probe's longest job of the family) interrupts a job that runs longer:
+the worker's main thread gets an exception at its next Python instruction, the job is failed with reason `timeout` and
+`--retry-failed` reruns it; the other running jobs are not touched. A job blocked inside one native call is interrupted only when
+that call returns. The queue refuses to start when workers x threads exceed the physical cores; the default is cores // workers.
 """
 import os
 import platform
@@ -50,6 +54,8 @@ except (ImportError, OSError):                                       # no torch,
     pass
 import argparse  # noqa: E402
 import concurrent.futures as cf  # noqa: E402
+import ctypes  # noqa: E402
+import threading  # noqa: E402
 from concurrent.futures.process import BrokenProcessPool  # noqa: E402
 import importlib  # noqa: E402
 import json  # noqa: E402
@@ -65,9 +71,15 @@ from pathlib import Path  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+import psutil  # noqa: E402
 import yaml  # noqa: E402
 
 from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
+
+
+class JobTimeout(BaseException):
+    """Raised in a worker's main thread when its job exceeds the family's `timeout_s` (not an Exception: the runner's own handlers
+    must not swallow it)."""
 
 FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped", "l4")
 CSV = {"preds": "predictions", "dropped": "dropped_cells", "diag": "physics_diagnostics", "lc": "metrics_lc", "lc_dropped": "dropped_cells_lc"}
@@ -132,7 +144,7 @@ def job_config(q, arm, job, threads):
             raise ValueError(f"{job['id']}: no frozen spec in the job's modes {cfg.get('modes')}")
         cfg["refit"] = {"fixed": fixed, "by_rung": bool(q["frozen"].get("by_rung")),
                         **({"frozen_dir": str(ROOT / q["frozen"]["models_dir"])} if arm.get("frozen_model") else {})}
-        keep |= {f"{m}@frozen" for m in keep} if arm.get("frozen_model") else set()
+        keep |= {f"{m}{s}" for m in keep for s in ("@frozen", "@update")} if arm.get("frozen_model") else set()
     if job["n"] != "all" or arm.get("spc_train"):                     # 05b: one learning-curve design, test substations shared with n = all
         cfg.update(lc_only=True, learning_curve={"n": [job["n"] if job["n"] == "all" else int(job["n"])], "draws": int(job["draw"]) + 1,
                                                  "draw_ids": [int(job["draw"])], "specs": list(fixed) if fixed else "all",
@@ -155,7 +167,23 @@ def keep_family(frames, family, fam_models, ml_models):
 
 
 def run_job(q, job, threads, stage):
-    """Worker: run one job and stage its frames -> (job, staged files, seconds)."""
+    """Worker: run one job and stage its frames -> (job, staged files, seconds). B2: with a family `timeout_s`, a timer raises
+    JobTimeout in this thread once the job runs longer; it is reported as TimeoutError("timeout: ...")."""
+    limit = q["families"][job["family"]].get("timeout_s")
+    if not limit:
+        return _run_job(q, job, threads, stage)
+    timer = threading.Timer(float(limit), ctypes.pythonapi.PyThreadState_SetAsyncExc, [ctypes.c_ulong(threading.get_ident()), ctypes.py_object(JobTimeout)])
+    timer.daemon = True
+    timer.start()
+    try:
+        return _run_job(q, job, threads, stage)
+    except JobTimeout:
+        raise TimeoutError(f"timeout: {job['id']} ran longer than the {limit} s of family {job['family']}") from None
+    finally:
+        timer.cancel()
+
+
+def _run_job(q, job, threads, stage):
     for p in q.get("sys_path", []):
         sys.path.insert(0, str(ROOT / p))
     t0, start = time.time(), datetime.now().isoformat(timespec="seconds")
@@ -274,7 +302,10 @@ def main(argv=None):
     if fams and fams - set(q["families"]):
         raise ValueError(f"--families: unknown {sorted(fams - set(q['families']))}")
     todo = [j for j in shard(all_jobs, a.shard) if (fams is None or j["family"] in fams) and not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
-    threads = a.threads or q.get("threads") or max(1, (os.cpu_count() or 1) // q["workers"])
+    cores = psutil.cpu_count(logical=False) or os.cpu_count() or 1
+    threads = a.threads or q.get("threads") or max(1, cores // q["workers"])
+    if q["workers"] * threads > cores:                                # B2 (05b lesson): oversubscribed jobs ran 1.5-13 x slower
+        raise SystemExit(f"{q['workers']} workers x {threads} threads exceed the {cores} physical cores: lower --workers or --threads")
     after = {arm["name"]: arm["after"] for arm in q["arms"] if arm.get("after")}
 
     def ready(j):                                                     # 06: the arm it depends on has finished this seed and family
@@ -287,7 +318,7 @@ def main(argv=None):
     def finish(job, files, info, err=None):
         J = out / "jobs"
         if err is not None:
-            (J / f"{job['id']}.failed").write_text(err, encoding="utf-8")
+            (J / f"{job['id']}.failed").write_text(("reason: timeout\n" if "TimeoutError: timeout:" in err else "") + err, encoding="utf-8")
             print(f"[{datetime.now():%H:%M:%S}] FAILED {job['id']}:\n{err}", flush=True)
         else:
             for f in files:

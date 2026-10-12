@@ -76,10 +76,14 @@ class Gate:
         return (np.asarray(P, float) * self.W[_bins(np.asarray(r, float), self.edges)]).sum(axis=1)
 
 
-def l5_seed(d, r_hat):
-    """L5 of one seed. d = <models>/L4/s<seed>; r_hat: Series over sub_id (inner and test substations).
-    Returns (test frame: the families' predictions, L5a, L5b; the fitted Gate; the families)."""
-    fams = sorted(p.name for p in Path(d).iterdir() if (p / "oof_inner.parquet").exists())
+def l5_seed(d, r_hat, fams=None):
+    """L5 of one seed. d = <models>/L4/s<seed>; r_hat: Series over sub_id (inner and test substations); `fams`: only these
+    family folders (the report's ensemble without the CNN). Returns (test frame: the families' predictions, L5a, L5b; the fitted
+    Gate; the families)."""
+    d = Path(d)
+    fams = sorted(p.name for p in d.iterdir() if (p / "oof_inner.parquet").exists() and (fams is None or p.name in fams))
+    if len(fams) < 2:
+        return pd.DataFrame(), None, fams
     oof = {f: pd.read_parquet(d / f / "oof_inner.parquet") for f in fams}
     O = pd.concat([oof[f]["oof"].rename(f) for f in fams], axis=1).dropna()        # rows every family predicted out of fold
     meta = oof[fams[0]].loc[O.index]
@@ -100,7 +104,7 @@ def main(argv=None):
         seed = int(d.name[1:])
         s = l4[l4["split_seed"] == seed].set_index("sub_id")
         T, g, fams = l5_seed(d, s["r_hat"])
-        if len(fams) < 2:
+        if g is None:
             print(f"seed {seed}: {len(fams)} family with an L4 model, no ensemble", file=sys.stderr)
             continue
         preds.append(T.rename_axis("sub_id").reset_index().assign(split_seed=seed))

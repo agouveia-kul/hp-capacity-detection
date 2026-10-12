@@ -78,8 +78,9 @@ class Scale:
             return np.asarray(self.kappa, float) / (C["T_h"] - C["T_design"]).to_numpy(float)
         return np.exp(self.g.predict(C[COVARS]))
 
-    def base(self, tab):
-        C = covariates(tab, self.s0.reindex(tab.index), self.clim, self.t_design)
+    def base(self, tab, s0=None):
+        """(P_hat, valid) on `tab` with the saved s0, or with `s0` (06 R(i) update row: only s0 changes; kappa / g stay frozen)."""
+        C = covariates(tab, self.s0.reindex(tab.index) if s0 is None else s0, self.clim, self.t_design)
         return estimate(C, self.m_hat(C))
 
 
@@ -132,7 +133,7 @@ def l4_bases(tab, members, num, temp, t_design):
     kappa = lambda m, T: np.asarray(m, float) * (np.asarray(T, float) - t_design)        # noqa: E731
     sa = Scale("l4a", float(kappa(num["full"]["m"], num["full"]["T_h"])))
     m_cf_b, sb, info = crossfit_m(C, m_true, tab, members)
-    rows, cf, cov = {}, {}, C.assign(m_true=m_true, **{c: tab[c] for c in ("split", "fold", "station", "size", "p", "HP_Count", "HP_Peak", "s_h_net")})
+    rows, cf, cov = {}, {}, C.assign(m_true=m_true, s0=s0, **{c: tab[c] for c in ("split", "fold", "station", "size", "p", "HP_Count", "HP_Peak", "s_h_net")})
     for s, m_cf in ((sa, Scale("l4a", kappa(num["m_cf"], num["T_cf"])).m_hat(C)), (sb, m_cf_b)):
         s.s0, s.clim, s.t_design = s0[te], clim, t_design
         m_full = s.m_hat(C)

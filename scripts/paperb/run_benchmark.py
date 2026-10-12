@@ -32,6 +32,10 @@ net-load fit scalars after pooling; `mode_feature_sets` restricts a mode to some
 predictions and, for L4, its scale model) under <dir>/<rung>/s<seed>/<family>/. Frame `l4`: covariates and m_hat_h per substation.
 `no_train_wape: [models]` skips the prediction of the train substations for those models (the `wape_train` diagnostic of 05b is
 then NaN): for TabPFN it is a third of a tuned configuration's time, and no 06 table uses it (decision 2026-10-12).
+`cnn_inits: 3` (B1): every final CNN fit and every fold fit of a fixed-params pass keeps the best of 3 initialisations
+(train.fit_inits); the validation loss and the test WAPE of each one are written as metrics `init<k>_val_loss` /
+`init<k>_test_wape` (diagnostics only; the choice is `init_chosen`). Axis R(i) (C7): next to `<model>@frozen`, an L4 model gets
+the label-free update row `<model>@update`: the frozen residual and scale model with s0 from the arm's own (scaled) train fillers.
 
     python scripts/paperb/run_benchmark.py --config configs/protocol_v1_quick.yaml [--set parallel.workers=4] [--resume]
 """
@@ -83,6 +87,7 @@ PBINS = [("pbin<=15", 0.0, 0.15), ("pbin15-35", 0.15, 0.35), ("pbin35-65", 0.35,
 CAL = {"paperA_cal": "paperA_sh_mh", "paperA_corr_cal": "paperA_corr"}     # calibrated estimator -> its base estimator
 OWN_STREAM = 6                                                     # 05b: fillers assigned to the GB-EoH whole-house pilot homes
 FROZEN = "@frozen"                                                 # 05b Arm 7: method suffix of the frozen-model row (cfg.refit.frozen_dir)
+UPDATE = "@update"                                                 # 06 R(i): frozen L4 model, s0 re-estimated from the scaled train fillers
 
 
 def write_atomic(f, text):
@@ -174,7 +179,7 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
         log(f"  {y.name}: {int((~y[tr | inn].notna()).sum())} train/inner substations without a target (failed fit), not used for fitting")
     ev_all, ev_by = cfg["cv"]["hyperopt"]["max_evals"], cfg["cv"]["hyperopt"].get("max_evals_by_model", {})
     pa_target = cfg.get("paperA", {}).get("target", "HP_Peak")
-    yv, out, extra, Xc, bvs = y.to_numpy(float), {}, {}, {}, {}
+    yv, out, extra, Xc, bvs, ini = y.to_numpy(float), {}, {}, {}, {}, {}
     refit, fitted = cfg.get("refit") or {}, {}                             # 05b A10: frozen (params, best_iter) per spec, persisted models
 
     def tuned(spec, name, X, yt, m_in, m_tr, opts=None, space=None, eval_on=None):
@@ -185,6 +190,13 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
                                      (y_kw[m_in], None if p_base is None else p_base[m_in]),
                                      None if fx is None else (fx["params"], fx["best_iter"]),
                                      cfg["cv"].get("fixed_params", {}).get(name))        # 06: hyperparameters fixed, one inner-CV pass
+        to_kw = lambda pr, mask: pr if p_base is None else p_base[mask] * np.exp(pr)            # noqa: E731  residual: z -> kW
+        if len(meta.get("inits") or []) > 1:                               # 06 B1: diagnostics of the final fit's initialisations
+            wt = [100 * float(np.abs(to_kw(c.predict(X[te]), te) - y_kw[te]).sum() / y_kw[te].sum()) for c in meta["init_models"]]
+            ini[spec] = {**{f"init{r['init']}_val_loss": r["val_loss"] for r in meta["inits"]}, **{f"init{i}_test_wape": w for i, w in enumerate(wt)},
+                         "init_chosen": next(r["init"] for r in meta["inits"] if r["chosen"])}
+            log(f"  {y.name} {'/'.join(spec)}: initialisations val_loss {[round(r['val_loss'], 5) for r in meta['inits']]}, chosen "
+                f"{ini[spec]['init_chosen']} (test WAPE per initialisation, diagnostic only: {[round(w, 1) for w in wt]})")
         k = rung(spec) if refit.get("by_rung") else spec                    # 06: one model per rung, the lowest inner-CV WAPE (first on ties)
         keep_m = refit.get("dir") and not spec[0].startswith("anchor_only_")   # the anchor-only baselines are never persisted
         if keep_m and not (refit.get("by_rung") and k in fitted and fitted[k]["meta"]["cv_wape"] <= meta["cv_wape"]):
@@ -194,7 +206,6 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
         if fx is not None:
             log(f"  {y.name} {'/'.join(spec)}: refit with fixed params {meta['params']}, best_iter {meta['best_iter']}, {time.time() - t0:.1f}s")
             return m.predict(X[te])
-        to_kw = lambda pr, mask: pr if p_base is None else p_base[mask] * np.exp(pr)            # noqa: E731  residual: z -> kW
         skip_tr = name in cfg.get("no_train_wape", [])                    # 06: no train-set prediction (TabPFN: a third of its time)
         p_tr = y_kw[m_tr] * np.nan if skip_tr else to_kw(m.predict(X[m_tr]), m_tr)
         bv = {"wape_train": 100 * float(np.abs(p_tr - y_kw[m_tr]).sum() / y_kw[m_tr].sum()), "wape_inner": meta["cv_wape"],
@@ -250,14 +261,18 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
                 from paperb.persist import frozen_predict
                 pv = None if mode == "direct" else (np.asarray(p, float)[te], np.asarray(valid, bool)[te])
                 root = Path(refit["frozen_dir"]) / (rung(spec) if refit.get("by_rung") else "")
-                out[(f"{method}{FROZEN}", *spec[1:])] = frozen_predict(root, seed, spec, X[te], pv, cfg.get("device", "cpu"), tab[te])
+                s0_new = pa["l4cov"]["s0"][te] if mode in ("l4a", "l4b") else None       # 06 R(i): the arm's own (scaled) train fillers
+                fr = frozen_predict(root, seed, spec, X[te], pv, cfg.get("device", "cpu"), tab[te], s0_new)
+                out[(f"{method}{FROZEN}", *spec[1:])] = fr if s0_new is None else fr[0]
+                if s0_new is not None:
+                    out[(f"{method}{UPDATE}", *spec[1:])] = fr[1]
                 log(f"  {y.name} {'/'.join(spec)}: frozen Stage 1 model from {refit['frozen_dir']} applied to the test substations")
     if refit.get("dir"):                                                # 05b A10: persist each refit model with its test design
         from paperb.persist import save_model
         for k, f in fitted.items():
             save_model(Path(refit["dir"]) / (k if refit.get("by_rung") else ""), seed, f["spec"], f, tab.index[te], out[f["spec"]],
                        refit.get("device", cfg.get("device", "cpu")))
-    for spec, bv in bvs.items():                                        # 05b Task 1b: train / inner-CV WAPE next to the test metrics
+    for spec, bv in [*bvs.items(), *ini.items()]:                       # 05b Task 1b: train / inner-CV WAPE next to the test metrics (06: + B1)
         extra[spec] = {**extra.get(spec, {}), **bv}
     return out, extra
 
@@ -300,7 +315,7 @@ def at_bound_rows(seed, target, tab, spec, n_hp):
 
 def run_seed(cfg, seed):
     """One split seed end to end -> dict of frames (runs in a worker process)."""
-    configure(cfg["parallel"]["threads"], cfg.get("ffnn", {}).get("patience", 40), cfg.get("device", "cpu"))
+    configure(cfg["parallel"]["threads"], cfg.get("ffnn", {}).get("patience", 40), cfg.get("device", "cpu"), cfg.get("cnn_inits", 1))
     lines, t0 = [], time.time()
 
     def log(msg):

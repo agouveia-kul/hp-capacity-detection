@@ -22,3 +22,4 @@ Collected so that they are not lost before the transfer iteration.
 - **FeederBW (DE)** real feeders, with registry labels.
 - **Design-temperature normalisation of m_h** (m_h ≈ SF_design / (T_h − T_design)) as a transfer candidate. The GB design temperature (−3 °C, CIBSE London 99.6 %) is London-only; the site spread is −1.5 to −5.9 °C (not verified at source).
 - **Learning m_h from covariates** (hierarchical / leave-one-population-out), and feeder-referenced features θ.
+- **Own-load term (from 06).** The own-load term of `paperA_corr_own` is absorbed by the residual intercept only within a pool. It differs between CH (real own load) and GB (none), so 07 must handle it explicitly, through a whole-house pilot m_h′ or by re-estimating the intercept.

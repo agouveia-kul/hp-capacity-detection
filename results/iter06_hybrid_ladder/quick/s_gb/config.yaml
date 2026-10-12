@@ -206,6 +206,7 @@ mode_feature_sets:
   - netfit
   - rawphys
 l4: true
+cnn_inits: 3
 no_train_wape:
 - TabPFN
 refit: null
@@ -383,7 +384,7 @@ queue:
     - cv.inner_substations_per_cell=2
     - cv.hyperopt.max_evals=3
     - anchors=[size]
-git_commit: 60a11b8a1b3cd314f16a903f4044977ab7873d0c
+git_commit: f2364b1744088700e1186310314d99bb4ab722a5
 tabpfn:
   checkpoint: tabpfn-v3.5-20260909.safetensors
   sha256: ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3

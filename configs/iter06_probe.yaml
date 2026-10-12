@@ -11,11 +11,11 @@ threads: 3
 frozen: {models_dir: results/iter06_hybrid_ladder/models/a_gb, by_rung: true}
 fixed_params: {csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv, models: {CNN: rawseries}, arms: [a_gb, s_gb]}
 families:
-  physics: {}
-  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
-  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3}
-  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3}
-  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3}
+  physics: {timeout_s: 1758}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS], timeout_s: 13968}
+  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3, timeout_s: 32961}
+  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3, timeout_s: 19455}
+  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3, timeout_s: 36666}
   cnn_d: {models: [CNN], set: ["modes=[direct]"]}
   cnn_r: {residual_models: [CNN], set: ["modes=[residual]"]}
   cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"]}
