@@ -4,7 +4,7 @@ Read this file fully at the start of every session. It is the contract for all w
 
 ## 1. Purpose
 
-This repository produces **Paper B**: *what data-driven (ML) methods can and cannot recover about thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature, and where they beat a physics estimator.*
+This repository produces **Paper B**: *a hybrid, identifiability-guided estimator of thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature. Physics-based estimation (Paper A) and data-driven estimation each have limits; the hybrid keeps the part that net load identifies (the heating slope) and learns only the part it does not (the scale m_h and a residual).* The contribution is a method, not a benchmark (Alex, 2026-10-09). Target: capacity only (`HP_Peak`).
 
 The companion **Paper A** (repo `hp-sensitivity-paper`) establishes identifiability. Its main points:
 - Absolute HP counts and N_total are **not** identifiable (scale ambiguity).
@@ -14,29 +14,25 @@ The companion **Paper A** (repo `hp-sensitivity-paper`) establishes identifiabil
 
 Paper B uses Paper A as its theoretical bound and baseline; it must not duplicate it.
 
-### Research questions
-- **RQ1 — targets vs identifiability.** How well do ML models predict each target:
-  - HP count;
-  - nameplate kW (HEAPO protocols subset);
-  - observed non-coincident peak (current `HP_Peak`);
-  - coincident peak;
-  - thermal sensitivity s_h (kW/K);
-  - ratio r;
-  - peak at design temperature.
+### Research questions (reframed as the ladder questions, 2026-10-09; iteration 06 brief)
+The method is tested as a ladder. The same model families are used at every rung, so each rung isolates one ingredient.
+- **Q1, physics and its limits (L0).** Where does Paper A's estimator stop: filler contamination, scale (m_h) dispersion, transfer of m_h? Evidence: 03b, 05b Arm 4.
+- **Q2, data-driven estimation and its limits (L1, L2).** What do generic features, physics-derived features and raw series reach with each family? How many labelled HP households are needed (n\*), and how sensitive is the result to the fillers' temperature response? Evidence: 05b, 06.
+- **Q3, the hybrid (L3, L4).** Does a physics-informed target (L3), and then a learned transferable scale m̂_h with an ML residual (L4, the proposed hybrid), pay off against L0 and against the best pure data-driven model, on accuracy, sample efficiency, robustness and transfer? Evidence: 06, 07.
+- **Q4, ensemble (L5).** Does an ensemble of hybrid experts (plain average; r̂ gate) beat the hybrid? It is dropped from the method if it fails its rule. Evidence: 06.
+- **Q5, transfer (axis T).** CH ↔ GB under harmonised labels, all rungs. Evidence: 07.
+- **Q6, use case.** Can a change in capacity be detected and quantified over a multi-year horizon? Evidence: 08.
 
-  Each is run with and without the scale anchor (dwelling count / feeder peak). Does performance track identifiability?
-- **RQ2 — value over physics.** On identifiable targets, does ML beat the hockey-stick / HDH / calibrated-delta estimators? Look at COP curvature, backup rods, blocking/control windows and DHW. Can TCL types (HP, backup rod, storage, direct, EWH) be told apart in aggregate?
-- **RQ3 — transfer.** Test CH → DE (FeederBW real feeders; WPuQ as a stress test) and a third domain (UKPN / RHPP / others). Compare raw-series vs physics-feature vs hybrid models, and fixed vs latent T_base.
-- **RQ4 — change detection.** Over a multi-year horizon with a given uptake probability, can capacity change be detected (minimum detectable change at a fixed false-alarm rate, detection delay) and quantified (relative, and registry-anchored absolute)?
+Iterations 00–05b use the earlier numbering (RQ1 targets vs identifiability, RQ2 value over physics, RQ3 transfer, RQ4 change detection). RQ1's other targets (HP count, nameplate, coincident peak, s_h, r, peak at design temperature) and the daily arm are dropped for now (2026-10-09).
 
-### Iteration plan (renumbered 2026-09-30, before iteration 05a)
+### Iteration plan (renumbered 2026-10-09 with the storyline; DECISIONS.md)
 - 03a / 03b — fair test of ML against the physics estimator (code / runs); done;
 - 04 — data inventory for larger pools and HP-profile simulation feasibility; done;
-- 05a / 05b — GB-EoH pool with analog-matched LCL filler (code) / is training data what holds ML back? (runs);
-- 06 — other targets and the daily arm (RQ1), both pools;
-- 07 — transfer (RQ3), incl. CH↔GB and the RHPP nameplate arm;
-- 08–09 — change detection (RQ4), EoH multi-year panel;
-- 10+ — freeze and draft.
+- 05a / 05b — GB-EoH pool with analog-matched LCL filler (code) / is training data what holds ML back? (runs); done;
+- 06 — the hybrid ladder (L0–L5; axes A, S, R), both pools;
+- 07 — transfer validation (axis T; CH ↔ GB under harmonised labels, all rungs);
+- 08 — change-detection use case (EoH multi-year panel);
+- 09+ — freeze and draft.
 
 **Paper storyline (Alex, 2026-10-09; replaces the earlier "paper lead"):**
 1. the LV network and its DER are unobservable;
@@ -108,6 +104,28 @@ There is no single headline dataset (decision 2026-10-12): B\* and GB-EoH are re
 - the median ΔWAPE is ≤ −1 pp.
 
 Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always reported.
+
+**The hybrid ladder, its four axes and the claim rule (06; pre-registered 2026-10-09, `iterations/06-hybrid-ladder.md`, DECISIONS.md 2026-10-12).** Families: the carried ones (linear, TabPFN, CNN). At each rung a family's configuration is chosen by inner-CV WAPE among that rung's configurations only.
+
+| Rung | Adds | Configurations |
+|---|---|---|
+| L0 | physics | `paperA_corr`, `paperA_corr_own`, `paperA_cal`, `slope_base`; the best by median WAPE is the L0 reference |
+| L1 | pure data-driven | tabular `whdd` + scale features, direct-log; CNN `raw` + scale, direct-log. No hockey-stick fit, no Paper A quantity |
+| L2 | physics-derived features | tabular {`netfit`, `both`} × {size, size_peak}, direct-log; CNN `rawphys` (raw + ŝ, P_base, T_h, N after pooling), direct-log |
+| L3 | physics-informed target | L2 inputs, mode `residual`: z = log y − log P̂_A |
+| L4 | learned transferable scale (**the proposed hybrid**) | P̂ = ŝ / m̂_h · exp(f_θ(x)), ŝ = max(s_h(net) − N·s₀, 0). `l4a`: m̂_h = κ / (T̂_h − T_design), κ from the pilot. `l4b`: m̂_h = g(covariates), a regularised regression of log m_h. m̂_h is cross-fitted; the L4 row is the inner-CV winner of {`l4a`, `l4b`} |
+| L5 | ensemble of hybrid experts | L5a: plain average of the families' L4 predictions. L5b: gate on r̂ = ŝ / P_base(net), edges and per-bin weights learned on out-of-fold inner-CV predictions |
+
+- **Axes.**
+  - **A, accuracy:** GB main and CH (B\*), n = all, seeds 0–9; WAPE overall and per Paper A bin (†).
+  - **S, sample efficiency:** GB learning curve at n ∈ {32, 62, 100, all}, 10 seeds × 2 draws; primary point n = 62; n\* (where a rung reaches L0) also reported.
+  - **R, robustness:** (i) the frozen n = all models on test aggregates with fillers ×0.5 and ×1.5, as the degradation ΔWAPE vs ×1.0; (ii) the same rung refit on the temporal replication year.
+  - **T, transfer:** evaluated in 07; 06 persists every rung's per-seed models for it.
+- **"Better" on an axis:** paired per-seed ΔWAPE < 0 in ≥ 8 of 10 seeds (≥ 80 % of seed × draws on S) **and** median ΔWAPE ≤ −1 pp. On R the degradation is compared, not the level.
+- **Rule 1, ladder steps:** per family and dataset, each rung against the one below (L2 vs L1, L3 vs L2, L4 vs L3) on A, S and R: better / worse / no difference.
+- **Rule 2, the hybrid claim:** the hybrid = L4 with its best family; the best pure data-driven model = the best of L1 / L2 over the families (both by inner-CV WAPE). The claim holds if (a) on A the hybrid's median WAPE is at most 1 pp above the best pure data-driven model (GB, overall) **and** (b) the hybrid is better on at least two of S, R, T. It is closed in 07. The hybrid vs L0 is reported on every axis.
+- **Rule 3, L5:** an ensemble form is kept only if it beats L4 by median ≤ −1 pp and in ≥ 8/10 seeds, overall or in the † bins, on GB. Otherwise it is a negative result and not part of the method.
+- Multiplicity (5 rungs × 3 families × 2 datasets × 3 axes) is stated with every table.
 
 - **Household-disjoint splits.** Split households into train/test pools **before** building substations. No household may appear in both. Stratify HP households by weather station.
 - **No stacking within a substation.** Each dwelling in a substation is a distinct household (`build_substations_norepl`). Feeder size and penetration are bounded by the pool, and those bounds are reported.
