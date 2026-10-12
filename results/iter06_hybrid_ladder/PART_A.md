@@ -24,6 +24,43 @@ diagnostics on train and inner substations.
 - L5 step on A-GB seed 0 (`ensemble.py`): runs; the gate keeps no edge (weights linear 0.08, TabPFN 0.71, CNN 0.25 on the
   out-of-fold predictions).
 
+## Review decisions of 2026-10-12 (DECISIONS.md, brief amendments A3-A8 and B1-B4; commit `7b723e5`, then the commit adding this section)
+- **B1, CNN best of 3 initialisations** (seeds seed + k * 7919; k = 0 is the split seed). In every fold fit of a fixed-params pass
+  the kept one has the lowest loss on the early-stopping fold (household-disjoint from the fitted and the scored fold). In every
+  final fit it has the lowest loss on the inner substations. **Deviation from the wording of B1:** a final fit uses every train
+  household, so no household-disjoint substation exists for it outside test; the inner substations are never fitted by the final
+  model and never test, but share households with the train substations. The choice screens out a collapsed initialisation; it
+  is not an unbiased loss. A B\* search evaluation trains one initialisation. Validation losses and per-initialisation test WAPE
+  are metrics `init<k>_val_loss` / `init<k>_test_wape` (diagnostics; the report lists their spread). In the re-probe (24 final
+  fits) the chosen initialisation was 0, 1, 2 in 8 fits each; worst / best validation loss: median 1.09, max 1.52.
+- **B2.** `timeout_s` per family = 3 x its longest probe job: physics 1,758 s, linear 13,968, tabpfn_d 32,961, tabpfn_r 19,455,
+  tabpfn_h 36,666, cnn_d 27,399, cnn_r 13,524, cnn_h 26,343. The job's main thread is interrupted at its next Python instruction,
+  the job is failed with `reason: timeout` and rerun by `--retry-failed`; other jobs are not touched. Limit: a job blocked inside
+  one native call is interrupted only when that call returns. The queue refuses to start above the physical cores. A read-only
+  check found the 05b feature caches for all ten seeds of a_gb, a_ch, r_x05, r_x15 and r_rep, so no physics job starts cold there.
+- **C7.** In r_x05 / r_x15 every L4 model also gets `<model>@update` (frozen residual and scale model, s0 from the scaled train
+  fillers). `paperA_corr` (scaled s0) and `paperA_corr_s0unscaled` were already both in the R-shift physics job.
+- **Report script** `scripts/paperb/iter06_report.py`, committed in `7b723e5` before any result: open choices in its docstring
+  (R = better on at least two of its three readings and worse on none; hybrid and best pure data-driven model chosen by the
+  median inner-CV WAPE over the seeds on A-GB; L5 judged on all test substations or on the union of the † bins; S second reading
+  = CH at n = all on the S configurations; n = all of S placed at the seed's number of train HP households). Tested on a
+  fabricated result tree and run on the quick (toy) outputs only.
+- **Probe jobs.** B1 and C7 change the content of 19 of the 40 seed-0 jobs, not only the GB CNN ones: every CNN job (a_gb, a_ch,
+  r_x05, r_x15, r_rep: 15) and the L4-holding linear and tabpfn_h jobs of r_x05 and r_x15 (4). These 19 were removed; the other
+  21 are unchanged. Re-probed at 6 workers x 3 threads: a_gb, a_ch and r_x05 CNN (9 jobs, 0 failed); the remaining 10 run with
+  the run. 30 of 880 jobs are done.
+- **Runtime after B1** (job-h per seed, re-probe): A-GB CNN 6.23 (was 2.00: cnn_d 2.54, cnn_r 1.25, cnn_h 2.44); A-CH CNN 3.66
+  (unchanged: the search dominates); r_x05 CNN 0.85 (was 0.48). Estimate of what remains: A-GB 118 job-h, A-CH 50, S-GB 84
+  (CNN x 3 extrapolated; about 40 is per-job overhead), R arms 49: **about 300 job-h, TabPFN about 124, wall time about 50 h
+  = 2.1 continuous days** at 6 workers (below the 4-day limit). TabPFN and S-GB are extrapolated from the first probe and the
+  timing check (cuts 1 and 2), not re-probed.
+
+- **Checks on the final code:** quick run 28/28 jobs; pytest 163 passed, 1 skipped (CUDA), 1 xfailed (documented); reload check
+  of the persisted seed-0 rung winners after the re-probe: 24 of 24 reproduce their own predictions (linear and CNN exactly,
+  TabPFN within 1.7e-5 relative). The run was **not** started and no task was registered.
+- **Command** (continuous, below-normal priority, 6 workers x 3 threads from the queue config; OneDrive sync paused for the run):
+  `powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter06.yaml -Continuous -Workers 6`
+
 ## Compute decisions after the probe (Alex, 2026-10-12; DECISIONS.md, brief amendments A1 and A2; commit after `60a11b8`)
 - **Cut 1:** TabPFN does not predict its train substations (`no_train_wape: [TabPFN]` in the arm configs). Timed on the
   persisted A-GB seed-0 L2 and L1 models (3 threads, idle machine): test prediction 197–202 s, train prediction 323–357 s,
@@ -44,7 +81,7 @@ diagnostics on train and inner substations.
   run merged old and new frames. Everything was deleted again, left for 5 min (nothing came back), and the quick run was
   repeated in the clean folder: no conflict copy, 40 probe jobs and the models untouched. Lesson: never delete and recreate
   a results folder in one step under OneDrive; pause the sync for the run, as `schedule_overnight.ps1` advises.
-- **Still open:** the CNN's fixed hyperparameters on the GB arms (below), and continuous against nights.
+- Decided in the review of 2026-10-12: the CNN's inherited hyperparameters on the GB arms (A3), and continuous mode.
 
 ## Runtime before the cuts (`runtime_estimate.md`, from the probe)
 | arm | physics | linear | TabPFN | CNN | all (job-h, 10 seeds) |
@@ -71,7 +108,7 @@ Ways to shorten it, none applied:
   would have no persisted model or out-of-fold predictions unless refit, and it needs new code.
 
 ## Assumptions and deviations (for the REVIEW)
-- **CNN hyperparameters on the GB arms (deviation, needs Alex's OK).** `fixed_params` in `configs/iter06.yaml`: on `a_gb`
+- **CNN hyperparameters on the GB arms (deviation; accepted by Alex on 2026-10-12, amendment A3).** `fixed_params` in `configs/iter06.yaml`: on `a_gb`
   and `s_gb` every CNN configuration takes the hyperparameters of the seed's 05b Arm 2 CNN winner (A10 carry-forward table);
   one inner-CV pass per configuration gives its inner-CV WAPE, the epoch count and the out-of-fold predictions. Reasons: A11
   puts the CNN on this CPU; one such pass plus the final fit took 11–17 min per configuration at n = all; 30 evaluations would

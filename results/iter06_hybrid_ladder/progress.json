@@ -1,8 +1,8 @@
 {
- "done": 64,
+ "done": 22,
  "failed": 0,
- "remaining": 0,
- "median_job_s": 827.056568980217,
- "eta_h": 0.0,
- "updated": "2026-10-12T10:10:05"
+ "remaining": 2,
+ "median_job_s": 2395.6992925405502,
+ "eta_h": 0.22,
+ "updated": "2026-10-12T17:00:27"
 }

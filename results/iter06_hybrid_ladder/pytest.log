@@ -1,6 +1,6 @@
-...............................................s................x....... [ 45%]
-........................................................................ [ 90%]
-...............                                                          [100%]
+...............................................s................x....... [ 43%]
+........................................................................ [ 87%]
+.....................                                                    [100%]
 ============================== warnings summary ===============================
 .venv\Lib\site-packages\hyperopt\atpe.py:19
   C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
@@ -40,7 +40,7 @@ tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[C
     return object.__file__
 
 tests/test_05b.py: 64 warnings
-tests/test_06.py: 70 warnings
+tests/test_06.py: 78 warnings
 tests/test_fair_test.py: 6 warnings
 tests/test_fair_test_03b.py: 10 warnings
 tests/test_gb_eoh.py: 600 warnings
@@ -56,9 +56,13 @@ tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
   C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\lc_fit.py:54: RuntimeWarning: overflow encountered in scalar power
     return float((b / (w_phys - a)) ** (1.0 / c))
 
+tests/test_06.py: 18 warnings
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\numpy\lib\nanfunctions.py:1215: RuntimeWarning: Mean of empty slice
+    return np.nanmean(a, axis, out=out, keepdims=keepdims)
+
 tests/test_protocol_v1.py::test_targets_nonnegative_and_deterministic
   C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\tests\test_protocol_v1.py:125: UserWarning: HP_CoincPeak > HP_Peak in 2 of 6 substations
     warnings.warn(f"HP_CoincPeak > HP_Peak in {int(viol.sum())} of {len(t1)} substations")
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-157 passed, 1 skipped, 1 xfailed, 803 warnings in 805.29s (0:13:25)
+163 passed, 1 skipped, 1 xfailed, 829 warnings in 750.99s (0:12:30)

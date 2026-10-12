@@ -16,9 +16,9 @@ families:
   tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3, timeout_s: 32961}
   tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3, timeout_s: 19455}
   tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3, timeout_s: 36666}
-  cnn_d: {models: [CNN], set: ["modes=[direct]"]}
-  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"]}
-  cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"]}
+  cnn_d: {models: [CNN], set: ["modes=[direct]"], timeout_s: 27399}
+  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"], timeout_s: 13524}
+  cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"], timeout_s: 26343}
 arms:
   - {name: a_gb, config: configs/iter06_a_gb.yaml, seeds: [0],
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}

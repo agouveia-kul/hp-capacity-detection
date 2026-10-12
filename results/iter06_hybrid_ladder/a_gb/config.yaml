@@ -211,6 +211,9 @@ mode_feature_sets:
   - both
   - rawphys
 l4: true
+cnn_inits: 3
+no_train_wape:
+- TabPFN
 refit:
   dir: results/iter06_hybrid_ladder/models/a_gb
   by_rung: true
@@ -230,7 +233,8 @@ queue:
     - a_gb
     - s_gb
   families:
-    physics: {}
+    physics:
+      timeout_s: 1758
     linear:
       models:
       - Linear
@@ -244,6 +248,7 @@ queue:
       - Lasso
       - ElasticNet
       - PLS
+      timeout_s: 13968
     tabpfn_d:
       models:
       - TabPFN
@@ -251,6 +256,7 @@ queue:
       - modes=[direct]
       group: tabpfn
       max_concurrent: 3
+      timeout_s: 32961
     tabpfn_r:
       residual_models:
       - TabPFN
@@ -258,6 +264,7 @@ queue:
       - modes=[residual]
       group: tabpfn
       max_concurrent: 3
+      timeout_s: 19455
     tabpfn_h:
       residual_models:
       - TabPFN
@@ -265,6 +272,7 @@ queue:
       - modes=[l4a, l4b]
       group: tabpfn
       max_concurrent: 3
+      timeout_s: 36666
     cnn_d:
       models:
       - CNN
@@ -307,27 +315,6 @@ queue:
     - cnn_d
     - cnn_r
     - cnn_h
-  - name: s_gb
-    config: configs/iter06_a_gb.yaml
-    seeds:
-    - 0
-    n:
-    - 32
-    - 62
-    - 100
-    draws:
-    - 0
-    families:
-    - physics
-    - linear
-    - tabpfn_d
-    - tabpfn_r
-    - tabpfn_h
-    - cnn_d
-    - cnn_r
-    - cnn_h
-    set:
-    - refit=null
   - name: r_x05
     config: configs/iter06_r_shift.yaml
     seeds:
@@ -346,40 +333,7 @@ queue:
     - cnn_h
     set:
     - 'pool.response_scale={fill: 0.5}'
-  - name: r_x15
-    config: configs/iter06_r_shift.yaml
-    seeds:
-    - 0
-    frozen: true
-    frozen_model: true
-    after: a_gb
-    families:
-    - physics
-    - linear
-    - tabpfn_d
-    - tabpfn_r
-    - tabpfn_h
-    - cnn_d
-    - cnn_r
-    - cnn_h
-    set:
-    - 'pool.response_scale={fill: 1.5}'
-  - name: r_rep
-    config: configs/iter06_r_rep.yaml
-    seeds:
-    - 0
-    frozen: true
-    after: a_gb
-    families:
-    - physics
-    - linear
-    - tabpfn_d
-    - tabpfn_r
-    - tabpfn_h
-    - cnn_d
-    - cnn_r
-    - cnn_h
-git_commit: c68dfbc4f07cb5364e1a9d8feb4a32190999d1a1
+git_commit: 7b723e506c142aafc29343156c29cf4e5bbec751
 tabpfn:
   checkpoint: tabpfn-v3.5-20260909.safetensors
   sha256: ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3
