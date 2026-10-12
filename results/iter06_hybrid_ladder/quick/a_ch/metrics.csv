@@ -2307,7 +2307,7 @@ iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,mape,29.3117575
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,r2,0.46556283588686653,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,n_pred_nan,0.0,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,mape_n_excluded,0.0,8,17,a_ch,tabpfn_d
-iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_train,1.1084107933624359,8,17,a_ch,tabpfn_d
+iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_train,,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_inner,47.05521569756226,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,n_train_sub,24.0,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,whdd,direct,log,all,n_inner_sub,32.0,8,17,a_ch,tabpfn_d
@@ -2355,7 +2355,7 @@ iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,mape,27.68183
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,r2,0.7146319150943502,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,n_pred_nan,0.0,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,mape_n_excluded,0.0,8,17,a_ch,tabpfn_d
-iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_train,2.765363434138617,8,17,a_ch,tabpfn_d
+iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_train,,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_inner,34.31528725880759,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,n_train_sub,24.0,8,17,a_ch,tabpfn_d
 iter06_a_ch,0,bstar_2023,HP_Peak,TabPFN,size,netfit,direct,log,all,n_inner_sub,32.0,8,17,a_ch,tabpfn_d

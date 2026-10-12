@@ -1,6 +1,6 @@
-...............................................s................x....... [ 46%]
-........................................................................ [ 92%]
-...........                                                              [100%]
+...............................................s................x....... [ 45%]
+........................................................................ [ 90%]
+...............                                                          [100%]
 ============================== warnings summary ===============================
 .venv\Lib\site-packages\hyperopt\atpe.py:19
   C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
@@ -40,7 +40,7 @@ tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[C
     return object.__file__
 
 tests/test_05b.py: 64 warnings
-tests/test_06.py: 46 warnings
+tests/test_06.py: 70 warnings
 tests/test_fair_test.py: 6 warnings
 tests/test_fair_test_03b.py: 10 warnings
 tests/test_gb_eoh.py: 600 warnings
@@ -61,4 +61,4 @@ tests/test_protocol_v1.py::test_targets_nonnegative_and_deterministic
     warnings.warn(f"HP_CoincPeak > HP_Peak in {int(viol.sum())} of {len(t1)} substations")
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-153 passed, 1 skipped, 1 xfailed, 779 warnings in 773.81s (0:12:53)
+157 passed, 1 skipped, 1 xfailed, 803 warnings in 805.29s (0:13:25)

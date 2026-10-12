@@ -2643,7 +2643,7 @@ iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,mape,30.4728
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,r2,0.9633104176859378,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,n_pred_nan,0.0,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,mape_n_excluded,0.0,30,58,a_gb,tabpfn_d
-iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_train,2.2336143522461276,30,58,a_gb,tabpfn_d
+iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_train,,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,wape_inner,21.77513845717823,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,n_train_sub,111.0,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,whdd,direct,log,all,n_inner_sub,90.0,30,58,a_gb,tabpfn_d
@@ -2698,7 +2698,7 @@ iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,mape,28.16
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,r2,0.9754299817130552,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,n_pred_nan,0.0,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,mape_n_excluded,0.0,30,58,a_gb,tabpfn_d
-iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_train,2.743268482031637,30,58,a_gb,tabpfn_d
+iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_train,,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,wape_inner,15.805509609532667,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,n_train_sub,111.0,30,58,a_gb,tabpfn_d
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,direct,log,all,n_inner_sub,90.0,30,58,a_gb,tabpfn_d
@@ -2756,7 +2756,7 @@ iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,mape_n_e
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,n_invalid,0.0,30,58,a_gb,tabpfn_r
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,n_resid_excluded_train,0.0,30,58,a_gb,tabpfn_r
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,n_resid_excluded_inner,0.0,30,58,a_gb,tabpfn_r
-iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,wape_train,1.661900060487918,30,58,a_gb,tabpfn_r
+iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,wape_train,,30,58,a_gb,tabpfn_r
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,wape_inner,15.722382961710101,30,58,a_gb,tabpfn_r
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,n_train_sub,111.0,30,58,a_gb,tabpfn_r
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,residual,log,all,n_inner_sub,90.0,30,58,a_gb,tabpfn_r
@@ -2814,7 +2814,7 @@ iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,mape_n_exclud
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,n_invalid,2.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,n_resid_excluded_train,5.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,n_resid_excluded_inner,5.0,30,58,a_gb,tabpfn_h
-iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,wape_train,2.388850935104193,30,58,a_gb,tabpfn_h
+iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,wape_train,,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,wape_inner,18.0545113657012,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,n_train_sub,106.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4a,log,all,n_inner_sub,85.0,30,58,a_gb,tabpfn_h
@@ -2872,7 +2872,7 @@ iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,mape_n_exclud
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,n_invalid,2.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,n_resid_excluded_train,5.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,n_resid_excluded_inner,5.0,30,58,a_gb,tabpfn_h
-iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,wape_train,3.5689044903199956,30,58,a_gb,tabpfn_h
+iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,wape_train,,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,wape_inner,18.212277926979656,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,n_train_sub,106.0,30,58,a_gb,tabpfn_h
 iter06_a_gb,0,gb_eoh_2122r3,HP_Peak,TabPFN,size,netfit,l4b,log,all,n_inner_sub,85.0,30,58,a_gb,tabpfn_h

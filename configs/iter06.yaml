@@ -3,7 +3,8 @@
 #   a_gb   accuracy, GB main, n = all, seeds 0-9: every ladder configuration tuned; rung winners persisted (models/a_gb/).
 #   a_ch   accuracy, B*, n = all, seeds 0-9: the same, tuned on B*; rung winners persisted (models/a_ch/).
 #   s_gb   sample efficiency: GB learning curve at n in {32, 62, 100}, 10 seeds x 2 draws (the designs of 05b Arm 1), tuned per
-#          design; the n = all point is a_gb (same split, test substations and seeds; not run twice). Nothing persisted.
+#          design, on anchor size and one feature set per rung (configs/iter06_s_gb.yaml; decision 2026-10-12, as 05b Arm 1
+#          under A4); the n = all point is a_gb restricted to those configurations. Nothing persisted.
 #   r_x05, r_x15  robustness (i): the frozen a_gb rung winners on test aggregates with the fillers' response x0.5 / x1.5
 #          (`<model>@frozen`), plus their refit on the scaled data. `after: a_gb`: a family job waits for a_gb's job of its seed.
 #   r_rep  robustness (ii): the a_gb rung winners refit on the temporal replication year (frozen spec and hyperparameters).
@@ -37,8 +38,8 @@ arms:
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
   - {name: a_ch, config: configs/iter06_a_ch.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
-  - {name: s_gb, config: configs/iter06_a_gb.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], n: [32, 62, 100], draws: [0, 1],
-     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h], set: ["refit=null"]}
+  - {name: s_gb, config: configs/iter06_s_gb.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], n: [32, 62, 100], draws: [0, 1],
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
   - {name: r_x05, config: configs/iter06_r_shift.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], frozen: true, frozen_model: true, after: a_gb,
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h], set: ["pool.response_scale={fill: 0.5}"]}
   - {name: r_x15, config: configs/iter06_r_shift.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], frozen: true, frozen_model: true, after: a_gb,

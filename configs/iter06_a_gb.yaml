@@ -25,6 +25,7 @@ target_transforms: [log]
 models: []
 residual_models: []
 l4: true
+no_train_wape: [TabPFN]              # decision 2026-10-12: TabPFN does not predict its train substations (wape_train is NaN; no 06 table uses it)
 cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
 physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
 paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_l4a, paperA_l4b]}

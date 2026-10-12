@@ -30,6 +30,8 @@ restricts a model to given anchors. The timing table carries the inner-CV WAPE (
 net-load fit scalars after pooling; `mode_feature_sets` restricts a mode to some feature sets (a rung's inputs);
 `refit: {dir, by_rung: true}` persists, per rung L1-L4, the spec with the lowest inner-CV WAPE of the job (with its out-of-fold
 predictions and, for L4, its scale model) under <dir>/<rung>/s<seed>/<family>/. Frame `l4`: covariates and m_hat_h per substation.
+`no_train_wape: [models]` skips the prediction of the train substations for those models (the `wape_train` diagnostic of 05b is
+then NaN): for TabPFN it is a third of a tuned configuration's time, and no 06 table uses it (decision 2026-10-12).
 
     python scripts/paperb/run_benchmark.py --config configs/protocol_v1_quick.yaml [--set parallel.workers=4] [--resume]
 """
@@ -193,7 +195,8 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
             log(f"  {y.name} {'/'.join(spec)}: refit with fixed params {meta['params']}, best_iter {meta['best_iter']}, {time.time() - t0:.1f}s")
             return m.predict(X[te])
         to_kw = lambda pr, mask: pr if p_base is None else p_base[mask] * np.exp(pr)            # noqa: E731  residual: z -> kW
-        p_tr = to_kw(m.predict(X[m_tr]), m_tr)
+        skip_tr = name in cfg.get("no_train_wape", [])                    # 06: no train-set prediction (TabPFN: a third of its time)
+        p_tr = y_kw[m_tr] * np.nan if skip_tr else to_kw(m.predict(X[m_tr]), m_tr)
         bv = {"wape_train": 100 * float(np.abs(p_tr - y_kw[m_tr]).sum() / y_kw[m_tr].sum()), "wape_inner": meta["cv_wape"],
               "n_train_sub": int(m_tr.sum()), "n_inner_sub": int(m_in.sum()), "n_test_sub": int(te.sum()),
               "n_overlap_sub": int((m_tr & m_in).sum() + (m_tr & te).sum() + (m_in & te).sum())}   # 05b Task 1b: disjoint sets

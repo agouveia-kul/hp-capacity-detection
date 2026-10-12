@@ -1,0 +1,15 @@
+# 06 arm S-GB (sample efficiency): GB learning curve at n in {32, 62, 100} distinct train HP households, 10 seeds x 2 draws, the
+# designs of 05b Arm 1 (learning_curve.py: train substations and inner folds rebuilt from the subsample, test substations fixed).
+# Decision 2026-10-12 (DECISIONS.md), as 05b Arm 1 under A4: anchor `size` only and one feature set per rung:
+#   L1  tabular whdd x size, direct-log; CNN raw x size
+#   L2  tabular netfit x size, direct-log; CNN rawphys x size
+#   L3  the L2 inputs, residual        L4  the L2 inputs, l4a and l4b (the L4 row = their inner-CV winner)
+# The n = all point is A-GB restricted to these configurations (same split, test substations, models and seeds; not run twice).
+# Tuned per design (CNN: the seed's 05b hyperparameters, `fixed_params` of the queue). Nothing is persisted. Queue only.
+base: configs/iter06_a_gb.yaml
+exp_id: iter06_s_gb
+out_dir: results/iter06_hybrid_ladder/s_gb
+refit: null
+anchors: [size]
+feature_sets: [whdd, netfit, raw, rawphys]
+mode_feature_sets: {residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}

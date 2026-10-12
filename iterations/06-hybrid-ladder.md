@@ -143,3 +143,8 @@ GB rows quote the 05a D5 deltas and the 05b Arm 7 sensitivity, as in 05b.
   2. the hybrid claim so far (A, S, R) and what 07 must show;
   3. L5 kept or dropped;
   4. which L4 variant (a or b) is the method's default for 07.
+
+## Amendments (recorded before the run; DECISIONS.md 2026-10-12)
+- **[A1] Axis S, configuration set.** S-GB runs on anchor `size` and one feature set per rung: L1 `whdd` (CNN `raw`), L2 `netfit` (CNN `rawphys`), L3 and L4 on the L2 inputs (L4: `l4a` and `l4b`). The n = all point is A-GB restricted to the same configurations. Axis A, the R arms and the persisted models keep the full grid. Reason: "the same designs as 05b Arm 1", which ran netfit × size (05b A4); about −92 job-h.
+- **[A2] TabPFN train-set prediction.** TabPFN does not predict its train substations (`wape_train` is NaN). No table or rule of this brief uses it; about −60 job-h.
+- **Open, not yet decided:** the CNN on the GB arms with the seed's 05b Arm 2 hyperparameters and one inner-CV pass per configuration (`fixed_params` in `configs/iter06.yaml`), instead of 30 evaluations per configuration.

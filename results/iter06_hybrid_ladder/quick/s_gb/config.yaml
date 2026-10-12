@@ -1,6 +1,6 @@
-exp_id: iter06_a_gb
+exp_id: iter06_s_gb
 protocol: v1.1
-out_dir: results/iter06_hybrid_ladder/a_gb
+out_dir: results/iter06_hybrid_ladder/s_gb
 cache_dir: data/_paperb
 paper_a_repo: ../hp-sensitivity-paper
 pool:
@@ -89,7 +89,6 @@ ffnn:
 feature_sets:
 - whdd
 - netfit
-- both
 - raw
 - rawphys
 modes:
@@ -118,7 +117,6 @@ paperA:
   crossfit: true
 anchors:
 - size
-- size_peak
 model_anchors: {}
 anchor_only_baselines:
   models:
@@ -200,20 +198,17 @@ model_feature_sets:
 mode_feature_sets:
   residual:
   - netfit
-  - both
   - rawphys
   l4a:
   - netfit
-  - both
   - rawphys
   l4b:
   - netfit
-  - both
   - rawphys
 l4: true
-refit:
-  dir: results/iter06_hybrid_ladder/models/a_gb
-  by_rung: true
+no_train_wape:
+- TabPFN
+refit: null
 queue:
   exp_id: iter06_quick
   out_dir: results/iter06_hybrid_ladder/quick
@@ -327,7 +322,7 @@ queue:
       [netfit, rawphys]}'
     - refit.dir=results/iter06_hybrid_ladder/quick/models/a_ch
   - name: s_gb
-    config: configs/iter06_a_gb.yaml
+    config: configs/iter06_s_gb.yaml
     seeds:
     - 0
     n:
@@ -346,11 +341,6 @@ queue:
     - cv.inner_substations_per_cell=2
     - cv.hyperopt.max_evals=3
     - 'cv.hyperopt.max_evals_by_model={CNN: 2}'
-    - anchors=[size]
-    - 'model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}'
-    - 'mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b:
-      [netfit, rawphys]}'
-    - refit=null
   - name: r_x15
     config: configs/iter06_r_shift.yaml
     seeds:
@@ -393,7 +383,7 @@ queue:
     - cv.inner_substations_per_cell=2
     - cv.hyperopt.max_evals=3
     - anchors=[size]
-git_commit: 66d66393faa79aaac49c437646bf073b442f685a
+git_commit: 60a11b8a1b3cd314f16a903f4044977ab7873d0c
 tabpfn:
   checkpoint: tabpfn-v3.5-20260909.safetensors
   sha256: ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3

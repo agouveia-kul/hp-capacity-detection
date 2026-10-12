@@ -14,7 +14,8 @@ diagnostics on train and inner substations.
 - pytest on the final code (`pytest.log`): 153 passed, 1 skipped (CUDA), 1 xfailed (the documented CNN CPU-vs-GPU case).
 - Quick run (`configs/iter06_quick.yaml`, every arm, seed 0, tiny grid): 28/28 jobs, 0 failed, 5.5 min. The first quick run
   found one bug (the anchor-only baselines reached the model persistence), fixed and tested.
-- Probe (`configs/iter06_probe.yaml`: seed 0 of every arm, draw 0, full size, 6 workers × 3 threads): 64/64 jobs, 0 failed,
+- Probe (`configs/iter06_probe.yaml`: seed 0 of every arm, draw 0, full size, 6 workers × 3 threads; 40 of its jobs remain
+  on disk after cut 2 removed the 24 S-GB ones): 64/64 jobs, 0 failed,
   30.1 job-h in 6.2 h. The job ids are those of the run, which skips them. The merged seed-0 tables (`<arm>/metrics.csv`
   and the like) are on disk but not committed and were not opened; the run rewrites them.
 - Reload check of the persisted seed-0 rung winners (`check_jobs.py --reload-models`; `models/` is git-ignored): 24 of 24
@@ -23,7 +24,29 @@ diagnostics on train and inner substations.
 - L5 step on A-GB seed 0 (`ensemble.py`): runs; the gate keeps no edge (weights linear 0.08, TabPFN 0.71, CNN 0.25 on the
   out-of-fold predictions).
 
-## Runtime (`runtime_estimate.md`, from the probe)
+## Compute decisions after the probe (Alex, 2026-10-12; DECISIONS.md, brief amendments A1 and A2; commit after `60a11b8`)
+- **Cut 1:** TabPFN does not predict its train substations (`no_train_wape: [TabPFN]` in the arm configs). Timed on the
+  persisted A-GB seed-0 L2 and L1 models (3 threads, idle machine): test prediction 197–202 s, train prediction 323–357 s,
+  four CV folds 411–591 s, fit 2–4 s; the train prediction is 31–34 % of the total. Only `wape_train` is lost (NaN from seed 1
+  on; seed 0's probe jobs still carry it). A TabPFN process peaked at 5.9–6.6 GB, so the cap of 3 jobs stays.
+- **Cut 2:** S-GB on anchor `size` and one feature set per rung (`configs/iter06_s_gb.yaml`): 5 configurations per model
+  (L1, L2, L3, L4 × 2) instead of 18 (CNN 10). The n = all point is A-GB restricted to the same configurations. The 24 S-GB
+  probe jobs held the full grid: they were removed (markers, frames, merged tables) and the run recomputes them, so every
+  S-GB job has the same content. Stated cost: on S the L2-vs-L1 step compares `netfit` with `whdd`, not the best of
+  {`netfit`, `both`}.
+- **Estimate after the cuts** (extrapolated from the probe and the timing check, not re-probed): about 230 job-h remaining
+  (A-GB 80, A-CH 50, S-GB 64 of which about 40 is per-job overhead, R arms 38), TabPFN about 110; wall time about 39 h at
+  6 workers = 1.6 continuous days or about 4 nights. The table below is the probe's estimate before the cuts.
+- After the cuts: quick run 28/28 jobs, 0 failed (S-GB runs the restricted grid; TabPFN's `wape_train` is NaN, its inner-CV
+  WAPE is there); pytest 157 passed, 1 skipped (CUDA), 1 xfailed (documented). The run was **not** started.
+- **OneDrive incident (2026-10-12, 12:20).** Deleting the 24 S-GB probe jobs and the quick folder and rerunning the quick run
+  at once made OneDrive restore the deleted files and write conflict copies (`*-P240003.*`) in `quick/jobs`, so that quick
+  run merged old and new frames. Everything was deleted again, left for 5 min (nothing came back), and the quick run was
+  repeated in the clean folder: no conflict copy, 40 probe jobs and the models untouched. Lesson: never delete and recreate
+  a results folder in one step under OneDrive; pause the sync for the run, as `schedule_overnight.ps1` advises.
+- **Still open:** the CNN's fixed hyperparameters on the GB arms (below), and continuous against nights.
+
+## Runtime before the cuts (`runtime_estimate.md`, from the probe)
 | arm | physics | linear | TabPFN | CNN | all (job-h, 10 seeds) |
 |---|---|---|---|---|---|
 | a_gb | 0.2 | 12.9 | 82.5 | 20.1 | 115.7 |

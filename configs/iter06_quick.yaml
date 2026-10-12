@@ -31,11 +31,9 @@ arms:
            "model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}",
            "mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}",
            "refit.dir=results/iter06_hybrid_ladder/quick/models/a_ch"]}
-  - {name: s_gb, config: configs/iter06_a_gb.yaml, seeds: [0], n: [62], draws: [0], families: [physics, linear, tabpfn_r, cnn_h],
+  - {name: s_gb, config: configs/iter06_s_gb.yaml, seeds: [0], n: [62], draws: [0], families: [physics, linear, tabpfn_r, cnn_h],
      set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
-           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}", "anchors=[size]",
-           "model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}",
-           "mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}", "refit=null"]}
+           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}"]}
   - {name: r_x15, config: configs/iter06_r_shift.yaml, seeds: [0], frozen: true, frozen_model: true, after: a_gb,
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h],
      set: ["pool.response_scale={fill: 1.5}", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}",

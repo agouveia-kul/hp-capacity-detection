@@ -333,12 +333,16 @@ def test_queue_arms_seeds_and_core_budget():
         job = next(j for j in js if j["arm"] == arm["name"] and j["family"] == "physics")
         cfg, _ = RQ.job_config(QUEUE, arm, job, 3)
         assert cfg["l4"] and {"paperA_l4a", "paperA_l4b", "paperA_corr_own"} <= set(cfg["paperA"]["estimators"]) and cfg["parallel"]["threads"] == 3
-        assert RB.computed_sets(cfg) == ["both", "netfit", "raw"] and cfg["anchors"] == ["size", "size_peak"]
+        assert cfg["no_train_wape"] == ["TabPFN"]
+        if arm["name"] == "s_gb":                                               # decision 2026-10-12: anchor size, one feature set per rung
+            assert RB.computed_sets(cfg) == ["netfit", "raw", "whdd"] and cfg["anchors"] == ["size"]
+        else:
+            assert RB.computed_sets(cfg) == ["both", "netfit", "raw"] and cfg["anchors"] == ["size", "size_peak"]
     for name, by in (("a_gb", True), ("a_ch", True), ("s_gb", False)):
         arm = next(a for a in QUEUE["arms"] if a["name"] == name)
         cfg, keep = RQ.job_config(QUEUE, arm, next(j for j in js if j["arm"] == name and j["family"] == "cnn_h"), 3)
         assert bool(cfg.get("refit")) == by and cfg["modes"] == ["l4a", "l4b"] and keep == {"CNN"} and cfg["paperA"]["estimators"] == []
-        assert {SM.rung(s) for s in RB.specs(cfg)} == {"L4"} and len(RB.specs(cfg)) == 4
+        assert {SM.rung(s) for s in RB.specs(cfg)} == {"L4"} and len(RB.specs(cfg)) == (4 if by else 2)
         if by:
             assert cfg["refit"] == {"dir": f"results/iter06_hybrid_ladder/models/{name}", "by_rung": True}
 
@@ -425,3 +429,33 @@ def test_probe_jobs_are_jobs_of_the_run():
     assert all(probe[k] == QUEUE[k] for k in ("exp_id", "out_dir", "workers", "threads", "families", "frozen", "fixed_params"))
     strip = lambda a: {k: v for k, v in a.items() if k not in ("seeds", "draws")}               # noqa: E731
     assert [strip(a) for a in probe["arms"]] == [strip(a) for a in QUEUE["arms"]]
+
+
+@pytest.mark.parametrize("models", [["Lasso"], ["TabPFN"], ["CNN"]])
+def test_s_gb_runs_anchor_size_and_one_feature_set_per_rung(models):
+    """Decision 2026-10-12 (as 05b Arm 1 under A4): S-GB = anchor size; whdd (L1) and netfit (L2-L4); CNN raw and rawphys."""
+    cfg = {**load_config("configs/iter06_s_gb.yaml"), "physics_baselines": [], "anchor_only_baselines": {"models": [], "features": []},
+           "paperA": {"estimators": []}, "models": models, "residual_models": models}
+    specs = [s for s in RB.specs(cfg) if s[0] in models]
+    l1, l2 = ("raw", "rawphys") if models == ["CNN"] else ("whdd", "netfit")
+    assert sorted((SM.rung(s), s[1], s[2], s[3]) for s in specs) == [("L1", "size", l1, "direct"), ("L2", "size", l2, "direct"),
+                                                                      ("L3", "size", l2, "residual"), ("L4", "size", l2, "l4a"), ("L4", "size", l2, "l4b")]
+    full = [s for s in RB.specs({**LADDER, "models": models, "residual_models": models}) if s[0] in models]
+    assert set(specs) < set(full) and not cfg.get("refit")                        # a subset of A-GB's grid (the n = all point); nothing persisted
+
+
+def test_no_train_wape_skips_the_train_prediction_only(monkeypatch):
+    T.configure(xgb_n_jobs=2)
+    tab, F = toy_tab()
+    cfg = {**toy_cfg(), "models": ["Lasso", "Ridge"], "residual_models": ["Lasso"], "physics_baselines": [], "anchor_only_baselines": {"models": [], "features": []}}
+    seen, real = [], T.Model.predict
+    monkeypatch.setattr(T.Model, "predict", lambda self, X: seen.append((self.name, len(X))) or real(self, X))
+    ref, e_ref = RB.predictions(cfg, tab, F, tab["HP_Peak"], 0, [], lambda m: None, toy_pa(tab))
+    n_ref = sum(n == 120 for name, n in seen if name == "Lasso")                 # 120 train substations
+    seen.clear()
+    out, extra = RB.predictions({**cfg, "no_train_wape": ["Lasso"]}, tab, F, tab["HP_Peak"], 0, [], lambda m: None, toy_pa(tab))
+    assert n_ref == 2 and not any(n == 120 for name, n in seen if name == "Lasso") and sum(n == 120 for name, n in seen if name == "Ridge") == 1
+    for s in out:                                                                 # predictions and the inner-CV WAPE are untouched
+        np.testing.assert_array_equal(out[s], ref[s])
+        if s[0] in ("Lasso", "Ridge"):
+            assert extra[s]["wape_inner"] == e_ref[s]["wape_inner"] and np.isnan(extra[s]["wape_train"]) == (s[0] == "Lasso")

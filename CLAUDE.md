@@ -118,7 +118,7 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
 
 - **Axes.**
   - **A, accuracy:** GB main and CH (B\*), n = all, seeds 0–9; WAPE overall and per Paper A bin (†).
-  - **S, sample efficiency:** GB learning curve at n ∈ {32, 62, 100, all}, 10 seeds × 2 draws; primary point n = 62; n\* (where a rung reaches L0) also reported.
+  - **S, sample efficiency:** GB learning curve at n ∈ {32, 62, 100, all}, 10 seeds × 2 draws; primary point n = 62; n\* (where a rung reaches L0) also reported. From the decision of 2026-10-12, S runs on anchor `size` and one feature set per rung (L1 `whdd` / `raw`, L2–L4 `netfit` / `rawphys`; as 05b Arm 1 under A4); its n = all point is A-GB restricted to those configurations.
   - **R, robustness:** (i) the frozen n = all models on test aggregates with fillers ×0.5 and ×1.5, as the degradation ΔWAPE vs ×1.0; (ii) the same rung refit on the temporal replication year.
   - **T, transfer:** evaluated in 07; 06 persists every rung's per-seed models for it.
 - **"Better" on an axis:** paired per-seed ΔWAPE < 0 in ≥ 8 of 10 seeds (≥ 80 % of seed × draws on S) **and** median ΔWAPE ≤ −1 pp. On R the degradation is compared, not the level.
