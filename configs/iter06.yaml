@@ -14,7 +14,8 @@
 # fixed_params (CNN on the GB arms a_gb and s_gb; a deviation from per-configuration tuning, see runtime_estimate.md): the CNN's
 # hyperparameters are those of the seed's 05b Arm 2 CNN winner (A10 carry-forward table) for every ladder configuration; one
 # inner-CV pass per configuration gives its inner-CV WAPE (the rung's choice), the epoch count and the out-of-fold predictions.
-# Without this line every CNN configuration is tuned with 30 evaluations (weeks on this CPU). a_ch tunes the CNN (30 evals):
+# Without this line every CNN configuration is tuned with 30 evaluations (roughly 400 to 900 more job-hours on this CPU,
+# results/iter06_hybrid_ladder/PART_A.md). a_ch tunes the CNN (30 evals):
 # 05b has no persisted B* CNN.
 exp_id: iter06
 out_dir: results/iter06_hybrid_ladder

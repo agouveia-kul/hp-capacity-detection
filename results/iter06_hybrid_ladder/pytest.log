@@ -1,0 +1,64 @@
+...............................................s................x....... [ 46%]
+........................................................................ [ 92%]
+...........                                                              [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\hyperopt\atpe.py:19
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+    import pkg_resources
+
+tests/test_05a_ii.py::test_london_temperature_is_heathrow_and_complete_over_the_lcl_window
+tests/test_05a_ii.py::test_london_temperature_is_heathrow_and_complete_over_the_lcl_window
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\fill_analog.py:52: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+    return pd.Series(pd.to_numeric(T["T"], errors="coerce").to_numpy(), index=pd.to_datetime(T["date"], errors="coerce")).dropna()
+
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+  C:\Program Files\Python312\Lib\inspect.py:1007: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    if ismodule(module) and hasattr(module, '__file__'):
+
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+  C:\Program Files\Python312\Lib\inspect.py:1008: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    f = module.__file__
+
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+  C:\Program Files\Python312\Lib\inspect.py:914: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    if getattr(object, '__file__', None):
+
+tests/test_05b.py::test_new_model_round_trip_seeds_and_fold_only_preprocessing[CNN]
+  C:\Program Files\Python312\Lib\inspect.py:915: DeprecationWarning: Importing from 'tabpfn.model.loading' is deprecated and will be removed in a future release; import from 'tabpfn.model_loading' instead.
+    return object.__file__
+
+tests/test_05b.py: 64 warnings
+tests/test_06.py: 46 warnings
+tests/test_fair_test.py: 6 warnings
+tests/test_fair_test_03b.py: 10 warnings
+tests/test_gb_eoh.py: 600 warnings
+tests/test_protocol_v1.py: 28 warnings
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\utils.py:203: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.datetime.utcnow()
+
+tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
+tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
+tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
+tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
+tests/test_05b.py::test_stage1_report_applies_the_preregistered_rule
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\lc_fit.py:54: RuntimeWarning: overflow encountered in scalar power
+    return float((b / (w_phys - a)) ** (1.0 / c))
+
+tests/test_protocol_v1.py::test_targets_nonnegative_and_deterministic
+  C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\tests\test_protocol_v1.py:125: UserWarning: HP_CoincPeak > HP_Peak in 2 of 6 substations
+    warnings.warn(f"HP_CoincPeak > HP_Peak in {int(viol.sum())} of {len(t1)} substations")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+153 passed, 1 skipped, 1 xfailed, 779 warnings in 773.81s (0:12:53)

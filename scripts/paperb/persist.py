@@ -11,6 +11,9 @@ Stage 2 (Arm 7): `frozen_predict` applies a saved model unchanged to the same te
 also stores `oof_inner.parquet` (its out-of-fold inner-CV predictions in kW, with y and the fold id; input of the L5 ensembles) and an
 L4 model `scale.joblib` (`scale_model.Scale`: kappa or g, the test substations' s0, T_design, station climate), from which
 `frozen_predict` rebuilds s_hat / m_hat_h on the scaled test substations with everything learned at x1.0.
+`reload_check` reloads every model below a directory in this process and compares it with its own saved test predictions:
+
+    python scripts/paperb/check_jobs.py --reload-models results/iter06_hybrid_ladder/models/a_gb     # writes <dir>/reload_check.csv
 """
 import hashlib
 import json
@@ -126,6 +129,23 @@ def load_predict(d, device=None):
     else:
         pred = m.predict(X)
     return pd.Series(np.asarray(pred, float), index=X.index, name="pred")
+
+
+def reload_check(root, device=None):
+    """Every model below `root`: max relative difference and WAPE difference (pp) between the reloaded model's predictions of its
+    saved test design and the predictions saved with it (A10: <= 1e-6, CNN / TabPFN <= 0.1 pp). Failures are listed, not raised."""
+    rows = []
+    for man in sorted(Path(root).rglob("manifest.json")):
+        d, ref = man.parent, pd.read_parquet(man.parent / "pred_refit.parquet")["pred"]
+        row = {"dir": d.relative_to(root).as_posix(), "spec": json.loads(man.read_text(encoding="utf-8"))["spec"]}
+        try:
+            p = load_predict(d, device)
+            row.update(max_rel_diff=float(np.max(np.abs(p - ref) / np.maximum(np.abs(ref), 1e-9))),
+                       d_wape_pp=100 * float(np.abs(p - ref).sum() / ref.sum()))
+        except Exception as e:  # noqa: BLE001
+            row["error"] = repr(e)[:200]
+        rows.append(row)
+    return pd.DataFrame(rows)
 
 
 def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None, tab_te=None):

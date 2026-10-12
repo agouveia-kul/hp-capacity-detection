@@ -5,6 +5,7 @@ households for k folds): every ML spec of that design is skipped, and the design
 lc_dropped frame. Such jobs are counted as "skipped (inner CV infeasible)", not as problems. Read-only.
 
     python scripts/paperb/check_jobs.py --config configs/iter05b_stage1.yaml [--families rawseries,tabpfn] [--expect-device rawseries=cuda,tabpfn=cuda]
+    python scripts/paperb/check_jobs.py --reload-models results/iter06_hybrid_ladder/models/a_gb     # 06: persist.reload_check of every model below
 """
 import argparse
 import json
@@ -51,10 +52,17 @@ def check(q, out, families=None, expect=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config", default=None)
     ap.add_argument("--families", default=None)
     ap.add_argument("--expect-device", default=None, help="family=device,... e.g. rawseries=cuda,tabpfn=cuda")
+    ap.add_argument("--reload-models", default=None, help="06: reload every persisted model below this directory (writes reload_check.csv)")
     a = ap.parse_args()
+    if a.reload_models:
+        from paperb.persist import reload_check
+        R = reload_check(ROOT / a.reload_models)
+        R.to_csv(ROOT / a.reload_models / "reload_check.csv", index=False)
+        print(R.to_string(index=False))
+        sys.exit(int("error" in R or bool((R["d_wape_pp"] > 0.1).any())))
     q = yaml.safe_load(open(ROOT / a.config))
     expect = dict(x.split("=") for x in a.expect_device.split(",")) if a.expect_device else None
     rows, problems = check(q, ROOT / q["out_dir"], set(a.families.split(",")) if a.families else None, expect)

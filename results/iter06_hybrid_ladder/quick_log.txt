@@ -1,0 +1,375 @@
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[10:11:18] queue iter06_quick: 28 of 28 jobs to run, 6 workers x 3 threads, stop at None, shard all, families all
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     2.4s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.4s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     2.4s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.4s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     2.7s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.7s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     3.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     3.2s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     3.3s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 37.65, cv_wape 51.0, train_wape 72.2, best_iter None, 0 evals, 0.0s, params {}
+[s0     3.3s]   HP_Peak Linear/size/whdd/direct/log: cv_mse 1022, cv_wape 91.5, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     3.3s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 29.67, cv_wape 44.6, train_wape 52.6, best_iter None, 0 evals, 0.0s, params {}
+[s0     2.8s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.8s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     3.3s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 23.21, cv_wape 37.3, train_wape 33.0, best_iter None, 0 evals, 0.0s, params {}
+[s0     2.7s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.7s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     2.7s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.7s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     3.4s]   HP_Peak Ridge/size/whdd/direct/log: cv_mse 21.62, cv_wape 34.0, train_wape 30.8, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0     3.6s]   HP_Peak Lasso/size/whdd/direct/log: cv_mse 27.08, cv_wape 35.4, train_wape 25.2, best_iter None, 3 evals, 0.1s, params {'alpha': 0.044970281365499326}
+[s0     3.8s]   HP_Peak ElasticNet/size/whdd/direct/log: cv_mse 42.2, cv_wape 39.8, train_wape 22.6, best_iter None, 3 evals, 0.2s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0     3.8s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 37.72, cv_wape 51.0, train_wape 71.6, best_iter 57, 3 evals, 0.5s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     4.0s]   HP_Peak PLS/size/whdd/direct/log: cv_mse 508.5, cv_wape 67.2, train_wape 22.2, best_iter None, 3 evals, 0.2s, params {'n_components': 9.0}
+[s0     4.0s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 37.15, cv_wape 34.0, train_wape 20.9, best_iter None, 0 evals, 0.0s, params {}
+[s0     3.6s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     4.1s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 17.07, cv_wape 29.3, train_wape 25.1, best_iter None, 3 evals, 0.1s, params {'alpha': 59.6822716716698}
+[s0     4.2s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 17.79, cv_wape 30.4, train_wape 24.7, best_iter None, 3 evals, 0.1s, params {'alpha': 0.044970281365499326}
+[s0     3.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     4.2s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 17.67, cv_wape 29.6, train_wape 44.2, best_iter 78, 3 evals, 0.4s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0     3.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     4.3s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 20.97, cv_wape 30.6, train_wape 23.7, best_iter None, 3 evals, 0.1s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0     3.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     4.3s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 28.39, cv_wape 33.1, train_wape 22.3, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     4.4s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 0.2305, cv_wape 31.3, train_wape 20.3, best_iter None, 0 evals, 0.0s, params {}
+[s0     4.4s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.1463, cv_wape 23.7, train_wape 22.7, best_iter None, 3 evals, 0.1s, params {'alpha': 34.453562907186836}
+[s0     4.5s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.1532, cv_wape 24.6, train_wape 22.7, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[s0     4.6s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 17.75, cv_wape 29.9, train_wape 45.6, best_iter 108, 3 evals, 0.4s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[s0     4.7s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.1712, cv_wape 33.7, train_wape 31.7, best_iter None, 3 evals, 0.1s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0     4.7s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 0.1831, cv_wape 27.2, train_wape 21.3, best_iter None, 3 evals, 0.1s, params {'n_components': 14.0}
+[s0     4.8s]   HP_Peak Linear/size/netfit/l4a/log: cv_mse 0.5707, cv_wape 59.6, train_wape 31.5, best_iter None, 0 evals, 0.0s, params {}
+[s0     4.8s] done in 4.8s
+[s0     4.8s]   HP_Peak Ridge/size/netfit/l4a/log: cv_mse 0.5054, cv_wape 37.8, train_wape 29.0, best_iter None, 3 evals, 0.1s, params {'alpha': 34.453562907186836}
+[s0     4.9s]   HP_Peak Lasso/size/netfit/l4a/log: cv_mse 0.4721, cv_wape 38.0, train_wape 28.6, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[10:11:37] done a_gb__s0__d0__nall__physics (12 s)
+[s0     5.1s]   HP_Peak ElasticNet/size/netfit/l4a/log: cv_mse 0.4593, cv_wape 41.2, train_wape 28.6, best_iter None, 3 evals, 0.2s, params {'alpha': 0.0008844374846554269, 'l1_ratio': 0.6458108965969798}
+[s0     5.2s]   HP_Peak PLS/size/netfit/l4a/log: cv_mse 0.4401, cv_wape 38.0, train_wape 30.3, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     5.2s]   HP_Peak Linear/size/netfit/l4b/log: cv_mse 0.5712, cv_wape 60.1, train_wape 31.7, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.3s]   HP_Peak Ridge/size/netfit/l4b/log: cv_mse 0.5152, cv_wape 38.0, train_wape 29.0, best_iter None, 3 evals, 0.1s, params {'alpha': 34.453562907186836}
+[s0     5.4s]   HP_Peak Lasso/size/netfit/l4b/log: cv_mse 0.4816, cv_wape 37.8, train_wape 28.7, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[s0     5.6s]   HP_Peak ElasticNet/size/netfit/l4b/log: cv_mse 0.4623, cv_wape 41.2, train_wape 28.8, best_iter None, 3 evals, 0.2s, params {'alpha': 0.0008844374846554269, 'l1_ratio': 0.6458108965969798}
+[s0     5.7s]   HP_Peak PLS/size/netfit/l4b/log: cv_mse 0.4455, cv_wape 38.2, train_wape 30.5, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     5.8s]   HP_Peak Linear/size/both/direct/log: cv_mse 814.3, cv_wape 83.5, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     5.9s]   HP_Peak Ridge/size/both/direct/log: cv_mse 19.21, cv_wape 31.8, train_wape 25.1, best_iter None, 3 evals, 0.1s, params {'alpha': 616.3265772595347}
+[s0     6.1s]   HP_Peak Lasso/size/both/direct/log: cv_mse 15.93, cv_wape 28.2, train_wape 19.8, best_iter None, 3 evals, 0.2s, params {'alpha': 0.044970281365499326}
+[s0     6.3s]   HP_Peak ElasticNet/size/both/direct/log: cv_mse 25.96, cv_wape 32.3, train_wape 16.9, best_iter None, 3 evals, 0.2s, params {'alpha': 0.023917855734381502, 'l1_ratio': 0.7616926738055597}
+[s0     6.5s]   HP_Peak PLS/size/both/direct/log: cv_mse 318.5, cv_wape 56.7, train_wape 13.6, best_iter None, 3 evals, 0.2s, params {'n_components': 14.0}
+[s0    10.7s] done in 10.7s
+[10:11:43] done a_gb__s0__d0__nall__linear (18 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.4s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.4s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     4.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     4.1s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     4.1s] features from cache gb_eoh_s0_5f995607a2d5_tab.parquet
+[s0     5.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01264, 'paperA_corr_all': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    48.8s]   HP_Peak CNN/size/raw/direct/log: cv_mse 26.34, cv_wape 42.4, train_wape 26.4, best_iter 199, 2 evals, 45.1s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0    55.5s]   HP_Peak TabPFN/size/netfit/l4a/log: cv_mse 0.09595, cv_wape 18.1, train_wape 2.4, best_iter None, 0 evals, 51.8s, params {}
+[s0    56.8s]   HP_Peak TabPFN/size/netfit/residual/log: cv_mse 0.05918, cv_wape 15.7, train_wape 1.7, best_iter None, 0 evals, 53.1s, params {}
+[s0    69.1s] done in 69.1s
+[10:12:42] done a_gb__s0__d0__nall__tabpfn_r (77 s)
+[s0    49.4s]   HP_Peak CNN/size/rawphys/residual/log: cv_mse 0.1586, cv_wape 28.5, train_wape 19.5, best_iter 114, 2 evals, 44.6s, params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}
+[s0    55.6s] done in 55.6s
+[10:12:49] done a_gb__s0__d0__nall__cnn_r (64 s)
+[s0    52.3s]   HP_Peak CNN/size/rawphys/l4a/log: cv_mse 0.4945, cv_wape 36.9, train_wape 25.8, best_iter 154, 2 evals, 46.5s, params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0    95.0s]   HP_Peak CNN/size/rawphys/direct/log: cv_mse 28.64, cv_wape 43.6, train_wape 31.5, best_iter 199, 2 evals, 46.1s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0     1.6s] HP train/test 64/22, fill 968/323; substations {'inner': 32, 'train': 24, 'test': 8}; dropped cells 60
+[s0     1.6s] features from cache bstar_s0_fea5d791897d_tab.parquet
+[s0     2.5s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     2.5s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 121.2, cv_wape 61.2, train_wape 75.6, best_iter None, 0 evals, 0.0s, params {}
+[s0     2.6s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 71.62, cv_wape 42.7, train_wape 30.4, best_iter None, 0 evals, 0.0s, params {}
+[s0     2.6s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 76.18, cv_wape 43.2, train_wape 21.2, best_iter None, 0 evals, 0.0s, params {}
+[s0     3.2s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 149.1, cv_wape 71.2, train_wape 71.3, best_iter 10, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     3.8s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 88.62, cv_wape 43.7, train_wape 53.4, best_iter 119, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     4.4s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 85.92, cv_wape 46.8, train_wape 56.0, best_iter 142, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     4.7s] done in 4.7s
+[10:13:12] done a_ch__s0__d0__nall__physics (17 s)
+[s0   101.5s] done in 101.5s
+[10:13:14] done a_gb__s0__d0__nall__cnn_d (109 s)
+[s0     1.6s] HP train/test 64/22, fill 968/323; substations {'inner': 32, 'train': 24, 'test': 8}; dropped cells 60
+[s0     1.6s] features from cache bstar_s0_fea5d791897d_tab.parquet
+[s0     2.5s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     2.6s]   HP_Peak Linear/size/whdd/direct/log: cv_mse 606.6, cv_wape 95.2, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     2.8s]   HP_Peak Ridge/size/whdd/direct/log: cv_mse 95.84, cv_wape 49.3, train_wape 33.8, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0     3.0s]   HP_Peak Lasso/size/whdd/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.2s, params {'alpha': 1.240457029338609}
+[s0     3.3s]   HP_Peak ElasticNet/size/whdd/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.3s, params {'alpha': 3.2659584397754107, 'l1_ratio': 0.4537234139768196}
+[s0     3.5s]   HP_Peak PLS/size/whdd/direct/log: cv_mse 542.1, cv_wape 86.6, train_wape 4.3, best_iter None, 3 evals, 0.2s, params {'n_components': 9.0}
+[s0     3.6s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 1.062e+05, cv_wape 784.2, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     3.7s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 106, cv_wape 47.3, train_wape 23.4, best_iter None, 3 evals, 0.1s, params {'alpha': 59.6822716716698}
+[s0     3.8s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.1s, params {'alpha': 1.240457029338609}
+[s0     4.0s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.1s, params {'alpha': 3.2659584397754107, 'l1_ratio': 0.4537234139768196}
+[s0     4.1s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 7.298e+07, cv_wape 9538.5, train_wape 15.4, best_iter None, 3 evals, 0.2s, params {'n_components': 9.0}
+[s0     4.2s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 149.3, cv_wape 36034031247847296285540352.0, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     4.3s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.2266, cv_wape 33.5, train_wape 16.6, best_iter None, 3 evals, 0.1s, params {'alpha': 41392.98423343556}
+[s0     4.4s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.2263, cv_wape 33.5, train_wape 16.6, best_iter None, 3 evals, 0.1s, params {'alpha': 0.25782089028055166}
+[s0     4.8s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.2271, cv_wape 33.6, train_wape 16.4, best_iter None, 3 evals, 0.4s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0     4.9s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 2.095, cv_wape 791.4, train_wape 11.3, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     5.0s]   HP_Peak Linear/size/netfit/l4a/log: cv_mse 61.51, cv_wape 110059079.4, train_wape 0.0, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.1s]   HP_Peak Ridge/size/netfit/l4a/log: cv_mse 0.3262, cv_wape 41.1, train_wape 21.0, best_iter None, 3 evals, 0.1s, params {'alpha': 41392.98423343556}
+[s0     5.2s]   HP_Peak Lasso/size/netfit/l4a/log: cv_mse 0.3261, cv_wape 41.2, train_wape 21.2, best_iter None, 3 evals, 0.1s, params {'alpha': 0.25782089028055166}
+[s0     5.6s]   HP_Peak ElasticNet/size/netfit/l4a/log: cv_mse 0.3821, cv_wape 41.5, train_wape 16.1, best_iter None, 3 evals, 0.4s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0     5.7s]   HP_Peak PLS/size/netfit/l4a/log: cv_mse 3.259, cv_wape 4441.9, train_wape 10.5, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     5.8s]   HP_Peak Linear/size/netfit/l4b/log: cv_mse 70.68, cv_wape 41033717.9, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     5.9s]   HP_Peak Ridge/size/netfit/l4b/log: cv_mse 0.3556, cv_wape 43.3, train_wape 21.4, best_iter None, 3 evals, 0.1s, params {'alpha': 41392.98423343556}
+[s0     6.1s]   HP_Peak Lasso/size/netfit/l4b/log: cv_mse 0.3554, cv_wape 43.3, train_wape 21.5, best_iter None, 3 evals, 0.1s, params {'alpha': 0.25782089028055166}
+[s0     6.4s]   HP_Peak ElasticNet/size/netfit/l4b/log: cv_mse 0.4156, cv_wape 44.2, train_wape 16.1, best_iter None, 3 evals, 0.3s, params {'alpha': 0.3265958439775407, 'l1_ratio': 0.4537234139768196}
+[s0     6.6s]   HP_Peak PLS/size/netfit/l4b/log: cv_mse 3.596, cv_wape 7104.5, train_wape 11.1, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     6.7s]   HP_Peak Linear/size/both/direct/log: cv_mse 537.6, cv_wape 91.7, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     6.9s]   HP_Peak Ridge/size/both/direct/log: cv_mse 86.71, cv_wape 46.8, train_wape 31.1, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0     7.2s]   HP_Peak Lasso/size/both/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.2s, params {'alpha': 1.240457029338609}
+[s0     7.5s]   HP_Peak ElasticNet/size/both/direct/log: cv_mse 175.7, cv_wape 70.6, train_wape 70.6, best_iter None, 3 evals, 0.3s, params {'alpha': 3.2659584397754107, 'l1_ratio': 0.4537234139768196}
+[s0     7.7s]   HP_Peak PLS/size/both/direct/log: cv_mse 538.5, cv_wape 91.8, train_wape 0.0, best_iter None, 3 evals, 0.2s, params {'n_components': 17.0}
+[s0    83.0s]   HP_Peak CNN/size/rawphys/l4b/log: cv_mse 0.4971, cv_wape 36.4, train_wape 24.3, best_iter 125, 2 evals, 30.7s, params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}
+[s0    13.3s] done in 13.3s
+[10:13:26] done a_ch__s0__d0__nall__linear (25 s)
+[s0    88.6s] done in 88.6s
+[10:13:29] done a_gb__s0__d0__nall__cnn_h (98 s)
+[s0   118.1s]   HP_Peak TabPFN/size/netfit/l4b/log: cv_mse 0.0968, cv_wape 18.2, train_wape 3.6, best_iter None, 0 evals, 52.2s, params {}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     1.4s] HP train/test 64/22, fill 968/323; substations {'inner': 32, 'train': 24, 'test': 8}; dropped cells 60
+[s0     1.4s] features from cache bstar_s0_fea5d791897d_tab.parquet
+[s0     2.2s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     1.3s] HP train/test 64/22, fill 968/323; substations {'inner': 32, 'train': 24, 'test': 8}; dropped cells 60
+[s0     1.3s] features from cache bstar_s0_fea5d791897d_tab.parquet
+[s0     2.0s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0   127.1s] done in 127.1s
+[10:13:40] done a_gb__s0__d0__nall__tabpfn_h (135 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.6s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.6s] features from cache gb_eoh_s0_834ca87d76b6_tab.parquet
+[s0     3.8s] features from cache gb_eoh_s0_57a62b3fcbbc_tab.parquet
+[s0    13.7s]   HP_Peak CNN/size/rawphys/residual/log: cv_mse 0.2718, cv_wape 36.5, train_wape 18.1, best_iter 1, 2 evals, 11.6s, params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}
+[s0     4.4s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0     4.5s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 0.7329, cv_wape 17.5, train_wape 46.3, best_iter None, 0 evals, 0.0s, params {}
+[s0     4.5s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 0.6929, cv_wape 18.0, train_wape 42.7, best_iter None, 0 evals, 0.0s, params {}
+[s0     4.5s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 0.6929, cv_wape 18.0, train_wape 35.4, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.0s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 52.8, best_iter 1, 3 evals, 0.5s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     3.4s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.4s] features from cache gb_eoh_s0_834ca87d76b6_tab.parquet
+[s0     5.3s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 50.1, best_iter 1, 3 evals, 0.3s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     3.6s] features from cache gb_eoh_s0_57a62b3fcbbc_tab.parquet
+[s0     5.7s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 0.7952, cv_wape 19.2, train_wape 52.8, best_iter 1, 3 evals, 0.3s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     5.9s] done in 5.9s
+[10:13:51] done s_gb__s0__d0__n62__physics (14 s)
+[s0     4.3s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0     4.4s]   HP_Peak Linear/size/whdd/direct/log: cv_mse 1.858, cv_wape 32.1, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     4.6s]   HP_Peak Ridge/size/whdd/direct/log: cv_mse 0.8177, cv_wape 19.6, train_wape 30.2, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0     4.8s]   HP_Peak Lasso/size/whdd/direct/log: cv_mse 0.726, cv_wape 16.7, train_wape 57.6, best_iter None, 3 evals, 0.2s, params {'alpha': 1.240457029338609}
+[s0     5.0s]   HP_Peak ElasticNet/size/whdd/direct/log: cv_mse 0.726, cv_wape 16.7, train_wape 57.6, best_iter None, 3 evals, 0.2s, params {'alpha': 3.2659584397754107, 'l1_ratio': 0.4537234139768196}
+[s0     5.2s]   HP_Peak PLS/size/whdd/direct/log: cv_mse 1.858, cv_wape 32.1, train_wape 0.7, best_iter None, 3 evals, 0.2s, params {'n_components': 14.0}
+[s0     5.3s]   HP_Peak Linear/size/netfit/direct/log: cv_mse 1.651, cv_wape 32.0, train_wape 9.0, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.3s]   HP_Peak Ridge/size/netfit/direct/log: cv_mse 0.711, cv_wape 16.6, train_wape 43.8, best_iter None, 3 evals, 0.1s, params {'alpha': 616.3265772595347}
+[s0     5.5s]   HP_Peak Lasso/size/netfit/direct/log: cv_mse 0.6597, cv_wape 17.1, train_wape 22.6, best_iter None, 3 evals, 0.1s, params {'alpha': 0.044970281365499326}
+[s0     5.6s]   HP_Peak ElasticNet/size/netfit/direct/log: cv_mse 0.6803, cv_wape 20.2, train_wape 20.1, best_iter None, 3 evals, 0.1s, params {'alpha': 0.008844374846554263, 'l1_ratio': 0.6458108965969798}
+[s0     5.7s]   HP_Peak PLS/size/netfit/direct/log: cv_mse 1.468, cv_wape 29.0, train_wape 17.9, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     5.7s]   HP_Peak Linear/size/netfit/residual/log: cv_mse 0.07603, cv_wape 22.7, train_wape 5.3, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.8s]   HP_Peak Ridge/size/netfit/residual/log: cv_mse 0.08509, cv_wape 24.7, train_wape 35.5, best_iter None, 3 evals, 0.1s, params {'alpha': 2871.500961053187}
+[s0     5.9s]   HP_Peak Lasso/size/netfit/residual/log: cv_mse 0.06526, cv_wape 20.3, train_wape 18.4, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[s0     6.1s]   HP_Peak ElasticNet/size/netfit/residual/log: cv_mse 0.04867, cv_wape 20.3, train_wape 15.4, best_iter None, 3 evals, 0.1s, params {'alpha': 0.002391785573438152, 'l1_ratio': 0.7616926738055597}
+[s0     6.2s]   HP_Peak PLS/size/netfit/residual/log: cv_mse 0.07603, cv_wape 22.7, train_wape 12.3, best_iter None, 3 evals, 0.1s, params {'n_components': 14.0}
+[s0     6.3s]   HP_Peak Linear/size/netfit/l4a/log: cv_mse 0.0768, cv_wape 22.7, train_wape 9.4, best_iter None, 0 evals, 0.0s, params {}
+[s0     6.4s]   HP_Peak Ridge/size/netfit/l4a/log: cv_mse 0.1211, cv_wape 30.8, train_wape 24.7, best_iter None, 3 evals, 0.1s, params {'alpha': 34.453562907186836}
+[s0     6.4s]   HP_Peak Lasso/size/netfit/l4a/log: cv_mse 0.0824, cv_wape 27.1, train_wape 22.9, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[s0     6.6s]   HP_Peak ElasticNet/size/netfit/l4a/log: cv_mse 0.05667, cv_wape 19.9, train_wape 24.4, best_iter None, 3 evals, 0.1s, params {'alpha': 0.002391785573438152, 'l1_ratio': 0.7616926738055597}
+[s0     6.7s]   HP_Peak PLS/size/netfit/l4a/log: cv_mse 0.07517, cv_wape 22.8, train_wape 26.8, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     6.7s]   HP_Peak Linear/size/netfit/l4b/log: cv_mse 0.1179, cv_wape 31.2, train_wape 9.6, best_iter None, 0 evals, 0.0s, params {}
+[s0     6.8s]   HP_Peak Ridge/size/netfit/l4b/log: cv_mse 0.1602, cv_wape 34.5, train_wape 24.8, best_iter None, 3 evals, 0.1s, params {'alpha': 34.453562907186836}
+[s0    18.3s] done in 18.3s
+[s0     6.9s]   HP_Peak Lasso/size/netfit/l4b/log: cv_mse 0.1079, cv_wape 31.2, train_wape 23.3, best_iter None, 3 evals, 0.1s, params {'alpha': 0.016246931049027892}
+[10:13:54] done a_ch__s0__d0__nall__cnn_r (29 s)
+[s0     7.1s]   HP_Peak ElasticNet/size/netfit/l4b/log: cv_mse 0.1038, cv_wape 26.2, train_wape 24.4, best_iter None, 3 evals, 0.1s, params {'alpha': 0.002391785573438152, 'l1_ratio': 0.7616926738055597}
+[s0     7.2s]   HP_Peak PLS/size/netfit/l4b/log: cv_mse 0.1164, cv_wape 31.1, train_wape 26.9, best_iter None, 3 evals, 0.1s, params {'n_components': 9.0}
+[s0     7.3s]   HP_Peak Linear/size/both/direct/log: cv_mse 1.518, cv_wape 28.7, train_wape 0.0, best_iter None, 0 evals, 0.1s, params {}
+[s0     7.5s]   HP_Peak Ridge/size/both/direct/log: cv_mse 0.8055, cv_wape 19.5, train_wape 27.9, best_iter None, 3 evals, 0.2s, params {'alpha': 616.3265772595347}
+[s0     7.7s]   HP_Peak Lasso/size/both/direct/log: cv_mse 0.726, cv_wape 16.7, train_wape 57.6, best_iter None, 3 evals, 0.2s, params {'alpha': 1.240457029338609}
+[s0     7.9s]   HP_Peak ElasticNet/size/both/direct/log: cv_mse 0.726, cv_wape 16.7, train_wape 57.6, best_iter None, 3 evals, 0.2s, params {'alpha': 3.2659584397754107, 'l1_ratio': 0.4537234139768196}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     8.2s]   HP_Peak PLS/size/both/direct/log: cv_mse 1.517, cv_wape 28.7, train_wape 3.4, best_iter None, 3 evals, 0.2s, params {'n_components': 9.0}
+[s0     8.7s] done in 8.7s
+[10:13:56] done s_gb__s0__d0__n62__linear (16 s)
+[s0   143.3s]   HP_Peak TabPFN/size/whdd/direct/log: cv_mse 13.19, cv_wape 21.8, train_wape 2.2, best_iter None, 0 evals, 139.7s, params {}
+[s0     4.0s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     4.0s] features from cache gb_eoh_s0_834ca87d76b6_tab.parquet
+[s0     4.3s] features from cache gb_eoh_s0_57a62b3fcbbc_tab.parquet
+[s0     5.0s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.9s] features from cache gb_eoh_s0_834ca87d76b6_tab.parquet
+[s0     4.2s] features from cache gb_eoh_s0_57a62b3fcbbc_tab.parquet
+[s0     5.0s] learning curve n=62 draw=0: 62 train HP households, 227 dropped cells
+[s0     3.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.9s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     5.3s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     3.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.9s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     5.3s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 37.65, cv_wape 51.0, train_wape 72.2, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.4s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 31.84, cv_wape 46.5, train_wape 56.6, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.4s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 29, cv_wape 43.2, train_wape 40.3, best_iter None, 0 evals, 0.0s, params {}
+[s0     6.1s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 37.72, cv_wape 51.0, train_wape 71.6, best_iter 57, 3 evals, 0.7s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     6.7s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 22.68, cv_wape 32.4, train_wape 22.4, best_iter 50, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     5.5s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     5.5s]   HP_Peak Ridge/size/whdd/direct/log: refit with fixed params {'alpha': 616.3265772595347}, best_iter None, 0.0s
+[s0     5.6s]   HP_Peak Ridge/size/whdd/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0     5.6s]   HP_Peak Lasso/size/both/direct/log: refit with fixed params {'alpha': 0.044970281365499326}, best_iter None, 0.0s
+[s0     5.7s]   HP_Peak Lasso/size/both/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0     5.7s]   HP_Peak Ridge/size/netfit/residual/log: refit with fixed params {'alpha': 34.453562907186836}, best_iter None, 0.0s
+[s0     5.7s]   HP_Peak Ridge/size/netfit/residual/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0     5.7s]   HP_Peak Ridge/size/netfit/l4a/log: refit with fixed params {'alpha': 34.453562907186836}, best_iter None, 0.0s
+[s0     5.7s]   HP_Peak Ridge/size/netfit/l4a/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0     5.9s] done in 5.9s
+[s0     7.3s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 22.66, cv_wape 34.2, train_wape 51.0, best_iter 106, 3 evals, 0.6s, params {'colsample_bytree': 0.9518696143151224, 'eta': 0.07412594079095115, 'gamma': 6.321406390130409, 'max_depth': 7.0, 'min_child_weight': 18.0, 'n_estimators': 430.0, 'reg_alpha': 0.190496195178539, 'reg_lambda': 1.8933342815492693, 'subsample': 0.8411318103731124}
+[10:14:21] done r_x15__s0__d0__nall__linear (16 s)
+[s0     7.6s] done in 7.6s
+[10:14:22] done r_x15__s0__d0__nall__physics (18 s)
+[s0    21.1s]   HP_Peak CNN/size/rawphys/l4a/log: cv_mse 0.1648, cv_wape 25.8, train_wape 33.3, best_iter 46, 0 evals, 16.0s, params {'dropout': 0.06923494298809725, 'kernel': 7, 'lr': 0.0010430799553716628, 'n_blocks': 3, 'weight_decay': 3.200811615404507e-05, 'width': 32}
+[s0    36.3s]   HP_Peak TabPFN/size/netfit/residual/log: cv_mse 0.05468, cv_wape 19.7, train_wape 1.2, best_iter None, 0 evals, 31.3s, params {}
+[s0    40.8s] done in 40.8s
+[10:14:38] done s_gb__s0__d0__n62__tabpfn_r (50 s)
+[s0    27.5s]   HP_Peak CNN/size/rawphys/l4b/log: cv_mse 0.2338, cv_wape 33.5, train_wape 31.5, best_iter 42, 0 evals, 6.5s, params {'dropout': 0.06923494298809725, 'kernel': 7, 'lr': 0.0010430799553716628, 'n_blocks': 3, 'weight_decay': 3.200811615404507e-05, 'width': 32}
+[s0    27.6s] done in 27.6s
+[10:14:39] done s_gb__s0__d0__n62__cnn_h (37 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.7s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.7s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     3.5s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     3.5s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     4.9s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     4.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    77.3s]   HP_Peak TabPFN/size/whdd/direct/log: cv_mse 88.75, cv_wape 47.1, train_wape 1.1, best_iter None, 0 evals, 75.0s, params {}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0    16.5s]   HP_Peak CNN/size/rawphys/residual/log: refit with fixed params {'dropout': 0.27161514804076176, 'kernel': 7, 'lr': 0.0004651761606468838, 'n_blocks': 3, 'weight_decay': 5.7191793058527115e-06, 'width': 16}, best_iter 114, 11.7s
+[s0    16.6s]   HP_Peak CNN/size/rawphys/residual/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    16.7s] done in 16.7s
+[10:15:01] done r_x15__s0__d0__nall__cnn_r (27 s)
+[s0     4.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     4.9s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0    19.1s]   HP_Peak CNN/size/raw/direct/log: refit with fixed params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}, best_iter 199, 14.1s
+[s0    19.3s]   HP_Peak CNN/size/raw/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0     4.9s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     4.9s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     6.5s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     6.4s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0    24.4s]   HP_Peak CNN/size/rawphys/direct/log: refit with fixed params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}, best_iter 199, 5.1s
+[s0    24.5s]   HP_Peak CNN/size/rawphys/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    24.6s] done in 24.6s
+[10:15:08] done r_x15__s0__d0__nall__cnn_d (35 s)
+[s0   217.3s]   HP_Peak TabPFN/size/netfit/direct/log: cv_mse 6.423, cv_wape 15.8, train_wape 2.7, best_iter None, 0 evals, 48.3s, params {}
+[s0    14.3s]   HP_Peak TabPFN/size/netfit/residual/log: refit with fixed params {}, best_iter None, 7.8s
+[s0    19.1s]   HP_Peak CNN/size/rawphys/l4b/log: refit with fixed params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}, best_iter 125, 12.6s
+[s0    19.2s]   HP_Peak CNN/size/rawphys/l4b/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    19.2s] done in 19.2s
+[10:15:17] done r_x15__s0__d0__nall__cnn_h (29 s)
+[s0   229.0s] done in 229.0s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[10:15:22] done a_gb__s0__d0__nall__tabpfn_d (237 s)
+[s0     3.9s] HP train/test 241/78, fill 2399/800; substations {'train': 93, 'inner': 80, 'test': 24}; dropped cells 357
+[s0     3.9s] features from cache gb_eoh_s0_cf1c19b466e8_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     5.1s] Paper A pilot m_h 0.02220 (241 train HP households); station pilots {'G001': 0.02131, 'G002': 0.02053, 'G003': 0.02323, 'G005': 0.02315, 'G011': 0.02483}; s0 {'paperA_corr': 0.01236, 'paperA_corr_all': 0.01236}; cross-fit fold m_h [0.02214, 0.02182, 0.0223, 0.02254]
+[s0     5.2s]   HP_Peak anchor_only_Linear/size/-/direct/none: cv_mse 36.58, cv_wape 48.6, train_wape 72.0, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.2s]   HP_Peak anchor_only_Linear/peak/-/direct/none: cv_mse 29.97, cv_wape 43.2, train_wape 52.8, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.2s]   HP_Peak anchor_only_Linear/size+peak/-/direct/none: cv_mse 22.8, cv_wape 39.3, train_wape 39.1, best_iter None, 0 evals, 0.0s, params {}
+[s0     5.8s]   HP_Peak anchor_only_XGBoost/size/-/direct/none: cv_mse 35.9, cv_wape 47.7, train_wape 70.4, best_iter 35, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     6.3s]   HP_Peak anchor_only_XGBoost/peak/-/direct/none: cv_mse 14.47, cv_wape 25.6, train_wape 32.3, best_iter 33, 3 evals, 0.5s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     7.0s]   HP_Peak anchor_only_XGBoost/size+peak/-/direct/none: cv_mse 14.58, cv_wape 26.0, train_wape 34.0, best_iter 72, 3 evals, 0.6s, params {'colsample_bytree': 0.5412194365741195, 'eta': 0.11968939322156943, 'gamma': 6.837542746895716, 'max_depth': 5.0, 'min_child_weight': 7.0, 'n_estimators': 220.0, 'reg_alpha': 0.4101277476340921, 'reg_lambda': 7.028021307836787, 'subsample': 0.7210771337355122}
+[s0     7.3s] done in 7.3s
+[10:15:31] done r_rep__s0__d0__nall__physics (18 s)
+[s0    35.4s]   HP_Peak TabPFN/size/netfit/residual/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    35.5s] done in 35.5s
+[10:15:33] done r_x15__s0__d0__nall__tabpfn_r (45 s)
+[s0   119.3s]   HP_Peak TabPFN/size/netfit/direct/log: cv_mse 46, cv_wape 34.3, train_wape 2.8, best_iter None, 0 evals, 29.5s, params {}
+[s0     4.3s] HP train/test 241/78, fill 2399/800; substations {'train': 93, 'inner': 80, 'test': 24}; dropped cells 357
+[s0     4.3s] features from cache gb_eoh_s0_cf1c19b466e8_tab.parquet
+[s0     5.6s] Paper A pilot m_h 0.02220 (241 train HP households); station pilots {'G001': 0.02131, 'G002': 0.02053, 'G003': 0.02323, 'G005': 0.02315, 'G011': 0.02483}; s0 {'paperA_corr': 0.01236, 'paperA_corr_all': 0.01236}; cross-fit fold m_h [0.02214, 0.02182, 0.0223, 0.02254]
+[s0     5.6s]   HP_Peak Ridge/size/whdd/direct/log: refit with fixed params {'alpha': 616.3265772595347}, best_iter None, 0.0s
+[s0     5.7s]   HP_Peak Lasso/size/both/direct/log: refit with fixed params {'alpha': 0.044970281365499326}, best_iter None, 0.1s
+[s0     5.7s]   HP_Peak Ridge/size/netfit/residual/log: refit with fixed params {'alpha': 34.453562907186836}, best_iter None, 0.0s
+[s0     5.7s]   HP_Peak Ridge/size/netfit/l4a/log: refit with fixed params {'alpha': 34.453562907186836}, best_iter None, 0.0s
+[s0     5.8s] done in 5.8s
+[10:15:36] done r_rep__s0__d0__nall__linear (16 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0   124.9s] done in 124.9s
+[10:15:39] done a_ch__s0__d0__nall__tabpfn_d (136 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.2s] HP train/test 241/78, fill 2399/800; substations {'train': 93, 'inner': 80, 'test': 24}; dropped cells 357
+[s0     3.2s] features from cache gb_eoh_s0_cf1c19b466e8_tab.parquet
+[s0     4.1s] Paper A pilot m_h 0.02220 (241 train HP households); station pilots {'G001': 0.02131, 'G002': 0.02053, 'G003': 0.02323, 'G005': 0.02315, 'G011': 0.02483}; s0 {'paperA_corr': 0.01236, 'paperA_corr_all': 0.01236}; cross-fit fold m_h [0.02214, 0.02182, 0.0223, 0.02254]
+[s0     2.8s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.8s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     3.7s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\models_rawseries.py:64: RuntimeWarning: All-NaN slice encountered
+  self.med = np.nanmedian(S, axis=0)
+[s0     8.5s]   HP_Peak TabPFN/size/whdd/direct/log: refit with fixed params {}, best_iter None, 4.8s
+[s0     2.5s] HP train/test 292/92, fill 2399/800; substations {'train': 111, 'inner': 90, 'test': 30}; dropped cells 363
+[s0     2.5s] features from cache gb_eoh_s0_ffaf70e26ecc_tab.parquet
+[s0     2.2s] HP train/test 241/78, fill 2399/800; substations {'train': 93, 'inner': 80, 'test': 24}; dropped cells 357
+[s0     2.2s] features from cache gb_eoh_s0_cf1c19b466e8_tab.parquet
+[s0    12.6s]   HP_Peak CNN/size/raw/direct/log: refit with fixed params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}, best_iter 199, 8.5s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\scripts\paperb\models_rawseries.py:64: RuntimeWarning: All-NaN slice encountered
+  self.med = np.nanmedian(S, axis=0)
+[s0     3.3s] Paper A pilot m_h 0.02498 (292 train HP households); station pilots {'G001': 0.02784, 'G002': 0.02223, 'G006': 0.02607, 'G009': 0.02107, 'G013': 0.02316}; s0 {'paperA_corr': 0.01904, 'paperA_corr_all': 0.01904, 'paperA_corr_s0unscaled': 0.01264}; cross-fit fold m_h [0.02476, 0.02512, 0.02499, 0.02503]
+[s0     3.0s] Paper A pilot m_h 0.02220 (241 train HP households); station pilots {'G001': 0.02131, 'G002': 0.02053, 'G003': 0.02323, 'G005': 0.02315, 'G011': 0.02483}; s0 {'paperA_corr': 0.01236, 'paperA_corr_all': 0.01236}; cross-fit fold m_h [0.02214, 0.02182, 0.0223, 0.02254]
+[s0    16.0s]   HP_Peak CNN/size/rawphys/direct/log: refit with fixed params {'dropout': 0.22244722205759584, 'kernel': 7, 'lr': 0.00046227044768184215, 'n_blocks': 3, 'weight_decay': 1.267587049825375e-05, 'width': 16}, best_iter 199, 3.3s
+[s0    16.0s] done in 16.0s
+[10:15:55] done r_rep__s0__d0__nall__cnn_d (26 s)
+[s0     8.6s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 5.3s
+[s0     8.4s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 5.4s
+[s0    14.8s] done in 14.8s
+[10:16:04] done r_rep__s0__d0__nall__tabpfn_h (21 s)
+[s0    24.2s]   HP_Peak TabPFN/size/netfit/l4a/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    24.2s] done in 24.2s
+[10:16:12] done r_x15__s0__d0__nall__tabpfn_h (31 s)
+[s0    46.4s]   HP_Peak TabPFN/size/whdd/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    47.8s]   HP_Peak TabPFN/size/netfit/direct/log: refit with fixed params {}, best_iter None, 1.3s
+[s0    58.3s]   HP_Peak TabPFN/size/netfit/direct/log: frozen Stage 1 model from C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\results\iter06_hybrid_ladder\quick\models\a_gb applied to the test substations
+[s0    58.3s] done in 58.3s
+[10:16:40] done r_x15__s0__d0__nall__tabpfn_d (68 s)
+[10:16:46] exit: {'done': 28, 'failed': 0, 'remaining': 0, 'median_job_s': 29.026779413223267, 'eta_h': 0.0, 'updated': '2026-10-12T10:16:45'}

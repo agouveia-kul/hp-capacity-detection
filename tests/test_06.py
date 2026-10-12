@@ -20,7 +20,7 @@ from paperb import run_queue as RQ  # noqa: E402
 from paperb import scale_model as SM  # noqa: E402
 from paperb import train as T  # noqa: E402
 from paperb.models_rawseries import PHYS_PREFIX, raw_columns  # noqa: E402
-from paperb.persist import load_model  # noqa: E402
+from paperb.persist import load_model, reload_check  # noqa: E402
 from paperb.residual import compose  # noqa: E402
 from test_05b import NEW, toy_cfg, toy_pa, toy_tab, toy_xy  # noqa: E402  (toy fixtures of 05b)
 
@@ -230,6 +230,8 @@ def test_rung_winners_are_persisted_by_inner_cv_and_the_frozen_l4_keeps_its_scal
         assert 100 * (oof["oof"] - oof["y"]).abs().sum() / tab.loc[inn, "HP_Peak"].sum() == pytest.approx(man["cv_wape"])   # the winner's out-of-fold predictions
         assert (d / "scale.joblib").exists() == (r == "L4")
         fixed[man["spec"]] = {"params": man["params"], "best_iter": man["best_iter"]}
+    chk = reload_check(tmp_path)                                                 # every persisted winner reloads to its own predictions
+    assert len(chk) == 4 and chk["max_rel_diff"].max() < 1e-9 and "error" not in chk
     l4 = next(tuple(s.split("|")) for s in fixed if SM.rung(tuple(s.split("|"))) == "L4")
     tab2, F2 = tab.copy(), F.copy()                                              # "scaled fillers": other slopes; the new pilot has another s0
     tab2["s_h_net"] = tab["s_h_net"] + tab["size"] * 0.003
