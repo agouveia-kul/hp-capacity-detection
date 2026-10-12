@@ -38,7 +38,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
 
 from hp_capacity import select_scale_free_columns
-from paperb.models_rawseries import CNN_SPACE, RAW_PREFIX
+from paperb.models_rawseries import CNN_SPACE, PHYS, PHYS_PREFIX, RAW_PREFIX
 
 ANCHOR_COLS = {"none": [], "size": ["size"], "size_peak": ["size", "peak"]}
 MAX_EPOCHS, PATIENCE, XGB_ES_ROUNDS = 500, 40, 25
@@ -100,11 +100,14 @@ MONOTONE = re.compile(r"nf_(all|wd|we)_(s_h|cold_resp)")
 def feature_matrix(features, tab, anchor, feature_set="whdd"):
     """Columns of `feature_set` plus the anchor columns of `anchor` in {none, size, size_peak}. whdd: scale-free
     windowed-HDD features (unchanged); netfit: the nf_* columns (features_netfit); both: the union; raw (05b): the daily
-    series rs_* of the raw-series CNN (substations.raw_daily)."""
+    series rs_* of the raw-series CNN (substations.raw_daily); rawphys (06, L2 of the CNN): raw plus the net-load fit scalars
+    `Feature Phys_*` (s_h, P_base, T_h of `tab`), which the CNN joins after pooling."""
     whdd = select_scale_free_columns(features[[c for c in features.columns if not c.startswith(("nf_", RAW_PREFIX))]])
     nf = [c for c in features.columns if c.startswith("nf_")]
     raw = [c for c in features.columns if c.startswith(RAW_PREFIX)]
-    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf, "raw": raw}[feature_set]].copy()
+    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf, "raw": raw, "rawphys": raw}[feature_set]].copy()
+    for k, c in (PHYS.items() if feature_set == "rawphys" else ()):
+        X[f"{PHYS_PREFIX}{k}"] = tab.loc[X.index, c].astype(float)
     for c in ANCHOR_COLS[anchor]:
         X[f"Feature Scale_{c}"] = tab.loc[X.index, c].astype(float)
     return X.apply(pd.to_numeric, errors="coerce").replace([np.inf, -np.inf], np.nan)
@@ -263,7 +266,7 @@ class Model:
 
 
 def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None,
-                    eval_on=None, fixed=None):
+                    eval_on=None, fixed=None, params=None):
     """Seeded hyperopt over household-grouped CV; returns (final model, meta dict, Trials).
 
     X, y, groups: inner substations and their fold ids. The final model is refit on (X_final, y_final)
@@ -272,7 +275,10 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
     out-of-fold predictions as WAPE on the kW scale: y_hat = prediction (p_hat None, direct models) or
     p_hat * exp(prediction) (residual models); meta['cv_wape'] (%, pooled over the folds) is the model-selection
     statistic of the learning curve -- inner CV only, never test. 05b A10: `fixed = (params, best_iter)` skips the search and the
-    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0).
+    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0). 06: meta['oof'] holds the
+    best trial's out-of-fold predictions of the inner substations (kW with `eval_on`, else the model's output), for the L5 ensembles.
+    `params` (06) fixes the hyperparameters but keeps one inner-CV pass: it gives cv_wape, the early-stopped iteration count and the
+    out-of-fold predictions, with no search (the CNN on machine A's CPU).
     """
     if fixed is not None:
         params, best_iter = dict(fixed[0]), fixed[1]
@@ -282,9 +288,10 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
     X, y, groups = pd.DataFrame(X), np.asarray(y, float), np.asarray(groups)
     folds = sorted(set(groups))
     iterative = model_name in ITERATIVE
+    kept = {"loss": np.inf, "oof": None}                               # out-of-fold predictions of the best trial (first on ties)
 
     def objective(params):
-        losses, iters, abserr = [], [], 0.0
+        losses, iters, abserr, oof = [], [], 0.0, np.full(len(y), np.nan)
         for i, f in enumerate(folds):
             va = groups == f
             es = groups == folds[(i + 1) % len(folds)] if iterative else np.zeros(len(y), bool)
@@ -293,16 +300,22 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
             iters.append(m.fit(X[tr], y[tr], X_es=X[es] if iterative else None, y_es=y[es] if iterative else None))
             pred = m.predict(X[va])
             losses.append(float(np.mean((pred - y[va]) ** 2)))
+            oof[va] = pred
             if eval_on is not None:
                 y_kw, p_hat = eval_on
-                abserr += float(np.abs((pred if p_hat is None else p_hat[va] * np.exp(pred)) - y_kw[va]).sum())
+                oof[va] = pred if p_hat is None else p_hat[va] * np.exp(pred)
+                abserr += float(np.abs(oof[va] - y_kw[va]).sum())
         wape = 100 * abserr / float(np.sum(eval_on[0])) if eval_on is not None else None
+        if float(np.mean(losses)) < kept["loss"]:
+            kept.update(loss=float(np.mean(losses)), oof=oof)
         return {"loss": float(np.mean(losses)), "status": STATUS_OK, "fold_losses": losses, "cv_wape": wape,
                 "best_iter": int(np.median(iters)) if iterative else None}
 
     trials = Trials()
     space = SPACES[model_name] if space is None else space
-    if space:
+    if params is not None:
+        params, res = dict(params), objective(dict(params))
+    elif space:
         best = fmin(objective, space, algo=tpe.suggest, max_evals=max_evals, trials=trials,
                     rstate=np.random.default_rng(seed), show_progressbar=False)
         params, res = space_eval(space, best), trials.best_trial["result"]
@@ -310,4 +323,5 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
         params, res = {}, objective({})
     final = Model(model_name, params, seed, opts)
     final.fit(X if X_final is None else pd.DataFrame(X_final), y if y_final is None else y_final, n_iter=res["best_iter"])
-    return final, {"params": params, "cv_mse": res["loss"], "cv_wape": res["cv_wape"], "best_iter": res["best_iter"], "n_evals": len(trials.trials)}, trials
+    return final, {"params": params, "cv_mse": res["loss"], "cv_wape": res["cv_wape"], "best_iter": res["best_iter"], "n_evals": len(trials.trials),
+                   "oof": kept["oof"]}, trials

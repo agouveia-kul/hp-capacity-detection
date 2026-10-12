@@ -1,0 +1,23 @@
+# 06 arm A-CH (accuracy, CH): B* (86 HP households, 15 min), seeds 0-9, n = all, protocol v1.1 grid. The same ladder
+# configurations as configs/iter06_a_gb.yaml (L1-L4 for the carried families, physics rows incl. paperA_l4a / paperA_l4b), tuned on
+# this pool. Every rung's inner-CV winner per seed and family is persisted under models/a_ch/ for 07. Queue only (configs/iter06.yaml).
+base: configs/pool_bstar.yaml
+exp_id: iter06_a_ch
+out_dir: results/iter06_hybrid_ladder/a_ch
+pred_figures: false
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [whdd, netfit, both, raw, rawphys]
+model_feature_sets: {CNN: [raw, rawphys]}
+mode_feature_sets: {residual: [netfit, both, rawphys], l4a: [netfit, both, rawphys], l4b: [netfit, both, rawphys]}
+modes: [direct, residual, l4a, l4b]
+target_transforms: [log]
+models: []
+residual_models: []
+l4: true
+cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_l4a, paperA_l4b]}
+anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}
+refit: {dir: results/iter06_hybrid_ladder/models/a_ch, by_rung: true}

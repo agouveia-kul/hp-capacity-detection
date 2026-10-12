@@ -199,20 +199,22 @@ def household_sensitivity(pool, fill_hh, own_hh=(), fill_station="KLO"):
     return {"s0": f["s_h"] / N, "s_h": f["s_h"], "T_h": f["T_h"], "P_base": f["P_base"], "N": N}
 
 
-def crossfit_pilot_m(pool, train_hp, caps, folds, members, m_full):
+def crossfit_pilot_m(pool, train_hp, caps, folds, members, m_full, T_full=None):
     """03b Task 3: pilot slope m_h that is out of sample on the pilot side, per substation of `members` (Series).
     Inner substation of fold k: pilot of the train HP households NOT in fold k (`folds`: hh -> fold). Train substation
     (no single fold): pilot of the train HP households not among its own HP members. Test: `m_full`.
-    Returns (m Series over `members`, {fold k: m_h})."""
+    Returns (m Series over `members`, {fold k: m_h}). 06: with `T_full` (the full pilot's T_h) also the same pilots' T_h
+    (Series over `members`), for the cross-fitted kappa of L4a (scale_model.py)."""
     train_hp = set(map(str, train_hp))
-    fold_m, out = {}, pd.Series(m_full, index=members.index, dtype=float)
+    fold_m, out = {}, pd.DataFrame({"m": m_full, "T_h": T_full}, index=members.index, dtype=float)
     for k in sorted(members.loc[members["split"] == "inner", "fold"].unique()):
-        keep = sorted(h for h in train_hp if folds[h] != k)
-        fold_m[int(k)] = pool_pilot(pool, keep, caps)["m"]
-        out[(members["split"] == "inner") & (members["fold"] == k)] = fold_m[int(k)]
+        pil = pool_pilot(pool, sorted(h for h in train_hp if folds[h] != k), caps)
+        fold_m[int(k)] = pil["m"]
+        out.loc[(members["split"] == "inner") & (members["fold"] == k), ["m", "T_h"]] = pil["m"], pil.get("T_h", np.nan)
     for sid in members.index[members["split"] == "train"]:
-        out[sid] = pool_pilot(pool, sorted(train_hp - set(members.at[sid, "hp_members"])), caps)["m"]
-    return out, fold_m
+        pil = pool_pilot(pool, sorted(train_hp - set(members.at[sid, "hp_members"])), caps)
+        out.loc[sid, ["m", "T_h"]] = pil["m"], pil.get("T_h", np.nan)
+    return (out["m"], fold_m) if T_full is None else (out["m"], fold_m, out["T_h"])
 
 
 def paperA_predictions(tab, full, by_station, s0=None, m_cf=None, m_own=None):

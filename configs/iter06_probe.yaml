@@ -1,0 +1,32 @@
+# 06 timing probe: seed 0 of every arm of configs/iter06.yaml at full size (s_gb: draw 0 of each n), at the planned concurrency
+# (6 workers x 3 threads). Same exp_id, out_dir, families, arm names and arm configs as configs/iter06.yaml, so the job ids are
+# identical and the run skips these jobs when it is launched: the probe is part of the run, not extra work (as 05b's probes).
+# Job hours from the .done markers and *.timing.parquet x seeds per arm -> results/iter06_hybrid_ladder/runtime_estimate.md.
+exp_id: iter06
+out_dir: results/iter06_hybrid_ladder
+workers: 6
+threads: 3
+frozen: {models_dir: results/iter06_hybrid_ladder/models/a_gb, by_rung: true}
+fixed_params: {csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv, models: {CNN: rawseries}, arms: [a_gb, s_gb]}
+families:
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
+  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3}
+  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3}
+  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3}
+  cnn_d: {models: [CNN], set: ["modes=[direct]"]}
+  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"]}
+  cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"]}
+arms:
+  - {name: a_gb, config: configs/iter06_a_gb.yaml, seeds: [0],
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
+  - {name: a_ch, config: configs/iter06_a_ch.yaml, seeds: [0],
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
+  - {name: s_gb, config: configs/iter06_a_gb.yaml, seeds: [0], n: [32, 62, 100], draws: [0],
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h], set: ["refit=null"]}
+  - {name: r_x05, config: configs/iter06_r_shift.yaml, seeds: [0], frozen: true, frozen_model: true, after: a_gb,
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h], set: ["pool.response_scale={fill: 0.5}"]}
+  - {name: r_x15, config: configs/iter06_r_shift.yaml, seeds: [0], frozen: true, frozen_model: true, after: a_gb,
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h], set: ["pool.response_scale={fill: 1.5}"]}
+  - {name: r_rep, config: configs/iter06_r_rep.yaml, seeds: [0], frozen: true, after: a_gb,
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}

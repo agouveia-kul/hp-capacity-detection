@@ -1,0 +1,45 @@
+# 06 quick run (run interactively before anything is scheduled): every arm of configs/iter06.yaml on the quick grid of 05b (sizes
+# {10, 40}, p {0.1, 0.5}, 3 train / 2 test / 2 inner substations per cell, 3 hyperopt evals, CNN 2), seed 0, anchor size only, TabPFN
+# on whdd and netfit only, L3 / L4 on netfit (CNN: rawphys) only. a_gb and r_x15 run every queue family (tune -> persist the rung
+# winners -> frozen-model row and frozen refit on the scaled data); the other arms run four families each, so that every family
+# and every arm config is exercised. The quick models go to quick/models/, never to the run's models/. Not a result.
+exp_id: iter06_quick
+out_dir: results/iter06_hybrid_ladder/quick
+workers: 6
+threads: 3
+frozen: {models_dir: results/iter06_hybrid_ladder/quick/models/a_gb, by_rung: true}
+fixed_params: {csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv, models: {CNN: rawseries}, arms: [s_gb]}   # a_gb tunes here (2 evals): both paths run
+families:
+  physics: {}
+  linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS]}
+  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3}
+  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3}
+  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3}
+  cnn_d: {models: [CNN], set: ["modes=[direct]"]}
+  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"]}
+  cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"]}
+arms:
+  - {name: a_gb, config: configs/iter06_a_gb.yaml, seeds: [0], families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}", "anchors=[size]",
+           "model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}",
+           "mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}",
+           "refit.dir=results/iter06_hybrid_ladder/quick/models/a_gb"]}
+  - {name: a_ch, config: configs/iter06_a_ch.yaml, seeds: [0], families: [physics, linear, tabpfn_d, cnn_r],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}", "anchors=[size]",
+           "model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}",
+           "mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}",
+           "refit.dir=results/iter06_hybrid_ladder/quick/models/a_ch"]}
+  - {name: s_gb, config: configs/iter06_a_gb.yaml, seeds: [0], n: [62], draws: [0], families: [physics, linear, tabpfn_r, cnn_h],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3", "cv.hyperopt.max_evals_by_model={CNN: 2}", "anchors=[size]",
+           "model_feature_sets={CNN: [raw, rawphys], TabPFN: [whdd, netfit]}",
+           "mode_feature_sets={residual: [netfit, rawphys], l4a: [netfit, rawphys], l4b: [netfit, rawphys]}", "refit=null"]}
+  - {name: r_x15, config: configs/iter06_r_shift.yaml, seeds: [0], frozen: true, frozen_model: true, after: a_gb,
+     families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h],
+     set: ["pool.response_scale={fill: 1.5}", "grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}",
+           "cv.inner_substations_per_cell=2", "cv.hyperopt.max_evals=3", "anchors=[size]"]}
+  - {name: r_rep, config: configs/iter06_r_rep.yaml, seeds: [0], frozen: true, after: a_gb, families: [physics, linear, tabpfn_h, cnn_d],
+     set: ["grid.size=[10, 40]", "grid.penetration=[0.1, 0.5]", "grid.substations_per_cell={train: 3, test: 2}", "cv.inner_substations_per_cell=2",
+           "cv.hyperopt.max_evals=3", "anchors=[size]"]}

@@ -25,6 +25,12 @@ substation (inner substation of fold k: pilot without fold k; train substation: 
 test: the full pilot). Extra cells per test substation set: Paper A's penetration bins (`pbin...`). `model_anchors`
 restricts a model to given anchors. The timing table carries the inner-CV WAPE (`cv_wape`) of every tuned model.
 
+06 (hybrid ladder, iterations/06-hybrid-ladder.md): the residual-type modes `l4a` / `l4b` fit the residual on s_hat / m_hat_h
+(scale_model.py; `l4: true` computes both bases, reported as `paperA_l4a` / `paperA_l4b`); feature set `rawphys` (CNN) adds the
+net-load fit scalars after pooling; `mode_feature_sets` restricts a mode to some feature sets (a rung's inputs);
+`refit: {dir, by_rung: true}` persists, per rung L1-L4, the spec with the lowest inner-CV WAPE of the job (with its out-of-fold
+predictions and, for L4, its scale model) under <dir>/<rung>/s<seed>/<family>/. Frame `l4`: covariates and m_hat_h per substation.
+
     python scripts/paperb/run_benchmark.py --config configs/protocol_v1_quick.yaml [--set parallel.workers=4] [--resume]
 """
 try:                                                                  # 05b: torch before pandas / pyarrow (pyarrow 15 bundles an old
@@ -61,6 +67,7 @@ from paperb.physics import (crossfit_pilot_m, household_caps, household_sensitiv
                             paperA_pilots, paperA_predictions, pilot_whole)
 from paperb.pools import build_pool  # noqa: E402
 from paperb.residual import log_ratio, residual_predict  # noqa: E402
+from paperb.scale_model import BASE, l4_bases, rung  # noqa: E402
 from paperb.splits import grouped_inner_folds, household_splits  # noqa: E402
 from paperb.substations import build_substations, evaluate_members  # noqa: E402
 from paperb.train import configure, feature_matrix, tune_grouped_cv  # noqa: E402
@@ -99,20 +106,28 @@ def specs(cfg):
     """Every prediction of one target as (method, anchor, feature_set, mode, target_transform)."""
     out = [(b, "none", NA, NA, NA) for b in cfg["physics_baselines"]] + [(e, "none", NA, NA, NA) for e in paperA_estimators(cfg)]
     models = [m for m in cfg["models"] if m != "FFNN" or cfg.get("ffnn", {}).get("enabled", False)]
-    fs_ok = lambda m, fs: fs in cfg.get("model_feature_sets", {}).get(m, [f for f in cfg.get("feature_sets", ["whdd"]) if f != "raw"])   # noqa: E731  05b: the CNN reads `raw` only
+    fs_ok = lambda m, fs: fs in cfg.get("model_feature_sets", {}).get(m, [f for f in cfg.get("feature_sets", ["whdd"]) if not f.startswith("raw")])   # noqa: E731  05b: only the CNN reads `raw*`
     for anchor in cfg["anchors"]:
         for fs in cfg.get("feature_sets", ["whdd"]):
             for mode in cfg.get("modes", ["direct"]):
+                if fs not in cfg.get("mode_feature_sets", {}).get(mode, [fs]):          # 06: the feature sets of a rung
+                    continue
                 out += ([(m, anchor, fs, "direct", t) for t in cfg.get("target_transforms", ["none"]) for m in models
                          if not (m == "XGBoost_mono" and fs == "whdd")                   # no nf_* column: = XGBoost
                          and anchor in cfg.get("model_anchors", {}).get(m, [anchor]) and fs_ok(m, fs)]
-                        if mode == "direct" else [(m, anchor, fs, "residual", "log") for m in cfg["residual_models"] if fs_ok(m, fs)])
+                        if mode == "direct" else [(m, anchor, fs, mode, "log") for m in cfg["residual_models"] if fs_ok(m, fs)])
     ao = cfg["anchor_only_baselines"]
     return out + [(f"anchor_only_{m}", "+".join(c), NA, "direct", "none") for m in ao["models"] for c in ao["features"]]
 
 
+def computed_sets(cfg):
+    """The feature sets `evaluate_members` computes (the cache key): `both` contains `whdd`, and `rawphys` (06) reads `raw`."""
+    fs = {"raw" if f == "rawphys" else f for f in cfg.get("feature_sets", ["whdd"])}
+    return sorted(fs - ({"whdd"} if "both" in fs else set()))
+
+
 def cached_eval(pool, members, cfg, seed, log):
-    key = hashlib.md5(json.dumps([FEATURE_VERSION, pool.name, cfg["pool"], cfg["target_defs"], cfg["features"], sorted(cfg.get("feature_sets", ["whdd"])),
+    key = hashlib.md5(json.dumps([FEATURE_VERSION, pool.name, cfg["pool"], cfg["target_defs"], cfg["features"], computed_sets(cfg),
                                   list(members.index), members["hp_members"].tolist(), members["fill_members"].tolist()]
                                  + ([pool.analog.seed] if pool.analog is not None else []),           # 05a: analog map seed
                                  sort_keys=True, default=str).encode()).hexdigest()[:12]     # 03a: memberships in the key
@@ -166,9 +181,14 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
         fx = refit.get("fixed", {}).get("|".join(spec))
         m, meta, _ = tune_grouped_cv(name, X[m_in], yt[m_in], tab.loc[m_in, "fold"], seed, ev, X[m_tr], yt[m_tr], opts, space,
                                      (y_kw[m_in], None if p_base is None else p_base[m_in]),
-                                     None if fx is None else (fx["params"], fx["best_iter"]))
-        if refit.get("dir"):
-            fitted[spec] = {"model": m, "meta": meta, "X_te": X[te], "X_tr": X[m_tr], "y_tr": yt[m_tr]}
+                                     None if fx is None else (fx["params"], fx["best_iter"]),
+                                     cfg["cv"].get("fixed_params", {}).get(name))        # 06: hyperparameters fixed, one inner-CV pass
+        k = rung(spec) if refit.get("by_rung") else spec                    # 06: one model per rung, the lowest inner-CV WAPE (first on ties)
+        keep_m = refit.get("dir") and not spec[0].startswith("anchor_only_")   # the anchor-only baselines are never persisted
+        if keep_m and not (refit.get("by_rung") and k in fitted and fitted[k]["meta"]["cv_wape"] <= meta["cv_wape"]):
+            oof = None if meta.get("oof") is None else pd.DataFrame({"oof": meta["oof"], "y": y_kw[m_in], "fold": tab.loc[m_in, "fold"]})
+            fitted[k] = {"spec": spec, "model": m, "meta": meta, "X_te": X[te], "X_tr": X[m_tr], "y_tr": yt[m_tr], "oof": oof,
+                         "scale": (pa or {}).get("scale", {}).get(spec[3])}
         if fx is not None:
             log(f"  {y.name} {'/'.join(spec)}: refit with fixed params {meta['params']}, best_iter {meta['best_iter']}, {time.time() - t0:.1f}s")
             return m.predict(X[te])
@@ -193,7 +213,7 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
 
     for spec in spec_list or specs(cfg):
         method, anchor, fs, mode, tt = spec
-        if (method.startswith("paperA_") or mode == "residual") and y.name != pa_target:
+        if (method.startswith("paperA_") or mode in BASE) and y.name != pa_target:
             continue                                                    # s_h / m_h estimates HP_Peak only
         if method in PHYSICS:
             out[spec] = make_baseline(method).fit(tab[fit_tr], y[fit_tr]).predict(tab[te])
@@ -217,20 +237,23 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
             if mode == "direct":
                 out[spec] = tuned(spec, method, X, yv, fit_in, fit_tr, {"target_transform": tt})
             else:
-                p, valid = pa.get("cf", {}).get("paperA_sh_mh", pa["paperA_sh_mh"][:2])      # cross-fitted (03b Task 3)
+                p, valid = pa.get("cf", {}).get(BASE[mode], pa[BASE[mode]][:2])              # cross-fitted (03b Task 3; 06: the L4 bases)
                 out[spec], c = residual_predict(lambda *a, **k: tuned(spec, *a, **k), method, X, yv, p, valid, fit_in, fit_tr, te)
                 extra[spec] = {"n_invalid": int((~valid[te]).sum()), **c}
-                if spec in fitted:
-                    fitted[spec].update(p_te=np.asarray(p, float)[te], valid_te=np.asarray(valid, bool)[te])
+                for f in fitted.values():
+                    if f["spec"] == spec:
+                        f.update(p_te=np.asarray(p, float)[te], valid_te=np.asarray(valid, bool)[te])
             if refit.get("frozen_dir") and "|".join(spec) in refit.get("fixed", {}):      # 05b Arm 7: the saved x1.0 model, unchanged
                 from paperb.persist import frozen_predict
                 pv = None if mode == "direct" else (np.asarray(p, float)[te], np.asarray(valid, bool)[te])
-                out[(f"{method}{FROZEN}", *spec[1:])] = frozen_predict(refit["frozen_dir"], seed, spec, X[te], pv, cfg.get("device", "cpu"))
+                root = Path(refit["frozen_dir"]) / (rung(spec) if refit.get("by_rung") else "")
+                out[(f"{method}{FROZEN}", *spec[1:])] = frozen_predict(root, seed, spec, X[te], pv, cfg.get("device", "cpu"), tab[te])
                 log(f"  {y.name} {'/'.join(spec)}: frozen Stage 1 model from {refit['frozen_dir']} applied to the test substations")
     if refit.get("dir"):                                                # 05b A10: persist each refit model with its test design
         from paperb.persist import save_model
-        for spec, f in fitted.items():
-            save_model(Path(refit["dir"]), seed, spec, f, tab.index[te], out[spec], refit.get("device", cfg.get("device", "cpu")))
+        for k, f in fitted.items():
+            save_model(Path(refit["dir"]) / (k if refit.get("by_rung") else ""), seed, f["spec"], f, tab.index[te], out[f["spec"]],
+                       refit.get("device", cfg.get("device", "cpu")))
     for spec, bv in bvs.items():                                        # 05b Task 1b: train / inner-CV WAPE next to the test metrics
         extra[spec] = {**extra.get(spec, {}), **bv}
     return out, extra
@@ -314,7 +337,7 @@ def run_seed(cfg, seed):
         adds the whole-house pilot (A7); a filler-scaled pool (Arm 7) adds `paperA_corr_s0unscaled` (s0 of the unscaled fillers)."""
         key = hashlib.md5(json.dumps([pool.name, cfg["pool"], {k: pac.get(k) for k in ("cap_def", "crossfit", "fill_station", "min_station_pilot")},
                                       seed, tag, sorted(train_hp), sorted(sp["train"]["fill"]), list(t.index), mem.loc[t.index, "hp_members"].tolist(),
-                                      sorted(map(str, fold_of.items())), "paperA_corr_own" in paperA_estimators(cfg)],
+                                      sorted(map(str, fold_of.items())), "paperA_corr_own" in paperA_estimators(cfg)] + (["l4"] if cfg.get("l4") else []),
                                      sort_keys=True, default=str).encode()).hexdigest()[:12]
         f = Path(cfg.get("pilot_cache_dir") or ROOT / cfg["cache_dir"] / "pilots") / f"{pool.name}_s{seed}_{key}.json"
         if cfg.get("pilot_cache", True) and f.exists():
@@ -324,8 +347,14 @@ def run_seed(cfg, seed):
             if cfg.get("pilot_cache", True):
                 write_atomic(f, json.dumps(c, default=float))
         pilots.extend(c["rows"])
-        return paperA_predictions(t, c["full"], c["by_st"], {k: np.asarray(v, float) for k, v in c["s0"].items()},
-                                  None if c["m_cf"] is None else np.asarray(c["m_cf"], float), c["m_own"])
+        out = paperA_predictions(t, c["full"], c["by_st"], {k: np.asarray(v, float) for k, v in c["s0"].items()},
+                                 None if c["m_cf"] is None else np.asarray(c["m_cf"], float), c["m_own"])
+        if cfg.get("l4"):                                               # 06: the L4 bases s_hat / m_hat_h, cross-fitted (scale_model.py)
+            rows_l4, cf_l4, out["scale"], out["l4cov"], info = l4_bases(t, mem, c, pool.temp, cfg["target_defs"]["T_design_C"])
+            out.update(rows_l4)
+            out["cf"].update(cf_l4)
+            pilots.append({"split_seed": seed, **tag, "pilot": "l4", **info})
+        return out
 
     def pilot_numbers(t, train_hp, caps, mem, fold_of, tag):
         full, by_st = paperA_pilots(pool, train_hp, caps, min_st)
@@ -350,10 +379,10 @@ def run_seed(cfg, seed):
                     s0_home = {h: by[pool.meta.at[h, "station"]]["s0"] for h in train_hp}
         rows.extend({"split_seed": seed, **tag, "pilot": f"s0:{k}", "s0": np.nanmedian(v["s0"]), "s_h": v["s_h"], "T_h": v["T_h"],
                      "n_hh": v["N"]} for k, v in s0.items())
-        m_cf = None
+        m_cf = T_cf = None
         if pac.get("crossfit", False):
-            m_ser, fold_m = crossfit_pilot_m(pool, train_hp, caps, fold_of, mem.loc[t.index], full["m"])
-            m_cf = m_ser.to_numpy().tolist()
+            m_ser, fold_m, T_ser = crossfit_pilot_m(pool, train_hp, caps, fold_of, mem.loc[t.index], full["m"], full["T_h"])
+            m_cf, T_cf = m_ser.to_numpy().tolist(), T_ser.to_numpy().tolist()
             rows.extend({"split_seed": seed, **tag, "pilot": f"cf:fold{k}", "m": v, "n_hh": len([h for h in train_hp if fold_of[h] != k])}
                         for k, v in fold_m.items())
         m_own = None
@@ -363,12 +392,13 @@ def run_seed(cfg, seed):
             own = pilot_whole(pool, train_hp, caps, s0_home, fillers)
             m_own = own["m"]
             rows.append({"split_seed": seed, **tag, "pilot": "own", **own})
-        return {"rows": rows, "full": full, "by_st": by_st, "m_cf": m_cf, "m_own": m_own,
+        return {"rows": rows, "full": full, "by_st": by_st, "m_cf": m_cf, "T_cf": T_cf, "m_own": m_own,
                 "s0": {k: np.broadcast_to(np.asarray(v["s0"], float), (len(t),)).tolist() for k, v in s0.items()}}
 
-    if paperA_estimators(cfg) or cfg.get("learning_curve"):
+    need_pa = bool(paperA_estimators(cfg) or cfg.get("learning_curve") or cfg.get("l4"))      # 06: an L4-only job has no Paper A row
+    if need_pa:
         caps = household_caps(pool, pac.get("cap_def", "hp_peak"))
-    if (paperA_estimators(cfg) or cfg.get("learning_curve")) and not lc_only:
+    if need_pa and not lc_only:
         pa = pilot_estimates(tab, sp["train"]["hp"], caps, members, folds, cap_def=pac.get("cap_def", "hp_peak"), n="main", lc_draw=-1)
         log(f"Paper A pilot m_h {pilots[0]['m']:.5f} ({pilots[0]['n_hh']} train HP households); station pilots "
             f"{ {r['pilot']: round(r['m'], 5) for r in pilots[1:] if r['pilot'] in pool.temp.columns} }; s0 "
@@ -389,7 +419,7 @@ def run_seed(cfg, seed):
             preds.append(pd.DataFrame({"sub_id": te, "target": target, **dict(zip(SPEC_COLS, spec)),
                                        "y": tab.loc[te, target].to_numpy(), "pred": pr, "split_seed": seed,
                                        "size": tab.loc[te, "size"].to_numpy(), "p": tab.loc[te, "p"].to_numpy()}))
-        spl_refit = [tuple(s.split("|")) for s in cfg["refit"]["fixed"]] if cfg.get("refit") else None    # 05b A10: the winners only
+        spl_refit = [tuple(s.split("|")) for s in cfg["refit"]["fixed"]] if (cfg.get("refit") or {}).get("fixed") else None    # 05b A10: the winners only
         score(target, tab, predictions(cfg, tab, F, tab[target], seed, timing, log, pa, spl_refit), members, keep)
         if cfg.get("oracle_rows") and target == "HP_Peak" and pa is not None and cfg["physics_baselines"]:   # 05b diagnostics (oracle.py)
             t_te = tab.loc[te]
@@ -438,7 +468,8 @@ def run_seed(cfg, seed):
             for r in timing[k:]:
                 r.update(n_train_hp=len(sub), lc_draw=draw, spc_train=spc or -1)
     log(f"done in {time.time() - t0:.1f}s")
-    return {"metrics": pd.DataFrame(rows).assign(exp_id=cfg["exp_id"], dataset=ds), "dropped": dropped,
+    l4 = pa["l4cov"].rename_axis("sub_id").reset_index().assign(split_seed=seed) if pa and "l4cov" in pa else pd.DataFrame()
+    return {"metrics": pd.DataFrame(rows).assign(exp_id=cfg["exp_id"], dataset=ds), "dropped": dropped, "l4": l4,
             "diag": pd.DataFrame([diag]), "timing": pd.DataFrame(timing), "preds": pd.concat(preds) if preds else pd.DataFrame(), "log": lines,
             "pilots": pd.DataFrame(pilots), "lc": pd.DataFrame(lc_rows).assign(exp_id=cfg["exp_id"], dataset=ds),
             "lc_dropped": pd.DataFrame(lc_dropped)}
@@ -484,7 +515,7 @@ def main():
                 failed[sd] = traceback.format_exc()
                 log(f"seed {sd} FAILED:\n{failed[sd]}")
                 continue
-            for k in ("metrics", "dropped", "diag", "timing", "preds", "pilots", "lc", "lc_dropped"):
+            for k in ("metrics", "dropped", "diag", "timing", "preds", "pilots", "lc", "lc_dropped", "l4"):
                 if len(res[k]):
                     res[k].to_csv(out / "seeds" / f"seed{sd}_{k}.csv", index=False)
             lines += res["log"]
@@ -498,7 +529,7 @@ def main():
     cols = ["exp_id", "split_seed", "dataset", "target", *SPEC_COLS, "cell", "metric", "value", "n_substations", "n_hp_households"]
     merged("metrics")[cols].to_csv(out / "metrics.csv", index=False)
     for k, name in (("dropped", "dropped_cells"), ("diag", "physics_diagnostics"), ("timing", "timing"), ("preds", "predictions"),
-                    ("pilots", "pilots"), ("lc_dropped", "dropped_cells_lc")):
+                    ("pilots", "pilots"), ("lc_dropped", "dropped_cells_lc"), ("l4", "l4")):
         if len(m := merged(k)):
             m.to_csv(out / f"{name}.csv", index=False)
     if len(m := merged("lc")):

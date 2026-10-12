@@ -31,6 +31,13 @@ running at that moment are marked failed with that reason, a new worker pool is 
 models in the queue's `frozen.models_csv`; no hyperopt); `frozen_model: true` also scores the saved Stage 1 model unchanged
 (`<model>@frozen`, from `frozen.models_dir`); `spc_train: k` makes every job of the arm a learning-curve design with k train
 substations per cell (n = all included), scored into metrics_lc.csv.
+06 (hybrid ladder): a queue without `frozen.models_csv` takes the frozen specs of a seed and family from the manifests of the rung
+winners another arm persisted (`frozen.models_dir`/<rung>/s<seed>/<family>/, `frozen.by_rung`), restricted to the job's modes. An
+arm with `after: <arm>` starts a family job only when that arm's job of the same seed and family is done (its models exist).
+`threads` (queue key or --threads) sets the threads per worker, so that workers x threads stays within the physical cores (05b
+lesson); a family's `group` shares its `max_concurrent` cap with the other families of the group. `fixed_params: {csv, models:
+{model: queue_family of the csv}, arms: [..]}` gives, in the listed arms, each model the hyperparameters of the seed's row of the
+05b carry-forward table (`cv.fixed_params`: no search, one inner-CV pass per configuration; train.tune_grouped_cv).
 """
 import os
 import platform
@@ -62,7 +69,7 @@ import yaml  # noqa: E402
 
 from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
 
-FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped")
+FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped", "l4")
 CSV = {"preds": "predictions", "dropped": "dropped_cells", "diag": "physics_diagnostics", "lc": "metrics_lc", "lc_dropped": "dropped_cells_lc"}
 ML_OFF = ["models=[]", "residual_models=[]", "modes=[direct]"]
 
@@ -82,7 +89,17 @@ def jobs(q):
 
 def frozen_specs(q, job):
     """05b A10 Stage 2: spec -> {params, best_iter} of the job's seed and queue family from the carry-forward table (carried models
-    only, i.e. reload check passed). Raises if there is none: the job is then listed as failed, never run without its model."""
+    only, i.e. reload check passed). Raises if there is none: the job is then listed as failed, never run without its model.
+    06: without `models_csv`, the rung winners persisted under `frozen.models_dir` (their manifests)."""
+    if "models_csv" not in q["frozen"]:
+        from paperb.lc_fit import FAMILY_OF
+        fam = q["families"][job["family"]]
+        fams = {FAMILY_OF[m] for m in fam.get("models", []) + fam.get("residual_models", [])}
+        mans = [json.loads(f.read_text(encoding="utf-8")) for f in sorted((ROOT / q["frozen"]["models_dir"]).glob(f"*/s{int(job['seed'])}/*/manifest.json"))]
+        out = {m["spec"]: {"params": m["params"], "best_iter": m["best_iter"]} for m in mans if m["family"] in fams}
+        if not out:
+            raise ValueError(f"{job['id']}: no persisted rung winner for seed {job['seed']}, queue family {job['family']}")
+        return out
     P = pd.read_csv(ROOT / q["frozen"]["models_csv"])
     P = P[(P["split_seed"] == int(job["seed"])) & (P["queue_family"] == job["family"]) & (P["carried_model"] == True)]  # noqa: E712
     if P.empty:
@@ -102,8 +119,19 @@ def job_config(q, arm, job, threads):
     cfg = set_dotted(load_config(arm["config"]), over + list(fam.get("set", [])) + list(arm.get("set", [])))
     keep = set(fam.get("models", [])) | set(fam.get("residual_models", []))
     fixed = frozen_specs(q, job) if arm.get("frozen") and job["family"] != "physics" else None
+    fp = q.get("fixed_params") or {}
+    if arm["name"] in fp.get("arms", []) and keep & set(fp["models"]):   # 06: the seed's 05b hyperparameters, no search
+        P = pd.read_csv(ROOT / fp["csv"])
+        P = P[(P["split_seed"] == int(job["seed"])) & (P["carried_model"] == True)].set_index("queue_family")["params"]  # noqa: E712
+        cfg.setdefault("cv", {})["fixed_params"] = {m: json.loads(P[f]) for m, f in fp["models"].items() if m in keep}
+    if arm.get("frozen"):
+        cfg.pop("refit", None)                                        # a frozen arm never persists (the arm config may name a model dir)
     if fixed:
-        cfg["refit"] = {"fixed": fixed, **({"frozen_dir": str(ROOT / q["frozen"]["models_dir"])} if arm.get("frozen_model") else {})}
+        fixed = {s: v for s, v in fixed.items() if s.split("|")[3] in cfg.get("modes", ["direct"])}     # 06: a family split by mode
+        if not fixed:
+            raise ValueError(f"{job['id']}: no frozen spec in the job's modes {cfg.get('modes')}")
+        cfg["refit"] = {"fixed": fixed, "by_rung": bool(q["frozen"].get("by_rung")),
+                        **({"frozen_dir": str(ROOT / q["frozen"]["models_dir"])} if arm.get("frozen_model") else {})}
         keep |= {f"{m}@frozen" for m in keep} if arm.get("frozen_model") else set()
     if job["n"] != "all" or arm.get("spc_train"):                     # 05b: one learning-curve design, test substations shared with n = all
         cfg.update(lc_only=True, learning_curve={"n": [job["n"] if job["n"] == "all" else int(job["n"])], "draws": int(job["draw"]) + 1,
@@ -220,6 +248,7 @@ def main(argv=None):
     ap.add_argument("--arms", default=None, help="comma-separated arm names: run only these arms (e.g. the timing probe)")
     ap.add_argument("--shard", default=None, help="I/N: run only jobs at positions I mod N (several machines, disjoint jobs)")
     ap.add_argument("--families", default=None, help="comma-separated queue families: run only these (e.g. rawseries,tabpfn on a GPU)")
+    ap.add_argument("--threads", type=int, default=None, help="threads per worker (default: the queue's `threads`, else cores // workers)")
     a = ap.parse_args(argv)
     q = yaml.safe_load(open(ROOT / a.config))
     q["workers"] = a.workers or q.get("workers", 1)
@@ -245,7 +274,12 @@ def main(argv=None):
     if fams and fams - set(q["families"]):
         raise ValueError(f"--families: unknown {sorted(fams - set(q['families']))}")
     todo = [j for j in shard(all_jobs, a.shard) if (fams is None or j["family"] in fams) and not (out / "jobs" / f"{j['id']}.done").exists() and not (out / "jobs" / f"{j['id']}.failed").exists()]
-    threads = max(1, (os.cpu_count() or 1) // q["workers"])
+    threads = a.threads or q.get("threads") or max(1, (os.cpu_count() or 1) // q["workers"])
+    after = {arm["name"]: arm["after"] for arm in q["arms"] if arm.get("after")}
+
+    def ready(j):                                                     # 06: the arm it depends on has finished this seed and family
+        dep = after.get(j["arm"])
+        return dep is None or j["family"] == "physics" or (out / "jobs" / f"{dep}__s{j['seed']}__d0__nall__{j['family']}.done").exists()
     t_start, t_stop = time.time(), stop_time(a.stop_at)
     print(f"[{datetime.now():%H:%M:%S}] queue {q['exp_id']}: {len(todo)} of {len(all_jobs)} jobs to run, {q['workers']} workers x "
           f"{threads} threads, stop at {t_stop}, shard {a.shard or 'all'}, families {a.families or 'all'}", flush=True)
@@ -268,6 +302,8 @@ def main(argv=None):
             for job in todo:
                 if t_stop and datetime.now() >= t_stop:
                     break
+                if not ready(job):                                  # left as remaining
+                    continue
                 try:
                     finish(*run_job(q, job, threads, stage))
                 except Exception:                                   # logged and skipped, never retried in a loop
@@ -275,11 +311,12 @@ def main(argv=None):
         else:
             ex = cf.ProcessPoolExecutor(q["workers"], mp_context=mp.get_context("spawn"), max_tasks_per_child=1)
             running, pending = {}, list(todo)
-            cap = {f: v["max_concurrent"] for f, v in q["families"].items() if v.get("max_concurrent")}   # 05b: e.g. TabPFN (RAM)
+            grp = {f: v.get("group", f) for f, v in q["families"].items()}                                # 06: families sharing a cap
+            cap = {grp[f]: v["max_concurrent"] for f, v in q["families"].items() if v.get("max_concurrent")}   # 05b: e.g. TabPFN (RAM)
             while True:
                 while len(running) < q["workers"] and not (t_stop and datetime.now() >= t_stop):
-                    busy = [j["family"] for j in running.values()]
-                    job = next((j for j in pending if busy.count(j["family"]) < cap.get(j["family"], q["workers"])), None)
+                    busy = [grp[j["family"]] for j in running.values()]
+                    job = next((j for j in pending if busy.count(grp[j["family"]]) < cap.get(grp[j["family"]], q["workers"]) and ready(j)), None)
                     if job is None:
                         break
                     pending.remove(job)

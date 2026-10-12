@@ -1,0 +1,32 @@
+# 06 arm A-GB (accuracy, GB): GB-EoH main window (Nov 2021 - Oct 2022, 384 homes), seeds 0-9, n = all, protocol v1.1 grid.
+# The ladder's configurations (iterations/06-hybrid-ladder.md; DECISIONS.md 2026-10-12), scored for every model of the carried
+# families; a rung's row is the family's inner-CV winner among that rung's configurations (never test):
+#   L1  tabular whdd x {size, size_peak}, direct-log; CNN raw x {size, size_peak}, direct-log
+#   L2  tabular {netfit, both} x {size, size_peak}, direct-log; CNN rawphys (raw + s_h, P_base, T_h of the net-load fit) x anchors
+#   L3  L2 inputs, mode residual (z = log y - log P_hat_A, P_hat_A = paperA_sh_mh cross-fitted, as 05b)
+#   L4  L2 inputs, modes l4a / l4b (z = log y - log(s_hat / m_hat_h), scale_model.py); zero residual = paperA_l4a / paperA_l4b
+# feature_sets lists whdd and rawphys too, but the feature cache key is the computed sets (netfit, both, raw), as 05b Arm 2: the
+# caches of 05b are reused. whdd keeps `features.kwargs.resolution: 15` on the 30-min series (each value repeated; tests/test_06.py).
+# refit: every rung's inner-CV winner per seed and family is persisted (A10 format) under models/a_gb/<rung>/s<seed>/<family>/,
+# with its out-of-fold inner-CV predictions (L5) and, for L4, its scale model (R-shift). Also the base of S-GB and R-shift (queue).
+# Models are set per queue family (configs/iter06.yaml). Run through the queue only.
+base: configs/pool_gb_eoh_2122.yaml
+exp_id: iter06_a_gb
+out_dir: results/iter06_hybrid_ladder/a_gb
+pred_figures: false
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [whdd, netfit, both, raw, rawphys]
+model_feature_sets: {CNN: [raw, rawphys]}
+mode_feature_sets: {residual: [netfit, both, rawphys], l4a: [netfit, both, rawphys], l4b: [netfit, both, rawphys]}
+modes: [direct, residual, l4a, l4b]
+target_transforms: [log]
+models: []
+residual_models: []
+l4: true
+cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_l4a, paperA_l4b]}
+anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}
+refit: {dir: results/iter06_hybrid_ladder/models/a_gb, by_rung: true}

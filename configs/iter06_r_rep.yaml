@@ -1,0 +1,23 @@
+# 06 arm R-rep (robustness ii): GB-EoH temporal replication (Oct 2022 - 28 Sep 2023, 319 homes), seeds 0-9, n = all. The 05b Arm 6
+# machinery: every rung's A-GB winner of the seed and family (spec and hyperparameters from its manifest, no re-tuning) is refit on
+# this pool; the L4 scale (kappa, g) and s0 are refit here too. Physics rows incl. paperA_l4a / paperA_l4b. A temporal replication
+# (another year, mostly the same homes), never an independent sample. Nothing is persisted. Queue only (configs/iter06.yaml).
+base: configs/pool_gb_eoh_2223.yaml
+exp_id: iter06_r_rep
+out_dir: results/iter06_hybrid_ladder/r_rep
+pred_figures: false
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [whdd, netfit, both, raw, rawphys]
+model_feature_sets: {CNN: [raw, rawphys]}
+mode_feature_sets: {residual: [netfit, both, rawphys], l4a: [netfit, both, rawphys], l4b: [netfit, both, rawphys]}
+modes: [direct, residual, l4a, l4b]
+target_transforms: [log]
+models: []
+residual_models: []
+l4: true
+cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_l4a, paperA_l4b]}
+anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}

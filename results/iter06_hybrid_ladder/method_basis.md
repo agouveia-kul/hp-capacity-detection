@@ -33,10 +33,14 @@ these works. Entries marked **UNVERIFIED** were not retrieved. Nothing here is c
 ## Ensembles: L5
 - **L5a, plain average** of the families' L4 predictions: the simplest combination, no learned weight.
 - **L5b, gated combination.** Weights are learned on out-of-fold inner-CV predictions, which is stacked generalisation [12];
-  the weights are non-negative least squares, as in stacked regressions [13] (solver: Lawson–Hanson NNLS [14], `scipy.optimize.nnls`).
+  the weights are non-negative least squares [14], as in stacked regressions [13]. Solver: `scipy.optimize.lsq_linear` with a lower
+  bound of 0 (bounded-variable least squares; its reference, Stark and Parker 1995, was not retrieved: **UNVERIFIED**), because
+  scipy 1.14's `nnls` fails on proportional columns and the families' predictions are close to that.
   The weights depend on the input through a gate, as in mixtures of experts [15]; our gate is a hard partition on one
   identifiable, label-free scalar (r̂ = ŝ / P_base(net)), not a learned soft gate, so [15] is the idea and not the algorithm.
-  The bin edges are chosen among fixed quantiles of r̂ by household-grouped cross-validation on the out-of-fold predictions.
+  The bin edges are chosen among fixed quantiles of r̂ by household-grouped cross-validation on the out-of-fold predictions;
+  the gate takes the fewest edges whose error is within 1 % (relative) of the lowest one (a parsimony rule of ours, fixed
+  before any 06 run).
 
 ## Comparison rule
 Paired per-seed differences with a seed-count threshold and a minimum effect (≥ 8 of 10 seeds and median ≤ −1 pp), as in

@@ -7,6 +7,10 @@ versions, device, SHA-256 of model.joblib). Two models are not pickled whole: th
 `RawSeriesCNN._net`) stores its state_dict in `cnn_state.pt` and is rebuilt on load; TabPFN (in-context learning) stores its train
 context `train_context.parquet` (X, y) plus the checkpoint name and SHA-256, and is refit from that context on load (seeded).
 Stage 2 (Arm 7): `frozen_predict` applies a saved model unchanged to the same test substations built from scaled fillers.
+06 (hybrid ladder): one directory per rung, <root>/<rung>/s<seed>/<family>/ (the rung's inner-CV winner of the family). A tuned model
+also stores `oof_inner.parquet` (its out-of-fold inner-CV predictions in kW, with y and the fold id; input of the L5 ensembles) and an
+L4 model `scale.joblib` (`scale_model.Scale`: kappa or g, the test substations' s0, T_design, station climate), from which
+`frozen_predict` rebuilds s_hat / m_hat_h on the scaled test substations with everything learned at x1.0.
 """
 import hashlib
 import json
@@ -75,7 +79,12 @@ def save_model(root, seed, spec, f, sub_ids, pred_te, device):
         extra["tabpfn"] = tabpfn_info()
     else:
         joblib.dump(m, d / "model.joblib")
+    if f.get("oof") is not None:
+        f["oof"].to_parquet(d / "oof_inner.parquet")
+    if f.get("scale") is not None:
+        joblib.dump(f["scale"], d / "scale.joblib")
     man = {"seed": int(seed), "family": FAMILY_OF[name], "spec": "|".join(spec), "params": f["meta"]["params"], "best_iter": f["meta"]["best_iter"],
+           "cv_wape": f["meta"].get("cv_wape"),
            "feature_columns": [str(c) for c in pd.DataFrame(f["X_te"]).columns], "n_train_sub": int(len(f["y_tr"])), "n_test_sub": int(len(X_te)),
            "residual": "p_te" in f, "device": device, "host": platform.node(), "packages": _versions(),
            "model_sha256": _sha(d / "model.joblib"), **extra}
@@ -119,11 +128,14 @@ def load_predict(d, device=None):
     return pd.Series(np.asarray(pred, float), index=X.index, name="pred")
 
 
-def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None):
+def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None, tab_te=None):
     """05b Arm 7 frozen-model row: the seed's saved Stage 1 model of `spec` (trained at x1.0), unchanged, applied to another
-    version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model)."""
+    version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model).
+    06: an L4 model's base s_hat / m_hat_h is rebuilt from its saved scale model on `tab_te` (the substation table of X_te)."""
     d = model_dir(root, seed, spec)
     m, man = load_model(d, device)
+    if (d / "scale.joblib").exists():
+        p_valid = joblib.load(d / "scale.joblib").base(tab_te)
     if man["spec"] != "|".join(spec):
         raise ValueError(f"{d}: saved model is {man['spec']}, not {'|'.join(spec)}")
     saved = pd.read_parquet(d / "X_test.parquet", columns=[]).index.astype(str)
