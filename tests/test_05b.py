@@ -643,3 +643,127 @@ def test_a11_check_writes_each_row_and_resumes_after_an_interruption(tmp_path, m
     C = RP.check(["rawseries"], tmp_path, device="cpu", out="cpu.csv", resume=True)
     assert calls == ["s1", "s2"] and sorted(C["split_seed"]) == [0, 1, 2] and C["reload_pass"].all()
     assert set(C["reload_device"]) == {"cpu"}
+
+
+# ------------------------------------------------------------------ Stage 2 (A10 frozen configurations, Arm 3, Arm 7 frozen-model row)
+STAGE2 = yaml.safe_load((ROOT / "configs" / "iter05b_stage2.yaml").read_text())
+CARRIED = ROOT / STAGE2["frozen"]["models_csv"]
+
+
+def stage2_job(arm, seed, family, n="all"):
+    a = next(x for x in STAGE2["arms"] if x["name"] == arm)
+    return a, next(j for j in RQ.jobs({**STAGE2, "arms": [a]}) if j["seed"] == seed and j["family"] == family and j["n"] == n)
+
+
+def test_stage2_queue_injects_each_seeds_frozen_spec():
+    P = pd.read_csv(CARRIED)
+    for arm, seed, fam in [("arm7_x05", 3, "linear"), ("arm4_o1", 17, "tabpfn"), ("arm6", 9, "rawseries")]:
+        a, job = stage2_job(arm, seed, fam)
+        cfg, keep = RQ.job_config(STAGE2, a, job, 2)
+        row = P[(P["split_seed"] == seed) & (P["queue_family"] == fam)].iloc[0]
+        assert list(cfg["refit"]["fixed"]) == [row["spec"]] and cfg["refit"]["fixed"][row["spec"]]["params"] == yaml.safe_load(row["params"])
+        assert ("frozen_dir" in cfg["refit"]) == (arm == "arm7_x05") and (f"{row['spec'].split('|')[0]}@frozen" in keep) == (arm == "arm7_x05")
+        assert not cfg.get("lc_only")
+    a, job = stage2_job("arm3_spc40", 4, "linear", 62)                         # Arm 3: learning-curve design with the frozen spec
+    cfg, _ = RQ.job_config(STAGE2, a, job, 2)
+    spec = P[(P["split_seed"] == 4) & (P["queue_family"] == "linear")]["spec"].iloc[0]
+    assert cfg["lc_only"] and cfg["learning_curve"]["n"] == [62] and cfg["learning_curve"]["specs"] == [spec]
+    assert cfg["learning_curve"]["substations_per_cell_train"] == [40] and cfg["learning_curve"]["draw_ids"] == [0]
+    a, job = stage2_job("arm3_spc10", 4, "physics")
+    cfg, _ = RQ.job_config(STAGE2, a, job, 2)
+    assert cfg["lc_only"] and cfg["learning_curve"]["n"] == ["all"] and cfg["learning_curve"]["specs"] == "all" and "refit" not in cfg
+    a, job = stage2_job("arm5", 0, "tabpfn")                                   # Arm 5 (B*): per-arm tuning, nothing frozen
+    assert "refit" not in RQ.job_config(STAGE2, a, job, 2)[0]
+    a, job = stage2_job("arm7_x05", 0, "linear")
+    with pytest.raises(ValueError, match="no carried frozen model"):          # never run without the seed's model
+        RQ.job_config(STAGE2, a, {**job, "seed": 99}, 2)
+    with pytest.raises(ValueError, match="no carried frozen model"):          # kernel / trees are not carried (A10)
+        RQ.job_config({**STAGE2, "families": {**STAGE2["families"], "kernel": {"models": ["SVR"]}}}, a, {**job, "family": "kernel"}, 2)
+
+
+def test_stage2_job_list_order_and_seeds():
+    js = RQ.jobs(STAGE2)
+    arms = list(dict.fromkeys(j["arm"] for j in js))
+    assert [a.split("_")[0] for a in arms] == ["arm2", "arm7", "arm7", "arm4", "arm4", "arm4", "arm4", "arm4", "arm3", "arm3", "arm5", "arm6"]
+    seeds = {a: sorted({j["seed"] for j in js if j["arm"] == a}) for a in arms}
+    assert all(seeds[a] == list(range(10 if a.startswith(("arm7", "arm3", "arm6")) else 20)) for a in arms)
+    assert {j["family"] for j in js if j["arm"] == "arm2_cpu"} == {"linear", "tabpfn", "rawseries"}         # device-matched reference
+    assert {j["family"] for j in js if j["arm"] != "arm5"} <= {"physics", "linear", "tabpfn", "rawseries"}      # A10: carried only
+    P = pd.read_csv(CARRIED)
+    assert set(P.loc[P["carried_model"], "queue_family"]) == {"linear", "tabpfn", "rawseries"} and P["carried_model"].sum() == 60
+
+
+@pytest.mark.parametrize("spec", [("Lasso", "size", "netfit", "direct", "log"), ("Lasso", "size", "netfit", "residual", "log")])
+def test_arm7_frozen_model_row_applies_the_saved_model_unchanged(spec, tmp_path):
+    from paperb.persist import load_model
+    T.configure(xgb_n_jobs=2)
+    tab, F = toy_tab()
+    cfg = {**toy_cfg(), "models": ["Lasso"], "residual_models": ["Lasso"]}
+    fixed = {"|".join(spec): {"params": {"alpha": 0.01}, "best_iter": None}}
+    out1, _ = RB.predictions({**cfg, "refit": {"dir": str(tmp_path), "fixed": fixed}}, tab, F, tab["HP_Peak"], 0, [], lambda m: None,
+                             toy_pa(tab), [spec])                                # step 1 (x1.0): fit and save
+    te = (tab["split"] == "test").to_numpy()
+    tab2, F2 = tab.copy(), F.copy()                                                # "scaled" data: other features, labels and train set
+    F2["nf_all_s_h"] *= np.where(te, 1.3, 0.7)
+    tab2["s_h_net"] *= 1.3
+    tab2["HP_Peak"] *= 1.1
+    pa2 = toy_pa(tab2)
+    out2, _ = RB.predictions({**cfg, "refit": {"fixed": fixed, "frozen_dir": str(tmp_path)}}, tab2, F2, tab2["HP_Peak"], 0, [], lambda m: None,
+                             pa2, [spec])
+    frozen = out2[("Lasso@frozen", *spec[1:])]
+    m, man = load_model(tmp_path / "s0" / "linear")
+    z = m.predict(T.feature_matrix(F2, tab2, "size", "netfit")[te])
+    want = z if spec[3] == "direct" else compose(pa2["paperA_sh_mh"][0][te], z, pa2["paperA_sh_mh"][1][te])
+    np.testing.assert_allclose(frozen, want, rtol=1e-12)                          # the saved model on the new test data, unchanged
+    assert not np.allclose(frozen, out2[spec])                                    # ... not the model refit on the new train data
+    out3, _ = RB.predictions({**cfg, "refit": {"fixed": fixed, "frozen_dir": str(tmp_path)}}, tab, F, tab["HP_Peak"], 0, [], lambda m: None,
+                             toy_pa(tab), [spec])
+    np.testing.assert_allclose(out3[("Lasso@frozen", *spec[1:])], out1[spec], rtol=1e-12)    # same data: the step-1 predictions
+    with pytest.raises(ValueError, match="test substations differ"):
+        RB.predictions({**cfg, "refit": {"fixed": fixed, "frozen_dir": str(tmp_path)}}, tab.rename(index=lambda s: s + "x"),
+                       F.rename(index=lambda s: s + "x"), tab["HP_Peak"].rename(index=lambda s: s + "x"), 0, [], lambda m: None, toy_pa(tab), [spec])
+
+
+STAGE1_JOBS = ROOT / "results" / "iter05b_data_limit" / "stage1" / "jobs"
+
+
+@pytest.mark.skipif(not (POOLS / "gb_eoh_2122r3_meta.parquet").exists() or not (STAGE1_JOBS / "arm2__s0__d0__nall__linear.preds.parquet").exists(),
+                    reason="GB-EoH pool cache or Stage 1 job frames missing")
+@pytest.mark.parametrize("family", ["linear", "tabpfn", pytest.param("rawseries", marks=pytest.mark.xfail(strict=True, reason=(
+    "2026-10-07: the CNN retrained on machine A's CPU gives dWAPE -0.89 pp vs its GPU-trained Stage 1 model (seed 0); Alex chose CPU + "
+    "the device-matched reference arm arm2_cpu (DECISIONS.md)")))])
+def test_stage2_frozen_job_reproduces_stage1_on_arm2_data(family, tmp_path):
+    """A10 tolerances: a frozen-spec queue job on Arm 2's own data (seed 0) gives the Stage 1 test predictions again: max relative
+    difference <= 1e-6 (linear), |dWAPE| <= 0.1 pp (TabPFN, CNN: Stage 1 on machine B's GPU, here refit on this CPU, A11)."""
+    if family == "tabpfn":
+        skip_tabpfn("TabPFN")
+    q = {**STAGE2, "arms": [{"name": "arm2", "config": "configs/iter05b_arm2.yaml", "seeds": [0], "frozen": True, "families": [family]}]}
+    job = RQ.jobs(q)[0]
+    _, files, info = RQ.run_job(q, job, max(1, (os.cpu_count() or 2) // 2), tmp_path)
+    new = pd.read_parquet(next(f for f in files if f.name.endswith(".preds.parquet")))
+    old = pd.read_parquet(STAGE1_JOBS / f"arm2__s0__d0__nall__{family}.preds.parquet")
+    spec = new[RB.SPEC_COLS].drop_duplicates()
+    assert len(spec) == 1
+    old = old.merge(spec, on=RB.SPEC_COLS).set_index(old.merge(spec, on=RB.SPEC_COLS)["sub_id"].astype(str))
+    new = new.set_index(new["sub_id"].astype(str)).reindex(old.index)
+    y = old["y"].to_numpy(float)
+    if family == "linear":
+        np.testing.assert_allclose(new["pred"].to_numpy(float), old["pred"].to_numpy(float), rtol=1e-6)
+    else:
+        dw = 100 * (np.abs(new["pred"].to_numpy(float) - y).sum() - np.abs(old["pred"].to_numpy(float) - y).sum()) / y.sum()
+        print(f"{family}: dWAPE {dw:.4f} pp vs Stage 1 ({info['seconds']:.0f} s)")
+        assert abs(dw) <= 0.1
+
+
+def test_stage2_probe_jobs_are_stage2_jobs():
+    p = yaml.safe_load((ROOT / "configs" / "iter05b_probe_stage2.yaml").read_text())
+    assert {k: p[k] for k in ("exp_id", "out_dir", "frozen", "families")} == {k: STAGE2[k] for k in ("exp_id", "out_dir", "frozen", "families")}
+    assert [{**a, "seeds": None} for a in p["arms"]] == [{**a, "seeds": None} for a in STAGE2["arms"]] and all(a["seeds"] == [0] for a in p["arms"])
+    assert {j["id"] for j in RQ.jobs(p)} <= {j["id"] for j in RQ.jobs(STAGE2)}
+
+
+def test_scaled_filler_cache_files_are_distinct_per_factor():
+    cfg = load_config("configs/iter05b_arm7.yaml")
+    files = {f: OR._rscale_files(cfg, f) for f in (0, 0.5, 1, 1.5)}
+    assert len({v[0] for v in files.values()}) == 4 and files[0.5][0].name.endswith("_rscale0.5.npy")
+    assert all(v[1].name == v[0].name[:-4] + "_info.json" for v in files.values())

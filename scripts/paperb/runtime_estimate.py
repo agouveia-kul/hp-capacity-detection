@@ -21,6 +21,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 import yaml  # noqa: E402
 
@@ -134,9 +135,56 @@ def main05b(workers, out=ROOT / "results" / "iter05b_data_limit"):
     return S
 
 
+def main05b_stage2(workers, out=ROOT / "results" / "iter05b_data_limit", night_h=NIGHT_H):
+    """05b Stage 2: estimate from the probe (configs/iter05b_probe_stage2.yaml: seed 0 of every arm, full size, same job ids as
+    configs/iter05b_stage2.yaml). Remaining job hours = probe job hours x (seeds - 1) per (arm, design, family). Upper bound = the probe
+    times as measured; lower bound = family jobs whose physics job (same arm, design) was still running when they started did that
+    job's feature evaluation and pilot themselves (the cache was empty): that cost is removed, floored at the family's arm2_cpu job
+    (features and pilot cached, same grid). In the full queue a seed's physics job mostly runs before its family jobs (arm -> family ->
+    seed order), so the lower bound is the likely case. Wall = max(job hours / workers, TabPFN job hours / its max_concurrent)."""
+    q = yaml.safe_load((ROOT / "configs" / "iter05b_stage2.yaml").read_text())
+    J, rows = out / "stage2" / "jobs", []
+    done = {f.name[:-5]: json.loads(f.read_text()) for f in J.glob("*__s0__*.done")}
+    for arm in q["arms"]:
+        for n in arm.get("n", ["all"]):
+            for fam in arm["families"]:
+                jid = f"{arm['name']}__s0__d0__n{n}__{fam}"
+                d = done.get(jid)
+                ph = done.get(f"{arm['name']}__s0__d0__n{n}__physics")
+                rows.append({"arm": arm["name"], "n": n, "family": fam, "seeds": len(arm["seeds"]), "probe_h": None if d is None else d["seconds"] / 3600,
+                             "start": None if d is None else d["start"], "phys_end": None if ph is None else ph["end"],
+                             "phys_h": None if ph is None else ph["seconds"] / 3600})
+    R = pd.DataFrame(rows)
+    ref = {r["family"]: r["probe_h"] for r in rows if r["arm"] == "arm2_cpu"}
+    overlap = (R["family"] != "physics") & R["phys_end"].notna() & (R["start"] < R["phys_end"])
+    floor = R["family"].map(ref).fillna(0) * R["arm"].str.contains("spc40").map({True: 4, False: 1})
+    R["lower_h"] = np.where(overlap, np.maximum(R["probe_h"] - R["phys_h"].fillna(0), floor), R["probe_h"])
+    for c, s in (("upper", "probe_h"), ("lower", "lower_h")):
+        R[f"{c}_rest_h"] = R[s] * (R["seeds"] - 1)
+    missing = [f"{r.arm}/{r.n}/{r.family}" for r in R[R["probe_h"].isna()].itertuples()]
+    A = R.groupby("arm", sort=False)[["probe_h", "lower_rest_h", "upper_rest_h"]].sum().round(1).reset_index()
+    tab = R[R["family"] == "tabpfn"][["lower_rest_h", "upper_rest_h"]].sum()
+    cap = q["families"]["tabpfn"].get("max_concurrent", workers)
+    tot = {c: float(R[f"{c}_rest_h"].sum()) for c in ("lower", "upper")}
+    wall = {c: max(tot[c] / workers, float(tab[f"{c}_rest_h"]) / cap) for c in tot}
+    md = lambda d: "\n".join(["| " + " | ".join(map(str, d.columns)) + " |", "|" + "---|" * d.shape[1]] + ["| " + " | ".join(map(str, r)) + " |" for r in d.itertuples(index=False)])  # noqa: E731
+    txt = ["# 05b Stage 2 runtime estimate from the probe (seed 0 of every arm)\n",
+           f"Probe jobs: {R['probe_h'].notna().sum()} of {len(R)} done ({R['probe_h'].sum():.1f} job-h); missing (not in the estimate): {', '.join(missing) or 'none'}.\n",
+           md(A.rename(columns={"probe_h": "probe job-h (seed 0)", "lower_rest_h": "remaining job-h, lower", "upper_rest_h": "remaining job-h, upper"})), "",
+           f"Remaining Stage 2 at {workers} workers (TabPFN at most {cap} at once): lower {tot['lower']:.0f} job-h -> {wall['lower']:.0f} h wall "
+           f"({wall['lower'] / 24:.1f} continuous days, {wall['lower'] / night_h:.1f} nights); upper {tot['upper']:.0f} job-h -> {wall['upper']:.0f} h wall "
+           f"({wall['upper'] / 24:.1f} continuous days, {wall['upper'] / night_h:.1f} nights).\n",
+           "Lower = feature evaluation and pilot paid once per (arm, design, seed) by the physics job; upper = probe times as measured "
+           "(some family jobs redid them). Contention as in the probe (6 workers).\n"]
+    (out / "stage2" / "runtime_estimate_stage2.md").write_text("\n".join(txt), encoding="utf-8")
+    print("\n".join(txt))
+    return R
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--probe05b", action="store_true", help="05b: estimate from the 05b probe (configs/iter05b_probe.yaml)")
+    ap.add_argument("--stage2", action="store_true", help="05b Stage 2: estimate from configs/iter05b_probe_stage2.yaml")
     a = ap.parse_args()
-    main05b(a.workers) if a.probe05b else main(a.workers)
+    main05b_stage2(a.workers) if a.stage2 else main05b(a.workers) if a.probe05b else main(a.workers)

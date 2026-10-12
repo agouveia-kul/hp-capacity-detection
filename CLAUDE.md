@@ -38,7 +38,17 @@ Paper B uses Paper A as its theoretical bound and baseline; it must not duplicat
 - 08–09 — change detection (RQ4), EoH multi-year panel;
 - 10+ — freeze and draft.
 
-**Current paper lead (03b; confirmed by Alex 2026-09-30, provisional until the 05b verdict):** identifiability-bounded learning. If 05b's verdict is D (data-limited), the lead is revisited. On B\*, no ML configuration beat the best physics row under the pre-registered criterion (§4).
+**Paper storyline (Alex, 2026-10-09; replaces the earlier "paper lead"):**
+1. the LV network and its DER are unobservable;
+2. physics-based estimation (Paper A) has limits;
+3. data-driven estimation (feature types × models) has other limits;
+4. a **hybrid, identifiability-guided estimator** is the methodological contribution;
+5. validation by transfer;
+6. use case: detecting a change in capacity.
+
+Target: capacity only.
+
+**05b framing of the data-driven part (decision 2026-10-12).** The ML gain replicates across years (Arm 6, all three carried families) but is conditional on the fillers' temperature response (Arm 7: frozen linear 0/10 and TabPFN 5/10 at ×0.5; only the CNN holds) and absent at CH sample size (Arm 5: no family and 0/60 configurations beat physics). This frames the data-driven section and motivates the hybrid estimator; the A12 lead options (ii) and (iii) are not adopted. 05b verdict: D (linear, CNN) + F; the S test is formally met for the raw-series family only and is not robust. The simulator is a no-go.
 
 ## 2. Environment
 
@@ -87,11 +97,11 @@ Protocol v1 is official: `configs/protocol_v1.yaml` (implemented in iteration 02
 
 | Pool | Role | HP households | Resolution | Non-HP load |
 |---|---|---|---|---|
-| **B\*** | headline, CH | 86 (≈ 62 train / 20 test per seed), cal2023 | 15-min | same-year Kaiser/HEAPO fill, plus each HP home's own non-HP load |
-| **GB-EoH** | second full-grid pool (from 05a) | non-hybrid homes with ≥ 90 % valid 30-min bins in a 12-month window (05a-ii R1/R2): main window Nov 2021 – Oct 2022, **384** homes (293 train / 92 test per seed, 275 / 81 used); **temporal replication** (another year, mostly the same homes: 272 of 319 shared) Oct 2022 – 28 Sep 2023, **319** homes | 30-min | flat-rate LCL households, analog-day matched (see `fill_analog.py`); one LCL household per dwelling, HP dwellings included |
+| **B\*** | CH: the small-n regime, with real co-located own load | 86 (≈ 62 train / 20 test per seed), cal2023 | 15-min | same-year Kaiser/HEAPO fill, plus each HP home's own non-HP load |
+| **GB-EoH** | GB: the large-n regime (full grid, from 05a) | non-hybrid homes with ≥ 90 % valid 30-min bins in a 12-month window (05a-ii R1/R2): main window Nov 2021 – Oct 2022, **384** homes (293 train / 92 test per seed, 274 / 81 used); **temporal replication** (another year, mostly the same homes: 272 of 319 shared) Oct 2022 – 28 Sep 2023, **319** homes | 30-min | flat-rate LCL households, analog-day matched (see `fill_analog.py`); one LCL household per dwelling, HP dwellings included |
 | **B** | sensitivity | 47, KLO only | 15-min | as B\* |
 
-Cross-pool comparisons use gaps to the best physics row, not absolute WAPE (label resolution differs).
+There is no single headline dataset (decision 2026-10-12): B\* and GB-EoH are reported side by side. Cross-pool comparisons use gaps to the best physics row, not absolute WAPE (label resolution differs).
 
 **Pre-registered comparison criterion (03a).** ML "beats physics" only if both hold, overall and per Paper A penetration bin:
 - the paired per-seed ΔWAPE against the best physics row is < 0 in ≥ 16 of 20 seeds (≥ 80 % of seed × draws for learning curves);
@@ -114,9 +124,10 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
   - Paper A's estimators:
     - `paperA_sh_mh`: s_h / m_h with the all-train pilot;
     - `paperA_corr`: the non-TCL-corrected version, with s₀ from the train fill;
-    - `paperA_cal`: bias-calibrated with the cross-fitted pilot.
+    - `paperA_cal`: bias-calibrated with the cross-fitted pilot;
+    - `paperA_corr_own` (05b, A7): label-free; the pilot scale m_h′ comes from the pilot homes' whole-house load minus n_pilot · s₀, so the HP homes' own non-HP response is folded into the scale. It needs whole-house meters on the pilot homes.
 - **Reference set for tables (from 03b).** These rows are always named in tables for continuity; they are **not a model filter**:
-  - physics: `slope_base`, `paperA_corr`, `paperA_cal` (+ `paperA_sh_mh` as Paper A's row);
+  - physics: `slope_base`, `paperA_corr`, `paperA_corr_own` (from 05b: the best physics row on B\*, 19.3 %), `paperA_cal` (+ `paperA_sh_mh` as Paper A's row);
   - ML: netfit + Lasso [size] direct, Lasso residual, XGBoost direct.
 - **Model families (from 05a/05b; all stay in the pipeline and in every arm):**
   - linear: Linear, Ridge, Lasso, ElasticNet, PLS;
@@ -229,3 +240,8 @@ Then stop and wait for review. Do not start the next iteration.
   - **LCL survey column shift.** The answer columns of `survey_answers.csv` are shifted by one against `survey_questions.csv`. Iteration 04's "0 portable heaters" filter (answer column Q304) selected 0 TVs. **Paper A's `_lcl_base` (`hp-sensitivity-paper`, `scripts/outputs.py`) applies the shift to Q248 but not to Q304, so its clean / heater-rich LCL splits carry the same bug**; it is being checked separately in the Paper A repo and was not changed here.
   - **D4 (05a-ii Task A), flag "filler-variability-limited".** A single winter's filler slope is intrinsically unstable (real 2012/13 → 2013/14 change 52–78 %), of the same size as the D4 rebuild error: classified intrinsic filler variability, and the mapping is accepted. The capacity-equivalent error that this natural year-to-year variability of real non-HP households' temperature response puts on any estimator exceeds 5 % of `HP_Peak` for p ≤ 0.5 (`d4_diagnostics.md`): those penetrations (Paper A bins ≤ 15, 15–35, 35–65 %) are marked **filler-variability-limited** in every GB-EoH table. It is a floor for any estimator, not a defect of the pool. 05b includes the filler-uncertainty arm (fillers' temperature response ×0.5, ×1.5).
   - **EoH meter dropout.** Home EOH0836 has a silent electricity meter (≈ 0 kW while delivering 8–10 kW of heat) for Feb – Apr 2023; it caused the jump in zero-run bins in 2022/23 and is not eligible in the Oct 2022 window. EOH2291 (15 % silent) is excluded from the main window by the `silent_elec_max` rule.
+- **Found in 05b:**
+  - **CNN retraining instability.** The raw-series CNN retrained with the same spec, hyperparameters and epoch count gives a different model on another device or thread count. CPU against GPU over 20 seeds: per-seed ΔWAPE std 3.2 pp, median +0.3 pp, seeds 8 and 9 collapse (+8.7 and +10.8 pp, 27 % WAPE). Seed 0 on the same CPU: −0.89 pp with 14 threads, −0.55 pp with 4. On a fixed device and thread count it is deterministic. Stage 1's CNN rows are GPU-trained; Stage 2's CNN deltas are paired with the CPU reference arm `arm2_cpu`. Read CNN differences of about 1 pp with this noise in mind (the S test).
+  - **Oracle O2 is an identity.** m_h(true) is fitted on the same HP aggregate whose slope it divides, so `oracle_O2` returns the label. The error decomposition has two informative terms, fill contamination and scale dispersion; "fit noise" is not reported as a component (decision 2026-10-12).
+  - **Queue lessons.** Keep workers × threads ≤ the physical cores: 6 workers × 4 threads on 20 cores, at below-normal priority, ran jobs 1.5–13 × slower than the one-seed probe (Stage 2 took 71 h against an estimate of 23–35 h). The queue has no per-job timeout yet: a CNN job can spin for hours (13.1 h in Stage 2; 4.2 h in the probe against 471 s alone). A seed's family jobs that start before its physics job has filled the caches redo the feature evaluation and the pilot.
+  - **Used HP households.** GB-EoH main 274 train / 81 test, replication 226 / 61, B\* 62 / 20. Stage 1's REVIEW wrote 292 / 81 (292 is the train split, not the households inside substations).

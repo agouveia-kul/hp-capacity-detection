@@ -1,0 +1,4 @@
+family,Arm 2 (20 seeds),Arm 6 (10 seeds),(a),(b) all x0.5 / x1.5,(b) pbin<=15 † x0.5 / x1.5,(b) pbin15-35 † x0.5 / x1.5,(b) pbin35-65 † x0.5 / x1.5,(b) pbin>65 x0.5 / x1.5,(b) overall,(b) every bin > 15 %,outcome
+linear,"20/20, -5.82 pp","9/10, -3.83 pp",True,0/10 / 10/10,4/10 / 9/10,0/10 / 7/10,1/10 / 6/10,3/10 / 4/10,False,False,other combination: Alex decides
+neural,"20/20, -9.80 pp","10/10, -8.38 pp",True,5/10 / 10/10,9/10 / 10/10,0/10 / 2/10,7/10 / 7/10,9/10 / 10/10,False,False,other combination: Alex decides
+rawseries,"20/20, -9.11 pp","10/10, -7.30 pp",True,10/10 / 10/10,9/10 / 10/10,8/10 / 7/10,8/10 / 9/10,8/10 / 9/10,True,False,"lead: physics-bounded below n*, ML ahead beyond"

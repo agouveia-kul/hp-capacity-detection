@@ -1,0 +1,9 @@
+# 05b Arm 4 (oracles, stage 2), GB-EoH part: main window, seeds 0-19, n = all, the Arm 2 grid. The physics job adds the oracle rows
+# (oracle.py: O1 = s_h(HP aggregate) / m_h(pilot), O2 = s_h(HP aggregate) / m_h(true), dispersion floor), diagnostics only. ML on O1:
+# queue arm with `pool.oracle=O1` (the HP aggregate replaces the net load), carried families with each seed's frozen Arm 2 spec as is
+# (DECISIONS.md 2026-10-07; for size_peak specs the anchor is then the HP aggregate's coincident peak). The B* part (physics only,
+# O1a / O1b) runs on configs/iter05b_arm5.yaml. Run through the queue only (configs/iter05b_stage2.yaml).
+base: configs/iter05b_arm2.yaml
+exp_id: iter05b_arm4
+out_dir: results/iter05b_data_limit/stage2/arm4
+oracle_rows: true

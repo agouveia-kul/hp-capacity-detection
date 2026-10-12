@@ -75,10 +75,16 @@ def apply_response_scale(pool, cfg):
     return pool
 
 
-def _scaled_lcl(S, T_days, factor, cfg):
+def _rscale_files(cfg, factor):
+    """Cache files (.npy, _info.json) of the LCL fillers scaled by `factor`. Not `with_suffix`: it read the ".5" of "rscale0.5" as a
+    suffix, so x0.5 and x0 shared "rscale0.npy" (x1.5 and x1 "rscale1.npy"); fixed in 05b Stage 2 before any Stage 2 run."""
     fc = cfg["pool"]["fill"]
     base = ROOT / cfg["cache_dir"] / "pools" / f"lcl_std_{fc['lcl_window'][0].replace('-', '')}_{fc['lcl_window'][1].replace('-', '')}_{fc.get('temp_source', 'heathrow')}_rscale{factor:g}"
-    f_npy, f_info = base.with_suffix(".npy"), base.with_name(base.name + "_info.json")
+    return base.with_name(base.name + ".npy"), base.with_name(base.name + "_info.json")
+
+
+def _scaled_lcl(S, T_days, factor, cfg):
+    f_npy, f_info = _rscale_files(cfg, factor)
     if not f_npy.exists():
         out, failed = np.empty(S.shape, np.float32), 0
         for j in range(S.shape[0]):

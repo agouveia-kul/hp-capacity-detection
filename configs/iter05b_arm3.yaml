@@ -1,0 +1,8 @@
+# 05b Arm 3 (households vs substations, stage 2): GB-EoH main window, seeds 0-9 x 1 draw, n in {62, all} x substations_per_cell_train
+# in {10, 40} (A4), the Arm 2 grid. Every job is a learning-curve design (learning_curve.py; test substations fixed, train substations
+# and inner folds rebuilt), rows in metrics_lc.csv with spc_train. Carried families with each seed's frozen Arm 2 spec (A10; tuned at
+# n = all with 10 substations per cell, which slightly favours that design) + physics. The S test is pre-registered (brief).
+base: configs/iter05b_arm2.yaml
+exp_id: iter05b_arm3
+out_dir: results/iter05b_data_limit/stage2/arm3
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}

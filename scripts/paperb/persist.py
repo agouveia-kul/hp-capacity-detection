@@ -6,6 +6,7 @@ estimator), `X_test.parquet` (the seed's test design, index = sub_id; `p_hat` / 
 versions, device, SHA-256 of model.joblib). Two models are not pickled whole: the CNN (its network class is local to
 `RawSeriesCNN._net`) stores its state_dict in `cnn_state.pt` and is rebuilt on load; TabPFN (in-context learning) stores its train
 context `train_context.parquet` (X, y) plus the checkpoint name and SHA-256, and is refit from that context on load (seeded).
+Stage 2 (Arm 7): `frozen_predict` applies a saved model unchanged to the same test substations built from scaled fillers.
 """
 import hashlib
 import json
@@ -82,8 +83,8 @@ def save_model(root, seed, spec, f, sub_ids, pred_te, device):
     return d
 
 
-def load_predict(d, device=None):
-    """Reload the model in `d` and predict its saved test design -> Series of predictions (kW) indexed by sub_id."""
+def load_model(d, device=None):
+    """Reload the model in `d` -> (model, manifest)."""
     d = Path(d)
     man = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
     if _sha(d / "model.joblib") != man["model_sha256"]:
@@ -103,10 +104,30 @@ def load_predict(d, device=None):
         SETTINGS["device"] = device or man["device"]
         C = pd.read_parquet(d / "train_context.parquet")
         m.fit(C.drop(columns="__y"), C["__y"].to_numpy())
-    X = pd.read_parquet(d / "X_test.parquet")
+    return m, man
+
+
+def load_predict(d, device=None):
+    """Reload the model in `d` and predict its saved test design -> Series of predictions (kW) indexed by sub_id."""
+    m, man = load_model(d, device)
+    X = pd.read_parquet(Path(d) / "X_test.parquet")
     if man["residual"]:
         p, valid = X.pop("__p_hat").to_numpy(float), X.pop("__valid").to_numpy(bool)
         pred = compose(p, m.predict(X), valid)
     else:
         pred = m.predict(X)
     return pd.Series(np.asarray(pred, float), index=X.index, name="pred")
+
+
+def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None):
+    """05b Arm 7 frozen-model row: the seed's saved Stage 1 model of `spec` (trained at x1.0), unchanged, applied to another
+    version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model)."""
+    d = model_dir(root, seed, spec)
+    m, man = load_model(d, device)
+    if man["spec"] != "|".join(spec):
+        raise ValueError(f"{d}: saved model is {man['spec']}, not {'|'.join(spec)}")
+    saved = pd.read_parquet(d / "X_test.parquet", columns=[]).index.astype(str)
+    if not saved.equals(pd.Index(X_te.index).astype(str)):
+        raise ValueError(f"{d}: test substations differ from the saved model's test design")
+    pred = m.predict(X_te[man["feature_columns"]])
+    return compose(p_valid[0], pred, p_valid[1]) if man["residual"] else np.asarray(pred, float)

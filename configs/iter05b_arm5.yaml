@@ -1,0 +1,23 @@
+# 05b Arm 5 (B* under v1.1, stage 2): B* (86 HP households, 15 min), seeds 0-19, protocol v1.1 grid (p = 0.8 added). The Arm 2
+# candidate grid (anchors {size, size_peak} x feature sets {netfit, both} x {direct-log, residual}; CNN on `raw`), all physics rows
+# incl. paperA_corr_own (A7). Carried families with per-arm tuning (A10): linear, neural = FFNN (full budget: 50 evals, patience 20)
+# and TabPFN, raw-series CNN (30 evals). Also the base of Arm 4's B* part (physics only: oracle rows, O1a = fillers' response removed,
+# O1b = the HP homes' own non-HP response removed). Run through the queue only (configs/iter05b_stage2.yaml).
+base: configs/pool_bstar.yaml
+exp_id: iter05b_arm5
+out_dir: results/iter05b_data_limit/stage2/arm5
+pred_figures: false
+split: {seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}
+targets: [HP_Peak]
+anchors: [size, size_peak]
+feature_sets: [netfit, both, raw]
+model_feature_sets: {CNN: [raw]}
+modes: [direct, residual]
+target_transforms: [log]
+models: []
+residual_models: []
+ffnn: {enabled: true, patience: 20}
+cv: {hyperopt: {max_evals_by_model: {CNN: 30}}}
+physics_baselines: [slope_only, slope_base, calibrated_delta, hdh]
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own]}
+anchor_only_baselines: {models: [Linear, XGBoost], features: [[size], [peak], [size, peak]]}

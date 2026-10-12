@@ -1,0 +1,54 @@
+# 05b Stage 2 timing probe (HANDOVER_stage2 step 3): seed 0 of every Stage 2 arm at full size (arm2_cpu seed 0 = the jobs of tests/test_05b.py::test_stage2_frozen_job_reproduces_stage1_on_arm2_data), run before Stage 2 is scheduled. Same
+# exp_id, out_dir, families, arm names and arm configs as configs/iter05b_stage2.yaml, so the job ids are identical and Stage 2 skips
+# these jobs when it is launched: the probe is part of Stage 2, not extra work (as configs/iter05b_probe.yaml for Stage 1).
+# Then: job hours from the .done markers (scripts/paperb/wall_times.py, *.timing.parquet) x seeds per arm -> Stage 2 estimate.
+exp_id: iter05b_stage2
+out_dir: results/iter05b_data_limit/stage2
+workers: 6
+frozen:
+  models_csv: results/iter05b_data_limit/stage1/refit/carry_forward_models.csv
+  models_dir: results/iter05b_data_limit/stage1/models
+families:
+  physics: {}
+  linear:
+    models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+    residual_models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+  tabpfn:
+    models:
+    - TabPFN
+    residual_models:
+    - TabPFN
+    max_concurrent: 3
+  rawseries:
+    models:
+    - CNN
+    residual_models:
+    - CNN
+  neural:
+    models:
+    - FFNN
+    residual_models:
+    - FFNN
+arms:
+  - {name: arm2_cpu, config: configs/iter05b_arm2.yaml, seeds: [0], frozen: true, families: [linear, tabpfn, rawseries]}
+  - {name: arm7_x05, config: configs/iter05b_arm7.yaml, seeds: [0], frozen: true, frozen_model: true, families: [physics, linear, tabpfn, rawseries], set: ['pool.response_scale={fill: 0.5}']}
+  - {name: arm7_x15, config: configs/iter05b_arm7.yaml, seeds: [0], frozen: true, frozen_model: true, families: [physics, linear, tabpfn, rawseries], set: ['pool.response_scale={fill: 1.5}']}
+  - {name: arm4, config: configs/iter05b_arm4.yaml, seeds: [0], families: [physics]}
+  - {name: arm4_o1, config: configs/iter05b_arm4.yaml, seeds: [0], frozen: true, families: [linear, tabpfn, rawseries], set: [pool.oracle=O1]}
+  - {name: arm4_bstar, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics], set: [exp_id=iter05b_arm4_bstar, oracle_rows=true]}
+  - {name: arm4_bstar_o1a, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics], set: [exp_id=iter05b_arm4_bstar_o1a, 'pool.response_scale={fill: 0}']}
+  - {name: arm4_bstar_o1b, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics], set: [exp_id=iter05b_arm4_bstar_o1b, 'pool.response_scale={own: 0}']}
+  - {name: arm3_spc10, config: configs/iter05b_arm3.yaml, seeds: [0], n: [62, all], draws: [0], spc_train: 10, frozen: true, families: [physics, linear, tabpfn, rawseries]}
+  - {name: arm3_spc40, config: configs/iter05b_arm3.yaml, seeds: [0], n: [62, all], draws: [0], spc_train: 40, frozen: true, families: [physics, linear, tabpfn, rawseries]}
+  - {name: arm5, config: configs/iter05b_arm5.yaml, seeds: [0], families: [physics, linear, neural, tabpfn, rawseries]}
+  - {name: arm6, config: configs/iter05b_arm6.yaml, seeds: [0], frozen: true, families: [physics, linear, tabpfn, rawseries]}

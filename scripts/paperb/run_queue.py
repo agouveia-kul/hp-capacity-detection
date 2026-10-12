@@ -27,6 +27,10 @@ records the host that ran the job.
 moves its CNN / TabPFN to the GPU, and each .done marker records the device. If a worker dies (e.g. out of memory), the jobs
 running at that moment are marked failed with that reason, a new worker pool is started and the queue goes on
 (`--retry-failed` reruns them later).
+05b Stage 2 (A10): an arm with `frozen: true` refits, in each family job, the seed's frozen Arm 2 winner of that family (the carried
+models in the queue's `frozen.models_csv`; no hyperopt); `frozen_model: true` also scores the saved Stage 1 model unchanged
+(`<model>@frozen`, from `frozen.models_dir`); `spc_train: k` makes every job of the arm a learning-curve design with k train
+substations per cell (n = all included), scored into metrics_lc.csv.
 """
 import os
 import platform
@@ -76,18 +80,38 @@ def jobs(q):
     return out
 
 
+def frozen_specs(q, job):
+    """05b A10 Stage 2: spec -> {params, best_iter} of the job's seed and queue family from the carry-forward table (carried models
+    only, i.e. reload check passed). Raises if there is none: the job is then listed as failed, never run without its model."""
+    P = pd.read_csv(ROOT / q["frozen"]["models_csv"])
+    P = P[(P["split_seed"] == int(job["seed"])) & (P["queue_family"] == job["family"]) & (P["carried_model"] == True)]  # noqa: E712
+    if P.empty:
+        raise ValueError(f"{job['id']}: no carried frozen model for seed {job['seed']}, queue family {job['family']}")
+    return {r["spec"]: {"params": json.loads(r["params"]), "best_iter": None if pd.isna(r["best_iter"]) else int(r["best_iter"])}
+            for r in P.to_dict("records")}
+
+
 def job_config(q, arm, job, threads):
-    """Arm config restricted to the job's family (and n, draw)."""
+    """Arm config restricted to the job's family (and n, draw). 05b Stage 2: an arm with `frozen: true` refits each seed's frozen
+    Arm 2 winner of the family (cfg.refit.fixed, no hyperopt); `frozen_model: true` also scores the saved Stage 1 model (Arm 7);
+    `spc_train: k` runs every job as a learning-curve design (n = all included) with k train substations per cell (Arm 3)."""
     fam = q["families"][job["family"]]
     over = ML_OFF if job["family"] == "physics" else [
         f"models={fam.get('models', [])}", f"residual_models={fam.get('residual_models', [])}", "physics_baselines=[]",
         "anchor_only_baselines.models=[]", "paperA.estimators=[]"]
     cfg = set_dotted(load_config(arm["config"]), over + list(fam.get("set", [])) + list(arm.get("set", [])))
-    if job["n"] != "all":                                             # 05b: one learning-curve design, test substations shared with n = all
-        cfg.update(lc_only=True, learning_curve={"n": [int(job["n"])], "draws": int(job["draw"]) + 1, "draw_ids": [int(job["draw"])],
-                                                 "specs": "all", "feature_sets": cfg.get("feature_sets", ["whdd"])})
+    keep = set(fam.get("models", [])) | set(fam.get("residual_models", []))
+    fixed = frozen_specs(q, job) if arm.get("frozen") and job["family"] != "physics" else None
+    if fixed:
+        cfg["refit"] = {"fixed": fixed, **({"frozen_dir": str(ROOT / q["frozen"]["models_dir"])} if arm.get("frozen_model") else {})}
+        keep |= {f"{m}@frozen" for m in keep} if arm.get("frozen_model") else set()
+    if job["n"] != "all" or arm.get("spc_train"):                     # 05b: one learning-curve design, test substations shared with n = all
+        cfg.update(lc_only=True, learning_curve={"n": [job["n"] if job["n"] == "all" else int(job["n"])], "draws": int(job["draw"]) + 1,
+                                                 "draw_ids": [int(job["draw"])], "specs": list(fixed) if fixed else "all",
+                                                 "feature_sets": cfg.get("feature_sets", ["whdd"]),
+                                                 **({"substations_per_cell_train": [int(arm["spc_train"])]} if arm.get("spc_train") else {})})
     cfg.setdefault("parallel", {})["threads"] = threads
-    return cfg, set(fam.get("models", [])) | set(fam.get("residual_models", []))
+    return cfg, keep
 
 
 def keep_family(frames, family, fam_models, ml_models):

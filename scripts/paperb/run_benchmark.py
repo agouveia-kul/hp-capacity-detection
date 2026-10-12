@@ -73,6 +73,7 @@ NA = "-"
 PBINS = [("pbin<=15", 0.0, 0.15), ("pbin15-35", 0.15, 0.35), ("pbin35-65", 0.35, 0.65), ("pbin>65", 0.65, np.inf)]   # Paper A (actual p)
 CAL = {"paperA_cal": "paperA_sh_mh", "paperA_corr_cal": "paperA_corr"}     # calibrated estimator -> its base estimator
 OWN_STREAM = 6                                                     # 05b: fillers assigned to the GB-EoH whole-house pilot homes
+FROZEN = "@frozen"                                                 # 05b Arm 7: method suffix of the frozen-model row (cfg.refit.frozen_dir)
 
 
 def write_atomic(f, text):
@@ -119,7 +120,7 @@ def cached_eval(pool, members, cfg, seed, log):
     f_tab, f_x = d / f"{pool.name}_s{seed}_{key}_tab.parquet", d / f"{pool.name}_s{seed}_{key}_X.parquet"
     if f_tab.exists() and f_x.exists():
         log(f"features from cache {f_tab.name}")
-        return pd.read_parquet(f_tab), pd.read_parquet(f_x), 0.0
+        return read_retry(pd.read_parquet, f_tab), read_retry(pd.read_parquet, f_x), 0.0
     t0 = time.time()
     tab, X = evaluate_members(pool, members, cfg)
     dt = time.time() - t0
@@ -134,7 +135,18 @@ def cached_eval(pool, members, cfg, seed, log):
                 raise
             os.remove(tmp)
     log(f"evaluated {len(tab)} substations in {dt:.1f}s ({dt / len(tab):.3f} s each)")
-    return pd.read_parquet(f_tab), X, dt
+    return read_retry(pd.read_parquet, f_tab), X, dt
+
+
+def read_retry(read, f, tries=10):
+    """read(f) of a cache file another queue job may be replacing right now (Windows: PermissionError while os.replace runs)."""
+    for k in range(tries):
+        try:
+            return read(f)
+        except PermissionError:
+            if k == tries - 1:
+                raise
+            time.sleep(1 + k)
 
 
 def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
@@ -210,6 +222,11 @@ def predictions(cfg, tab, F, y, seed, timing, log, pa=None, spec_list=None):
                 extra[spec] = {"n_invalid": int((~valid[te]).sum()), **c}
                 if spec in fitted:
                     fitted[spec].update(p_te=np.asarray(p, float)[te], valid_te=np.asarray(valid, bool)[te])
+            if refit.get("frozen_dir") and "|".join(spec) in refit.get("fixed", {}):      # 05b Arm 7: the saved x1.0 model, unchanged
+                from paperb.persist import frozen_predict
+                pv = None if mode == "direct" else (np.asarray(p, float)[te], np.asarray(valid, bool)[te])
+                out[(f"{method}{FROZEN}", *spec[1:])] = frozen_predict(refit["frozen_dir"], seed, spec, X[te], pv, cfg.get("device", "cpu"))
+                log(f"  {y.name} {'/'.join(spec)}: frozen Stage 1 model from {refit['frozen_dir']} applied to the test substations")
     if refit.get("dir"):                                                # 05b A10: persist each refit model with its test design
         from paperb.persist import save_model
         for spec, f in fitted.items():
@@ -301,7 +318,7 @@ def run_seed(cfg, seed):
                                      sort_keys=True, default=str).encode()).hexdigest()[:12]
         f = Path(cfg.get("pilot_cache_dir") or ROOT / cfg["cache_dir"] / "pilots") / f"{pool.name}_s{seed}_{key}.json"
         if cfg.get("pilot_cache", True) and f.exists():
-            c = json.loads(f.read_text())
+            c = json.loads(read_retry(Path.read_text, f))
         else:
             c = pilot_numbers(t, train_hp, caps, mem, fold_of, tag)
             if cfg.get("pilot_cache", True):
