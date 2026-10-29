@@ -10,7 +10,7 @@
 #   r_rep  robustness (ii): the a_gb rung winners refit on the temporal replication year (frozen spec and hyperparameters).
 # Families: the carried ones (A10). TabPFN and the CNN are split by mode, so that a job holds one rung group (direct = L1 + L2,
 # residual = L3, l4a + l4b = L4): shorter jobs, and a rung group can be scheduled on its own (--families). The three TabPFN
-# families share one cap of 3 running jobs (about 1 GB of weights per process). Every job on machine A's CPU (A11).
+# families share one cap of 2 running jobs (an A-GB TabPFN job holds 4-6 GB; 3 at once made the machine page, decision 2026-10-29). Every job on machine A's CPU (A11).
 # threads: 6 workers x 3 threads = 18 of 20 physical cores (05b lesson: workers x threads within the physical cores; the queue
 # refuses more). timeout_s per family (B2): 3 x the longest probe job of the family (seed 0, 2026-10-12); a timed-out job is
 # failed with reason `timeout` and rerun by --retry-failed.
@@ -29,9 +29,9 @@ fixed_params: {csv: results/iter05b_data_limit/stage1/refit/carry_forward_models
 families:
   physics: {timeout_s: 1758}
   linear: {models: [Linear, Ridge, Lasso, ElasticNet, PLS], residual_models: [Linear, Ridge, Lasso, ElasticNet, PLS], timeout_s: 13968}
-  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 3, timeout_s: 32961}
-  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 3, timeout_s: 19455}
-  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 3, timeout_s: 36666}
+  tabpfn_d: {models: [TabPFN], set: ["modes=[direct]"], group: tabpfn, max_concurrent: 2, timeout_s: 32961}
+  tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 2, timeout_s: 19455}
+  tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 2, timeout_s: 36666}
   cnn_d: {models: [CNN], set: ["modes=[direct]"], timeout_s: 27399}
   cnn_r: {residual_models: [CNN], set: ["modes=[residual]"], timeout_s: 13524}
   cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"], timeout_s: 26343}
