@@ -654,3 +654,20 @@ def test_report_winner_is_chosen_by_inner_cv_never_by_test(tmp_path):
                       for fs, test, inner in (("netfit", 10.0, 30.0), ("both", 50.0, 20.0)) for k, v in (("wape", test), ("wape_inner", inner))])
     w = RP.winners(RP.wide(M, ["split_seed"]), ["split_seed"])
     assert len(w) == 1 and w["feature_set"].iloc[0] == "both" and w["all"].iloc[0] == 50.0 and w["rung"].iloc[0] == "L2"
+
+
+def test_l4b_crossfit_survives_a_design_with_inner_rows_in_one_fold_only():
+    """2026-11-02: two n = 32 learning-curve designs had labelled inner substations in one fold only; crossfit_m raised."""
+    tab, C = scale_pool(noise=0.01)
+    inn = (tab["split"] == "inner").to_numpy()
+    tab.loc[inn & (tab["fold"] != 2).to_numpy(), "split"] = "dropped"           # inner rows left in fold 2 only
+    keep = tab["split"] != "dropped"
+    tab, C = tab[keep], C[keep]
+    m_cf, full, info = SM.crossfit_m(C, tab["m"].to_numpy(), tab, tab[["hp_members"]])
+    inn = (tab["split"] == "inner").to_numpy()
+    assert info["n_cf_fallback"] == inn.sum() and np.isnan(info["l4b_cv_mse"]) and info["l4b_alpha"] == max(SM.ALPHAS)
+    np.testing.assert_allclose(m_cf[inn], full.m_hat(C[inn]))                       # those rows get the all-train g
+    assert np.isfinite(m_cf).all()
+    tab2, C2 = scale_pool(noise=0.01)                                               # a normal design: unchanged behaviour
+    _, _, info2 = SM.crossfit_m(C2, tab2["m"].to_numpy(), tab2, tab2[["hp_members"]])
+    assert info2["n_cf_fallback"] == 0 and np.isfinite(info2["l4b_cv_mse"])

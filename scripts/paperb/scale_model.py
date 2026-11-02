@@ -18,7 +18,9 @@ from the cross-fitted pilot (`physics.crossfit_pilot_m`: inner row of fold k = p
 its own HP members). l4b: inner row of fold k = g fitted on the inner rows of the other folds; train row = g fitted on the
 train rows that share no HP household with it (other stations, and disjoint substations of its own station; with fewer than
 MIN_ROWS such rows the all-train g is used and the row is counted in `n_cf_fallback`). Test rows: the full pilot / the g of all
-train rows.
+train rows. An inner fold whose other folds hold no labelled inner row (small learning-curve designs; fixed 2026-11-02 after two
+n = 32 designs failed) also gets the all-train g, counted in `n_cf_fallback`; alpha is chosen on the folds that can be scored, and
+is the largest of ALPHAS when none can (l4b_cv_mse NaN).
 The own-load term of `paperA_corr_own` (m_h' instead of m_h) is a constant factor on m_hat_h, which the residual's intercept
 absorbs; it is not a separate L4 component (`paperA_corr_own` stays an L0 row).
 """
@@ -94,13 +96,22 @@ def crossfit_m(C, m, tab, members, alphas=ALPHAS, min_rows=MIN_ROWS):
     def oof(a):
         out = np.full(len(tab), np.nan)
         for k in np.unique(fold[inn]):
-            out[inn & (fold == k)] = fit(a, inn & (fold != k) & lab).m_hat(C[inn & (fold == k)])
+            rows = inn & (fold != k) & lab
+            if rows.any():                                             # else: no other fold has a labelled inner row (small n)
+                out[inn & (fold == k)] = fit(a, rows).m_hat(C[inn & (fold == k)])
         return out
 
-    cv = {a: float(np.mean((np.log(oof(a)[inn & lab]) - np.log(m[inn & lab])) ** 2)) for a in alphas}
-    alpha = min(cv, key=cv.get)
+    def cv_mse(a):
+        o, y = oof(a)[inn & lab], m[inn & lab]
+        ok = np.isfinite(o)
+        return float(np.mean((np.log(o[ok]) - np.log(y[ok])) ** 2)) if ok.any() else np.nan
+
+    cv = {a: cv_mse(a) for a in alphas}
+    alpha = min((a for a in alphas if np.isfinite(cv[a])), key=cv.get, default=max(alphas))   # no scorable fold: the strongest shrinkage
     full = fit(alpha, tr & lab)
-    out, n_fb = np.where(inn, oof(alpha), full.m_hat(C)), 0
+    o = oof(alpha)
+    n_fb = int((inn & ~np.isfinite(o)).sum())                          # inner rows without a cross-fitted m_hat: the all-train g
+    out = np.where(inn & np.isfinite(o), o, full.m_hat(C))
     hp = members.loc[tab.index, "hp_members"]
     for st in pd.unique(tab.loc[tr, "station"]):                       # HP members come from one station: other stations never overlap
         own = np.flatnonzero(tr & (tab["station"] == st).to_numpy())
