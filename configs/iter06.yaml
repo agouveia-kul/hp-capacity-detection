@@ -15,6 +15,7 @@
 # refuses more). timeout_s per family (B2): 3 x the longest probe job of the family (seed 0, 2026-10-12); a timed-out job is
 # failed with reason `timeout` and rerun by --retry-failed. CNN limits raised on 2026-11-06 for the last 5 A-GB CNN reruns (30 h
 # direct and L4, 12 h residual; DECISIONS.md): seeds 2 and 9 train near the 200-epoch maximum and need about 8-22 h, seed 0 about 2 h.
+# Residual raised to 24 h on 2026-11-09 for the one rerun left, a_gb seed 9 residual (timed out at 12 h; DECISIONS.md).
 # fixed_params (CNN on the GB arms a_gb and s_gb; a deviation from per-configuration tuning, see runtime_estimate.md): the CNN's
 # hyperparameters are those of the seed's 05b Arm 2 CNN winner (A10 carry-forward table) for every ladder configuration; one
 # inner-CV pass per configuration gives its inner-CV WAPE (the rung's choice), the epoch count and the out-of-fold predictions.
@@ -34,7 +35,7 @@ families:
   tabpfn_r: {residual_models: [TabPFN], set: ["modes=[residual]"], group: tabpfn, max_concurrent: 2, timeout_s: 19455}
   tabpfn_h: {residual_models: [TabPFN], set: ["modes=[l4a, l4b]"], group: tabpfn, max_concurrent: 2, timeout_s: 36666}
   cnn_d: {models: [CNN], set: ["modes=[direct]"], timeout_s: 108000}
-  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"], timeout_s: 43200}
+  cnn_r: {residual_models: [CNN], set: ["modes=[residual]"], timeout_s: 86400}
   cnn_h: {residual_models: [CNN], set: ["modes=[l4a, l4b]"], timeout_s: 108000}
 arms:
   - {name: a_gb, config: configs/iter06_a_gb.yaml, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
