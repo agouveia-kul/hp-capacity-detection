@@ -1,0 +1,172 @@
+reading,family,step,n,n_neg,median,verdict
+A-GB all,linear,L2 vs L1,10.0,9.0,-2.4412484522256452,better
+A-GB all,linear,L3 vs L2,10.0,8.0,-3.3804022474427047,better
+A-GB all,linear,L4 vs L3,10.0,0.0,8.168493471741499,worse
+A-GB all,tabpfn,L2 vs L1,10.0,10.0,-1.6842944155411175,better
+A-GB all,tabpfn,L3 vs L2,10.0,1.0,0.6121719389986682,no difference
+A-GB all,tabpfn,L4 vs L3,10.0,0.0,1.9728822165650133,worse
+A-GB all,cnn,L2 vs L1,10.0,6.0,-0.4726781632949537,no difference
+A-GB all,cnn,L3 vs L2,10.0,4.0,0.6277846416299484,no difference
+A-GB all,cnn,L4 vs L3,10.0,0.0,4.3248238651874065,worse
+A-GB pbin<=15,linear,L2 vs L1,10.0,8.0,-1.7734685203240819,better
+A-GB pbin<=15,linear,L3 vs L2,10.0,8.0,-1.9560138698407403,better
+A-GB pbin<=15,linear,L4 vs L3,10.0,0.0,19.019564304056864,worse
+A-GB pbin<=15,tabpfn,L2 vs L1,10.0,10.0,-2.102726898920018,better
+A-GB pbin<=15,tabpfn,L3 vs L2,10.0,1.0,0.9093765316310947,no difference
+A-GB pbin<=15,tabpfn,L4 vs L3,10.0,0.0,7.073011655955124,worse
+A-GB pbin<=15,cnn,L2 vs L1,10.0,9.0,-0.9991358758632387,no difference
+A-GB pbin<=15,cnn,L3 vs L2,10.0,4.0,0.6042866715549131,no difference
+A-GB pbin<=15,cnn,L4 vs L3,10.0,0.0,9.933518815162577,worse
+A-GB pbin15-35,linear,L2 vs L1,10.0,8.0,-1.7275560746904652,better
+A-GB pbin15-35,linear,L3 vs L2,10.0,10.0,-4.457012912017207,better
+A-GB pbin15-35,linear,L4 vs L3,10.0,6.0,-0.61924125553141,no difference
+A-GB pbin15-35,tabpfn,L2 vs L1,10.0,8.0,-2.234389086535173,better
+A-GB pbin15-35,tabpfn,L3 vs L2,10.0,2.0,0.4835797468971421,no difference
+A-GB pbin15-35,tabpfn,L4 vs L3,10.0,6.0,-0.10285652170750126,no difference
+A-GB pbin15-35,cnn,L2 vs L1,10.0,4.0,0.2534766015753833,no difference
+A-GB pbin15-35,cnn,L3 vs L2,10.0,5.0,0.020332963956717798,no difference
+A-GB pbin15-35,cnn,L4 vs L3,10.0,1.0,2.766423550981238,worse
+A-GB pbin35-65,linear,L2 vs L1,10.0,7.0,-2.431569124062765,no difference
+A-GB pbin35-65,linear,L3 vs L2,10.0,9.0,-5.600110152861791,better
+A-GB pbin35-65,linear,L4 vs L3,10.0,3.0,3.468313015861103,no difference
+A-GB pbin35-65,tabpfn,L2 vs L1,10.0,8.0,-1.226812163292518,better
+A-GB pbin35-65,tabpfn,L3 vs L2,10.0,3.0,0.8142425219287839,no difference
+A-GB pbin35-65,tabpfn,L4 vs L3,10.0,5.0,-0.0033041237186521855,no difference
+A-GB pbin35-65,cnn,L2 vs L1,10.0,7.0,-0.8872969207786543,no difference
+A-GB pbin35-65,cnn,L3 vs L2,10.0,3.0,0.8595676817489561,no difference
+A-GB pbin35-65,cnn,L4 vs L3,10.0,5.0,-0.16076595885326128,no difference
+A-GB pbin>65,linear,L2 vs L1,10.0,9.0,-3.8568927766078493,better
+A-GB pbin>65,linear,L3 vs L2,10.0,8.0,-3.458459956484342,better
+A-GB pbin>65,linear,L4 vs L3,10.0,2.0,5.624341361698584,worse
+A-GB pbin>65,tabpfn,L2 vs L1,10.0,8.0,-1.2766841195239453,better
+A-GB pbin>65,tabpfn,L3 vs L2,10.0,2.0,0.5112989400211116,no difference
+A-GB pbin>65,tabpfn,L4 vs L3,10.0,5.0,-0.04642075699220616,no difference
+A-GB pbin>65,cnn,L2 vs L1,10.0,6.0,-0.8602782763882049,no difference
+A-GB pbin>65,cnn,L3 vs L2,10.0,3.0,1.2225701965502598,no difference
+A-GB pbin>65,cnn,L4 vs L3,10.0,5.0,-0.6827270958100442,no difference
+A-CH all,linear,L2 vs L1,10.0,5.0,-0.510602670135011,no difference
+A-CH all,linear,L3 vs L2,10.0,10.0,-7.678751997048454,better
+A-CH all,linear,L4 vs L3,10.0,2.0,2.798252681154402,worse
+A-CH all,tabpfn,L2 vs L1,10.0,8.0,-3.942177715564193,better
+A-CH all,tabpfn,L3 vs L2,10.0,2.0,0.5321521281747295,no difference
+A-CH all,tabpfn,L4 vs L3,10.0,6.0,-0.5426604762029221,no difference
+A-CH all,cnn,L2 vs L1,10.0,6.0,-0.6916218054920549,no difference
+A-CH all,cnn,L3 vs L2,10.0,6.0,-0.41571118323666756,no difference
+A-CH all,cnn,L4 vs L3,10.0,4.0,0.8494362705718226,no difference
+A-CH pbin<=15,linear,L2 vs L1,10.0,7.0,-1.2688261739469908,no difference
+A-CH pbin<=15,linear,L3 vs L2,10.0,10.0,-4.716471297367761,better
+A-CH pbin<=15,linear,L4 vs L3,10.0,3.0,4.836728459690024,no difference
+A-CH pbin<=15,tabpfn,L2 vs L1,10.0,8.0,-3.2699808988155574,better
+A-CH pbin<=15,tabpfn,L3 vs L2,10.0,3.0,0.7212051849929706,no difference
+A-CH pbin<=15,tabpfn,L4 vs L3,10.0,5.0,-0.1397540763839391,no difference
+A-CH pbin<=15,cnn,L2 vs L1,10.0,8.0,-0.7767860834682292,no difference
+A-CH pbin<=15,cnn,L3 vs L2,10.0,5.0,-0.42308350431175157,no difference
+A-CH pbin<=15,cnn,L4 vs L3,10.0,2.0,1.734247322788562,worse
+A-CH pbin15-35,linear,L2 vs L1,10.0,4.0,0.5737807023147798,no difference
+A-CH pbin15-35,linear,L3 vs L2,10.0,10.0,-9.77108581371953,better
+A-CH pbin15-35,linear,L4 vs L3,10.0,3.0,3.312586999177136,no difference
+A-CH pbin15-35,tabpfn,L2 vs L1,10.0,9.0,-5.064831216338974,better
+A-CH pbin15-35,tabpfn,L3 vs L2,10.0,5.0,-0.016722368887982952,no difference
+A-CH pbin15-35,tabpfn,L4 vs L3,10.0,7.0,-0.08335653956003153,no difference
+A-CH pbin15-35,cnn,L2 vs L1,10.0,8.0,-1.474555340822671,better
+A-CH pbin15-35,cnn,L3 vs L2,10.0,4.0,0.514933496899384,no difference
+A-CH pbin15-35,cnn,L4 vs L3,10.0,4.0,1.3622124665470645,no difference
+A-CH pbin35-65,linear,L2 vs L1,10.0,4.0,0.3993108943022001,no difference
+A-CH pbin35-65,linear,L3 vs L2,10.0,8.0,-6.402771585721444,better
+A-CH pbin35-65,linear,L4 vs L3,10.0,4.0,2.150632819335515,no difference
+A-CH pbin35-65,tabpfn,L2 vs L1,10.0,6.0,-3.0963998823363523,no difference
+A-CH pbin35-65,tabpfn,L3 vs L2,10.0,4.0,0.08888544171574608,no difference
+A-CH pbin35-65,tabpfn,L4 vs L3,10.0,8.0,-0.7604937770968245,no difference
+A-CH pbin35-65,cnn,L2 vs L1,10.0,7.0,-0.7493847470262462,no difference
+A-CH pbin35-65,cnn,L3 vs L2,10.0,4.0,1.5826443467377276,no difference
+A-CH pbin35-65,cnn,L4 vs L3,10.0,4.0,0.25039205988769453,no difference
+A-CH pbin>65,linear,L2 vs L1,10.0,6.0,-1.6746496803339097,no difference
+A-CH pbin>65,linear,L3 vs L2,10.0,9.0,-5.234356289076947,better
+A-CH pbin>65,linear,L4 vs L3,10.0,4.0,0.6122887951804374,no difference
+A-CH pbin>65,tabpfn,L2 vs L1,10.0,7.0,-3.0575144328600175,no difference
+A-CH pbin>65,tabpfn,L3 vs L2,10.0,2.0,1.2913109978165505,worse
+A-CH pbin>65,tabpfn,L4 vs L3,10.0,8.0,-0.9004967392065888,no difference
+A-CH pbin>65,cnn,L2 vs L1,10.0,4.0,1.801902609194907,no difference
+A-CH pbin>65,cnn,L3 vs L2,10.0,6.0,-2.006339627682876,no difference
+A-CH pbin>65,cnn,L4 vs L3,10.0,8.0,-2.682576132218748,better
+S-GB n=32,linear,L2 vs L1,7.0,6.0,-7.034604748885815,better
+S-GB n=32,linear,L3 vs L2,7.0,3.0,1.1766418303205768,no difference
+S-GB n=32,linear,L4 vs L3,7.0,0.0,15.953962833094124,worse
+S-GB n=32,tabpfn,L2 vs L1,15.0,15.0,-4.427426637240622,better
+S-GB n=32,tabpfn,L3 vs L2,7.0,7.0,-1.8281024115951823,better
+S-GB n=32,tabpfn,L4 vs L3,7.0,0.0,5.043923012092641,worse
+S-GB n=32,cnn,L2 vs L1,11.0,10.0,-8.883724830499965,better
+S-GB n=32,cnn,L3 vs L2,7.0,7.0,-5.313526070161153,better
+S-GB n=32,cnn,L4 vs L3,7.0,0.0,24.591957948710387,worse
+S-GB n=62,linear,L2 vs L1,20.0,17.0,-5.844802791233807,better
+S-GB n=62,linear,L3 vs L2,20.0,13.0,-2.6123692620967827,no difference
+S-GB n=62,linear,L4 vs L3,20.0,0.0,10.392921665517346,worse
+S-GB n=62,tabpfn,L2 vs L1,20.0,20.0,-4.409957832416222,better
+S-GB n=62,tabpfn,L3 vs L2,20.0,13.0,-0.4989253953366717,no difference
+S-GB n=62,tabpfn,L4 vs L3,20.0,1.0,4.190585027952485,worse
+S-GB n=62,cnn,L2 vs L1,20.0,11.0,-1.1112448334746983,no difference
+S-GB n=62,cnn,L3 vs L2,20.0,18.0,-4.800308350793733,better
+S-GB n=62,cnn,L4 vs L3,20.0,2.0,2.8336966429918533,worse
+S-GB n=100,linear,L2 vs L1,20.0,19.0,-5.6939047248503005,better
+S-GB n=100,linear,L3 vs L2,20.0,18.0,-2.947448846813071,better
+S-GB n=100,linear,L4 vs L3,20.0,0.0,7.6805150599369885,worse
+S-GB n=100,tabpfn,L2 vs L1,20.0,20.0,-4.22345395220346,better
+S-GB n=100,tabpfn,L3 vs L2,20.0,7.0,0.14305291393351105,no difference
+S-GB n=100,tabpfn,L4 vs L3,20.0,0.0,1.6519868378271862,worse
+S-GB n=100,cnn,L2 vs L1,20.0,13.0,-0.5482219995437614,no difference
+S-GB n=100,cnn,L3 vs L2,20.0,14.0,-1.2684437179815973,no difference
+S-GB n=100,cnn,L4 vs L3,20.0,1.0,4.214387888255466,worse
+S-GB n=all,linear,L2 vs L1,10.0,0.0,4.403947999468828,worse
+S-GB n=all,linear,L3 vs L2,10.0,10.0,-6.773485875181082,better
+S-GB n=all,linear,L4 vs L3,10.0,0.0,7.148562314369396,worse
+S-GB n=all,tabpfn,L2 vs L1,10.0,10.0,-3.067820865996822,better
+S-GB n=all,tabpfn,L3 vs L2,10.0,4.0,0.17103332233206459,no difference
+S-GB n=all,tabpfn,L4 vs L3,10.0,0.0,1.608667202799559,worse
+S-GB n=all,cnn,L2 vs L1,10.0,4.0,0.34327014501586994,no difference
+S-GB n=all,cnn,L3 vs L2,10.0,3.0,0.6725350847326732,no difference
+S-GB n=all,cnn,L4 vs L3,10.0,1.0,2.866677162398762,worse
+S-CH n=all,linear,L2 vs L1,10.0,5.0,0.16045667484987014,no difference
+S-CH n=all,linear,L3 vs L2,10.0,10.0,-10.36483952472111,better
+S-CH n=all,linear,L4 vs L3,10.0,2.0,2.460650845750112,worse
+S-CH n=all,tabpfn,L2 vs L1,10.0,10.0,-10.433308077398484,better
+S-CH n=all,tabpfn,L3 vs L2,10.0,2.0,0.2857046472556224,no difference
+S-CH n=all,tabpfn,L4 vs L3,10.0,6.0,-0.14709299802845877,no difference
+S-CH n=all,cnn,L2 vs L1,10.0,7.0,-2.0965541735076902,no difference
+S-CH n=all,cnn,L3 vs L2,10.0,4.0,0.5031114374440566,no difference
+S-CH n=all,cnn,L4 vs L3,10.0,3.0,0.872798925462444,no difference
+R x0.5,linear,L2 vs L1,10.0,10.0,-2.852990642921485,better
+R x0.5,linear,L3 vs L2,10.0,0.0,2.2835695932896094,worse
+R x0.5,linear,L4 vs L3,10.0,0.0,7.659356045264726,worse
+R x0.5,tabpfn,L2 vs L1,10.0,10.0,-4.099603686989262,better
+R x0.5,tabpfn,L3 vs L2,10.0,5.0,0.27577552549626816,no difference
+R x0.5,tabpfn,L4 vs L3,10.0,0.0,11.311405278387506,worse
+R x0.5,cnn,L2 vs L1,10.0,4.0,0.6569266879805395,no difference
+R x0.5,cnn,L3 vs L2,10.0,4.0,0.4493615200496732,no difference
+R x0.5,cnn,L4 vs L3,10.0,0.0,11.980288553014107,worse
+R x1.5,linear,L2 vs L1,10.0,9.0,-2.578302388391286,better
+R x1.5,linear,L3 vs L2,10.0,0.0,2.6460001075795354,worse
+R x1.5,linear,L4 vs L3,10.0,0.0,6.056076196843987,worse
+R x1.5,tabpfn,L2 vs L1,10.0,10.0,-4.026174857053568,better
+R x1.5,tabpfn,L3 vs L2,10.0,8.0,-1.2930320115939633,better
+R x1.5,tabpfn,L4 vs L3,10.0,10.0,-2.8505398534785904,better
+R x1.5,cnn,L2 vs L1,10.0,5.0,-0.07032461886165642,no difference
+R x1.5,cnn,L3 vs L2,10.0,6.0,-0.1518589568838138,no difference
+R x1.5,cnn,L4 vs L3,10.0,4.0,1.487585758901159,no difference
+R rep,linear,L2 vs L1,10.0,1.0,0.9484215040343251,no difference
+R rep,linear,L3 vs L2,10.0,6.0,-0.5834167034941817,no difference
+R rep,linear,L4 vs L3,10.0,6.0,-0.9067533765632732,no difference
+R rep,tabpfn,L2 vs L1,10.0,6.0,-0.18875533374264286,no difference
+R rep,tabpfn,L3 vs L2,10.0,8.0,-0.7598486124694093,no difference
+R rep,tabpfn,L4 vs L3,10.0,5.0,-0.02826214348816869,no difference
+R rep,cnn,L2 vs L1,10.0,5.0,-0.023572604082620963,no difference
+R rep,cnn,L3 vs L2,10.0,7.0,-1.1638752997600976,no difference
+R rep,cnn,L4 vs L3,10.0,5.0,-0.3888256600312934,no difference
+R (combined),cnn,L2 vs L1,,,,no difference
+R (combined),cnn,L3 vs L2,,,,no difference
+R (combined),cnn,L4 vs L3,,,,no difference
+R (combined),linear,L2 vs L1,,,,better
+R (combined),linear,L3 vs L2,,,,worse
+R (combined),linear,L4 vs L3,,,,worse
+R (combined),tabpfn,L2 vs L1,,,,better
+R (combined),tabpfn,L3 vs L2,,,,no difference
+R (combined),tabpfn,L4 vs L3,,,,no difference

@@ -416,13 +416,15 @@ def figures(out, T, Z, root):
         save(fig, "learning_curves")
     bars = [k for k in ("R x0.5", "R x0.5 update", "R x1.5", "R x1.5 update", "R rep") if k in T and len(T[k])]
     if bars:                                                           # robustness: degradation of L1-L4 per family
-        fig, axs = plt.subplots(1, len(bars), figsize=(3.2 * len(bars), 3.2), squeeze=False, sharey=True)
+        fig, axs = plt.subplots(1, len(bars), figsize=(3.2 * len(bars), 3.2), squeeze=False)   # own y-axis per panel (2026-11-13: display only)
         for ax, k in zip(axs[0], bars):
             for i, fam in enumerate(FAMS):
                 ax.bar(np.arange(4) + 0.27 * (i - 1), [col(T[k], (fam, r)).median() for r in rl], 0.25, color=col_f[fam], label=fam)
             if len(Z.get(k, [])):
                 ax.axhline(pd.Series(Z[k]).median(), color="k", ls="--", lw=0.8, label="L0")
             ax.set(title=k, xticks=range(4), xticklabels=rl)
+            if max(abs(v) for v in ax.get_ylim()) > 100:
+                ax.set_yscale("symlog", linthresh=10)
         axs[0][0].set_ylabel("dWAPE vs x1.0 / main year (pp)")
         axs[0][0].legend(fontsize=7)
         save(fig, "robustness")

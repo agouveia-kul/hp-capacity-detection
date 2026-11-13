@@ -1,0 +1,58 @@
+reading,step,all_families,without_cnn,cnn_dependent
+A-GB all,L2 vs L1,mixed,better,True
+A-GB all,L3 vs L2,mixed,mixed,False
+A-GB all,L4 vs L3,worse,worse,False
+A-GB pbin<=15,L2 vs L1,mixed,better,True
+A-GB pbin<=15,L3 vs L2,mixed,mixed,False
+A-GB pbin<=15,L4 vs L3,worse,worse,False
+A-GB pbin15-35,L2 vs L1,mixed,better,True
+A-GB pbin15-35,L3 vs L2,mixed,mixed,False
+A-GB pbin15-35,L4 vs L3,mixed,no difference,True
+A-GB pbin35-65,L2 vs L1,mixed,mixed,False
+A-GB pbin35-65,L3 vs L2,mixed,mixed,False
+A-GB pbin35-65,L4 vs L3,no difference,no difference,False
+A-GB pbin>65,L2 vs L1,mixed,better,True
+A-GB pbin>65,L3 vs L2,mixed,mixed,False
+A-GB pbin>65,L4 vs L3,mixed,mixed,False
+A-CH all,L2 vs L1,mixed,mixed,False
+A-CH all,L3 vs L2,mixed,mixed,False
+A-CH all,L4 vs L3,mixed,mixed,False
+A-CH pbin<=15,L2 vs L1,mixed,mixed,False
+A-CH pbin<=15,L3 vs L2,mixed,mixed,False
+A-CH pbin<=15,L4 vs L3,mixed,no difference,True
+A-CH pbin15-35,L2 vs L1,mixed,mixed,False
+A-CH pbin15-35,L3 vs L2,mixed,mixed,False
+A-CH pbin15-35,L4 vs L3,no difference,no difference,False
+A-CH pbin35-65,L2 vs L1,no difference,no difference,False
+A-CH pbin35-65,L3 vs L2,mixed,mixed,False
+A-CH pbin35-65,L4 vs L3,no difference,no difference,False
+A-CH pbin>65,L2 vs L1,no difference,no difference,False
+A-CH pbin>65,L3 vs L2,mixed,mixed,False
+A-CH pbin>65,L4 vs L3,mixed,no difference,True
+S-GB n=32,L2 vs L1,better,better,False
+S-GB n=32,L3 vs L2,mixed,mixed,False
+S-GB n=32,L4 vs L3,worse,worse,False
+S-GB n=62,L2 vs L1,mixed,better,True
+S-GB n=62,L3 vs L2,mixed,no difference,True
+S-GB n=62,L4 vs L3,worse,worse,False
+S-GB n=100,L2 vs L1,mixed,better,True
+S-GB n=100,L3 vs L2,mixed,mixed,False
+S-GB n=100,L4 vs L3,worse,worse,False
+S-GB n=all,L2 vs L1,mixed,mixed,False
+S-GB n=all,L3 vs L2,mixed,mixed,False
+S-GB n=all,L4 vs L3,worse,worse,False
+S-CH n=all,L2 vs L1,mixed,mixed,False
+S-CH n=all,L3 vs L2,mixed,mixed,False
+S-CH n=all,L4 vs L3,mixed,mixed,False
+R x0.5,L2 vs L1,mixed,better,True
+R x0.5,L3 vs L2,mixed,mixed,False
+R x0.5,L4 vs L3,worse,worse,False
+R x1.5,L2 vs L1,mixed,better,True
+R x1.5,L3 vs L2,mixed,mixed,False
+R x1.5,L4 vs L3,mixed,mixed,False
+R rep,L2 vs L1,no difference,no difference,False
+R rep,L3 vs L2,no difference,no difference,False
+R rep,L4 vs L3,no difference,no difference,False
+R (combined),L2 vs L1,mixed,better,True
+R (combined),L3 vs L2,mixed,mixed,False
+R (combined),L4 vs L3,mixed,mixed,False
