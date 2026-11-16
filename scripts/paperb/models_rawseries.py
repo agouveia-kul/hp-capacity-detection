@@ -10,11 +10,15 @@ Linear(width) -> ReLU -> Dropout -> Linear(1). Adam with weight decay, batch 64,
 (patience 20, at most MAX_EPOCHS) on the household-disjoint training fold the caller passes (`train.tune_grouped_cv`: the next
 training fold, never the scored one); the final model is refit for the median best epoch count. Deterministic: torch seeded,
 deterministic algorithms, a fixed thread count, seeded batch order.
+06 (ladder rung L2 of the CNN, feature set `rawphys`): the columns `Feature Phys_*` (PHYS: the substation's net-load fit s_h, P_base,
+T_h; `train.feature_matrix`) are joined after pooling next to the anchors. The kW columns are divided by the size anchor, as the
+net-load channel; a missing value (failed fit) takes the median of the training rows; all are standardised on the training rows.
 """
 import numpy as np
 from hyperopt import hp
 
 RAW_PREFIX, RAW_DAYS, MAX_EPOCHS, PATIENCE, BATCH = "rs_", 365, 200, 20, 64
+PHYS_PREFIX, PHYS = "Feature Phys_", {"s_h": "s_h_net", "P_base": "P_base_net", "T_h": "T_h_net"}
 CNN_SPACE = {"width": hp.choice("width", [8, 16, 32]), "kernel": hp.choice("kernel", [3, 5, 7, 9]),
              "n_blocks": hp.choice("n_blocks", [2, 3]), "dropout": hp.uniform("dropout", 0.0, 0.3),
              "weight_decay": hp.loguniform("weight_decay", np.log(1e-6), np.log(1e-2)),
@@ -45,10 +49,17 @@ class RawSeriesCNN:
         """DataFrame -> (series [n, 2, days], anchors [n, k]) with the training-row statistics."""
         ycol = [c for c in X.columns if c.startswith(f"{RAW_PREFIX}y_")]
         tcol = [c for c in X.columns if c.startswith(f"{RAW_PREFIX}T_")]
-        acol = [c for c in X.columns if not c.startswith(RAW_PREFIX)]
+        pcol = [c for c in X.columns if c.startswith(PHYS_PREFIX)]
+        acol = [c for c in X.columns if not c.startswith((RAW_PREFIX, PHYS_PREFIX))]
         size = X["Feature Scale_size"].to_numpy(float)[:, None]
         S = np.stack([X[ycol].to_numpy(float) / size, X[tcol].to_numpy(float)], axis=1)
         A = np.log(np.maximum(X[acol].to_numpy(float), 1e-6))
+        if pcol:                                                 # 06: net-load fit scalars, per dwelling (T_h as it is)
+            P = X[pcol].to_numpy(float) / np.where(np.array([c.endswith("T_h") for c in pcol])[None], 1.0, size)
+            P = np.where(np.isfinite(P), P, np.nan)
+            if fit:
+                self.p_med = np.nan_to_num(np.nanmedian(P, axis=0))
+            A = np.c_[A, np.where(np.isfinite(P), P, self.p_med[None])]
         if fit:
             self.med = np.nanmedian(S, axis=0)
             self.med = np.where(np.isfinite(self.med), self.med, 0.0)

@@ -140,7 +140,7 @@ def evaluate_members(pool, members, cfg, with_features=True):
                                                                             **cfg["features"]["kwargs"]))
             if sets & {"netfit", "both"}:
                 feats[sid].update(netfit_features(T, net, calendar=cal))
-            if "raw" in sets:
+            if sets & {"raw", "rawphys"}:                          # 06: rawphys = raw + net-load fit scalars taken from `tab`
                 feats[sid].update(raw_daily(T, net))
     tab = members.drop(columns=["hp_members", "fill_members"]).join(pd.DataFrame.from_dict(rows, orient="index"))
     return tab, (pd.DataFrame.from_dict(feats, orient="index").reindex(tab.index) if with_features else None)

@@ -1,0 +1,19 @@
+reading,hybrid,L0,n,n_neg,median,verdict
+A-GB all,tabpfn L4,slope_base,10,10,-6.496017657341291,better
+A-GB pbin<=15,tabpfn L4,slope_base,10,10,-12.324342287809841,better
+A-GB pbin15-35,tabpfn L4,slope_base,10,10,-4.016663908463325,better
+A-GB pbin35-65,tabpfn L4,slope_base,10,8,-4.16836078923188,better
+A-GB pbin>65,tabpfn L4,paperA_corr_own,10,10,-4.7328693437048726,better
+A-CH all,tabpfn L4,slope_base,10,8,-2.8242347016892246,better
+A-CH pbin<=15,tabpfn L4,paperA_corr_own,10,8,-3.278377102518899,better
+A-CH pbin15-35,tabpfn L4,paperA_cal,10,5,-0.3847509614079536,no difference
+A-CH pbin35-65,tabpfn L4,slope_base,10,6,-1.0013665256167856,no difference
+A-CH pbin>65,tabpfn L4,paperA_corr_own,10,7,-1.2992654342874768,no difference
+S-GB n=32,tabpfn L4,paperA_corr_own,15,0,15.77440584284738,worse
+S-GB n=62,tabpfn L4,paperA_corr_own,20,5,2.2298289197731656,no difference
+S-GB n=100,tabpfn L4,slope_base,20,19,-4.438051434504523,better
+S-GB n=all,tabpfn L4,slope_base,10,10,-5.562382694046985,better
+S-CH n=all,tabpfn L4,slope_base,10,8,-3.1453075736196805,better
+R x0.5,tabpfn L4,paperA_corr_s0unscaled,10,9,-5.960915500133602,better
+R x1.5,tabpfn L4,paperA_corr_s0unscaled,10,10,-17.808006381306733,better
+R rep,tabpfn L4,slope_base,10,4,0.0912019996843565,no difference

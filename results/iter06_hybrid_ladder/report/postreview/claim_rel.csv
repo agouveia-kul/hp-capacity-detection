@@ -1,0 +1,4 @@
+form,families,hybrid,best_pure_dd,cv_hybrid,cv_dd,A_median_hybrid,A_median_dd,A_gap_pp,a_holds,S_n62,S_median,S_n_neg,R x0.5 verdict,R x1.5 verdict,R rep verdict,R x0.5 median,R x1.5 median,R rep median,R,T,outcome,cnn_dependent,A_gap,A_gap_rel,R x0.5,R x1.5,R rep
+"record (WAPE, 1 pp)",linear+tabpfn+cnn,tabpfn L4,tabpfn L2,19.12948576176592,17.03683288863161,19.39909251371593,16.38926794326666,3.009824570449272,False,worse,3.320512571447967,0/20,worse,better,no difference,11.15341212161904,-4.560856782181865,-0.921195970453616,no difference,pending 07,fails,False,,,,,
+"relative, nMAE",,tabpfn L4,tabpfn L2,,,4.074402246812346,3.4567483939333097,,False,worse,,,,,,,,,no difference,,fails,,0.6176538528790361,0.17868059299977856,worse,better,no difference
+"relative, WAPE",,tabpfn L4,tabpfn L2,,,19.39909251371593,16.389267943266663,,False,worse,,,,,,,,,no difference,,fails,,3.0098245704492683,0.18364606527076877,worse,better,better

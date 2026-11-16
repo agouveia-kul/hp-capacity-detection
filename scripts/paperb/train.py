@@ -38,17 +38,19 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
 
 from hp_capacity import select_scale_free_columns
-from paperb.models_rawseries import CNN_SPACE, RAW_PREFIX
+from paperb.models_rawseries import CNN_SPACE, PHYS, PHYS_PREFIX, RAW_PREFIX
 
 ANCHOR_COLS = {"none": [], "size": ["size"], "size_peak": ["size", "peak"]}
 MAX_EPOCHS, PATIENCE, XGB_ES_ROUNDS = 500, 40, 25
-SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE, "device": "cpu"}   # per-process; set by configure() (02b runner)
+SETTINGS = {"xgb_n_jobs": -1, "patience": PATIENCE, "device": "cpu", "cnn_inits": 1}   # per-process; set by configure() (02b runner)
+INIT_STEP = 7919                                              # 06 B1: initialisation k of the CNN is seeded with seed + k * INIT_STEP
 
 
-def configure(xgb_n_jobs=-1, patience=PATIENCE, device="cpu"):
+def configure(xgb_n_jobs=-1, patience=PATIENCE, device="cpu", cnn_inits=1):
     """XGBoost thread cap per worker, FFNN early-stopping patience (protocol default 40) and the torch device of the CNN and
-    TabPFN ("cpu" or "cuda"; 05b: one device per family for a whole stage, recorded in each job's .done marker)."""
-    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience), device=str(device))
+    TabPFN ("cpu" or "cuda"; 05b: one device per family for a whole stage, recorded in each job's .done marker). 06 B1:
+    `cnn_inits` = initialisations of every final CNN fit and of every fold fit of a fixed-params pass (`fit_inits`)."""
+    SETTINGS.update(xgb_n_jobs=int(xgb_n_jobs), patience=int(patience), device=str(device), cnn_inits=int(cnn_inits))
 
 SPACES = {                                                  # legacy search ranges (benchmark_capacity_models.py)
     "XGBoost": {"eta": hp.uniform("eta", 0.01, 0.3), "max_depth": hp.quniform("max_depth", 3, 10, 1),
@@ -100,11 +102,14 @@ MONOTONE = re.compile(r"nf_(all|wd|we)_(s_h|cold_resp)")
 def feature_matrix(features, tab, anchor, feature_set="whdd"):
     """Columns of `feature_set` plus the anchor columns of `anchor` in {none, size, size_peak}. whdd: scale-free
     windowed-HDD features (unchanged); netfit: the nf_* columns (features_netfit); both: the union; raw (05b): the daily
-    series rs_* of the raw-series CNN (substations.raw_daily)."""
+    series rs_* of the raw-series CNN (substations.raw_daily); rawphys (06, L2 of the CNN): raw plus the net-load fit scalars
+    `Feature Phys_*` (s_h, P_base, T_h of `tab`), which the CNN joins after pooling."""
     whdd = select_scale_free_columns(features[[c for c in features.columns if not c.startswith(("nf_", RAW_PREFIX))]])
     nf = [c for c in features.columns if c.startswith("nf_")]
     raw = [c for c in features.columns if c.startswith(RAW_PREFIX)]
-    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf, "raw": raw}[feature_set]].copy()
+    X = features[{"whdd": whdd, "netfit": nf, "both": whdd + nf, "raw": raw, "rawphys": raw}[feature_set]].copy()
+    for k, c in (PHYS.items() if feature_set == "rawphys" else ()):
+        X[f"{PHYS_PREFIX}{k}"] = tab.loc[X.index, c].astype(float)
     for c in ANCHOR_COLS[anchor]:
         X[f"Feature Scale_{c}"] = tab.loc[X.index, c].astype(float)
     return X.apply(pd.to_numeric, errors="coerce").replace([np.inf, -np.inf], np.nan)
@@ -262,8 +267,21 @@ class Model:
         return np.maximum(out, 0.0) if self.opts["clip"] else out
 
 
+def fit_inits(model_name, params, seed, opts, n_init, fit, val_loss):
+    """06 B1 (DECISIONS.md 2026-10-12): train `n_init` initialisations (seeds seed + k * INIT_STEP; k = 0 is the split seed, so one
+    initialisation is the model as before) with `fit(model) -> iteration count` and keep the one with the lowest
+    `val_loss(model)`, first on ties. Returns (model, its iteration count, [{init, val_loss}], every initialisation's model)."""
+    runs = []
+    for k in range(n_init):
+        m = Model(model_name, params, seed + k * INIT_STEP, opts)
+        it = fit(m)
+        runs.append((float(val_loss(m)) if n_init > 1 else np.nan, k, m, it))
+    best = min(runs, key=lambda r: (r[0], r[1])) if n_init > 1 else runs[0]
+    return best[2], best[3], [{"init": k, "val_loss": v, "chosen": k == best[1]} for v, k, _, _ in runs], [m for _, _, m, _ in runs]
+
+
 def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, y_final=None, opts=None, space=None,
-                    eval_on=None, fixed=None):
+                    eval_on=None, fixed=None, params=None):
     """Seeded hyperopt over household-grouped CV; returns (final model, meta dict, Trials).
 
     X, y, groups: inner substations and their fold ids. The final model is refit on (X_final, y_final)
@@ -272,42 +290,67 @@ def tune_grouped_cv(model_name, X, y, groups, seed, max_evals=50, X_final=None, 
     out-of-fold predictions as WAPE on the kW scale: y_hat = prediction (p_hat None, direct models) or
     p_hat * exp(prediction) (residual models); meta['cv_wape'] (%, pooled over the folds) is the model-selection
     statistic of the learning curve -- inner CV only, never test. 05b A10: `fixed = (params, best_iter)` skips the search and the
-    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0).
+    inner CV and only refits the final model with those (logged) values (meta cv_* None, n_evals 0). 06: meta['oof'] holds the
+    best trial's out-of-fold predictions of the inner substations (kW with `eval_on`, else the model's output), for the L5 ensembles.
+    `params` (06) fixes the hyperparameters but keeps one inner-CV pass: it gives cv_wape, the early-stopped iteration count and the
+    out-of-fold predictions, with no search (the CNN on machine A's CPU).
+    06 B1: the CNN is trained from SETTINGS["cnn_inits"] initialisations (`fit_inits`) (a) in every final fit, where the kept one has
+    the lowest MSE on the inner substations (X, y: never fitted by the final model, never test; they share households with the
+    train substations, so this screens out a collapsed initialisation and is not an unbiased loss), and (b) in every fold fit of a
+    fixed-params pass, where it has the lowest MSE on the early-stopping fold (household-disjoint from the fitted and the scored
+    fold). A hyperparameter search uses one initialisation per evaluation. meta['inits'] / meta['init_models']: the final fit's
+    validation losses and models (diagnostics).
     """
+    n_init = SETTINGS["cnn_inits"] if model_name == "CNN" else 1
+    mse = lambda m, X_, y_: np.mean((m.predict(X_) - np.asarray(y_, float)) ** 2)        # noqa: E731
     if fixed is not None:
         params, best_iter = dict(fixed[0]), fixed[1]
-        final = Model(model_name, params, seed, opts)
-        final.fit(pd.DataFrame(X if X_final is None else X_final), y if y_final is None else y_final, n_iter=best_iter)
-        return final, {"params": params, "cv_mse": None, "cv_wape": None, "best_iter": best_iter, "n_evals": 0}, None
+        Xf, yf = pd.DataFrame(X if X_final is None else X_final), y if y_final is None else y_final
+        final, _, inits, cands = fit_inits(model_name, params, seed, opts, n_init, lambda m: m.fit(Xf, yf, n_iter=best_iter),
+                                           lambda m: mse(m, pd.DataFrame(X), y))
+        return final, {"params": params, "cv_mse": None, "cv_wape": None, "best_iter": best_iter, "n_evals": 0, "inits": inits,
+                       "init_models": cands}, None
     X, y, groups = pd.DataFrame(X), np.asarray(y, float), np.asarray(groups)
     folds = sorted(set(groups))
     iterative = model_name in ITERATIVE
+    n_cv = n_init if params is not None else 1                         # B1: a search evaluation trains one initialisation
+    kept = {"loss": np.inf, "oof": None}                               # out-of-fold predictions of the best trial (first on ties)
 
     def objective(params):
-        losses, iters, abserr = [], [], 0.0
+        losses, iters, abserr, oof = [], [], 0.0, np.full(len(y), np.nan)
         for i, f in enumerate(folds):
             va = groups == f
             es = groups == folds[(i + 1) % len(folds)] if iterative else np.zeros(len(y), bool)
             tr = ~va & ~es
-            m = Model(model_name, params, seed, opts)
-            iters.append(m.fit(X[tr], y[tr], X_es=X[es] if iterative else None, y_es=y[es] if iterative else None))
+            m, it, _, _ = fit_inits(model_name, params, seed, opts, n_cv,
+                                    lambda m: m.fit(X[tr], y[tr], X_es=X[es] if iterative else None, y_es=y[es] if iterative else None),
+                                    lambda m: mse(m, X[es], y[es]))
+            iters.append(it)
             pred = m.predict(X[va])
             losses.append(float(np.mean((pred - y[va]) ** 2)))
+            oof[va] = pred
             if eval_on is not None:
                 y_kw, p_hat = eval_on
-                abserr += float(np.abs((pred if p_hat is None else p_hat[va] * np.exp(pred)) - y_kw[va]).sum())
+                oof[va] = pred if p_hat is None else p_hat[va] * np.exp(pred)
+                abserr += float(np.abs(oof[va] - y_kw[va]).sum())
         wape = 100 * abserr / float(np.sum(eval_on[0])) if eval_on is not None else None
+        if float(np.mean(losses)) < kept["loss"]:
+            kept.update(loss=float(np.mean(losses)), oof=oof)
         return {"loss": float(np.mean(losses)), "status": STATUS_OK, "fold_losses": losses, "cv_wape": wape,
                 "best_iter": int(np.median(iters)) if iterative else None}
 
     trials = Trials()
     space = SPACES[model_name] if space is None else space
-    if space:
+    if params is not None:
+        params, res = dict(params), objective(dict(params))
+    elif space:
         best = fmin(objective, space, algo=tpe.suggest, max_evals=max_evals, trials=trials,
                     rstate=np.random.default_rng(seed), show_progressbar=False)
         params, res = space_eval(space, best), trials.best_trial["result"]
     else:
         params, res = {}, objective({})
-    final = Model(model_name, params, seed, opts)
-    final.fit(X if X_final is None else pd.DataFrame(X_final), y if y_final is None else y_final, n_iter=res["best_iter"])
-    return final, {"params": params, "cv_mse": res["loss"], "cv_wape": res["cv_wape"], "best_iter": res["best_iter"], "n_evals": len(trials.trials)}, trials
+    Xf, yf = X if X_final is None else pd.DataFrame(X_final), y if y_final is None else y_final
+    final, _, inits, cands = fit_inits(model_name, params, seed, opts, n_init, lambda m: m.fit(Xf, yf, n_iter=res["best_iter"]),
+                                       lambda m: mse(m, X, y))
+    return final, {"params": params, "cv_mse": res["loss"], "cv_wape": res["cv_wape"], "best_iter": res["best_iter"], "n_evals": len(trials.trials),
+                   "oof": kept["oof"], "inits": inits, "init_models": cands}, trials

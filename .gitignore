@@ -31,3 +31,11 @@ results/**/_pre_run_*
 /results/iter05b_data_limit/stage1/arm1/metrics_lc.csv
 /results/iter05b_data_limit/stage1/arm1/dropped_cells.csv
 /results/iter05b_data_limit/stage1/arm2/metrics.csv
+# 06: the big merged long-format files are committed gzipped; gunzip before iter06_report.py
+/results/iter06_hybrid_ladder/a_gb/metrics.csv
+/results/iter06_hybrid_ladder/a_ch/metrics.csv
+/results/iter06_hybrid_ladder/s_gb/metrics_lc.csv
+/results/iter06_hybrid_ladder/r_x05/metrics.csv
+/results/iter06_hybrid_ladder/r_x15/metrics.csv
+/results/iter06_hybrid_ladder/r_rep/metrics.csv
+/results/iter06_hybrid_ladder/s_gb/dropped_cells.csv

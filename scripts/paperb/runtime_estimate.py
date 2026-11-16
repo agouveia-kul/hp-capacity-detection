@@ -14,6 +14,7 @@ unknowns. Arm 1 runs netfit x size only (a quarter of the probe's feature-set x 
 
     python scripts/paperb/runtime_estimate.py [--workers 6]
     python scripts/paperb/runtime_estimate.py --probe05b --workers 10     # 05b, after configs/iter05b_probe.yaml
+    python scripts/paperb/runtime_estimate.py --iter06 --workers 6        # 06, after configs/iter06_probe.yaml
 """
 import argparse
 import json
@@ -181,10 +182,45 @@ def main05b_stage2(workers, out=ROOT / "results" / "iter05b_data_limit", night_h
     return R
 
 
+def main06(workers, out=ROOT / "results" / "iter06_hybrid_ladder", night_h=NIGHT_H):
+    """06: estimate from the probe (configs/iter06_probe.yaml: seed 0 of every arm, draw 0, full size, run at the planned concurrency;
+    same job ids as configs/iter06.yaml). Job hours of a group (arm, family, n) = its probe job x the group's jobs in the run.
+    Wall = max(job hours / workers, TabPFN-group job hours / its cap). Groups without a finished probe job are listed, not estimated."""
+    from paperb.run_queue import jobs
+    q = yaml.safe_load((ROOT / "configs" / "iter06.yaml").read_text())
+    J = pd.DataFrame(jobs(q))
+    done = {f.name[:-5]: json.loads(f.read_text()) for f in (out / "jobs").glob("*.done")}
+    J["h"] = [done[i]["seconds"] / 3600 if i in done else np.nan for i in J["id"]]
+    G = J.groupby(["arm", "family", "n"], sort=False)["h"].agg(jobs="size", probed="count", probe_h="mean").reset_index()
+    G["job_h"] = G["jobs"] * G["probe_h"]
+    G["rest_h"] = G["job_h"] - G["probed"] * G["probe_h"].fillna(0)
+    grp = G["family"].map(lambda f: q["families"][f].get("group", f))
+    A = G.assign(group=grp.where(grp == "tabpfn", G["family"].str.split("_").str[0])).pivot_table(index="arm", columns="group", values="job_h", aggfunc="sum", sort=False)
+    A["all"] = A.sum(axis=1)
+    cap = min(v["max_concurrent"] for v in q["families"].values() if v.get("group") == "tabpfn")
+    tot, rest, tab = float(G["job_h"].sum()), float(G["rest_h"].sum()), float(G.loc[grp == "tabpfn", "rest_h"].sum())
+    wall = max(rest / workers, tab / cap)
+    iv = sorted((pd.Timestamp(d["start"]), pd.Timestamp(d["end"])) for i, d in done.items() if i in set(J["id"]))
+    busy = sum((e - s_).total_seconds() for s_, e in iv) / 3600 if iv else 0.0
+    span = (max(e for _, e in iv) - min(s_ for s_, _ in iv)).total_seconds() / 3600 if iv else 0.0
+    missing = [f"{r.arm}/{r.family}/n{r.n}" for r in G[G["probed"] == 0].itertuples()]
+    md = lambda d: "\n".join(["| " + " | ".join(map(str, d.columns)) + " |", "|" + "---|" * d.shape[1]] + ["| " + " | ".join(map(str, r)) + " |" for r in d.itertuples(index=False)])  # noqa: E731
+    txt = ["# 06 runtime estimate from the probe (seed 0 of every arm, draw 0; 6 workers x 3 threads)\n",
+           f"Probe: {len(done)} jobs done, {busy:.1f} job-h in {span:.1f} h of wall time. Groups without a finished probe job (not in the estimate): "
+           f"{', '.join(missing) or 'none'}.\n", "Job hours of the whole run per arm and family group (probe job x jobs of the group):\n",
+           md(A.round(1).reset_index()), "",
+           f"Whole run {tot:.0f} job-h; remaining after the probe {rest:.0f} job-h, of which TabPFN {tab:.0f} (at most {cap} at once). Wall time at "
+           f"{workers} workers: {wall:.0f} h = {wall / 24:.1f} continuous days = {wall / night_h:.1f} nights of {night_h} h.\n"]
+    (out / "runtime_estimate.md").write_text("\n".join(txt), encoding="utf-8")
+    print("\n".join(txt))
+    return G
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--probe05b", action="store_true", help="05b: estimate from the 05b probe (configs/iter05b_probe.yaml)")
     ap.add_argument("--stage2", action="store_true", help="05b Stage 2: estimate from configs/iter05b_probe_stage2.yaml")
+    ap.add_argument("--iter06", action="store_true", help="06: estimate from configs/iter06_probe.yaml")
     a = ap.parse_args()
-    main05b_stage2(a.workers) if a.stage2 else main05b(a.workers) if a.probe05b else main(a.workers)
+    main06(a.workers) if a.iter06 else main05b_stage2(a.workers) if a.stage2 else main05b(a.workers) if a.probe05b else main(a.workers)

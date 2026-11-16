@@ -1,0 +1,11 @@
+# 06 arm R-shift (robustness i): A-GB with the fillers' temperature response scaled x0.5 / x1.5 per queue arm
+# (`pool.response_scale={fill: f}`, the 05b Arm 7 machinery). Per seed and family, every rung's A-GB winner is (1) applied
+# unchanged to the scaled test substations: row `<model>@frozen`, the R axis; an L4 model keeps its x1.0 scale model and s0
+# (persist.frozen_predict), and (2) refit on the scaled data with its frozen hyperparameters. Physics rows are refit on the scaled
+# data, plus paperA_corr_s0unscaled (s0 of the unscaled fillers: the frozen correction). The x1.0 reference is A-GB. Nothing is
+# persisted. Run through the queue only (configs/iter06.yaml).
+base: configs/iter06_a_gb.yaml
+exp_id: iter06_r_shift
+out_dir: results/iter06_hybrid_ladder/r_shift
+refit: null
+paperA: {estimators: [paperA_sh_mh, paperA_sh_mh_station, paperA_cal, paperA_corr, paperA_corr_cal, paperA_corr_own, paperA_l4a, paperA_l4b, paperA_corr_s0unscaled]}

@@ -1,0 +1,49 @@
+arm,ensemble_of,cell,ensemble,hybrid_family,median_wape,n,n_neg,median,verdict,kept
+a_gb,all,all,L5a,tabpfn,19.411885031289437,10,4,0.11800933509586464,no difference,False
+a_gb,all,all,L5b,tabpfn,18.18686138201987,10,10,-0.6626927245974201,no difference,False
+a_gb,all,dagger,L5a,tabpfn,21.691578313304674,10,6,-0.2946334801184296,no difference,False
+a_gb,all,dagger,L5b,tabpfn,21.396177582864205,10,10,-0.9240775379434396,no difference,False
+a_gb,all,pbin<=15,L5a,tabpfn,31.918831627939042,10,4,1.0295385391809653,no difference,False
+a_gb,all,pbin<=15,L5b,tabpfn,29.95312328386539,10,7,-0.9816048208608557,no difference,False
+a_gb,all,pbin15-35,L5a,tabpfn,15.8244385703909,10,9,-2.101852423371101,better,False
+a_gb,all,pbin15-35,L5b,tabpfn,16.460746340317716,10,9,-1.4396811172036932,better,False
+a_gb,all,pbin35-65,L5a,tabpfn,11.378093529065925,10,6,-0.2815599710126966,no difference,False
+a_gb,all,pbin35-65,L5b,tabpfn,10.538626667425929,10,9,-0.7749640232901145,no difference,False
+a_gb,all,pbin>65,L5a,tabpfn,9.12334985668523,10,2,1.115309727989024,worse,False
+a_gb,all,pbin>65,L5b,tabpfn,7.219450726600783,10,5,-0.3610613475075981,no difference,False
+a_gb,no_cnn,all,L5a,tabpfn,21.768604945353776,10,0,2.4168855146857595,worse,False
+a_gb,no_cnn,all,L5b,tabpfn,19.64363008068299,10,3,0.21260927295498888,no difference,False
+a_gb,no_cnn,dagger,L5a,tabpfn,24.585489305939817,10,1,2.253091877799468,worse,False
+a_gb,no_cnn,dagger,L5b,tabpfn,22.5923428297714,10,5,0.12800389719128802,no difference,False
+a_gb,no_cnn,pbin<=15,L5a,tabpfn,35.18897034857358,10,1,4.022874514957909,worse,False
+a_gb,no_cnn,pbin<=15,L5b,tabpfn,31.813974947706853,10,3,0.7768753542677782,no difference,False
+a_gb,no_cnn,pbin15-35,L5a,tabpfn,18.255835340509506,10,5,-0.014218980242659995,no difference,False
+a_gb,no_cnn,pbin15-35,L5b,tabpfn,17.57342586225473,10,8,-0.3282412267149688,no difference,False
+a_gb,no_cnn,pbin35-65,L5a,tabpfn,12.83911228023884,10,2,1.7269378809743507,worse,False
+a_gb,no_cnn,pbin35-65,L5b,tabpfn,11.555566577702827,10,7,-0.2569095918239981,no difference,False
+a_gb,no_cnn,pbin>65,L5a,tabpfn,12.52541503906131,10,0,3.0232557752102167,worse,False
+a_gb,no_cnn,pbin>65,L5b,tabpfn,7.554917856123344,10,5,-0.021917078665765644,no difference,False
+a_ch,all,all,L5a,tabpfn,17.162707383614936,10,3,0.6150890845047012,no difference,False
+a_ch,all,all,L5b,tabpfn,18.110279910347998,10,3,1.6976104826407532,no difference,False
+a_ch,all,dagger,L5a,tabpfn,18.76303800201572,10,3,0.659861917948465,no difference,False
+a_ch,all,dagger,L5b,tabpfn,19.85297667382531,10,3,1.7853029889079917,no difference,False
+a_ch,all,pbin<=15,L5a,tabpfn,22.438390305815297,10,2,0.5832328216011735,no difference,False
+a_ch,all,pbin<=15,L5b,tabpfn,22.556598752996663,10,2,1.5468015240426052,worse,False
+a_ch,all,pbin15-35,L5a,tabpfn,14.72767789532963,10,5,0.5517349679420418,no difference,False
+a_ch,all,pbin15-35,L5b,tabpfn,16.655621628747742,10,3,2.4107816200309875,no difference,False
+a_ch,all,pbin35-65,L5a,tabpfn,12.499628022250214,10,4,0.8871248088775863,no difference,False
+a_ch,all,pbin35-65,L5b,tabpfn,15.434945624649776,10,3,2.623235238949782,no difference,False
+a_ch,all,pbin>65,L5a,tabpfn,9.448275090771475,10,6,-0.7859194838054888,no difference,False
+a_ch,all,pbin>65,L5b,tabpfn,11.192940724002792,10,2,1.5019780198038135,worse,False
+a_ch,no_cnn,all,L5a,tabpfn,16.640637436672872,10,4,0.11696240629174248,no difference,False
+a_ch,no_cnn,all,L5b,tabpfn,18.18508518842126,10,2,2.116361233635761,worse,False
+a_ch,no_cnn,dagger,L5a,tabpfn,18.039292355343644,10,5,0.05751234727394561,no difference,False
+a_ch,no_cnn,dagger,L5b,tabpfn,20.32257549342298,10,2,2.202416440181274,worse,False
+a_ch,no_cnn,pbin<=15,L5a,tabpfn,22.996269620672376,10,3,1.1732695275180056,no difference,False
+a_ch,no_cnn,pbin<=15,L5b,tabpfn,23.6173964734144,10,1,1.8294725726882728,worse,False
+a_ch,no_cnn,pbin15-35,L5a,tabpfn,14.578430662507564,10,6,-0.29374400892507424,no difference,False
+a_ch,no_cnn,pbin15-35,L5b,tabpfn,17.5341756541606,10,3,2.612883828978985,no difference,False
+a_ch,no_cnn,pbin35-65,L5a,tabpfn,10.428534070450997,10,4,0.19449326139624112,no difference,False
+a_ch,no_cnn,pbin35-65,L5b,tabpfn,13.913215544629253,10,3,2.0110198597152706,no difference,False
+a_ch,no_cnn,pbin>65,L5a,tabpfn,9.217612804703133,10,6,-0.24765453905926815,no difference,False
+a_ch,no_cnn,pbin>65,L5b,tabpfn,10.931726906377286,10,4,0.805801290496285,no difference,False

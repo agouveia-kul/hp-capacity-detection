@@ -7,6 +7,13 @@ versions, device, SHA-256 of model.joblib). Two models are not pickled whole: th
 `RawSeriesCNN._net`) stores its state_dict in `cnn_state.pt` and is rebuilt on load; TabPFN (in-context learning) stores its train
 context `train_context.parquet` (X, y) plus the checkpoint name and SHA-256, and is refit from that context on load (seeded).
 Stage 2 (Arm 7): `frozen_predict` applies a saved model unchanged to the same test substations built from scaled fillers.
+06 (hybrid ladder): one directory per rung, <root>/<rung>/s<seed>/<family>/ (the rung's inner-CV winner of the family). A tuned model
+also stores `oof_inner.parquet` (its out-of-fold inner-CV predictions in kW, with y and the fold id; input of the L5 ensembles) and an
+L4 model `scale.joblib` (`scale_model.Scale`: kappa or g, the test substations' s0, T_design, station climate), from which
+`frozen_predict` rebuilds s_hat / m_hat_h on the scaled test substations with everything learned at x1.0.
+`reload_check` reloads every model below a directory in this process and compares it with its own saved test predictions:
+
+    python scripts/paperb/check_jobs.py --reload-models results/iter06_hybrid_ladder/models/a_gb     # writes <dir>/reload_check.csv
 """
 import hashlib
 import json
@@ -75,7 +82,12 @@ def save_model(root, seed, spec, f, sub_ids, pred_te, device):
         extra["tabpfn"] = tabpfn_info()
     else:
         joblib.dump(m, d / "model.joblib")
+    if f.get("oof") is not None:
+        f["oof"].to_parquet(d / "oof_inner.parquet")
+    if f.get("scale") is not None:
+        joblib.dump(f["scale"], d / "scale.joblib")
     man = {"seed": int(seed), "family": FAMILY_OF[name], "spec": "|".join(spec), "params": f["meta"]["params"], "best_iter": f["meta"]["best_iter"],
+           "cv_wape": f["meta"].get("cv_wape"),
            "feature_columns": [str(c) for c in pd.DataFrame(f["X_te"]).columns], "n_train_sub": int(len(f["y_tr"])), "n_test_sub": int(len(X_te)),
            "residual": "p_te" in f, "device": device, "host": platform.node(), "packages": _versions(),
            "model_sha256": _sha(d / "model.joblib"), **extra}
@@ -119,15 +131,41 @@ def load_predict(d, device=None):
     return pd.Series(np.asarray(pred, float), index=X.index, name="pred")
 
 
-def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None):
+def reload_check(root, device=None):
+    """Every model below `root`: max relative difference and WAPE difference (pp) between the reloaded model's predictions of its
+    saved test design and the predictions saved with it (A10: <= 1e-6, CNN / TabPFN <= 0.1 pp). Failures are listed, not raised."""
+    rows = []
+    for man in sorted(Path(root).rglob("manifest.json")):
+        d, ref = man.parent, pd.read_parquet(man.parent / "pred_refit.parquet")["pred"]
+        row = {"dir": d.relative_to(root).as_posix(), "spec": json.loads(man.read_text(encoding="utf-8"))["spec"]}
+        try:
+            p = load_predict(d, device)
+            row.update(max_rel_diff=float(np.max(np.abs(p - ref) / np.maximum(np.abs(ref), 1e-9))),
+                       d_wape_pp=100 * float(np.abs(p - ref).sum() / ref.sum()))
+        except Exception as e:  # noqa: BLE001
+            row["error"] = repr(e)[:200]
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def frozen_predict(root, seed, spec, X_te, p_valid=None, device=None, tab_te=None, s0_update=None):
     """05b Arm 7 frozen-model row: the seed's saved Stage 1 model of `spec` (trained at x1.0), unchanged, applied to another
-    version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model)."""
+    version of the same test substations (X_te, index = sub_id; `p_valid` = (P_hat_A, valid) on them for a residual model).
+    06: an L4 model's base s_hat / m_hat_h is rebuilt from its saved scale model on `tab_te` (the substation table of X_te). With
+    `s0_update` (per-dwelling s0 of the test substations, re-estimated without labels) it returns (frozen prediction, update
+    prediction): the same residual and scale model, s0 replaced (06 R(i), DECISIONS.md 2026-10-12)."""
     d = model_dir(root, seed, spec)
     m, man = load_model(d, device)
+    upd = None
+    if (d / "scale.joblib").exists():
+        scale = joblib.load(d / "scale.joblib")
+        p_valid = scale.base(tab_te)
+        upd = None if s0_update is None else scale.base(tab_te, np.asarray(s0_update, float))
     if man["spec"] != "|".join(spec):
         raise ValueError(f"{d}: saved model is {man['spec']}, not {'|'.join(spec)}")
     saved = pd.read_parquet(d / "X_test.parquet", columns=[]).index.astype(str)
     if not saved.equals(pd.Index(X_te.index).astype(str)):
         raise ValueError(f"{d}: test substations differ from the saved model's test design")
     pred = m.predict(X_te[man["feature_columns"]])
-    return compose(p_valid[0], pred, p_valid[1]) if man["residual"] else np.asarray(pred, float)
+    out = compose(p_valid[0], pred, p_valid[1]) if man["residual"] else np.asarray(pred, float)
+    return out if s0_update is None else (out, compose(upd[0], pred, upd[1]))

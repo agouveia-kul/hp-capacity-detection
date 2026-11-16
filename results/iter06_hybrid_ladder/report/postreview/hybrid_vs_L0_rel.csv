@@ -1,0 +1,19 @@
+reading,n,n_neg,median_rel,median_diff,verdict,verdict_rel_wape,verdict_record
+A-GB all,10,10,-0.25280322075337913,-1.4036896081708625,better,better,better
+A-GB pbin<=15,10,10,-0.29715799877267207,-2.3889506940877174,better,better,better
+A-GB pbin15-35,10,10,-0.1847895990515721,-1.27288531314225,better,better,better
+A-GB pbin35-65,10,8,-0.23322027977126825,-1.7723677855908173,better,better,better
+A-GB pbin>65,10,10,-0.39595987901682006,-2.801965897007946,better,better,better
+A-CH all,10,8,-0.14910316071244537,-0.8815832285292822,better,better,better
+A-CH pbin<=15,10,8,-0.12624574603623961,-0.7691661529486598,better,better,better
+A-CH pbin15-35,10,5,-0.026343066758939007,-0.1529191044580891,no difference,no difference,no difference
+A-CH pbin35-65,10,6,-0.09661957083190575,-0.6393624967080043,no difference,no difference,no difference
+A-CH pbin>65,10,7,-0.16145780898017292,-1.034734743361934,no difference,no difference,no difference
+S-GB n=32,15,0,0.5472874098178715,3.401719667319579,worse,worse,worse
+S-GB n=62,20,5,0.0812063776707978,0.4753957644268083,no difference,no difference,no difference
+S-GB n=100,20,19,-0.1848940150979578,-0.9506487971943289,better,better,better
+S-GB n=all,10,10,-0.22497639046056517,-1.1703578516162922,better,better,better
+S-CH n=all,10,8,-0.17384291089456266,-1.0215524255720227,better,better,better
+R x0.5,10,9,-0.23913009595332357,-1.2620974174025317,better,better,better
+R x1.5,10,10,-0.6931875169019917,-3.6353278192082903,better,better,better
+R rep,10,6,-0.016129624528990548,-0.09941888232916796,no difference,no difference,no difference

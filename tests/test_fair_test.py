@@ -122,7 +122,8 @@ def test_monotone_constraints_only_on_sh_and_cold_resp():
 
 def test_wape_hand_computed():
     out = compute_metrics([10.0, 20.0, 30.0], [12.0, 18.0, 33.0])
-    assert list(out)[0] == "wape" and out["wape"] == pytest.approx(7 / 60 * 100)
+    assert out["wape"] == pytest.approx(7 / 60 * 100)
+    assert list(out)[0] == "nmae" and out["nmae"] == pytest.approx(7 / 3 / 30 * 100)       # primary from 07 (2026-11-16)
 
 
 @pytest.mark.parametrize("name", ["Linear", "Ridge", "Lasso", "XGBoost"])
