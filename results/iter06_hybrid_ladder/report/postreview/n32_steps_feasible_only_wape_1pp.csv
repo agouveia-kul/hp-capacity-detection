@@ -1,0 +1,10 @@
+reading,family,step,n,n_neg,median,verdict
+S-GB n=32 (feasible designs),linear,L2 vs L1,7,6,-7.034604748885815,better
+S-GB n=32 (feasible designs),linear,L3 vs L2,7,3,1.1766418303205768,no difference
+S-GB n=32 (feasible designs),linear,L4 vs L3,7,0,15.953962833094124,worse
+S-GB n=32 (feasible designs),tabpfn,L2 vs L1,7,7,-4.427426637240622,better
+S-GB n=32 (feasible designs),tabpfn,L3 vs L2,7,7,-1.8281024115951823,better
+S-GB n=32 (feasible designs),tabpfn,L4 vs L3,7,0,5.043923012092641,worse
+S-GB n=32 (feasible designs),cnn,L2 vs L1,7,6,-6.951331139769078,better
+S-GB n=32 (feasible designs),cnn,L3 vs L2,7,7,-5.313526070161153,better
+S-GB n=32 (feasible designs),cnn,L4 vs L3,7,0,24.591957948710387,worse

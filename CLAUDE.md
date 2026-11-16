@@ -4,7 +4,7 @@ Read this file fully at the start of every session. It is the contract for all w
 
 ## 1. Purpose
 
-This repository produces **Paper B**: *a hybrid, identifiability-guided estimator of thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature. Physics-based estimation (Paper A) and data-driven estimation each have limits; the hybrid keeps the part that net load identifies (the heating slope) and learns only the part it does not (the scale m_h and a residual).* The contribution is a method, not a benchmark (Alex, 2026-10-09). Target: capacity only (`HP_Peak`).
+This repository produces **Paper B**: *a hybrid, identifiability-guided estimator of thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature. Physics-based estimation (Paper A) and data-driven estimation each have limits; the hybrid keeps the part that net load identifies (the heating slope) and learns only the part it does not (the scale m_h and a residual).* **After 06 (decision 2026-11-13):** the method is identifiability-guided hybridisation through the **inputs** (physics-derived features, L2) and the **target** (a residual on the Paper A estimate, L3). It is labelled post hoc and tested confirmatorily on transfer in 07. The learned transferable scale (L4) and the ensemble (L5) are pre-registered negative results. The contribution is a method, not a benchmark (Alex, 2026-10-09). Target: capacity only (`HP_Peak`).
 
 The companion **Paper A** (repo `hp-sensitivity-paper`) establishes identifiability. Its main points:
 - Absolute HP counts and N_total are **not** identifiable (scale ambiguity).
@@ -29,8 +29,8 @@ Iterations 00–05b use the earlier numbering (RQ1 targets vs identifiability, R
 - 03a / 03b — fair test of ML against the physics estimator (code / runs); done;
 - 04 — data inventory for larger pools and HP-profile simulation feasibility; done;
 - 05a / 05b — GB-EoH pool with analog-matched LCL filler (code) / is training data what holds ML back? (runs); done;
-- 06 — the hybrid ladder (L0–L5; axes A, S, R), both pools;
-- 07 — transfer validation (axis T; CH ↔ GB under harmonised labels, all rungs);
+- 06 — the hybrid ladder (L0–L5; axes A, S, R), both pools; done (rule 2 failed; L5 dropped);
+- 07 — transfer validation: confirmatory test of L2/L3 (rules T1–T3), axis T for the 06 record, CH ↔ GB under the harmonised label `HL`;
 - 08 — change-detection use case (EoH multi-year panel);
 - 09+ — freeze and draft.
 
@@ -121,7 +121,7 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
   - **S, sample efficiency:** GB learning curve at n ∈ {32, 62, 100, all}, 10 seeds × 2 draws; primary point n = 62; n\* (where a rung reaches L0) also reported. From the decision of 2026-10-12, S runs on anchor `size` and one feature set per rung (L1 `whdd` / `raw`, L2–L4 `netfit` / `rawphys`; as 05b Arm 1 under A4); its n = all point is A-GB restricted to those configurations.
   - **R, robustness:** (i) the frozen n = all models on test aggregates with fillers ×0.5 and ×1.5, as the degradation ΔWAPE vs ×1.0; (ii) the same rung refit on the temporal replication year.
   - **T, transfer:** evaluated in 07; 06 persists every rung's per-seed models for it.
-- **"Better" on an axis:** paired per-seed ΔWAPE < 0 in ≥ 8 of 10 seeds (≥ 80 % of seed × draws on S) **and** median ΔWAPE ≤ −1 pp. On R the degradation is compared, not the level.
+- **"Better" on an axis:** paired per-seed ΔWAPE < 0 in ≥ 8 of 10 seeds (≥ 80 % of seed × draws on S) **and** median ΔWAPE ≤ −1 pp. On R the degradation is compared, not the level. *(06 rules, applied on WAPE, of record.)* From 07 on, "better" = paired per-seed difference < 0 in ≥ 8 of 10 seeds **and** median per-seed relative difference ≤ −5 % (the same verdict in nMAE and WAPE).
 - **Rule 1, ladder steps:** per family and dataset, each rung against the one below (L2 vs L1, L3 vs L2, L4 vs L3) on A, S and R: better / worse / no difference.
 - **Rule 2, the hybrid claim:** the hybrid = L4 with its best family; the best pure data-driven model = the best of L1 / L2 over the families (both by inner-CV WAPE). The claim holds if (a) on A the hybrid's median WAPE is at most 1 pp above the best pure data-driven model (GB, overall) **and** (b) the hybrid is better on at least two of S, R, T. It is closed in 07. The hybrid vs L0 is reported on every axis.
 - **Rule 3, L5:** an ensemble form is kept only if it beats L4 by median ≤ −1 pp and in ≥ 8/10 seeds, overall or in the † bins, on GB. Otherwise it is a negative result and not part of the method.
@@ -132,7 +132,7 @@ Paper A's penetration bins (≤ 15 / 15–35 / 35–65 / > 65 %) are always repo
 - **Grouped CV inside train.** Hyperparameter tuning and feature selection use folds built from household-disjoint sub-pools. Never use KFold over substations that share households.
 - **Repeated splits.** Headline metrics are the mean ± spread over at least 10 independent household splits (seeds).
 - **Uncertainty = across-split summary (median, mean ± std, 5 %–90 %).** No bootstrap unless an iteration says so.
-- **Primary metric = WAPE** (Σ|ŷ − y| / Σy, as in Paper A); it comes first in `summary.csv` and in every table. MAPE and R² are secondary (decision 2026-09-29, 02b review).
+- **Primary metric = nMAE** (from 07; decision 2026-11-16): mean|ŷ − y| / max(y) × 100 %, per evaluation set (seed × dataset × arm; per Paper A bin over that bin's substations, with the bin's own maximum). Report the normaliser max(y) (kW) beside each cell. It comes first in `summary.csv` and in every table. **WAPE** (Σ|ŷ − y| / Σy, as in Paper A) is secondary; MAPE and R² follow. On one set nMAE = WAPE · mean(y)/max(y). Results up to 06 were decided on WAPE and stand as recorded.
 - **Effective sample size.** Always report the number of distinct HP households behind each result.
 - **Physics baselines are always reported next to ML:**
   - hockey-stick slope-only map;

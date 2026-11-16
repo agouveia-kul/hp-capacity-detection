@@ -1,0 +1,4 @@
+reading,family,step,verdict_record,verdict_rel_nmae,verdict_rel_wape,median_rel,median_record_pp,table,arm,cell,ensemble
+A-GB pbin>65,tabpfn,L3 vs L2,no difference,worse,worse,0.06384452540022294,0.5112989400211116,steps,,,
+A-CH pbin>65,tabpfn,L4 vs L3,no difference,better,better,-0.11863666161424113,-0.9004967392065888,steps,,,
+,,,no difference,better,better,-0.06881240381177986,,L5,a_gb,pbin35-65,L5b

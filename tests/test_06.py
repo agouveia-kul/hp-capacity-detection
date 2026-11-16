@@ -436,7 +436,9 @@ def test_probe_jobs_are_jobs_of_the_run():
     ids = {j["id"] for j in RQ.jobs(QUEUE)}
     pj = RQ.jobs(probe)
     assert len(pj) == 8 * (5 + 3) and {j["id"] for j in pj} <= ids and {j["seed"] for j in pj} == {0}
-    assert all(probe[k] == QUEUE[k] for k in ("exp_id", "out_dir", "workers", "threads", "families", "frozen", "fixed_params"))
+    assert all(probe[k] == QUEUE[k] for k in ("exp_id", "out_dir", "workers", "threads", "frozen", "fixed_params"))
+    no_timeout = lambda f: {k: {kk: vv for kk, vv in v.items() if kk != "timeout_s"} for k, v in f.items()}   # noqa: E731  B2 amended at run time (DECISIONS 2026-11-06/09)
+    assert no_timeout(probe["families"]) == no_timeout(QUEUE["families"])
     strip = lambda a: {k: v for k, v in a.items() if k not in ("seeds", "draws")}               # noqa: E731
     assert [strip(a) for a in probe["arms"]] == [strip(a) for a in QUEUE["arms"]]
 

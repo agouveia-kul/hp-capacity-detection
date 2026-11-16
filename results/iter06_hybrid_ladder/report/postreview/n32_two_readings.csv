@@ -1,0 +1,27 @@
+reading,family,rung,n32_wape_median,n32_units,n_star_median,n_star_finite
+as registered (all designs),linear,L1,37.76625683006159,7,245.6676046724501,9/10
+as registered (all designs),linear,L2,30.045876857262822,7,inf,3/10
+as registered (all designs),linear,L3,31.2225186875834,7,68.50810688512543,10/10
+as registered (all designs),linear,L4,49.53635215767586,7,inf,4/10
+as registered (all designs),tabpfn,L1,41.85655902944374,15,72.73939500244965,10/10
+as registered (all designs),tabpfn,L2,39.71338494199089,15,53.860545330885174,10/10
+as registered (all designs),tabpfn,L3,31.53459292214677,7,47.032134151856745,10/10
+as registered (all designs),tabpfn,L4,43.892582257697065,15,66.48558168225554,10/10
+as registered (all designs),cnn,L1,45.04131188155012,11,60.59881570475302,10/10
+as registered (all designs),cnn,L2,35.72953416774093,11,59.959680956639076,10/10
+as registered (all designs),cnn,L3,27.27165500938617,7,39.77753641261359,10/10
+as registered (all designs),cnn,L4,45.31160288391836,11,66.62973818443359,10/10
+as registered (all designs),physics,L0,26.33196692827687,20,,
+designs feasible for every job type,linear,L1,37.76625683006159,7,245.6676046724501,9/10
+designs feasible for every job type,linear,L2,30.045876857262822,7,inf,3/10
+designs feasible for every job type,linear,L3,31.2225186875834,7,68.50810688512543,10/10
+designs feasible for every job type,linear,L4,49.53635215767586,7,inf,4/10
+designs feasible for every job type,tabpfn,L1,37.683833128153374,7,72.86176640662038,10/10
+designs feasible for every job type,tabpfn,L2,33.28455307315461,7,50.982892098103065,10/10
+designs feasible for every job type,tabpfn,L3,31.53459292214677,7,47.032134151856745,10/10
+designs feasible for every job type,tabpfn,L4,35.45111049568009,7,63.29280605304417,10/10
+designs feasible for every job type,cnn,L1,36.78867182269988,7,57.67652815393572,10/10
+designs feasible for every job type,cnn,L2,35.20807561131697,7,60.00934307151559,10/10
+designs feasible for every job type,cnn,L3,27.27165500938617,7,39.77753641261359,10/10
+designs feasible for every job type,cnn,L4,59.91626929107827,7,68.37393889130192,10/10
+designs feasible for every job type,physics,L0,25.92532664986432,7,,
