@@ -146,3 +146,41 @@ def test_doy_perm_aligns_calendars():
     assert p[0] == 61 and p[-1] == 60 and sorted(p) == list(range(365))         # 1 Jan = day 61 of Nov-Oct; 31 Dec = day 60
     assert (T.doy_perm("2021-11-01", "2021-11-01") == np.arange(365)).all()
 
+
+RUNNER = '''import time
+import pandas as pd
+
+
+def run_seed(cfg, seed):
+    time.sleep(float(cfg.get("toy_sleep", 0)))
+    return {"metrics": pd.DataFrame([{"exp_id": "toy", "split_seed": seed, "dataset": "toy", "target": "HP_Peak", "method": m,
+                                      "anchor": "size", "feature_set": "-", "mode": "direct", "target_transform": "none", "cell": "all",
+                                      "metric": "wape", "value": 1.0, "n_substations": 1, "n_hp_households": 1} for m in cfg["models"]])}
+'''
+
+
+def test_watchdog_kills_a_blocked_job_on_time_and_spares_the_others(tmp_path):
+    """Task 3: a job blocked in one native call (time.sleep) past its limit is killed within the grace period, not when the call
+    returns (06: up to 2.5 h late); a job running beside it finishes; a relaunch never retries the killed job in a loop."""
+    import time
+    import yaml
+    from paperb import run_queue as RQ
+    (tmp_path / "toy07_runner.py").write_text(RUNNER)
+    arm = {"name": "a", "config": "tests/fixtures/toy_queue_arm.yaml", "runner": "toy07_runner:run_seed", "seeds": [0],
+           "families": ["blocked", "ok"]}
+    q = {"exp_id": "toy07", "out_dir": str(tmp_path / "out"), "workers": 2, "threads": 1, "sys_path": [str(tmp_path)],
+         "watchdog": True, "watchdog_grace_s": 2,
+         "families": {"blocked": {"models": ["Lasso"], "set": ["toy_sleep=120"], "timeout_s": 1},
+                      "ok": {"models": ["Ridge"], "set": ["toy_sleep=8"]}}, "arms": [arm]}
+    cfg = tmp_path / "toy07.yaml"
+    cfg.write_text(yaml.safe_dump(q))
+    t0 = time.time()
+    prog = RQ.main(["--config", str(cfg)])
+    took = time.time() - t0
+    J = tmp_path / "out" / "jobs"
+    assert prog == {**prog, "done": 1, "failed": 1, "remaining": 0}
+    txt = (J / "a__s0__d0__nall__blocked.failed").read_text()
+    assert txt.startswith("reason: timeout") and "killed by the watchdog" in txt
+    assert (J / "a__s0__d0__nall__ok.done").exists()
+    assert took < 60, took                                                       # killed at ~1 + 2 s, not after the 120 s call
+    assert RQ.main(["--config", str(cfg)])["failed"] == 1

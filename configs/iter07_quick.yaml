@@ -1,0 +1,106 @@
+# Iteration 07 quick run (hard rule 7): seed 0, physics + linear + CNN direct both directions, the CH seed-0 linear L4a refit.
+# The quick refit persists under results/iter07_transfer/quick/models (its transfer arms read it through transfer.models_dir). Validity and runtime only.
+exp_id: iter07_quick
+out_dir: results/iter07_transfer/quick
+workers: 3
+threads: 4
+watchdog: true
+watchdog_grace_s: 60
+frozen:
+  models_csv: results/iter07_transfer/l4a_refits.csv
+  by_rung: true
+families:
+  physics:
+    timeout_s: 1800
+  linear:
+    models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+    residual_models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+    timeout_s: 3600
+  tabpfn_d:
+    models:
+    - TabPFN
+    set:
+    - modes=[direct]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 7200
+  tabpfn_r:
+    residual_models:
+    - TabPFN
+    set:
+    - modes=[residual]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 7200
+  tabpfn_h:
+    residual_models:
+    - TabPFN
+    set:
+    - modes=[l4a]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 7200
+  cnn_d:
+    models:
+    - CNN
+    set:
+    - modes=[direct]
+    timeout_s: 7200
+  cnn_r:
+    residual_models:
+    - CNN
+    set:
+    - modes=[residual]
+    timeout_s: 7200
+  cnn_h:
+    residual_models:
+    - CNN
+    set:
+    - modes=[l4a]
+    timeout_s: 21600
+arms:
+- name: refit_ch
+  config: configs/iter06_a_ch.yaml
+  frozen: true
+  frozen_arm: a_ch
+  persist_dir: results/iter07_transfer/quick/models/a_ch
+  seeds: []
+  seeds_by_family:
+    linear:
+    - 0
+  families:
+  - linear
+- name: ch_gb
+  config: configs/iter07_ch_gb.yaml
+  runner: paperb.transfer:run_seed
+  after: refit_ch
+  seeds:
+  - 0
+  families:
+  - physics
+  - linear
+  - cnn_d
+  set:
+  - transfer.models_dir=results/iter07_transfer/quick/models
+- name: gb_ch
+  config: configs/iter07_gb_ch.yaml
+  runner: paperb.transfer:run_seed
+  after: refit_gb
+  seeds:
+  - 0
+  families:
+  - physics
+  - linear
+  - cnn_d
+  set:
+  - transfer.models_dir=results/iter07_transfer/quick/models

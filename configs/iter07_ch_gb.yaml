@@ -1,0 +1,8 @@
+# Iteration 07 transfer arm a_ch -> a_gb (iterations/07-transfer-validation.md). Runner paperb.transfer:run_seed (configs/iter07.yaml).
+# The base is the SOURCE pool's 06 arm config: its physics_baselines, models and modes select what a family job carries; the
+# transfer runner reads both pools' 06 configs itself (feature pipeline, T_design, holidays) and persists nothing.
+base: configs/iter06_a_ch.yaml
+exp_id: iter07_ch_gb
+out_dir: results/iter07_transfer/ch_gb
+transfer: {source: a_ch, target: a_gb}
+refit: null
