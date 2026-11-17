@@ -45,8 +45,8 @@ that call returns. The queue refuses to start when workers x threads exceed the 
 07 (transfer): `watchdog: true` runs every job in its own spawned process and kills a job still alive `watchdog_grace_s` (60) after
 its family's `timeout_s`, whatever native call it is blocked in (06: the async timeout fired up to 2.5 h late); the other jobs are
 not touched (`run_watched`). A frozen arm with `persist_dir` persists its refits by rung (the L4a refits); `frozen_arm` selects the
-rows of a `models_csv` that holds several 06 arms; `seeds_by_family` lists an arm's seeds per family; `after` waits only for a
-dependency job that exists.
+rows of a `models_csv` that holds several 06 arms; `seeds_by_family` lists an arm's seeds per family; with `after_optional: true`
+an arm waits only for a dependency job that exists (default: a missing one keeps it waiting, as in 06).
 """
 import os
 import platform
@@ -368,11 +368,12 @@ def main(argv=None):
         raise SystemExit(f"{q['workers']} workers x {threads} threads exceed the {cores} physical cores: lower --workers or --threads")
     after = {arm["name"]: arm["after"] for arm in q["arms"] if arm.get("after")}
     job_ids = {j["id"] for j in all_jobs}
+    optional = {arm["name"] for arm in q["arms"] if arm.get("after_optional")}
 
     def ready(j):                                                     # 06: the arm it depends on has finished this seed and family
         dep = after.get(j["arm"])
         dep_id = f"{dep}__s{j['seed']}__d0__nall__{j['family']}"
-        return (dep is None or j["family"] == "physics" or dep_id not in job_ids                 # 07: no such job (no refit needed)
+        return (dep is None or j["family"] == "physics" or (j["arm"] in optional and dep_id not in job_ids)   # 07: no refit needed
                 or (out / "jobs" / f"{dep_id}.done").exists())
     t_start, t_stop = time.time(), stop_time(a.stop_at)
     print(f"[{datetime.now():%H:%M:%S}] queue {q['exp_id']}: {len(todo)} of {len(all_jobs)} jobs to run, {q['workers']} workers x "

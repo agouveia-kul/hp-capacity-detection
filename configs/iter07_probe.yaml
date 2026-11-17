@@ -104,6 +104,7 @@ arms:
   config: configs/iter07_ch_gb.yaml
   runner: paperb.transfer:run_seed
   after: refit_ch
+  after_optional: true
   seeds:
   - 0
   families:
@@ -119,6 +120,7 @@ arms:
   config: configs/iter07_gb_ch.yaml
   runner: paperb.transfer:run_seed
   after: refit_gb
+  after_optional: true
   seeds:
   - 0
   families:

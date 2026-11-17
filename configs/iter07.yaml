@@ -25,7 +25,7 @@ arms:
      seeds: [], seeds_by_family: {linear: [3, 6], tabpfn_h: [3, 5, 6, 7], cnn_h: [3, 4, 5, 6, 8]}, families: [cnn_h, tabpfn_h, linear]}
   - {name: refit_ch, config: configs/iter06_a_ch.yaml, frozen: true, frozen_arm: a_ch, persist_dir: results/iter07_transfer/models/a_ch,
      seeds: [], seeds_by_family: {linear: [0, 2, 3, 5, 7, 8, 9], tabpfn_h: [0, 2, 3, 5, 7, 8], cnn_h: [0, 2, 3, 5, 6, 7, 9]}, families: [cnn_h, tabpfn_h, linear]}
-  - {name: ch_gb, config: configs/iter07_ch_gb.yaml, runner: "paperb.transfer:run_seed", after: refit_ch, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  - {name: ch_gb, config: configs/iter07_ch_gb.yaml, runner: "paperb.transfer:run_seed", after: refit_ch, after_optional: true, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
-  - {name: gb_ch, config: configs/iter07_gb_ch.yaml, runner: "paperb.transfer:run_seed", after: refit_gb, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  - {name: gb_ch, config: configs/iter07_gb_ch.yaml, runner: "paperb.transfer:run_seed", after: refit_gb, after_optional: true, seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
      families: [physics, linear, tabpfn_d, tabpfn_r, tabpfn_h, cnn_d, cnn_r, cnn_h]}
