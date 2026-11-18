@@ -1,5 +1,6 @@
 # Iteration 07 probe: the run's (configs/iter07.yaml) seed-0 jobs, same job ids and out_dir; the run skips them.
 # Logs runtime and validity counts only (no transfer error metric before the report script is committed).
+# 2026-11-18: seed 0 has no GB refit cell, so the probe adds one GB refit per family at seed 3 (the run's own job ids) to time them.
 exp_id: iter07
 out_dir: results/iter07_transfer
 workers: 5
@@ -25,7 +26,7 @@ families:
     - Lasso
     - ElasticNet
     - PLS
-    timeout_s: 3600
+    timeout_s: 1800
   tabpfn_d:
     models:
     - TabPFN
@@ -33,7 +34,7 @@ families:
     - modes=[direct]
     group: tabpfn
     max_concurrent: 2
-    timeout_s: 7200
+    timeout_s: 1800
   tabpfn_r:
     residual_models:
     - TabPFN
@@ -41,7 +42,7 @@ families:
     - modes=[residual]
     group: tabpfn
     max_concurrent: 2
-    timeout_s: 7200
+    timeout_s: 1800
   tabpfn_h:
     residual_models:
     - TabPFN
@@ -49,25 +50,25 @@ families:
     - modes=[l4a]
     group: tabpfn
     max_concurrent: 2
-    timeout_s: 7200
+    timeout_s: 1800
   cnn_d:
     models:
     - CNN
     set:
     - modes=[direct]
-    timeout_s: 7200
+    timeout_s: 1800
   cnn_r:
     residual_models:
     - CNN
     set:
     - modes=[residual]
-    timeout_s: 7200
+    timeout_s: 1800
   cnn_h:
     residual_models:
     - CNN
     set:
     - modes=[l4a]
-    timeout_s: 21600
+    timeout_s: 1800
 arms:
 - name: refit_gb
   config: configs/iter06_a_gb.yaml
@@ -76,9 +77,12 @@ arms:
   persist_dir: results/iter07_transfer/models/a_gb
   seeds: []
   seeds_by_family:
-    linear: []
-    tabpfn_h: []
-    cnn_h: []
+    linear:
+    - 3
+    tabpfn_h:
+    - 3
+    cnn_h:
+    - 3
   families:
   - cnn_h
   - tabpfn_h

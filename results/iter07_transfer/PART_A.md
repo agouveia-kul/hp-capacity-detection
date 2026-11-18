@@ -1,4 +1,4 @@
-# Iteration 07, Part A — stopped after Task 2 (split proposed), 2026-11-16
+# Iteration 07, Part A — A1 (Tasks 0–2) and A2 (Tasks 3–4) done; stopped for the pre-run check, 2026-11-18
 
 Not the iteration's REVIEW. **No transfer error metric was computed or opened.** The only error numbers computed are the round
 trip of test (c): a pool's own models on its own 06 test set, compared with the 06 predictions. Those are in-pool 06 numbers,
@@ -162,7 +162,57 @@ The brief caps Part A at about 300 logic lines: "if it is bigger, stop after Tas
   outputs before their `.done`, and persisted model files before their manifest. A crash can now lose only a job that is still
   running, and a relaunch reruns it.
 
-**Probe: not started.** OneDrive restarted with the 21:39 reboot, so its sync is probably running again.
+**Probe** (`configs/iter07_probe.yaml`): done, **22 of 22 jobs, 0 failed**. It ran 2026-11-17 23:48 to 2026-11-18 00:06, with
+OneDrive paused by Alex, started detached (`launch_detached.cmd`, normal priority, 5 workers × 4 threads; no scheduled task),
+logging to `log.txt`. It uses the run's own job ids, so the run skips these 22 jobs.
+- **Jobs:** the seed-0 jobs of both directions (16), the 3 CH seed-0 L4a refits, and one GB refit per family at seed 3.
+- **Why seed 3 for GB:** seed 0 has no GB refit cell (GB's seed-0 L4 winners are L4a). Seed 3 has the largest GB CNN epoch count
+  (168), so it is the worst case.
+- **Validity:**
+  - every expected row is present (455 × 3 `label_def` per CH→GB spec, 135 × 3 per GB→CH spec), with 0 NaN predictions and no
+    load error;
+  - all 6 refits match their `l4a_refits.csv` row (spec, params; CNN epochs 83 and 168).
+- **Invalid base (ŝ = 0), seed 0, a count to report:**
+  - GB→CH: 25 of 135 for `paperA_corr`, `paperA_corr_cal`, `paperA_l4a` and the L4 rows of all three families;
+  - CH→GB: 22 of 455 for `paperA_corr@tgt_s0` only.
+- **Seen in the log:** the CNN refit logs the in-pool GB test WAPE of its three initialisations, a 06 B1 diagnostic. The choice
+  among them uses validation loss only. It is an in-pool number, not a transfer metric.
+
+| job (seed 0 unless noted) | CH→GB (s) | GB→CH (s) |
+|---|---|---|
+| physics / linear | 9 / 13 | 13 / 14 |
+| CNN direct / residual / L4 | 22 / 20 / 21 | 23 / 20 / 18 |
+| TabPFN direct / residual / L4 | 132 / 48 / 42 | **522** / 283 / 252 |
+
+| refit job | CH (seed 0) | GB (seed 3) |
+|---|---|---|
+| linear | 9 s | 12 s |
+| TabPFN L4a | 33 s | 164 s |
+| CNN L4a | 46 s | 179 s |
+
+GB-source TabPFN is the slow family: it refits its GB train context for each of its models. 06's GB CNN refit took ~1.3 h because
+it included the search; here the parameters and epoch count are fixed.
+
+**Timeouts:** `timeout_s` = max(3 × the probe's longest job of the family, 1,800 s) = **1,800 s for every family**, in
+`iter07.yaml` and `iter07_probe.yaml`. The largest 3× value is 1,566 s (TabPFN direct). The 30-min floor allows for 06's lesson
+that run jobs can run several times slower than the probe. The watchdog kills a job 60 s past its limit.
+
+**Estimate for the run** (`configs/iter07.yaml`): 191 jobs; 169 left after the probe (144 transfer, 25 refits).
+- About 4.1 job-hours: transfer 9 seeds × 1,452 s ≈ 3.6 h, plus refits ≈ 0.5 h, with each GB CNN refit scaled by its epochs.
+- TabPFN is capped at 2 at a time and makes up about 3.4 job-hours of that, so it sets the wall time: **≈ 2 h at 5 workers**.
+- **≈ 4 h** if jobs run twice as slowly as in the probe. Either way, well within one night.
+
+**Command (Alex runs it; I register nothing):**
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config configs\iter07.yaml -StartAt 22:00 -Continuous -Workers 5
+```
+
+- **Before:** pause OneDrive sync for the run, and resume it only after the run and its merge.
+- **Restart behaviour:** the PC crashed twice on 2026-11-17 (above), and a reboot resumes OneDrive sync. A crash now loses at most
+  the jobs that were running. Relaunching the same command resumes; add `--retry-failed` only if a job is marked failed.
+- **Daytime alternative:** at ~2 h the run could also go in the daytime, through the same detached launcher as the probe, on your
+  request: `results\iter07_transfer\launch_detached.cmd configs\iter07.yaml`.
 
 ## Assumptions and deviations (for the REVIEW)
 - **HL GB:** a home without any P_ih reading has immersion 0 (data dictionary). The 40-home ambiguity is above.
@@ -176,8 +226,8 @@ The brief caps Part A at about 300 logic lines: "if it is bigger, stop after Tas
   `predictions.csv` and `labels/label_audit.csv` (c_tgt).
 
 ## Decisions for Alex
-1. **The split.** Approve A1 (Tasks 0–2) as reviewed, then let me finish A2: refits, quick run, probe, timeouts, estimate, and
-   the scheduling command. *Recommended:* yes. A2 is drafted and adds about 106 logic lines.
+1. **The split.** Approved 2026-11-17, and A2 is done: quick run, probe, timeouts, estimate, command. **Pre-run check:** start the
+   full run (command above)? *Recommended:* yes. Part B's report script is committed before any result is read.
 2. **The 40 GB homes with a design immersion load but no immersion channel.** *Recommended:* keep immersion 0, as the data
    dictionary reads, and report the −0.46 % bound as a sensitivity line in the label table. Excluding the homes would change
    the 06 test sets.
