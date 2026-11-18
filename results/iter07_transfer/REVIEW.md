@@ -1,6 +1,6 @@
 # Iteration 07 — Transfer validation (CH ↔ GB, frozen 06 models, harmonised label HL)
 **Goal:** test confirmatorily, on the pool it was not selected on, whether identifiability-guided hybridisation (L2/L3) beats pure data-driven (T1) and physics (T2), and close the 06 record on axis T (T3).
-**Branch / commit:** iter/07-transfer @ RESULTS_COMMIT (report script `0238677`, committed and pushed before any transfer result was read)
+**Branch / commit:** iter/07-transfer @ 6f97acc (report script `0238677`, committed and pushed before any transfer result was read)
 **Changed:**
 - Logic lines:
   - `labels_hl.py` 75, `iter07_labels.py` 68, `transfer.py` 165 (Part A1);
