@@ -1,0 +1,5 @@
+direction,step,seeds,seeds_A<B,n,median_rel_diff_pct,verdict
+CH->GB,"T3 L4a vs L3, CNN",all seeds (of record),10,10,-23.8,better
+CH->GB,"T3 L4a vs L3, CNN",seed 6 excluded (not of record),9,9,-23.0,better
+GB->CH,"T3 L4a vs L3, CNN",all seeds (of record),2,10,18.5,worse
+GB->CH,"T3 L4a vs L3, CNN",seed 6 excluded (not of record),2,9,19.0,no difference

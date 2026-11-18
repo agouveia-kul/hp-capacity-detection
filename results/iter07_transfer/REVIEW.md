@@ -48,7 +48,7 @@
 **Problems found:**
 - **GB seed-6 CNN L4a refit collapsed.** Following B1, it chose the initialisation with the lowest validation loss (0.117), whose in-pool test WAPE is 213.8 %. 06's own fit of the same configuration had nMAE 4.4 %. The other 10 GB refits reproduce 06 within 0.3 pp.
   - Kept as pre-registered.
-  - No verdict changes: GB→CH L4a vs L3 CNN is still worse without seed 6 (2/9 seeds, +19 %).
+  - *Corrected post-review:* without seed 6, GB→CH L4a vs L3 CNN is "no difference" (7 of 9 seeds worse, +19 %; the rule needs 8), not "still worse" as first written. The verdict of record (all 10 seeds: worse) stands.
   - It inflates the CH→GB L4 CNN in-pool reference for seed 6.
   - B1's validation loss can pick a degenerate model.
 - **Residual blow-ups:** CH→GB L3/L4 linear blow up on single seeds (nMAE 53 and 80 at seeds 3 and 9). The residual exp(f) extrapolates on out-of-range features, as in 06's R(i).
@@ -65,3 +65,27 @@
    - Primary: `paperA_corr` with the site's own s₀, which is label-free and has the smallest physics gap.
    - Comparator: TabPFN L2 refit on GB (best in-pool).
    - Detect changes on differences, so that a stable bias cancels.
+
+**Post-review (2026-11-18)** — post-review, not of record (`scripts/paperb/iter07_postreview.py`, saved outputs only; `report/postreview/`).
+- **WAPE beside nMAE** (HL, median over seeds; transfer | in-pool):
+
+  | direction | H\* overall | H\* ≤ 15 % | D\* overall | L0ref overall |
+  |---|---|---|---|---|
+  | CH→GB | nMAE 10.9 \| 3.5; WAPE 51.9 \| 16.4 | nMAE 21.2 \| 4.4; WAPE 114 \| 24 | nMAE 10.3; WAPE 50.6 | nMAE 18.2; WAPE 88.5 |
+  | GB→CH | nMAE 10.1 \| 5.0; WAPE 31.4 \| 15.4 | nMAE 8.5 \| 4.8; WAPE 36.5 \| 19.6 | nMAE 12.3; WAPE 37.6 | nMAE 14.0; WAPE 43.3 |
+
+  All rows are in `postreview/wape_nmae.csv`.
+- **Bias** (`postreview/bias.csv`, median over seeds of mean(pred − y)/max y, overall):
+  - CH→GB: `paperA_corr` +21 %, target-s₀ row +7 %;
+  - GB→CH: `paperA_corr` −13 %, target-s₀ row −4 %, `paperA_sh_mh` +3 %.
+
+  The sign follows the s₀ in use: CH 0.0054 vs GB 0.0127 kW/K, a factor of 2.3, against m_h 0.0182 vs 0.0250 (1.4).
+- **Bias cancellation:** the target-s₀ row's GB→CH score is partly bias cancellation. The larger GB pilot scale offsets the bias from CH's own load, so it beats CH's own in-pool physics (5.6 vs 7.9 nMAE), as uncorrected `paperA_sh_mh` does (6.4 vs 15.9).
+- **Seed 6 excluded** (`postreview/seed6.csv`): T3 L4a vs L3 CNN is better CH→GB (9/9) and no difference GB→CH (7 of 9 worse). The "Problems found" line is corrected above.
+- **Decisions (DECISIONS.md 2026-11-18):**
+  - outcome and reading lines;
+  - run go and the Part A open items: immersion 0 for the 40 homes; CH T_design −8 °C UNVERIFIED;
+  - Decision 1: paper reframed as an identifiability-guided analysis of what transfers; s₀ is the bottleneck;
+  - Decision 2: 07b-i read-only audit of unseen targets before any local-s₀ rung;
+  - Decision 3: 08 pre-registers TabPFN L2 and `paperA_corr` with site s₀, no single primary, change on differences;
+  - method line: CNN initialisations are chosen on a household-disjoint validation fold from 07b/08 on.

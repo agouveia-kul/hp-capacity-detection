@@ -4,7 +4,14 @@ Read this file fully at the start of every session. It is the contract for all w
 
 ## 1. Purpose
 
-This repository produces **Paper B**: *a hybrid, identifiability-guided estimator of thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature. Physics-based estimation (Paper A) and data-driven estimation each have limits; the hybrid keeps the part that net load identifies (the heating slope) and learns only the part it does not (the scale m_h and a residual).* **After 06 (decision 2026-11-13):** the method is identifiability-guided hybridisation through the **inputs** (physics-derived features, L2) and the **target** (a residual on the Paper A estimate, L3). It is labelled post hoc and tested confirmatorily on transfer in 07. The learned transferable scale (L4) and the ensemble (L5) are pre-registered negative results. The contribution is a method, not a benchmark (Alex, 2026-10-09). Target: capacity only (`HP_Peak`).
+This repository produces **Paper B**: *a hybrid, identifiability-guided estimator of thermostatically controlled load (TCL) / heat-pump (HP) installed capacity from aggregated LV net load and temperature. Physics-based estimation (Paper A) and data-driven estimation each have limits; the hybrid keeps the part that net load identifies (the heating slope) and learns only the part it does not (the scale m_h and a residual).*
+
+**After 06 and 07 (decisions 2026-11-13, 2026-11-18):** the paper is a pre-registered, identifiability-guided analysis of what aggregated net load lets physics, data-driven and hybrid estimators learn and transfer.
+- The hybrid ladder is reported with its negative results (L4, L5) and with its post hoc in-pool gain (L2/L3), which is not confirmed under transfer (07 T1).
+- Under transfer the HP-side scale transfers approximately, while the non-HP temperature response s₀ is site-specific and is the bottleneck.
+- A label-free estimator with a locally estimated s₀ becomes a contribution only if 07b confirms it on unseen data.
+
+Target: capacity only (`HP_Peak`).
 
 The companion **Paper A** (repo `hp-sensitivity-paper`) establishes identifiability. Its main points:
 - Absolute HP counts and N_total are **not** identifiable (scale ambiguity).
@@ -30,16 +37,18 @@ Iterations 00–05b use the earlier numbering (RQ1 targets vs identifiability, R
 - 04 — data inventory for larger pools and HP-profile simulation feasibility; done;
 - 05a / 05b — GB-EoH pool with analog-matched LCL filler (code) / is training data what holds ML back? (runs); done;
 - 06 — the hybrid ladder (L0–L5; axes A, S, R), both pools; done (rule 2 failed; L5 dropped);
-- 07 — transfer validation: confirmatory test of L2/L3 (rules T1–T3), axis T for the 06 record, CH ↔ GB under the harmonised label `HL`;
-- 08 — change-detection use case (EoH multi-year panel);
+- 07 — transfer validation CH ↔ GB; done (T1 not confirmed);
+- 07b-i — read-only audit of unseen targets for a label-free local-s₀ estimator;
+- 07b — confirmatory test of that estimator, if 07b-i finds a target;
+- 08 — change-detection use case within GB-EoH (two years);
 - 09+ — freeze and draft.
 
 **Paper storyline (Alex, 2026-10-09; replaces the earlier "paper lead"):**
 1. the LV network and its DER are unobservable;
 2. physics-based estimation (Paper A) has limits;
 3. data-driven estimation (feature types × models) has other limits;
-4. a **hybrid, identifiability-guided estimator** is the methodological contribution;
-5. validation by transfer;
+4. identifiability-guided hybridisation, tested as a pre-registered ladder (what pays within a pool, what does not);
+5. transfer: what is transferable and what is site-specific;
 6. use case: detecting a change in capacity.
 
 Target: capacity only.
