@@ -214,6 +214,10 @@ powershell -ExecutionPolicy Bypass -File scripts\schedule_overnight.ps1 -Config 
 - **Daytime alternative:** at ~2 h the run could also go in the daytime, through the same detached launcher as the probe, on your
   request: `results\iter07_transfer\launch_detached.cmd configs\iter07.yaml`.
 
+**Run started 2026-11-18 00:17** on Alex's request ("Launch it now"). It uses the detached launcher (PID 4588), with no
+scheduled task, normal priority and 5 workers × 4 threads, logging to `log.txt`. OneDrive was paused, with no reboot since the
+pause. The queue took the 169 remaining jobs. To resume after a crash, run the same launcher again.
+
 ## Assumptions and deviations (for the REVIEW)
 - **HL GB:** a home without any P_ih reading has immersion 0 (data dictionary). The 40-home ambiguity is above.
 - **c is per substation, then the median over the seed's train substations** (the brief's wording). Per bin, c is reported but
