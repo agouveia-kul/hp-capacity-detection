@@ -1,0 +1,31 @@
+07b-i audit, config iter07b_i_quick, commit 7abe655a6b519ce1428435af41da5bd3e83eaadb, runtime 28 s
+Blindness: no estimator, prediction or error metric computed on any candidate.
+
+Files opened (path | purpose):
+data\_paperb\iter07bi_quick\be_series_days.parquet | audit cache (written by this script)
+data\DER_capacity_by_installation.csv | BE monitoring: DER table (HP electrical peak = label)
+data\95951bd3-6123-4264-bf38-c7c220761a9b_0.gz.parquet | BE monitoring: P1, HP, PV, buffer and outdoor-T values of HP homes without battery (own-load slope)
+data\26b72e88-1805-4aeb-adae-b82ee8cfe9b8_0.gz.parquet | BE monitoring: P1, HP, PV, buffer and outdoor-T values of HP homes without battery (own-load slope)
+data\_paperb\iter07bi_quick\fluvius24_daily.parquet | audit cache (written by this script)
+data\FeederBW\feeder_metadata.csv | FeederBW registry (labels, housing units)
+data\FeederBW\weather_data.parquet | FeederBW per-feeder air temperature
+data\FeederBW\feeder_measurement_data_001-040\feeder_measurement_data_001-040\feeder_001.parquet | FeederBW feeder active power (coverage; s0 if no HP/electric heating registered)
+data\FeederBW\feeder_measurement_data_001-040\feeder_measurement_data_001-040\feeder_002.parquet | FeederBW feeder active power (coverage; s0 if no HP/electric heating registered)
+data\FeederBW\feeder_measurement_data_001-040\feeder_measurement_data_001-040\feeder_003.parquet | FeederBW feeder active power (coverage; s0 if no HP/electric heating registered)
+data\FeederBW\feeder_measurement_data_001-040\feeder_measurement_data_001-040\feeder_004.parquet | FeederBW feeder active power (coverage; s0 if no HP/electric heating registered)
+data\FeederBW\feeder_measurement_data_001-040\feeder_measurement_data_001-040\feeder_005.parquet | FeederBW feeder active power (coverage; s0 if no HP/electric heating registered)
+data\ukpn-low-carbon-technologies-secondary.csv | UKPN LCT register (HP rows = label)
+data\ukpn-smart-meter-consumption-lv-feeder.csv | UKPN LV feeder smart-meter aggregates (counts, period)
+data\_paperb\pools\bstar_2023_meta.parquet | B* membership (disjointness check)
+data\_paperb\iter01\coverage_heapo15.parquet | HEAPO coverage scan (iter01)
+data\_paperb\iter01\coverage_heapo_daily.parquet | HEAPO coverage scan (iter01)
+data\heapo_data\meta_data\households.csv | HEAPO households (group, protocols)
+data\heapo_data\reports\protocols.csv | HEAPO protocols (nameplate label)
+data\_paperb\iter04\neea_units.parquet | NEEA per-home fits from 04 (s_res = own non-HP slope)
+data\_paperb\iter04\neea_fill.parquet | NEEA fill homes from 04 (no electric heating)
+data\SITES v9.2.csv | NEEA site states
+data\neea_base_circuits_2023.parquet | NEEA mains of fill homes (s0)
+data\neea_temp_2023.parquet | NEEA outdoor probes
+data\_wpuq_pool_cache.pkl | WPuQ legacy pool cache (household meters of HP homes = own load)
+data\_paperb\iter04\neea_units.parquet | NEEA HP homes (envelope)
+data\_paperb\iter04\neea_fill.parquet | NEEA fill (envelope)

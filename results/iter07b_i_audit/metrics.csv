@@ -1,0 +1,94 @@
+exp_id,dataset,metric,value
+iter07b_i_audit,BE monitoring,installations,32
+iter07b_i_audit,BE monitoring,installations per set,"{""BE-2024"": 16, ""BE-2025"": 32}"
+iter07b_i_audit,BE monitoring,period per set,"{""BE-2024"": ""2024-03-26 .. 2024-12-31"", ""BE-2025"": ""2025-01-01 .. 2025-12-31""}"
+iter07b_i_audit,BE monitoring,"with HP series (mid-e/hp/P, mid-e/hp1/P, mid-e/hp2/P)",18
+iter07b_i_audit,BE monitoring,with P1 series (fluvius/p1/P),30
+iter07b_i_audit,BE monitoring,"with PV series (mid-e/pv/P, mid-e/inverter1-pv/P, mid-e/inverter2-pv/P)",18
+iter07b_i_audit,BE monitoring,with BUF series (mid-e/buffer-tank-resistance/P),19
+iter07b_i_audit,BE monitoring,"with T series (hp/hp1-outside-air/T, hp/outside-air/T, sensor/outside-air/T, sensor/outside/T)",18
+iter07b_i_audit,BE monitoring,with heat meter (mid-c/space-heating/P),27
+iter07b_i_audit,BE monitoring,"HP and P1 both >= 90% of days, season2024/25",9
+iter07b_i_audit,BE monitoring,"HP and P1 both >= 90% of days, cal2025",9
+iter07b_i_audit,BE monitoring,"HP, P1 and outdoor T >= 90%, season2024/25",6
+iter07b_i_audit,BE monitoring,"HP, P1 and outdoor T >= 90%, cal2025",5
+iter07b_i_audit,BE monitoring,outdoor-temperature series,"[""hp/hp1-outside-air/T"", ""hp/hp2-outside-air/T"", ""hp/outside-air/T"", ""sensor/outside-air/T"", ""sensor/outside/T""]"
+iter07b_i_audit,BE monitoring,DER table rows,32
+iter07b_i_audit,BE monitoring,DER heat pump = yes,18
+iter07b_i_audit,BE monitoring,DER HP electrical peak kW (median [IQR]),"""3.79 [2.97-4.66] (n=18)"""
+iter07b_i_audit,BE monitoring,DER buffer-tank resistor peak > 0,6
+iter07b_i_audit,BE monitoring,DER with PV,18
+iter07b_i_audit,BE monitoring,DER with battery,12
+iter07b_i_audit,BE monitoring,DER EV charger found,0
+iter07b_i_audit,BE monitoring,DER installations in series,32
+iter07b_i_audit,BE monitoring,DER HP homes with a battery (excluded from the own-load slope),12
+iter07b_i_audit,BE monitoring,"own-load homes (HP, no battery, P1+HP)",6
+iter07b_i_audit,BE monitoring,own-load days per home,"""258 [217-339] (n=6)"""
+iter07b_i_audit,BE monitoring,"own-load fits per home (all, incl. at bound)","[{""home"": ""152"", ""days"": 210, ""s0"": 0.0253, ""T_h"": 20.0, ""r2"": 0.4465, ""at_bound"": true, ""own_T"": true}, {""home"": ""263"", ""days"": 359, ""s0"": 0.023, ""T_h"": 20.0, ""r2"": 0.4221, ""at_bound"": true, ""own_T"": true}, {""home"": ""410"", ""days"": 400, ""s0"": 0.0374, ""T_h"": 15.2391, ""r2"": 0.1439, ""at_bound"": false, ""own_T"": true}, {""home"": ""420"", ""days"": 279, ""s0"": 0.0, ""T_h"": 8.0, ""r2"": -0.0, ""at_bound"": true, ""own_T"": true}, {""home"": ""430"", ""days"": 147, ""s0"": 0.0049, ""T_h"": 20.0, ""r2"": 0.3142, ""at_bound"": true, ""own_T"": true}, {""home"": ""440"", ""days"": 238, ""s0"": 0.0007, ""T_h"": 20.0, ""r2"": 0.0243, ""at_bound"": true, ""own_T"": true}]"
+iter07b_i_audit,BE monitoring,"own non-HP slope kW/K per HP home (hinge inside, not at bound)","""0.0374 [0.0374-0.0374] (n=1)"""
+iter07b_i_audit,BE monitoring,own-load T_h,"""15.2 [15.2-15.2] (n=1)"""
+iter07b_i_audit,BE monitoring,own-load r2,"""0.14 [0.14-0.14] (n=1)"""
+iter07b_i_audit,BE monitoring,own slope of the aggregate / n (days with all homes),0.0
+iter07b_i_audit,Fluvius 2024,meters,2400
+iter07b_i_audit,Fluvius 2024,EAN_ID shared between files,0
+iter07b_i_audit,Fluvius 2024,period,"""2024-01-01 .. 2024-12-31"""
+iter07b_i_audit,Fluvius 2024,"HP-flagged, no PV, complete (gross whole-house load)",600
+iter07b_i_audit,Fluvius 2024,"HP-flagged, no PV, no EV, complete",300
+iter07b_i_audit,Fluvius 2024,"non-HP, no PV, no EV, complete (local s0 fill)",300
+iter07b_i_audit,Fluvius 2024,temperature on disk,"""none for Flanders 2024 (Solcast files on disk carry irradiance only)"""
+iter07b_i_audit,FeederBW,feeders,200
+iter07b_i_audit,FeederBW,feeders read,200
+iter07b_i_audit,FeederBW,housing units per feeder,"""32 [18-47] (n=200)"""
+iter07b_i_audit,FeederBW,feeders with HP kW > 0 (last registry row),123
+iter07b_i_audit,FeederBW,feeders whose HP kW changes,41
+iter07b_i_audit,FeederBW,HP kW per feeder (HP > 0),"""9.4 [5.2-19.5] (n=123)"""
+iter07b_i_audit,FeederBW,HP kW per housing unit (HP > 0),"""0.280 [0.122-0.700] (n=123)"""
+iter07b_i_audit,FeederBW,feeders with storage/electric heaters registered,165
+iter07b_i_audit,FeederBW,feeders with HP > 0 and no electric heating,11
+iter07b_i_audit,FeederBW,feeders with no HP and no electric heating,24
+iter07b_i_audit,FeederBW,feeders with PV registered,176
+iter07b_i_audit,FeederBW,feeders with commerce,123
+iter07b_i_audit,FeederBW,full days 2023-04-01..2024-04-01 (median feeder),366.0
+iter07b_i_audit,FeederBW,s0 feeders fitted,20
+iter07b_i_audit,FeederBW,s0 fit errors (listed in feederbw_s0.csv),2
+iter07b_i_audit,FeederBW,"s0 hinge inside, not at bound",12
+iter07b_i_audit,FeederBW,"s0 kW/K per housing unit, all","""0.0275 [0.0041-0.0752] (n=12)"""
+iter07b_i_audit,FeederBW,"s0, no PV no commerce","""0.0036 [0.0034-0.0038] (n=2)"""
+iter07b_i_audit,FeederBW,s0 T_h,"""18.1 [14.9-19.0] (n=12)"""
+iter07b_i_audit,UKPN,LCT HP rows,384
+iter07b_i_audit,UKPN,HP connections (sum),3730
+iter07b_i_audit,UKPN,HP connections per substation,"""8 [7-11] (n=384)"""
+iter07b_i_audit,UKPN,HP import kW per row,"""49.2 [34.9-67.8] (n=384)"""
+iter07b_i_audit,UKPN,LV feeders,2061
+iter07b_i_audit,UKPN,secondary substations,873
+iter07b_i_audit,UKPN,devices per feeder,"""19 [12-30] (n=1976)"""
+iter07b_i_audit,UKPN,period,"""2024-06-01 .. 2024-06-30"""
+iter07b_i_audit,UKPN,datasets,"[""UKPN_July_2024""]"
+iter07b_i_audit,UKPN,HP substations present in the feeder file,17
+iter07b_i_audit,HEAPO beyond B*,B* HEAPO HP households,47
+iter07b_i_audit,HEAPO beyond B*,"heapo15 total >= 90%, not in B* (per window)","{""2019/20"": 8, ""2020/21"": 116, ""2021/22"": 264, ""2022/23"": 841, ""cal2020"": 32, ""cal2021"": 166, ""cal2022"": 304, ""cal2023"": 1027}"
+iter07b_i_audit,HEAPO beyond B*,"heapo15 hp >= 90%, not in B* (per window)","{""2019/20"": 1, ""2021/22"": 2, ""2022/23"": 3, ""cal2022"": 1}"
+iter07b_i_audit,HEAPO beyond B*,"heapo_daily total >= 90%, not in B* (per window)","{""2019/20"": 227, ""2020/21"": 145, ""2021/22"": 352, ""2022/23"": 730, ""2023/24"": 820, ""cal2019"": 125, ""cal2020"": 198, ""cal2021"": 170, ""cal2022"": 419, ""cal2023"": 774}"
+iter07b_i_audit,HEAPO beyond B*,"heapo_daily hp >= 90%, not in B* (per window)","{""2021/22"": 2, ""2022/23"": 6, ""cal2022"": 3}"
+iter07b_i_audit,HEAPO beyond B*,HEAPO households,1408
+iter07b_i_audit,HEAPO beyond B*,groups,"{""control"": 1194, ""treatment"": 214}"
+iter07b_i_audit,HEAPO beyond B*,with nameplate electric power (protocol),67
+iter07b_i_audit,HEAPO beyond B*,"with nameplate, not in B*",66
+iter07b_i_audit,HEAPO beyond B*,source-only mapping: B* HP_Peak / nameplate electric power,"""1.14 [1.14-1.14] (n=1)"""
+iter07b_i_audit,NEEA,"HP homes, heating fully submetered (04 rule, selects on s_res)",57
+iter07b_i_audit,NEEA,own non-HP slope s_res kW/K per HP home (04 rule),"""0.0069 [0.0006-0.0141] (n=57)"""
+iter07b_i_audit,NEEA,"HP homes, no gas furnace, no PV, s_heat > 0.05 (no s_res cut)",77
+iter07b_i_audit,NEEA,per state (no s_res cut),"{""WA"": 37, ""OR"": 31, ""ID"": 9}"
+iter07b_i_audit,NEEA,own non-HP slope s_res kW/K per HP home (no s_res cut),"""0.0119 [0.0038-0.0334] (n=76)"""
+iter07b_i_audit,NEEA,"fill homes (no electric heating, >= 330 full days)",49
+iter07b_i_audit,NEEA,fill homes per state,"{""WA"": 21, ""ID"": 16, ""OR"": 11, ""MT"": 1}"
+iter07b_i_audit,NEEA,"s0 WA aggregate, all days","{""n"": 21, ""days"": 365, ""s0"": 0.0143, ""T_h"": 8.0, ""P_base_per_dw"": 1.2201, ""r2"": 0.0288, ""hinge_inside"": true, ""at_bound"": true}"
+iter07b_i_audit,NEEA,"s0 WA aggregate, days T <= 18 C (no cooling)","{""n"": 21, ""days"": 270, ""s0"": 0.0268, ""T_h"": 12.0692, ""P_base_per_dw"": 1.0502, ""r2"": 0.6917, ""hinge_inside"": true, ""at_bound"": false}"
+iter07b_i_audit,NEEA,"s0 ID aggregate, all days","{""n"": 16, ""days"": 365, ""s0"": 0.0, ""T_h"": 8.0, ""P_base_per_dw"": 0.8771, ""r2"": -0.0, ""hinge_inside"": true, ""at_bound"": true}"
+iter07b_i_audit,NEEA,"s0 ID aggregate, days T <= 18 C (no cooling)","{""n"": 16, ""days"": 242, ""s0"": 0.0139, ""T_h"": 12.4142, ""P_base_per_dw"": 0.7001, ""r2"": 0.3579, ""hinge_inside"": true, ""at_bound"": false}"
+iter07b_i_audit,NEEA,"s0 OR aggregate, all days","{""n"": 11, ""days"": 365, ""s0"": 0.0006, ""T_h"": 8.0, ""P_base_per_dw"": 1.0626, ""r2"": 0.0, ""hinge_inside"": true, ""at_bound"": true}"
+iter07b_i_audit,NEEA,"s0 OR aggregate, days T <= 18 C (no cooling)","{""n"": 11, ""days"": 269, ""s0"": 0.0153, ""T_h"": 13.5147, ""P_base_per_dw"": 0.9, ""r2"": 0.2364, ""hinge_inside"": true, ""at_bound"": false}"
+iter07b_i_audit,WPuQ,HP homes with household meter,37
+iter07b_i_audit,WPuQ,own non-HP slope kW/K per home,"""0.0064 [0.0049-0.0094] (n=19)"""
+iter07b_i_audit,WPuQ,own slope of the aggregate / n,0.0048
+iter07b_i_audit,WPuQ,period,"""2019-01-01 .. 2019-12-31"""

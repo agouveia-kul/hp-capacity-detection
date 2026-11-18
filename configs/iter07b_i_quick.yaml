@@ -1,0 +1,16 @@
+# Smoke config of iter07b_i_audit: one file per multi-file source, 2 split seeds; writes to a quick folder.
+exp_id: iter07b_i_quick
+protocol: audit (read-only)
+out_dir: results/iter07b_i_audit/quick
+cache_dir: data/_paperb/iter07bi_quick
+seeds:
+  split: 0
+  n_split_seeds: 2
+limit_files: 1
+coverage: 0.9
+windows:                   # BE monitoring windows checked for HP, P1 and outdoor-T coverage (aliases merged)
+  season2024/25: ["2024-11-01", "2025-04-01"]
+  cal2025: ["2025-01-01", "2026-01-01"]
+feederbw_year: ["2023-04-01", "2024-04-01"]
+neea_year: ["2023-01-01", "2024-01-01"]
+wpuq_year: ["2019-01-01", "2020-01-01"]

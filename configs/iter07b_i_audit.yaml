@@ -1,0 +1,18 @@
+# Iteration 07b-i: read-only audit of unseen targets for a label-free local-s0 estimator.
+# Blindness rule: no estimator, prediction or error metric on any candidate; only label / input / coverage
+# descriptives and s0 (or own-load slope) of non-HP samples. Every opened file is listed in log.txt.
+exp_id: iter07b_i_audit
+protocol: audit (read-only)
+out_dir: results/iter07b_i_audit
+cache_dir: data/_paperb/iter07bi
+seeds:
+  split: 0                 # envelope split seeds 0..n-1 (protocol v1.1 uses 0..9 / 0..19)
+  n_split_seeds: 10
+limit_files: null          # quick: scan only the first file of each multi-file source
+coverage: 0.9              # share of valid days (or samples) that makes a window "complete"
+windows:                   # BE monitoring windows checked for HP, P1 and outdoor-T coverage (aliases merged)
+  season2024/25: ["2024-11-01", "2025-04-01"]
+  cal2025: ["2025-01-01", "2026-01-01"]
+feederbw_year: ["2023-04-01", "2024-04-01"]  # FeederBW s0 year (first full year on disk)
+neea_year: ["2023-01-01", "2024-01-01"]
+wpuq_year: ["2019-01-01", "2020-01-01"]

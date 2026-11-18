@@ -1,0 +1,4 @@
+pool,HP,fill,note,HP per split (test),HP per split (train),test subs <=15%,test subs 15-35%,test subs 35-65%,test subs >65%,max size p=0.05,max size p=0.1,max size p=0.2,max size p=0.3,max size p=0.5,max size p=0.8,max size p=1.0
+BE monitoring (HP+P1 complete) + Fluvius 2024 fill,0,0,too few HP for a split,,,,,,,,,,,,,
+"Fluvius 2024 HP-flag (no PV, no EV) + Fluvius 2024 fill",0,0,too few HP for a split,,,,,,,,,,,,,
+US-NEEA cal2023,57,49,,15.0,42.0,20.0,20.0,5.0,0.0,10.0,10.0,10.0,10.0,10.0,0.0,0.0

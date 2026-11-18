@@ -1,0 +1,48 @@
+cache_dir: data/_paperb/iter07bi
+coverage: 0.9
+exp_id: iter07b_i_audit
+feederbw_year:
+- '2023-04-01'
+- '2024-04-01'
+git_commit: 7abe655a6b519ce1428435af41da5bd3e83eaadb
+grid:
+  max_overlap: 0.75
+  min_station_pool: 3
+  n_hp: round
+  on_infeasible: drop
+  penetration:
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 0.8
+  - 1.0
+  size:
+  - 10
+  - 20
+  - 40
+  - 80
+  - 120
+  substations_per_cell:
+    test: 5
+    train: 10
+limit_files: null
+neea_year:
+- '2023-01-01'
+- '2024-01-01'
+out_dir: results/iter07b_i_audit
+protocol: audit (read-only)
+seeds:
+  n_split_seeds: 10
+  split: 0
+windows:
+  cal2025:
+  - '2025-01-01'
+  - '2026-01-01'
+  season2024/25:
+  - '2024-11-01'
+  - '2025-04-01'
+wpuq_year:
+- '2019-01-01'
+- '2020-01-01'
