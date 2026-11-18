@@ -139,6 +139,31 @@ The brief caps Part A at about 300 logic lines: "if it is bigger, stop after Tas
   each at 3 threads in 06 (an R-arm refit, 4,526 s). Expected under one night; to be measured by the probe.
 - **OneDrive:** pause the sync for the probe and the run, and resume it only after the merge.
 
+## A2 progress (split approved 2026-11-17; DECISIONS line)
+**Quick run** (`configs/iter07_quick.yaml`, seed 0; 7 jobs): done, 0 failed. Validity counts only, no error metric opened.
+- CH→GB (455 target substations) and GB→CH (135): every expected row is present for all three `label_def` values, with 0 NaN
+  predictions and no load error. c_src: CH 0.965 and GB 0.958 on seed 0.
+- The CH seed-0 linear L4a refit reproduces its `l4a_refits.csv` row (spec ElasticNet|size_peak|netfit|l4a|log, same params).
+  The CH→GB L4 linear row used this refit.
+- Jobs take 6–34 s. The GB→CH jobs build the 30-min CH feature cache first (22 s).
+- **Invalid physics base (ŝ = 0), a count to report:**
+  - GB→CH: 25 of 135 for `paperA_corr`, `paperA_corr_cal`, `paperA_l4a` and L4 linear. The GB source's s₀ median is 0.0126 kW/K,
+    2.3× CH's 0.0054, so it over-corrects the CH aggregates.
+  - CH→GB: 22 of 455 for the secondary row `paperA_corr@tgt_s0`.
+
+**Two machine crashes on 2026-11-17.** Both were unclean shutdowns (Kernel-Power 41).
+- 11:56:43: bugcheck 0x50 (PAGE_FAULT_IN_NONPAGED_AREA), and the dump failed. Three GB→CH quick jobs were running.
+- 17:15:23: shortly after waking from Modern Standby, with no job running.
+- Both boots log corrected PCIe errors (WHEA 17) from the NVIDIA GPU (VEN_10DE DEV_25BC).
+- The 11:56 crash left the just-renamed `data/_paperb/features/bstar30_s0_f74e82df29a7_{tab,X}.parquet` without a parquet footer.
+  These were files written by 07 that day. I deleted them, waited 90 s (nothing came back), and the rerun rebuilt them.
+- Every other file written that day reads back. The refit model's sha256 matches its manifest.
+- **Fix (`65e8cca`, 18 lines, no computed value changes):** `paperb.durable()` fsyncs feature caches before `os.replace`, job
+  outputs before their `.done`, and persisted model files before their manifest. A crash can now lose only a job that is still
+  running, and a relaunch reruns it.
+
+**Probe: not started.** OneDrive restarted with the 21:39 reboot, so its sync is probably running again.
+
 ## Assumptions and deviations (for the REVIEW)
 - **HL GB:** a home without any P_ih reading has immersion 0 (data dictionary). The 40-home ambiguity is above.
 - **c is per substation, then the median over the seed's train substations** (the brief's wording). Per bin, c is reported but
