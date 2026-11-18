@@ -1,0 +1,121 @@
+rule,direction,A,B,label_def,cell,seeds_A<B,n_seeds,median_rel_diff_pct,verdict,verdict_wape,family
+T1,CH->GB,L2 tabpfn,L1 cnn,HL,all,7,10,-6.250030007397295,no difference,no difference,
+T2,CH->GB,L2 tabpfn,slope_base,HL,all,10,10,-42.28621196390734,better,better,
+T3 L2-L1,CH->GB,L2 linear,L1 linear,HL,all,3,10,6.825823613954644,no difference,no difference,linear
+T3 L3-L2,CH->GB,L3 linear,L2 linear,HL,all,0,10,59.19532290565206,worse,worse,linear
+T3 L4-L3,CH->GB,L4 linear,L3 linear,HL,all,7,10,-15.090782506956495,no difference,no difference,linear
+T3 L2-L1,CH->GB,L2 tabpfn,L1 tabpfn,HL,all,3,10,15.796496039979518,no difference,no difference,tabpfn
+T3 L3-L2,CH->GB,L3 tabpfn,L2 tabpfn,HL,all,1,10,17.84528810288349,worse,worse,tabpfn
+T3 L4-L3,CH->GB,L4 tabpfn,L3 tabpfn,HL,all,10,10,-29.228817043884312,better,better,tabpfn
+T3 L2-L1,CH->GB,L2 cnn,L1 cnn,HL,all,8,10,-4.703878019463886,no difference,no difference,cnn
+T3 L3-L2,CH->GB,L3 cnn,L2 cnn,HL,all,0,10,68.01659912574945,worse,worse,cnn
+T3 L4-L3,CH->GB,L4 cnn,L3 cnn,HL,all,10,10,-23.75572182645354,better,better,cnn
+T3 06hybrid-D*,CH->GB,L4 cnn,L1 cnn,HL,all,2,10,9.265199380165997,worse,worse,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL,pbin<=15,5,10,-1.4897034700763427,no difference,no difference,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL,pbin<=15,10,10,-31.400930059659636,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL,pbin15-35,2,10,4.829914318237046,no difference,no difference,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL,pbin15-35,10,10,-58.577474875528836,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL,pbin35-65,9,10,-39.92481069021744,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL,pbin35-65,9,10,-64.9706963266401,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL,pbin>65,10,10,-37.65223017860278,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL,pbin>65,9,10,-46.13699326712919,better,better,
+T1,GB->CH,L2 tabpfn,L1 cnn,HL,all,7,10,-17.329216502648507,no difference,no difference,
+T2,GB->CH,L2 tabpfn,slope_base,HL,all,10,10,-26.959111523079876,better,better,
+T3 L2-L1,GB->CH,L2 linear,L1 linear,HL,all,5,10,5.923666942813969,no difference,no difference,linear
+T3 L3-L2,GB->CH,L3 linear,L2 linear,HL,all,9,10,-29.12357911274743,better,better,linear
+T3 L4-L3,GB->CH,L4 linear,L3 linear,HL,all,0,10,143.13437484656296,worse,worse,linear
+T3 L2-L1,GB->CH,L2 tabpfn,L1 tabpfn,HL,all,3,10,28.751879795397393,no difference,no difference,tabpfn
+T3 L3-L2,GB->CH,L3 tabpfn,L2 tabpfn,HL,all,5,10,1.3397803843871001,no difference,no difference,tabpfn
+T3 L4-L3,GB->CH,L4 tabpfn,L3 tabpfn,HL,all,5,10,-1.7637193183178776,no difference,no difference,tabpfn
+T3 L2-L1,GB->CH,L2 cnn,L1 cnn,HL,all,4,10,19.73731476204028,no difference,no difference,cnn
+T3 L3-L2,GB->CH,L3 cnn,L2 cnn,HL,all,6,10,-0.5822816626738913,no difference,no difference,cnn
+T3 L4-L3,GB->CH,L4 cnn,L3 cnn,HL,all,2,10,18.498897046418342,worse,worse,cnn
+T3 06hybrid-D*,GB->CH,L4 tabpfn,L1 cnn,HL,all,6,10,-9.89605217973217,no difference,no difference,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL,pbin<=15,9,10,-22.627959778939587,better,better,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL,pbin<=15,10,10,-35.90058111284622,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL,pbin15-35,6,10,-12.262434968998281,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL,pbin15-35,10,10,-22.97484002405117,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL,pbin35-65,5,10,-10.352270221843087,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL,pbin35-65,9,10,-19.428276212548333,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL,pbin>65,5,10,-5.699200886437697,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL,pbin>65,7,10,-18.454896984215978,no difference,no difference,
+T1,CH->GB,L2 tabpfn,L1 cnn,HL_uncorrected,all,6,10,-3.9317578167900074,no difference,no difference,
+T2,CH->GB,L2 tabpfn,slope_base,HL_uncorrected,all,10,10,-42.717018370475536,better,better,
+T3 L2-L1,CH->GB,L2 linear,L1 linear,HL_uncorrected,all,2,10,10.667173742226426,worse,worse,linear
+T3 L3-L2,CH->GB,L3 linear,L2 linear,HL_uncorrected,all,0,10,66.93443778009085,worse,worse,linear
+T3 L4-L3,CH->GB,L4 linear,L3 linear,HL_uncorrected,all,7,10,-14.200415971770619,no difference,no difference,linear
+T3 L2-L1,CH->GB,L2 tabpfn,L1 tabpfn,HL_uncorrected,all,2,10,29.864327386568284,worse,worse,tabpfn
+T3 L3-L2,CH->GB,L3 tabpfn,L2 tabpfn,HL_uncorrected,all,1,10,24.940748653926516,worse,worse,tabpfn
+T3 L4-L3,CH->GB,L4 tabpfn,L3 tabpfn,HL_uncorrected,all,10,10,-32.13197188206902,better,better,tabpfn
+T3 L2-L1,CH->GB,L2 cnn,L1 cnn,HL_uncorrected,all,6,10,-1.603731968454758,no difference,no difference,cnn
+T3 L3-L2,CH->GB,L3 cnn,L2 cnn,HL_uncorrected,all,0,10,71.73174438874479,worse,worse,cnn
+T3 L4-L3,CH->GB,L4 cnn,L3 cnn,HL_uncorrected,all,10,10,-27.111779973101214,better,better,cnn
+T3 06hybrid-D*,CH->GB,L4 cnn,L1 cnn,HL_uncorrected,all,2,10,11.463817226506984,worse,worse,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL_uncorrected,pbin<=15,5,10,-1.3172718747260077,no difference,no difference,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL_uncorrected,pbin<=15,10,10,-30.65777444481121,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL_uncorrected,pbin15-35,1,10,13.010878420628647,worse,worse,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL_uncorrected,pbin15-35,10,10,-57.20988197151764,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL_uncorrected,pbin35-65,9,10,-34.70610448934798,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL_uncorrected,pbin35-65,10,10,-69.80817274008366,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,HL_uncorrected,pbin>65,10,10,-36.65011041182155,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,HL_uncorrected,pbin>65,10,10,-63.5035991389435,better,better,
+T1,GB->CH,L2 tabpfn,L1 cnn,HL_uncorrected,all,7,10,-22.43080360114518,no difference,no difference,
+T2,GB->CH,L2 tabpfn,slope_base,HL_uncorrected,all,10,10,-29.253119811406613,better,better,
+T3 L2-L1,GB->CH,L2 linear,L1 linear,HL_uncorrected,all,5,10,0.4779112392447611,no difference,no difference,linear
+T3 L3-L2,GB->CH,L3 linear,L2 linear,HL_uncorrected,all,9,10,-30.58107675047769,better,better,linear
+T3 L4-L3,GB->CH,L4 linear,L3 linear,HL_uncorrected,all,0,10,144.04536962159042,worse,worse,linear
+T3 L2-L1,GB->CH,L2 tabpfn,L1 tabpfn,HL_uncorrected,all,3,10,19.29013982539961,no difference,no difference,tabpfn
+T3 L3-L2,GB->CH,L3 tabpfn,L2 tabpfn,HL_uncorrected,all,5,10,1.3717567975214773,no difference,no difference,tabpfn
+T3 L4-L3,GB->CH,L4 tabpfn,L3 tabpfn,HL_uncorrected,all,5,10,1.7201908517431739,no difference,no difference,tabpfn
+T3 L2-L1,GB->CH,L2 cnn,L1 cnn,HL_uncorrected,all,3,10,16.42393743544555,no difference,no difference,cnn
+T3 L3-L2,GB->CH,L3 cnn,L2 cnn,HL_uncorrected,all,6,10,-0.4949914547079002,no difference,no difference,cnn
+T3 L4-L3,GB->CH,L4 cnn,L3 cnn,HL_uncorrected,all,2,10,21.16465260480669,worse,worse,cnn
+T3 06hybrid-D*,GB->CH,L4 tabpfn,L1 cnn,HL_uncorrected,all,5,10,-4.3902451948354955,no difference,no difference,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL_uncorrected,pbin<=15,9,10,-23.86621380642723,better,better,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL_uncorrected,pbin<=15,10,10,-38.10156188287467,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL_uncorrected,pbin15-35,7,10,-8.028015285917656,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL_uncorrected,pbin15-35,10,10,-18.74136711355116,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL_uncorrected,pbin35-65,5,10,-3.040106752966256,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL_uncorrected,pbin35-65,8,10,-16.317203950306798,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,HL_uncorrected,pbin>65,6,10,-25.636524686403924,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,HL_uncorrected,pbin>65,6,10,-18.094391127903265,no difference,no difference,
+T1,CH->GB,L2 tabpfn,L1 cnn,native,all,7,10,-6.591714645676522,no difference,no difference,
+T2,CH->GB,L2 tabpfn,slope_base,native,all,10,10,-42.46920469625353,better,better,
+T3 L2-L1,CH->GB,L2 linear,L1 linear,native,all,3,10,6.369120443658938,no difference,no difference,linear
+T3 L3-L2,CH->GB,L3 linear,L2 linear,native,all,0,10,59.60484452715373,worse,worse,linear
+T3 L4-L3,CH->GB,L4 linear,L3 linear,native,all,7,10,-14.778562591183702,no difference,no difference,linear
+T3 L2-L1,CH->GB,L2 tabpfn,L1 tabpfn,native,all,3,10,13.30138616065008,no difference,no difference,tabpfn
+T3 L3-L2,CH->GB,L3 tabpfn,L2 tabpfn,native,all,1,10,17.93008005541063,worse,worse,tabpfn
+T3 L4-L3,CH->GB,L4 tabpfn,L3 tabpfn,native,all,10,10,-29.226923564111168,better,better,tabpfn
+T3 L2-L1,CH->GB,L2 cnn,L1 cnn,native,all,7,10,-4.206468419914419,no difference,no difference,cnn
+T3 L3-L2,CH->GB,L3 cnn,L2 cnn,native,all,0,10,67.44025047813928,worse,worse,cnn
+T3 L4-L3,CH->GB,L4 cnn,L3 cnn,native,all,10,10,-24.332888194985703,better,better,cnn
+T3 06hybrid-D*,CH->GB,L4 cnn,L1 cnn,native,all,2,10,9.058580535895153,worse,worse,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,native,pbin<=15,5,10,-1.6400210017862724,no difference,no difference,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,native,pbin<=15,10,10,-31.763032757989183,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,native,pbin15-35,3,10,3.1770288970240217,no difference,no difference,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,native,pbin15-35,10,10,-59.173856978681336,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,native,pbin35-65,9,10,-38.04071213248334,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,native,pbin35-65,9,10,-66.29952548016844,better,better,
+"T1 (bin, reported only)",CH->GB,L2 tabpfn,L1 cnn,native,pbin>65,10,10,-39.25768797413464,better,better,
+"T2 (bin, reported only)",CH->GB,L2 tabpfn,slope_base,native,pbin>65,9,10,-48.320128894352735,better,better,
+T1,GB->CH,L2 tabpfn,L1 cnn,native,all,7,10,-17.9997471486508,no difference,no difference,
+T2,GB->CH,L2 tabpfn,slope_base,native,all,10,10,-26.730697658961848,better,better,
+T3 L2-L1,GB->CH,L2 linear,L1 linear,native,all,5,10,7.207977628104434,no difference,no difference,linear
+T3 L3-L2,GB->CH,L3 linear,L2 linear,native,all,9,10,-28.64022473128186,better,better,linear
+T3 L4-L3,GB->CH,L4 linear,L3 linear,native,all,0,10,151.1422002206468,worse,worse,linear
+T3 L2-L1,GB->CH,L2 tabpfn,L1 tabpfn,native,all,3,10,29.139506978504336,no difference,no difference,tabpfn
+T3 L3-L2,GB->CH,L3 tabpfn,L2 tabpfn,native,all,5,10,1.0328204314373413,no difference,no difference,tabpfn
+T3 L4-L3,GB->CH,L4 tabpfn,L3 tabpfn,native,all,5,10,-2.212949554135573,no difference,no difference,tabpfn
+T3 L2-L1,GB->CH,L2 cnn,L1 cnn,native,all,4,10,17.549467125384716,no difference,no difference,cnn
+T3 L3-L2,GB->CH,L3 cnn,L2 cnn,native,all,6,10,-0.4310754264873989,no difference,no difference,cnn
+T3 L4-L3,GB->CH,L4 cnn,L3 cnn,native,all,2,10,18.04794684812255,worse,worse,cnn
+T3 06hybrid-D*,GB->CH,L4 tabpfn,L1 cnn,native,all,6,10,-9.666774835516609,no difference,no difference,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,native,pbin<=15,9,10,-21.565456852012083,better,better,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,native,pbin<=15,10,10,-36.33341037391784,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,native,pbin15-35,7,10,-11.112716549313706,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,native,pbin15-35,10,10,-20.830997378360056,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,native,pbin35-65,5,10,-9.284859030929127,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,native,pbin35-65,8,10,-17.868990774129937,better,better,
+"T1 (bin, reported only)",GB->CH,L2 tabpfn,L1 cnn,native,pbin>65,6,10,-14.361148902040568,no difference,no difference,
+"T2 (bin, reported only)",GB->CH,L2 tabpfn,slope_base,native,pbin>65,7,10,-15.965661812134051,no difference,no difference,

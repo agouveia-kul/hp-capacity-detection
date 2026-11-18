@@ -1,3 +1,5 @@
+**Superseded on 2026-11-16 by `iterations/07-transfer-validation.md`** (its points are folded into that brief). Kept unchanged below for the record.
+
 # Notes for the iteration 07 brief (transfer, RQ3). Not a brief: read when 07 is written.
 
 Collected so that they are not lost before the transfer iteration.

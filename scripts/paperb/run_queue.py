@@ -42,6 +42,11 @@ B2 (DECISIONS.md 2026-10-12): a family's `timeout_s` (3 x the probe's longest jo
 the worker's main thread gets an exception at its next Python instruction, the job is failed with reason `timeout` and
 `--retry-failed` reruns it; the other running jobs are not touched. A job blocked inside one native call is interrupted only when
 that call returns. The queue refuses to start when workers x threads exceed the physical cores; the default is cores // workers.
+07 (transfer): `watchdog: true` runs every job in its own spawned process and kills a job still alive `watchdog_grace_s` (60) after
+its family's `timeout_s`, whatever native call it is blocked in (06: the async timeout fired up to 2.5 h late); the other jobs are
+not touched (`run_watched`). A frozen arm with `persist_dir` persists its refits by rung (the L4a refits); `frozen_arm` selects the
+rows of a `models_csv` that holds several 06 arms; `seeds_by_family` lists an arm's seeds per family; with `after_optional: true`
+an arm waits only for a dependency job that exists (default: a missing one keeps it waiting, as in 06).
 """
 import os
 import platform
@@ -74,7 +79,7 @@ import pandas as pd  # noqa: E402
 import psutil  # noqa: E402
 import yaml  # noqa: E402
 
-from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
+from paperb import ROOT, durable, git_hash, load_config, set_dotted  # noqa: E402
 
 
 class JobTimeout(BaseException):
@@ -91,7 +96,7 @@ def jobs(q):
     out = []
     for arm in q["arms"]:
         for fam in arm["families"]:
-            for seed in arm["seeds"]:
+            for seed in arm.get("seeds_by_family", {}).get(fam, arm["seeds"]):     # 07: the refit arms list their cells per family
                 for n in arm.get("n", ["all"]):
                     for draw in ([0] if n == "all" else arm.get("draws", [0])):
                         out.append({"arm": arm["name"], "seed": seed, "draw": draw, "n": n, "family": fam,
@@ -114,6 +119,8 @@ def frozen_specs(q, job):
         return out
     P = pd.read_csv(ROOT / q["frozen"]["models_csv"])
     P = P[(P["split_seed"] == int(job["seed"])) & (P["queue_family"] == job["family"]) & (P["carried_model"] == True)]  # noqa: E712
+    if "arm" in P:                                                   # 07: one table for both pools (the 06 arm of each row)
+        P = P[P["arm"] == next(a for a in q["arms"] if a["name"] == job["arm"]).get("frozen_arm", job["arm"])]
     if P.empty:
         raise ValueError(f"{job['id']}: no carried frozen model for seed {job['seed']}, queue family {job['family']}")
     return {r["spec"]: {"params": json.loads(r["params"]), "best_iter": None if pd.isna(r["best_iter"]) else int(r["best_iter"])}
@@ -145,6 +152,8 @@ def job_config(q, arm, job, threads):
         cfg["refit"] = {"fixed": fixed, "by_rung": bool(q["frozen"].get("by_rung")),
                         **({"frozen_dir": str(ROOT / q["frozen"]["models_dir"])} if arm.get("frozen_model") else {})}
         keep |= {f"{m}{s}" for m in keep for s in ("@frozen", "@update")} if arm.get("frozen_model") else set()
+        if arm.get("persist_dir"):                                    # 07: the L4a refits are persisted (by rung) for the transfer jobs
+            cfg["refit"].update(dir=str(ROOT / arm["persist_dir"]), by_rung=True)
     if job["n"] != "all" or arm.get("spc_train"):                     # 05b: one learning-curve design, test substations shared with n = all
         cfg.update(lc_only=True, learning_curve={"n": [job["n"] if job["n"] == "all" else int(job["n"])], "draws": int(job["draw"]) + 1,
                                                  "draw_ids": [int(job["draw"])], "specs": list(fixed) if fixed else "all",
@@ -200,6 +209,57 @@ def _run_job(q, job, threads, stage):
             files.append(f)
     return job, files, {"seconds": time.time() - t0, "start": start, "end": datetime.now().isoformat(timespec="seconds"), "host": platform.node(),
                         "device": cfg.get("device", "cpu")}
+
+
+def _child(q, job, threads, stage, result_file):
+    """07 watchdog mode: one job in its own process; its result (or traceback) is pickled to `result_file`."""
+    import pickle
+    try:
+        res = ("ok", run_job(q, job, threads, stage))
+    except Exception:  # noqa: BLE001 - reported by the parent
+        res = ("err", traceback.format_exc())
+    Path(result_file).write_bytes(pickle.dumps(res))
+
+
+def run_watched(q, todo, threads, stage, ready, finish, t_stop, poll_s=2.0):
+    """07 hard per-job timeout: every job runs in its own spawned process; a job still alive `watchdog_grace_s` (default 60) after its
+    family's `timeout_s` is killed (TerminateProcess) and failed with reason timeout, whatever native call it is blocked in; the
+    other jobs are not touched. The in-process async timer of run_job stays the first, graceful attempt. A process that exits
+    without a result (e.g. out of memory) fails only its own job."""
+    import pickle
+    ctx, grace = mp.get_context("spawn"), float(q.get("watchdog_grace_s", 60))
+    grp = {f: v.get("group", f) for f, v in q["families"].items()}
+    cap = {grp[f]: v["max_concurrent"] for f, v in q["families"].items() if v.get("max_concurrent")}
+    running, pending = {}, list(todo)
+    while True:
+        while len(running) < q["workers"] and not (t_stop and datetime.now() >= t_stop):
+            busy = [grp[j["family"]] for j, *_ in running.values()]
+            job = next((j for j in pending if busy.count(grp[j["family"]]) < cap.get(grp[j["family"]], q["workers"]) and ready(j)), None)
+            if job is None:
+                break
+            pending.remove(job)
+            rf = stage / f"{job['id']}.result.pkl"
+            rf.unlink(missing_ok=True)
+            p = ctx.Process(target=_child, args=(q, job, threads, stage, str(rf)))
+            p.start()
+            lim = q["families"][job["family"]].get("timeout_s")
+            running[p] = (job, rf, lim, None if not lim else time.time() + float(lim) + grace)
+        if not running:
+            return
+        time.sleep(poll_s)
+        for p, (job, rf, lim, deadline) in list(running.items()):
+            if p.is_alive() and deadline and time.time() > deadline:
+                p.kill()
+                p.join()
+                running.pop(p)
+                finish(job, [], None, f"TimeoutError: timeout: {job['id']} ran longer than the {lim} s of family {job['family']}; "
+                                      f"killed by the watchdog {grace:.0f} s after the limit")
+            elif not p.is_alive():
+                p.join()
+                running.pop(p)
+                res = pickle.loads(rf.read_bytes()) if rf.exists() else ("err", f"worker process died (exit code {p.exitcode}), likely out of memory")
+                rf.unlink(missing_ok=True)
+                finish(*res[1]) if res[0] == "ok" else finish(job, [], None, res[1])
 
 
 def shard(all_jobs, spec):
@@ -307,10 +367,14 @@ def main(argv=None):
     if q["workers"] * threads > cores:                                # B2 (05b lesson): oversubscribed jobs ran 1.5-13 x slower
         raise SystemExit(f"{q['workers']} workers x {threads} threads exceed the {cores} physical cores: lower --workers or --threads")
     after = {arm["name"]: arm["after"] for arm in q["arms"] if arm.get("after")}
+    job_ids = {j["id"] for j in all_jobs}
+    optional = {arm["name"] for arm in q["arms"] if arm.get("after_optional")}
 
     def ready(j):                                                     # 06: the arm it depends on has finished this seed and family
         dep = after.get(j["arm"])
-        return dep is None or j["family"] == "physics" or (out / "jobs" / f"{dep}__s{j['seed']}__d0__nall__{j['family']}.done").exists()
+        dep_id = f"{dep}__s{j['seed']}__d0__nall__{j['family']}"
+        return (dep is None or j["family"] == "physics" or (j["arm"] in optional and dep_id not in job_ids)   # 07: no refit needed
+                or (out / "jobs" / f"{dep_id}.done").exists())
     t_start, t_stop = time.time(), stop_time(a.stop_at)
     print(f"[{datetime.now():%H:%M:%S}] queue {q['exp_id']}: {len(todo)} of {len(all_jobs)} jobs to run, {q['workers']} workers x "
           f"{threads} threads, stop at {t_stop}, shard {a.shard or 'all'}, families {a.families or 'all'}", flush=True)
@@ -323,13 +387,17 @@ def main(argv=None):
         else:
             for f in files:
                 shutil.move(str(f), str(J / f.name))
+            durable(*(J / f.name for f in files))                         # 07: outputs on disk before the .done marker
             (J / f"{job['id']}.done").write_text(json.dumps(info))
+            durable(J / f"{job['id']}.done")
             print(f"[{datetime.now():%H:%M:%S}] done {job['id']} ({info['seconds']:.0f} s)", flush=True)
         status(q, out, all_jobs, t_start)
 
     keep_awake(True)
     try:
-        if q["workers"] == 1:
+        if q.get("watchdog", False):                                    # 07: one process per job, killed by the hard watchdog
+            run_watched(q, todo, threads, stage, ready, finish, t_stop)
+        elif q["workers"] == 1:
             for job in todo:
                 if t_stop and datetime.now() >= t_stop:
                     break

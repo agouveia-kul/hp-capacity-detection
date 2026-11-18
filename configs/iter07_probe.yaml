@@ -1,0 +1,138 @@
+# Iteration 07 probe: the run's (configs/iter07.yaml) seed-0 jobs, same job ids and out_dir; the run skips them.
+# Logs runtime and validity counts only (no transfer error metric before the report script is committed).
+# 2026-11-18: seed 0 has no GB refit cell, so the probe adds one GB refit per family at seed 3 (the run's own job ids) to time them.
+exp_id: iter07
+out_dir: results/iter07_transfer
+workers: 5
+threads: 4
+watchdog: true
+watchdog_grace_s: 60
+frozen:
+  models_csv: results/iter07_transfer/l4a_refits.csv
+  by_rung: true
+families:
+  physics:
+    timeout_s: 1800
+  linear:
+    models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+    residual_models:
+    - Linear
+    - Ridge
+    - Lasso
+    - ElasticNet
+    - PLS
+    timeout_s: 1800
+  tabpfn_d:
+    models:
+    - TabPFN
+    set:
+    - modes=[direct]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 1800
+  tabpfn_r:
+    residual_models:
+    - TabPFN
+    set:
+    - modes=[residual]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 1800
+  tabpfn_h:
+    residual_models:
+    - TabPFN
+    set:
+    - modes=[l4a]
+    group: tabpfn
+    max_concurrent: 2
+    timeout_s: 1800
+  cnn_d:
+    models:
+    - CNN
+    set:
+    - modes=[direct]
+    timeout_s: 1800
+  cnn_r:
+    residual_models:
+    - CNN
+    set:
+    - modes=[residual]
+    timeout_s: 1800
+  cnn_h:
+    residual_models:
+    - CNN
+    set:
+    - modes=[l4a]
+    timeout_s: 1800
+arms:
+- name: refit_gb
+  config: configs/iter06_a_gb.yaml
+  frozen: true
+  frozen_arm: a_gb
+  persist_dir: results/iter07_transfer/models/a_gb
+  seeds: []
+  seeds_by_family:
+    linear:
+    - 3
+    tabpfn_h:
+    - 3
+    cnn_h:
+    - 3
+  families:
+  - cnn_h
+  - tabpfn_h
+  - linear
+- name: refit_ch
+  config: configs/iter06_a_ch.yaml
+  frozen: true
+  frozen_arm: a_ch
+  persist_dir: results/iter07_transfer/models/a_ch
+  seeds: []
+  seeds_by_family:
+    linear:
+    - 0
+    tabpfn_h:
+    - 0
+    cnn_h:
+    - 0
+  families:
+  - cnn_h
+  - tabpfn_h
+  - linear
+- name: ch_gb
+  config: configs/iter07_ch_gb.yaml
+  runner: paperb.transfer:run_seed
+  after: refit_ch
+  after_optional: true
+  seeds:
+  - 0
+  families:
+  - physics
+  - linear
+  - tabpfn_d
+  - tabpfn_r
+  - tabpfn_h
+  - cnn_d
+  - cnn_r
+  - cnn_h
+- name: gb_ch
+  config: configs/iter07_gb_ch.yaml
+  runner: paperb.transfer:run_seed
+  after: refit_gb
+  after_optional: true
+  seeds:
+  - 0
+  families:
+  - physics
+  - linear
+  - tabpfn_d
+  - tabpfn_r
+  - tabpfn_h
+  - cnn_d
+  - cnn_r
+  - cnn_h

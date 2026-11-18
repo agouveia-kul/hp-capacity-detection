@@ -1,0 +1,13 @@
+direction,row,all,pbin<=15,pbin15-35,pbin35-65,pbin>65
+CH->GB,paperA_corr,21.1,33.7,23.8,22.1,25.3
+CH->GB,slope_base,18.1,31.4,20.0,16.6,16.4
+CH->GB,paperA_corr@tgt_s0,6.6,6.2,9.9,13.0,17.7
+CH->GB,paperA_sh_mh,32.5,55.6,34.7,29.1,31.0
+CH->GB,L2 tabpfn,8.6,21.2,6.5,-0.9,-7.9
+CH->GB,L1 tabpfn,-5.7,1.4,-11.9,-21.9,-31.4
+GB->CH,paperA_corr,-12.9,-15.3,-10.4,-13.2,-12.6
+GB->CH,slope_base,-13.6,-13.4,-12.5,-20.4,-22.7
+GB->CH,paperA_corr@tgt_s0,-4.1,-3.5,-4.4,-7.9,-9.3
+GB->CH,paperA_sh_mh,3.1,7.2,0.0,-3.6,-6.7
+GB->CH,L2 tabpfn,-9.6,-7.9,-9.3,-17.2,-21.7
+GB->CH,L1 tabpfn,-0.7,0.0,-0.1,-2.2,-7.8
