@@ -63,7 +63,7 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 import yaml  # noqa: E402
 
-from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
+from paperb import ROOT, durable, git_hash, load_config, set_dotted  # noqa: E402
 from paperb.fill_analog import add_own_fillers  # noqa: E402
 from paperb.learning_curve import lc_designs  # noqa: E402
 from paperb.metrics import compute_metrics  # noqa: E402
@@ -150,6 +150,7 @@ def cached_eval(pool, members, cfg, seed, log):
     for df, f in ((X, f_x), (tab.astype({c: float for c in tab.columns if c.startswith(("hinge_inside", "at_bound"))}), f_tab)):   # atomic: queue jobs share the cache
         tmp = f.with_name(f"{f.name}.{os.getpid()}.tmp")
         df.to_parquet(tmp)
+        durable(tmp)
         try:
             os.replace(tmp, f)
         except PermissionError:                                          # Windows: another job replaced or is reading it (same content)

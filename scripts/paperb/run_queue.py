@@ -79,7 +79,7 @@ import pandas as pd  # noqa: E402
 import psutil  # noqa: E402
 import yaml  # noqa: E402
 
-from paperb import ROOT, git_hash, load_config, set_dotted  # noqa: E402
+from paperb import ROOT, durable, git_hash, load_config, set_dotted  # noqa: E402
 
 
 class JobTimeout(BaseException):
@@ -387,7 +387,9 @@ def main(argv=None):
         else:
             for f in files:
                 shutil.move(str(f), str(J / f.name))
+            durable(*(J / f.name for f in files))                         # 07: outputs on disk before the .done marker
             (J / f"{job['id']}.done").write_text(json.dumps(info))
+            durable(J / f"{job['id']}.done")
             print(f"[{datetime.now():%H:%M:%S}] done {job['id']} ({info['seconds']:.0f} s)", flush=True)
         status(q, out, all_jobs, t_start)
 

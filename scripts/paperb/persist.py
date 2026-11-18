@@ -25,6 +25,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
+from paperb import durable
 from paperb.lc_fit import FAMILY_OF
 from paperb.residual import compose
 
@@ -91,7 +92,9 @@ def save_model(root, seed, spec, f, sub_ids, pred_te, device):
            "feature_columns": [str(c) for c in pd.DataFrame(f["X_te"]).columns], "n_train_sub": int(len(f["y_tr"])), "n_test_sub": int(len(X_te)),
            "residual": "p_te" in f, "device": device, "host": platform.node(), "packages": _versions(),
            "model_sha256": _sha(d / "model.joblib"), **extra}
+    durable(*(p for p in d.iterdir() if p.is_file()))                    # 07: crash-safe before the manifest marks the model complete
     (d / "manifest.json").write_text(json.dumps(man, indent=1, default=str), encoding="utf-8")
+    durable(d / "manifest.json")
     return d
 
 

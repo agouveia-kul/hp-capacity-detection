@@ -1,5 +1,6 @@
 """Protocol v1 (iteration 02a) implementation for Paper B. See configs/protocol_v1.yaml."""
 import copy
+import os
 import subprocess
 from pathlib import Path
 
@@ -48,6 +49,14 @@ def set_dotted(cfg, assignments):
             d = d.setdefault(h, {})
         d[last] = yaml.safe_load(val)
     return cfg
+
+
+def durable(*paths):
+    """Flush files to disk before they are renamed into place or marked done. A hard crash loses writes still in the OS cache,
+    even after an atomic rename (07: a bugcheck on 2026-11-17 left a renamed feature cache without its parquet footer)."""
+    for p in paths:
+        with open(p, "rb+") as fh:
+            os.fsync(fh.fileno())
 
 
 def git_hash():
