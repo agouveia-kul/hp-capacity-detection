@@ -1,0 +1,1632 @@
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[23:48:53] queue iter07: 19 of 19 jobs to run, 5 workers x 4 threads, stop at None, shard all, families all
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     1.0s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s0     1.0s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     1.0s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s0     1.0s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     1.1s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     1.1s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     1.2s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s0     1.2s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     3.3s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     3.3s]   HP_Peak ElasticNet/size_peak/netfit/l4a/log: refit with fixed params {'alpha': 0.07621876641831815, 'l1_ratio': 0.8478409436448826}, best_iter None, 0.0s
+[s0     3.3s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     3.5s] Paper A pilot m_h 0.01931 (64 train HP households); station pilots {'Hg': 0.01863, 'KLO': 0.01933}; s0 {'paperA_corr': 0.00542, 'paperA_corr_all': 0.00619}; cross-fit fold m_h [0.01991, 0.01923, 0.01909, 0.01915]
+[s0     4.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     4.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     4.6s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+[s0     4.6s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+[s0     5.2s] done in 5.2s
+[s0     4.9s] done: 11 prediction rows sets, c_src 0.9650
+[s0     6.9s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 3.4s
+[23:49:09] done refit_ch__s0__d0__nall__linear (9 s)
+[23:49:09] done ch_gb__s0__d0__nall__physics (9 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     1.1s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     1.2s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0     6.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     6.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     6.9s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+[s0     6.9s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.0s
+[s0     7.0s]   L2 linear PLS|size_peak|both|direct|log: predicted 455 target substations in 0.0s
+[s0     7.0s]   L3 linear Linear|size_peak|netfit|residual|log: predicted 455 target substations in 0.0s
+[s0     7.0s]   L4 linear ElasticNet|size_peak|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s0     6.9s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+[s0     7.6s] done: 4 prediction rows sets, c_src 0.9650
+[23:49:29] done ch_gb__s0__d0__nall__linear (13 s)
+[s0    29.5s] done in 29.5s
+[23:49:34] done refit_ch__s0__d0__nall__tabpfn_h (33 s)
+[s0    15.5s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 8.6s
+[s0    15.7s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.2s
+[s0    16.3s] done: 2 prediction rows sets, c_src 0.9650
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[23:49:40] done ch_gb__s0__d0__nall__cnn_d (22 s)
+[s0    39.7s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.20339, 0.20652, 0.20726], chosen 0 (test WAPE per initialisation, diagnostic only: [16.8, 17.0, 16.4])
+[s0    39.7s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.013016876163445193, 'kernel': 9, 'lr': 0.0010047929346930513, 'n_blocks': 2, 'weight_decay': 7.32227136523509e-05, 'width': 32}, best_iter 83, 36.3s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     1.1s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[s0    42.2s] done in 42.2s
+[s0     1.0s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[23:49:46] done refit_ch__s0__d0__nall__cnn_h (46 s)
+[s0     5.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     5.6s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     5.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     5.7s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     4.1s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0    14.0s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 455 target substations in 8.3s
+[s0    14.5s] done: 1 prediction rows sets, c_src 0.9650
+[s0     6.2s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     6.8s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0     1.0s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[23:49:58] done ch_gb__s0__d0__nall__cnn_r (20 s)
+[s0     7.8s] done: 10 prediction rows sets, c_src 0.9576
+[23:50:00] done gb_ch__s0__d0__nall__physics (13 s)
+[s0     5.3s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     6.2s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0    15.6s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 9.4s
+[s0    16.2s] done: 1 prediction rows sets, c_src 0.9650
+[23:50:14] done ch_gb__s0__d0__nall__cnn_h (21 s)
+[s0     4.4s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     6.4s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     4.5s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     7.1s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0     7.2s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 135 target substations in 0.0s
+[s0     7.2s]   L2 linear Lasso|size_peak|both|direct|log: predicted 135 target substations in 0.0s
+[s0     7.2s]   L3 linear ElasticNet|size_peak|both|residual|log: predicted 135 target substations in 0.0s
+[s0     7.3s]   L4 linear Lasso|size_peak|both|l4a|log: predicted 135 target substations in 0.0s
+[s0     8.4s] done: 4 prediction rows sets, c_src 0.9576
+[s0     6.4s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     7.2s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[23:50:20] done gb_ch__s0__d0__nall__linear (14 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0    42.2s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 36.5s
+[s0    42.7s] done: 1 prediction rows sets, c_src 0.9650
+[s0    16.5s]   L1 rawseries CNN|size|raw|direct|log: predicted 135 target substations in 9.3s
+[s0    16.8s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 135 target substations in 0.4s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0    17.8s] done: 2 prediction rows sets, c_src 0.9576
+[s0     4.0s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[23:50:30] done ch_gb__s0__d0__nall__tabpfn_r (48 s)
+[s0     5.8s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[23:50:32] done gb_ch__s0__d0__nall__cnn_d (23 s)
+[s0     6.4s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0     3.9s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     5.5s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     6.0s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0    96.7s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 92.1s
+[s0    13.7s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 7.3s
+[s0    14.6s] done: 1 prediction rows sets, c_src 0.9576
+[s0     1.0s] features from cache bstar_s0_3f8c01dc4cd0_tab.parquet
+[23:50:42] done gb_ch__s0__d0__nall__cnn_r (20 s)
+[s0     4.6s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0    12.9s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 135 target substations in 6.8s
+[s0     5.4s] CH->GB: 455 target test substations; source m_h 0.01931, kappa 0.4650, s0 median 0.00542; day alignment by (month, day)
+[s0    13.8s] done: 1 prediction rows sets, c_src 0.9576
+[23:50:48] done gb_ch__s0__d0__nall__cnn_h (18 s)
+[s0   127.9s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 31.2s
+[s0   128.2s] done: 2 prediction rows sets, c_src 0.9650
+[23:51:12] done ch_gb__s0__d0__nall__tabpfn_d (132 s)
+[s0    37.2s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 455 target substations in 31.8s
+[s0    37.5s] done: 1 prediction rows sets, c_src 0.9650
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[23:51:18] done ch_gb__s0__d0__nall__tabpfn_h (42 s)
+[s0     2.7s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     3.9s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     4.4s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0     2.8s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     4.2s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     4.8s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0   259.1s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 254.7s
+[s0   279.5s]   L3 neural TabPFN|size|both|residual|log: predicted 135 target substations in 274.8s
+[s0   280.3s] done: 1 prediction rows sets, c_src 0.9576
+[23:56:06] done gb_ch__s0__d0__nall__tabpfn_r (283 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     2.6s] features from cache gb_eoh_s0_8b392ced5c47_tab.parquet
+[s0     4.0s] features from cache bstar30_s0_f74e82df29a7_tab.parquet
+[s0     4.5s] GB->CH: 135 target test substations; source m_h 0.02498, kappa 0.3976, s0 median 0.01264; day alignment by (month, day)
+[s0   517.8s]   L2 neural TabPFN|size|both|direct|log: predicted 135 target substations in 258.7s
+[s0   518.5s] done: 2 prediction rows sets, c_src 0.9576
+[00:00:00] done gb_ch__s0__d0__nall__tabpfn_d (522 s)
+[s0   247.0s]   L4 neural TabPFN|size_peak|both|l4a|log: predicted 135 target substations in 242.5s
+[s0   247.7s] done: 1 prediction rows sets, c_src 0.9576
+[00:00:24] done gb_ch__s0__d0__nall__tabpfn_h (252 s)
+[00:00:25] exit: {'done': 19, 'failed': 0, 'remaining': 0, 'median_job_s': 21.548246145248413, 'eta_h': 0.0, 'updated': '2026-11-18T00:00:24'}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:02:39] queue iter07: 3 of 22 jobs to run, 5 workers x 4 threads, stop at None, shard all, families all
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s3     2.0s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s3     2.0s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     2.0s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s3     2.0s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     8.7s] Paper A pilot m_h 0.02500 (292 train HP households); station pilots {'G001': 0.02669, 'G002': 0.0227, 'G006': 0.02649, 'G009': 0.02153, 'G013': 0.02213}; s0 {'paperA_corr': 0.01266, 'paperA_corr_all': 0.01266}; cross-fit fold m_h [0.02499, 0.02511, 0.02497, 0.02492]
+[s3     8.8s] Paper A pilot m_h 0.02500 (292 train HP households); station pilots {'G001': 0.02669, 'G002': 0.0227, 'G006': 0.02649, 'G009': 0.02153, 'G013': 0.02213}; s0 {'paperA_corr': 0.01266, 'paperA_corr_all': 0.01266}; cross-fit fold m_h [0.02499, 0.02511, 0.02497, 0.02492]
+[s3     8.8s] Paper A pilot m_h 0.02500 (292 train HP households); station pilots {'G001': 0.02669, 'G002': 0.0227, 'G006': 0.02649, 'G009': 0.02153, 'G013': 0.02213}; s0 {'paperA_corr': 0.01266, 'paperA_corr_all': 0.01266}; cross-fit fold m_h [0.02499, 0.02511, 0.02497, 0.02492]
+[s3     8.9s]   HP_Peak Ridge/size_peak/both/l4a/log: refit with fixed params {'alpha': 12229.860799822773}, best_iter None, 0.1s
+[s3    10.0s] done in 10.0s
+[s3    11.1s]   HP_Peak TabPFN/size/both/l4a/log: refit with fixed params {}, best_iter None, 2.3s
+[00:02:57] done refit_gb__s3__d0__nall__linear (12 s)
+[s3   161.6s] done in 161.6s
+[00:05:29] done refit_gb__s3__d0__nall__tabpfn_h (164 s)
+[s3   175.7s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.13687, 0.1667, 0.14915], chosen 0 (test WAPE per initialisation, diagnostic only: [21.9, 22.8, 20.5])
+[s3   175.7s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.0946997286011711, 'kernel': 7, 'lr': 0.001845224838811464, 'n_blocks': 3, 'weight_decay': 9.466864371975534e-06, 'width': 32}, best_iter 168, 166.9s
+[s3   176.9s] done in 176.9s
+[00:05:43] done refit_gb__s3__d0__nall__cnn_h (179 s)
+[00:05:44] exit: {'done': 22, 'failed': 0, 'remaining': 0, 'median_job_s': 22.36875557899475, 'eta_h': 0.0, 'updated': '2026-11-18T00:05:43'}
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:17:38] queue iter07: 169 of 191 jobs to run, 5 workers x 4 threads, stop at None, shard all, families all
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     3.4s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s4     3.5s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s5     3.6s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s5     3.6s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     3.5s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s5     3.5s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s8     3.6s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s8     3.6s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s6     3.7s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s6     3.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s8    14.3s] Paper A pilot m_h 0.02499 (292 train HP households); station pilots {'G001': 0.02776, 'G002': 0.02245, 'G006': 0.024, 'G009': 0.02072, 'G013': 0.02328}; s0 {'paperA_corr': 0.01216, 'paperA_corr_all': 0.01216}; cross-fit fold m_h [0.0249, 0.02505, 0.02519, 0.02484]
+[s5    14.4s] Paper A pilot m_h 0.02514 (292 train HP households); station pilots {'G001': 0.02757, 'G002': 0.02299, 'G006': 0.02649, 'G009': 0.0204, 'G013': 0.02258}; s0 {'paperA_corr': 0.01285, 'paperA_corr_all': 0.01285}; cross-fit fold m_h [0.02469, 0.02527, 0.02496, 0.02563]
+[s5    15.0s] Paper A pilot m_h 0.02514 (292 train HP households); station pilots {'G001': 0.02757, 'G002': 0.02299, 'G006': 0.02649, 'G009': 0.0204, 'G013': 0.02258}; s0 {'paperA_corr': 0.01285, 'paperA_corr_all': 0.01285}; cross-fit fold m_h [0.02469, 0.02527, 0.02496, 0.02563]
+[s4    15.1s] Paper A pilot m_h 0.02522 (292 train HP households); station pilots {'G001': 0.02686, 'G002': 0.02288, 'G006': 0.0269, 'G009': 0.02179, 'G013': 0.0255}; s0 {'paperA_corr': 0.01244, 'paperA_corr_all': 0.01244}; cross-fit fold m_h [0.02513, 0.02513, 0.0253, 0.02535]
+[s6    15.1s] Paper A pilot m_h 0.02513 (292 train HP households); station pilots {'G001': 0.02788, 'G002': 0.02287, 'G006': 0.02518, 'G009': 0.02056, 'G013': 0.02229}; s0 {'paperA_corr': 0.01258, 'paperA_corr_all': 0.01258}; cross-fit fold m_h [0.02523, 0.02498, 0.02454, 0.02577]
+[s5    18.2s]   HP_Peak TabPFN/size_peak/both/l4a/log: refit with fixed params {}, best_iter None, 3.7s
+[s8   385.4s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.14162, 0.13475, 0.14132], chosen 1 (test WAPE per initialisation, diagnostic only: [22.3, 21.0, 23.5])
+[s8   385.4s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.20140861841942378, 'kernel': 9, 'lr': 0.0018200259918838323, 'n_blocks': 3, 'weight_decay': 2.058083250840173e-06, 'width': 32}, best_iter 101, 371.0s
+[s8   389.8s] done in 389.8s
+[00:24:20] done refit_gb__s8__d0__nall__cnn_h (394 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     7.8s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s6     7.8s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6    30.9s] Paper A pilot m_h 0.02513 (292 train HP households); station pilots {'G001': 0.02788, 'G002': 0.02287, 'G006': 0.02518, 'G009': 0.02056, 'G013': 0.02229}; s0 {'paperA_corr': 0.01258, 'paperA_corr_all': 0.01258}; cross-fit fold m_h [0.02523, 0.02498, 0.02454, 0.02577]
+[s6    37.4s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 6.5s
+[s5   500.3s] done in 500.3s
+[00:26:11] done refit_gb__s5__d0__nall__tabpfn_h (504 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     6.1s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s7     6.1s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7    27.1s] Paper A pilot m_h 0.02507 (292 train HP households); station pilots {'G001': 0.02768, 'G002': 0.02255, 'G006': 0.02467, 'G009': 0.02112, 'G013': 0.02254}; s0 {'paperA_corr': 0.01198, 'paperA_corr_all': 0.01198}; cross-fit fold m_h [0.02436, 0.02578, 0.02532, 0.02487]
+[s7    34.1s]   HP_Peak TabPFN/size/both/l4a/log: refit with fixed params {}, best_iter None, 6.9s
+[s6   213.6s] done in 213.6s
+[00:28:13] done refit_gb__s6__d0__nall__tabpfn_h (221 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5   647.1s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.13488, 0.14849, 0.12873], chosen 2 (test WAPE per initialisation, diagnostic only: [20.4, 21.4, 20.1])
+[s5   647.1s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.1995005076013763, 'kernel': 7, 'lr': 0.0009551781005652862, 'n_blocks': 3, 'weight_decay': 8.506743790680527e-06, 'width': 32}, best_iter 156, 632.0s
+[s6     6.7s] HP train/test 292/92, fill 2399/800; substations {'train': 2080, 'inner': 1340, 'test': 455}; dropped cells 3458
+[s6     6.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s5   651.4s] done in 651.4s
+[00:28:41] done refit_gb__s5__d0__nall__cnn_h (655 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     1.4s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s2     1.4s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s6    28.7s] Paper A pilot m_h 0.02513 (292 train HP households); station pilots {'G001': 0.02788, 'G002': 0.02287, 'G006': 0.02518, 'G009': 0.02056, 'G013': 0.02229}; s0 {'paperA_corr': 0.01258, 'paperA_corr_all': 0.01258}; cross-fit fold m_h [0.02523, 0.02498, 0.02454, 0.02577]
+[s6    29.1s]   HP_Peak ElasticNet/size_peak/netfit/l4a/log: refit with fixed params {'alpha': 0.0014412812467941593, 'l1_ratio': 0.5101460010898973}, best_iter None, 0.3s
+[s2     5.7s] Paper A pilot m_h 0.01866 (64 train HP households); station pilots {'Hg': 0.01835, 'KLO': 0.01863}; s0 {'paperA_corr': 0.00554, 'paperA_corr_all': 0.00646}; cross-fit fold m_h [0.01829, 0.01868, 0.0186, 0.01903]
+[s6    32.4s] done in 32.4s
+[00:29:05] done refit_gb__s6__d0__nall__linear (40 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     2.0s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s3     2.0s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s3     6.7s] Paper A pilot m_h 0.01740 (64 train HP households); station pilots {'Hg': 0.01794, 'KLO': 0.01773}; s0 {'paperA_corr': 0.00509, 'paperA_corr_all': 0.00577}; cross-fit fold m_h [0.01683, 0.0176, 0.01759, 0.01764]
+[s2    48.2s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.21094, 0.20343, 0.23604], chosen 1 (test WAPE per initialisation, diagnostic only: [20.3, 18.9, 19.1])
+[s2    48.3s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.18896049850620195, 'kernel': 5, 'lr': 0.0010353772060013823, 'n_blocks': 3, 'weight_decay': 0.00011467193012502381, 'width': 32}, best_iter 61, 42.4s
+[s2    51.9s] done in 51.9s
+[00:29:49] done refit_ch__s2__d0__nall__cnn_h (59 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     1.7s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s5     1.7s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s3    46.4s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.18782, 0.19144, 0.19822], chosen 0 (test WAPE per initialisation, diagnostic only: [30.4, 28.0, 25.5])
+[s3    46.4s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.12235891747068614, 'kernel': 3, 'lr': 0.0018761952669856616, 'n_blocks': 2, 'weight_decay': 0.0004907288997182032, 'width': 16}, best_iter 133, 39.7s
+[s3    50.0s] done in 50.0s
+[s5     6.8s] Paper A pilot m_h 0.01802 (64 train HP households); station pilots {'Hg': 0.01811, 'KLO': 0.01829}; s0 {'paperA_corr': 0.00531, 'paperA_corr_all': 0.00605}; cross-fit fold m_h [0.01743, 0.01786, 0.01888, 0.01798]
+[00:30:12] done refit_ch__s3__d0__nall__cnn_h (57 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     1.8s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s6     1.8s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s6     7.2s] Paper A pilot m_h 0.01833 (64 train HP households); station pilots {'Hg': 0.01851, 'KLO': 0.01843}; s0 {'paperA_corr': 0.00518, 'paperA_corr_all': 0.00593}; cross-fit fold m_h [0.01817, 0.01842, 0.01872, 0.0181]
+[s5    39.6s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.21541, 0.2303, 0.22147], chosen 0 (test WAPE per initialisation, diagnostic only: [16.3, 20.2, 18.0])
+[s5    39.6s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.29995161414186067, 'kernel': 5, 'lr': 0.0029961543169795867, 'n_blocks': 2, 'weight_decay': 3.7554087810025174e-05, 'width': 32}, best_iter 53, 32.6s
+[s5    43.7s] done in 43.7s
+[00:30:50] done refit_ch__s5__d0__nall__cnn_h (51 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.9s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s7     1.9s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[s6    43.5s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.22878, 0.24431, 0.24343], chosen 0 (test WAPE per initialisation, diagnostic only: [16.5, 17.3, 18.3])
+[s6    43.5s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.19934473898935823, 'kernel': 5, 'lr': 0.0015714126180439497, 'n_blocks': 3, 'weight_decay': 2.064019389085038e-06, 'width': 16}, best_iter 79, 36.2s
+[s7     7.6s] Paper A pilot m_h 0.01791 (64 train HP households); station pilots {'Hg': 0.01853, 'KLO': 0.01761}; s0 {'paperA_corr': 0.00568, 'paperA_corr_all': 0.00647}; cross-fit fold m_h [0.01779, 0.01764, 0.01763, 0.0186]
+[s6    47.8s] done in 47.8s
+[00:31:16] done refit_ch__s6__d0__nall__cnn_h (55 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     1.9s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s9     1.9s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s9     7.5s] Paper A pilot m_h 0.01740 (64 train HP households); station pilots {'Hg': 0.01818, 'KLO': 0.01713}; s0 {'paperA_corr': 0.00571, 'paperA_corr_all': 0.00658}; cross-fit fold m_h [0.01715, 0.01747, 0.0177, 0.01734]
+[s7    44.1s]   HP_Peak CNN/size_peak/rawphys/l4a/log: initialisations val_loss [0.29684, 0.28037, 0.29524], chosen 1 (test WAPE per initialisation, diagnostic only: [22.1, 24.0, 23.9])
+[s7    44.1s]   HP_Peak CNN/size_peak/rawphys/l4a/log: refit with fixed params {'dropout': 0.23833054040258267, 'kernel': 9, 'lr': 0.002916271832791061, 'n_blocks': 2, 'weight_decay': 1.476307039000897e-06, 'width': 8}, best_iter 103, 36.3s
+[s7    48.4s] done in 48.4s
+[00:31:56] done refit_ch__s7__d0__nall__cnn_h (56 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     1.7s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s2     1.7s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s2     6.8s] Paper A pilot m_h 0.01866 (64 train HP households); station pilots {'Hg': 0.01835, 'KLO': 0.01863}; s0 {'paperA_corr': 0.00554, 'paperA_corr_all': 0.00646}; cross-fit fold m_h [0.01829, 0.01868, 0.0186, 0.01903]
+[s2    13.2s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 6.3s
+[s2    53.0s] done in 53.0s
+[s9    92.2s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.17607, 0.22205, 0.18714], chosen 0 (test WAPE per initialisation, diagnostic only: [18.2, 14.4, 18.8])
+[s9    92.2s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.28811182131926, 'kernel': 7, 'lr': 0.0008125048671880334, 'n_blocks': 3, 'weight_decay': 7.738866591321642e-06, 'width': 32}, best_iter 121, 84.5s
+[00:33:06] done refit_ch__s2__d0__nall__tabpfn_h (60 s)
+[s9    95.8s] done in 95.8s
+[00:33:10] done refit_ch__s9__d0__nall__cnn_h (103 s)
+[s6   927.8s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.14353, 0.11717, 0.1196], chosen 1 (test WAPE per initialisation, diagnostic only: [19.2, 213.8, 18.0])
+[s6   927.8s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.01891223690633195, 'kernel': 7, 'lr': 0.001212560018847726, 'n_blocks': 3, 'weight_decay': 1.9175505468938412e-05, 'width': 32}, best_iter 158, 912.6s
+[s6   931.7s] done in 931.7s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:33:21] done refit_gb__s6__d0__nall__cnn_h (936 s)
+[s3     1.4s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s3     1.4s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     1.4s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s2     1.4s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s3     5.5s] Paper A pilot m_h 0.01740 (64 train HP households); station pilots {'Hg': 0.01794, 'KLO': 0.01773}; s0 {'paperA_corr': 0.00509, 'paperA_corr_all': 0.00577}; cross-fit fold m_h [0.01683, 0.0176, 0.01759, 0.01764]
+[s2     5.7s] Paper A pilot m_h 0.01866 (64 train HP households); station pilots {'Hg': 0.01835, 'KLO': 0.01863}; s0 {'paperA_corr': 0.00554, 'paperA_corr_all': 0.00646}; cross-fit fold m_h [0.01829, 0.01868, 0.0186, 0.01903]
+[s2     5.7s]   HP_Peak Ridge/size/netfit/l4a/log: refit with fixed params {'alpha': 924.6255387302593}, best_iter None, 0.0s
+[s3    11.0s]   HP_Peak TabPFN/size_peak/netfit/l4a/log: refit with fixed params {}, best_iter None, 5.4s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     8.9s] done in 8.9s
+[s3     1.5s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s3     1.5s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[00:33:35] done refit_ch__s2__d0__nall__linear (15 s)
+[s3     6.8s] Paper A pilot m_h 0.01740 (64 train HP households); station pilots {'Hg': 0.01794, 'KLO': 0.01773}; s0 {'paperA_corr': 0.00509, 'paperA_corr_all': 0.00577}; cross-fit fold m_h [0.01683, 0.0176, 0.01759, 0.01764]
+[s3     7.0s]   HP_Peak Lasso/size/netfit/l4a/log: refit with fixed params {'alpha': 0.000681743040489444}, best_iter None, 0.1s
+[s3    10.4s] done in 10.4s
+[00:33:45] done refit_ch__s3__d0__nall__linear (17 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     2.0s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s5     2.0s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s4   966.1s]   HP_Peak CNN/size/rawphys/l4a/log: initialisations val_loss [0.12691, 0.1352, 0.11376], chosen 2 (test WAPE per initialisation, diagnostic only: [21.3, 21.3, 18.6])
+[s4   966.1s]   HP_Peak CNN/size/rawphys/l4a/log: refit with fixed params {'dropout': 0.015472215251117437, 'kernel': 9, 'lr': 0.0014954871625557046, 'n_blocks': 3, 'weight_decay': 4.828874873169432e-06, 'width': 32}, best_iter 142, 950.9s
+[s5     8.3s] Paper A pilot m_h 0.01802 (64 train HP households); station pilots {'Hg': 0.01811, 'KLO': 0.01829}; s0 {'paperA_corr': 0.00531, 'paperA_corr_all': 0.00605}; cross-fit fold m_h [0.01743, 0.01786, 0.01888, 0.01798]
+[s5     8.3s]   HP_Peak Ridge/size_peak/netfit/l4a/log: refit with fixed params {'alpha': 883.4104164135583}, best_iter None, 0.0s
+[s4   971.0s] done in 971.0s
+[00:34:01] done refit_gb__s4__d0__nall__cnn_h (975 s)
+[s5    12.7s] done in 12.7s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.9s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s7     1.9s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[00:34:05] done refit_ch__s5__d0__nall__linear (21 s)
+[s7     7.7s] Paper A pilot m_h 0.01791 (64 train HP households); station pilots {'Hg': 0.01853, 'KLO': 0.01761}; s0 {'paperA_corr': 0.00568, 'paperA_corr_all': 0.00647}; cross-fit fold m_h [0.01779, 0.01764, 0.01763, 0.0186]
+[s7     7.7s]   HP_Peak Ridge/size/netfit/l4a/log: refit with fixed params {'alpha': 549.3143954125437}, best_iter None, 0.0s
+[s7    11.8s] done in 11.8s
+[s3    55.5s] done in 55.5s
+[00:34:18] done refit_ch__s3__d0__nall__tabpfn_h (62 s)
+[00:34:18] done refit_ch__s7__d0__nall__linear (21 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     1.8s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s8     1.8s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     1.6s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s9     1.6s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s8     6.4s] Paper A pilot m_h 0.01838 (64 train HP households); station pilots {'Hg': 0.01993, 'KLO': 0.01807}; s0 {'paperA_corr': 0.00544, 'paperA_corr_all': 0.00639}; cross-fit fold m_h [0.01907, 0.01823, 0.01795, 0.01839]
+[s8     6.5s]   HP_Peak Ridge/size/netfit/l4a/log: refit with fixed params {'alpha': 1769.9118726032361}, best_iter None, 0.0s
+[s8    10.0s] done in 10.0s
+[s9     6.9s] Paper A pilot m_h 0.01740 (64 train HP households); station pilots {'Hg': 0.01818, 'KLO': 0.01713}; s0 {'paperA_corr': 0.00571, 'paperA_corr_all': 0.00658}; cross-fit fold m_h [0.01715, 0.01747, 0.0177, 0.01734]
+[s9     7.0s]   HP_Peak Lasso/size/netfit/l4a/log: refit with fixed params {'alpha': 0.0013202431460145431}, best_iter None, 0.0s
+[00:34:30] done refit_ch__s8__d0__nall__linear (18 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9    10.7s] done in 10.7s
+[00:34:34] done refit_ch__s9__d0__nall__linear (18 s)
+[s5     1.6s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s5     1.6s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s1     1.6s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+[s5     6.5s] Paper A pilot m_h 0.01802 (64 train HP households); station pilots {'Hg': 0.01811, 'KLO': 0.01829}; s0 {'paperA_corr': 0.00531, 'paperA_corr_all': 0.00605}; cross-fit fold m_h [0.01743, 0.01786, 0.01888, 0.01798]
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     8.0s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     9.2s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s1    10.0s] done: 11 prediction rows sets, c_src 0.9516
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:34:46] done ch_gb__s1__d0__nall__physics (17 s)
+[s5    13.4s]   HP_Peak TabPFN/size/both/l4a/log: refit with fixed params {}, best_iter None, 6.8s
+[s2     1.9s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s3     2.5s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s2    10.4s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    11.9s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s2    13.0s] done: 11 prediction rows sets, c_src 0.9388
+[00:35:01] done ch_gb__s2__d0__nall__physics (20 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    10.6s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3    12.1s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s3    13.1s] done: 11 prediction rows sets, c_src 0.9399
+[00:35:07] done ch_gb__s3__d0__nall__physics (21 s)
+[s4     2.0s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    10.2s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4    11.5s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s4    12.5s] done: 11 prediction rows sets, c_src 0.9387
+[00:35:21] done ch_gb__s4__d0__nall__physics (21 s)
+[s5     1.9s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     1.9s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s5    10.5s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5    12.0s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s5    13.0s] done: 11 prediction rows sets, c_src 0.9307
+[00:35:35] done ch_gb__s5__d0__nall__physics (22 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     9.5s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6    10.9s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s6    11.9s] done: 11 prediction rows sets, c_src 0.9489
+[00:35:41] done ch_gb__s6__d0__nall__physics (21 s)
+[s7     1.7s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     9.5s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7    10.7s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s7    11.4s] done: 11 prediction rows sets, c_src 0.9594
+[s7   568.0s] done in 568.0s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     1.4s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[00:35:54] done refit_gb__s7__d0__nall__tabpfn_h (575 s)
+[00:35:54] done ch_gb__s7__d0__nall__physics (20 s)
+[s9     1.5s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s8     7.5s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     8.4s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s8     9.0s] done: 11 prediction rows sets, c_src 0.9449
+[00:36:02] done ch_gb__s8__d0__nall__physics (16 s)
+[s9     6.5s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     7.7s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s9     8.5s] done: 11 prediction rows sets, c_src 0.9345
+[00:36:06] done ch_gb__s9__d0__nall__physics (15 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     1.9s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+[s7     2.0s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s7     2.0s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     7.3s] Paper A pilot m_h 0.01791 (64 train HP households); station pilots {'Hg': 0.01853, 'KLO': 0.01761}; s0 {'paperA_corr': 0.00568, 'paperA_corr_all': 0.00647}; cross-fit fold m_h [0.01779, 0.01764, 0.01763, 0.0186]
+[s1     9.5s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1    10.9s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s1    10.9s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s1    11.0s]   L2 linear PLS|size|netfit|direct|log: predicted 455 target substations in 0.0s
+[s1    11.0s]   L3 linear ElasticNet|size|netfit|residual|log: predicted 455 target substations in 0.0s
+[s1    11.0s]   L4 linear Ridge|size_peak|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s1    12.0s] done: 4 prediction rows sets, c_src 0.9516
+[s2     2.0s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s7    14.6s]   HP_Peak TabPFN/size_peak/netfit/l4a/log: refit with fixed params {}, best_iter None, 7.3s
+[00:36:22] done ch_gb__s1__d0__nall__linear (19 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2    10.0s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    11.7s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s2    11.8s]   L1 linear ElasticNet|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s2    11.8s]   L2 linear Lasso|size|netfit|direct|log: predicted 455 target substations in 0.0s
+[s2    11.8s]   L3 linear PLS|size_peak|netfit|residual|log: predicted 455 target substations in 0.0s
+[s2    11.8s]   L4 linear Ridge|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s3     2.4s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s2    12.9s] done: 4 prediction rows sets, c_src 0.9388
+[00:36:33] done ch_gb__s2__d0__nall__linear (21 s)
+[s3    10.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3    12.3s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s3    12.4s]   L1 linear ElasticNet|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s3    12.4s]   L2 linear ElasticNet|size_peak|netfit|direct|log: predicted 455 target substations in 0.0s
+[s3    12.5s]   L3 linear Ridge|size|netfit|residual|log: predicted 455 target substations in 0.0s
+[s3    12.5s]   L4 linear Lasso|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    13.5s] done: 4 prediction rows sets, c_src 0.9399
+[00:36:45] done ch_gb__s3__d0__nall__linear (23 s)
+[s4     2.2s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5   142.7s] done in 142.7s
+[s4    10.5s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[00:36:59] done refit_ch__s5__d0__nall__tabpfn_h (150 s)
+[s4    11.8s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s4    11.8s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s4    11.9s]   L2 linear Lasso|size_peak|netfit|direct|log: predicted 455 target substations in 0.0s
+[s4    11.9s]   L3 linear Lasso|size|netfit|residual|log: predicted 455 target substations in 0.0s
+[s4    11.9s]   L4 linear Ridge|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s5     2.0s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s4    13.0s] done: 4 prediction rows sets, c_src 0.9387
+[00:37:04] done ch_gb__s4__d0__nall__linear (25 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7    60.5s] done in 60.5s
+[s5    10.0s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[00:37:10] done refit_ch__s7__d0__nall__tabpfn_h (67 s)
+[s5    11.3s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s5    11.4s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s5    11.4s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 455 target substations in 0.1s
+[s5    11.5s]   L3 linear ElasticNet|size|both|residual|log: predicted 455 target substations in 0.1s
+[s5    11.5s]   L4 linear Ridge|size_peak|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s5    12.3s] done: 4 prediction rows sets, c_src 0.9307
+[00:37:12] done ch_gb__s5__d0__nall__linear (23 s)
+[s6     1.9s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     8.9s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6    10.1s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s6    10.2s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s6    10.2s]   L2 linear PLS|size_peak|netfit|direct|log: predicted 455 target substations in 0.0s
+[s6    10.3s]   L3 linear Lasso|size|netfit|residual|log: predicted 455 target substations in 0.0s
+[s6    10.3s]   L4 linear Ridge|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s6    11.2s] done: 4 prediction rows sets, c_src 0.9489
+[s8     1.9s] HP train/test 64/22, fill 968/323; substations {'train': 500, 'inner': 440, 'test': 135}; dropped cells 605
+[s8     1.9s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.6s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[00:37:25] done ch_gb__s6__d0__nall__linear (21 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     7.1s] Paper A pilot m_h 0.01838 (64 train HP households); station pilots {'Hg': 0.01993, 'KLO': 0.01807}; s0 {'paperA_corr': 0.00544, 'paperA_corr_all': 0.00639}; cross-fit fold m_h [0.01907, 0.01823, 0.01795, 0.01839]
+[s8     1.7s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s7     8.4s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     9.6s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s7     9.7s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s7     9.8s]   L2 linear Ridge|size_peak|both|direct|log: predicted 455 target substations in 0.1s
+[s7     9.8s]   L3 linear Ridge|size_peak|netfit|residual|log: predicted 455 target substations in 0.0s
+[s7     9.8s]   L4 linear Ridge|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s9     1.8s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s7    10.7s] done: 4 prediction rows sets, c_src 0.9594
+[00:37:35] done ch_gb__s7__d0__nall__linear (19 s)
+[s8    14.7s]   HP_Peak TabPFN/size/netfit/l4a/log: refit with fixed params {}, best_iter None, 7.6s
+[s8     8.9s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8    10.4s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s8    10.5s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s8    10.5s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 455 target substations in 0.1s
+[s8    10.6s]   L3 linear ElasticNet|size|netfit|residual|log: predicted 455 target substations in 0.0s
+[s8    10.6s]   L4 linear Ridge|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[s8    11.6s] done: 4 prediction rows sets, c_src 0.9449
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     9.7s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9    11.1s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s9    11.2s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 455 target substations in 0.1s
+[s9    11.3s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 455 target substations in 0.1s
+[s9    11.4s]   L3 linear Lasso|size|both|residual|log: predicted 455 target substations in 0.1s
+[s9    11.4s]   L4 linear Lasso|size|netfit|l4a|log: predicted 455 target substations in 0.0s
+[00:37:43] done ch_gb__s8__d0__nall__linear (19 s)
+[s9    12.3s] done: 4 prediction rows sets, c_src 0.9345
+[00:37:45] done ch_gb__s9__d0__nall__linear (20 s)
+[s1     2.0s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     9.7s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1    11.0s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s1     2.0s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     2.4s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s1    10.6s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1    12.2s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s3     2.4s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s2    11.7s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    13.3s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s3    11.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s8    60.3s] done in 60.3s
+[s3    12.9s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[00:38:23] done refit_ch__s8__d0__nall__tabpfn_h (68 s)
+[s1    30.3s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 455 target substations in 18.1s
+[s1    30.7s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 455 target substations in 0.4s
+[s1    31.6s] done: 2 prediction rows sets, c_src 0.9516
+[00:38:32] done ch_gb__s1__d0__nall__cnn_d (40 s)
+[s2    30.2s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 16.9s
+[s2    30.7s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.4s
+[s2    31.8s] done: 2 prediction rows sets, c_src 0.9388
+[s3    29.1s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 16.2s
+[s3    29.4s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.4s
+[s3    30.5s] done: 2 prediction rows sets, c_src 0.9399
+[00:38:40] done ch_gb__s2__d0__nall__cnn_d (41 s)
+[00:38:40] done ch_gb__s3__d0__nall__cnn_d (40 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     1.9s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s4     2.1s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     9.9s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    11.3s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s4     9.7s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s6     2.2s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s5     2.2s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s4    11.1s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s6    10.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s5    10.7s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s6    12.3s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s5    12.3s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s4    27.5s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 16.4s
+[s4    28.0s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 455 target substations in 0.5s
+[s4    29.2s] done: 2 prediction rows sets, c_src 0.9387
+[00:39:26] done ch_gb__s4__d0__nall__cnn_d (38 s)
+[s5    28.7s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 455 target substations in 16.3s
+[s6    28.8s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 16.5s
+[s5    29.1s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 455 target substations in 0.5s
+[s6    29.3s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.5s
+[s5    30.1s] done: 2 prediction rows sets, c_src 0.9307
+[s6    30.3s] done: 2 prediction rows sets, c_src 0.9489
+[00:39:34] done ch_gb__s5__d0__nall__cnn_d (39 s)
+[00:39:34] done ch_gb__s6__d0__nall__cnn_d (39 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.8s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     3.8s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s9     3.8s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s7    16.0s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7    18.8s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s8    18.3s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s9    18.3s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8    20.7s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s9    20.7s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s7    45.4s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 26.7s
+[s7    46.3s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 455 target substations in 0.8s
+[s7    47.9s] done: 2 prediction rows sets, c_src 0.9594
+[00:40:41] done ch_gb__s7__d0__nall__cnn_d (58 s)
+[s8    50.5s]   L1 rawseries CNN|size|raw|direct|log: predicted 455 target substations in 29.7s
+[s9    50.5s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 455 target substations in 29.7s
+[s8    51.3s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.8s
+[s9    51.4s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 455 target substations in 0.9s
+[s8    53.6s] done: 2 prediction rows sets, c_src 0.9449
+[s9    53.7s] done: 2 prediction rows sets, c_src 0.9345
+[00:40:55] done ch_gb__s8__d0__nall__cnn_d (65 s)
+[00:40:55] done ch_gb__s9__d0__nall__cnn_d (65 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     3.7s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     3.9s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s3     4.0s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s1    19.4s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1    21.9s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s1   244.4s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 233.4s
+[s3    17.7s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s2    17.8s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s3    20.2s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s2    20.3s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s1    46.8s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 24.8s
+[s1    48.2s] done: 1 prediction rows sets, c_src 0.9516
+[00:42:17] done ch_gb__s1__d0__nall__cnn_r (66 s)
+[s2    44.7s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 455 target substations in 24.4s
+[s3    44.9s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 24.7s
+[s2    45.9s] done: 1 prediction rows sets, c_src 0.9388
+[s3    46.1s] done: 1 prediction rows sets, c_src 0.9399
+[00:42:30] done ch_gb__s2__d0__nall__cnn_r (63 s)
+[00:42:30] done ch_gb__s3__d0__nall__cnn_r (63 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     1.6s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     7.9s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     8.9s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s5     1.7s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s6     1.7s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s6     8.1s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s5     8.3s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s6     9.4s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s5     9.6s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s4    20.9s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 12.0s
+[s4    21.6s] done: 1 prediction rows sets, c_src 0.9387
+[s1   321.6s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 77.1s
+[s2   259.0s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 247.7s
+[s1   322.4s] done: 2 prediction rows sets, c_src 0.9516
+[00:43:08] done ch_gb__s4__d0__nall__cnn_r (32 s)
+[00:43:10] done ch_gb__s1__d0__nall__tabpfn_d (332 s)
+[s6    21.8s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 12.5s
+[s5    22.1s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 12.5s
+[s6    22.5s] done: 1 prediction rows sets, c_src 0.9489
+[s5    22.7s] done: 1 prediction rows sets, c_src 0.9307
+[00:43:16] done ch_gb__s5__d0__nall__cnn_r (30 s)
+[00:43:16] done ch_gb__s6__d0__nall__cnn_r (29 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.5s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[s3     1.5s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     7.3s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     8.3s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s3     7.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s8     1.6s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s9     1.6s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s3     8.6s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s9     7.2s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8     7.3s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     8.3s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s9     8.3s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s7    19.4s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 11.0s
+[s7    20.1s] done: 1 prediction rows sets, c_src 0.9594
+[00:43:46] done ch_gb__s7__d0__nall__cnn_r (27 s)
+[s9    21.1s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 12.8s
+[s8    21.2s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 455 target substations in 12.9s
+[s9    21.8s] done: 1 prediction rows sets, c_src 0.9345
+[s8    21.9s] done: 1 prediction rows sets, c_src 0.9449
+[s2   307.4s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 48.4s
+[s2   308.2s] done: 2 prediction rows sets, c_src 0.9388
+[00:43:56] done ch_gb__s8__d0__nall__cnn_r (28 s)
+[00:43:57] done ch_gb__s9__d0__nall__cnn_r (29 s)
+[00:43:59] done ch_gb__s2__d0__nall__tabpfn_d (318 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     1.5s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     8.1s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     9.3s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s2     1.6s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s3     1.7s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s4     1.6s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+[s2     8.2s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s3     8.6s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s2     9.4s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s3     9.8s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s4     8.2s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     9.5s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s1    21.6s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 12.3s
+[s1    22.4s] done: 1 prediction rows sets, c_src 0.9516
+[00:44:27] done ch_gb__s1__d0__nall__cnn_h (29 s)
+[s2    23.4s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 14.0s
+[s3    23.8s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 455 target substations in 14.0s
+[s2    24.3s] done: 1 prediction rows sets, c_src 0.9388
+[s3    24.6s] done: 1 prediction rows sets, c_src 0.9399
+[00:44:39] done ch_gb__s2__d0__nall__cnn_h (31 s)
+[00:44:41] done ch_gb__s3__d0__nall__cnn_h (32 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     1.8s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     9.3s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    10.6s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s5     1.9s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s6     1.7s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s5     9.2s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5    10.6s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s6     9.5s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6    10.7s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s4    24.5s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 455 target substations in 13.9s
+[s4    25.3s] done: 1 prediction rows sets, c_src 0.9387
+[00:45:13] done ch_gb__s4__d0__nall__cnn_h (33 s)
+[s5    25.5s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 14.8s
+[s5    26.4s] done: 1 prediction rows sets, c_src 0.9307
+[s6    25.9s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 15.2s
+[00:45:25] done ch_gb__s5__d0__nall__cnn_h (34 s)
+[s6    26.8s] done: 1 prediction rows sets, c_src 0.9489
+[00:45:28] done ch_gb__s6__d0__nall__cnn_h (35 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     2.1s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7    10.0s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7    11.4s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s8     1.7s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s9     1.9s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s8     9.6s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8    11.0s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s9     9.8s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s7    25.5s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 455 target substations in 14.1s
+[s9    11.2s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s7    26.2s] done: 1 prediction rows sets, c_src 0.9594
+[00:46:02] done ch_gb__s7__d0__nall__cnn_h (35 s)
+[s8    26.4s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 455 target substations in 15.3s
+[s8    27.2s] done: 1 prediction rows sets, c_src 0.9449
+[s9    27.1s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 455 target substations in 15.9s
+[s9    27.9s] done: 1 prediction rows sets, c_src 0.9345
+[00:46:16] done ch_gb__s8__d0__nall__cnn_h (36 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:46:18] done ch_gb__s9__d0__nall__cnn_h (36 s)
+[s1     7.7s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3   192.6s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 184.0s
+[s2     7.0s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s3     7.2s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s1    55.7s] evaluated 135 substations in 44.3s (0.328 s each)
+[s1    56.9s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+[s1    59.3s] done: 10 prediction rows sets, c_src 0.9565
+[00:47:22] done gb_ch__s1__d0__nall__physics (68 s)
+[s2    54.6s] evaluated 135 substations in 43.5s (0.322 s each)
+[s2    55.6s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s2    57.7s] done: 10 prediction rows sets, c_src 0.9555
+[s3    55.7s] evaluated 135 substations in 44.5s (0.330 s each)
+[s3    56.6s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[00:47:35] done gb_ch__s2__d0__nall__physics (66 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    58.9s] done: 10 prediction rows sets, c_src 0.9540
+[00:47:39] done gb_ch__s3__d0__nall__physics (67 s)
+[s4   208.2s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 198.7s
+[s4     7.3s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3   263.7s]   L2 neural TabPFN|size_peak|netfit|direct|log: predicted 455 target substations in 71.1s
+[s3   264.6s] done: 2 prediction rows sets, c_src 0.9399
+[00:47:51] done ch_gb__s3__d0__nall__tabpfn_d (271 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     6.7s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s6     6.8s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     1.6s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s5     8.2s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     9.5s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s4    51.9s] evaluated 135 substations in 41.3s (0.306 s each)
+[s4    52.8s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+[s4    55.1s] done: 10 prediction rows sets, c_src 0.9557
+[00:48:37] done gb_ch__s4__d0__nall__physics (63 s)
+[s5    52.4s] evaluated 135 substations in 42.4s (0.314 s each)
+[s5    53.7s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s5    55.9s] done: 10 prediction rows sets, c_src 0.9541
+[s4   274.0s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 65.8s
+[s6    52.3s] evaluated 135 substations in 42.2s (0.312 s each)
+[s4   274.9s] done: 2 prediction rows sets, c_src 0.9387
+[s6    53.3s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[00:48:52] done ch_gb__s4__d0__nall__tabpfn_d (282 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:48:52] done gb_ch__s5__d0__nall__physics (64 s)
+[s6    55.3s] done: 10 prediction rows sets, c_src 0.9537
+[00:48:54] done gb_ch__s6__d0__nall__physics (63 s)
+[s7     7.3s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     1.6s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s8     6.7s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s9     7.0s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s6     8.9s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6    10.1s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s7    53.0s] evaluated 135 substations in 42.3s (0.313 s each)
+[s7    53.9s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s7    56.4s] done: 10 prediction rows sets, c_src 0.9545
+[00:49:54] done gb_ch__s7__d0__nall__physics (64 s)
+[s8    52.8s] evaluated 135 substations in 42.6s (0.316 s each)
+[s8    53.9s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s9    53.6s] evaluated 135 substations in 43.3s (0.321 s each)
+[s8    56.2s] done: 10 prediction rows sets, c_src 0.9576
+[s9    54.6s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s9    56.6s] done: 10 prediction rows sets, c_src 0.9530
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:50:09] done gb_ch__s8__d0__nall__physics (64 s)
+[00:50:11] done gb_ch__s9__d0__nall__physics (64 s)
+[s1     7.8s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1    10.7s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1    11.8s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+[s1    11.9s]   L1 linear ElasticNet|size_peak|whdd|direct|log: predicted 135 target substations in 0.0s
+[s1    11.9s]   L2 linear PLS|size_peak|both|direct|log: predicted 135 target substations in 0.1s
+[s1    12.0s]   L3 linear Lasso|size|both|residual|log: predicted 135 target substations in 0.1s
+[s1    12.1s]   L4 linear Lasso|size|both|l4a|log: predicted 135 target substations in 0.1s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1    14.2s] done: 4 prediction rows sets, c_src 0.9565
+[00:50:29] done gb_ch__s1__d0__nall__linear (22 s)
+[s2     7.3s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s3     7.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s2    10.2s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2    11.6s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s2    11.7s]   L1 linear Linear|size_peak|whdd|direct|log: predicted 135 target substations in 0.1s
+[s2    11.8s]   L2 linear Lasso|size_peak|both|direct|log: predicted 135 target substations in 0.1s
+[s2    11.8s]   L3 linear ElasticNet|size|both|residual|log: predicted 135 target substations in 0.0s
+[s2    11.8s]   L4 linear Ridge|size_peak|netfit|l4a|log: predicted 135 target substations in 0.0s
+[s3    10.8s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3    12.0s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[s2    13.9s] done: 4 prediction rows sets, c_src 0.9555
+[s3    12.0s]   L1 linear Ridge|size_peak|whdd|direct|log: predicted 135 target substations in 0.0s
+[s3    12.1s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 135 target substations in 0.1s
+[s3    12.2s]   L3 linear Lasso|size|both|residual|log: predicted 135 target substations in 0.1s
+[s3    12.2s]   L4 linear Ridge|size_peak|both|l4a|log: predicted 135 target substations in 0.1s
+[00:50:44] done gb_ch__s2__d0__nall__linear (22 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    14.1s] done: 4 prediction rows sets, c_src 0.9540
+[00:50:46] done gb_ch__s3__d0__nall__linear (22 s)
+[s4     7.7s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    10.7s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4    12.0s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    12.0s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 135 target substations in 0.1s
+[s4    12.1s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 135 target substations in 0.0s
+[s4    12.1s]   L3 linear Lasso|size_peak|both|residual|log: predicted 135 target substations in 0.1s
+[s4    12.2s]   L4 linear Lasso|size_peak|both|l4a|log: predicted 135 target substations in 0.1s
+[s4    14.2s] done: 4 prediction rows sets, c_src 0.9557
+[00:51:04] done gb_ch__s4__d0__nall__linear (23 s)
+[s5     7.2s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s6     7.5s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s5    10.6s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5    12.0s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s5    12.0s]   L1 linear Linear|size|whdd|direct|log: predicted 135 target substations in 0.1s
+[s5    12.1s]   L2 linear Lasso|size_peak|both|direct|log: predicted 135 target substations in 0.0s
+[s5    12.1s]   L3 linear ElasticNet|size|both|residual|log: predicted 135 target substations in 0.0s
+[s5    12.2s]   L4 linear ElasticNet|size_peak|both|l4a|log: predicted 135 target substations in 0.1s
+[s6    10.9s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s6    12.2s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[s6    12.3s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 135 target substations in 0.1s
+[s6    12.3s]   L2 linear Ridge|size_peak|both|direct|log: predicted 135 target substations in 0.1s
+[s6    12.4s]   L3 linear ElasticNet|size_peak|both|residual|log: predicted 135 target substations in 0.1s
+[s6    12.4s]   L4 linear ElasticNet|size_peak|netfit|l4a|log: predicted 135 target substations in 0.0s
+[s5    14.6s] done: 4 prediction rows sets, c_src 0.9541
+[00:51:18] done gb_ch__s5__d0__nall__linear (23 s)
+[s6    14.7s] done: 4 prediction rows sets, c_src 0.9537
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:51:21] done gb_ch__s6__d0__nall__linear (23 s)
+[s5   202.0s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 192.4s
+[s7     6.9s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7    10.1s] features from cache bstar30_s7_a105db12d641_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7    11.6s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s7    11.6s]   L1 linear ElasticNet|size_peak|whdd|direct|log: predicted 135 target substations in 0.0s
+[s7    11.7s]   L2 linear Ridge|size_peak|both|direct|log: predicted 135 target substations in 0.0s
+[s7    11.7s]   L3 linear Ridge|size|both|residual|log: predicted 135 target substations in 0.1s
+[s7    11.8s]   L4 linear ElasticNet|size_peak|both|l4a|log: predicted 135 target substations in 0.1s
+[s7    14.1s] done: 4 prediction rows sets, c_src 0.9545
+[00:51:41] done gb_ch__s7__d0__nall__linear (23 s)
+[s8     7.4s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8    10.5s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s9     7.7s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8    11.8s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s8    11.9s]   L1 linear Linear|size_peak|whdd|direct|log: predicted 135 target substations in 0.1s
+[s8    12.0s]   L2 linear Linear|size|both|direct|log: predicted 135 target substations in 0.1s
+[s8    12.1s]   L3 linear Lasso|size|both|residual|log: predicted 135 target substations in 0.1s
+[s8    12.1s]   L4 linear ElasticNet|size_peak|both|l4a|log: predicted 135 target substations in 0.1s
+[s9    10.7s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s8    14.2s] done: 4 prediction rows sets, c_src 0.9576
+[s9    12.1s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s9    12.2s]   L1 linear Lasso|size_peak|whdd|direct|log: predicted 135 target substations in 0.1s
+[s9    12.3s]   L2 linear ElasticNet|size_peak|both|direct|log: predicted 135 target substations in 0.1s
+[s9    12.4s]   L3 linear Lasso|size|both|residual|log: predicted 135 target substations in 0.1s
+[s9    12.4s]   L4 linear Lasso|size|netfit|l4a|log: predicted 135 target substations in 0.0s
+[00:51:53] done gb_ch__s8__d0__nall__linear (22 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9    14.5s] done: 4 prediction rows sets, c_src 0.9530
+[00:51:57] done gb_ch__s9__d0__nall__linear (23 s)
+[s1     6.9s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     9.8s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1    11.0s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     7.5s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    10.7s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s3     7.3s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s2    11.9s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s1    25.4s]   L1 rawseries CNN|size|raw|direct|log: predicted 135 target substations in 14.4s
+[s1    25.7s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 135 target substations in 0.3s
+[s3    10.8s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s1    27.6s] done: 2 prediction rows sets, c_src 0.9565
+[s3    12.2s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[00:52:29] done gb_ch__s1__d0__nall__cnn_d (36 s)
+[s6   207.1s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 197.1s
+[s2    26.6s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 14.7s
+[s2    27.0s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 135 target substations in 0.4s
+[s2    29.0s] done: 2 prediction rows sets, c_src 0.9555
+[00:52:42] done gb_ch__s2__d0__nall__cnn_d (37 s)
+[s3    26.8s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 14.6s
+[s3    27.2s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 135 target substations in 0.5s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    29.2s] done: 2 prediction rows sets, c_src 0.9540
+[00:52:46] done gb_ch__s3__d0__nall__cnn_d (37 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     7.4s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4    10.2s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    11.4s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+[s5     7.6s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5    10.6s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5    11.7s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s6     7.8s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s4    24.6s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 13.2s
+[s4    25.0s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 135 target substations in 0.3s
+[s6    10.8s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s4    26.8s] done: 2 prediction rows sets, c_src 0.9557
+[s6    12.0s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[00:53:18] done gb_ch__s4__d0__nall__cnn_d (35 s)
+[s5    25.8s]   L1 rawseries CNN|size|raw|direct|log: predicted 135 target substations in 14.0s
+[s5    26.1s]   L2 rawseries CNN|size_peak|rawphys|direct|log: predicted 135 target substations in 0.3s
+[s5    27.9s] done: 2 prediction rows sets, c_src 0.9541
+[s6    26.2s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 14.2s
+[00:53:30] done gb_ch__s5__d0__nall__cnn_d (36 s)
+[s6    26.7s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 135 target substations in 0.4s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6    28.8s] done: 2 prediction rows sets, c_src 0.9537
+[00:53:34] done gb_ch__s6__d0__nall__cnn_d (37 s)
+[s7     7.4s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6   276.6s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 69.4s
+[s6   277.3s] done: 2 prediction rows sets, c_src 0.9489
+[s7    10.5s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7    11.7s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[00:53:49] done ch_gb__s6__d0__nall__tabpfn_d (285 s)
+[s8     6.3s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     9.4s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s9     6.5s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8    10.6s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s7    24.7s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 13.0s
+[s9     9.3s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s7    25.0s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 135 target substations in 0.3s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9    10.4s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s7    27.0s] done: 2 prediction rows sets, c_src 0.9545
+[00:54:05] done gb_ch__s7__d0__nall__cnn_d (35 s)
+[s7     1.9s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[s8    24.1s]   L1 rawseries CNN|size_peak|raw|direct|log: predicted 135 target substations in 13.5s
+[s8    24.4s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 135 target substations in 0.3s
+[s7     8.8s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s8    26.1s] done: 2 prediction rows sets, c_src 0.9576
+[s7    10.2s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s9    24.1s]   L1 rawseries CNN|size|raw|direct|log: predicted 135 target substations in 13.7s
+[s9    24.8s]   L2 rawseries CNN|size|rawphys|direct|log: predicted 135 target substations in 0.7s
+[00:54:17] done gb_ch__s8__d0__nall__cnn_d (34 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9    26.7s] done: 2 prediction rows sets, c_src 0.9530
+[00:54:21] done gb_ch__s9__d0__nall__cnn_d (34 s)
+[s1     7.5s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1    10.5s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1    11.7s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     7.0s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    10.0s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2    11.3s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s3     7.4s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s1    25.7s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 14.0s
+[s1    27.8s] done: 1 prediction rows sets, c_src 0.9565
+[s3    10.6s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3    11.7s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[00:54:52] done gb_ch__s1__d0__nall__cnn_r (36 s)
+[s5   406.9s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 455 target substations in 204.9s
+[s5   407.6s] done: 2 prediction rows sets, c_src 0.9307
+[00:54:58] done ch_gb__s5__d0__nall__tabpfn_d (415 s)
+[s2    25.0s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 13.7s
+[s2    26.7s] done: 1 prediction rows sets, c_src 0.9555
+[00:55:04] done gb_ch__s2__d0__nall__cnn_r (35 s)
+[s3    25.1s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 13.4s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3    26.9s] done: 1 prediction rows sets, c_src 0.9540
+[00:55:08] done gb_ch__s3__d0__nall__cnn_r (35 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     6.6s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s8     1.7s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     9.4s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4    10.4s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     8.4s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     9.7s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s5     6.9s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     9.9s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5    11.1s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s6     6.9s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s4    23.3s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 12.9s
+[s4    25.5s] done: 1 prediction rows sets, c_src 0.9557
+[s6    10.4s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s6    11.5s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[00:55:37] done gb_ch__s4__d0__nall__cnn_r (33 s)
+[s5    26.0s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 135 target substations in 14.9s
+[s5    27.9s] done: 1 prediction rows sets, c_src 0.9541
+[s6    25.9s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 135 target substations in 14.4s
+[00:55:51] done gb_ch__s5__d0__nall__cnn_r (35 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6    28.1s] done: 1 prediction rows sets, c_src 0.9537
+[00:55:55] done gb_ch__s6__d0__nall__cnn_r (35 s)
+[s7     6.9s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     9.9s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7    11.1s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     7.6s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8    10.4s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s9     7.5s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8    11.5s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s7    25.1s]   L3 rawseries CNN|size_peak|rawphys|residual|log: predicted 135 target substations in 14.0s
+[s7    27.0s] done: 1 prediction rows sets, c_src 0.9545
+[s9    10.6s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s9    11.8s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[00:56:25] done gb_ch__s7__d0__nall__cnn_r (35 s)
+[s8    26.1s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 135 target substations in 14.6s
+[s8    28.0s] done: 1 prediction rows sets, c_src 0.9576
+[00:56:40] done gb_ch__s8__d0__nall__cnn_r (36 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9    27.3s]   L3 rawseries CNN|size|rawphys|residual|log: predicted 135 target substations in 15.5s
+[s9    29.4s] done: 1 prediction rows sets, c_src 0.9530
+[00:56:44] done gb_ch__s9__d0__nall__cnn_r (38 s)
+[s1     7.4s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1    10.4s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1    11.6s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     7.2s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2    10.3s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2    11.4s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s3     7.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s1    25.5s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 13.9s
+[s1    27.7s] done: 1 prediction rows sets, c_src 0.9565
+[s3    10.7s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3    11.9s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[00:57:14] done gb_ch__s1__d0__nall__cnn_h (36 s)
+[s2    26.3s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 14.8s
+[s2    28.4s] done: 1 prediction rows sets, c_src 0.9555
+[00:57:29] done gb_ch__s2__d0__nall__cnn_h (36 s)
+[s3    26.5s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 14.7s
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7   203.9s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 193.7s
+[s3    28.8s] done: 1 prediction rows sets, c_src 0.9540
+[00:57:33] done gb_ch__s3__d0__nall__cnn_h (37 s)
+[s4     7.2s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4    10.3s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4    11.5s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     7.4s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5    10.3s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5    11.3s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s6     6.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s4    24.8s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 13.2s
+[s4    26.4s] done: 1 prediction rows sets, c_src 0.9557
+[s6     9.3s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[00:58:01] done gb_ch__s4__d0__nall__cnn_h (34 s)
+[s6    10.3s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[s5    23.0s]   L4 rawseries CNN|size_peak|rawphys|l4a|log: predicted 135 target substations in 11.7s
+[s5    24.3s] done: 1 prediction rows sets, c_src 0.9541
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6    21.4s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 11.1s
+[00:58:13] done gb_ch__s5__d0__nall__cnn_h (32 s)
+[s6    22.7s] done: 1 prediction rows sets, c_src 0.9537
+[00:58:15] done gb_ch__s6__d0__nall__cnn_h (31 s)
+[s7     5.1s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7   255.5s]   L2 neural TabPFN|size_peak|netfit|direct|log: predicted 455 target substations in 51.7s
+[s7   256.2s] done: 2 prediction rows sets, c_src 0.9594
+[s7     7.0s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7     7.8s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s8   188.9s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 179.1s
+[00:58:24] done ch_gb__s7__d0__nall__tabpfn_d (264 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     4.9s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s7    17.8s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 10.0s
+[s9     5.0s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8     6.9s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7    18.9s] done: 1 prediction rows sets, c_src 0.9545
+[s8     7.7s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s9     7.0s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[00:58:36] done gb_ch__s7__d0__nall__cnn_h (25 s)
+[s9     7.8s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s9     1.2s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s9     6.3s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9     7.1s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s8    17.4s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 9.7s
+[s8    18.5s] done: 1 prediction rows sets, c_src 0.9576
+[s9    17.5s]   L4 rawseries CNN|size|rawphys|l4a|log: predicted 135 target substations in 9.7s
+[s9    18.7s] done: 1 prediction rows sets, c_src 0.9530
+[00:58:48] done gb_ch__s8__d0__nall__cnn_h (24 s)
+[00:58:50] done gb_ch__s9__d0__nall__cnn_h (24 s)
+[s8   224.4s]   L2 neural TabPFN|size|netfit|direct|log: predicted 455 target substations in 35.6s
+[s8   225.0s] done: 2 prediction rows sets, c_src 0.9449
+[00:59:02] done ch_gb__s8__d0__nall__tabpfn_d (232 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     1.0s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+[s1     4.7s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     5.4s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s1    43.5s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 38.1s
+[s1    44.0s] done: 1 prediction rows sets, c_src 0.9516
+[00:59:58] done ch_gb__s1__d0__nall__tabpfn_r (49 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     1.1s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s2     4.3s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2     4.9s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s9    99.9s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 455 target substations in 92.8s
+[s2    41.3s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 36.3s
+[s2    41.6s] done: 1 prediction rows sets, c_src 0.9388
+[01:00:53] done ch_gb__s2__d0__nall__tabpfn_r (46 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     1.0s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s3     4.2s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     4.8s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s3    40.0s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 35.2s
+[s3    40.5s] done: 1 prediction rows sets, c_src 0.9399
+[01:01:45] done ch_gb__s3__d0__nall__tabpfn_r (45 s)
+[s9   194.3s]   L2 neural TabPFN|size|both|direct|log: predicted 455 target substations in 94.3s
+[s9   194.7s] done: 2 prediction rows sets, c_src 0.9345
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[01:01:53] done ch_gb__s9__d0__nall__tabpfn_d (200 s)
+[s4     1.0s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+[s4     4.1s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     4.6s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     1.0s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s5     4.5s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     5.1s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s4    38.6s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 34.0s
+[s4    39.1s] done: 1 prediction rows sets, c_src 0.9387
+[01:02:35] done ch_gb__s4__d0__nall__tabpfn_r (43 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     0.9s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s6     4.0s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6     4.7s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s6    40.8s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 36.1s
+[s6    41.2s] done: 1 prediction rows sets, c_src 0.9489
+[01:03:27] done ch_gb__s6__d0__nall__tabpfn_r (45 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     0.9s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[s5   100.2s]   L3 neural TabPFN|size|both|residual|log: predicted 455 target substations in 95.0s
+[s5   100.5s] done: 1 prediction rows sets, c_src 0.9307
+[s7     4.2s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     4.7s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[01:03:44] done ch_gb__s5__d0__nall__tabpfn_r (104 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     1.0s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s8     4.1s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     4.7s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s7    37.1s]   L3 neural TabPFN|size_peak|netfit|residual|log: predicted 455 target substations in 32.4s
+[s7    37.5s] done: 1 prediction rows sets, c_src 0.9594
+[01:04:16] done ch_gb__s7__d0__nall__tabpfn_r (42 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     0.9s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s9     4.0s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s8    36.9s]   L3 neural TabPFN|size|netfit|residual|log: predicted 455 target substations in 32.1s
+[s9     4.6s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s8    37.2s] done: 1 prediction rows sets, c_src 0.9449
+[01:04:32] done ch_gb__s8__d0__nall__tabpfn_r (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     0.9s] features from cache bstar_s1_26bd00f15c50_tab.parquet
+[s1     4.1s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     4.7s] CH->GB: 455 target test substations; source m_h 0.01811, kappa 0.4380, s0 median 0.00518; day alignment by (month, day)
+[s9    36.7s]   L3 neural TabPFN|size_peak|netfit|residual|log: predicted 455 target substations in 32.1s
+[s9    37.1s] done: 1 prediction rows sets, c_src 0.9345
+[01:05:04] done ch_gb__s9__d0__nall__tabpfn_r (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     0.9s] features from cache bstar_s2_b767f6a41ee4_tab.parquet
+[s2     4.0s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s1    37.1s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 455 target substations in 32.4s
+[s2     4.6s] CH->GB: 455 target test substations; source m_h 0.01866, kappa 0.4551, s0 median 0.00554; day alignment by (month, day)
+[s1    37.4s] done: 1 prediction rows sets, c_src 0.9516
+[01:05:20] done ch_gb__s1__d0__nall__tabpfn_h (42 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     0.9s] features from cache bstar_s3_00b6c09104d1_tab.parquet
+[s3     4.0s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     4.6s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4261, s0 median 0.00509; day alignment by (month, day)
+[s2    36.8s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 455 target substations in 32.1s
+[s2    37.2s] done: 1 prediction rows sets, c_src 0.9388
+[01:05:52] done ch_gb__s2__d0__nall__tabpfn_h (42 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     1.0s] features from cache bstar_s4_ebfdd545a08c_tab.parquet
+[s4     4.3s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     4.9s] CH->GB: 455 target test substations; source m_h 0.01856, kappa 0.4554, s0 median 0.00550; day alignment by (month, day)
+[s3    37.8s]   L4 neural TabPFN|size_peak|netfit|l4a|log: predicted 455 target substations in 33.1s
+[s3    38.1s] done: 1 prediction rows sets, c_src 0.9399
+[01:06:09] done ch_gb__s3__d0__nall__tabpfn_h (42 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     1.0s] features from cache bstar_s5_753bd3a07b87_tab.parquet
+[s5     3.9s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     4.5s] CH->GB: 455 target test substations; source m_h 0.01802, kappa 0.4415, s0 median 0.00531; day alignment by (month, day)
+[s4    36.9s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 455 target substations in 32.0s
+[s4    37.3s] done: 1 prediction rows sets, c_src 0.9387
+[01:06:41] done ch_gb__s4__d0__nall__tabpfn_h (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     1.0s] features from cache bstar_s6_72e19c4653e7_tab.parquet
+[s6     4.1s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6     4.7s] CH->GB: 455 target test substations; source m_h 0.01833, kappa 0.4473, s0 median 0.00518; day alignment by (month, day)
+[s6    39.5s]   L4 neural TabPFN|size_peak|netfit|l4a|log: predicted 455 target substations in 34.8s
+[s6    39.9s] done: 1 prediction rows sets, c_src 0.9489
+[01:07:31] done ch_gb__s6__d0__nall__tabpfn_h (44 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     1.0s] features from cache bstar_s7_e028c3b4d859_tab.parquet
+[s7     4.4s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     5.0s] CH->GB: 455 target test substations; source m_h 0.01791, kappa 0.4353, s0 median 0.00568; day alignment by (month, day)
+[s5    97.5s]   L4 neural TabPFN|size|both|l4a|log: predicted 455 target substations in 93.0s
+[s5    97.9s] done: 1 prediction rows sets, c_src 0.9307
+[01:07:57] done ch_gb__s5__d0__nall__tabpfn_h (102 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     1.0s] features from cache bstar_s8_79e0b555ffae_tab.parquet
+[s8     4.0s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     4.6s] CH->GB: 455 target test substations; source m_h 0.01838, kappa 0.4466, s0 median 0.00544; day alignment by (month, day)
+[s7    36.6s]   L4 neural TabPFN|size_peak|netfit|l4a|log: predicted 455 target substations in 31.6s
+[s7    37.1s] done: 1 prediction rows sets, c_src 0.9594
+[01:08:19] done ch_gb__s7__d0__nall__tabpfn_h (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     1.0s] features from cache bstar_s9_e26a542fe6e6_tab.parquet
+[s9     4.0s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9     4.6s] CH->GB: 455 target test substations; source m_h 0.01740, kappa 0.4199, s0 median 0.00571; day alignment by (month, day)
+[s8    36.2s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 455 target substations in 31.6s
+[s8    36.6s] done: 1 prediction rows sets, c_src 0.9449
+[01:08:46] done ch_gb__s8__d0__nall__tabpfn_h (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     3.2s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     4.7s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1     5.3s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+[s9    36.2s]   L4 neural TabPFN|size_peak|netfit|l4a|log: predicted 455 target substations in 31.6s
+[s9    36.6s] done: 1 prediction rows sets, c_src 0.9345
+[01:09:08] done ch_gb__s9__d0__nall__tabpfn_h (41 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     3.3s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2     4.9s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2     5.5s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s1   280.2s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 274.9s
+[s2   284.4s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 278.9s
+[s1   578.1s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 297.9s
+[s1   579.0s] done: 2 prediction rows sets, c_src 0.9565
+[01:18:36] done gb_ch__s1__d0__nall__tabpfn_d (583 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     3.1s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     4.6s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3     5.1s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[s2   578.3s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 293.9s
+[s2   579.1s] done: 2 prediction rows sets, c_src 0.9555
+[01:18:58] done gb_ch__s2__d0__nall__tabpfn_d (583 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     3.2s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     5.0s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4     5.5s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+[s3   257.8s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 252.7s
+[s4   258.8s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 253.4s
+[s3   517.9s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 260.1s
+[s3   518.6s] done: 2 prediction rows sets, c_src 0.9540
+[01:27:26] done gb_ch__s3__d0__nall__tabpfn_d (523 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     2.8s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     4.2s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5     4.7s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s4   515.1s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 256.3s
+[s4   515.9s] done: 2 prediction rows sets, c_src 0.9557
+[01:27:45] done gb_ch__s4__d0__nall__tabpfn_d (520 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     2.4s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6     3.7s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s6     4.2s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[s5   234.9s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 230.2s
+[s6   239.8s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 235.6s
+[s5   484.8s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 249.9s
+[s5   485.4s] done: 2 prediction rows sets, c_src 0.9541
+[01:35:41] done gb_ch__s5__d0__nall__tabpfn_d (489 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     2.5s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     3.9s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7     4.3s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s6   487.5s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 247.7s
+[s6   488.3s] done: 2 prediction rows sets, c_src 0.9537
+[01:36:03] done gb_ch__s6__d0__nall__tabpfn_d (492 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     2.6s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     3.9s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s8     4.4s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s7   240.7s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 236.4s
+[s8   246.3s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 241.9s
+[s7   497.8s]   L2 neural TabPFN|size|both|direct|log: predicted 135 target substations in 257.1s
+[s7   498.4s] done: 2 prediction rows sets, c_src 0.9545
+[01:44:09] done gb_ch__s7__d0__nall__tabpfn_d (502 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     3.0s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9     4.4s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s9     4.9s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s8   498.5s]   L2 neural TabPFN|size|both|direct|log: predicted 135 target substations in 252.2s
+[s8   499.4s] done: 2 prediction rows sets, c_src 0.9576
+[01:44:31] done gb_ch__s8__d0__nall__tabpfn_d (503 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     2.5s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     3.9s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1     4.4s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+[s9   236.8s]   L1 neural TabPFN|size_peak|whdd|direct|log: predicted 135 target substations in 231.9s
+[s1   262.2s]   L3 neural TabPFN|size|both|residual|log: predicted 135 target substations in 257.9s
+[s1   262.9s] done: 1 prediction rows sets, c_src 0.9565
+[01:49:04] done gb_ch__s1__d0__nall__tabpfn_r (266 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     2.7s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2     4.1s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2     4.6s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s9   481.7s]   L2 neural TabPFN|size_peak|both|direct|log: predicted 135 target substations in 244.9s
+[s9   482.4s] done: 2 prediction rows sets, c_src 0.9530
+[01:52:21] done gb_ch__s9__d0__nall__tabpfn_d (486 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     2.8s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     4.2s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3     4.6s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[s2   253.1s]   L3 neural TabPFN|size_peak|both|residual|log: predicted 135 target substations in 248.5s
+[s2   253.8s] done: 1 prediction rows sets, c_src 0.9555
+[01:53:32] done gb_ch__s2__d0__nall__tabpfn_r (257 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     2.6s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     3.9s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4     4.4s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+[s3   254.9s]   L3 neural TabPFN|size|both|residual|log: predicted 135 target substations in 250.3s
+[s3   255.6s] done: 1 prediction rows sets, c_src 0.9540
+[01:56:47] done gb_ch__s3__d0__nall__tabpfn_r (259 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     2.6s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     4.0s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5     4.5s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s4   254.8s]   L3 neural TabPFN|size|both|residual|log: predicted 135 target substations in 250.4s
+[s4   255.4s] done: 1 prediction rows sets, c_src 0.9557
+[01:57:57] done gb_ch__s4__d0__nall__tabpfn_r (259 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     2.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6     4.0s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s6     4.5s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[s6    93.1s]   L3 neural TabPFN|size_peak|netfit|residual|log: predicted 135 target substations in 88.5s
+[s6    93.7s] done: 1 prediction rows sets, c_src 0.9537
+[01:59:39] done gb_ch__s6__d0__nall__tabpfn_r (97 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     2.7s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     4.1s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7     4.6s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s5   250.6s]   L3 neural TabPFN|size|both|residual|log: predicted 135 target substations in 246.0s
+[s5   251.2s] done: 1 prediction rows sets, c_src 0.9541
+[02:01:07] done gb_ch__s5__d0__nall__tabpfn_r (255 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     2.5s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     3.9s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s8     4.4s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s7   253.9s]   L3 neural TabPFN|size_peak|both|residual|log: predicted 135 target substations in 249.3s
+[s7   254.7s] done: 1 prediction rows sets, c_src 0.9545
+[02:04:03] done gb_ch__s7__d0__nall__tabpfn_r (258 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     2.8s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9     4.2s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s9     4.7s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s8   256.5s]   L3 neural TabPFN|size_peak|both|residual|log: predicted 135 target substations in 252.2s
+[s8   257.2s] done: 1 prediction rows sets, c_src 0.9576
+[02:05:33] done gb_ch__s8__d0__nall__tabpfn_r (260 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s1     2.5s] features from cache gb_eoh_s1_35c94df8eb39_tab.parquet
+[s1     3.8s] features from cache bstar30_s1_e303ed6099aa_tab.parquet
+[s1     4.4s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4014, s0 median 0.01299; day alignment by (month, day)
+[s9   252.0s]   L3 neural TabPFN|size_peak|both|residual|log: predicted 135 target substations in 247.3s
+[s9   252.6s] done: 1 prediction rows sets, c_src 0.9530
+[02:08:26] done gb_ch__s9__d0__nall__tabpfn_r (256 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s2     2.6s] features from cache gb_eoh_s2_e7c16a94a64e_tab.parquet
+[s2     4.1s] features from cache bstar30_s2_cb05c1c96498_tab.parquet
+[s2     4.6s] GB->CH: 135 target test substations; source m_h 0.02468, kappa 0.3937, s0 median 0.01276; day alignment by (month, day)
+[s1   243.2s]   L4 neural TabPFN|size_peak|both|l4a|log: predicted 135 target substations in 238.8s
+[s1   243.9s] done: 1 prediction rows sets, c_src 0.9565
+[02:09:46] done gb_ch__s1__d0__nall__tabpfn_h (247 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s3     2.5s] features from cache gb_eoh_s3_30e47f2a4dd0_tab.parquet
+[s3     3.9s] features from cache bstar30_s3_19ea7e7827b5_tab.parquet
+[s3     4.4s] GB->CH: 135 target test substations; source m_h 0.02500, kappa 0.3983, s0 median 0.01266; day alignment by (month, day)
+[s2   246.4s]   L4 neural TabPFN|size_peak|both|l4a|log: predicted 135 target substations in 241.8s
+[s2   247.1s] done: 1 prediction rows sets, c_src 0.9555
+[02:12:42] done gb_ch__s2__d0__nall__tabpfn_h (250 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s4     2.4s] features from cache gb_eoh_s4_6be12af31114_tab.parquet
+[s4     3.7s] features from cache bstar30_s4_cf233df3093d_tab.parquet
+[s4     4.2s] GB->CH: 135 target test substations; source m_h 0.02522, kappa 0.4029, s0 median 0.01244; day alignment by (month, day)
+[s3   244.5s]   L4 neural TabPFN|size|both|l4a|log: predicted 135 target substations in 240.2s
+[s3   245.1s] done: 1 prediction rows sets, c_src 0.9540
+[02:14:00] done gb_ch__s3__d0__nall__tabpfn_h (248 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s5     2.5s] features from cache gb_eoh_s5_ce7bd20ab75d_tab.parquet
+[s5     3.9s] features from cache bstar30_s5_b48891336c9d_tab.parquet
+[s5     4.4s] GB->CH: 135 target test substations; source m_h 0.02514, kappa 0.4008, s0 median 0.01285; day alignment by (month, day)
+[s4   244.1s]   L4 neural TabPFN|size|both|l4a|log: predicted 135 target substations in 239.9s
+[s4   244.9s] done: 1 prediction rows sets, c_src 0.9557
+[02:16:56] done gb_ch__s4__d0__nall__tabpfn_h (248 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s6     2.7s] features from cache gb_eoh_s6_2db30bdb9ff0_tab.parquet
+[s6     4.1s] features from cache bstar30_s6_f0d61b7f0cb4_tab.parquet
+[s6     4.5s] GB->CH: 135 target test substations; source m_h 0.02513, kappa 0.4009, s0 median 0.01258; day alignment by (month, day)
+[s5   245.9s]   L4 neural TabPFN|size_peak|both|l4a|log: predicted 135 target substations in 241.6s
+[s5   246.8s] done: 1 prediction rows sets, c_src 0.9541
+[02:18:17] done gb_ch__s5__d0__nall__tabpfn_h (250 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s7     2.4s] features from cache gb_eoh_s7_9edce86f236e_tab.parquet
+[s7     3.8s] features from cache bstar30_s7_a105db12d641_tab.parquet
+[s7     4.3s] GB->CH: 135 target test substations; source m_h 0.02507, kappa 0.3997, s0 median 0.01198; day alignment by (month, day)
+[s6    84.6s]   L4 neural TabPFN|size|netfit|l4a|log: predicted 135 target substations in 80.1s
+[s6    85.3s] done: 1 prediction rows sets, c_src 0.9537
+[02:18:31] done gb_ch__s6__d0__nall__tabpfn_h (89 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s8     2.4s] features from cache gb_eoh_s8_efc4290a6b04_tab.parquet
+[s8     3.8s] features from cache bstar30_s8_2f6c1abeddee_tab.parquet
+[s8     4.3s] GB->CH: 135 target test substations; source m_h 0.02499, kappa 0.3986, s0 median 0.01216; day alignment by (month, day)
+[s7   244.6s]   L4 neural TabPFN|size|both|l4a|log: predicted 135 target substations in 240.3s
+[s7   245.4s] done: 1 prediction rows sets, c_src 0.9545
+[02:22:31] done gb_ch__s7__d0__nall__tabpfn_h (249 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s9     2.5s] features from cache gb_eoh_s9_00bae61f3513_tab.parquet
+[s9     3.9s] features from cache bstar30_s9_a9e5ef18244e_tab.parquet
+[s9     4.4s] GB->CH: 135 target test substations; source m_h 0.02497, kappa 0.3980, s0 median 0.01293; day alignment by (month, day)
+[s8   246.1s]   L4 neural TabPFN|size_peak|both|l4a|log: predicted 135 target substations in 241.8s
+[s8   246.7s] done: 1 prediction rows sets, c_src 0.9576
+[02:22:47] done gb_ch__s8__d0__nall__tabpfn_h (250 s)
+[s9   177.6s]   L4 neural TabPFN|size|both|l4a|log: predicted 135 target substations in 173.2s
+[s9   178.4s] done: 1 prediction rows sets, c_src 0.9530
+[02:25:39] done gb_ch__s9__d0__nall__tabpfn_h (182 s)
+[02:25:44] exit: {'done': 191, 'failed': 0, 'remaining': 0, 'median_job_s': 41.052987575531006, 'eta_h': 0.0, 'updated': '2026-11-18T02:25:39'}
