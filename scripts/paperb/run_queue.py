@@ -86,7 +86,7 @@ class JobTimeout(BaseException):
     """Raised in a worker's main thread when its job exceeds the family's `timeout_s` (not an Exception: the runner's own handlers
     must not swallow it)."""
 
-FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped", "l4")
+FRAMES = ("metrics", "timing", "preds", "pilots", "dropped", "diag", "lc", "lc_dropped", "l4", "feeders")      # 08: feeders (change_eval)
 CSV = {"preds": "predictions", "dropped": "dropped_cells", "diag": "physics_diagnostics", "lc": "metrics_lc", "lc_dropped": "dropped_cells_lc"}
 ML_OFF = ["models=[]", "residual_models=[]", "modes=[direct]"]
 

@@ -1,0 +1,20 @@
+[19:37:32] queue iter08: 2 of 2 jobs to run, 2 workers x 4 threads, stop at None, shard all, families all
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[s0     1.8s] 395 feeders, 1181 dropped cells; 63 of 92 test HP homes in both years
+[s0     1.8s] 395 feeders, 1181 dropped cells; 63 of 92 test HP homes in both years
+[s0    38.2s] evaluated 395 substations in 36.2s (0.092 s each)
+[s0    38.3s] evaluated 395 substations in 36.2s (0.092 s each)
+[s0    81.8s] evaluated 395 substations in 43.3s (0.110 s each)
+[s0    81.9s] done: 790 prediction rows (['E2', 'E3'])
+[19:39:00] done change__s0__d0__nall__physics (84 s)
+[s0   378.0s] year 1: {'E1': 'TabPFN|size|both|direct|log', 'E4': 'TabPFN|size_peak|whdd|direct|log'}
+[s0   378.0s] features from cache gb_eoh_s0_d75e23f06503_tab.parquet
+[s0   718.1s] year 2: {'E1': 'TabPFN|size|both|direct|log', 'E4': 'TabPFN|size_peak|whdd|direct|log'}
+[s0   718.2s] done: 790 prediction rows (['E1', 'E4'])
+[19:49:36] done change__s0__d0__nall__tabpfn (720 s)
+C:\Users\VENANCIA\OneDrive - VITO\Desktop\hp-capacity-detection\.venv\Lib\site-packages\hyperopt\atpe.py:19: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[19:49:38] exit: {'done': 2, 'failed': 0, 'remaining': 0, 'median_job_s': 401.97924077510834, 'eta_h': 0.0, 'updated': '2026-11-18T19:49:36'}

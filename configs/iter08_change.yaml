@@ -1,0 +1,24 @@
+# Iteration 08 arm (iterations/08-change-detection.md; DECISIONS.md 2026-11-18): paired feeders within GB-EoH, main year (the 06 A-GB
+# arm config, pool 2122r3) and replication year (the 06 R(ii) arm config, pool 2223r3), both through the 06 feature pipeline.
+# Runner paperb.change_eval:run_seed (queue only: configs/iter08.yaml). Family physics -> E2 (paperA_corr, local s0 per year) and
+# E3 (paperA_sh_mh); family tabpfn (models [E1, E4]) -> the frozen 06 A-GB TabPFN L2 / L1 winners. Nothing is fitted or persisted.
+# feeders_per_cell = 5 (the 06 test substations_per_cell) and max_overlap / min_station_pool (the 06 grid) are the 06 generator rules.
+exp_id: iter08_change
+out_dir: results/iter08_change_detection
+models: []
+residual_models: []
+modes: [direct]
+physics_baselines: []
+anchor_only_baselines: {models: []}
+paperA: {estimators: []}
+parallel: {threads: 4}
+device: cpu
+change:
+  year1: configs/iter06_a_gb.yaml
+  year2: configs/iter06_r_rep.yaml
+  N: [20, 40, 80]
+  p1: [0.05, 0.1, 0.2, 0.3, 0.5]
+  dp: [0.0, 0.05, 0.1, 0.2]
+  feeders_per_cell: 5
+  max_overlap: 0.75
+  min_station_pool: 3

@@ -1,0 +1,17 @@
+# Iteration 08 queue (iterations/08-change-detection.md; DECISIONS 2026-11-18). One job per (seed, family): physics (E2, E3; it also
+# evaluates both years' feeder features into data/_paperb/features, which the tabpfn job of the seed then reads) and tabpfn (E1, E4).
+# Hard per-job watchdog (07). Probe 2026-11-18 (seed 0, results/iter08_change_detection/PART_A.md): physics 84 s, tabpfn 720 s;
+# timeout_s = max(3 x the probe's job, 1800 s). TabPFN one job at a time (a TabPFN process peaked at ~6 GB in 06; ~11.5 GB were
+# free on this machine with nothing running). Run with scripts/schedule_overnight.ps1 (Alex) or launch_detached.cmd on his request.
+exp_id: iter08
+out_dir: results/iter08_change_detection
+workers: 2
+threads: 4
+watchdog: true
+watchdog_grace_s: 60
+families:
+  physics: {timeout_s: 1800}
+  tabpfn: {models: [E1, E4], group: tabpfn, max_concurrent: 1, timeout_s: 2160}
+arms:
+  - {name: change, config: configs/iter08_change.yaml, runner: "paperb.change_eval:run_seed", seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+     families: [physics, tabpfn]}

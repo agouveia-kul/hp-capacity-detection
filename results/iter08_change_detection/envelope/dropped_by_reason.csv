@@ -1,0 +1,21 @@
+split_seed,reason,n_cells
+0,k1 + dk > max_overlap * H,281
+0,station pool < min_station_pool,900
+1,k1 + dk > max_overlap * H,290
+1,station pool < min_station_pool,1140
+2,k1 + dk > max_overlap * H,271
+2,station pool < min_station_pool,900
+3,k1 + dk > max_overlap * H,280
+3,station pool < min_station_pool,1080
+4,k1 + dk > max_overlap * H,281
+4,station pool < min_station_pool,960
+5,k1 + dk > max_overlap * H,274
+5,station pool < min_station_pool,1020
+6,k1 + dk > max_overlap * H,290
+6,station pool < min_station_pool,960
+7,k1 + dk > max_overlap * H,264
+7,station pool < min_station_pool,1080
+8,k1 + dk > max_overlap * H,276
+8,station pool < min_station_pool,900
+9,k1 + dk > max_overlap * H,267
+9,station pool < min_station_pool,1140

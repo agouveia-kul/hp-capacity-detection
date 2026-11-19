@@ -1,0 +1,8 @@
+..                                                                       [100%]
+============================= slowest 5 durations =============================
+1934.73s call     tests/test_08.py::test_label_permutation_tabpfn
+370.11s call     tests/test_08.py::test_e1_reproduces_06_on_06_test_substations
+0.01s setup    tests/test_08.py::test_label_permutation_tabpfn
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed, 8 deselected in 2307.31s (0:38:27)
