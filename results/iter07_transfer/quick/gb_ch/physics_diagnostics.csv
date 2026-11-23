@@ -1,0 +1,14 @@
+method,rung,family,n_invalid_base,n_pred_nan,load_error,split_seed,direction,c_src,arm,dir,spec,seconds
+paperA_sh_mh,L0,physics,0.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_l4a,L0,physics,25.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_corr,L0,physics,25.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_cal,L0,physics,0.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_corr_cal,L0,physics,25.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_corr@tgt_s0,L0,physics,0.0,0.0,nan,0,GB->CH,0.9575989797963449,gb_ch,,,
+paperA_corr_own,L0,physics,,,n/a: no whole-house meters in GB,0,GB->CH,0.9575989797963449,gb_ch,,,
+Lasso,L1,linear,0.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L1\s0\linear,Lasso|size_peak|whdd|direct|log,0.162123441696167
+Lasso,L2,linear,0.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L2\s0\linear,Lasso|size_peak|both|direct|log,0.01860952377319336
+ElasticNet,L3,linear,0.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L3\s0\linear,ElasticNet|size_peak|both|residual|log,0.022601842880249023
+Lasso,L4,linear,25.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L4\s0\linear,Lasso|size_peak|both|l4a|log,0.022136211395263672
+CNN,L1,cnn_d,0.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L1\s0\rawseries,CNN|size|raw|direct|log,3.222231388092041
+CNN,L2,cnn_d,0.0,0.0,,0,GB->CH,0.9575989797963449,gb_ch,results\iter06_hybrid_ladder\models\a_gb\L2\s0\rawseries,CNN|size_peak|rawphys|direct|log,0.2306370735168457

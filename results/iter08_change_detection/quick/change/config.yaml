@@ -1,0 +1,67 @@
+exp_id: iter08_change
+out_dir: results/iter08_change_detection
+models: []
+residual_models: []
+modes:
+- direct
+physics_baselines: []
+anchor_only_baselines:
+  models: []
+paperA:
+  estimators: []
+parallel:
+  threads: 4
+device: cpu
+change:
+  year1: configs/iter06_a_gb.yaml
+  year2: configs/iter06_r_rep.yaml
+  N:
+  - 20
+  - 40
+  - 80
+  p1:
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  dp:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  feeders_per_cell: 5
+  max_overlap: 0.75
+  min_station_pool: 3
+queue:
+  exp_id: iter08_quick
+  out_dir: results/iter08_change_detection/quick
+  workers: 2
+  threads: 4
+  watchdog: true
+  watchdog_grace_s: 60
+  families:
+    physics:
+      timeout_s: 1800
+    tabpfn:
+      models:
+      - E1
+      - E4
+      group: tabpfn
+      max_concurrent: 2
+      timeout_s: 1800
+  arms:
+  - name: change
+    config: configs/iter08_change.yaml
+    runner: paperb.change_eval:run_seed
+    seeds:
+    - 0
+    families:
+    - physics
+    - tabpfn
+    set:
+    - change.N=[20]
+    - change.p1=[0.05,0.1]
+    - change.dp=[0.0,0.1]
+    - change.feeders_per_cell=2
+git_commit: f35464a985993048b2a84ea24e12f48b8368e0fc

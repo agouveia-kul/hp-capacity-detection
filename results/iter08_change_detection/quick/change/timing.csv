@@ -1,0 +1,17 @@
+split_seed,method,step,seconds,n_substations,arm,family
+0,E2,evaluate_y1,4.2898781299591064,42,change,physics
+0,E3,evaluate_y1,4.2898781299591064,42,change,physics
+0,E2,estimate_y1,4.954352378845215,42,change,physics
+0,E3,estimate_y1,4.954352378845215,42,change,physics
+0,E2,evaluate_y2,4.98872709274292,42,change,physics
+0,E3,evaluate_y2,4.98872709274292,42,change,physics
+0,E2,estimate_y2,5.288609266281128,42,change,physics
+0,E3,estimate_y2,5.288609266281128,42,change,physics
+0,E1,evaluate_y1,4.251628398895264,42,change,tabpfn
+0,E4,evaluate_y1,4.251628398895264,42,change,tabpfn
+0,E1,estimate_y1,321.53548073768616,42,change,tabpfn
+0,E4,estimate_y1,321.53548073768616,42,change,tabpfn
+0,E1,evaluate_y2,0.0,42,change,tabpfn
+0,E4,evaluate_y2,0.0,42,change,tabpfn
+0,E1,estimate_y2,324.6573178768158,42,change,tabpfn
+0,E4,estimate_y2,324.6573178768158,42,change,tabpfn

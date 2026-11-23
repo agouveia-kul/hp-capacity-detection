@@ -86,14 +86,6 @@ split_seed,method,seconds,n_substations,target,anchor,feature_set,mode,target_tr
 0,KernelRidge,0.524428129196167,,HP_Peak,size_peak,both,direct,log,3.0,90.0,111.0,27.775328049110982,1.7457249681669218,q_arm2,kernel
 0,SVR,0.5121073722839355,,HP_Peak,size_peak,both,residual,log,3.0,90.0,111.0,25.500871238735723,1.9258621765395012,q_arm2,kernel
 0,KernelRidge,0.45006561279296875,,HP_Peak,size_peak,both,residual,log,3.0,90.0,111.0,24.97675304802886,1.7050543436287025,q_arm2,kernel
-0,CatBoost,21.506652355194092,,HP_Peak,size,netfit,direct,log,3.0,90.0,111.0,18.71907869627284,8.783907240851144,q_arm2,catboost
-0,CatBoost,10.35487174987793,,HP_Peak,size,netfit,residual,log,3.0,90.0,111.0,22.388026325389077,4.870801748641456,q_arm2,catboost
-0,CatBoost,106.43681240081787,,HP_Peak,size,both,direct,log,3.0,90.0,111.0,21.850363462741075,5.821157272405497,q_arm2,catboost
-0,CatBoost,64.80396103858948,,HP_Peak,size,both,residual,log,3.0,90.0,111.0,25.99616040444828,1.1172845828381293,q_arm2,catboost
-0,CatBoost,20.34800672531128,,HP_Peak,size_peak,netfit,direct,log,3.0,90.0,111.0,19.46116464664091,7.204378345019734,q_arm2,catboost
-0,CatBoost,11.440069675445557,,HP_Peak,size_peak,netfit,residual,log,3.0,90.0,111.0,21.839377216273792,9.619409102628316,q_arm2,catboost
-0,CatBoost,101.74957847595215,,HP_Peak,size_peak,both,direct,log,3.0,90.0,111.0,22.442979823981346,5.3413422823408645,q_arm2,catboost
-0,CatBoost,22.4006290435791,,HP_Peak,size_peak,both,residual,log,3.0,90.0,111.0,27.31131403860431,12.617795681898187,q_arm2,catboost
 0,FFNN,13.35336709022522,,HP_Peak,size,netfit,direct,log,3.0,90.0,111.0,27.377823906187125,11.07859069320113,q_arm2,neural
 0,FFNN,11.924638032913208,,HP_Peak,size,netfit,residual,log,3.0,90.0,111.0,24.024071536523707,19.574651764801736,q_arm2,neural
 0,FFNN,15.4889554977417,,HP_Peak,size,both,direct,log,3.0,90.0,111.0,45.1523135026295,11.155703608788928,q_arm2,neural
@@ -114,11 +106,3 @@ split_seed,method,seconds,n_substations,target,anchor,feature_set,mode,target_tr
 0,TabPFN,36.315144300460815,,HP_Peak,size_peak,netfit,residual,log,0.0,90.0,111.0,16.56596368393478,1.6872413127375456,q_arm2,tabpfn
 0,TabPFN,88.6051299571991,,HP_Peak,size_peak,both,direct,log,0.0,90.0,111.0,15.681785453721398,2.7260876350181333,q_arm2,tabpfn
 0,TabPFN,74.98035502433777,,HP_Peak,size_peak,both,residual,log,0.0,90.0,111.0,18.922901979501354,0.6746173194956571,q_arm2,tabpfn
-0,GP,17.632177591323853,,HP_Peak,size,netfit,direct,log,0.0,90.0,111.0,22.965741141253137,3.7165384798555863,q_arm2,gp
-0,GP,11.174542665481567,,HP_Peak,size,netfit,residual,log,0.0,90.0,111.0,22.82905887175275,2.6464200210185416,q_arm2,gp
-0,GP,16.512515783309937,,HP_Peak,size,both,direct,log,0.0,90.0,111.0,61.72525210913177,9.643050399394246,q_arm2,gp
-0,GP,17.17552161216736,,HP_Peak,size,both,residual,log,0.0,90.0,111.0,34.39890626156795,3.363201447866944,q_arm2,gp
-0,GP,43.92295241355896,,HP_Peak,size_peak,netfit,direct,log,0.0,90.0,111.0,25.898677725711796,5.082914508329162,q_arm2,gp
-0,GP,21.170002222061157,,HP_Peak,size_peak,netfit,residual,log,0.0,90.0,111.0,23.88915083074372,2.5207532012481493,q_arm2,gp
-0,GP,25.186582803726196,,HP_Peak,size_peak,both,direct,log,0.0,90.0,111.0,61.72525210913177,9.643050399394241,q_arm2,gp
-0,GP,28.150604963302612,,HP_Peak,size_peak,both,residual,log,0.0,90.0,111.0,34.39890626156795,3.363201447866946,q_arm2,gp

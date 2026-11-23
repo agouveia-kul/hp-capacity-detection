@@ -1,0 +1,14 @@
+method,rung,family,n_invalid_base,n_pred_nan,split_seed,direction,c_src,arm,dir,spec,seconds
+paperA_sh_mh,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_l4a,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_corr,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_cal,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_corr_cal,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_corr_own,L0,physics,0,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+paperA_corr@tgt_s0,L0,physics,22,0,0,CH->GB,0.9650413827745183,ch_gb,,,
+Lasso,L1,linear,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter06_hybrid_ladder\models\a_ch\L1\s0\linear,Lasso|size_peak|whdd|direct|log,0.031836509704589844
+PLS,L2,linear,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter06_hybrid_ladder\models\a_ch\L2\s0\linear,PLS|size_peak|both|direct|log,0.031510353088378906
+Linear,L3,linear,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter06_hybrid_ladder\models\a_ch\L3\s0\linear,Linear|size_peak|netfit|residual|log,0.008059501647949219
+ElasticNet,L4,linear,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter07_transfer\quick\models\a_ch\L4\s0\linear,ElasticNet|size_peak|netfit|l4a|log,0.007809638977050781
+CNN,L1,cnn_d,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter06_hybrid_ladder\models\a_ch\L1\s0\rawseries,CNN|size|raw|direct|log,2.06581711769104
+CNN,L2,cnn_d,0,0,0,CH->GB,0.9650413827745183,ch_gb,results\iter06_hybrid_ladder\models\a_ch\L2\s0\rawseries,CNN|size|rawphys|direct|log,0.09565615653991699

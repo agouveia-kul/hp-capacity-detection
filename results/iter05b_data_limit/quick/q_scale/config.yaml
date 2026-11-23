@@ -236,11 +236,6 @@ queue:
       residual_models:
       - SVR
       - KernelRidge
-    catboost:
-      models:
-      - CatBoost
-      residual_models:
-      - CatBoost
     neural:
       models:
       - FFNN
@@ -257,11 +252,6 @@ queue:
       residual_models:
       - TabPFN
       max_concurrent: 3
-    gp:
-      models:
-      - GP
-      residual_models:
-      - GP
   arms:
   - name: q_arm1
     config: configs/iter05b_arm1.yaml
@@ -276,11 +266,9 @@ queue:
     - linear
     - trees
     - kernel
-    - catboost
     - neural
     - rawseries
     - tabpfn
-    - gp
     set:
     - grid.size=[10, 40]
     - grid.penetration=[0.1, 0.5]
@@ -297,11 +285,9 @@ queue:
     - linear
     - trees
     - kernel
-    - catboost
     - neural
     - rawseries
     - tabpfn
-    - gp
     set:
     - grid.size=[10, 40]
     - grid.penetration=[0.1, 0.5]
@@ -358,4 +344,4 @@ queue:
     - physics_baselines=[slope_base]
     - paperA.estimators=[paperA_sh_mh, paperA_corr, paperA_corr_own]
     - oracle_rows=true
-git_commit: 2e6f229e17ec63dd3e53689584ea89523383fbe2
+git_commit: af24147183b89c08815a3b85e9e2556ab987e4ce

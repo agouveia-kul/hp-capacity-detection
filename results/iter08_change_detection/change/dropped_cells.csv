@@ -1,0 +1,1182 @@
+split_seed,half,station,N,p1,dp,k1,dk,H,F,reason,arm,family
+0,0,G001,20,0.05,0.2,1,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.1,0.1,2,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.1,0.2,2,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.2,0.0,4,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.2,0.05,4,1,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.2,0.1,4,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.2,0.2,4,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.3,0.0,6,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.3,0.05,6,1,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.3,0.1,6,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.3,0.2,6,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.5,0.0,10,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.5,0.05,10,1,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.5,0.1,10,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,20,0.5,0.2,10,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.05,0.05,2,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.05,0.1,2,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.05,0.2,2,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.1,0.0,4,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.1,0.05,4,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.1,0.1,4,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.1,0.2,4,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.2,0.0,8,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.2,0.05,8,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.2,0.1,8,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.2,0.2,8,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.3,0.0,12,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.3,0.05,12,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.3,0.1,12,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.3,0.2,12,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.5,0.0,20,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.5,0.05,20,2,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.5,0.1,20,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,40,0.5,0.2,20,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.05,0.0,4,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.05,0.05,4,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.05,0.1,4,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.05,0.2,4,16,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.1,0.0,8,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.1,0.05,8,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.1,0.1,8,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.1,0.2,8,16,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.2,0.0,16,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.2,0.05,16,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.2,0.1,16,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.2,0.2,16,16,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.3,0.0,24,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.3,0.05,24,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.3,0.1,24,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.3,0.2,24,16,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.5,0.0,40,0,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.5,0.05,40,4,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.5,0.1,40,8,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G001,80,0.5,0.2,40,16,5,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,20,0.3,0.2,6,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,20,0.5,0.0,10,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,20,0.5,0.05,10,1,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,20,0.5,0.1,10,2,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,20,0.5,0.2,10,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.05,0.2,2,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.1,0.2,4,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.2,0.05,8,2,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.2,0.1,8,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.2,0.2,8,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.3,0.0,12,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.3,0.05,12,2,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.3,0.1,12,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.3,0.2,12,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.5,0.0,20,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.5,0.05,20,2,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.5,0.1,20,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,40,0.5,0.2,20,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.05,0.1,4,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.05,0.2,4,16,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.1,0.05,8,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.1,0.1,8,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.1,0.2,8,16,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.2,0.0,16,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.2,0.05,16,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.2,0.1,16,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.2,0.2,16,16,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.3,0.0,24,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.3,0.05,24,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.3,0.1,24,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.3,0.2,24,16,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.5,0.0,40,0,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.5,0.05,40,4,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.5,0.1,40,8,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G002,80,0.5,0.2,40,16,13,400,k1 + dk > max_overlap * H,change,physics
+0,0,G005,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G005,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.05,0.0,1,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.05,0.05,1,1,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.05,0.1,1,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.05,0.2,1,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.1,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.1,0.05,2,1,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.1,0.1,2,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.1,0.2,2,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.2,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.2,0.05,4,1,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.2,0.1,4,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.2,0.2,4,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.3,0.0,6,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.3,0.05,6,1,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.3,0.1,6,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.3,0.2,6,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.5,0.0,10,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.5,0.05,10,1,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.5,0.1,10,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,20,0.5,0.2,10,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.05,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.05,0.05,2,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.05,0.1,2,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.05,0.2,2,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.1,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.1,0.05,4,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.1,0.1,4,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.1,0.2,4,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.2,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.2,0.05,8,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.2,0.1,8,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.2,0.2,8,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.3,0.0,12,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.3,0.05,12,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.3,0.1,12,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.3,0.2,12,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.5,0.0,20,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.5,0.05,20,2,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.5,0.1,20,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,40,0.5,0.2,20,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.05,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.05,0.05,4,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.05,0.1,4,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.05,0.2,4,16,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.1,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.1,0.05,8,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.1,0.1,8,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.1,0.2,8,16,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.2,0.0,16,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.2,0.05,16,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.2,0.1,16,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.2,0.2,16,16,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.3,0.0,24,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.3,0.05,24,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.3,0.1,24,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.3,0.2,24,16,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.5,0.0,40,0,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.5,0.05,40,4,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.5,0.1,40,8,2,400,station pool < min_station_pool,change,physics
+0,0,G006,80,0.5,0.2,40,16,2,400,station pool < min_station_pool,change,physics
+0,0,G009,20,0.05,0.2,1,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.1,0.1,2,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.1,0.2,2,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.2,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.2,0.05,4,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.2,0.1,4,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.2,0.2,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.3,0.0,6,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.3,0.05,6,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.3,0.1,6,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.3,0.2,6,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.5,0.0,10,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.5,0.05,10,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.5,0.1,10,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,20,0.5,0.2,10,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.05,0.05,2,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.05,0.1,2,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.05,0.2,2,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.1,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.1,0.05,4,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.1,0.1,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.1,0.2,4,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.2,0.0,8,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.2,0.05,8,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.2,0.1,8,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.2,0.2,8,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.3,0.0,12,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.3,0.05,12,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.3,0.1,12,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.3,0.2,12,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.5,0.0,20,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.5,0.05,20,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.5,0.1,20,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,40,0.5,0.2,20,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.05,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.05,0.05,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.05,0.1,4,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.05,0.2,4,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.1,0.0,8,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.1,0.05,8,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.1,0.1,8,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.1,0.2,8,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.2,0.0,16,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.2,0.05,16,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.2,0.1,16,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.2,0.2,16,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.3,0.0,24,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.3,0.05,24,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.3,0.1,24,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.3,0.2,24,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.5,0.0,40,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.5,0.05,40,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.5,0.1,40,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G009,80,0.5,0.2,40,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,0,G011,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G011,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G013,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G014,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G016,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,0,G022,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,1,G001,20,0.05,0.2,1,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.1,0.2,2,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.2,0.05,4,1,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.2,0.1,4,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.2,0.2,4,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.3,0.0,6,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.3,0.05,6,1,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.3,0.1,6,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.3,0.2,6,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.5,0.0,10,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.5,0.05,10,1,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.5,0.1,10,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,20,0.5,0.2,10,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.05,0.1,2,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.05,0.2,2,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.1,0.05,4,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.1,0.1,4,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.1,0.2,4,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.2,0.0,8,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.2,0.05,8,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.2,0.1,8,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.2,0.2,8,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.3,0.0,12,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.3,0.05,12,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.3,0.1,12,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.3,0.2,12,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.5,0.0,20,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.5,0.05,20,2,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.5,0.1,20,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,40,0.5,0.2,20,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.05,0.05,4,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.05,0.1,4,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.05,0.2,4,16,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.1,0.0,8,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.1,0.05,8,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.1,0.1,8,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.1,0.2,8,16,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.2,0.0,16,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.2,0.05,16,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.2,0.1,16,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.2,0.2,16,16,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.3,0.0,24,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.3,0.05,24,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.3,0.1,24,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.3,0.2,24,16,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.5,0.0,40,0,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.5,0.05,40,4,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.5,0.1,40,8,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G001,80,0.5,0.2,40,16,6,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,20,0.3,0.2,6,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,20,0.5,0.0,10,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,20,0.5,0.05,10,1,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,20,0.5,0.1,10,2,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,20,0.5,0.2,10,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.05,0.2,2,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.1,0.2,4,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.2,0.05,8,2,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.2,0.1,8,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.2,0.2,8,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.3,0.0,12,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.3,0.05,12,2,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.3,0.1,12,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.3,0.2,12,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.5,0.0,20,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.5,0.05,20,2,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.5,0.1,20,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,40,0.5,0.2,20,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.05,0.1,4,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.05,0.2,4,16,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.1,0.05,8,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.1,0.1,8,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.1,0.2,8,16,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.2,0.0,16,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.2,0.05,16,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.2,0.1,16,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.2,0.2,16,16,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.3,0.0,24,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.3,0.05,24,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.3,0.1,24,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.3,0.2,24,16,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.5,0.0,40,0,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.5,0.05,40,4,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.5,0.1,40,8,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G002,80,0.5,0.2,40,16,12,400,k1 + dk > max_overlap * H,change,physics
+0,1,G006,20,0.05,0.0,1,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.05,0.05,1,1,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.05,0.1,1,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.05,0.2,1,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.1,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.1,0.05,2,1,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.1,0.1,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.1,0.2,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.2,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.2,0.05,4,1,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.2,0.1,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.2,0.2,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.3,0.0,6,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.3,0.05,6,1,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.3,0.1,6,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.3,0.2,6,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.5,0.0,10,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.5,0.05,10,1,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.5,0.1,10,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,20,0.5,0.2,10,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.05,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.05,0.05,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.05,0.1,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.05,0.2,2,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.1,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.1,0.05,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.1,0.1,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.1,0.2,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.2,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.2,0.05,8,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.2,0.1,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.2,0.2,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.3,0.0,12,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.3,0.05,12,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.3,0.1,12,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.3,0.2,12,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.5,0.0,20,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.5,0.05,20,2,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.5,0.1,20,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,40,0.5,0.2,20,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.05,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.05,0.05,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.05,0.1,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.05,0.2,4,16,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.1,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.1,0.05,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.1,0.1,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.1,0.2,8,16,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.2,0.0,16,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.2,0.05,16,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.2,0.1,16,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.2,0.2,16,16,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.3,0.0,24,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.3,0.05,24,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.3,0.1,24,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.3,0.2,24,16,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.5,0.0,40,0,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.5,0.05,40,4,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.5,0.1,40,8,2,400,station pool < min_station_pool,change,physics
+0,1,G006,80,0.5,0.2,40,16,2,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,1,G007,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,1,G008,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,1,G009,20,0.05,0.2,1,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.1,0.1,2,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.1,0.2,2,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.2,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.2,0.05,4,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.2,0.1,4,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.2,0.2,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.3,0.0,6,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.3,0.05,6,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.3,0.1,6,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.3,0.2,6,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.5,0.0,10,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.5,0.05,10,1,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.5,0.1,10,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,20,0.5,0.2,10,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.05,0.05,2,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.05,0.1,2,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.05,0.2,2,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.1,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.1,0.05,4,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.1,0.1,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.1,0.2,4,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.2,0.0,8,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.2,0.05,8,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.2,0.1,8,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.2,0.2,8,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.3,0.0,12,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.3,0.05,12,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.3,0.1,12,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.3,0.2,12,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.5,0.0,20,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.5,0.05,20,2,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.5,0.1,20,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,40,0.5,0.2,20,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.05,0.0,4,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.05,0.05,4,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.05,0.1,4,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.05,0.2,4,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.1,0.0,8,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.1,0.05,8,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.1,0.1,8,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.1,0.2,8,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.2,0.0,16,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.2,0.05,16,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.2,0.1,16,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.2,0.2,16,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.3,0.0,24,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.3,0.05,24,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.3,0.1,24,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.3,0.2,24,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.5,0.0,40,0,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.5,0.05,40,4,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.5,0.1,40,8,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G009,80,0.5,0.2,40,16,4,400,k1 + dk > max_overlap * H,change,physics
+0,1,G011,20,0.05,0.0,1,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.05,0.05,1,1,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.05,0.1,1,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.05,0.2,1,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.1,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.1,0.05,2,1,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.1,0.1,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.1,0.2,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.2,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.2,0.05,4,1,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.2,0.1,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.2,0.2,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.3,0.0,6,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.3,0.05,6,1,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.3,0.1,6,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.3,0.2,6,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.5,0.0,10,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.5,0.05,10,1,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.5,0.1,10,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,20,0.5,0.2,10,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.05,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.05,0.05,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.05,0.1,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.05,0.2,2,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.1,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.1,0.05,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.1,0.1,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.1,0.2,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.2,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.2,0.05,8,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.2,0.1,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.2,0.2,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.3,0.0,12,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.3,0.05,12,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.3,0.1,12,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.3,0.2,12,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.5,0.0,20,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.5,0.05,20,2,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.5,0.1,20,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,40,0.5,0.2,20,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.05,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.05,0.05,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.05,0.1,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.05,0.2,4,16,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.1,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.1,0.05,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.1,0.1,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.1,0.2,8,16,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.2,0.0,16,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.2,0.05,16,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.2,0.1,16,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.2,0.2,16,16,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.3,0.0,24,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.3,0.05,24,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.3,0.1,24,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.3,0.2,24,16,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.5,0.0,40,0,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.5,0.05,40,4,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.5,0.1,40,8,2,400,station pool < min_station_pool,change,physics
+0,1,G011,80,0.5,0.2,40,16,2,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,1,G012,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.05,0.0,1,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.05,0.05,1,1,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.05,0.1,1,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.05,0.2,1,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.1,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.1,0.05,2,1,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.1,0.1,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.1,0.2,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.2,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.2,0.05,4,1,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.2,0.1,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.2,0.2,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.3,0.0,6,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.3,0.05,6,1,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.3,0.1,6,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.3,0.2,6,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.5,0.0,10,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.5,0.05,10,1,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.5,0.1,10,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,20,0.5,0.2,10,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.05,0.0,2,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.05,0.05,2,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.05,0.1,2,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.05,0.2,2,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.1,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.1,0.05,4,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.1,0.1,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.1,0.2,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.2,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.2,0.05,8,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.2,0.1,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.2,0.2,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.3,0.0,12,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.3,0.05,12,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.3,0.1,12,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.3,0.2,12,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.5,0.0,20,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.5,0.05,20,2,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.5,0.1,20,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,40,0.5,0.2,20,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.05,0.0,4,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.05,0.05,4,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.05,0.1,4,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.05,0.2,4,16,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.1,0.0,8,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.1,0.05,8,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.1,0.1,8,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.1,0.2,8,16,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.2,0.0,16,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.2,0.05,16,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.2,0.1,16,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.2,0.2,16,16,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.3,0.0,24,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.3,0.05,24,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.3,0.1,24,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.3,0.2,24,16,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.5,0.0,40,0,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.5,0.05,40,4,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.5,0.1,40,8,2,400,station pool < min_station_pool,change,physics
+0,1,G013,80,0.5,0.2,40,16,2,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,1,G016,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.05,0.0,1,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.05,0.05,1,1,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.05,0.1,1,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.05,0.2,1,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.1,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.1,0.05,2,1,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.1,0.1,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.1,0.2,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.2,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.2,0.05,4,1,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.2,0.1,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.2,0.2,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.3,0.0,6,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.3,0.05,6,1,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.3,0.1,6,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.3,0.2,6,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.5,0.0,10,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.5,0.05,10,1,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.5,0.1,10,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,20,0.5,0.2,10,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.05,0.0,2,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.05,0.05,2,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.05,0.1,2,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.05,0.2,2,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.1,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.1,0.05,4,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.1,0.1,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.1,0.2,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.2,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.2,0.05,8,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.2,0.1,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.2,0.2,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.3,0.0,12,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.3,0.05,12,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.3,0.1,12,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.3,0.2,12,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.5,0.0,20,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.5,0.05,20,2,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.5,0.1,20,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,40,0.5,0.2,20,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.05,0.0,4,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.05,0.05,4,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.05,0.1,4,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.05,0.2,4,16,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.1,0.0,8,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.1,0.05,8,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.1,0.1,8,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.1,0.2,8,16,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.2,0.0,16,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.2,0.05,16,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.2,0.1,16,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.2,0.2,16,16,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.3,0.0,24,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.3,0.05,24,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.3,0.1,24,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.3,0.2,24,16,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.5,0.0,40,0,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.5,0.05,40,4,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.5,0.1,40,8,1,400,station pool < min_station_pool,change,physics
+0,1,G018,80,0.5,0.2,40,16,1,400,station pool < min_station_pool,change,physics
